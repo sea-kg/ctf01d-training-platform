@@ -1,4 +1,4 @@
-# Example Service 2
+# ctf01d-training-platform
 
 Service used go && mysql
 
