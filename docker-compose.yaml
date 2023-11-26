@@ -1,0 +1,16 @@
+version: "3"
+
+services:
+
+
+  database:
+    build: DataBase/
+    ports:
+      - 5432:5432
+
+  backend:
+    build: ./
+    environment:
+      - DSN=postgres://postgres:postgres@10.10.0.136:5432/postgres?sslmode=disable
+    ports:
+      - 8090:8090
