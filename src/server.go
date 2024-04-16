@@ -22,9 +22,19 @@ func getConnString() string {
 		os.Getenv("SERVICE2_GO_MYSQL_DBNAME"))
 }
 
-type Flag struct {
-	Flag_id string `db:"flag_id"`
-	Flag    string `db:"flag"`
+type FlagDB struct {
+	ID         int    `db:"id"`
+	ExternalID string `db:"external_id"`
+	Flag       string `db:"flag"`
+	ServiceID  *int   `db:"service_id"`
+	GameID     *int   `db:"game_id"`
+}
+
+type FlagResponse struct {
+	ExternalID string `json:"flag_id"`
+	Flag       string `json:"flag"`
+	ServiceID  int    `json:"serviceId,omitempty"`
+	GameID     int    `json:"gameId,omitempty"`
 }
 
 type ErrorJson struct {
@@ -33,7 +43,7 @@ type ErrorJson struct {
 
 // --------------------------------------------------------
 
-func err_json(w http.ResponseWriter, msg string) {
+func errJson(w http.ResponseWriter, msg string) {
 	errorJson := ErrorJson{msg}
 	js, err := json.Marshal(errorJson)
 	if err != nil {
@@ -50,24 +60,24 @@ func err_json(w http.ResponseWriter, msg string) {
 
 func putFlag(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
-	flag_id := params["flag_id"]
-	flag := params["flag"]
+	externalID := params["flag_id"]
+	flagValue := params["flag"]
 
 	db, err := sqlx.Connect("mysql", getConnString())
 	if err != nil {
 		log.Printf("FAILED connect to database %s\n", err.Error())
-		err_json(w, err.Error())
+		errJson(w, err.Error())
 		return
 	}
 
-	_, err2 := db.Exec(`INSERT INTO flag (flag_id, flag) VALUES(?,?)`, flag_id, flag)
+	_, err2 := db.Exec(`INSERT INTO flags (external_id, flag) VALUES(?,?)`, externalID, flagValue)
 	if err2 != nil {
-		log.Printf("FAILED insert flag=%s with flag_id=%s\n", flag_id, flag)
-		err_json(w, err2.Error())
+		log.Printf("FAILED insert flag=%s with flag_id=%s\n", externalID, flagValue)
+		errJson(w, err2.Error())
 		db.Close()
 		return
 	}
-	flag2 := Flag{flag_id, flag}
+	flag2 := FlagResponse{externalID, flagValue, 1, 1}
 	js, err := json.Marshal(flag2)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -75,7 +85,7 @@ func putFlag(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	log.Printf("Inserted flag=%s with flag_id=%s\n", flag_id, flag)
+	log.Printf("Inserted flag=%s with flag_id=%s\n", externalID, flagValue)
 	w.Header().Set("Content-Type", "application/json")
 	w.Write(js)
 	db.Close()
@@ -85,29 +95,29 @@ func putFlag(w http.ResponseWriter, r *http.Request) {
 
 func getFlag(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
-	flag_id := params["flag_id"]
+	externalID := params["flag_id"]
 
 	db, err := sqlx.Connect("mysql", getConnString())
 	if err != nil {
 		log.Printf("FAILED connect to database %s\n", err.Error())
-		err_json(w, err.Error())
+		errJson(w, err.Error())
 		return
 	}
 
-	var flag Flag
-	err2 := db.Get(&flag, `SELECT * FROM flag WHERE flag_id = ?`, flag_id)
+	var flag FlagDB
+	err2 := db.Get(&flag, `SELECT * FROM flags WHERE external_id = ? LIMIT 1`, externalID)
 	if err2 != nil {
 		db.Close()
-		err_json(w, err2.Error())
+		errJson(w, err2.Error())
 		return
 	}
 
-	js, err := json.Marshal(flag)
+	js, err := json.Marshal(FlagResponse{ExternalID: flag.ExternalID, Flag: flag.Flag})
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-	log.Printf("Get flag=%s with flag_id=%s", flag.Flag_id, flag.Flag)
+	log.Printf("Get flag=%s with flag_id=%s", flag.ExternalID, flag.Flag)
 
 	w.Header().Set("Content-Type", "application/json")
 	w.Write(js)
@@ -124,14 +134,14 @@ func flagsList(w http.ResponseWriter, r *http.Request) {
 	db, err := sqlx.Connect("mysql", getConnString())
 	if err != nil {
 		log.Printf("FAILED connect to database %s\n", err.Error())
-		err_json(w, err.Error())
+		errJson(w, err.Error())
 		return
 	}
 
 	var flag_ids []string
-	err2 := db.Select(&flag_ids, "SELECT flag_id FROM flag")
+	err2 := db.Select(&flag_ids, "SELECT external_id FROM flags")
 	if err2 != nil {
-		err_json(w, err2.Error())
+		errJson(w, err2.Error())
 		db.Close()
 		return
 	}
@@ -154,6 +164,9 @@ var templates = template.Must(template.ParseFiles("html/index.html"))
 
 func index(w http.ResponseWriter, r *http.Request) {
 	templates.Execute(w, nil)
+	// if err != nil {
+	// 	return err
+	// }
 }
 
 // --------------------------------------------------------
@@ -169,8 +182,8 @@ func loggingMiddleware(next http.Handler) http.Handler {
 // --------------------------------------------------------
 
 func main() {
-	host := "localhost" // Замените на актуальный хост, если он отличается
-	port := "4102"      // Порт может быть также вынесен в конфигурацию или переменные окружения
+	host := "localhost"
+	port := "4102"
 
 	rtr := mux.NewRouter()
 	rtr.Use(loggingMiddleware)
