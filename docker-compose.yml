@@ -16,7 +16,7 @@ services:
       - service2_go_net
 
   service2_go:
-    image: ctf01d-game-simulation/service2_go:latest
+    build: .
     depends_on:
       - service2_go_db
     environment:

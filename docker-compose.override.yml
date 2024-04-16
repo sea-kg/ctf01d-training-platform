@@ -1,0 +1,5 @@
+version: '2'
+
+services:
+  service2_go:
+    image: ctf01d-game-simulation/service2_go:latest
