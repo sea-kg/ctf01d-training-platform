@@ -4,8 +4,10 @@ import (
 	"encoding/json"
 	"fmt"
 	"html/template"
+	"log"
 	"net/http"
 	"os"
+	"time"
 
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/gorilla/mux"
@@ -13,13 +15,11 @@ import (
 )
 
 func getConnString() string {
-	var sRet string
-	sRet = os.Getenv("SERVICE2_GO_MYSQL_USER") + ":"
-	sRet = sRet + os.Getenv("SERVICE2_GO_MYSQL_PASSWORD")
-	sRet = sRet + "@tcp(" + os.Getenv("SERVICE2_GO_MYSQL_HOST") + ":3306)/"
-	sRet = sRet + os.Getenv("SERVICE2_GO_MYSQL_DBNAME")
-	fmt.Printf("getConnString sRet=%s\n", sRet)
-	return sRet
+	return fmt.Sprintf("%s:%s@tcp(%s:3306)/%s",
+		os.Getenv("SERVICE2_GO_MYSQL_USER"),
+		os.Getenv("SERVICE2_GO_MYSQL_PASSWORD"),
+		os.Getenv("SERVICE2_GO_MYSQL_HOST"),
+		os.Getenv("SERVICE2_GO_MYSQL_DBNAME"))
 }
 
 type Flag struct {
@@ -48,21 +48,21 @@ func err_json(w http.ResponseWriter, msg string) {
 
 // --------------------------------------------------------
 
-func put_flag(w http.ResponseWriter, r *http.Request) {
+func putFlag(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 	flag_id := params["flag_id"]
 	flag := params["flag"]
 
 	db, err := sqlx.Connect("mysql", getConnString())
 	if err != nil {
-		fmt.Printf("FAILED connect to database %s\n", err.Error())
+		log.Printf("FAILED connect to database %s\n", err.Error())
 		err_json(w, err.Error())
 		return
 	}
 
 	_, err2 := db.Exec(`INSERT INTO flag (flag_id, flag) VALUES(?,?)`, flag_id, flag)
 	if err2 != nil {
-		fmt.Printf("FAILED insert flag=%s with flag_id=%s\n", flag_id, flag)
+		log.Printf("FAILED insert flag=%s with flag_id=%s\n", flag_id, flag)
 		err_json(w, err2.Error())
 		db.Close()
 		return
@@ -75,7 +75,7 @@ func put_flag(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	fmt.Printf("Inserted flag=%s with flag_id=%s\n", flag_id, flag)
+	log.Printf("Inserted flag=%s with flag_id=%s\n", flag_id, flag)
 	w.Header().Set("Content-Type", "application/json")
 	w.Write(js)
 	db.Close()
@@ -83,13 +83,13 @@ func put_flag(w http.ResponseWriter, r *http.Request) {
 
 // --------------------------------------------------------
 
-func get_flag(w http.ResponseWriter, r *http.Request) {
+func getFlag(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 	flag_id := params["flag_id"]
 
 	db, err := sqlx.Connect("mysql", getConnString())
 	if err != nil {
-		fmt.Printf("FAILED connect to database %s\n", err.Error())
+		log.Printf("FAILED connect to database %s\n", err.Error())
 		err_json(w, err.Error())
 		return
 	}
@@ -107,7 +107,7 @@ func get_flag(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-	fmt.Printf("Get flag=%s with flag_id=%s", flag.Flag_id, flag.Flag)
+	log.Printf("Get flag=%s with flag_id=%s", flag.Flag_id, flag.Flag)
 
 	w.Header().Set("Content-Type", "application/json")
 	w.Write(js)
@@ -120,10 +120,10 @@ type FlagIDs struct {
 	FlagIDs []string
 }
 
-func list_flag(w http.ResponseWriter, r *http.Request) {
+func flagsList(w http.ResponseWriter, r *http.Request) {
 	db, err := sqlx.Connect("mysql", getConnString())
 	if err != nil {
-		fmt.Printf("FAILED connect to database %s\n", err.Error())
+		log.Printf("FAILED connect to database %s\n", err.Error())
 		err_json(w, err.Error())
 		return
 	}
@@ -150,25 +150,38 @@ func list_flag(w http.ResponseWriter, r *http.Request) {
 
 // --------------------------------------------------------
 
+var templates = template.Must(template.ParseFiles("html/index.html"))
+
 func index(w http.ResponseWriter, r *http.Request) {
-	t, _ := template.ParseFiles("html/index.html")
-	t.Execute(w, nil)
+	templates.Execute(w, nil)
+}
+
+// --------------------------------------------------------
+
+func loggingMiddleware(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		startTime := time.Now()
+		next.ServeHTTP(w, r)
+		log.Printf("Request %s processed. Execution time: %s\n", r.RequestURI, time.Since(startTime))
+	})
 }
 
 // --------------------------------------------------------
 
 func main() {
-	fmt.Printf("Start server...\n")
+	host := "localhost" // Замените на актуальный хост, если он отличается
+	port := "4102"      // Порт может быть также вынесен в конфигурацию или переменные окружения
+
 	rtr := mux.NewRouter()
+	rtr.Use(loggingMiddleware)
 	rtr.HandleFunc("/", index).Methods("GET")
-	rtr.HandleFunc("/api/flags/{flag_id:[a-zA-Z0-9]+}", get_flag).Methods("GET")
-	rtr.HandleFunc("/api/flags/{flag_id:[a-zA-Z0-9]+}/{flag:[a-zA-Z0-9-]+}", put_flag).Methods("POST")
-	rtr.HandleFunc("/api/flags/", list_flag)
+	rtr.HandleFunc("/api/flags/{flag_id:[a-zA-Z0-9]+}", getFlag).Methods("GET")
+	rtr.HandleFunc("/api/flags/{flag_id:[a-zA-Z0-9]+}/{flag:[a-zA-Z0-9-]+}", putFlag).Methods("POST")
+	rtr.HandleFunc("/api/flags/", flagsList)
 	http.Handle("/", rtr)
 
 	fs := http.FileServer(http.Dir("html/static"))
 	http.Handle("/static/", http.StripPrefix("/static/", fs))
-	fmt.Printf("ListenAndServe 4102...\n")
-
-	http.ListenAndServe(":4102", nil)
+	log.Printf("Start server on %s:%s\n", host, port)
+	http.ListenAndServe(host+":"+port, nil)
 }

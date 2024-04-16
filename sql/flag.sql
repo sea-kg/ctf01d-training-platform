@@ -1,4 +1,3 @@
-
 CREATE TABLE `flag` (
   `flag_id` varchar(255) NOT NULL,
   `flag` varchar(255) NOT NULL
