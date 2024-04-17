@@ -1,4 +1,4 @@
-module server
+module ctf01d
 
 go 1.22.2
 

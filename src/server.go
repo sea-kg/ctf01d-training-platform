@@ -1,3 +1,4 @@
+// DEPRECATED
 package main
 
 import (
