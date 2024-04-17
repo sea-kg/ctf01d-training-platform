@@ -2,10 +2,8 @@ package routers
 
 import (
 	"fmt"
-	"log"
 	"net/http"
 	"strings"
-	"time"
 
 	"github.com/gorilla/mux"
 
@@ -22,17 +20,8 @@ type Route struct {
 
 type Routes []Route
 
-func loggingMiddleware(next http.Handler) http.Handler {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		startTime := time.Now()
-		next.ServeHTTP(w, r)
-		log.Printf("Request %s processed. Execution time: %s\n", r.RequestURI, time.Since(startTime))
-	})
-}
-
 func NewRouter() *mux.Router {
 	router := mux.NewRouter().StrictSlash(true)
-	router.Use(loggingMiddleware)
 	for _, route := range routes {
 		var handler http.Handler
 		handler = route.HandlerFunc

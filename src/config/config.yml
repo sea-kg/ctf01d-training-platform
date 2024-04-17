@@ -1,0 +1,9 @@
+http:
+  port: '4102'
+  host: 'localhost'
+
+logger:
+  log_level: 'debug'
+
+postgres:
+  url: postgres://postgres@localhost:5432/ctf01d

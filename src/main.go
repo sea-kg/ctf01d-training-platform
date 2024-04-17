@@ -4,13 +4,19 @@ import (
 	"log"
 	"net/http"
 
-	sw "ctf01d/routers"
+	"ctf01d/config"
+	"ctf01d/routers"
 )
 
 func main() {
+	cfg, err := config.NewConfig()
+	if err != nil {
+		log.Fatalf("Config error: %s", err)
+	}
 	log.Printf("Server started")
+	router := routers.NewRouter()
 
-	router := sw.NewRouter()
-
-	log.Fatal(http.ListenAndServe(":4102", router))
+	log.Fatal(
+		http.ListenAndServe(cfg.HTTP.Host+":"+cfg.HTTP.Port, router),
+	)
 }
