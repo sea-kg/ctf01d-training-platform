@@ -31,7 +31,7 @@ func (r *gameRepo) Create(ctx context.Context, game *models.Game) error {
 func (r *gameRepo) GetById(ctx context.Context, id string) (*models.Game, error) {
 	query := `SELECT id, start_time, end_time, description FROM games WHERE id = ?`
 	game := &models.Game{}
-	err := r.db.QueryRowContext(ctx, query, id).Scan(&game.ID, &game.StartTime, &game.EndTime, &game.Description)
+	err := r.db.QueryRowContext(ctx, query, id).Scan(&game.Id, &game.StartTime, &game.EndTime, &game.Description)
 	if err != nil {
 		return nil, err
 	}
@@ -40,7 +40,7 @@ func (r *gameRepo) GetById(ctx context.Context, id string) (*models.Game, error)
 
 func (r *gameRepo) Update(ctx context.Context, game *models.Game) error {
 	query := `UPDATE games SET start_time = ?, end_time = ?, description = ? WHERE id = ?`
-	_, err := r.db.ExecContext(ctx, query, game.StartTime, game.EndTime, game.Description, game.ID)
+	_, err := r.db.ExecContext(ctx, query, game.StartTime, game.EndTime, game.Description, game.Id)
 	return err
 }
 
@@ -61,7 +61,7 @@ func (r *gameRepo) List(ctx context.Context) ([]models.Game, error) {
 	var games []models.Game
 	for rows.Next() {
 		var game models.Game
-		if err := rows.Scan(&game.ID, &game.StartTime, &game.EndTime, &game.Description); err != nil {
+		if err := rows.Scan(&game.Id, &game.StartTime, &game.EndTime, &game.Description); err != nil {
 			return nil, err
 		}
 		games = append(games, game)

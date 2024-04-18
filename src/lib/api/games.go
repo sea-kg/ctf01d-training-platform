@@ -98,7 +98,7 @@ func UpdateGameHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 	}
 	vars := mux.Vars(r)
 	id := vars["id"]
-	updateGame.ID = id
+	updateGame.Id = id
 	err := gameRepo.Update(r.Context(), updateGame)
 	if err != nil {
 		respondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": err.Error()})
