@@ -5,6 +5,7 @@ import (
 	"ctf01d/lib/repository"
 	"database/sql"
 	"encoding/json"
+	"log"
 	"net/http"
 	"time"
 
@@ -112,9 +113,13 @@ func respondWithJSON(w http.ResponseWriter, code int, payload interface{}) {
 	response, err := json.Marshal(payload)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
-		w.Write([]byte(`{"error": "Error marshaling the response object"}`))
+		if _, err := w.Write([]byte(`{"error": "Error marshaling the response object"}`)); err != nil {
+			log.Printf("Error writing error response: %v", err)
+		}
 		return
 	}
 	w.WriteHeader(code)
-	w.Write(response)
+	if _, err := w.Write(response); err != nil {
+		log.Printf("Error writing response: %v", err)
+	}
 }
