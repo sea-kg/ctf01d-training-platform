@@ -1,0 +1,10 @@
+http:
+  port: '4102'
+  host: 'localhost'
+
+logger:
+  log_level: 'debug'
+
+db:
+  driver: postgres
+  data_source: postgres://postgres:postgres@localhost:5432/ctf01d?sslmode=disable

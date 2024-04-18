@@ -2,20 +2,23 @@ openapi: 3.0.0
 info:
   title: CTF Management API
   description: 'API for managing CTF (Capture The Flag) games, teams, users, and services.'
-  version: 1.0.0
   contact: {}
+  version: 1.0.0
 servers:
   - url: 'https://api.ctf01d.com'
     description: Production server
   - url: 'https://api.staging.ctf01d.com'
     description: Staging server
+  - url: 'http://localhost:4102'
+    description: Local server
 paths:
   /users:
     get:
-      summary: List all users
-      operationId: listUsers
       tags:
         - Users
+      summary: List all users
+      operationId: listUsers
+      parameters: []
       responses:
         '200':
           description: A list of users
@@ -25,32 +28,34 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/User'
-      parameters: []
+                x-content-type: application/json
     post:
-      summary: Create a new user
-      operationId: createUser
       tags:
         - Users
+      summary: Create a new user
+      operationId: createUser
+      parameters: []
       requestBody:
-        required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/User'
+        required: true
       responses:
         '201':
           description: User created successfully
-      parameters: []
   '/users/{id}':
     get:
-      summary: Get a user by ID
-      operationId: getUserById
       tags:
         - Users
+      summary: Get a user by ID
+      operationId: getUserById
       parameters:
         - name: id
           in: path
           required: true
+          style: simple
+          explode: false
           schema:
             type: string
       responses:
@@ -61,34 +66,38 @@ paths:
               schema:
                 $ref: '#/components/schemas/User'
     put:
-      summary: Update a user
-      operationId: updateUser
       tags:
         - Users
+      summary: Update a user
+      operationId: updateUser
       parameters:
         - name: id
           in: path
           required: true
+          style: simple
+          explode: false
           schema:
             type: string
       requestBody:
-        required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/User'
+        required: true
       responses:
         '200':
           description: User updated successfully
     delete:
-      summary: Delete a user
-      operationId: deleteUser
       tags:
         - Users
+      summary: Delete a user
+      operationId: deleteUser
       parameters:
         - name: id
           in: path
           required: true
+          style: simple
+          explode: false
           schema:
             type: string
       responses:
@@ -96,10 +105,11 @@ paths:
           description: User deleted successfully
   /games:
     get:
-      summary: List all games
-      operationId: listGames
       tags:
         - Games
+      summary: List all games
+      operationId: listGames
+      parameters: []
       responses:
         '200':
           description: A list of games
@@ -109,32 +119,34 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Game'
-      parameters: []
+                x-content-type: application/json
     post:
-      summary: Create a new game
-      operationId: createGame
       tags:
         - Games
+      summary: Create a new game
+      operationId: createGame
+      parameters: []
       requestBody:
-        required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/Game'
+        required: true
       responses:
         '201':
           description: Game created successfully
-      parameters: []
   '/games/{id}':
     get:
-      summary: Get a game by ID
-      operationId: getGameById
       tags:
         - Games
+      summary: Get a game by ID
+      operationId: getGameById
       parameters:
         - name: id
           in: path
           required: true
+          style: simple
+          explode: false
           schema:
             type: string
       responses:
@@ -145,34 +157,38 @@ paths:
               schema:
                 $ref: '#/components/schemas/Game'
     put:
-      summary: Update a game
-      operationId: updateGame
       tags:
         - Games
+      summary: Update a game
+      operationId: updateGame
       parameters:
         - name: id
           in: path
           required: true
+          style: simple
+          explode: false
           schema:
             type: string
       requestBody:
-        required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/Game'
+        required: true
       responses:
         '200':
           description: Game updated successfully
     delete:
-      summary: Delete a game
-      operationId: deleteGame
       tags:
         - Games
+      summary: Delete a game
+      operationId: deleteGame
       parameters:
         - name: id
           in: path
           required: true
+          style: simple
+          explode: false
           schema:
             type: string
       responses:
@@ -180,10 +196,11 @@ paths:
           description: Game deleted successfully
   /teams:
     get:
-      summary: List all teams
-      operationId: listTeams
       tags:
         - Teams
+      summary: List all teams
+      operationId: listTeams
+      parameters: []
       responses:
         '200':
           description: A list of teams
@@ -193,32 +210,34 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Team'
-      parameters: []
+                x-content-type: application/json
     post:
-      summary: Create a new team
-      operationId: createTeam
       tags:
         - Teams
+      summary: Create a new team
+      operationId: createTeam
+      parameters: []
       requestBody:
-        required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/Team'
+        required: true
       responses:
         '201':
           description: Team created successfully
-      parameters: []
   '/teams/{id}':
     get:
-      summary: Get a team by ID
-      operationId: getTeamById
       tags:
         - Teams
+      summary: Get a team by ID
+      operationId: getTeamById
       parameters:
         - name: id
           in: path
           required: true
+          style: simple
+          explode: false
           schema:
             type: string
       responses:
@@ -229,129 +248,50 @@ paths:
               schema:
                 $ref: '#/components/schemas/Team'
     put:
-      summary: Update a team
-      operationId: updateTeam
       tags:
         - Teams
+      summary: Update a team
+      operationId: updateTeam
       parameters:
         - name: id
           in: path
           required: true
+          style: simple
+          explode: false
           schema:
             type: string
       requestBody:
-        required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/Team'
+        required: true
       responses:
         '200':
           description: Team updated successfully
     delete:
-      summary: Delete a team
-      operationId: deleteTeam
       tags:
         - Teams
+      summary: Delete a team
+      operationId: deleteTeam
       parameters:
         - name: id
           in: path
           required: true
+          style: simple
+          explode: false
           schema:
             type: string
       responses:
         '204':
           description: Team deleted successfully
-  /flags:
-    get:
-      summary: List all flags
-      operationId: listFlags
-      tags:
-        - Flags
-      responses:
-        '200':
-          description: A list of flags
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Flag'
-      parameters: []
-    post:
-      summary: Create a new flag
-      operationId: createFlag
-      tags:
-        - Flags
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Flag'
-      responses:
-        '201':
-          description: Flag created successfully
-      parameters: []
-  '/flags/{id}':
-    get:
-      summary: Get a flag by ID
-      operationId: getFlagById
-      tags:
-        - Flags
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Detailed information of a flag
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Flag'
-    put:
-      summary: Update a flag
-      operationId: updateFlag
-      tags:
-        - Flags
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Flag'
-      responses:
-        '200':
-          description: Flag updated successfully
-    delete:
-      summary: Delete a flag
-      operationId: deleteFlag
-      tags:
-        - Flags
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        '204':
-          description: Flag deleted successfully
   /results:
     get:
-      summary: List all results
-      operationId: listResults
       tags:
         - Results
+      summary: List all results
+      operationId: listResults
+      parameters: []
       responses:
         '200':
           description: A list of game results
@@ -361,32 +301,34 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Result'
-      parameters: []
+                x-content-type: application/json
     post:
-      summary: Create a new result
-      operationId: createResult
       tags:
         - Results
+      summary: Create a new result
+      operationId: createResult
+      parameters: []
       requestBody:
-        required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/Result'
+        required: true
       responses:
         '201':
           description: Result created successfully
-      parameters: []
   '/results/{id}':
     get:
-      summary: Get a result by ID
-      operationId: getResultById
       tags:
         - Results
+      summary: Get a result by ID
+      operationId: getResultById
       parameters:
         - name: id
           in: path
           required: true
+          style: simple
+          explode: false
           schema:
             type: string
       responses:
@@ -398,10 +340,11 @@ paths:
                 $ref: '#/components/schemas/Result'
   /services:
     get:
-      summary: List all services
-      operationId: listServices
       tags:
         - Services
+      summary: List all services
+      operationId: listServices
+      parameters: []
       responses:
         '200':
           description: A list of services
@@ -411,32 +354,34 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Service'
-      parameters: []
+                x-content-type: application/json
     post:
-      summary: Create a new service
-      operationId: createService
       tags:
         - Services
+      summary: Create a new service
+      operationId: createService
+      parameters: []
       requestBody:
-        required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/Service'
+        required: true
       responses:
         '201':
           description: Service created successfully
-      parameters: []
   '/services/{id}':
     get:
-      summary: Get a service by ID
-      operationId: getServiceById
       tags:
         - Services
+      summary: Get a service by ID
+      operationId: getServiceById
       parameters:
         - name: id
           in: path
           required: true
+          style: simple
+          explode: false
           schema:
             type: string
       responses:
@@ -447,34 +392,38 @@ paths:
               schema:
                 $ref: '#/components/schemas/Service'
     put:
-      summary: Update a service
-      operationId: updateService
       tags:
         - Services
+      summary: Update a service
+      operationId: updateService
       parameters:
         - name: id
           in: path
           required: true
+          style: simple
+          explode: false
           schema:
             type: string
       requestBody:
-        required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/Service'
+        required: true
       responses:
         '200':
           description: Service updated successfully
     delete:
-      summary: Delete a service
-      operationId: deleteService
       tags:
         - Services
+      summary: Delete a service
+      operationId: deleteService
       parameters:
         - name: id
           in: path
           required: true
+          style: simple
+          explode: false
           schema:
             type: string
       responses:
@@ -500,25 +449,17 @@ components:
         status:
           type: string
           description: 'Status of the user (active, disabled)'
-    Flag:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique identifier for the flag
-        flag:
-          type: string
-          description: The actual flag string (secret data participants need to find)
-        service_id:
-          type: string
-          description: Identifier of the service the flag is associated with
-        game_id:
-          type: string
-          description: Identifier of the game this flag is part of
-      required:
-        - id
-        - flag
+      example:
+        role: role
+        avatar_url: avatar_url
+        id: id
+        username: username
+        status: status
     Game:
+      required:
+        - end_time
+        - id
+        - start_time
       type: object
       properties:
         id:
@@ -526,20 +467,27 @@ components:
           description: Unique identifier for the game
         start_time:
           type: string
-          format: date-time
           description: The start time of the game
+          format: date-time
         end_time:
           type: string
-          format: date-time
           description: The end time of the game
+          format: date-time
         description:
           type: string
           description: A brief description of the game
-      required:
-        - id
-        - start_time
-        - end_time
+      example:
+        start_time: '2000-01-23T04:56:07.000Z'
+        end_time: '2000-01-23T04:56:07.000Z'
+        description: description
+        id: id
     Result:
+      required:
+        - game_id
+        - id
+        - rank
+        - score
+        - team_id
       type: object
       properties:
         id:
@@ -557,13 +505,18 @@ components:
         rank:
           type: integer
           description: The rank achieved by the team in this game
-      required:
-        - id
-        - team_id
-        - game_id
-        - score
-        - rank
+      example:
+        score: 0
+        rank: 6
+        id: id
+        team_id: team_id
+        game_id: game_id
     Service:
+      required:
+        - author
+        - id
+        - is_public
+        - name
       type: object
       properties:
         id:
@@ -584,12 +537,17 @@ components:
         is_public:
           type: boolean
           description: Boolean indicating if the service is public
+      example:
+        logo_url: logo_url
+        author: author
+        name: name
+        is_public: true
+        description: description
+        id: id
+    Team:
       required:
         - id
-        - name
-        - author
-        - is_public
-    Team:
+        - team_name
       type: object
       properties:
         id:
@@ -610,9 +568,13 @@ components:
         avatar_url:
           type: string
           description: URL to the team's avatar
-      required:
-        - id
-        - team_name
+      example:
+        avatar_url: avatar_url
+        university: university
+        social_links: social_links
+        description: description
+        id: id
+        team_name: team_name
   links: {}
   callbacks: {}
 security: []
