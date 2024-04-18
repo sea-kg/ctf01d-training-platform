@@ -5,5 +5,6 @@ http:
 logger:
   log_level: 'debug'
 
-postgres:
-  url: postgres://postgres@localhost:5432/ctf01d
+db:
+  driver: postgres
+  data_source: postgres://postgres:postgres@localhost:5432/ctf01d?sslmode=disable

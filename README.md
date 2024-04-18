@@ -29,6 +29,35 @@ $ SERVICE2_GO_MYSQL_HOST=service2_go_db SERVICE2_GO_MYSQL_DBNAME=service2_go SER
 
 ## Run DB for local devlopment
 
+### psql -- actual
+
+connect to db configure in `src/config/config.yaml`
+
+```yaml
+...
+db:
+  driver: postgres
+  data_source: postgres://postgres@localhost:5432/ctf01d
+...
+```
+
+run local container
+
+```shell
+$ docker run -d --name ctf01d-postgres -e POSTGRES_DB=ctf01d -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -p 5432:5432 postgres
+```
+
+attach to container
+
+```shell
+# TODO
+```
+
+### mysql -- deprecated
+
+run local container
+
+
 ```shell
 $ docker run --name service2_go_db -e MYSQL_ROOT_PASSWORD=service2_go -e MYSQL_DATABASE=service2_go -e MYSQL_USER=service2_go -e MYSQL_PASSWORD=service2_go -p 3306:3306 -d mysql:latest
 ```

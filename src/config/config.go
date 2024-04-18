@@ -10,7 +10,7 @@ type (
 	Config struct {
 		HTTP `yaml:"http"`
 		Log  `yaml:"logger"`
-		PG   `yaml:"postgres"`
+		DB   `yaml:"db"`
 	}
 
 	HTTP struct {
@@ -22,8 +22,9 @@ type (
 		Level string `env-required:"true" yaml:"log_level"   env:"LOG_LEVEL"`
 	}
 
-	PG struct {
-		URL string `env-required:"true" yaml:"url" env:"PG_URL"`
+	DB struct {
+		Driver     string `yaml:"driver"`
+		DataSource string `env-required:"true" yaml:"data_source" env:"data_source"`
 	}
 )
 
@@ -32,7 +33,7 @@ func NewConfig() (*Config, error) {
 
 	err := cleanenv.ReadConfig("./config/config.yml", cfg)
 	if err != nil {
-		return nil, fmt.Errorf("config error: %w", err)
+		return nil, fmt.Errorf("%w", err)
 	}
 
 	err = cleanenv.ReadEnv(cfg)

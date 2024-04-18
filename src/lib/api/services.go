@@ -1,30 +1,31 @@
 package api
 
 import (
+	"database/sql"
 	"net/http"
 )
 
-func CreateService(w http.ResponseWriter, r *http.Request) {
+func CreateServiceHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
 }
 
-func DeleteService(w http.ResponseWriter, r *http.Request) {
+func DeleteServiceHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
 }
 
-func GetServiceById(w http.ResponseWriter, r *http.Request) {
+func GetServiceByIdHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
 }
 
-func ListServices(w http.ResponseWriter, r *http.Request) {
+func ListServicesHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
 }
 
-func UpdateService(w http.ResponseWriter, r *http.Request) {
+func UpdateServiceHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
 }

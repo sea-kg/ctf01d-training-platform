@@ -1,20 +1,21 @@
 package api
 
 import (
+	"database/sql"
 	"net/http"
 )
 
-func CreateResult(w http.ResponseWriter, r *http.Request) {
+func CreateResultHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
 }
 
-func GetResultById(w http.ResponseWriter, r *http.Request) {
+func GetResultByIdHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
 }
 
-func ListResults(w http.ResponseWriter, r *http.Request) {
+func ListResultsHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
 }

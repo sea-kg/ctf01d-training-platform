@@ -1,11 +1,13 @@
 package main
 
 import (
+	"ctf01d/config"
+	"ctf01d/routers"
+	"database/sql"
 	"log"
 	"net/http"
 
-	"ctf01d/config"
-	"ctf01d/routers"
+	_ "github.com/lib/pq"
 )
 
 func main() {
@@ -13,8 +15,13 @@ func main() {
 	if err != nil {
 		log.Fatalf("Config error: %s", err)
 	}
+	db, err := sql.Open(cfg.DB.Driver, cfg.DB.DataSource)
+	if err != nil {
+		log.Fatal("Error connecting to the database: ", err)
+	}
+	defer db.Close()
 	log.Printf("Server started")
-	router := routers.NewRouter()
+	router := routers.NewRouter(db)
 
 	log.Fatal(
 		http.ListenAndServe(cfg.HTTP.Host+":"+cfg.HTTP.Port, router),
