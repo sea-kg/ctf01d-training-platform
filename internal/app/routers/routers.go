@@ -97,6 +97,9 @@ var frontRoutes = FrontRoutes{
 	FrontRoute{"ListGame", strings.ToUpper("Get"), "/games/index.html", func(w http.ResponseWriter, r *http.Request) {
 		renderTemplate(w, "games/index.html")
 	}},
+	FrontRoute{"ListUser", strings.ToUpper("Get"), "/users/index.html", func(w http.ResponseWriter, r *http.Request) {
+		renderTemplate(w, "users/index.html")
+	}},
 	FrontRoute{"Index", strings.ToUpper("Get"), "/", func(w http.ResponseWriter, r *http.Request) {
 		renderTemplate(w, "index.html")
 	}},
