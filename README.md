@@ -22,7 +22,7 @@ $ go build main.go
 
 ```shell
 $ cd src
-$ go run main.go
+$ go run cmd/ctf01d/main.go
 ```
 
 ## Run DB for local devlopment

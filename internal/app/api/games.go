@@ -22,7 +22,7 @@ type RequestGame struct {
 func CreateGameHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 	var game RequestGame
 	if err := json.NewDecoder(r.Body).Decode(&game); err != nil {
-		respondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Invalid request payload"})
+		respondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Invalid request payload: " + err.Error()})
 		return
 	}
 	if game.EndTime.Before(game.StartTime) {
