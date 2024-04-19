@@ -88,6 +88,8 @@ var apiRoutes = ApiRoutes{
 	ApiRoute{"GetUserById", strings.ToUpper("Get"), "/api/users/{id}", api.GetUserByIdHandler},
 	ApiRoute{"ListUsers", strings.ToUpper("Get"), "/api/users", api.ListUsersHandler},
 	ApiRoute{"UpdateUser", strings.ToUpper("Put"), "/api/users/{id}", api.UpdateUserHandler},
+
+	ApiRoute{"ListUniversities", strings.ToUpper("Get"), "/api/universities", api.ListUniversitiesHandler},
 }
 
 var frontRoutes = FrontRoutes{
@@ -99,6 +101,9 @@ var frontRoutes = FrontRoutes{
 	}},
 	FrontRoute{"ListUser", strings.ToUpper("Get"), "/users/index.html", func(w http.ResponseWriter, r *http.Request) {
 		renderTemplate(w, "users/index.html")
+	}},
+	FrontRoute{"ListUser", strings.ToUpper("Get"), "/teams/index.html", func(w http.ResponseWriter, r *http.Request) {
+		renderTemplate(w, "teams/index.html")
 	}},
 	FrontRoute{"Index", strings.ToUpper("Get"), "/", func(w http.ResponseWriter, r *http.Request) {
 		renderTemplate(w, "index.html")

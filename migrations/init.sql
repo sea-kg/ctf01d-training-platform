@@ -8,12 +8,18 @@ CREATE TABLE users (
     role VARCHAR(255) NOT NULL CHECK (role IN ('admin', 'player', 'guest'))
 );
 
+-- Университеты
+CREATE TABLE universities (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) UNIQUE NOT NULL
+);
+
 -- Команды
 CREATE TABLE teams (
     id SERIAL PRIMARY KEY,
-    team_name VARCHAR(255) UNIQUE NOT NULL,
+    name VARCHAR(255) UNIQUE NOT NULL,
     description VARCHAR(255) NOT NULL,
-    university VARCHAR(255),
+    university_id INTEGER REFERENCES universities(id),
     social_links TEXT,
     avatar_url VARCHAR(255)
 );

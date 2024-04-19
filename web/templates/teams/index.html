@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Main Page</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            display: flex;
+        }
+
+        .sidebar {
+            width: 60%;
+            background: #f3f3f3;
+            padding: 20px;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .content {
+            width: 40%;
+            padding: 20px;
+        }
+
+        input {
+            display: block;
+            width: 50%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+
+        button {
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <h2>Teams</h2>
+            <div id="team-list">
+                <!-- Team list will be loaded here -->
+            </div>
+        </div>
+        <div class="content">
+            <h2>Add New Team</h2>
+            <form id="add-team-form">
+                <input type="text" id="name" name="name" placeholder="Team name" required>
+                <input type="text" id="description" name="description" placeholder="Description">
+                <input type="text" id="social_links" name="social_links" placeholder="Social links">
+                <input type="text" id="avatar_url" name="avatar_url" placeholder="Avatar URL">
+                <input type="text" id="university" name="university_name" placeholder="University">
+                <input type="hidden" id="university_id" name="university_id">
+
+                <button type="submit">Add Team</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            function loadTeams() {
+                $.ajax({
+                    url: '/api/teams',
+                    method: 'GET',
+                    success: function (teams) {
+                        $('#team-list').empty();
+                        teams.forEach(function (team) {
+                            $('#team-list').append(`<div>
+                                <p>Name<b> ${team.name}</b></h4>
+                                <p>university: ${team.university}</p>
+                                <p>description: ${team.description}</p>
+                                <img src="${team.avatar_url}" alt="Team Avatar" style="width:50px;height:50px;">
+                                <button onclick="deleteTeam('${team.id}')">Delete</button>
+                            </div>`);
+                        });
+                    }
+                });
+            }
+            $('#university').autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: '/api/universities',  // Путь к API, который возвращает список университетов
+                        dataType: 'json',
+                        data: {
+                            term: request.term  // Параметр поиска, отправляемый на сервер
+                        },
+                        success: function (data) {
+                            response($.map(data, function (item) {
+                                return {
+                                    label: item.name,  // 'name' предполагается что это название университета
+                                    value: item.name,
+                                    id: item.id    // Сохраняем id университета в объекте для последующего использования
+                                };
+                            }));
+                        }
+                    });
+                },
+                minLength: 2,  // Минимальное количество символов для начала поиска
+                select: function (event, ui) {
+                    console.log("Selected: " + ui.item.label + ", ID: " + ui.item.id);
+                    // Устанавливаем название университета в текстовое поле и id в скрытое поле
+                    $('#university').val(ui.item.label);  // Показывает выбранное название
+                    $('#university_id').val(ui.item.id);  // Скрытое поле для id
+                    return false;  // Предотвращаем автоматическое установление value в поле ввода
+                }
+            });
+            loadTeams();
+            $('#add-team-form').on('submit', function (e) {
+                e.preventDefault();
+                var data = {
+                    name: $('#name').val(),
+                    password: $('#password').val(),
+                    social_links: $('#social_links').val(),
+                    description: $('#description').val(),
+                    university_id: $('#university_id').val()
+                };
+
+                $.ajax({
+                    url: '/api/teams',
+                    method: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(data),
+                    success: function (response) {
+                        alert('Team added successfully!');
+                        loadTeams();
+                    },
+                    error: function () {
+                        alert('Error adding team');
+                    }
+                });
+            });
+        });
+
+        function deleteTeam(teamId) {
+            $.ajax({
+                url: `/api/teams/${teamId}`,
+                method: 'DELETE',
+                success: function () {
+                    alert('Team deleted successfully!');
+                    // loadTeams(); fixme not work
+                },
+                error: function () {
+                    alert('Error deleting team');
+                }
+            });
+        }
+    </script>
+</body>
+</html>

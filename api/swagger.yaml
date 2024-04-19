@@ -607,10 +607,10 @@ components:
           description: Boolean indicating if the service is public
     TeamRequest:
       required:
-        - team_name
+        - name
       type: object
       properties:
-        team_name:
+        name:
           type: string
           description: Name of the team
         description:
@@ -628,13 +628,13 @@ components:
     TeamResponse:
       required:
         - id
-        - team_name
+        - name
       type: object
       properties:
         id:
           type: string
           description: Unique identifier for the team
-        team_name:
+        name:
           type: string
           description: Name of the team
         description:
