@@ -1,6 +1,6 @@
 # ctf01d-training-platform
 
-Service used go && mysql
+Service used go && psql
 
 [http://localhost:4102/](http://localhost:4102/)
 
@@ -8,23 +8,21 @@ Service used go && mysql
 
 ```shell
 $ sudo apt install golang
-$ go get github.com/go-sql-driver/mysql
-$ go get github.com/jmoiron/sqlx
-$ go get github.com/gorilla/mux
+$ go mod download
 ```
 
 ## Build server
 
 ```shell
 $ cd src
-$ go build server.go
+$ go build main.go
 ```
 
 ## Run local dev server
 
 ```shell
 $ cd src
-$ SERVICE2_GO_MYSQL_HOST=service2_go_db SERVICE2_GO_MYSQL_DBNAME=service2_go SERVICE2_GO_MYSQL_USER=service2_go SERVICE2_GO_MYSQL_PASSWORD=service2_go go run server.go
+$ go run main.go
 ```
 
 ## Run DB for local devlopment
@@ -50,14 +48,5 @@ $ docker run -d --name ctf01d-postgres -e POSTGRES_DB=ctf01d -e POSTGRES_USER=po
 attach to container
 
 ```shell
-# TODO
-```
-
-### mysql -- deprecated
-
-run local container
-
-
-```shell
-$ docker run --name service2_go_db -e MYSQL_ROOT_PASSWORD=service2_go -e MYSQL_DATABASE=service2_go -e MYSQL_USER=service2_go -e MYSQL_PASSWORD=service2_go -p 3306:3306 -d mysql:latest
+$ docker exec -it ctf01d-postgres psql -U postgres
 ```

@@ -1,21 +1,21 @@
 version: '2'
 
 services:
-  service2_go_db:
-    image: mysql:5.7
-    volumes:
-      - "./dckr_mysql:/var/lib/mysql"
-      - "./sql:/docker-entrypoint-initdb.d"
+  service2_db:
+    image: postgres:16
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: service2_go
-      MYSQL_DATABASE: service2_go
-      MYSQL_USER: service2_go
-      MYSQL_PASSWORD: service2_go
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: service2_go
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg_data:/var/lib/postgresql/data/
     networks:
       - service2_go_net
 
-  service2_go:
+  service2_backend:
     build: .
     depends_on:
       - service2_go_db

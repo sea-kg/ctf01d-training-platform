@@ -3,12 +3,13 @@ package api
 import (
 	"ctf01d/lib/models"
 	"ctf01d/lib/repository"
+	"ctf01d/lib/view"
 	"database/sql"
 	"encoding/json"
+	"log"
 	"net/http"
 	"time"
 
-	_ "github.com/go-sql-driver/mysql"
 	"github.com/gorilla/mux"
 )
 
@@ -35,7 +36,7 @@ func CreateGameHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 		Description: game.Description,
 	}
 	if err := gameRepo.Create(r.Context(), newGame); err != nil {
-		respondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to create game"})
+		respondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to create game: " + err.Error()})
 		return
 	}
 	respondWithJSON(w, http.StatusOK, map[string]string{"data": "Game created successfully"})
@@ -61,12 +62,7 @@ func GetGameByIdHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 		respondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to fetch game"})
 		return
 	}
-	gameJSON, err := json.Marshal(game)
-	if err != nil {
-		respondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": err.Error()})
-		return
-	}
-	respondWithJSON(w, http.StatusOK, gameJSON)
+	respondWithJSON(w, http.StatusOK, view.NewGameFromModel(game))
 }
 
 func ListGamesHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
@@ -76,15 +72,11 @@ func ListGamesHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 		respondWithJSON(w, http.StatusBadRequest, map[string]string{"error": err.Error()})
 		return
 	}
-	gamesJSON, err := json.Marshal(games)
-	if err != nil {
-		respondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": err.Error()})
-		return
-	}
-	respondWithJSON(w, http.StatusOK, gamesJSON)
+	respondWithJSON(w, http.StatusOK, view.NewGamesFromModels(games))
 }
 
 func UpdateGameHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
+	// fixme update не проверяет есть ли запись в бд
 	var game RequestGame
 	if err := json.NewDecoder(r.Body).Decode(&game); err != nil {
 		respondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Invalid request payload"})
@@ -98,7 +90,7 @@ func UpdateGameHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 	}
 	vars := mux.Vars(r)
 	id := vars["id"]
-	updateGame.ID = id
+	updateGame.Id = id
 	err := gameRepo.Update(r.Context(), updateGame)
 	if err != nil {
 		respondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": err.Error()})
@@ -107,14 +99,19 @@ func UpdateGameHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 	respondWithJSON(w, http.StatusOK, map[string]string{"data": "Game updated successfully"})
 }
 
+// fixme это общий респондер - надо его вынести отсюда
 func respondWithJSON(w http.ResponseWriter, code int, payload interface{}) {
 	w.Header().Set("Content-Type", "application/json")
 	response, err := json.Marshal(payload)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
-		w.Write([]byte(`{"error": "Error marshaling the response object"}`))
+		if _, err := w.Write([]byte(`{"error": "Error marshaling the response object"}`)); err != nil {
+			log.Printf("Error writing error response: %v", err)
+		}
 		return
 	}
 	w.WriteHeader(code)
-	w.Write(response)
+	if _, err := w.Write(response); err != nil {
+		log.Printf("Error writing response: %v", err)
+	}
 }
