@@ -11,7 +11,7 @@ type UserRepository interface {
 	GetById(ctx context.Context, id string) (*models.User, error)
 	Update(ctx context.Context, user *models.User) error
 	Delete(ctx context.Context, id string) error
-	List(ctx context.Context) ([]models.User, error)
+	List(ctx context.Context) ([]*models.User, error)
 }
 
 type userRepo struct {
@@ -23,13 +23,13 @@ func NewUserRepository(db *sql.DB) UserRepository {
 }
 
 func (r *userRepo) Create(ctx context.Context, user *models.User) error {
-	query := `INSERT INTO users (username, avatar_url, role) VALUES ($1, $2, $3)`
-	_, err := r.db.ExecContext(ctx, query, user.Username, user.AvatarUrl, user.Role)
+	query := `INSERT INTO users (user_name, avatar_url, role, status, password_hash) VALUES ($1, $2, $3, $4, $5)`
+	_, err := r.db.ExecContext(ctx, query, user.Username, user.AvatarUrl, user.Role, user.Status, user.PasswordHash)
 	return err
 }
 
 func (r *userRepo) GetById(ctx context.Context, id string) (*models.User, error) {
-	query := `SELECT id, username, avatar_url, role FROM users WHERE id = $1`
+	query := `SELECT id, user_name, avatar_url, role FROM users WHERE id = $1`
 	user := &models.User{}
 	err := r.db.QueryRowContext(ctx, query, id).Scan(&user.Id, &user.Username, &user.AvatarUrl, &user.Role)
 	if err != nil {
@@ -39,7 +39,7 @@ func (r *userRepo) GetById(ctx context.Context, id string) (*models.User, error)
 }
 
 func (r *userRepo) Update(ctx context.Context, user *models.User) error {
-	query := `UPDATE users SET username = $1, avatar_url = $2, role = $3 WHERE id = $4`
+	query := `UPDATE users SET user_name = $1, avatar_url = $2, role = $3 WHERE id = $4`
 	_, err := r.db.ExecContext(ctx, query, user.Username, user.AvatarUrl, user.Role, user.Id)
 	return err
 }
@@ -50,21 +50,21 @@ func (r *userRepo) Delete(ctx context.Context, id string) error {
 	return err
 }
 
-func (r *userRepo) List(ctx context.Context) ([]models.User, error) {
-	query := `SELECT id, username, avatar_url, role FROM users`
+func (r *userRepo) List(ctx context.Context) ([]*models.User, error) {
+	query := `SELECT id, user_name, avatar_url, role FROM users`
 	rows, err := r.db.QueryContext(ctx, query)
 	if err != nil {
 		return nil, err
 	}
 	defer rows.Close()
 
-	var users []models.User
+	var users []*models.User
 	for rows.Next() {
 		var user models.User
 		if err := rows.Scan(&user.Id, &user.Username, &user.AvatarUrl, &user.Role); err != nil {
 			return nil, err
 		}
-		users = append(users, user)
+		users = append(users, &user)
 	}
 	return users, nil
 }

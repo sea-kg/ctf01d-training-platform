@@ -130,7 +130,6 @@ paths:
         content:
           application/json:
             schema:
-              # fixme тут нужно убрать id из запроса
               $ref: '#/components/schemas/GameRequest'
         required: true
       responses:

@@ -1,16 +1,17 @@
 -- Пользователи
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
-    user_name VARCHAR(255) NOT NULL,
+    user_name VARCHAR(255) UNIQUE NOT NULL,
     password_hash VARCHAR(255) NOT NULL,
     avatar_url VARCHAR(255),
-    role VARCHAR(255) NOT NULL CHECK (role IN ('admin', 'player'))
+    status VARCHAR(255),
+    role VARCHAR(255) NOT NULL CHECK (role IN ('admin', 'player', 'guest'))
 );
 
 -- Команды
 CREATE TABLE teams (
     id SERIAL PRIMARY KEY,
-    team_name VARCHAR(255) NOT NULL,
+    team_name VARCHAR(255) UNIQUE NOT NULL,
     description VARCHAR(255) NOT NULL,
     university VARCHAR(255),
     social_links TEXT,

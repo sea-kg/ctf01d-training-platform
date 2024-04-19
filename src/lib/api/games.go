@@ -10,7 +10,6 @@ import (
 	"net/http"
 	"time"
 
-	_ "github.com/go-sql-driver/mysql"
 	"github.com/gorilla/mux"
 )
 
@@ -37,7 +36,7 @@ func CreateGameHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 		Description: game.Description,
 	}
 	if err := gameRepo.Create(r.Context(), newGame); err != nil {
-		respondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to create game"})
+		respondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to create game: " + err.Error()})
 		return
 	}
 	respondWithJSON(w, http.StatusOK, map[string]string{"data": "Game created successfully"})
@@ -100,6 +99,7 @@ func UpdateGameHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 	respondWithJSON(w, http.StatusOK, map[string]string{"data": "Game updated successfully"})
 }
 
+// fixme это общий респондер - надо его вынести отсюда
 func respondWithJSON(w http.ResponseWriter, code int, payload interface{}) {
 	w.Header().Set("Content-Type", "application/json")
 	response, err := json.Marshal(payload)
