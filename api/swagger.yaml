@@ -5,14 +5,14 @@ info:
   contact: {}
   version: 1.0.0
 servers:
-  - url: 'https://api.ctf01d.com'
+  - url: 'https://ctf01d.com'
     description: Production server
-  - url: 'https://api.staging.ctf01d.com'
+  - url: 'https://staging.ctf01d.com'
     description: Staging server
   - url: 'http://localhost:4102'
     description: Local server
 paths:
-  /users:
+  /api/users:
     get:
       tags:
         - Users
@@ -44,7 +44,7 @@ paths:
       responses:
         '201':
           description: User created successfully
-  '/users/{id}':
+  '/api/users/{id}':
     get:
       tags:
         - Users
@@ -103,7 +103,7 @@ paths:
       responses:
         '204':
           description: User deleted successfully
-  /games:
+  /api/games:
     get:
       tags:
         - Games
@@ -135,7 +135,7 @@ paths:
       responses:
         '201':
           description: Game created successfully
-  '/games/{id}':
+  '/api/games/{id}':
     get:
       tags:
         - Games
@@ -194,7 +194,7 @@ paths:
       responses:
         '200':
           description: Game deleted successfully
-  /teams:
+  /api/teams:
     get:
       tags:
         - Teams
@@ -226,7 +226,7 @@ paths:
       responses:
         '201':
           description: Team created successfully
-  '/teams/{id}':
+  '/api/teams/{id}':
     get:
       tags:
         - Teams
@@ -285,7 +285,7 @@ paths:
       responses:
         '204':
           description: Team deleted successfully
-  /results:
+  /api/results:
     get:
       tags:
         - Results
@@ -317,7 +317,7 @@ paths:
       responses:
         '201':
           description: Result created successfully
-  '/results/{id}':
+  '/api/results/{id}':
     get:
       tags:
         - Results
@@ -338,7 +338,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResultResponse'
-  /services:
+  /api/services:
     get:
       tags:
         - Services
@@ -370,7 +370,7 @@ paths:
       responses:
         '201':
           description: Service created successfully
-  '/services/{id}':
+  '/api/services/{id}':
     get:
       tags:
         - Services
