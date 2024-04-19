@@ -1,5 +1,5 @@
 version: '2'
 
 services:
-  service2_go:
+  service2_backend:
     image: ctf01d-game-simulation/service2_go:latest
