@@ -27,7 +27,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/User'
+                  $ref: '#/components/schemas/UserResponse'
                 x-content-type: application/json
     post:
       tags:
@@ -39,7 +39,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/User'
+              $ref: '#/components/schemas/UserRequest'
         required: true
       responses:
         '201':
@@ -64,7 +64,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
+                $ref: '#/components/schemas/UserResponse'
     put:
       tags:
         - Users
@@ -82,7 +82,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/User'
+              $ref: '#/components/schemas/UserRequest'
         required: true
       responses:
         '200':
@@ -118,7 +118,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Game'
+                  $ref: '#/components/schemas/GameResponse'
                 x-content-type: application/json
     post:
       tags:
@@ -131,7 +131,7 @@ paths:
           application/json:
             schema:
               # fixme тут нужно убрать id из запроса
-              $ref: '#/components/schemas/Game'
+              $ref: '#/components/schemas/GameRequest'
         required: true
       responses:
         '201':
@@ -156,7 +156,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Game'
+                $ref: '#/components/schemas/GameResponse'
     put:
       tags:
         - Games
@@ -174,7 +174,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Game'
+              $ref: '#/components/schemas/GameRequest'
         required: true
       responses:
         '200':
@@ -210,7 +210,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Team'
+                  $ref: '#/components/schemas/TeamResponse'
                 x-content-type: application/json
     post:
       tags:
@@ -222,7 +222,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Team'
+              $ref: '#/components/schemas/TeamRequest'
         required: true
       responses:
         '201':
@@ -247,7 +247,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Team'
+                $ref: '#/components/schemas/TeamResponse'
     put:
       tags:
         - Teams
@@ -265,7 +265,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Team'
+              $ref: '#/components/schemas/TeamRequest'
         required: true
       responses:
         '200':
@@ -301,7 +301,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Result'
+                  $ref: '#/components/schemas/ResultResponse'
                 x-content-type: application/json
     post:
       tags:
@@ -313,7 +313,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Result'
+              $ref: '#/components/schemas/ResultRequest'
         required: true
       responses:
         '201':
@@ -338,7 +338,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Result'
+                $ref: '#/components/schemas/ResultResponse'
   /services:
     get:
       tags:
@@ -354,7 +354,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Service'
+                  $ref: '#/components/schemas/ServiceResponse'
                 x-content-type: application/json
     post:
       tags:
@@ -366,7 +366,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Service'
+              $ref: '#/components/schemas/ServiceRequest'
         required: true
       responses:
         '201':
@@ -391,7 +391,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Service'
+                $ref: '#/components/schemas/ServiceResponse'
     put:
       tags:
         - Services
@@ -409,7 +409,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Service'
+              $ref: '#/components/schemas/ServiceRequest'
         required: true
       responses:
         '200':
@@ -432,31 +432,66 @@ paths:
           description: Service deleted successfully
 components:
   schemas:
-    User:
+    UserRequest:
       type: object
       properties:
-        id:
-          type: string
-          description: The unique identifier for the user
-        username:
+        user_name:
           type: string
           description: The name of the user
         role:
           type: string
-          description: 'The role of the user (admin, player)'
+          enum: [ "admin", "player", "guest"]
+          example: "player"
+          description: 'The role of the user (admin, player or guest)'
         avatar_url:
           type: string
           description: URL to the user's avatar
         status:
           type: string
           description: 'Status of the user (active, disabled)'
-      example:
-        role: role
-        avatar_url: avatar_url
-        id: id
-        username: username
-        status: status
-    Game:
+        password:
+          type: string
+          description: 'User password'
+    UserResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the user
+        user_name:
+          type: string
+          description: The name of the user
+        role:
+          type: string
+          enum: [ "admin", "player", "guest"]
+          example: "player"
+          description: 'The role of the user (admin, player or guest)'
+        avatar_url:
+          type: string
+          description: URL to the user's avatar
+        status:
+          type: string
+          description: 'Status of the user (active, disabled)'
+    GameRequest:
+      required:
+        - end_time
+        - start_time
+      type: object
+      properties:
+        start_time:
+          type: string
+          description: The start time of the game
+          format: date-time
+          example: '2000-01-23T04:56:07.000Z'
+        end_time:
+          type: string
+          description: The end time of the game
+          format: date-time
+          example: '2000-01-24T04:56:07.000Z'
+        description:
+          type: string
+          description: A brief description of the game
+    GameResponse:
       required:
         - end_time
         - id
@@ -470,22 +505,39 @@ components:
           type: string
           description: The start time of the game
           format: date-time
+          example: '2000-01-23T04:56:07.000Z'
         end_time:
           type: string
           description: The end time of the game
           format: date-time
+          example: '2000-01-24T04:56:07.000Z'
         description:
           type: string
           description: A brief description of the game
-      example:
-        start_time: '2000-01-23T04:56:07.000Z'
-        end_time: '2000-01-23T04:56:07.000Z'
-        description: description
-        id: id
-    Result:
+    ResultRequest:
       required:
         - game_id
+        - rank
+        - score
+        - team_id
+      type: object
+      properties:
+        team_id:
+          type: string
+          description: Identifier of the team this result belongs to
+        game_id:
+          type: string
+          description: Identifier of the game this result is for
+        score:
+          type: integer
+          description: The score achieved by the team
+        rank:
+          type: integer
+          description: The rank achieved by the team in this game
+    ResultResponse:
+      required:
         - id
+        - game_id
         - rank
         - score
         - team_id
@@ -506,13 +558,29 @@ components:
         rank:
           type: integer
           description: The rank achieved by the team in this game
-      example:
-        score: 0
-        rank: 6
-        id: id
-        team_id: team_id
-        game_id: game_id
-    Service:
+    ServiceRequest:
+      required:
+        - author
+        - is_public
+        - name
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the service
+        author:
+          type: string
+          description: Author of the service
+        logo_url:
+          type: string
+          description: URL to the logo of the service
+        description:
+          type: string
+          description: A brief description of the service
+        is_public:
+          type: boolean
+          description: Boolean indicating if the service is public
+    ServiceResponse:
       required:
         - author
         - id
@@ -538,14 +606,27 @@ components:
         is_public:
           type: boolean
           description: Boolean indicating if the service is public
-      example:
-        logo_url: logo_url
-        author: author
-        name: name
-        is_public: true
-        description: description
-        id: id
-    Team:
+    TeamRequest:
+      required:
+        - team_name
+      type: object
+      properties:
+        team_name:
+          type: string
+          description: Name of the team
+        description:
+          type: string
+          description: A brief description of the team
+        university:
+          type: string
+          description: University or institution the team is associated with
+        social_links:
+          type: string
+          description: JSON string containing social media links of the team
+        avatar_url:
+          type: string
+          description: URL to the team's avatar
+    TeamResponse:
       required:
         - id
         - team_name
@@ -569,13 +650,6 @@ components:
         avatar_url:
           type: string
           description: URL to the team's avatar
-      example:
-        avatar_url: avatar_url
-        university: university
-        social_links: social_links
-        description: description
-        id: id
-        team_name: team_name
   links: {}
   callbacks: {}
 security: []
