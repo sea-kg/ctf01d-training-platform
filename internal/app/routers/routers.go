@@ -8,8 +8,8 @@ import (
 
 	"github.com/gorilla/mux"
 
-	"ctf01d/lib/api"
-	"ctf01d/lib/logger"
+	"ctf01d/internal/app/api"
+	"ctf01d/internal/app/logger"
 )
 
 type Route struct {

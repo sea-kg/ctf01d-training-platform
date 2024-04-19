@@ -1,7 +1,7 @@
 package view
 
 import (
-	"ctf01d/lib/models"
+	"ctf01d/internal/app/models"
 	"time"
 )
 

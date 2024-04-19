@@ -1,6 +1,6 @@
 package view
 
-import "ctf01d/lib/models"
+import "ctf01d/internal/app/models"
 
 type User struct {
 	Id        string `json:"id,omitempty"`

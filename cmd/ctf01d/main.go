@@ -1,8 +1,8 @@
 package main
 
 import (
-	"ctf01d/config"
-	"ctf01d/routers"
+	config "ctf01d/configs"
+	"ctf01d/internal/app/routers"
 	"database/sql"
 	"log"
 	"net/http"

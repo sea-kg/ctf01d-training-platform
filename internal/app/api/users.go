@@ -2,9 +2,9 @@ package api
 
 import (
 	"crypto/sha1"
-	"ctf01d/lib/models"
-	"ctf01d/lib/repository"
-	"ctf01d/lib/view"
+	"ctf01d/internal/app/models"
+	"ctf01d/internal/app/repository"
+	"ctf01d/internal/app/view"
 	"database/sql"
 	"encoding/hex"
 	"encoding/json"
