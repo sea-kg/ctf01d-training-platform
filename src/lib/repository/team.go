@@ -23,15 +23,15 @@ func NewTeamRepository(db *sql.DB) TeamRepository {
 }
 
 func (r *teamRepo) Create(ctx context.Context, team *models.Team) error {
-	query := `INSERT INTO teams (name, description) VALUES (?, ?)`
-	_, err := r.db.ExecContext(ctx, query, team.TeamName, team.Description)
+	query := `INSERT INTO teams (name, description) VALUES ($1, $2, $3, $4, $5)`
+	_, err := r.db.ExecContext(ctx, query, team.TeamName, team.Description, team.University, team.SocialLinks, team.AvatarUrl)
 	return err
 }
 
 func (r *teamRepo) GetById(ctx context.Context, id string) (*models.Team, error) {
-	query := `SELECT id, name, description FROM teams WHERE id = ?`
+	query := `SELECT id, name, description, university, social_links, avatar_url FROM teams WHERE id = $1`
 	team := &models.Team{}
-	err := r.db.QueryRowContext(ctx, query, id).Scan(&team.Id, &team.TeamName, &team.Description)
+	err := r.db.QueryRowContext(ctx, query, id).Scan(&team.Id, &team.TeamName, &team.Description, &team.University, &team.SocialLinks, &team.AvatarUrl)
 	if err != nil {
 		return nil, err
 	}
@@ -39,13 +39,13 @@ func (r *teamRepo) GetById(ctx context.Context, id string) (*models.Team, error)
 }
 
 func (r *teamRepo) Update(ctx context.Context, team *models.Team) error {
-	query := `UPDATE teams SET name = ?, description = ? WHERE id = ?`
-	_, err := r.db.ExecContext(ctx, query, team.TeamName, team.Description, team.Id)
+	query := `UPDATE teams SET name = $1, description = $2 university = $3 social_links = $4 avatar_url = $5 WHERE id = $6`
+	_, err := r.db.ExecContext(ctx, query, team.TeamName, team.Description, team.University, team.SocialLinks, team.AvatarUrl, team.Id)
 	return err
 }
 
 func (r *teamRepo) Delete(ctx context.Context, id string) error {
-	query := `DELETE FROM teams WHERE id = ?`
+	query := `DELETE FROM teams WHERE id = $1`
 	_, err := r.db.ExecContext(ctx, query, id)
 	return err
 }

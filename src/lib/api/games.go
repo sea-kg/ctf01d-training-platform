@@ -3,6 +3,7 @@ package api
 import (
 	"ctf01d/lib/models"
 	"ctf01d/lib/repository"
+	"ctf01d/lib/view"
 	"database/sql"
 	"encoding/json"
 	"log"
@@ -62,12 +63,7 @@ func GetGameByIdHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 		respondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to fetch game"})
 		return
 	}
-	gameJSON, err := json.Marshal(game)
-	if err != nil {
-		respondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": err.Error()})
-		return
-	}
-	respondWithJSON(w, http.StatusOK, gameJSON)
+	respondWithJSON(w, http.StatusOK, view.NewGameFromModel(game))
 }
 
 func ListGamesHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
@@ -77,15 +73,11 @@ func ListGamesHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 		respondWithJSON(w, http.StatusBadRequest, map[string]string{"error": err.Error()})
 		return
 	}
-	gamesJSON, err := json.Marshal(games)
-	if err != nil {
-		respondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": err.Error()})
-		return
-	}
-	respondWithJSON(w, http.StatusOK, gamesJSON)
+	respondWithJSON(w, http.StatusOK, view.NewGamesFromModels(games))
 }
 
 func UpdateGameHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
+	// fixme update не проверяет есть ли запись в бд
 	var game RequestGame
 	if err := json.NewDecoder(r.Body).Decode(&game); err != nil {
 		respondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Invalid request payload"})

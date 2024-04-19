@@ -23,13 +23,13 @@ func NewResultRepository(db *sql.DB) ResultRepository {
 }
 
 func (r *resultRepo) Create(ctx context.Context, result *models.Result) error {
-	query := `INSERT INTO results (team_id, game_id, score, rank) VALUES (?, ?, ?, ?)`
+	query := `INSERT INTO results (team_id, game_id, score, rank) VALUES ($1, $2, $3, $4)`
 	_, err := r.db.ExecContext(ctx, query, result.TeamId, result.GameId, result.Score, result.Rank)
 	return err
 }
 
 func (r *resultRepo) GetById(ctx context.Context, id string) (*models.Result, error) {
-	query := `SELECT id, team_id, game_id, score, rank FROM results WHERE id = ?`
+	query := `SELECT id, team_id, game_id, score, rank FROM results WHERE id = $1`
 	result := &models.Result{}
 	err := r.db.QueryRowContext(ctx, query, id).Scan(&result.Id, &result.TeamId, &result.GameId, &result.Score, &result.Rank)
 	if err != nil {
@@ -39,13 +39,13 @@ func (r *resultRepo) GetById(ctx context.Context, id string) (*models.Result, er
 }
 
 func (r *resultRepo) Update(ctx context.Context, result *models.Result) error {
-	query := `UPDATE results SET team_id = ?, game_id = ?, score = ?, rank = ? WHERE id = ?`
+	query := `UPDATE results SET team_id = $1, game_id = $2, score = $3, rank = $4 WHERE id = $5`
 	_, err := r.db.ExecContext(ctx, query, result.TeamId, result.GameId, result.Score, result.Rank, result.Id)
 	return err
 }
 
 func (r *resultRepo) Delete(ctx context.Context, id string) error {
-	query := `DELETE FROM results WHERE id = ?`
+	query := `DELETE FROM results WHERE id = $1`
 	_, err := r.db.ExecContext(ctx, query, id)
 	return err
 }

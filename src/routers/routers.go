@@ -45,164 +45,31 @@ func Index(w http.ResponseWriter, r *http.Request) {
 }
 
 var routes = Routes{
-	Route{
-		"CreateGame",
-		strings.ToUpper("Post"),
-		"/games",
-		api.CreateGameHandler,
-	},
+	Route{"CreateGame", strings.ToUpper("Post"), "/games", api.CreateGameHandler},
+	Route{"DeleteGame", strings.ToUpper("Delete"), "/games/{id}", api.DeleteGameHandler},
+	Route{"GetGameById", strings.ToUpper("Get"), "/games/{id}", api.GetGameByIdHandler},
+	Route{"ListGames", strings.ToUpper("Get"), "/games", api.ListGamesHandler},
+	Route{"UpdateGame", strings.ToUpper("Put"), "/games/{id}", api.UpdateGameHandler},
 
-	Route{
-		"DeleteGame",
-		strings.ToUpper("Delete"),
-		"/games/{id}",
-		api.DeleteGameHandler,
-	},
+	Route{"CreateResult", strings.ToUpper("Post"), "/results", api.CreateResultHandler},
+	Route{"GetResultById", strings.ToUpper("Get"), "/results/{id}", api.GetResultByIdHandler},
+	Route{"ListResults", strings.ToUpper("Get"), "/results", api.ListResultsHandler},
 
-	Route{
-		"GetGameById",
-		strings.ToUpper("Get"),
-		"/games/{id}",
-		api.GetGameByIdHandler,
-	},
+	Route{"CreateService", strings.ToUpper("Post"), "/services", api.CreateServiceHandler},
+	Route{"DeleteService", strings.ToUpper("Delete"), "/services/{id}", api.DeleteServiceHandler},
+	Route{"GetServiceById", strings.ToUpper("Get"), "/services/{id}", api.GetServiceByIdHandler},
+	Route{"ListServices", strings.ToUpper("Get"), "/services", api.ListServicesHandler},
+	Route{"UpdateService", strings.ToUpper("Put"), "/services/{id}", api.UpdateServiceHandler},
 
-	Route{
-		"ListGames",
-		strings.ToUpper("Get"),
-		"/games",
-		api.ListGamesHandler,
-	},
+	Route{"CreateTeam", strings.ToUpper("Post"), "/teams", api.CreateTeamHandler},
+	Route{"DeleteTeam", strings.ToUpper("Delete"), "/teams/{id}", api.DeleteTeamHandler},
+	Route{"GetTeamById", strings.ToUpper("Get"), "/teams/{id}", api.GetTeamByIdHandler},
+	Route{"ListTeams", strings.ToUpper("Get"), "/teams", api.ListTeamsHandler},
+	Route{"UpdateTeam", strings.ToUpper("Put"), "/teams/{id}", api.UpdateTeamHandler},
 
-	Route{
-		"UpdateGame",
-		strings.ToUpper("Put"),
-		"/games/{id}",
-		api.UpdateGameHandler,
-	},
-
-	Route{
-		"CreateResult",
-		strings.ToUpper("Post"),
-		"/results",
-		api.CreateResultHandler,
-	},
-
-	Route{
-		"GetResultById",
-		strings.ToUpper("Get"),
-		"/results/{id}",
-		api.GetResultByIdHandler,
-	},
-
-	Route{
-		"ListResults",
-		strings.ToUpper("Get"),
-		"/results",
-		api.ListResultsHandler,
-	},
-
-	Route{
-		"CreateService",
-		strings.ToUpper("Post"),
-		"/services",
-		api.CreateServiceHandler,
-	},
-
-	Route{
-		"DeleteService",
-		strings.ToUpper("Delete"),
-		"/services/{id}",
-		api.DeleteServiceHandler,
-	},
-
-	Route{
-		"GetServiceById",
-		strings.ToUpper("Get"),
-		"/services/{id}",
-		api.GetServiceByIdHandler,
-	},
-
-	Route{
-		"ListServices",
-		strings.ToUpper("Get"),
-		"/services",
-		api.ListServicesHandler,
-	},
-
-	Route{
-		"UpdateService",
-		strings.ToUpper("Put"),
-		"/services/{id}",
-		api.UpdateServiceHandler,
-	},
-
-	Route{
-		"CreateTeam",
-		strings.ToUpper("Post"),
-		"/teams",
-		api.CreateTeamHandler,
-	},
-
-	Route{
-		"DeleteTeam",
-		strings.ToUpper("Delete"),
-		"/teams/{id}",
-		api.DeleteTeamHandler,
-	},
-
-	Route{
-		"GetTeamById",
-		strings.ToUpper("Get"),
-		"/teams/{id}",
-		api.GetTeamByIdHandler,
-	},
-
-	Route{
-		"ListTeams",
-		strings.ToUpper("Get"),
-		"/teams",
-		api.ListTeamsHandler,
-	},
-
-	Route{
-		"UpdateTeam",
-		strings.ToUpper("Put"),
-		"/teams/{id}",
-		api.UpdateTeamHandler,
-	},
-
-	Route{
-		"CreateUser",
-		strings.ToUpper("Post"),
-		"/users",
-		api.CreateUserHandler,
-	},
-
-	Route{
-		"DeleteUser",
-		strings.ToUpper("Delete"),
-		"/users/{id}",
-		api.DeleteUserHandler,
-	},
-
-	Route{
-		"GetUserById",
-		strings.ToUpper("Get"),
-		"/users/{id}",
-		api.GetUserByIdHandler,
-	},
-
-	Route{
-		"ListUsers",
-		strings.ToUpper("Get"),
-		"/users",
-		api.ListUsersHandler,
-	},
-
-	Route{
-		"UpdateUser",
-		strings.ToUpper("Put"),
-		"/users/{id}",
-		api.UpdateUserHandler,
-	},
+	Route{"CreateUser", strings.ToUpper("Post"), "/users", api.CreateUserHandler},
+	Route{"DeleteUser", strings.ToUpper("Delete"), "/users/{id}", api.DeleteUserHandler},
+	Route{"GetUserById", strings.ToUpper("Get"), "/users/{id}", api.GetUserByIdHandler},
+	Route{"ListUsers", strings.ToUpper("Get"), "/users", api.ListUsersHandler},
+	Route{"UpdateUser", strings.ToUpper("Put"), "/users/{id}", api.UpdateUserHandler},
 }

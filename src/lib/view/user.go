@@ -1,14 +1,9 @@
 package view
 
 type User struct {
-	// The unique identifier for the user
-	Id string `json:"id,omitempty"`
-	// The name of the user
-	Username string `json:"username,omitempty"`
-	// The role of the user (admin, player)
-	Role string `json:"role,omitempty"`
-	// URL to the user's avatar
+	Id        string `json:"id,omitempty"`
+	Username  string `json:"username,omitempty"`
+	Role      string `json:"role,omitempty"`
 	AvatarUrl string `json:"avatar_url,omitempty"`
-	// Status of the user (active, disabled)
-	Status string `json:"status,omitempty"`
+	Status    string `json:"status,omitempty"`
 }

@@ -23,15 +23,13 @@ func NewServiceRepository(db *sql.DB) ServiceRepository {
 }
 
 func (r *serviceRepo) Create(ctx context.Context, service *models.Service) error {
-	// fixme check params
-	query := `INSERT INTO services (name author, logo_url, description, is_public) VALUES (?, ?, ?, ?)`
+	query := `INSERT INTO services (name, author, logo_url, description, is_public) VALUES ($1, $2, $3, $4)`
 	_, err := r.db.ExecContext(ctx, query, service.Name, service.Author, service.LogoUrl, service.Description, service.IsPublic)
 	return err
 }
 
 func (r *serviceRepo) GetById(ctx context.Context, id string) (*models.Service, error) {
-	// fixme - check params
-	query := `SELECT id name, author, logo_url, description, is_public FROM services WHERE id = ?`
+	query := `SELECT id, name, author, logo_url, description, is_public FROM services WHERE id = $1`
 	service := &models.Service{}
 	err := r.db.QueryRowContext(ctx, query, id).Scan(&service.Id, &service.Name, &service.Author, &service.LogoUrl, &service.Description, &service.IsPublic)
 	if err != nil {
@@ -41,21 +39,19 @@ func (r *serviceRepo) GetById(ctx context.Context, id string) (*models.Service, 
 }
 
 func (r *serviceRepo) Update(ctx context.Context, service *models.Service) error {
-	// fixme - check params
-	query := `UPDATE services SET start_time = ?, end_time = ?, description = ? WHERE id = ?`
+	query := `UPDATE services SET start_time = $1, end_time = $2, description = $3 WHERE id = $4`
 	_, err := r.db.ExecContext(ctx, query, service.Name, service.Author, service.LogoUrl, service.Description, service.IsPublic)
 	return err
 }
 
 func (r *serviceRepo) Delete(ctx context.Context, id string) error {
-	query := `DELETE FROM services WHERE id = ?`
+	query := `DELETE FROM services WHERE id = $1`
 	_, err := r.db.ExecContext(ctx, query, id)
 	return err
 }
 
 func (r *serviceRepo) List(ctx context.Context) ([]models.Service, error) {
-	// fixme - check params
-	query := `SELECT id, start_time, end_time, description FROM services`
+	query := `SELECT id, name, author, logo_url, description, is_public FROM services`
 	rows, err := r.db.QueryContext(ctx, query)
 	if err != nil {
 		return nil, err

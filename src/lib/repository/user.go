@@ -23,13 +23,13 @@ func NewUserRepository(db *sql.DB) UserRepository {
 }
 
 func (r *userRepo) Create(ctx context.Context, user *models.User) error {
-	query := `INSERT INTO users (username, avatar_url, role) VALUES (?, ?, ?)`
+	query := `INSERT INTO users (username, avatar_url, role) VALUES ($1, $2, $3)`
 	_, err := r.db.ExecContext(ctx, query, user.Username, user.AvatarUrl, user.Role)
 	return err
 }
 
 func (r *userRepo) GetById(ctx context.Context, id string) (*models.User, error) {
-	query := `SELECT id, username, avatar_url, role FROM users WHERE id = ?`
+	query := `SELECT id, username, avatar_url, role FROM users WHERE id = $1`
 	user := &models.User{}
 	err := r.db.QueryRowContext(ctx, query, id).Scan(&user.Id, &user.Username, &user.AvatarUrl, &user.Role)
 	if err != nil {
@@ -39,13 +39,13 @@ func (r *userRepo) GetById(ctx context.Context, id string) (*models.User, error)
 }
 
 func (r *userRepo) Update(ctx context.Context, user *models.User) error {
-	query := `UPDATE users SET username = ?, avatar_url = ?, role = ? WHERE id = ?`
+	query := `UPDATE users SET username = $1, avatar_url = $2, role = $3 WHERE id = $4`
 	_, err := r.db.ExecContext(ctx, query, user.Username, user.AvatarUrl, user.Role, user.Id)
 	return err
 }
 
 func (r *userRepo) Delete(ctx context.Context, id string) error {
-	query := `DELETE FROM users WHERE id = ?`
+	query := `DELETE FROM users WHERE id = $1`
 	_, err := r.db.ExecContext(ctx, query, id)
 	return err
 }
