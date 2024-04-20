@@ -50,3 +50,24 @@ CREATE TABLE results (
     score INTEGER NOT NULL,
     rank INTEGER NOT NULL
 );
+
+-- Пользователи и команды
+CREATE TABLE team_members (
+    user_id INTEGER REFERENCES users(id),
+    team_id INTEGER REFERENCES teams(id),
+    PRIMARY KEY (user_id, team_id)
+);
+
+-- Команды и игры
+CREATE TABLE team_games (
+    team_id INTEGER REFERENCES teams(id),
+    game_id INTEGER REFERENCES games(id),
+    PRIMARY KEY (team_id, game_id)
+);
+
+-- Игры и сервисы
+CREATE TABLE game_services (
+    game_id INTEGER REFERENCES games(id),
+    service_id INTEGER REFERENCES services(id),
+    PRIMARY KEY (game_id, service_id)
+);
