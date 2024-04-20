@@ -14,17 +14,19 @@ import (
 )
 
 type RequestUser struct {
-	Username  string `json:"user_name"`
-	Role      string `json:"role"`
-	AvatarUrl string `json:"avatar_url"`
-	Status    string `json:"status"`
-	Password  string `json:"password"`
+	Username  string   `json:"user_name"`
+	Role      string   `json:"role"`
+	AvatarUrl string   `json:"avatar_url"`
+	Status    string   `json:"status"`
+	Password  string   `json:"password"`
+	TeamsId   []string `json:"team_ids"`
 }
 
 func CreateUserHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
+	// fixme обернуть в транзакцию, т.к. две вставки подряд
 	var user RequestUser
 	if err := json.NewDecoder(r.Body).Decode(&user); err != nil {
-		api_helpers.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Invalid request payload"})
+		api_helpers.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Invalid request payload: " + err.Error()})
 		return
 	}
 	userRepo := repository.NewUserRepository(db)
@@ -38,6 +40,12 @@ func CreateUserHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 	if err := userRepo.Create(r.Context(), newUser); err != nil {
 		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to create user: " + err.Error()})
 		return
+	}
+	if len(user.TeamsId) > 0 {
+		if err := userRepo.AddUserToTeams(r.Context(), newUser.Id, user.TeamsId); err != nil {
+			api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to add user to teams: " + err.Error()})
+			return
+		}
 	}
 	api_helpers.RespondWithJSON(w, http.StatusOK, map[string]string{"data": "User created successfully"})
 }

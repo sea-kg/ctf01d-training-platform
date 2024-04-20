@@ -8,6 +8,7 @@ import (
 
 type UserRepository interface {
 	Create(ctx context.Context, user *models.User) error
+	AddUserToTeams(ctx context.Context, userId int, teamIds []string) error
 	GetById(ctx context.Context, id string) (*models.User, error)
 	Update(ctx context.Context, user *models.User) error
 	Delete(ctx context.Context, id string) error
@@ -23,9 +24,22 @@ func NewUserRepository(db *sql.DB) UserRepository {
 }
 
 func (r *userRepo) Create(ctx context.Context, user *models.User) error {
-	query := `INSERT INTO users (user_name, avatar_url, role, status, password_hash) VALUES ($1, $2, $3, $4, $5)`
-	_, err := r.db.ExecContext(ctx, query, user.Username, user.AvatarUrl, user.Role, user.Status, user.PasswordHash)
-	return err
+	query := `INSERT INTO users (user_name, avatar_url, role, status, password_hash) VALUES ($1, $2, $3, $4, $5) RETURNING id`
+	err := r.db.QueryRowContext(ctx, query, user.Username, user.AvatarUrl, user.Role, user.Status, user.PasswordHash).Scan(&user.Id)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func (r *userRepo) AddUserToTeams(ctx context.Context, userId int, teamIds []string) error {
+	for _, teamId := range teamIds {
+		_, err := r.db.ExecContext(ctx, "INSERT INTO team_members (user_id, team_id) VALUES ($1, $2)", userId, teamId)
+		if err != nil {
+			return err
+		}
+	}
+	return nil
 }
 
 func (r *userRepo) GetById(ctx context.Context, id string) (*models.User, error) {

@@ -36,6 +36,13 @@
             margin: 10px 0;
         }
 
+        select {
+            display: block;
+            width: 50%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+
         button {
             cursor: pointer;
         }
@@ -73,6 +80,8 @@
             <h2>Add New User</h2>
             <form id="add-user-form">
                 <input type="text" id="username" name="username" placeholder="Username" required>
+                <select id="team" name="team" multiple>
+                </select>
                 <input type="password" id="password" name="password" placeholder="Password" required>
                 <input type="text" id="status" name="status" placeholder="Status">
                 <input type="text" id="avatar_url" name="avatar_url" placeholder="Avatar URL">
@@ -106,16 +115,34 @@
                     }
                 });
             }
-
+            function loadTeams() {
+                $.ajax({
+                    url: '/api/teams',
+                    method: 'GET',
+                    success: function (teams) {
+                        var teamSelect = $('#team');
+                        teamSelect.empty(); // Очистка предыдущих значений
+                        teams.forEach(function (team) {
+                            teamSelect.append(`<option value="${team.id}">${team.name}</option>`);
+                        });
+                    },
+                    error: function () {
+                        alert('Error loading teams');
+                    }
+                });
+            }
             loadUsers();
+            loadTeams();
             $('#add-user-form').on('submit', function (e) {
                 e.preventDefault();
+                var selectedTeams = $('#team').val();
                 var data = {
                     user_name: $('#username').val(),
                     password: $('#password').val(),
                     avatar_url: $('#avatar_url').val(),
                     status: $('#status').val(),
-                    role: $('#role').val()
+                    role: $('#role').val(),
+                    team_ids: selectedTeams
                 };
 
                 $.ajax({
