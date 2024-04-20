@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>List of Games</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>List of Games</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Start Time</th>
+                <th>End Time</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody id="games-table">
+        </tbody>
+    </table>
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                url: '/api/games',
+                method: 'GET',
+                success: function (games) {
+                    var gamesTable = $('#games-table');
+                    games.forEach(function (game) {
+                        gamesTable.append('<tr>' +
+                            '<td>' + game.id + '</td>' +
+                            '<td>' + game.start_time + '</td>' +
+                            '<td>' + game.end_time + '</td>' +
+                            '<td>' + game.description + '</td>' +
+                            '</tr>');
+                    });
+                },
+                error: function () {
+                    alert('Error loading games');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

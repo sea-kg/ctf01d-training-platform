@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Main Page</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            display: flex;
+        }
+
+        .sidebar {
+            width: 60%;
+            background: #f3f3f3;
+            padding: 20px;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .content {
+            width: 40%;
+            padding: 20px;
+        }
+
+        input {
+            display: block;
+            width: 50%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+
+        button {
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <h2>Users</h2>
+            <div id="user-list">
+                <!-- User list will be loaded here -->
+            </div>
+        </div>
+        <div class="content">
+            <h2>Add New User</h2>
+            <form id="add-user-form">
+                <input type="text" id="username" name="username" placeholder="Username" required>
+                <input type="password" id="password" name="password" placeholder="Password" required>
+                <input type="text" id="status" name="status" placeholder="Status">
+                <input type="text" id="avatar_url" name="avatar_url" placeholder="Avatar URL">
+                <select id="role" name="role">
+                    <option value="admin">Admin</option>
+                    <option value="player">Player</option>
+                    <option value="player">Guest</option>
+                </select>
+                <button type="submit">Add User</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            function loadUsers() {
+                $.ajax({
+                    url: '/api/users',
+                    method: 'GET',
+                    success: function (users) {
+                        $('#user-list').empty();
+                        users.forEach(function (user) {
+                            $('#user-list').append(`<div>
+                                <p>Nick<b> ${user.user_name}</b></h4>
+                                <p>Role: ${user.role}</p>
+                                <p>Status: ${user.status}</p>
+                                <img src="${user.avatar_url}" alt="User Avatar" style="width:50px;height:50px;">
+                                <button onclick="deleteUser('${user.id}')">Delete</button>
+                            </div>`);
+                        });
+                    }
+                });
+            }
+
+            loadUsers();
+            $('#add-user-form').on('submit', function (e) {
+                e.preventDefault();
+                var data = {
+                    user_name: $('#username').val(),
+                    password: $('#password').val(),
+                    avatar_url: $('#avatar_url').val(),
+                    status: $('#status').val(),
+                    role: $('#role').val()
+                };
+
+                $.ajax({
+                    url: '/api/users',
+                    method: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(data),
+                    success: function (response) {
+                        alert('User added successfully!');
+                        loadUsers();
+                    },
+                    error: function () {
+                        alert('Error adding user');
+                    }
+                });
+            });
+        });
+
+        function deleteUser(userId) {
+            $.ajax({
+                url: `/api/users/${userId}`,
+                method: 'DELETE',
+                success: function () {
+                    alert('User deleted successfully!');
+                    // loadUsers(); fixme not work
+                },
+                error: function () {
+                    alert('Error deleting user');
+                }
+            });
+        }
+    </script>
+</body>
+</html>

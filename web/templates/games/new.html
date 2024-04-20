@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Create Game</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 40px;
+            }
+
+            label,
+            input,
+            button {
+                display: block;
+                margin-top: 10px;
+            }
+
+            label {
+                margin-bottom: 5px;
+            }
+        </style>
+</head>
+
+<body>
+    <h1>Create New Game</h1>
+    <form id="create-game-form">
+        <label for="start-time">Start Time:</label>
+        <input type="datetime-local" id="start-time" name="start_time" required>
+
+        <label for="end-time">End Time:</label>
+        <input type="datetime-local" id="end-time" name="end_time" required>
+
+        <label for="description">Description:</label>
+        <input type="text" id="description" name="description" required>
+
+        <button type="submit">Create Game</button>
+    </form>
+
+    <script>
+        $(document).ready(function () {
+            $('#create-game-form').on('submit', function (e) {
+                e.preventDefault();
+                var startTimeInput = $('#start-time').val();
+                var endTimeInput = $('#end-time').val();
+                // convert to ISO 8601
+                var startTime = new Date(startTimeInput).toISOString();
+                var endTime = new Date(endTimeInput).toISOString();
+                var data = {
+                    start_time: startTime,
+                    end_time: endTime,
+                    description: $('#description').val()
+                };
+                $.ajax({
+                    url: '/api/games',
+                    method: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(data),
+                    success: function (response) {
+                        alert('Game created successfully!');
+                    },
+                    error: function () {
+                        alert('Error creating game');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
