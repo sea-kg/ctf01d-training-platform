@@ -93,9 +93,6 @@ var apiRoutes = ApiRoutes{
 }
 
 var frontRoutes = FrontRoutes{
-	FrontRoute{"CreateGame", strings.ToUpper("Get"), "/games/new.html", func(w http.ResponseWriter, r *http.Request) {
-		renderTemplate(w, "games/new.html")
-	}},
 	FrontRoute{"ListGame", strings.ToUpper("Get"), "/games/index.html", func(w http.ResponseWriter, r *http.Request) {
 		renderTemplate(w, "games/index.html")
 	}},

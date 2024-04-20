@@ -41,6 +41,20 @@
         button {
             cursor: pointer;
         }
+
+        .navigation {
+            margin-bottom: 20px;
+        }
+
+        .navigation a {
+            margin-right: 20px;
+            text-decoration: none;
+            color: blue;
+        }
+
+        .navigation a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 
@@ -53,6 +67,11 @@
             </div>
         </div>
         <div class="content">
+            <div class="navigation">
+                <a href="/games/index.html">List Games</a>
+                <a href="/users/index.html">List Users</a>
+                <a href="/teams/index.html">List Teams</a>
+            </div>
             <h2>Add New Team</h2>
             <form id="add-team-form">
                 <input type="text" id="name" name="name" placeholder="Team name" required>
@@ -123,7 +142,7 @@
                     password: $('#password').val(),
                     social_links: $('#social_links').val(),
                     description: $('#description').val(),
-                    avatar_url: 'https://robohash.org/' + $('#avatar_url').val(), // тут для отладки рандомный текст преврашается в image
+                    avatar_url: $('#avatar_url').val(),
                     university_id: $('#university_id').val()
                 };
 

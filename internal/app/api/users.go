@@ -1,13 +1,11 @@
 package api
 
 import (
-	"crypto/sha1"
 	"ctf01d/internal/app/models"
 	"ctf01d/internal/app/repository"
 	api_helpers "ctf01d/internal/app/utils"
 	"ctf01d/internal/app/view"
 	"database/sql"
-	"encoding/hex"
 	"encoding/json"
 	"net/http"
 
@@ -33,20 +31,14 @@ func CreateUserHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 		Username:     user.Username,
 		Role:         user.Role,
 		Status:       user.Status,
-		PasswordHash: HashPassword(user.Password),
+		PasswordHash: api_helpers.HashPassword(user.Password),
+		AvatarUrl:    api_helpers.PrepareAvatar(user.AvatarUrl),
 	}
 	if err := userRepo.Create(r.Context(), newUser); err != nil {
 		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to create user: " + err.Error()})
 		return
 	}
 	api_helpers.RespondWithJSON(w, http.StatusOK, map[string]string{"data": "User created successfully"})
-}
-
-// ей тут не место, вынести в - tool, добавить соль в конфиг и солить пароли
-func HashPassword(s string) string {
-	h := sha1.New()
-	h.Write([]byte(s))
-	return hex.EncodeToString(h.Sum(nil))
 }
 
 func DeleteUserHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
