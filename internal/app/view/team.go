@@ -11,21 +11,21 @@ type Team struct {
 	AvatarUrl   string `json:"avatar_url,omitempty"`
 }
 
-func NewTeamFromModel(u *models.Team) *Team {
+func NewTeamFromModel(t *models.Team) *Team {
 	return &Team{
-		Id:          u.Id,
-		Name:        u.Name,
-		Description: u.Description,
-		University:  u.UniversityId,
-		SocialLinks: u.SocialLinks,
-		AvatarUrl:   u.AvatarUrl,
+		Id:          t.Id,
+		Name:        t.Name,
+		Description: t.Description,
+		University:  t.University,
+		SocialLinks: t.SocialLinks,
+		AvatarUrl:   t.AvatarUrl,
 	}
 }
 
-func NewTeamsFromModels(ms []*models.Team) []*Team {
+func NewTeamsFromModels(ts []*models.Team) []*Team {
 	var teams []*Team
-	for _, m := range ms {
-		teams = append(teams, NewTeamFromModel(m))
+	for _, t := range ts {
+		teams = append(teams, NewTeamFromModel(t))
 	}
 	return teams
 }

@@ -5,6 +5,7 @@ type Team struct {
 	Name         string `db:"name"`
 	Description  string `db:"description"`
 	UniversityId string `db:"university_id"`
+	University   string
 	SocialLinks  string `db:"social_links"`
 	AvatarUrl    string `db:"avatar_url"`
 }

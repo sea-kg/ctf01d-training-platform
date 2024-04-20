@@ -29,9 +29,9 @@ func (r *teamRepo) Create(ctx context.Context, team *models.Team) error {
 }
 
 func (r *teamRepo) GetById(ctx context.Context, id string) (*models.Team, error) {
-	query := `SELECT id, name, description, university, social_links, avatar_url FROM teams WHERE id = $1`
+	query := "SELECT t.*, u.name as university_name FROM teams t JOIN universities u ON t.university_id = u.id"
 	team := &models.Team{}
-	err := r.db.QueryRowContext(ctx, query, id).Scan(&team.Id, &team.Name, &team.Description, &team.UniversityId, &team.SocialLinks, &team.AvatarUrl)
+	err := r.db.QueryRowContext(ctx, query, id).Scan(&team.Id, &team.Name, &team.Description, &team.UniversityId, &team.University, &team.SocialLinks, &team.AvatarUrl)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ func (r *teamRepo) Delete(ctx context.Context, id string) error {
 }
 
 func (r *teamRepo) List(ctx context.Context) ([]*models.Team, error) {
-	query := `SELECT id, name, description FROM teams`
+	query := "SELECT t.*, u.name as university_name FROM teams t JOIN universities u ON t.university_id = u.id"
 	rows, err := r.db.QueryContext(ctx, query)
 	if err != nil {
 		return nil, err
@@ -61,7 +61,7 @@ func (r *teamRepo) List(ctx context.Context) ([]*models.Team, error) {
 	var teams []*models.Team
 	for rows.Next() {
 		var team models.Team
-		if err := rows.Scan(&team.Id, &team.Name, &team.Description); err != nil {
+		if err := rows.Scan(&team.Id, &team.Name, &team.Description, &team.UniversityId, &team.SocialLinks, &team.AvatarUrl, &team.University); err != nil {
 			return nil, err
 		}
 		teams = append(teams, &team)

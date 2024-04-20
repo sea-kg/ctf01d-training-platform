@@ -56,10 +56,10 @@
             <h2>Add New Team</h2>
             <form id="add-team-form">
                 <input type="text" id="name" name="name" placeholder="Team name" required>
-                <input type="text" id="description" name="description" placeholder="Description">
-                <input type="text" id="social_links" name="social_links" placeholder="Social links">
-                <input type="text" id="avatar_url" name="avatar_url" placeholder="Avatar URL">
-                <input type="text" id="university" name="university_name" placeholder="University">
+                <input type="text" id="description" name="Description" placeholder="Description">
+                <input type="text" id="social_links" name="Social links" placeholder="Social links">
+                <input type="text" id="avatar_url" name="Avatar URL" placeholder="Avatar URL">
+                <input type="text" id="university" name="University" placeholder="University">
                 <input type="hidden" id="university_id" name="university_id">
 
                 <button type="submit">Add Team</button>
@@ -77,10 +77,10 @@
                         $('#team-list').empty();
                         teams.forEach(function (team) {
                             $('#team-list').append(`<div>
-                                <p>Name<b> ${team.name}</b></h4>
-                                <p>university: ${team.university}</p>
-                                <p>description: ${team.description}</p>
                                 <img src="${team.avatar_url}" alt="Team Avatar" style="width:50px;height:50px;">
+                                <p>Name: <b> ${team.name}</b></h4>
+                                <p>University: ${team.university}</p>
+                                <p>Description: ${team.description}</p>
                                 <button onclick="deleteTeam('${team.id}')">Delete</button>
                             </div>`);
                         });
@@ -106,13 +106,13 @@
                         }
                     });
                 },
-                minLength: 2,  // Минимальное количество символов для начала поиска
+                minLength: 2,
                 select: function (event, ui) {
                     console.log("Selected: " + ui.item.label + ", ID: " + ui.item.id);
-                    // Устанавливаем название университета в текстовое поле и id в скрытое поле
-                    $('#university').val(ui.item.label);  // Показывает выбранное название
-                    $('#university_id').val(ui.item.id);  // Скрытое поле для id
-                    return false;  // Предотвращаем автоматическое установление value в поле ввода
+
+                    $('#university').val(ui.item.label);
+                    $('#university_id').val(ui.item.id);
+                    return false;
                 }
             });
             loadTeams();
@@ -123,6 +123,7 @@
                     password: $('#password').val(),
                     social_links: $('#social_links').val(),
                     description: $('#description').val(),
+                    avatar_url: 'https://robohash.org/' + $('#avatar_url').val(), // тут для отладки рандомный текст преврашается в image
                     university_id: $('#university_id').val()
                 };
 

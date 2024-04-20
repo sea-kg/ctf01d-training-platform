@@ -16,6 +16,7 @@ type RequestTeam struct {
 	Name         string `json:"name"`
 	SocialLinks  string `json:"social_links"`
 	Description  string `json:"description"`
+	AvatarUrl    string `json:"avatar_url"`
 	UniversityId string `json:"university_id"`
 }
 
@@ -27,11 +28,13 @@ func CreateTeamHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 	}
 
 	teamRepo := repository.NewTeamRepository(db)
+	// fixme request to model надо вынести и переиспользовать
 	newTeam := &models.Team{
 		Name:         team.Name,
 		SocialLinks:  team.SocialLinks,
 		Description:  team.Description,
 		UniversityId: team.UniversityId,
+		AvatarUrl:    team.AvatarUrl,
 	}
 	if err := teamRepo.Create(r.Context(), newTeam); err != nil {
 		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to create team: " + err.Error()})
@@ -85,6 +88,7 @@ func UpdateTeamHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 		SocialLinks:  team.SocialLinks,
 		Description:  team.Description,
 		UniversityId: team.UniversityId,
+		AvatarUrl:    team.AvatarUrl,
 	}
 	vars := mux.Vars(r)
 	id := vars["id"]
