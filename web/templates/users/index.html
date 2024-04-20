@@ -36,8 +36,29 @@
             margin: 10px 0;
         }
 
+        select {
+            display: block;
+            width: 50%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+
         button {
             cursor: pointer;
+        }
+
+        .navigation {
+            margin-bottom: 20px;
+        }
+
+        .navigation a {
+            margin-right: 20px;
+            text-decoration: none;
+            color: blue;
+        }
+
+        .navigation a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
@@ -51,9 +72,16 @@
             </div>
         </div>
         <div class="content">
+            <div class="navigation">
+                <a href="/games/index.html">List Games</a>
+                <a href="/users/index.html">List Users</a>
+                <a href="/teams/index.html">List Teams</a>
+            </div>
             <h2>Add New User</h2>
             <form id="add-user-form">
                 <input type="text" id="username" name="username" placeholder="Username" required>
+                <select id="team" name="team" multiple>
+                </select>
                 <input type="password" id="password" name="password" placeholder="Password" required>
                 <input type="text" id="status" name="status" placeholder="Status">
                 <input type="text" id="avatar_url" name="avatar_url" placeholder="Avatar URL">
@@ -77,26 +105,44 @@
                         $('#user-list').empty();
                         users.forEach(function (user) {
                             $('#user-list').append(`<div>
-                                <p>Nick<b> ${user.user_name}</b></h4>
+                                <img src="${user.avatar_url}" alt="User Avatar" style="width:50px;height:50px;">
+                                <p>Nick: <b> ${user.user_name}</b></h4>
                                 <p>Role: ${user.role}</p>
                                 <p>Status: ${user.status}</p>
-                                <img src="${user.avatar_url}" alt="User Avatar" style="width:50px;height:50px;">
                                 <button onclick="deleteUser('${user.id}')">Delete</button>
                             </div>`);
                         });
                     }
                 });
             }
-
+            function loadTeams() {
+                $.ajax({
+                    url: '/api/teams',
+                    method: 'GET',
+                    success: function (teams) {
+                        var teamSelect = $('#team');
+                        teamSelect.empty();
+                        teams.forEach(function (team) {
+                            teamSelect.append(`<option value="${team.id}">${team.name}</option>`);
+                        });
+                    },
+                    error: function () {
+                        alert('Error loading teams');
+                    }
+                });
+            }
             loadUsers();
+            loadTeams();
             $('#add-user-form').on('submit', function (e) {
                 e.preventDefault();
+                var selectedTeams = $('#team').val();
                 var data = {
                     user_name: $('#username').val(),
                     password: $('#password').val(),
                     avatar_url: $('#avatar_url').val(),
                     status: $('#status').val(),
-                    role: $('#role').val()
+                    role: $('#role').val(),
+                    team_ids: selectedTeams
                 };
 
                 $.ajax({
@@ -130,4 +176,5 @@
         }
     </script>
 </body>
+
 </html>

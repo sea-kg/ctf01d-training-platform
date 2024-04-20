@@ -3,66 +3,170 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>List of Games</title>
+    <title>Main Page</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 40px;
+            margin: 0;
+            padding: 0;
+            display: flex;
         }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
+        .sidebar {
+            width: 60%;
+            background: #f3f3f3;
+            padding: 20px;
+            height: 100vh;
+            overflow-y: auto;
         }
 
-        th,
-        td {
-            padding: 8px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
+        .content {
+            width: 40%;
+            padding: 20px;
         }
 
-        th {
-            background-color: #f2f2f2;
+        input {
+            display: block;
+            width: 50%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        .navigation {
+            margin-bottom: 20px;
+        }
+
+        a {
+            margin-right: 20px;
+            text-decoration: none;
+            color: blue;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .team-member {
+            margin-top: 10px;
         }
     </style>
 </head>
 
 <body>
-    <h1>List of Games</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Start Time</th>
-                <th>End Time</th>
-                <th>Description</th>
-            </tr>
-        </thead>
-        <tbody id="games-table">
-        </tbody>
-    </table>
+    <div class="sidebar">
+        <h2>Games</h2>
+        <div id="games-list">
+            <!-- Games list will be loaded here -->
+        </div>
+    </div>
+    <div class="content">
+        <div class="navigation">
+            <a href="/games/index.html">List Games</a>
+            <a href="/users/index.html">List Users</a>
+            <a href="/teams/index.html">List Teams</a>
+        </div>
+            <h2>Create New Game</h2>
+            <form id="create-game-form">
+                <input type="datetime-local" id="start-time" name="start_time" required>
+                <input type="datetime-local" id="end-time" name="end_time" required>
+                <input type="text" id="description" name="description" required>
+
+                <button type="submit">Create Game</button>
+            </form>
+        <h2>Game Details</h2>
+        <div id="game-details">
+            <!-- Game details will be shown here -->
+        </div>
+    </div>
+
     <script>
         $(document).ready(function () {
-            $.ajax({
-                url: '/api/games',
-                method: 'GET',
-                success: function (games) {
-                    var gamesTable = $('#games-table');
-                    games.forEach(function (game) {
-                        gamesTable.append('<tr>' +
-                            '<td>' + game.id + '</td>' +
-                            '<td>' + game.start_time + '</td>' +
-                            '<td>' + game.end_time + '</td>' +
-                            '<td>' + game.description + '</td>' +
-                            '</tr>');
-                    });
-                },
-                error: function () {
-                    alert('Error loading games');
-                }
+            $('#create-game-form').on('submit', function (e) {
+                e.preventDefault();
+                var startTimeInput = $('#start-time').val();
+                var endTimeInput = $('#end-time').val();
+                // convert to ISO 8601
+                var startTime = new Date(startTimeInput).toISOString();
+                var endTime = new Date(endTimeInput).toISOString();
+                var data = {
+                    start_time: startTime,
+                    end_time: endTime,
+                    description: $('#description').val()
+                };
+                $.ajax({
+                    url: '/api/games',
+                    method: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(data),
+                    success: function (response) {
+                        alert('Game created successfully!');
+                        loadGames();
+                    },
+                    error: function () {
+                        alert('Error creating game');
+                    }
+                });
             });
+
+            function loadGames() {
+                $.ajax({
+                    url: '/api/games',
+                    method: 'GET',
+                    success: function (games) {
+                        console.log('Games loaded:', games);
+                        $('#games-list').empty();
+                        games.forEach(function (game) {
+                            var gameDiv = $('<div>');
+                            var idP = $('<p>').text('Description: ');
+                            gameDiv.append(idP);
+                            var gameLink = $('<a>').text(game.description || 'Game ' + game.id);
+                            gameLink.on('click', function () {
+                                loadGameDetails(game.id);
+                            });
+                            idP.append(gameLink);
+                            gameDiv.append(`<p>Start Time: ${game.start_time}</p>`);
+                            gameDiv.append(`<p>End Time: ${game.end_time}</p>`);
+                            $('#games-list').append(gameDiv);
+                        });
+                    },
+                    error: function () {
+                        alert('Error loading games');
+                    }
+                });
+            }
+
+            function loadGameDetails(gameId) {
+                $.ajax({
+                    url: `/api/games/${gameId}`,
+                    method: 'GET',
+                    success: function (game) {
+                        var details = `<p>Start Time: ${game.start_time}</p>
+                                       <p>End Time: ${game.end_time}</p>
+                                       <p>Description: ${game.description}</p>
+                                       <h3>Teams</h3>`;
+                        game.team_details.forEach(function (team) {
+                            details += `<div><strong>${team.name}</strong> - ${team.description}
+                                        <h4>Members:</h4>`;
+                            team.members.forEach(function (member) {
+                                details += `<p class="team-member">${member.user_name}</p>`;
+                            });
+                            details += '</div>';
+                        });
+                        $('#game-details').html(details);
+                    },
+                    error: function () {
+                        alert('Error loading game details');
+                    }
+                });
+            }
+            loadGames();
         });
     </script>
 </body>

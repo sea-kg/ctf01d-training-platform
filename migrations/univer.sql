@@ -1,2167 +1,2163 @@
-insert into universities (name) values ('Алтайский государственный аграрный университет');
-insert into universities (name) values ('Алтайский государственный гуманитарно-педагогический университет имени В.М. Шукшина');
-insert into universities (name) values ('Алтайский государственный институт культуры');
-insert into universities (name) values ('Алтайский государственный медицинский университет');
-insert into universities (name) values ('Алтайский государственный педагогический университет');
-insert into universities (name) values ('Алтайский государственный технический университет им. И.И. Ползунова');
-insert into universities (name) values ('Алтайский государственный университет');
-insert into universities (name) values ('Алтайский институт труда и права (филиал) Академии труда и социальных отношений');
-insert into universities (name) values ('Алтайский институт финансового управления');
-insert into universities (name) values ('Алтайский институт экономики - филиал Санкт-Петербургского университета управления и экономики');
-insert into universities (name) values ('Алтайский филиал Московского государственного института культуры');
-insert into universities (name) values ('Алтайский филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации');
-insert into universities (name) values ('Алтайский филиал Российской международной академии туризма');
-insert into universities (name) values ('Алтайский экономико-юридический институт');
-insert into universities (name) values ('Барнаульский филиал Московской академии предпринимательства при Правительстве Москвы');
-insert into universities (name) values ('Барнаульский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Барнаульский филиал Финансового университета при Правительстве Российской Федерации');
-insert into universities (name) values ('Барнаульский юридический институт');
-insert into universities (name) values ('Бийский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Бийский филиал Университета ""Синергия""');
-insert into universities (name) values ('Институт национальной безопасности и управления рисками');
-insert into universities (name) values ('Рубцовский индустриальный институт (филиал) Алтайского государственного технического университета им. И.И. Ползунова');
-insert into universities (name) values ('Рубцовский институт (филиал) Алтайского государственного университета');
-insert into universities (name) values ('Рубцовский филиал Университета Российской академии образования');
-insert into universities (name) values ('Филиал Алтайского государственного университета в г. Белокурихе');
-insert into universities (name) values ('Филиал Алтайского государственного университета в г. Бийске');
-insert into universities (name) values ('Филиал Алтайского государственного университета в г. Славгороде');
-insert into universities (name) values ('Филиал Московского психолого-социального университета в г. Барнауле Алтайского края');
-insert into universities (name) values ('Филиал Сибирского государственного университета путей сообщения в г. Новоалтайске');
-insert into universities (name) values ('Филиал Финансового университета при Правительстве Российской Федерации в г.Барнауле');
-insert into universities (name) values ('Амурская государственная медицинская академия');
-insert into universities (name) values ('Амурский государственный университет');
-insert into universities (name) values ('Амурский институт железнодорожного транспорта - филиал Дальневосточного государственного университета путей сообщения в г. Свободном');
-insert into universities (name) values ('Амурский филиал Морского государственного университета имени адмирала Г.И. Невельского');
-insert into universities (name) values ('Байкало-Амурский институт железнодорожного транспорта - филиал Дальневосточного государственного университета путей сообщения в г. Тынде');
-insert into universities (name) values ('Благовещенский государственный педагогический университет');
-insert into universities (name) values ('Благовещенский филиал Московской академии предпринимательства при Правительстве Москвы');
-insert into universities (name) values ('Благовещенский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Дальневосточное высшее военное командное училище (военный институт) имени Маршала Советского Союза К.К. Рокоссовского (филиал) Военного учебно-научного центра Сухопутных войск ""Общевойсковая академия Вооруженных Сил Российской Федерации""');
-insert into universities (name) values ('Дальневосточный государственный аграрный университет');
-insert into universities (name) values ('Открытый Институт Муниципальных Проблем');
-insert into universities (name) values ('Арктический морской институт имени В.И. Воронина - филиал Государственного университета морского и речного флота имени адмирала С.О. Макарова');
-insert into universities (name) values ('Архангельский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Архангельский филиал Финансового университета при Правительстве Российской Федерации');
-insert into universities (name) values ('Вельский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Институт управления (г. Архангельск)');
-insert into universities (name) values ('Котласский филиал Государственного университета морского и речного флота имени адмирала С.О. Макарова');
-insert into universities (name) values ('Северный (Арктический) федеральный университет имени М.В. Ломоносова');
-insert into universities (name) values ('Северный государственный медицинский университет');
-insert into universities (name) values ('Северный институт предпринимательства');
-insert into universities (name) values ('Северный филиал Московского гуманитарно-экономического института');
-insert into universities (name) values ('Северодвинский филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации');
-insert into universities (name) values ('Северодвинский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Филиал Санкт-Петербургского государственного университета культуры и искусств в г. Архангельске');
-insert into universities (name) values ('филиал Северного (Арктического) федерального университета имени М.В. Ломоносова в г. Коряжме Архангельской области');
-insert into universities (name) values ('Филиал Северного (Арктического) федерального университета имени М.В. Ломоносова в г. Северодвинске Архангельской области');
-insert into universities (name) values ('Астраханская государственная консерватория (академия)');
-insert into universities (name) values ('Астраханский (г. Астрахань) филиал Международного юридического института');
-insert into universities (name) values ('Астраханский государственный архитектурно-строительный университет');
-insert into universities (name) values ('Астраханский государственный медицинский университет');
-insert into universities (name) values ('Астраханский государственный технический университет');
-insert into universities (name) values ('Астраханский государственный университет');
-insert into universities (name) values ('Астраханский филиал Волжского государственного университета водного транспорта');
-insert into universities (name) values ('Астраханский филиал Московского финансово-промышленного университета ""СИНЕРГИЯ""');
-insert into universities (name) values ('Астраханский филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации');
-insert into universities (name) values ('Астраханский филиал Саратовского государственного аграрного университета имени Н.И. Вавилова');
-insert into universities (name) values ('Астраханский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Астраханский филиал Университета Российской академии образования');
-insert into universities (name) values ('Астраханский филиал Южно-Российского гуманитарного института');
-insert into universities (name) values ('Институт мировой экономики и финансов');
-insert into universities (name) values ('Каспийский институт морского и речного транспорта - филиал Волжского государственного университета водного транспорта');
-insert into universities (name) values ('Филиал Астраханского государственного университета в г. Знаменске Астраханской области');
-insert into universities (name) values ('Филиал ""Взлет"" Московского авиационного института (национального исследовательского университета) в г. Ахтубинске');
-insert into universities (name) values ('Филиал Международного института экономики и права в городе Астрахани');
-insert into universities (name) values ('Филиал Саратовской государственной академии права в г. Астрахани');
-insert into universities (name) values ('Белгородский государственный аграрный университет имени В. Я. Горина');
-insert into universities (name) values ('Белгородский государственный институт искусств и культуры');
-insert into universities (name) values ('Белгородский государственный национальный исследовательский университет');
-insert into universities (name) values ('Белгородский государственный технологический университет им. В.Г. Шухова');
-insert into universities (name) values ('Белгородский инженерно-экономический институт');
-insert into universities (name) values ('Белгородский институт экономики и права');
-insert into universities (name) values ('Белгородский университет кооперации, экономики и права');
-insert into universities (name) values ('Белгородский филиал Московского государственного университета путей сообщения');
-insert into universities (name) values ('Белгородский филиал Московского государственного университета экономики, статистики и информатики (МЭСИ)');
-insert into universities (name) values ('Белгородский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Белгородский юридический институт Министерства внутренних дел Российской Федерации');
-insert into universities (name) values ('Губкинский филиал Белгородского государственного технологического университета им. В.Г. Шухова');
-insert into universities (name) values ('Губкинский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Старооскольский технологический институт им. А.А. Угарова (филиал) Национального исследовательского технологического университета «МИСиС»');
-insert into universities (name) values ('Старооскольский филиал Белгородского государственного университета');
-insert into universities (name) values ('Старооскольский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Филиал Воронежской государственной академии искусств в городе Белгороде');
-insert into universities (name) values ('Брянский государственный аграрный университет');
-insert into universities (name) values ('Брянский государственный инженерно-технологический университет');
-insert into universities (name) values ('Брянский государственный технический университет');
-insert into universities (name) values ('Брянский государственный университет имени академика И.Г. Петровского');
-insert into universities (name) values ('Брянский институт управления и бизнеса');
-insert into universities (name) values ('Брянский филиал Академии права и управления (института)');
-insert into universities (name) values ('Брянский филиал Московского государственного университета путей сообщения');
-insert into universities (name) values ('Брянский филиал Московского государственного университета экономики, статистики и информатики (МЭСИ)');
-insert into universities (name) values ('Брянский филиал Национального государственного Университета физической культуры, спорта и здоровья имени П.Ф. Лесгафта, Санкт-Петербург');
-insert into universities (name) values ('Брянский филиал Российского государственного торгово-экономического университета');
-insert into universities (name) values ('Брянский филиал Российского университета кооперации');
-insert into universities (name) values ('Брянский филиал Российского экономического университета имени Г.В. Плеханова');
-insert into universities (name) values ('Брянский филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации');
-insert into universities (name) values ('Брянский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Брянский филиал Финансового университета при Правительстве Российской Федерации');
-insert into universities (name) values ('Карачевский филиал Орловского государственного университета имени И.С. Тургенева');
-insert into universities (name) values ('Филиал Брянского государственного университета имени академика И.Г.Петровского в г. Новозыбкове');
-insert into universities (name) values ('Филиал Московского государственного университета технологий и управления в г. Унече Брянской области');
-insert into universities (name) values ('Филиал Московского нового юридического института в г. Брянске');
-insert into universities (name) values ('Филиал Московского психолого-социального университета в г. Брянске');
-insert into universities (name) values ('Александровский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Владимирский государственный университет имени Александра Григорьевича и Николая Григорьевича Столетовых');
-insert into universities (name) values ('Владимирский институт бизнеса');
-insert into universities (name) values ('Владимирский институт туризма и гостеприимства');
-insert into universities (name) values ('Владимирский филиал Московского финансово-юридического университета МФЮА');
-insert into universities (name) values ('Владимирский филиал Российского университета кооперации');
-insert into universities (name) values ('Владимирский филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации');
-insert into universities (name) values ('Владимирский филиал Российской международной академии туризма');
-insert into universities (name) values ('Владимирский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Владимирский филиал Финансового университета при Правительстве Российской Федерации');
-insert into universities (name) values ('Владимирский юридический институт Федеральной службы исполнения наказаний');
-insert into universities (name) values ('Ковровская государственная технологическая академия имени В.А. Дегтярева');
-insert into universities (name) values ('Ковровский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Муромский институт (филиал) Владимирского государственного университета имени Александра Григорьевича и Николая Григорьевича Столетовых');
-insert into universities (name) values ('Муромский филиал Московского государственного университета путей сообщения');
-insert into universities (name) values ('Педагогический институт Владимирского государственного университета имени Александра Григорьевича и Николая Григорьевича Столетовых');
-insert into universities (name) values ('Покровский филиал Московского педагогического государственного университета');
-insert into universities (name) values ('Филиал Владимирского государственного университета имени Александра Григорьевича и Николая Григорьевича Столетовых в г. Гусь-Хрустальный');
-insert into universities (name) values ('Филиал Московского психолого-социального университета в г. Муроме Владимирской области');
-insert into universities (name) values ('Филиал Столичной финансово-гуманитарной академии в г. Владимире');
-insert into universities (name) values ('Быковский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Волгоградская академия Министерства внутренних дел Российской Федерации');
-insert into universities (name) values ('Волгоградская государственная академия физической культуры');
-insert into universities (name) values ('Волгоградская консерватория (институт) имени П.А. Серебрякова');
-insert into universities (name) values ('Волгоградский государственный аграрный университет');
-insert into universities (name) values ('Волгоградский государственный институт искусств и культуры');
-insert into universities (name) values ('Волгоградский государственный медицинский университет');
-insert into universities (name) values ('Волгоградский государственный социально-педагогический университет');
-insert into universities (name) values ('Волгоградский государственный технический университет');
-insert into universities (name) values ('Волгоградский государственный университет');
-insert into universities (name) values ('Волгоградский гуманитарный институт');
-insert into universities (name) values ('Волгоградский институт бизнеса');
-insert into universities (name) values ('Волгоградский институт экономики, социологии и права');
-insert into universities (name) values ('Волгоградский кооперативный институт (филиал) Российского университета кооперации');
-insert into universities (name) values ('Волгоградский филиал Академии труда и социальных отношений');
-insert into universities (name) values ('Волгоградский филиал Института управления');
-insert into universities (name) values ('Волгоградский филиал Международного славянского института');
-insert into universities (name) values ('Волгоградский филиал Московского государственного университета путей сообщения');
-insert into universities (name) values ('Волгоградский филиал Российского государственного торгово-экономического университета');
-insert into universities (name) values ('Волгоградский филиал Российского экономического университета имени Г.В. Плеханова');
-insert into universities (name) values ('Волгоградский филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации');
-insert into universities (name) values ('Волгоградский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Волгоградский филиал Финансового университета при Правительстве Российской Федерации');
-insert into universities (name) values ('Волгоградский юридический институт');
-insert into universities (name) values ('Волжский (г. Волжский Волгоградской области) филиал Международного юридического института');
-insert into universities (name) values ('Волжский гуманитарный институт (филиал) Волгоградского государственного университета');
-insert into universities (name) values ('Волжский институт строительства и технологий (филиал) Волгоградского государственного архитектурно-строительного университета');
-insert into universities (name) values ('Волжский институт экономики, педагогики и права');
-insert into universities (name) values ('Волжский политехнический институт (филиал) Волгоградского государственного технического университета');
-insert into universities (name) values ('Волжский филиал Московского института рекламы, туризма, шоу-бизнеса');
-insert into universities (name) values ('Волжский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Институт архитектуры и строительства Волгоградского государственного технического университета');
-insert into universities (name) values ('Камышинский технологический институт (филиал) Волгоградского государственного технического университета');
-insert into universities (name) values ('Камышинский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Линевский филиал Сибирской государственной геодезической академии');
-insert into universities (name) values ('Себряковский филиал Волгоградского государственного архитектурно-строительного университета');
-insert into universities (name) values ('Филиал Волгоградского государственного социально-педагогического университета в г. Михайловке Волгоградской области');
-insert into universities (name) values ('Филиал Международного института экономики и права в городе Волгограде');
-insert into universities (name) values ('Филиал Национального исследовательского университета ""МЭИ"" в г. Волжском');
-insert into universities (name) values ('филиал Финансового университета при Правительстве Российской Федерации в г.Волгограде');
-insert into universities (name) values ('Вологодская государственная молочнохозяйственная академия имени Н.В. Верещагина');
-insert into universities (name) values ('Вологодский государственный университет');
-insert into universities (name) values ('Вологодский институт бизнеса');
-insert into universities (name) values ('Вологодский институт права и экономики Федеральной службы исполнения наказаний');
-insert into universities (name) values ('Вологодский филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации');
-insert into universities (name) values ('Вологодский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Институт менеджмента и информационных технологий (филиал) Санкт-Петербургского государственного политехнического университета в г. Череповце');
-insert into universities (name) values ('Педагогический институт ВоГУ');
-insert into universities (name) values ('Северо-Западный институт (филиал) Университета имени О.Е. Кутафина (МГЮА)');
-insert into universities (name) values ('Филиал Санкт-Петербургского государственного экономического университета в г. Череповце');
-insert into universities (name) values ('Филиал Столичной финансово-гуманитарной академии в г. Вологде');
-insert into universities (name) values ('Филиал Столичной финансово-гуманитарной академии в г. Череповце');
-insert into universities (name) values ('Череповецкий военный инженерный институт радиоэлектроники');
-insert into universities (name) values ('Череповецкий государственный университет');
-insert into universities (name) values ('Череповецкий филиал Московской государственной академии водного транспорта');
-insert into universities (name) values ('Череповецкий филиал Современной гуманитарной академии');
-insert into universities (name) values ('Череповецкий филиал Университета Российской академии образования');
-insert into universities (name) values ('Борисоглебский филиал Воронежского государственного университета');
-insert into universities (name) values ('Борисоглебский филиал Института менеджмента, маркетинга и финансов');
-insert into universities (name) values ('Военный авиационный инженерный университет');
-insert into universities (name) values ('Воронежская государственная академия искусств');
-insert into universities (name) values ('Воронежский государственный аграрный университет имени императора Петра I');
-insert into universities (name) values ('Воронежский государственный институт физической культуры');
-insert into universities (name) values ('Воронежский государственный лесотехнический университет имени Г.Ф. Морозова');
-insert into universities (name) values ('Воронежский государственный медицинский университет им. Н.Н. Бурденко');
-insert into universities (name) values ('Воронежский государственный педагогический университет');
-insert into universities (name) values ('Воронежский государственный технический университет');
-insert into universities (name) values ('Воронежский государственный технический университет');
-insert into universities (name) values ('Воронежский государственный университет');
-insert into universities (name) values ('Воронежский государственный университет инженерных технологий');
-insert into universities (name) values ('Воронежский институт высоких технологий');
-insert into universities (name) values ('Воронежский институт инновационных систем');
-insert into universities (name) values ('Воронежский институт кооперации (филиал) Белгородского университета кооперации, экономики и права');
-insert into universities (name) values ('Воронежский институт Министерства внутренних дел Российской Федерации');
-insert into universities (name) values ('Воронежский институт правительственной связи (филиал) Академии Федеральной службы охраны Российской Федерации');
-insert into universities (name) values ('Воронежский институт Федеральной службы исполнения наказаний');
-insert into universities (name) values ('Воронежский институт экономики и социального управления');
-insert into universities (name) values ('Воронежский филиал Государственного университета морского и речного флота имени адмирала С.О. Макарова');
-insert into universities (name) values ('Воронежский филиал Московского государственного университета путей сообщения');
-insert into universities (name) values ('Воронежский филиал Московского гуманитарно-экономического института');
-insert into universities (name) values ('Воронежский филиал Московской открытой социальной академии');
-insert into universities (name) values ('Воронежский филиал Российского государственного торгово-экономического университета');
-insert into universities (name) values ('Воронежский филиал Российского экономического университета имени Г.В. Плеханова');
-insert into universities (name) values ('Воронежский филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации');
-insert into universities (name) values ('Воронежский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Воронежский экономико-правовой институт');
-insert into universities (name) values ('Институт менеджмента, маркетинга и финансов');
-insert into universities (name) values ('Институт экономики и права (г. Воронеж)');
-insert into universities (name) values ('Международный институт компьютерных технологий');
-insert into universities (name) values ('Филиал Воронежского государственного технического университета в г. Борисоглебске');
-insert into universities (name) values ('филиал Всероссийского заочного финансово-экономического института в г. Воронеже');
-insert into universities (name) values ('Филиал Московского института экономики, менеджмента и права в г. Воронеже');
-insert into universities (name) values ('Центральный филиал Российской академии правосудия (г. Воронеж)');
-insert into universities (name) values ('Биробиджанский филиал Амурского государственного университета');
-insert into universities (name) values ('Биробиджанский филиал Дальневосточного государственного аграрного университета');
-insert into universities (name) values ('Биробиджанский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Приамурский государственный университет имени Шолом-Алейхема');
-insert into universities (name) values ('Агинский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Забайкальский аграрный институт - филиал Иркутского государственного аграрного университета имени А.А.Ежевского');
-insert into universities (name) values ('Забайкальский государственный университет');
-insert into universities (name) values ('Забайкальский институт железнодорожного транспорта - филиал Иркутского государственного университета путей сообщения');
-insert into universities (name) values ('Забайкальский институт предпринимательства - филиал Сибирского университета потребительской кооперации');
-insert into universities (name) values ('Читинская государственная медицинская академия');
-insert into universities (name) values ('Читинский институт (филиал) Байкальского государственного университета экономики и права');
-insert into universities (name) values ('Читинский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Ивановская государственная медицинская академия Министерства здравоохранения и социального развития Российской Федерации');
-insert into universities (name) values ('Ивановская государственная сельскохозяйственная академия имени академика Д.К. Беляева');
-insert into universities (name) values ('Ивановский (г. Иваново) филиал Международного юридического института');
-insert into universities (name) values ('Ивановский государственный политехнический университет');
-insert into universities (name) values ('Ивановский государственный университет');
-insert into universities (name) values ('Ивановский государственный химико-технологический университет');
-insert into universities (name) values ('Ивановский государственный энергетический университет имени В.И. Ленина');
-insert into universities (name) values ('Ивановский институт Государственной противопожарной службы Министерства Российской Федерации по делам гражданской обороны, чрезвычайным ситуациям и ликвидации последствий стихийных бедствий');
-insert into universities (name) values ('Ивановский филиал Владимирского юридического института Федеральной службы исполнения наказаний');
-insert into universities (name) values ('Ивановский филиал Института управления');
-insert into universities (name) values ('Ивановский филиал Российского государственного торгово-экономического университета');
-insert into universities (name) values ('Ивановский филиал Российского университета кооперации');
-insert into universities (name) values ('Ивановский филиал Российского экономического университета имени Г.В. Плеханова');
-insert into universities (name) values ('Ивановский филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации');
-insert into universities (name) values ('Ивановский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Институт бизнеса, информационных технологий и финансов');
-insert into universities (name) values ('Кинешемский филиал Современной гуманитарной академии');
-insert into universities (name) values ('филиал Московского государственного индустриального университета в г. Кинешме');
-insert into universities (name) values ('Шуйский филиал Ивановского государственного университета');
-insert into universities (name) values ('Ангарский государственный технический университет');
-insert into universities (name) values ('Ангарский филиал Сибирской академии права, экономики и управления');
-insert into universities (name) values ('Байкальский государственный университет');
-insert into universities (name) values ('Братский государственный университет');
-insert into universities (name) values ('Восточно-Сибирский институт Министерства внутренних дел Российской Федерации');
-insert into universities (name) values ('Восточно-Сибирский институт экономики и права');
-insert into universities (name) values ('Восточно-Сибирский филиал Российской академии правосудия (г. Иркутск)');
-insert into universities (name) values ('Иркутский государственный аграрный университет имени А.А.Ежевского');
-insert into universities (name) values ('Иркутский государственный медицинский университет Министерства здравоохранения Российской Федерации');
-insert into universities (name) values ('Иркутский государственный университет');
-insert into universities (name) values ('Иркутский государственный университет путей сообщения');
-insert into universities (name) values ('Иркутский институт международного туризма');
-insert into universities (name) values ('Иркутский национальный исследовательский технический университет');
-insert into universities (name) values ('Иркутский филиал Академии труда и социальных отношений');
-insert into universities (name) values ('Иркутский филиал Московского государственного технического университета гражданской авиации');
-insert into universities (name) values ('Иркутский филиал Российского государственного торгово-экономического университета');
-insert into universities (name) values ('Иркутский филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации');
-insert into universities (name) values ('Иркутский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Иркутский юридический институт (филиал) Всероссийского государственного университета юстиции');
-insert into universities (name) values ('Сибирская академия права, экономики и управления');
-insert into universities (name) values ('Филиал Байкальского государственного университета экономики и права в г. Братске');
-insert into universities (name) values ('Филиал Байкальского государственного университета экономики и права в г. Усть-Илимске');
-insert into universities (name) values ('Филиал Иркутского государственного технического университета в г. Усолье-Сибирском');
-insert into universities (name) values ('Филиал Иркутского государственного университета в г. Братске');
-insert into universities (name) values ('Филиал Иркутского государственного университета путей сообщения в г. Братске');
-insert into universities (name) values ('Филиал Российского государственного университета физической культуры, спорта, молодежи и туризма в г. Иркутске');
-insert into universities (name) values ('Кабардино-Балкарский государственный аграрный университет имени В.М. Кокова');
-insert into universities (name) values ('Кабардино-Балкарский государственный университет им. Х.М. Бербекова');
-insert into universities (name) values ('Кабардино-Балкарский институт бизнеса');
-insert into universities (name) values ('Нальчикский институт кооперации (филиал) Белгородского университета кооперации, экономики и права');
-insert into universities (name) values ('Нальчикский филиал Краснодарского университета Министерства внутренних дел Российской Федерации');
-insert into universities (name) values ('Нальчикский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Северо-Кавказский государственный институт искусств');
-insert into universities (name) values ('Филиал Армавирского лингвистического социального института в г. Нальчике');
-insert into universities (name) values ('Балтийская государственная академия рыбопромыслового флота');
-insert into universities (name) values ('Балтийский военно-морской институт имени Адмирала Ф.Ф. Ушакова (филиал) Военного учебно-научного центра Военно-Морского Флота ""Военно-морская академия имени Адмирала Флота Советского Союза Н.Г. Кузнецова""');
-insert into universities (name) values ('Балтийский институт экономики и финансов');
-insert into universities (name) values ('Балтийский федеральный университет имени Иммануила Канта');
-insert into universities (name) values ('Калининградский государственный технический университет');
-insert into universities (name) values ('Калининградский институт туризма - филиал Российской международной академии туризма');
-insert into universities (name) values ('Калининградский институт управления');
-insert into universities (name) values ('Калининградский институт экономики - филиал Санкт-Петербургского университета управления и экономики');
-insert into universities (name) values ('Калининградский пограничный институт Федеральной службы безопасности Российской Федерации');
-insert into universities (name) values ('Калининградский филиал Евразийского открытого института');
-insert into universities (name) values ('Калининградский филиал Международного университета в Москве');
-insert into universities (name) values ('Калининградский филиал Московского государственного университета путей сообщения');
-insert into universities (name) values ('Калининградский филиал Московского государственного университета экономики, статистики и информатики (МЭСИ)');
-insert into universities (name) values ('Калининградский филиал Московского финансово-юридического университета МФЮА');
-insert into universities (name) values ('Калининградский филиал Российского университета кооперации');
-insert into universities (name) values ('Калининградский филиал Российского экономического университета имени Г.В. Плеханова');
-insert into universities (name) values ('Калининградский филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации');
-insert into universities (name) values ('Калининградский филиал Санкт-Петербургского государственного аграрного университета');
-insert into universities (name) values ('Калининградский филиал Санкт-Петербургского университета МВД России');
-insert into universities (name) values ('Калининградский филиал Санкт-Петербургского университета Министерства внутренних дел Российской Федерации');
-insert into universities (name) values ('Калининградский филиал Современной гуманитарной академии');
-insert into universities (name) values ('филиал Московского государственного университета технологий и управления имени К.Г. Разумовского в г. Калининграде');
-insert into universities (name) values ('филиал Московского нового юридического института в г. Советске');
-insert into universities (name) values ('Филиал Московского психолого-социального университета в г. Черняховске Калининградской области');
-insert into universities (name) values ('Филиал Санкт-Петербургского института внешнеэкономических связей, экономики и права в г. Калининграде');
-insert into universities (name) values ('Балабановский филиал Московского педагогического государственного университета');
-insert into universities (name) values ('Институт управления, бизнеса и технологий');
-insert into universities (name) values ('Калужский государственный университет им. К.Э. Циолковского');
-insert into universities (name) values ('Калужский институт туристского бизнеса - филиал Российской международной академии туризма');
-insert into universities (name) values ('Калужский филиал Всероссийского государственного университета юстиции');
-insert into universities (name) values ('Калужский филиал Международного славянского института');
-insert into universities (name) values ('Калужский филиал Московского государственного технического университета имени Н.Э. Баумана');
-insert into universities (name) values ('Калужский филиал Московского государственного университета путей сообщения');
-insert into universities (name) values ('Калужский филиал Московского гуманитарно-экономического института');
-insert into universities (name) values ('Калужский филиал Российского государственного аграрного университета - МСХА имени К.А. Тимирязева');
-insert into universities (name) values ('Калужский филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации');
-insert into universities (name) values ('Калужский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Калужский филиал Финансового университета при Правительстве Российской Федерации');
-insert into universities (name) values ('Кировский филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации');
-insert into universities (name) values ('Международный институт делового администрирования ""ФРИДАС""');
-insert into universities (name) values ('Обнинский институт атомной энергетики - филиал Национального исследовательского ядерного университета ""МИФИ""');
-insert into universities (name) values ('Обнинский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Среднерусский гуманитарно-технологический институт');
-insert into universities (name) values ('филиал Государственного университета управления в г. Обнинске Калужской области');
-insert into universities (name) values ('Филиал Российского государственного гуманитарного университета в г. Калуге');
-insert into universities (name) values ('Филиал Российского государственного социального университета в г. Калуге');
-insert into universities (name) values ('филиал Финансового университета при Правительстве Российской Федерации в г.Калуге');
-insert into universities (name) values ('Дальневосточный институт управления, бизнеса и права');
-insert into universities (name) values ('Дальневосточный филиал Всероссийской академии внешней торговли Министерства экономического развития Российской Федерации');
-insert into universities (name) values ('Камчатский государственный технический университет');
-insert into universities (name) values ('Камчатский государственный университет им. Витуса Беринга');
-insert into universities (name) values ('Камчатский филиал Российского университета кооперации');
-insert into universities (name) values ('Петропавловск-Камчатский филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации');
-insert into universities (name) values ('Петропавловск-Камчатский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Филиал Дальневосточного федерального университета в г. Петропавловске-Камчатском');
-insert into universities (name) values ('Карачаево-Черкесский государственный университет имени У.Д. Алиева');
-insert into universities (name) values ('Карачаево-Черкесский филиал Московской открытой социальной академии');
-insert into universities (name) values ('Карачаево-Черкесский филиал Пятигорского государственного лингвистического университета');
-insert into universities (name) values ('Северо-Кавказская государственная гуманитарно-технологическая академия');
-insert into universities (name) values ('Филиал Ростовского государственного экономического университета (РИНХ) в г. Черкесске Карачаево-Черкесской Республики');
-insert into universities (name) values ('Филиал Ставропольского института имени В.Д. Чурсина в г. Черкесске');
-insert into universities (name) values ('Филиал Южного федерального университета в г. Черкесске Карачаево-Черкесской Республики');
-insert into universities (name) values ('Филиал Южного федерального университета в с. Учкекен Карачаево-Черкесской Республики');
-insert into universities (name) values ('Черкесский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Беловский институт (филиал) Кемеровского государственного университета');
-insert into universities (name) values ('Кемеровский государственный институт культуры');
-insert into universities (name) values ('Кемеровский государственный медицинский университет');
-insert into universities (name) values ('Кемеровский государственный сельскохозяйственный институт');
-insert into universities (name) values ('Кемеровский государственный университет');
-insert into universities (name) values ('Кемеровский институт (филиал) Российского экономического университета имени Г.В. Плеханова');
-insert into universities (name) values ('Кемеровский технологический институт пищевой промышленности');
-insert into universities (name) values ('Кемеровский филиал Московского государственного университета экономики, статистики и информатики (МЭСИ)');
-insert into universities (name) values ('Кемеровский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Кузбасский государственный технический университет имени Т.Ф. Горбачева');
-insert into universities (name) values ('Кузбасский институт Федеральной службы исполнения наказаний');
-insert into universities (name) values ('Кузбасский институт экономики и права');
-insert into universities (name) values ('Кузбасский областной педагогический институт имени Н.М. Голянской');
-insert into universities (name) values ('Междуреченский филиал Сибирского государственного индустриального университета');
-insert into universities (name) values ('Новокузнецкий институт (филиал) Кемеровского государственного университета');
-insert into universities (name) values ('Новокузнецкий филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации');
-insert into universities (name) values ('Новокузнецкий филиал Современной гуманитарной академии');
-insert into universities (name) values ('Осинниковский филиал Сибирского государственного индустриального университета');
-insert into universities (name) values ('Прокопьевский филиал Московского политехнического университета');
-insert into universities (name) values ('Прокопьевский филиал Сибирского государственного индустриального университета');
-insert into universities (name) values ('Сибирский государственный индустриальный университет');
-insert into universities (name) values ('Сибирский филиал Международного института экономики и права');
-insert into universities (name) values ('Тайгинский институт железнодорожного транспорта - филиал Омского государственного университета путей сообщения');
-insert into universities (name) values ('Таштагольский филиал Сибирского государственного индустриального университета');
-insert into universities (name) values ('Филиал Кемеровского государственного университета в г. Анжеро-Судженске');
-insert into universities (name) values ('Филиал Кузбасского государственного технического университета имени Т.Ф. Горбачева в г. Белово');
-insert into universities (name) values ('Филиал Кузбасского государственного технического университета имени Т.Ф. Горбачева в г. Междуреченске');
-insert into universities (name) values ('Филиал Кузбасского государственного технического университета имени Т.Ф. Горбачева в г. Новокузнецке');
-insert into universities (name) values ('Филиал Кузбасского государственного технического университета имени Т.Ф. Горбачева в г. Прокопьевске');
-insert into universities (name) values ('Филиал Кузбасской государственной педагогической академии в г. Кемерове');
-insert into universities (name) values ('Филиал Международного института экономики и права в городе Киселевске');
-insert into universities (name) values ('Филиал Национального исследовательского Томского государственного университета в г. Прокопьевске');
-insert into universities (name) values ('Филиал Национального исследовательского Томского государственного университета в г. Юрге');
-insert into universities (name) values ('Филиал Российского государственного профессионально-педагогического университета в г. Кемерово');
-insert into universities (name) values ('Филиал Санкт-Петербургского института внешнеэкономических связей, экономики и права в г. Новокузнецке Кемеровской области');
-insert into universities (name) values ('Филиал Сибирского государственного университета физической культуры и спорта в г. Кемерово');
-insert into universities (name) values ('Филиал Томского государственного архитектурно-строительного университета в г. Ленинске-Кузнецком');
-insert into universities (name) values ('Юргинский технологический институт (филиал) Национального исследовательского Томского политехнического университета');
-insert into universities (name) values ('Волго-Вятский институт (филиал) Университета имени О.Е. Кутафина (МГЮА)');
-insert into universities (name) values ('Вятская государственная сельскохозяйственная академия');
-insert into universities (name) values ('Вятский государственный университет');
-insert into universities (name) values ('Вятский социально-экономический институт');
-insert into universities (name) values ('Вятскополянский филиал Казанского государственного технического университета им. А.Н. Туполева');
-insert into universities (name) values ('Кирово-Чепецкий филиал Вятского социально-экономического института');
-insert into universities (name) values ('Кировская государственная медицинская академия');
-insert into universities (name) values ('Кировский институт иностранных языков');
-insert into universities (name) values ('Кировский филиал Академии права и управления Федеральной службы исполнения наказаний');
-insert into universities (name) values ('Кировский филиал Московского государственного университета путей сообщения');
-insert into universities (name) values ('Кировский филиал Московского гуманитарно-экономического института');
-insert into universities (name) values ('Кировский филиал Московского университета государственного управления');
-insert into universities (name) values ('Кировский филиал Московской финансово-юридической академии');
-insert into universities (name) values ('Кировский филиал Пермской государственной академии искусства и культуры');
-insert into universities (name) values ('Кировский филиал Санкт-Петербургского Гуманитарного университета профсоюзов');
-insert into universities (name) values ('Кировский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Кировский филиал Университета Российской академии образования');
-insert into universities (name) values ('Котельнический филиал Вятской государственной сельскохозяйственной академии');
-insert into universities (name) values ('Нолинский филиал Вятской государственной сельскохозяйственной академии');
-insert into universities (name) values ('Слободской филиал Вятского социально-экономического института');
-insert into universities (name) values ('Филиал Вятского государственного гуманитарного университета в г. Вятские Поляны');
-insert into universities (name) values ('филиал Московского государственного индустриального университета в г. Кирове');
-insert into universities (name) values ('Филиал Санкт-Петербургского института внешнеэкономических связей, экономики и права в г. Кирове');
-insert into universities (name) values ('филиал Финансового университета при Правительстве Российской Федерации в г.Кирове');
-insert into universities (name) values ('Яранский филиал Вятской государственной сельскохозяйственной академии');
-insert into universities (name) values ('Военная академия радиационной, химической и биологической защиты им. Маршала Советского Союза С.К. Тимошенко');
-insert into universities (name) values ('Костромская государственная сельскохозяйственная академия');
-insert into universities (name) values ('Костромской государственный университет');
-insert into universities (name) values ('Костромской филиал Международной академии бизнеса и новых технологий');
-insert into universities (name) values ('Костромской филиал Современной гуманитарной академии');
-insert into universities (name) values ('Филиал Российского государственного гуманитарного университета в г. Костроме');
-insert into universities (name) values ('Академия маркетинга и социально-информационных технологий - ИМСИТ (г. Краснодар)');
-insert into universities (name) values ('Анапский филиал Кубанского государственного аграрного университета');
-insert into universities (name) values ('Анапский филиал Московского педагогического государственного университета');
-insert into universities (name) values ('Анапский филиал Южного института менеджмента');
-insert into universities (name) values ('Армавирский государственный педагогический университет');
-insert into universities (name) values ('Армавирский лингвистический социальный институт');
-insert into universities (name) values ('Армавирский механико-технологический институт (филиал) Кубанского государственного технологического университета');
-insert into universities (name) values ('Армавирский Православно-Социальный Институт');
-insert into universities (name) values ('Армавирский социально-психологический институт');
-insert into universities (name) values ('Армавирский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Государственный морской университет имени адмирала Ф.Ф. Ушакова');
-insert into universities (name) values ('Гулькевичский филиал Северо-Кавказского института бизнеса, инженерных и информационных технологий');
-insert into universities (name) values ('Ейский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Институт береговой охраны Федеральной службы безопасности Российской Федерации');
-insert into universities (name) values ('Институт международного права, экономики, гуманитарных наук и управления имени К.В. Россинского');
-insert into universities (name) values ('Институт современных технологий и экономики');
-insert into universities (name) values ('Институт экономики и управления в медицине и социальной сфере');
-insert into universities (name) values ('Институт экономики, права и гуманитарных специальностей');
-insert into universities (name) values ('Краснодарский государственный институт культуры');
-insert into universities (name) values ('Краснодарский кооперативный институт (филиал) Российского университета кооперации');
-insert into universities (name) values ('Краснодарский муниципальный медицинский институт высшего сестринского образования');
-insert into universities (name) values ('Краснодарский университет Министерства внутренних дел Российской Федерации');
-insert into universities (name) values ('Краснодарский филиал Владимирского юридического института Федеральной службы исполнения наказаний');
-insert into universities (name) values ('Краснодарский филиал Российского экономического университета им. Г.В. Плеханова');
-insert into universities (name) values ('Краснодарский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Краснодарское высшее военное училище (военный институт) имени генерала армии С.М. Штеменко');
-insert into universities (name) values ('Кубанский государственный аграрный университет');
-insert into universities (name) values ('Кубанский государственный медицинский университет');
-insert into universities (name) values ('Кубанский государственный технологический университет');
-insert into universities (name) values ('Кубанский государственный университет');
-insert into universities (name) values ('Кубанский государственный университет физической культуры, спорта и туризма');
-insert into universities (name) values ('Кубанский институт международного предпринимательства и менеджмента');
-insert into universities (name) values ('Кубанский институт социоэкономики и права (филиал) Академии труда и социальных отношений');
-insert into universities (name) values ('Кубанский медицинский институт');
-insert into universities (name) values ('Кубанский социально-экономический институт');
-insert into universities (name) values ('Лабинский филиал Северо-Кавказского института бизнеса, инженерных и информационных технологий');
-insert into universities (name) values ('Международный инновационный университет');
-insert into universities (name) values ('Новороссийский политехнический институт (филиал) Кубанского государственного технологического университета');
-insert into universities (name) values ('Новороссийский филиал Краснодарского университета Министерства внутренних дел Российской Федерации');
-insert into universities (name) values ('Новороссийский филиал Московского гуманитарно-экономического института');
-insert into universities (name) values ('Новороссийский филиал Пятигорского государственного лингвистического университета');
-insert into universities (name) values ('Новороссийский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Отрадненский гуманитарный институт');
-insert into universities (name) values ('Северо-Кавказский институт бизнеса, инженерных и информационных технологий');
-insert into universities (name) values ('Северо-Кавказский филиал Российской академии правосудия (г. Краснодар)');
-insert into universities (name) values ('Сочинский государственный университет');
-insert into universities (name) values ('Сочинский институт Восточной экономико-юридической гуманитарной академии (филиал)');
-insert into universities (name) values ('Сочинский институт курортной рекреации и гостеприимства - филиал Российской международной академии туризма');
-insert into universities (name) values ('Сочинский институт моды, бизнеса и права');
-insert into universities (name) values ('Сочинский институт (филиал) Российского университета дружбы народов');
-insert into universities (name) values ('Сочинский институт экономики и информационных технологий');
-insert into universities (name) values ('Сочинский морской институт');
-insert into universities (name) values ('Сочинский филиал Московского автомобильно-дорожного государственного технического университета (МАДИ)');
-insert into universities (name) values ('Сочинский филиал Московского института предпринимательства и права');
-insert into universities (name) values ('Сочинский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Филиал Адыгейского государственного университета в г. Белореченске');
-insert into universities (name) values ('Филиал Адыгейского государственного университета в г. Ейске');
-insert into universities (name) values ('Филиал Адыгейского государственного университета в г. Сочи');
-insert into universities (name) values ('Филиал Академии маркетинга и социально-информационных технологий - ИМСИТ (г. Краснодар) в г. Новороссийске');
-insert into universities (name) values ('Филиал Армавирского лингвистического социального института в г. Новороссийске');
-insert into universities (name) values ('Филиал Армавирского лингвистического социального института в г. Тихорецке');
-insert into universities (name) values ('Филиал Армавирского лингвистического социального института в г. Усть-Лабинске');
-insert into universities (name) values ('Филиал (г. Анапа) Академического правового института');
-insert into universities (name) values ('Филиал Института экономики и управления в медицине и социальной сфере (г. Белореченск)');
-insert into universities (name) values ('Филиал Кубанского государственного университета в г. Армавире');
-insert into universities (name) values ('Филиал Кубанского государственного университета в г. Геленджике');
-insert into universities (name) values ('Филиал Кубанского государственного университета в г. Горячий Ключ');
-insert into universities (name) values ('Филиал Кубанского государственного университета в г. Кореновске');
-insert into universities (name) values ('Филиал Кубанского государственного университета в г. Кропоткине');
-insert into universities (name) values ('Филиал Кубанского государственного университета в г. Новороссийске');
-insert into universities (name) values ('Филиал Кубанского государственного университета в г. Славянске-на-Кубани');
-insert into universities (name) values ('Филиал Кубанского государственного университета в г. Тихорецке');
-insert into universities (name) values ('Филиал Кубанского государственного университета в станице Ленинградской');
-insert into universities (name) values ('Филиал Кубанского государственного университета в станице Отрадной');
-insert into universities (name) values ('Филиал Кубанского государственного университета в станице Павловской');
-insert into universities (name) values ('Филиал Кубанского государственного университета физической культуры, спорта и туризма в г. Ейске');
-insert into universities (name) values ('Филиал Кубанского института международного предпринимательства и менеджмента в городе Кропоткине');
-insert into universities (name) values ('Филиал Московского государственного открытого университета в г. Ейске Краснодарского края');
-insert into universities (name) values ('Филиал Московского нового юридического института в г. Сочи');
-insert into universities (name) values ('Филиал НОУ ВПО «Московский университет имени С.Ю. Витте» в г. Краснодаре');
-insert into universities (name) values ('Филиал Российского государственного гидрометеорологического университета в г. Туапсе Краснодарского края');
-insert into universities (name) values ('Филиал Российского государственного социального университета в г. Сочи Краснодарского края');
-insert into universities (name) values ('Филиал Российского государственного университета туризма и сервиса в г. Сочи');
-insert into universities (name) values ('Филиал Ростовского государственного университета путей сообщения в г. Краснодаре');
-insert into universities (name) values ('Филиал Ростовского государственного университета путей сообщения в г. Кропоткине');
-insert into universities (name) values ('Филиал Ростовского государственного университета путей сообщения в г. Туапсе');
-insert into universities (name) values ('Филиал Ростовского государственного экономического университета РИНХ в г. Ейске Краснодарского края');
-insert into universities (name) values ('Филиал Санкт-Петербургского института внешнеэкономических связей, экономики и права в г. Краснодаре');
-insert into universities (name) values ('Филиал Сочинского государственного университета в г. Анапе Краснодарского края');
-insert into universities (name) values ('Филиал Ставропольского института имени В.Д. Чурсина в г. Кропоткине');
-insert into universities (name) values ('Филиал Финансового университета при Правительстве Российской Федерации в г. Краснодаре');
-insert into universities (name) values ('филиал Финансового университета при Правительстве Российской Федерации в г.Новороссийске');
-insert into universities (name) values ('Филиал Южного федерального университета в г. Геленджике Краснодарского края');
-insert into universities (name) values ('Филиал Южного федерального университета в г. Ейске Краснодарского края');
-insert into universities (name) values ('Южно-Российский институт международных отношений');
-insert into universities (name) values ('Южный институт менеджмента');
-insert into universities (name) values ('Ачинский филиал Красноярского государственного аграрного университета');
-insert into universities (name) values ('Ачинский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Восточно-Сибирский институт туризма - филиал Российской международной академии туризма');
-insert into universities (name) values ('Енисейский филиал Сибирского государственного университета водного транспорта (в г. Красноярске)');
-insert into universities (name) values ('Красноярская государственная академия музыки и театра');
-insert into universities (name) values ('Красноярский государственный аграрный университет');
-insert into universities (name) values ('Красноярский государственный медицинский университет имени профессора В.Ф. Войно-Ясенецкого');
-insert into universities (name) values ('Красноярский государственный педагогический университет им. В.П. Астафьева');
-insert into universities (name) values ('Красноярский государственный художественный институт');
-insert into universities (name) values ('Красноярский институт железнодорожного транспорта - филиал Иркутского государственного университета путей сообщения в г. Красноярске');
-insert into universities (name) values ('Красноярский институт социально-экономических наук');
-insert into universities (name) values ('Красноярский институт экономики - филиал Санкт-Петербургского университета управления и экономики');
-insert into universities (name) values ('Красноярский филиал Академии труда и социальных отношений');
-insert into universities (name) values ('Красноярский филиал Московского государственного университета экономики, статистики и информатики (МЭСИ)');
-insert into universities (name) values ('Красноярский филиал Российского экономического университета имени Г.В. Плеханова');
-insert into universities (name) values ('Красноярский филиал Санкт-Петербургского государственного университета гражданской авиации');
-insert into universities (name) values ('Красноярский филиал Санкт-Петербургского Гуманитарного университета профсоюзов');
-insert into universities (name) values ('Красноярский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Красноярский филиал Университета Российской академии образования');
-insert into universities (name) values ('Лесосибирский педагогический институт - филиал Сибирского федерального университета');
-insert into universities (name) values ('Лесосибирский филиал Сибирского государственного университета науки и технологий имени академика М.Ф. Решетнева');
-insert into universities (name) values ('Лесосибирский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Норильский государственный индустриальный институт');
-insert into universities (name) values ('Норильский филиал Кисловодского института экономики и права');
-insert into universities (name) values ('Норильский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Сибирский государственный университет науки и технологий имени академика М.Ф. Решетнева');
-insert into universities (name) values ('Сибирский государственный университет науки и технологий имени академика М.Ф. Решетнева');
-insert into universities (name) values ('Сибирский институт бизнеса, управления и психологии');
-insert into universities (name) values ('Сибирский федеральный университет');
-insert into universities (name) values ('Сибирский юридический институт Федеральной службы Российской Федерации по контролю за оборотом наркотиков');
-insert into universities (name) values ('Торгово-экономический институт Сибирского федерального университета');
-insert into universities (name) values ('Филиал Красноярского государственного педагогического университета им. В.П. Астафьева в г. Минусинске');
-insert into universities (name) values ('Филиал Красноярского государственного торгово-экономического института в г. Ачинске Красноярского края');
-insert into universities (name) values ('Филиал Московского государственного университета культуры и искусств в городе Норильске');
-insert into universities (name) values ('Филиал Московского психолого-социального университета в г. Красноярске');
-insert into universities (name) values ('Филиал Российского государственного гуманитарного университета в г. Красноярске');
-insert into universities (name) values ('Филиал Санкт-Петербургского института внешнеэкономических связей, экономики и права в г. Красноярске');
-insert into universities (name) values ('Филиал Сибирского государственного университета науки и технологий имени академика М.Ф. Решетнева в г. Железногорске');
-insert into universities (name) values ('Зауральский гуманитарно-технологический институт');
-insert into universities (name) values ('Курганская государственная сельскохозяйственная академия имени Т.С. Мальцева');
-insert into universities (name) values ('Курганский государственный университет (КГУ)');
-insert into universities (name) values ('Курганский институт железнодорожного транспорта - филиал Уральского государственного университета путей сообщения в г. Кургане');
-insert into universities (name) values ('Курганский филиал Академии труда и социальных отношений');
-insert into universities (name) values ('Курганский филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации');
-insert into universities (name) values ('Курганский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Курганский филиал Уральского института экономики, управления и права');
-insert into universities (name) values ('Шадринский государственный педагогический институт');
-insert into universities (name) values ('Шадринский филиал Московского педагогического государственного университета');
-insert into universities (name) values ('Академия бизнеса и предпринимательства');
-insert into universities (name) values ('Железногорский филиал Курского института менеджмента, экономики и бизнеса');
-insert into universities (name) values ('Железногорский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Индустриальный институт');
-insert into universities (name) values ('Курская академия государственной и муниципальной службы (Академия госслужбы)');
-insert into universities (name) values ('Курская государственная сельскохозяйственная академия имени профессора И.И. Иванова');
-insert into universities (name) values ('Курский автодорожный институт');
-insert into universities (name) values ('Курский государственный медицинский университет');
-insert into universities (name) values ('Курский государственный университет');
-insert into universities (name) values ('Курский гуманитарно-технический институт');
-insert into universities (name) values ('Курский институт кооперации (филиал) Белгородского университета кооперации, экономики и права');
-insert into universities (name) values ('Курский институт менеджмента, экономики и бизнеса');
-insert into universities (name) values ('Курский медицинский институт');
-insert into universities (name) values ('Курский технический институт');
-insert into universities (name) values ('Курский филиал Орловского юридического института Министерства внутренних дел Российской Федерации');
-insert into universities (name) values ('Курский филиал Российского государственного торгово-экономического университета');
-insert into universities (name) values ('Курский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Курский филиал Финансового университета при Правительстве Российской Федерации');
-insert into universities (name) values ('Льговский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Региональный открытый социальный институт');
-insert into universities (name) values ('Региональный финансово-экономический институт');
-insert into universities (name) values ('Рыльский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Суджанский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Филиал Московского института государственного управления и права в Курской области');
-insert into universities (name) values ('Филиал Московского института права в г. Курске');
-insert into universities (name) values ('Филиал Московского психолого-социального университета в г. Железногорске Курской области');
-insert into universities (name) values ('Юго-Западный государственный университет (ЮЗГУ)');
-insert into universities (name) values ('Бокситогорский институт (филиал) Ленинградского государственного университета имени А.С. Пушкина');
-insert into universities (name) values ('Выборгский филиал Государственного университета морского и речного флота имени адмирала С.О. Макарова');
-insert into universities (name) values ('Выборгский филиал Российского государственного педагогического университета им. А.И. Герцена');
-insert into universities (name) values ('Выборгский филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации');
-insert into universities (name) values ('Выборгский филиал Санкт-Петербургского государственного университета аэрокосмического приборостроения');
-insert into universities (name) values ('Государственный институт экономики, финансов, права и технологий');
-insert into universities (name) values ('Ивангородский гуманитарно-технический институт (филиал) Санкт-Петербургского государственного университета аэрокосмического приборостроения');
-insert into universities (name) values ('Институт ядерной энергетики (филиал) Санкт-Петербургского государственного политехнического университета в г. Сосновый Бор');
-insert into universities (name) values ('Лужский институт (филиал) Ленинградского государственного университета имени А.С. Пушкина');
-insert into universities (name) values ('Межотраслевой институт подготовки кадров и информации');
-insert into universities (name) values ('Сосновоборский филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации');
-insert into universities (name) values ('Сосновоборский филиал Санкт-Петербургского государственного университета аэрокосмического приборостроения');
-insert into universities (name) values ('Филиал Российского государственного гуманитарного университета в г. Всеволожске Ленинградской области');
-insert into universities (name) values ('Филиал Российского государственного педагогического университета им.А.И.Герцена в г. Волхове');
-insert into universities (name) values ('Филиал Санкт-Петербургского института внешнеэкономических связей, экономики и права в г. Бокситогорске Ленинградской области');
-insert into universities (name) values ('Филиал Санкт-Петербургского института внешнеэкономических связей, экономики и права в г. Волхове Ленинградской области');
-insert into universities (name) values ('Филиал Санкт-Петербургского института внешнеэкономических связей, экономики и права в г. Гатчине Ленинградской области');
-insert into universities (name) values ('Филиал Санкт-Петербургского института внешнеэкономических связей, экономики и права в г. Луге Ленинградской области');
-insert into universities (name) values ('Филиал Северо-Западного государственного заочного технического университета');
-insert into universities (name) values ('Елецкий государственный университет им. И.А. Бунина');
-insert into universities (name) values ('Елецкий филиал Московского государственного университета путей сообщения');
-insert into universities (name) values ('Елецкий филиал Современной гуманитарной академии');
-insert into universities (name) values ('Институт права и экономики');
-insert into universities (name) values ('Липецкий государственный педагогический университет');
-insert into universities (name) values ('Липецкий государственный технический университет');
-insert into universities (name) values ('Липецкий кооперативный институт (филиал) Белгородского университета потребительской кооперации');
-insert into universities (name) values ('Липецкий филиал Воронежского института Министерства внутренних дел Российской Федерации');
-insert into universities (name) values ('Липецкий филиал Воронежского института Федеральной службы исполнения наказаний');
-insert into universities (name) values ('Липецкий филиал Института менеджмента, маркетинга и финансов');
-insert into universities (name) values ('Липецкий филиал Международного института компьютерных технологий');
-insert into universities (name) values ('Липецкий филиал Московской гуманитарно-технической академии');
-insert into universities (name) values ('Липецкий филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации');
-insert into universities (name) values ('Липецкий филиал Современной Гуманитарной академии');
-insert into universities (name) values ('Липецкий эколого-гуманитарный институт');
-insert into universities (name) values ('Филиал Института международного права и экономики имени А.С. Грибоедова в г. Липецке');
-insert into universities (name) values ('Филиал Московского государственного университета технологий и управления в г. Липецке');
-insert into universities (name) values ('филиал Финансового университета при Правительстве Российской Федерации в г.Липецке');
-insert into universities (name) values ('Магаданский институт экономики - филиал Санкт-Петербургского университета управления и экономики');
-insert into universities (name) values ('Магаданский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Северо-Восточный государственный университет');
-insert into universities (name) values ('Академический международный институт');
-insert into universities (name) values ('Академический правовой институт');
-insert into universities (name) values ('Академия Генеральной прокуратуры Российской Федерации');
-insert into universities (name) values ('Академия Государственной противопожарной службы');
-insert into universities (name) values ('Академия МНЭПУ');
-insert into universities (name) values ('Академия социального управления');
-insert into universities (name) values ('Академия сферы социальных отношений');
-insert into universities (name) values ('Академия труда и социальных отношений');
-insert into universities (name) values ('Академия управления Министерства внутренних дел Российской Федерации');
-insert into universities (name) values ('Академия Федеральной службы безопасности Российской Федерации');
-insert into universities (name) values ('Академия хорового искусства имени В.С. Попова');
-insert into universities (name) values ('Библейско-богословский институт святого апостола Андрея');
-insert into universities (name) values ('Военная академия Ракетных войск стратегического назначения имени Петра Великого');
-insert into universities (name) values ('Военный университет');
-insert into universities (name) values ('Военный учебно-научный центр Военно-воздушных сил ""Военно-воздушная академия имени профессора Н.Е. Жуковского и Ю.А. Гагарина""');
-insert into universities (name) values ('Военный учебно-научный центр Сухопутных войск «Общевойсковая академия Вооруженных Сил Российской Федерации»');
-insert into universities (name) values ('Всероссийская академия внешней торговли Министерства экономического развития Российской Федерации');
-insert into universities (name) values ('Всероссийский государственный университет кинематографии имени С.А.Герасимова');
-insert into universities (name) values ('Всероссийский государственный университет юстиции (РПА Минюста России)');
-insert into universities (name) values ('Высшая школа корпоративного управления');
-insert into universities (name) values ('Высшая школа печати и медиаиндустрии Московского политехнического университета');
-insert into universities (name) values ('Высшая школа психологии (Институт)');
-insert into universities (name) values ('Высшая школа финансов и менеджмента Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации');
-insert into universities (name) values ('Высшее театральное училище (институт) им. М.С. Щепкина при Государственном академическом Малом театре Росии');
-insert into universities (name) values ('Государственная классическая академия имени Маймонида');
-insert into universities (name) values ('Государственный академический университет гуманитарных наук');
-insert into universities (name) values ('Государственный институт русского языка им А.С. Пушкина');
-insert into universities (name) values ('Государственный музыкально-педагогический институт имени М.М. Ипполитова-Иванова');
-insert into universities (name) values ('Государственный университет по землеустройству');
-insert into universities (name) values ('Государственный университет управления');
-insert into universities (name) values ('Гуманитарно-Прогностический институт');
-insert into universities (name) values ('Гуманитарно-Экологический Институт');
-insert into universities (name) values ('Гуманитарно-экономический и информационно-технологический институт');
-insert into universities (name) values ('Гуманитарно-экономический институт имени B.C. Черномырдина');
-insert into universities (name) values ('Гуманитарно-экономический и технологический институт');
-insert into universities (name) values ('Гуманитарный институт (г. Москва)');
-insert into universities (name) values ('Гуманитарный институт имени П.А.Столыпина');
-insert into universities (name) values ('Гуманитарный институт телевидения и радиовещания им. М.А. Литовчина');
-insert into universities (name) values ('Дипломатическая академия');
-insert into universities (name) values ('Евразийский открытый институт');
-insert into universities (name) values ('Европейский Университет Права JUSTO');
-insert into universities (name) values ('Заочный финансово-экономический институт Финансового университета при Правительстве Российской федерации');
-insert into universities (name) values ('Зеленоградское отделение ГБОУ ВПО МГПУ - Институт делового администрирования');
-insert into universities (name) values ('Институт автомобильных технологий и управления');
-insert into universities (name) values ('Институт бизнеса и делового администрирования (ИБДА) РАНХиГС');
-insert into universities (name) values ('Институт бизнеса и дизайна');
-insert into universities (name) values ('Институт бизнеса и права г. Москва');
-insert into universities (name) values ('Институт гостиничного и туристического менеджмента');
-insert into universities (name) values ('Институт государственного администрирования');
-insert into universities (name) values ('Институт государственного управления, права и инновационных технологий');
-insert into universities (name) values ('Институт государственной службы и управления (ИГСУ) РАНХиГС');
-insert into universities (name) values ('Институт гуманитарного образования и информационных технологий');
-insert into universities (name) values ('Институт деловой карьеры');
-insert into universities (name) values ('Институт европейских культур');
-insert into universities (name) values ('Институт журналистики и литературного творчества');
-insert into universities (name) values ('Институт индустрии моды');
-insert into universities (name) values ('Институт искусства реставрации');
-insert into universities (name) values ('Институт коммерции и права');
-insert into universities (name) values ('Институт коммуникативных технологий');
-insert into universities (name) values ('Институт Международного Бизнес Образования');
-insert into universities (name) values ('Институт международного права и экономики имени А.С.Грибоедова');
-insert into universities (name) values ('Институт международной торговли и права');
-insert into universities (name) values ('Институт международных социально-гуманитарных связей');
-insert into universities (name) values ('Институт международных стандартов учета и управления');
-insert into universities (name) values ('Институт международных экономических связей');
-insert into universities (name) values ('Институт менеджмента и бизнеса');
-insert into universities (name) values ('Институт менеджмента, экономики и инноваций');
-insert into universities (name) values ('Институт механики и энергетики имени В.П. Горячкина Российского государственного аграрного университета - МСХА имени К.А. Тимирязева');
-insert into universities (name) values ('Институт Мировой экономики и информатизации');
-insert into universities (name) values ('Институт мировых цивилизаций');
-insert into universities (name) values ('Институт Московская высшая школа социальных и экономических наук');
-insert into universities (name) values ('Институт недвижимости и строительного бизнеса');
-insert into universities (name) values ('Институт непрерывного образования');
-insert into universities (name) values ('Институт правовой экономики');
-insert into universities (name) values ('Институт практического востоковедения');
-insert into universities (name) values ('Институт Практической Психологии и Психоанализа');
-insert into universities (name) values ('Институт природообустройства имени А.Н. Костякова Российского государственного аграрного университета - МСХА имени К.А. Тимирязева');
-insert into universities (name) values ('Институт профессионального образования');
-insert into universities (name) values ('Институт профессиональных инноваций');
-insert into universities (name) values ('Институт психологии');
-insert into universities (name) values ('Институт психологии и педагогики');
-insert into universities (name) values ('Институт психотерапии и клинической психологии');
-insert into universities (name) values ('Институт русского театра');
-insert into universities (name) values ('Институт рыночной экономики, социальной политики и права');
-insert into universities (name) values ('Институт сервиса (г. Москва) (филиал) Российского государственного университета туризма и сервиса');
-insert into universities (name) values ('Институт современного искусства');
-insert into universities (name) values ('Институт современного права и экономики');
-insert into universities (name) values ('Институт современного управления, кино и телевидения');
-insert into universities (name) values ('Институт современной экономики (г. Москва)');
-insert into universities (name) values ('Институт Содружества Независимых Государств');
-insert into universities (name) values ('Институт социальных наук');
-insert into universities (name) values ('Институт стран Востока');
-insert into universities (name) values ('Институт театрального искусства им. П.М. Ершова');
-insert into universities (name) values ('Институт текстильной и легкой промышленности московского государственного университета технологий и управления');
-insert into universities (name) values ('Институт традиционного прикладного искусства (Московский филиал) Высшей школы народных искусств (института)');
-insert into universities (name) values ('Институт туризма и гостеприимства (г. Москва) (филиал) Российского государственного университета туризма и сервиса');
-insert into universities (name) values ('Институт УНИК');
-insert into universities (name) values ('Институт управления');
-insert into universities (name) values ('Институт управления и информатики');
-insert into universities (name) values ('Институт управления и права');
-insert into universities (name) values ('Институт управления, экономики, права и искусства');
-insert into universities (name) values ('Институт финансов, экономики и права офицеров запаса');
-insert into universities (name) values ('Институт экономики бизнеса');
-insert into universities (name) values ('Институт экономики и антикризисного управления');
-insert into universities (name) values ('Институт экономики и культуры (г. Москва)');
-insert into universities (name) values ('Институт экономики и предпринимательства');
-insert into universities (name) values ('Институт экономики и социальных отношений');
-insert into universities (name) values ('Институт экономики и управления в промышленности');
-insert into universities (name) values ('Институт экономики и управления в строительстве и промышленности');
-insert into universities (name) values ('Институт экономики, финансов и права');
-insert into universities (name) values ('Институт языков и культур имени Л.Толстого');
-insert into universities (name) values ('Литературный институт имени А.М.Горького');
-insert into universities (name) values ('Международная академия бизнеса и управления');
-insert into universities (name) values ('Международная академия оценки и консалтинга');
-insert into universities (name) values ('Международный еврейский институт экономики, финансов и права');
-insert into universities (name) values ('Международный институт гостиничного менеджмента и туризма');
-insert into universities (name) values ('Международный институт ""ИНФО-Рутения""');
-insert into universities (name) values ('Международный институт экономики и права');
-insert into universities (name) values ('Международный славянский институт');
-insert into universities (name) values ('Международный социально-гуманитарный институт');
-insert into universities (name) values ('Международный университет в Москве');
-insert into universities (name) values ('Международный юридический институт');
-insert into universities (name) values ('Московская академия образования Натальи Нестеровой');
-insert into universities (name) values ('Московская академия предпринимательства при Правительстве г. Москвы');
-insert into universities (name) values ('Московская академия рынка труда и информационных технологий');
-insert into universities (name) values ('Московская академия экономики и права');
-insert into universities (name) values ('Московская Высшая Школа Экономики - финансовый институт');
-insert into universities (name) values ('Московская государственная академия ветеринарной медицины и биотехнологии имени К.И. Скрябина');
-insert into universities (name) values ('Московская государственная академия водного транспорта');
-insert into universities (name) values ('Московская государственная академия коммунального хозяйства и строительства');
-insert into universities (name) values ('Московская государственная академия хореографии');
-insert into universities (name) values ('Московская государственная консерватория (университет) имени П. И. Чайковского');
-insert into universities (name) values ('Московская государственная художественно-промышленная академия им. С.Г. Строганова');
-insert into universities (name) values ('Московская гуманитарно-техническая академия');
-insert into universities (name) values ('Московская международная высшая школа бизнеса ""МИРБИС"" (Институт)');
-insert into universities (name) values ('Московский авиационный институт (национальный исследовательский университет)');
-insert into universities (name) values ('Московский автомобильно-дорожный государственный технический университет (МАДИ)');
-insert into universities (name) values ('Московский архитектурный институт (государственная академия)');
-insert into universities (name) values ('Московский банковский институт');
-insert into universities (name) values ('Московский горный институт Национального исследовательского технологического университета ""МИСИС""');
-insert into universities (name) values ('Московский городской институт международного туризма');
-insert into universities (name) values ('Московский городской институт современных психологических технологий');
-insert into universities (name) values ('Московский городской педагогический университет');
-insert into universities (name) values ('Московский городской университет управления Правительства Москвы');
-insert into universities (name) values ('Московский государственный академический художественный институт имени В.И. Сурикова');
-insert into universities (name) values ('Московский государственный вечерний металлургический институт');
-insert into universities (name) values ('Московский государственный гуманитарно-экономический университет');
-insert into universities (name) values ('Московский государственный гуманитарный университет имени М.А. Шолохова');
-insert into universities (name) values ('Московский государственный индустриальный университет');
-insert into universities (name) values ('Московский государственный институт индустрии туризма имени Ю.А. Сенкевича');
-insert into universities (name) values ('Московский государственный институт международных отношений (университет)');
-insert into universities (name) values ('Московский государственный институт музыки имени А.Г. Шнитке');
-insert into universities (name) values ('Московский государственный лингвистический университет');
-insert into universities (name) values ('Московский государственный медико-стоматологический университет имени А.И. Евдокимова');
-insert into universities (name) values ('Московский государственный областной университет');
-insert into universities (name) values ('Московский государственный психолого-педагогический университет');
-insert into universities (name) values ('Московский государственный строительный университет - национальный исследовательский университет');
-insert into universities (name) values ('Московский государственный текстильный университет имени А.Н. Косыгина');
-insert into universities (name) values ('Московский государственный технический университет гражданской авиации');
-insert into universities (name) values ('Московский государственный технический университет имени Н.Э. Баумана (национальный исследовательский университет)');
-insert into universities (name) values ('Московский государственный технологический университет ""Станкин""');
-insert into universities (name) values ('Московский государственный университет геодезии и картографии');
-insert into universities (name) values ('Московский государственный университет имени М.В. Ломоносова');
-insert into universities (name) values ('Московский государственный университет пищевых производств');
-insert into universities (name) values ('Московский государственный университет путей сообщения');
-insert into universities (name) values ('Московский государственный университет технологий и управления имени К.Г. Разумовского');
-insert into universities (name) values ('Московский государственный университет экономики, статистики и информатики');
-insert into universities (name) values ('Московский государственный юридический университет имени О.Е. Кутафина');
-insert into universities (name) values ('Московский гуманитарно-экономический институт');
-insert into universities (name) values ('Московский гуманитарный институт');
-insert into universities (name) values ('Московский гуманитарный институт имени Е.Р. Дашковой');
-insert into universities (name) values ('Московский гуманитарный педагогический институт');
-insert into universities (name) values ('Московский гуманитарный университет');
-insert into universities (name) values ('Московский институт аналитической психологии и психоанализа');
-insert into universities (name) values ('Московский институт банковского дела');
-insert into universities (name) values ('Московский институт государственного и корпоративного управления');
-insert into universities (name) values ('Московский институт государственного управления и права');
-insert into universities (name) values ('Московский институт иностранных языков');
-insert into universities (name) values ('Московский институт лингвистики');
-insert into universities (name) values ('Московский институт мировой экономики и международных отношений');
-insert into universities (name) values ('Московский институт национальных и региональных отношений');
-insert into universities (name) values ('Московский институт открытого образования');
-insert into universities (name) values ('Московский институт права');
-insert into universities (name) values ('Московский институт предпринимательства и права');
-insert into universities (name) values ('Московский институт психоанализа');
-insert into universities (name) values ('Московский институт рекламы, туризма, шоу-бизнеса');
-insert into universities (name) values ('Московский институт современного академического образования');
-insert into universities (name) values ('Московский институт телевидения и радиовещания ""Останкино""');
-insert into universities (name) values ('Московский институт управления');
-insert into universities (name) values ('Московский институт управления и сервиса');
-insert into universities (name) values ('Московский институт физической культуры и спорта');
-insert into universities (name) values ('Московский институт экономики, политики и права');
-insert into universities (name) values ('Московский институт электроники и математики Национального исследовательского университета ""Высшая школа экономики""');
-insert into universities (name) values ('Московский институт энергобезопасности и энергосбережения');
-insert into universities (name) values ('Московский институт юриспруденции');
-insert into universities (name) values ('Московский информационно-технологический университет – Московский архитектурно-строительный институт');
-insert into universities (name) values ('Московский Исламский Университет (Учреждение)');
-insert into universities (name) values ('Московский медицинский институт ""РЕАВИЗ""');
-insert into universities (name) values ('Московский налоговый институт');
-insert into universities (name) values ('МОСКОВСКИЙ НОВЫЙ ЮРИДИЧЕСКИЙ ИНСТИТУТ');
-insert into universities (name) values ('Московский областной филиал Санкт-Петербургского Гуманитарного университета профсоюзов Институт искусств и информационных технологий');
-insert into universities (name) values ('Московский открытый институт');
-insert into universities (name) values ('Московский педагогический государственный университет');
-insert into universities (name) values ('Московский пограничный институт Федеральной службы безопасности Российской Федерации');
-insert into universities (name) values ('Московский политехнический университет');
-insert into universities (name) values ('Московский психолого-социальный университет');
-insert into universities (name) values ('Московский социально-педагогический институт');
-insert into universities (name) values ('Московский социально-экономический институт');
-insert into universities (name) values ('Московский технический университет связи и информатики');
-insert into universities (name) values ('Московский технологический институт');
-insert into universities (name) values ('Московский технологический университет');
-insert into universities (name) values ('Московский транспортный институт');
-insert into universities (name) values ('Московский университет имени С.Ю.Витте');
-insert into universities (name) values ('Московский университет Министерства внутренних дел Российской Федерации имени В.Я. Кикотя');
-insert into universities (name) values ('Московский университет ""ТУРО""');
-insert into universities (name) values ('Московский филиал автономного образовательного учреждения Ленинградского государственного университета имени А.С. Пушкина');
-insert into universities (name) values ('Московский филиал Российской международной академии туризма');
-insert into universities (name) values ('Московский финансово-правовой институт');
-insert into universities (name) values ('Московский финансово-экономический институт');
-insert into universities (name) values ('Московский финансово-юридический университет МФЮА');
-insert into universities (name) values ('Московский художественно-промышленный институт');
-insert into universities (name) values ('Московский экономико-финансовый институт');
-insert into universities (name) values ('Московский экономический институт');
-insert into universities (name) values ('Московский экономический институт Высшая школа Современное образование');
-insert into universities (name) values ('Московское высшее военное командное училище (военный институт) (филиал) Военного учебно-научного центра Сухопутных войск ""Общевойсковая академия Вооруженных Сил Российской Федерации""');
-insert into universities (name) values ('Национальный институт бизнеса');
-insert into universities (name) values ('Национальный Институт Дизайна');
-insert into universities (name) values ('Национальный институт имени Екатерины Великой');
-insert into universities (name) values ('Национальный институт моды');
-insert into universities (name) values ('Национальный институт современного дизайна');
-insert into universities (name) values ('Национальный институт финансовых рынков и управления');
-insert into universities (name) values ('Национальный исследовательский технологический университет «МИСиС»');
-insert into universities (name) values ('Национальный исследовательский университет ""Высшая школа экономики""');
-insert into universities (name) values ('Национальный исследовательский университет ""МИЭТ""');
-insert into universities (name) values ('Национальный исследовательский университет ""МЭИ""');
-insert into universities (name) values ('Национальный исследовательский ядерный университет ""МИФИ""');
-insert into universities (name) values ('Останкинский институт телевидения и радиовещания');
-insert into universities (name) values ('Первый Московский государственный медицинский университет имени И.М. Сеченова');
-insert into universities (name) values ('Первый московский юридический институт');
-insert into universities (name) values ('Пограничная академия Федеральной службы безопасности Российской Федерации');
-insert into universities (name) values ('Православный Свято-Тихоновский Гуманитарный Университет');
-insert into universities (name) values ('Российская академия адвокатуры и нотариата');
-insert into universities (name) values ('Российская академия живописи, ваяния и зодчества Ильи Глазунова');
-insert into universities (name) values ('Российская академия музыки имени Гнесиных');
-insert into universities (name) values ('Российская академия народного хозяйства и государственной службы при Президенте Российской Федерации');
-insert into universities (name) values ('Российская академия предпринимательства');
-insert into universities (name) values ('Российская государственная академия интеллектуальной собственности');
-insert into universities (name) values ('Российская государственная специализированная академия искусств');
-insert into universities (name) values ('Российская школа частного права (институт)');
-insert into universities (name) values ('Российская экономическая школа (Институт)');
-insert into universities (name) values ('Российский государственный аграрный университет- МСХА имени К.А. Тимирязева');
-insert into universities (name) values ('Российский государственный геологоразведочный университет имени Серго Орджоникидзе');
-insert into universities (name) values ('Российский государственный гуманитарный университет');
-insert into universities (name) values ('Российский государственный социальный университет');
-insert into universities (name) values ('Российский государственный технологический университет имени К.Э. Циолковского Московского авиационного института (национального исследовательского университета)');
-insert into universities (name) values ('Российский государственный торгово-экономический университет');
-insert into universities (name) values ('Российский государственный университет имени А.Н. Косыгина Технологии. Дизайн. Искусство');
-insert into universities (name) values ('Российский государственный университет инновационных технологий и предпринимательства');
-insert into universities (name) values ('Российский государственный университет нефти и газа (национальный исследовательский университет) имени И.М, Губкина');
-insert into universities (name) values ('Российский государственный университет правосудия');
-insert into universities (name) values ('Российский государственный университет физической культуры, спорта, молодежи и туризма (ГЦОЛИФК)');
-insert into universities (name) values ('Российский национальный исследовательский медицинский университет имени Н.И. Пирогова');
-insert into universities (name) values ('Российский новый университет');
-insert into universities (name) values ('Российский православный институт святого Иоанна Богослова');
-insert into universities (name) values ('Российский университет дружбы народов');
-insert into universities (name) values ('Российский университет театрального искусства - ГИТИС');
-insert into universities (name) values ('Российский химико-технологический университет имени Д.И. Менделеева');
-insert into universities (name) values ('Российский экономический университет имени Г.В. Плеханова');
-insert into universities (name) values ('Русский институт управления имени В.П. Чернова');
-insert into universities (name) values ('Свято-Филаретовский православно-христианский институт');
-insert into universities (name) values ('Славяно-Греко-Латинская академия');
-insert into universities (name) values ('Славянский деловой институт им. К.В. Нечаева (Митрополита Питирима)');
-insert into universities (name) values ('Современная гуманитарная академия');
-insert into universities (name) values ('Современный морской институт');
-insert into universities (name) values ('Социально-экономический институт');
-insert into universities (name) values ('Специализированный институт юриспруденции');
-insert into universities (name) values ('Столичная финансово-гуманитарная академия');
-insert into universities (name) values ('Столичный гуманитарно-экономический институт');
-insert into universities (name) values ('Столичный институт иностранных языков');
-insert into universities (name) values ('Столичный институт переводчиков');
-insert into universities (name) values ('Театральный институт имени Бориса Щукина при Государственном академическом театре имени Евг. Вахтангова');
-insert into universities (name) values ('Университет Российской академии образования');
-insert into universities (name) values ('Университет ""Синергия""');
-insert into universities (name) values ('Филиал Санкт-Петербургского института внешнеэкономических связей, экономики и права в г. Москве');
-insert into universities (name) values ('Финансово-промышленный институт');
-insert into universities (name) values ('Финансовый университет при Правительстве Российской Федерации');
-insert into universities (name) values ('Школа-студия (институт) имени Вл.И. Немировича-Данченко при Московском Художественном академическом театре имени А.П. Чехова');
-insert into universities (name) values ('Экономико-правовой институт');
-insert into universities (name) values ('Академия гражданской защиты МЧС России');
-insert into universities (name) values ('Бронницкий филиал Московского автомобильно-дорожного государственного технического университета (МАДИ)');
-insert into universities (name) values ('Военно-технический университет при Федеральном агентстве специального строительства');
-insert into universities (name) values ('Волоколамский институт гостеприимства - филиал Российской международной академии туризма');
-insert into universities (name) values ('Воскресенский институт туризма - филиал Российской международной академии туризма');
-insert into universities (name) values ('Воскресенский филиал Московского политехнического университета');
-insert into universities (name) values ('Гжельский государственный университет');
-insert into universities (name) values ('Голицынский пограничный институт Федеральной службы безопасности Российской Федерации');
-insert into universities (name) values ('Гуманитарно-социальный институт');
-insert into universities (name) values ('Дмитровский филиал Астраханского государственного технического университета');
-insert into universities (name) values ('Дмитровский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Егорьевский технологический институт (филиал) Московского государственного технологического университета ""Станкин""');
-insert into universities (name) values ('Егорьевский филиал Московского педагогического государственного университета');
-insert into universities (name) values ('Западно-Подмосковный институт туризма - филиал Российской международной академии туризма');
-insert into universities (name) values ('Ивантеевский филиал Московского политехнического университета');
-insert into universities (name) values ('Институт бизнеса, психологии и управления');
-insert into universities (name) values ('Институт информационных технологий, экономики и менеджмента');
-insert into universities (name) values ('Институт международных экономических отношений');
-insert into universities (name) values ('Институт социально-экономического прогнозирования и моделирования');
-insert into universities (name) values ('Институт технологии туризма');
-insert into universities (name) values ('Институт экономики');
-insert into universities (name) values ('Коломенский институт (филиал) Московского политехнического университета');
-insert into universities (name) values ('Коломенский филиал Евразийского открытого института');
-insert into universities (name) values ('Коломенский филиал Московской академии экономики и права');
-insert into universities (name) values ('Коломенский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Королёвский (г. Королёв Московской области) филиал Международного юридического института');
-insert into universities (name) values ('Красногорский филиал Московской финансово-промышленной академии');
-insert into universities (name) values ('Красногорский филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации');
-insert into universities (name) values ('Краснознаменский (г. Краснознаменск Московской области) филиал Международного юридического института');
-insert into universities (name) values ('Краснознаменский филиал Университета ""Синергия""');
-insert into universities (name) values ('Международный институт менеджмента ЛИНК');
-insert into universities (name) values ('Международный университет природы, общества и человека ""Дубна"" (университет ""Дубна"")');
-insert into universities (name) values ('Московская государственная академия физической культуры');
-insert into universities (name) values ('Московский военный институт радиоэлектроники Космических войск');
-insert into universities (name) values ('Московский государственный институт культуры');
-insert into universities (name) values ('Московский государственный областной гуманитарный институт');
-insert into universities (name) values ('Московский областной институт управления');
-insert into universities (name) values ('Московский областной институт управления и права');
-insert into universities (name) values ('Московский областной филиал Московского университета МВД Российской Федерации');
-insert into universities (name) values ('Московский открытый юридический институт');
-insert into universities (name) values ('Московский региональный социально-экономический институт');
-insert into universities (name) values ('Московский физико-технический институт (государственный университет)');
-insert into universities (name) values ('Московской области Государственный социально-гуманитарный университет');
-insert into universities (name) values ('Муниципальный институт г. Жуковского');
-insert into universities (name) values ('Мытищинский филиал МГТУ им. Н. Э. Баумана');
-insert into universities (name) values ('Мытищинский филиал Московского государственного строительного университета');
-insert into universities (name) values ('Новый Гуманитарный институт');
-insert into universities (name) values ('Нолинский филиал Вятской государственной сельскохозяйственной академии');
-insert into universities (name) values ('Одинцовский (г. Одинцово Московской области) филиал Международного юридического института');
-insert into universities (name) values ('Одинцовский гуманитарный университет');
-insert into universities (name) values ('Одинцовский филиал Российской международной академии туризма');
-insert into universities (name) values ('Орехово-Зуевский филиал Института экономики и предпринимательства');
-insert into universities (name) values ('Павлово-Посадский филиал Российской международной академии туризма');
-insert into universities (name) values ('Павлово-Посадский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Подольский социально-спортивный институт');
-insert into universities (name) values ('Подольский филиал Московского политехнического университета');
-insert into universities (name) values ('Подольский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Пущинский государственный естественно-научный институт');
-insert into universities (name) values ('Реутовский (г. Реутов Московской области) филиал Международного юридического института');
-insert into universities (name) values ('Российская инженерная академия менеджмента и агробизнеса');
-insert into universities (name) values ('Российская международная академия туризма');
-insert into universities (name) values ('Российская таможенная академия');
-insert into universities (name) values ('Российский государственный аграрный заочный университет');
-insert into universities (name) values ('Российский государственный университет туризма и сервиса');
-insert into universities (name) values ('Российский университет кооперации');
-insert into universities (name) values ('Сергиево-Посадский гуманитарный институт');
-insert into universities (name) values ('Сергиево-Посадский филиал Московского педагогического государственного университета');
-insert into universities (name) values ('Серпуховской военный институт ракетных войск');
-insert into universities (name) values ('Серпуховской филиал Российского государственного торгово-экономического университета');
-insert into universities (name) values ('Сколковский институт науки и технологий');
-insert into universities (name) values ('Социально-правовой институт экономической безопасности');
-insert into universities (name) values ('Ступинский филиал Московского авиационного института (национального исследовательского университета)');
-insert into universities (name) values ('Филиал ""Котельники"" Международного университета природы, общества и человека ""Дубна""');
-insert into universities (name) values ('Филиал Международного университета природы, общества и человека ""Дубна""- Дмитровский институт непрерывного образования');
-insert into universities (name) values ('Филиал Московского государственного индустриального университета');
-insert into universities (name) values ('Филиал Московского государственного открытого университета в г. Шатуре Московской области');
-insert into universities (name) values ('Филиал Московского государственного строительного университета в г. Дмитрове Московской области');
-insert into universities (name) values ('Филиал Московского государственного строительного университета в г. Люберцы Московской области');
-insert into universities (name) values ('Филиал Московского государственного строительного университета в г. Можайске Московской области');
-insert into universities (name) values ('Филиал Московского государственного университета имени М.В. Ломоносова в г. Пущино');
-insert into universities (name) values ('Филиал Московского государственного университета культуры и искусств в городе Жуковском');
-insert into universities (name) values ('филиал Московского государственного университета технологий и управления в г. Волоколамске Московской области');
-insert into universities (name) values ('Филиал Московского государственного университета технологий и управления в г. Орехово-Зуево');
-insert into universities (name) values ('Филиал Московского государственного университета технологий и управления им. К.Г. Разумовского в г. Серпухове Московской области');
-insert into universities (name) values ('Филиал Московского нового юридического института в г. Юбилейный');
-insert into universities (name) values ('Филиал Московского нового юридического института в п. Тучково Рузского района Московской области');
-insert into universities (name) values ('Филиал Московского психолого-социального университета в г. Люберцы Московской области');
-insert into universities (name) values ('Филиал Московского психолого-социального университета в г. Одинцово Московской области');
-insert into universities (name) values ('Филиал Московского психолого-социального университета в г. Электростали Московской области');
-insert into universities (name) values ('Филиал Московского технологического университета в г. Сергиевом Посаде');
-insert into universities (name) values ('Филиал Московского технологического университета в г. Серпухове');
-insert into universities (name) values ('Филиал Московского технологического университета в г. Фрязино');
-insert into universities (name) values ('Филиал Московской государственной академии коммунального хозяйства и строительства в г. Дмитрове Московской области');
-insert into universities (name) values ('Филиал Московской государственной академии коммунального хозяйства и строительства в г. Егорьевске');
-insert into universities (name) values ('Филиал Московской государственной академии коммунального хозяйства и строительства в г. Можайске');
-insert into universities (name) values ('Филиал Московской государственной академии коммунального хозяйства и строительства в г. Серпухове Московской области');
-insert into universities (name) values ('Филиал Московской государственной академии коммунального хозяйства и строительства г. Люберцы Московской области');
-insert into universities (name) values ('Филиал ""Протвино"" Международного университета природы, общества и человека ""Дубна""');
-insert into universities (name) values ('Филиал ""Ракетно-космическая техника"" Московского авиационного института (национального исследовательского университета)');
-insert into universities (name) values ('Филиал Российского государственного гуманитарного университета в г. Балашихе');
-insert into universities (name) values ('филиал Российского государственного гуманитарного университета в г. Воскресенске Московской области');
-insert into universities (name) values ('Филиал Российского государственного гуманитарного университета в г. Дмитрове');
-insert into universities (name) values ('Филиал Российского государственного гуманитарного университета в г. Домодедово Московской области');
-insert into universities (name) values ('Филиал Российского государственного гуманитарного университета в г. Наро-Фоминске Московской области');
-insert into universities (name) values ('Филиал Российского государственного гуманитарного университета в г. Павловский Посад');
-insert into universities (name) values ('Филиал Российского государственного гуманитарного университета в г. Электростали');
-insert into universities (name) values ('Филиал Российского государственного социального университета в г. Дедовске Московской области');
-insert into universities (name) values ('Филиал Российского государственного социального университета в г. Клину Московской области');
-insert into universities (name) values ('Филиал Российского государственного социального университета в г. Павловский Посад Московской области');
-insert into universities (name) values ('Филиал Санкт-Петербургского института внешнеэкономических связей, экономики и права в г. Наро-Фоминске Московской области');
-insert into universities (name) values ('Филиал ""Стрела"" Московского авиационного института (национального исследовательского университета)');
-insert into universities (name) values ('Филиал ""Угреша"" Международного университета природы, общества и человека ""Дубна""');
-insert into universities (name) values ('Финансово-технологическая академия');
-insert into universities (name) values ('Химкинский филиал Российского университета кооперации');
-insert into universities (name) values ('Центральный институт управления и экономики туристского бизнеса - филиал Российской международной академии туризма');
-insert into universities (name) values ('Чеховский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Электростальский институт (филиал) Московского политехнического университета');
-insert into universities (name) values ('Электростальский филиал Евразийского открытого института');
-insert into universities (name) values ('Апатитский филиал Мурманского государственного технического университета');
-insert into universities (name) values ('Международный институт бизнес-образования');
-insert into universities (name) values ('Мурманская академия экономики и управления');
-insert into universities (name) values ('Мурманский арктический государственный университет');
-insert into universities (name) values ('Мурманский государственный технический университет');
-insert into universities (name) values ('Мурманский институт экономики - филиал Санкт-Петербургской академии управления и экономики');
-insert into universities (name) values ('Мурманский филиал Государственного университета морского и речного флота имени адмирала С.О. Макарова');
-insert into universities (name) values ('Мурманский филиал Московской академии предпринимательства при Правительстве Москвы');
-insert into universities (name) values ('Мурманский филиал Петербургского государственного университета путей сообщения');
-insert into universities (name) values ('Мурманский филиал Российского университета кооперации');
-insert into universities (name) values ('Мурманский филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации');
-insert into universities (name) values ('Мурманский филиал Санкт-Петербургского Гуманитарного университета профсоюзов');
-insert into universities (name) values ('Мурманский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Мурманский филиал Юридического института (г. Санкт-Петербург)');
-insert into universities (name) values ('Северо-Западный филиал Московского гуманитарно-экономического института');
-insert into universities (name) values ('Филиал Балтийского института экологии, политики и права в г. Мурманске');
-insert into universities (name) values ('Филиал Института международного права и экономики имени А.С. Грибоедова в г. Мурманске');
-insert into universities (name) values ('Филиал Международного института экономики и права в городе Мурманске');
-insert into universities (name) values ('Филиал Столичной финансово-гуманитарной академии в г. Мурманске');
-insert into universities (name) values ('Арзамасский политехнический институт (филиал) Нижегородского государственного технического университета им. Р.Е. Алексеева');
-insert into universities (name) values ('Арзамасский филиал Нижегородского государственного университета им. Н.И. Лобачевского');
-insert into universities (name) values ('Арзамасский филиал Российского университета кооперации');
-insert into universities (name) values ('Арзамасский филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации');
-insert into universities (name) values ('Арзамасский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Борский филиал Нижегородского государственного университета им. Н.И. Лобачевского');
-insert into universities (name) values ('Волго-Вятский филиал Московского технического университета связи и информатики');
-insert into universities (name) values ('Волжский государственный университет водного транспорта');
-insert into universities (name) values ('Выксунский филиал Национального исследовательского технологического университета «МИСиС»');
-insert into universities (name) values ('Выксунский филиал Нижегородского государственного технического университета им. Р.Е. Алексеева');
-insert into universities (name) values ('Дзержинский политехнический институт (филиал) Нижегородского государственного технического университета им. Р.Е. Алексеева');
-insert into universities (name) values ('Дзержинский филиал Нижегородского государственного университета им. Н.И. Лобачевского');
-insert into universities (name) values ('Дзержинский филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации');
-insert into universities (name) values ('Дзержинский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Институт Федеральной службы безопасности Российской Федерации (г. Нижний Новгород)');
-insert into universities (name) values ('Кстовский филиал Нижегородского государственного университета им. Н.И. Лобачевского');
-insert into universities (name) values ('Национальный исследовательский Нижегородский государственный университет им. Н.И. Лобачевского');
-insert into universities (name) values ('Нижегородская академия Министерства внутренних дел Российской Федерации');
-insert into universities (name) values ('Нижегородская государственная консерватория (академия) имени М.И. Глинки');
-insert into universities (name) values ('Нижегородская государственная медицинская академия');
-insert into universities (name) values ('Нижегородская государственная сельскохозяйственная академия');
-insert into universities (name) values ('Нижегородская правовая академия');
-insert into universities (name) values ('Нижегородский (г. Нижний Новгород) филиал Международного юридического института при Министерстве юстиции Российской Федерации');
-insert into universities (name) values ('Нижегородский государственный архитектурно-строительный университет');
-insert into universities (name) values ('Нижегородский государственный инженерно-экономический университет');
-insert into universities (name) values ('Нижегородский государственный лингвистический университет имени Н.А. Добролюбова');
-insert into universities (name) values ('Нижегородский государственный педагогический университет имени Козьмы Минина');
-insert into universities (name) values ('Нижегородский государственный технический университет им. Р.Е. Алексеева');
-insert into universities (name) values ('Нижегородский институт менеджмента и бизнеса');
-insert into universities (name) values ('Нижегородский институт управления - филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации');
-insert into universities (name) values ('Нижегородский коммерческий институт');
-insert into universities (name) values ('Нижегородский филиал Академии МНЭПУ');
-insert into universities (name) values ('Нижегородский филиал Академии труда и социальных отношений');
-insert into universities (name) values ('Нижегородский филиал Гуманитарного института (г. Москва)');
-insert into universities (name) values ('Нижегородский филиал Института бизнеса и политики');
-insert into universities (name) values ('Нижегородский филиал Московского государственного университета путей сообщения');
-insert into universities (name) values ('Нижегородский филиал Московского государственного университета экономики, статистики и информатики (МЭСИ)');
-insert into universities (name) values ('Нижегородский филиал Московского гуманитарно-экономического института');
-insert into universities (name) values ('Нижегородский филиал Национального исследовательского университета ""Высшая школа экономики""');
-insert into universities (name) values ('Нижегородский филиал Российского нового университета');
-insert into universities (name) values ('Нижегородский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Нижегородский филиал Университета Российской академии образования');
-insert into universities (name) values ('Нижегородское высшее военно-инженерное командное училище (военный институт)');
-insert into universities (name) values ('Павловский филиал Нижегородского государственного университета им. Н.И. Лобачевского');
-insert into universities (name) values ('Приволжский филиал Российской академии правосудия (г. Нижний Новгород)');
-insert into universities (name) values ('Саровский физико-технический институт - филиал Национального исследовательского ядерного университета ""МИФИ""');
-insert into universities (name) values ('Саровский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Сергачский филиал Нижегородского государственного университета им. Н.И. Лобачевского');
-insert into universities (name) values ('Филиал Московского государственного открытого университета в г. Кулебаки Нижегородской области');
-insert into universities (name) values ('Филиал Московского государственного университета технологий и управления в г. Нижний Новгород');
-insert into universities (name) values ('Филиал Московского института права в г. Нижний Новгород');
-insert into universities (name) values ('Филиал Московского института экономики, менеджмента и права в г. Нижний Новгород');
-insert into universities (name) values ('Филиал Российского государственного гуманитарного университета в г. Нижний Новгород');
-insert into universities (name) values ('Филиал Санкт-Петербургского института внешнеэкономических связей, экономики и права в г. Дзержинске Нижегородской области');
-insert into universities (name) values ('Филиал Сочинского государственного университета в г. Нижний Новгород Нижегородской области');
-insert into universities (name) values ('Шахунский филиал Нижегородского государственного университета им. Н.И. Лобачевского');
-insert into universities (name) values ('Новгородский государственный университет имени Ярослава Мудрого');
-insert into universities (name) values ('Новгородский филиал Российского университета кооперации');
-insert into universities (name) values ('Новгородский филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации');
-insert into universities (name) values ('Новгородский филиал Санкт-Петербургского института управления и права');
-insert into universities (name) values ('Новгородский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Северный филиал в г. Великий Новгород Российского государственного университета инновационных технологий и предпринимательства');
-insert into universities (name) values ('Филиал Российского государственного гуманитарного университета в г. Великий Новгород');
-insert into universities (name) values ('Институт социальной реабилитации Новосибирского государственного технического университета');
-insert into universities (name) values ('Куйбышевский филиал Новосибирского государственного педагогического университета');
-insert into universities (name) values ('Линевский филиал Сибирской государственной геодезической академии');
-insert into universities (name) values ('Новосибирская государственная консерватория (академия) имени М.И. Глинки');
-insert into universities (name) values ('Новосибирский государственный аграрный университет');
-insert into universities (name) values ('Новосибирский государственный архитектурно-строительный университет (Сибстрин)');
-insert into universities (name) values ('Новосибирский государственный медицинский университет');
-insert into universities (name) values ('Новосибирский государственный педагогический университет');
-insert into universities (name) values ('Новосибирский государственный театральный институт');
-insert into universities (name) values ('Новосибирский государственный технический университет');
-insert into universities (name) values ('Новосибирский государственный университет архитектуры, дизайна и искусств');
-insert into universities (name) values ('Новосибирский государственный университет экономики и управления ""НИНХ""');
-insert into universities (name) values ('Новосибирский гуманитарный институт');
-insert into universities (name) values ('Новосибирский институт экономики и менеджмента');
-insert into universities (name) values ('Новосибирский институт экономики, психологии и права');
-insert into universities (name) values ('Новосибирский национальный исследовательский государственный университет');
-insert into universities (name) values ('Новосибирский технологический институт Российского государственного университета им. А.Н. Косыгина');
-insert into universities (name) values ('Новосибирский филиал Московской финансово-юридической академии');
-insert into universities (name) values ('Новосибирский филиал Российского государственного торгово-экономического университета');
-insert into universities (name) values ('Новосибирский филиал Российской академии предпринимательства');
-insert into universities (name) values ('Новосибирский филиал Санкт-Петербургского университета управления и экономики');
-insert into universities (name) values ('Новосибирский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Новосибирский филиал Томского экономико-юридического института');
-insert into universities (name) values ('Новосибирский юридический институт (филиал) Национального исследовательского Томского государственного университета');
-insert into universities (name) values ('Новосибирское высшее военное командное училище (военный институт) (филиал) Военного учебно-научного центра Сухопутных войск ""Общевойсковая академия Вооруженных Сил Российской Федерации""');
-insert into universities (name) values ('Новый сибирский институт');
-insert into universities (name) values ('Сибирская академия управления и массовых коммуникаций (институт)');
-insert into universities (name) values ('Сибирская академия финансов и банковского дела');
-insert into universities (name) values ('Сибирский государственный университет водного транспорта');
-insert into universities (name) values ('Сибирский государственный университет геосистем и технологий');
-insert into universities (name) values ('Сибирский государственный университет путей сообщения');
-insert into universities (name) values ('Сибирский государственный университет телекоммуникаций и информатики');
-insert into universities (name) values ('Сибирский институт международных отношений и регионоведения');
-insert into universities (name) values ('Сибирский институт - филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации');
-insert into universities (name) values ('Сибирский независимый институт');
-insert into universities (name) values ('Сибирский университет потребительской кооперации');
-insert into universities (name) values ('Филиал Московского института предпринимательства и права в г. Новосибирске');
-insert into universities (name) values ('Филиал Московского педагогического государственного университета в городе Новосибирске');
-insert into universities (name) values ('Филиал Санкт-Петербургского института внешнеэкономических связей, экономики и права в г. Новосибирске');
-insert into universities (name) values ('Евразийский институт экономики, менеджмента, информатики');
-insert into universities (name) values ('Омская академия Министерства внутренних дел Российской Федерации');
-insert into universities (name) values ('Омская гуманитарная академия');
-insert into universities (name) values ('Омская юридическая академия');
-insert into universities (name) values ('Омский государственный аграрный университет имени П.А.Столыпина');
-insert into universities (name) values ('Омский государственный институт сервиса');
-insert into universities (name) values ('Омский государственный медицинский университет');
-insert into universities (name) values ('Омский государственный педагогический университет');
-insert into universities (name) values ('Омский государственный технический университет');
-insert into universities (name) values ('Омский государственный университет им. Ф.М. Достоевского');
-insert into universities (name) values ('Омский государственный университет путей сообщения');
-insert into universities (name) values ('Омский институт водного транспорта (филиал) Сибирского государственного университета водного транспорта');
-insert into universities (name) values ('Омский институт международного менеджмента и иностранных языков ""Ин.яз.-Омск""');
-insert into universities (name) values ('Омский институт (филиал) Российского государственного торгово-экономического университета');
-insert into universities (name) values ('Омский региональный институт');
-insert into universities (name) values ('Омский филиал Московского института иностранных языков');
-insert into universities (name) values ('Омский филиал Московской финансово-промышленной академии');
-insert into universities (name) values ('Омский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Омский филиал Финансового университета при Правительстве Российской Федерации');
-insert into universities (name) values ('Омский экономический институт');
-insert into universities (name) values ('Сибирская государственная автомобильно-дорожная академия (СибАДИ)');
-insert into universities (name) values ('Сибирский государственный университет физической культуры и спорта');
-insert into universities (name) values ('Сибирский институт бизнеса и информационных технологий');
-insert into universities (name) values ('Сибирский казачий институт технологий и управления (филиал) Московского государственного университета технологий и управления им. К.Г. Разумовского');
-insert into universities (name) values ('Тарский филиал Омского государственного аграрного университета');
-insert into universities (name) values ('Филиал Международного института экономики и права в городе Омске');
-insert into universities (name) values ('Филиал Омского государственного педагогического университета в г. Таре');
-insert into universities (name) values ('Филиал Российского государственного профессионально-педагогического университета в г. Омске');
-insert into universities (name) values ('Филиал Столичной финансово-гуманитарной академии в г. Омске');
-insert into universities (name) values ('Бугурусланский филиал Самарского института управления');
-insert into universities (name) values ('Бузулукский гуманитарно-технологический институт (филиал) Оренбургского государственного университета');
-insert into universities (name) values ('Новотроицкий филиал Национального исследовательского технологического университета «МИСиС»');
-insert into universities (name) values ('Оренбургский государственный аграрный университет');
-insert into universities (name) values ('Оренбургский государственный институт искусств им. Л. и М. Ростроповичей');
-insert into universities (name) values ('Оренбургский государственный институт менеджмента');
-insert into universities (name) values ('Оренбургский государственный медицинский университет');
-insert into universities (name) values ('Оренбургский государственный педагогический университет');
-insert into universities (name) values ('Оренбургский государственный университет');
-insert into universities (name) values ('Оренбургский институт бизнеса и управления');
-insert into universities (name) values ('Оренбургский институт путей сообщения - филиал Самарского государственного университета путей сообщения');
-insert into universities (name) values ('Оренбургский институт (филиал) Университета имени О.Е. Кутафина (МГЮА)');
-insert into universities (name) values ('Оренбургский институт экономики и культуры');
-insert into universities (name) values ('Оренбургский филиал Академии труда и социальных отношений');
-insert into universities (name) values ('Оренбургский филиал (заочного обучения) Уфимского юридического института МВД России');
-insert into universities (name) values ('Оренбургский филиал Института бизнеса и политики');
-insert into universities (name) values ('Оренбургский филиал Поволжского государственного университета телекоммуникаций и информатики');
-insert into universities (name) values ('Оренбургский филиал Российского государственного торгово-экономического университета');
-insert into universities (name) values ('Оренбургский филиал Российского экономического университета имени Г.В. Плеханова');
-insert into universities (name) values ('Оренбургский филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации');
-insert into universities (name) values ('Оренбургский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Орский гуманитарно-технологический институт (филиал) Оренбургского государственного университета');
-insert into universities (name) values ('Орский филиал Московской финансово-юридической академии');
-insert into universities (name) values ('Орский филиал Оренбургского государственного института менеджмента');
-insert into universities (name) values ('Филиал Московского института права в г. Орске');
-insert into universities (name) values ('Филиал Московского технологического института ""ВТУ"" в г. Оренбурге');
-insert into universities (name) values ('Филиал Первого Московского юридического института');
-insert into universities (name) values ('Филиал Российского государственного университета нефти и газа им. И.М. Губкина в г. Оренбурге');
-insert into universities (name) values ('Филиал Самарского государственного университета путей сообщения в г. Орске');
-insert into universities (name) values ('Филиал Столичной финансово-гуманитарной академии в г. Орске');
-insert into universities (name) values ('Академия Федеральной службы охраны Российской Федерации');
-insert into universities (name) values ('Ливенский филиал Орловского государственного университета имени И.С. Тургенева');
-insert into universities (name) values ('Мценский филиал Орловского государственного университета имени И.С. Тургенева');
-insert into universities (name) values ('Орловский государственный аграрный университет');
-insert into universities (name) values ('Орловский государственный институт культуры');
-insert into universities (name) values ('Орловский государственный институт экономики и торговли');
-insert into universities (name) values ('Орловский государственный университет имени И.С. Тургенева');
-insert into universities (name) values ('Орловский филиал Московского государственного университета путей сообщения');
-insert into universities (name) values ('Орловский филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации');
-insert into universities (name) values ('Орловский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Орловский юридический институт');
-insert into universities (name) values ('филиал Финансового университета при Правительстве Российской Федерации в г.Орле');
-insert into universities (name) values ('Кузнецкий институт информационных и управленческих технологий (филиал) Пензенского государственного университета');
-insert into universities (name) values ('Нижнеломовский филиал Пензенского государственного университета');
-insert into universities (name) values ('Пензенская государственная сельскохозяйственная академия');
-insert into universities (name) values ('Пензенский артиллерийский инженерный институт имени Главного маршала артиллерии Н.Н. Воронова (филиал) Военного учебно-научного центра Сухопутных войск ""Общевойсковая академия Вооруженных Сил Российской Федерации""');
-insert into universities (name) values ('Пензенский государственный педагогический университет имени В.Г. Белинского');
-insert into universities (name) values ('Пензенский государственный технологический университет');
-insert into universities (name) values ('Пензенский государственный университет');
-insert into universities (name) values ('Пензенский государственный университет архитектуры и строительства');
-insert into universities (name) values ('Пензенский региональный центр высшей школы (филиал) Российского Государственного Университета Инновационных Технологий и Предринимательства');
-insert into universities (name) values ('Пензенский филиал Академии МНЭПУ');
-insert into universities (name) values ('Пензенский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Сердобский филиал Пензенского государственного университета');
-insert into universities (name) values ('Университет ""Синергия""');
-insert into universities (name) values ('Филиал Всероссийского заочного финансово-экономического института в г. Пензе');
-insert into universities (name) values ('Филиал Московского университета имени С.Ю. Витте в г. Пензе');
-insert into universities (name) values ('Березниковский филиал Пермского национального исследовательского политехнического университета');
-insert into universities (name) values ('Западно-Уральский институт экономики и права');
-insert into universities (name) values ('Западно-Уральский филиал Московской международной высшей школы бизнеса МИРБИС (Институт)');
-insert into universities (name) values ('Лысьвенский филиал Пермского национального исследовательского политехнического университета');
-insert into universities (name) values ('Пермская государственная сельскохозяйственная академия имени академика Д.Н. Прянишникова');
-insert into universities (name) values ('Пермская государственная фармацевтическая академия Федерального агентства по здравоохранению и социальному развитию');
-insert into universities (name) values ('Пермский военный институт внутренних войск');
-insert into universities (name) values ('Пермский государственный гуманитарно-педагогический университет');
-insert into universities (name) values ('Пермский государственный институт культуры');
-insert into universities (name) values ('Пермский Государственный Медицинский Университет Имени Академика Е.А. Вагнера');
-insert into universities (name) values ('Пермский государственный национальный исследовательский университет');
-insert into universities (name) values ('Пермский гуманитарно-технологический институт');
-insert into universities (name) values ('Пермский институт железнодорожного транспорта - филиал Уральского государственного университета путей сообщения в г. Перми');
-insert into universities (name) values ('Пермский институт муниципального управления (Высшая школа приватизации и предпринимательства)');
-insert into universities (name) values ('Пермский институт Федеральной службы исполнения наказаний');
-insert into universities (name) values ('Пермский институт (филиал) Российского государственного торгово-экономического университета');
-insert into universities (name) values ('Пермский институт (филиал) Российского экономического университета имени Г.В. Плеханова');
-insert into universities (name) values ('Пермский институт экономики и финансов');
-insert into universities (name) values ('Пермский национальный исследовательский политехнический университет');
-insert into universities (name) values ('Пермский филиал Волжского государственного университета водного транспорта');
-insert into universities (name) values ('Пермский филиал Евразийского открытого института');
-insert into universities (name) values ('Пермский филиал Московского государственного университета экономики, статистики и информатики (МЭСИ)');
-insert into universities (name) values ('Пермский филиал Национального исследовательского университета ""Высшая школа экономики""');
-insert into universities (name) values ('Пермский филиал Нижегородской академии Министерства внутренних дел Российской Федерации');
-insert into universities (name) values ('Пермский филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации');
-insert into universities (name) values ('Пермский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Прикамский социальный институт');
-insert into universities (name) values ('Соликамский государственный педагогический институт');
-insert into universities (name) values ('Уральский гуманитарный институт г. Пермь');
-insert into universities (name) values ('Уральский филиал Российской академии живописи, ваяния и зодчества');
-insert into universities (name) values ('Филиал Московского института государственного управления и права в Пермском крае');
-insert into universities (name) values ('Филиал Российского государственного университета туризма и сервиса в г. Перми');
-insert into universities (name) values ('Филиал Санкт-Петербургского института внешнеэкономических связей, экономики и права в г. Перми');
-insert into universities (name) values ('Филиал Удмуртского государственного университета в городе Кудымкаре');
-insert into universities (name) values ('Филиал Уральского федерального университета имени первого Президента России Б.Н. Ельцина в г. Чусовом');
-insert into universities (name) values ('Чайковский государственный институт физической культуры');
-insert into universities (name) values ('Чайковский технологический институт (филиал) Ижевского государственного технического университета');
-insert into universities (name) values ('Чайковский филиал Пермского национального исследовательского политехнического университета');
-insert into universities (name) values ('Арсеньевский технологический институт (филиал) Дальневосточного федерального университета');
-insert into universities (name) values ('Владивостокский государственный университет экономики и сервиса');
-insert into universities (name) values ('Владивостокский филиал Дальневосточного юридического института Министерства внутренних дел Российской Федерации');
-insert into universities (name) values ('Владивостокский филиал Российской таможенной академии');
-insert into universities (name) values ('Владивостокский филиал Санкт-Петербургского Гуманитарного университета профсоюзов');
-insert into universities (name) values ('Владивостокский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Дальневосточный государственный институт искусств');
-insert into universities (name) values ('Дальневосточный государственный технический рыбохозяйственный университет');
-insert into universities (name) values ('Дальневосточный федеральный университет');
-insert into universities (name) values ('Дальневосточный филиал Кузбасского института Федеральной службы исполнения наказаний (г. Уссурийск)');
-insert into universities (name) values ('Институт технологии и бизнеса');
-insert into universities (name) values ('Морской государственный университет имени адмирала Г.И. Невельского');
-insert into universities (name) values ('Находкинский рыбопромышленный институт (филиал) Дальневосточного государственного технического рыбохозяйственного университета');
-insert into universities (name) values ('Находкинский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Открытый юридический институт');
-insert into universities (name) values ('Приморская государственная сельскохозяйственная академия');
-insert into universities (name) values ('Приморский институт железнодорожного транспорта - филиал Дальневосточного государственного университета путей сообщения в г. Уссурийске');
-insert into universities (name) values ('Приморский филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации');
-insert into universities (name) values ('Приморский филиал Сибирского университета потребительской кооперации');
-insert into universities (name) values ('Славянский технический рыбохозяйственный институт (филиал) Дальневосточного государственного технического рыбохозяйственного университета');
-insert into universities (name) values ('Тихоокеанский военно-морской институт имени С.О. Макарова (филиал) Военного учебно-научного центра Военно-Морского Флота ""Военно-морская академия имени Адмирала Флота Советского Союза Н.Г. Кузнецова""');
-insert into universities (name) values ('Тихоокеанский государственный медицинский университет Министерства здравоохранения Российской федирации');
-insert into universities (name) values ('Тихоокеанский государственный экономический университет');
-insert into universities (name) values ('Уссурийский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Филиал Владивостокского государственного университета экономики и сервиса в г. Артеме');
-insert into universities (name) values ('Филиал Владивостокского государственного университета экономики и сервиса в г. Находке');
-insert into universities (name) values ('Филиал Дальневосточного федеральногой университета в г. Дальнегорске');
-insert into universities (name) values ('Филиал Дальневосточного федеральногой университета в г. Дальнереченске');
-insert into universities (name) values ('Филиал Дальневосточного федерального университета в г. Артеме');
-insert into universities (name) values ('Филиал Дальневосточного федерального университета в г. Большой-Камень');
-insert into universities (name) values ('Филиал Дальневосточного федерального университета в г. Находке');
-insert into universities (name) values ('Филиал Дальневосточного федерального университета в г. Партизанске');
-insert into universities (name) values ('Филиал Дальневосточного федерального университета в г. Уссурийске');
-insert into universities (name) values ('Филиал Международного института экономики и права в городе Владивостоке');
-insert into universities (name) values ('Филиал Тихоокеанского государственного экономического университета в г. Арсеньеве Приморского края');
-insert into universities (name) values ('Великолукская государственная академия физической культуры и спорта');
-insert into universities (name) values ('Великолукская государственная сельскохозяйственная академия');
-insert into universities (name) values ('Великолукский филиал Петербургского государственного университета путей сообщения');
-insert into universities (name) values ('Великолукский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Псковский государственный университет');
-insert into universities (name) values ('Псковский филиал Академии права и управления (института)');
-insert into universities (name) values ('Псковский филиал Академии права и управления Федеральной службы исполнения наказаний');
-insert into universities (name) values ('Псковский филиал Московской открытой социальной академии');
-insert into universities (name) values ('Псковский филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации');
-insert into universities (name) values ('Псковский филиал Российской международной академии туризма');
-insert into universities (name) values ('Псковский филиал Санкт-Петербургского государственного экономического университета');
-insert into universities (name) values ('Псковский филиал Санкт-Петербургского института управления и права');
-insert into universities (name) values ('Псковский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Филиал Санкт-Петербургского государственного университета культуры и искусств в г. Пскове');
-insert into universities (name) values ('Адыгейский государственный университет');
-insert into universities (name) values ('Адыгейский филиал Кубанского государственного медицинского университета в г. Майкопе');
-insert into universities (name) values ('Адыгейский филиал Московской открытой социальной академии');
-insert into universities (name) values ('Адыгейский филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации');
-insert into universities (name) values ('Майкопский государственный технологический университет');
-insert into universities (name) values ('Майкопский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Филиал Майкопского государственного технологического университета в поселке Яблоновском Республики Адыгея');
-insert into universities (name) values ('Горно-Алтайский государственный университет');
-insert into universities (name) values ('Горно-Алтайский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Башкирская академия государственной службы и управления при Президенте Республики Башкортостан');
-insert into universities (name) values ('Башкирский государственный аграрный университет');
-insert into universities (name) values ('Башкирский государственный медицинский университет');
-insert into universities (name) values ('Башкирский государственный педагогический университет им. М.Акмуллы');
-insert into universities (name) values ('Башкирский государственный университет');
-insert into universities (name) values ('Башкирский институт социальных технологий (филиал) Академии труда и социальных отношений');
-insert into universities (name) values ('Башкирский институт физической культуры (филиал) Уральского государственного университета физической культуры');
-insert into universities (name) values ('Башкирский кооперативный институт (филиал) Российского университета кооперации');
-insert into universities (name) values ('Бирский филиал Башкирского государственного университета');
-insert into universities (name) values ('Восточная экономико-юридическая гуманитарная академия');
-insert into universities (name) values ('Зауральский филиал Башкирского государственного аграрного университета');
-insert into universities (name) values ('Институт экономики и сервиса Уфимского государственного нефтяного технического университета');
-insert into universities (name) values ('Кумертауский институт экономики и права');
-insert into universities (name) values ('Кумертауский филиал Оренбургского государственного университета');
-insert into universities (name) values ('Кумертауский филиал Уфимского государственного авиационного технического университета');
-insert into universities (name) values ('Нефтекамский филиал Башкирского государственного университета');
-insert into universities (name) values ('Октябрьский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Салаватский гуманитарный институт');
-insert into universities (name) values ('Салаватский институт экономики и управления');
-insert into universities (name) values ('Сибайский институт (филиал) Башкирского государственного университета');
-insert into universities (name) values ('Стерлитамакский институт физической культуры (филиал) Уральского государственного университета физической культуры');
-insert into universities (name) values ('Стерлитамакский филиал Башкирского государственного университета');
-insert into universities (name) values ('Стерлитамакский филиал Московского государственного гуманитарного университета имени М.А. Шолохова');
-insert into universities (name) values ('Стерлитамакский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Уфимский государственный авиационный технический университет');
-insert into universities (name) values ('Уфимский государственный институт искусств имени Загира Исмагилова');
-insert into universities (name) values ('Уфимский государственный нефтяной технический университет');
-insert into universities (name) values ('Уфимский институт коммерции и права');
-insert into universities (name) values ('Уфимский институт путей сообщения - филиал Самарского государственного университета путей сообщения');
-insert into universities (name) values ('Уфимский институт (филиал) Российского экономического университета имени Г.В. Плеханова');
-insert into universities (name) values ('Уфимский филиал Московского государственного гуманитарного университета имени М.А. Шолохова');
-insert into universities (name) values ('Уфимский филиал Московского института экономических преобразований');
-insert into universities (name) values ('Уфимский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Уфимский филиал Уральской государственной юридической академии');
-insert into universities (name) values ('Уфимский юридический институт');
-insert into universities (name) values ('Филиал Магнитогорского государственного технического университета им. Г.И. Носова в г. Белорецке');
-insert into universities (name) values ('Филиал Международного института экономики и права в городе Белорецке');
-insert into universities (name) values ('филиал Московского государственного университета технологий и управления в г. Мелеузе (Республика Башкортостан)');
-insert into universities (name) values ('Филиал Московского психолого-социального университета в г. Стерлитамаке Республики Башкортостан');
-insert into universities (name) values ('Филиал Самарского государственного технического университета в г. Белебее Республики Башкортостан');
-insert into universities (name) values ('Филиал Столичной финансово-гуманитарной академии в г. Уфе');
-insert into universities (name) values ('Филиал Уфимского государственного авиационного технического университета в г. Белорецке');
-insert into universities (name) values ('Филиал Уфимского государственного авиационного технического университета в г. Ишимбае');
-insert into universities (name) values ('Филиал Уфимского государственного авиационного технического университета в г. Нефтекамске');
-insert into universities (name) values ('Филиал Уфимского государственного авиационного технического университета в г. Стерлитамаке');
-insert into universities (name) values ('Филиал Уфимского государственного нефтяного технического университета в г. Октябрьском');
-insert into universities (name) values ('Филиал Уфимского государственного нефтяного технического университета в г. Салавате');
-insert into universities (name) values ('Филиал Уфимского государственного нефтяного технического университета в г. Стерлитамаке');
-insert into universities (name) values ('филиал Финансового университета при Правительстве Российской Федерации в г.Уфе');
-insert into universities (name) values ('Филиал Челябинской государственной академии культуры и искусств');
-insert into universities (name) values ('Байкальский экономико-правовой институт');
-insert into universities (name) values ('Бурятская государственная сельскохозяйственная академия имени В.Р. Филиппова');
-insert into universities (name) values ('Бурятский государственный университет');
-insert into universities (name) values ('Бурятский институт инфокоммуникаций (филиал) Сибирского государственного университета телекоммуникаций и информатики в городе Улан-Удэ');
-insert into universities (name) values ('Бурятский филиал Академии труда и социальных отношений');
-insert into universities (name) values ('Восточно-Сибирский государственный институт культуры');
-insert into universities (name) values ('Восточно-Сибирский государственный университет технологий и управления');
-insert into universities (name) values ('Улан-Удэнский институт железнодорожного транспорта - филиал Иркутского государственного университета путей сообщения');
-insert into universities (name) values ('Улан-Удэнский филиал заочного обучения Восточно-Сибирского института Министерства внутренних дел Российской Федерации');
-insert into universities (name) values ('Улан-Удэнский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Филиал Иркутского государственного университета путей сообщения в г. Северобайкальске');
-insert into universities (name) values ('Филиал Российского государственного гуманитарного университета в г. Улан-Удэ Республики Бурятия');
-insert into universities (name) values ('Буйнакский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Дагестанский государственный аграрный университет имени М.М.Джамбулатова');
-insert into universities (name) values ('Дагестанский государственный институт народного хозяйства при Правительстве Республики Дагестан');
-insert into universities (name) values ('Дагестанский государственный медицинский университет');
-insert into universities (name) values ('Дагестанский государственный педагогический университет');
-insert into universities (name) values ('Дагестанский государственный технический университет');
-insert into universities (name) values ('Дагестанский государственный университет');
-insert into universities (name) values ('Дагестанский институт прикладного искусства, дизайна и архитектуры');
-insert into universities (name) values ('Дагестанский кооперативный институт (филиал) Белгородского университета потребительской кооперации');
-insert into universities (name) values ('Дагестанский филиал Российского государственного педагогического университета им. А. И. Герцена');
-insert into universities (name) values ('Дагестанский филиал Университета Российской академии образования');
-insert into universities (name) values ('Дербентский гуманитарный институт');
-insert into universities (name) values ('Дербентский филиал Московского государственного университета экономики, статистики и информатики');
-insert into universities (name) values ('Дербентский филиал Московского педагогического государственного университета');
-insert into universities (name) values ('Дербентский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Институт Мировой Экономики');
-insert into universities (name) values ('Институт финансов и права');
-insert into universities (name) values ('Институт ЮжДАГ');
-insert into universities (name) values ('Кавказский светский институт');
-insert into universities (name) values ('Махачкалинский филиал Московского автомобильно-дорожного государственного технического университета (МАДИ)');
-insert into universities (name) values ('Махачкалинский филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации');
-insert into universities (name) values ('Махачкалинский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Международная гуманитарно-техническая академия (институт)');
-insert into universities (name) values ('Профессиональная образовательная организация ""Дагестанская академия образования и культуры""');
-insert into universities (name) values ('Светский институт народов Кавказа');
-insert into universities (name) values ('Северо-Кавказский (г. Махачкала) филиал Всероссийского государственного университета юстиции');
-insert into universities (name) values ('Северо-Кавказский государственный налоговый институт - филиал Всероссийской государственной налоговой академии Министерства финансов Российской Федерации, г. Махачкала');
-insert into universities (name) values ('Социально-педагогический институт');
-insert into universities (name) values ('Филиал Грозненского государственного нефтяного института имени академика М.Д. Миллионщикова в г. Дербенте');
-insert into universities (name) values ('Филиал Дагестанского государственного педагогического университета в г. Буйнакске');
-insert into universities (name) values ('Филиал Дагестанского государственного педагогического университета в г. Дербенте');
-insert into universities (name) values ('Филиал Дагестанского государственного педагогического университета в г. Избербаше');
-insert into universities (name) values ('Филиал Дагестанского государственного технического университета в г. Кизляре');
-insert into universities (name) values ('Филиал Дагестанского государственного университета в г. Буйнакске');
-insert into universities (name) values ('Филиал Дагестанского государственного университета в г. Дербенте');
-insert into universities (name) values ('Филиал Дагестанского государственного университета в г. Избербаше');
-insert into universities (name) values ('Филиал Дагестанского государственного университета в г. Каспийске');
-insert into universities (name) values ('Филиал Дагестанского государственного университета в г. Кизилюрте');
-insert into universities (name) values ('Филиал Дагестанского государственного университета в г. Кизляре');
-insert into universities (name) values ('Филиал Дагестанского государственного университета в г. Хасавюрте');
-insert into universities (name) values ('Филиал Московского института предпринимательства и права в г. Дербенте');
-insert into universities (name) values ('Филиал Московского института предпринимательства и права в г. Махачкале');
-insert into universities (name) values ('Филиал Российского государственного университета туризма и сервиса в г. Махачкале');
-insert into universities (name) values ('Филиал Ростовского государственного экономического университета (РИНХ) в г. Махачкале Республики Дагестан');
-insert into universities (name) values ('Филиал Санкт-Петербургского государственного экономического университета в г. Кизляре');
-insert into universities (name) values ('Филиал Южного федерального университета в г. Кизляре Республики Дагестан');
-insert into universities (name) values ('Филиал Южного федерального университета в г. Махачкале Республики Дагестан');
-insert into universities (name) values ('Хасавюртовский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Ингушский государственный университет');
-insert into universities (name) values ('Институт экономики и правоведения (г. Назрань)');
-insert into universities (name) values ('Назранский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Калмыцкий государственный университет имени Б.Б. Городовикова');
-insert into universities (name) values ('Калмыцкий филиал Московской академии экономики и права');
-insert into universities (name) values ('Филиал Российского государственного гуманитарного университета в г. Элисте');
-insert into universities (name) values ('Элистинский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Карельский институт туризма - филиал Российской международной академии туризма');
-insert into universities (name) values ('Карельский региональный институт управления, экономики и права Петрозаводского государственного университета');
-insert into universities (name) values ('Карельский филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации');
-insert into universities (name) values ('Петрозаводская государственная консерватория (академия) имени А.К. Глазунова');
-insert into universities (name) values ('Петрозаводский государственный университет');
-insert into universities (name) values ('Петрозаводский филиал Международного славянского института');
-insert into universities (name) values ('Петрозаводский филиал Петербургского государственного университета путей сообщения');
-insert into universities (name) values ('Петрозаводский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Приладожский филиал Петрозаводского государственного университета');
-insert into universities (name) values ('Северный (г. Петрозаводск) филиал Всероссийского государственного университета юстиции');
-insert into universities (name) values ('Филиал Международного института экономики и права в городе Петрозаводске');
-insert into universities (name) values ('Воркутинский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Воркутинский филиал Сыктывкарского государственного университета');
-insert into universities (name) values ('Воркутинский филиал Университета Российской академии образования');
-insert into universities (name) values ('Воркутинский филиал Ухтинского технического государственного университета');
-insert into universities (name) values ('Институт управления, информации и бизнеса');
-insert into universities (name) values ('Коми государственный педагогический институт');
-insert into universities (name) values ('Коми республиканская академия государственной службы и управления');
-insert into universities (name) values ('Коми филиал Вятской государственной сельскохозяйственной академии');
-insert into universities (name) values ('Коми филиал Кировской государственной медицинской академии Федерального агентства по здравоохранению и социальному развитию в г. Сыктывкаре');
-insert into universities (name) values ('Сыктывкарский государственный университет имени Питирима Сорокина');
-insert into universities (name) values ('Сыктывкарский лесной институт (филиал) Санкт-Петербургского государственного лесотехнического университета имени С.М. Кирова');
-insert into universities (name) values ('Сыктывкарский филиал Нижегородского коммерческого института');
-insert into universities (name) values ('Сыктывкарский филиал Российского университета кооперации');
-insert into universities (name) values ('Сыктывкарский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Ухтинский государственный технический университет');
-insert into universities (name) values ('Ухтинский филиал Московского государственного университета путей сообщения');
-insert into universities (name) values ('Ухтинский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Филиал Столичной финансово-гуманитарной академии в г. Ухте');
-insert into universities (name) values ('Филиал Ухтинского государственного технического университета в г. Усинске');
-insert into universities (name) values ('Гуманитарно-педагогическая академия филиал Крымского федерального университета имени В.И.Вернадского');
-insert into universities (name) values ('Керченский государственный морской технологический университет');
-insert into universities (name) values ('Крымский инженерно-педагогический университет');
-insert into universities (name) values ('Крымский институт бизнеса');
-insert into universities (name) values ('Крымский университет культуры, искусств и туризма');
-insert into universities (name) values ('Крымский федеральный университет имени В.И. Вернадского');
-insert into universities (name) values ('Волжский филиал Казанского национального исследовательского технического университета им. А.Н. Туполева-КАИ');
-insert into universities (name) values ('Волжский филиал Российской академии предпринимательства');
-insert into universities (name) values ('Йошкар-Олинский филиал Московского института государственного управления и права');
-insert into universities (name) values ('Йошкар-Олинский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Марийский государственный университет');
-insert into universities (name) values ('Марийский филиал Московской открытой социальной академии');
-insert into universities (name) values ('Межрегиональный открытый социальный институт');
-insert into universities (name) values ('Поволжский государственный технологический университет');
-insert into universities (name) values ('Филиал Московского психолого-социального университета в г. Йошкар-Ола Республики Марий Эл');
-insert into universities (name) values ('Ковылкинский филиал Мордовского государственного университета имени Н.П. Огарева');
-insert into universities (name) values ('Мордовский государственный педагогический институт имени М.Е. Евсевьева');
-insert into universities (name) values ('Мордовский гуманитарный институт');
-insert into universities (name) values ('Национальный исследовательский Мордовский государственный университет им. Н. П. Огарёва');
-insert into universities (name) values ('Рузаевский институт машиностроения (филиал) Мордовского государственного университета им. Н.П. Огарева');
-insert into universities (name) values ('Саранский кооперативный институт (филиал) Российского университета кооперации');
-insert into universities (name) values ('Саранский филиал Нижегородской академии Министерства внутренних дел Российской Федерации');
-insert into universities (name) values ('Саранский филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации');
-insert into universities (name) values ('Саранский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Средне-Волжский (г. Саранск) филиал Всероссийского государственного университета юстиции');
-insert into universities (name) values ('Филиал Самарского государственного университета путей сообщения в г. Рузаевке');
-insert into universities (name) values ('Арктический государственный институт культуры и искусств');
-insert into universities (name) values ('Высшая школа музыки (институт) Республики Саха (Якутия)');
-insert into universities (name) values ('Мирнинский филиал Томского политехнического университета');
-insert into universities (name) values ('Октемский филиал Якутской государственной сельскохозяйственной академии');
-insert into universities (name) values ('Олекминский филиал Якутской государственной сельскохозяйственной академии');
-insert into universities (name) values ('Политехнический институт (филиал) Северо-Восточного федерального университета имени М.К. Аммосова в г. Мирном');
-insert into universities (name) values ('Саха государственная педагогическая академия');
-insert into universities (name) values ('Северо-Восточный федеральный университет имени М.К. Аммосова');
-insert into universities (name) values ('Технический институт (филиал) Северо-Восточного федерального университета имени М.К. Аммосова в г. Нерюнгри');
-insert into universities (name) values ('Технологический институт Северо-восточного федерального университета имени М.К.Аммосова');
-insert into universities (name) values ('Филиал Красноярского государственного художественного института');
-insert into universities (name) values ('Филиал Новосибирского государственного архитектурно-строительного университета (Сибстрин) в г. Айхале');
-insert into universities (name) values ('Филиал Санкт-Петербургского государственного университета кино и телевидения');
-insert into universities (name) values ('Чурапчинский государственный институт физической культуры и спорта');
-insert into universities (name) values ('Южно-Якутский институт железнодорожного транспорта - филиал Дальневосточного государственного университета путей сообщения в г. Нерюнгри');
-insert into universities (name) values ('Якутская государственная сельскохозяйственная академия');
-insert into universities (name) values ('Якутский институт водного транспорта (филиал) Сибирского государственного университета водного транспорта');
-insert into universities (name) values ('Якутский институт экономики филиал Санкт-Петербургского университета управления и экономики');
-insert into universities (name) values ('Якутский филиал Дальневосточного юридического института Министерства внутренних дел Российской Федерации');
-insert into universities (name) values ('Якутский филиал Московского государственного гуманитарного университета имени М.А. Шолохова');
-insert into universities (name) values ('Якутский филиал Российского государственного университета туризма и сервиса');
-insert into universities (name) values ('Якутский филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации');
-insert into universities (name) values ('Якутский филиал Санкт-Петербургского Гуманитарного университета профсоюзов');
-insert into universities (name) values ('Якутский филиал Сибирского университета потребительской кооперации');
-insert into universities (name) values ('Якутский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Якутский экономико-правовой институт (филиал) Академии труда и социальных отношений');
-insert into universities (name) values ('Владикавказский институт моды');
-insert into universities (name) values ('Владикавказский институт управления');
-insert into universities (name) values ('Владикавказский институт экономики, управления и права (г. Владикавказ)');
-insert into universities (name) values ('Владикавказский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Владикавказский филиал Финансового университета при Правительстве Российской Федерации');
-insert into universities (name) values ('Горский государственный аграрный университет');
-insert into universities (name) values ('Институт цивилизации (г. Владикавказ)');
-insert into universities (name) values ('Северо-Кавказский горно-металлургический институт (государственный технологический университет)');
-insert into universities (name) values ('Северо-Осетинская государственная медицинская академия');
-insert into universities (name) values ('Северо-Осетинский государственный педагогический институт');
-insert into universities (name) values ('Северо-Осетинский государственный университет имени Коста Левановича Хетагурова');
-insert into universities (name) values ('Северо-осетинский институт экологии и безопасности жизнедеятельности');
-insert into universities (name) values ('Академия социального образования');
-insert into universities (name) values ('Альметьевский государственный институт муниципальной службы');
-insert into universities (name) values ('Альметьевский государственный нефтяной институт');
-insert into universities (name) values ('Альметьевский институт Восточной экономико-юридической гуманитарной академии (филиал)');
-insert into universities (name) values ('Альметьевский филиал Казанского государственного технического университета им. А.Н. Туполева');
-insert into universities (name) values ('Альметьевский филиал Казанского инновационного университета имени В.Г.Тимирясова');
-insert into universities (name) values ('Альметьевский филиал Университета управления ТИСБИ');
-insert into universities (name) values ('Бугульминский филиал Казанского инновационного университета имени В.Г.Тимирясова');
-insert into universities (name) values ('Бугульминский филиал Казанского национального исследовательского технического университета им. А.Н. Туполева-КАИ');
-insert into universities (name) values ('Бугульминский филиал Казанского национального исследовательского технологического университета');
-insert into universities (name) values ('Волжско-Камский филиал Российской международной академии туризма');
-insert into universities (name) values ('Елабужский институт (филиал) Казанского (Приволжского) федерального университета""');
-insert into universities (name) values ('Елабужский филиал Института социальных и гуманитарных знаний');
-insert into universities (name) values ('Зеленодольский институт машиностроения и информационных технологий (филиал) Казанского государственного технического университета им. А.Н. Туполева');
-insert into universities (name) values ('Зеленодольский филиал Казанского инновационного университета имени В.Г.Тимирясова');
-insert into universities (name) values ('Институт социальных и гуманитарных знаний');
-insert into universities (name) values ('Институт управления (г. Набережные Челны)');
-insert into universities (name) values ('Институт экономики и финансов Казанского (Приволжского) федерального университета');
-insert into universities (name) values ('Казанская государственная академия ветеринарной медицины им. Н.Э. Баумана');
-insert into universities (name) values ('Казанская государственная консерватория (академия) имени Н.Г. Жиганова');
-insert into universities (name) values ('Казанский государственный аграрный университет');
-insert into universities (name) values ('Казанский государственный архитектурно-строительный университет');
-insert into universities (name) values ('Казанский государственный медицинский университет');
-insert into universities (name) values ('Казанский государственный университет культуры и искусств');
-insert into universities (name) values ('Казанский государственный энергетический университет');
-insert into universities (name) values ('Казанский инновационный университет имени В.Г. Тимирясова');
-insert into universities (name) values ('Казанский институт предпринимательства и права');
-insert into universities (name) values ('Казанский институт (филиал) Российского государственного торгово-экономического университета');
-insert into universities (name) values ('Казанский институт финансов, экономики и информатики');
-insert into universities (name) values ('Казанский кооперативный институт (филиал) Российского университета кооперации');
-insert into universities (name) values ('Казанский национальный исследовательский технический университет им. А.Н. Туполева-КАИ');
-insert into universities (name) values ('Казанский национальный исследовательский технологический университет');
-insert into universities (name) values ('Казанский (Приволжский) федеральный университет');
-insert into universities (name) values ('Казанский филиал Академии труда и социальных отношений');
-insert into universities (name) values ('Казанский филиал Владимирского юридического института Федеральной службы исполнения наказаний');
-insert into universities (name) values ('Казанский филиал Волжского государственного университета водного транспорта');
-insert into universities (name) values ('Казанский филиал Московского государственного университета путей сообщения');
-insert into universities (name) values ('Казанский филиал Московской Академии Предпринимательства при Правительстве Москвы');
-insert into universities (name) values ('Казанский филиал Нижегородского государственного лингвистического университета им. Н.А. Добролюбова');
-insert into universities (name) values ('Казанский филиал Поволжского государственного университета телекоммуникаций и информатики');
-insert into universities (name) values ('Казанский филиал Российского государственного университета правосудия (г.Казань)');
-insert into universities (name) values ('Казанский филиал Российской международной академии туризма');
-insert into universities (name) values ('Казанский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Казанский юридический институт МВД РФ');
-insert into universities (name) values ('Казанский юридический институт (филиал) Всероссийского государственного университета юстиции');
-insert into universities (name) values ('Казанское высшее военное командное училище (военный институт) (филиал) Военного учебно-научного центра Сухопутных войск ""Общевойсковая академия Вооруженных Сил Российской Федерации""');
-insert into universities (name) values ('Камский институт');
-insert into universities (name) values ('Камский институт искусств и дизайна');
-insert into universities (name) values ('Лениногорский филиал Казанского государственного технического университета им. А.Н. Туполева');
-insert into universities (name) values ('Набережночелнинский государственный педагогический университет');
-insert into universities (name) values ('Набережночелнинский государственный торгово-технологический институт');
-insert into universities (name) values ('Набережно-Челнинский институт Восточной экономико-юридической гуманитарной академии (филиал)');
-insert into universities (name) values ('Набережночелнинский филиал Академии управления ТИСБИ');
-insert into universities (name) values ('Набережночелнинский филиал Казанского государственного технического университета им. А.Н. Туполева');
-insert into universities (name) values ('Набережночелнинский филиал Казанского инновационного университета имени В.Г.Тимирясова');
-insert into universities (name) values ('Набережночелнинский филиал Поволжской государственной академии физической культуры, спорта и туризма');
-insert into universities (name) values ('Набережночелнинский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Нижнекамский институт открытого образования');
-insert into universities (name) values ('Нижнекамский муниципальный институт');
-insert into universities (name) values ('Нижнекамский филиал Академии управления ТИСБИ');
-insert into universities (name) values ('Нижнекамский филиал Казанского инновационного университета имени В.Г.Тимирясова');
-insert into universities (name) values ('Нижнекамский филиал Московского гуманитарно-экономического института');
-insert into universities (name) values ('Нижнекамский химико-технологический институт (филиал) Казанского национального исследовательского технологического университета');
-insert into universities (name) values ('Поволжская государственная академия физической культуры спорта и туризма');
-insert into universities (name) values ('Российский исламский институт');
-insert into universities (name) values ('Университет управления ""ТИСБИ""');
-insert into universities (name) values ('Филиал Казанского (Приволжского) федерального университета в г. Набережные Челны');
-insert into universities (name) values ('Филиал Казанского (Приволжского) федерального университета в г. Чистополе');
-insert into universities (name) values ('Филиал Московского государственного университета культуры и искусств в городе Набережные Челны');
-insert into universities (name) values ('Чистопольский филиал ""Восток"" Казанского государственного технического университета им. А. Н. Туполева');
-insert into universities (name) values ('Чистопольский филиал Казанского инновационного университета имени В.Г.Тимирясова');
-insert into universities (name) values ('Кызылский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Тувинский государственный университет');
-insert into universities (name) values ('Абаканский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Саяно-Шушенский филиал Сибирского федерального университета');
-insert into universities (name) values ('Филиал Хакасского государственного университета');
-insert into universities (name) values ('Хакасский государственный университет им. Н.Ф. Катанова');
-insert into universities (name) values ('Хакасский институт бизнеса');
-insert into universities (name) values ('Хакасский технический институт - филиал Сибирского федерального университета');
-insert into universities (name) values ('Хакасский филиал Красноярского государственного аграрного университета');
-insert into universities (name) values ('Хакасский филиал Российского экономического университета имени Г.В. Плеханова');
-insert into universities (name) values ('Азово-Черноморский инженерный институт ФГБОУ ВПО «Донской государственный аграрный университет» в г. Зернограде');
-insert into universities (name) values ('Азовский филиал Евразийского открытого института');
-insert into universities (name) values ('Академия строительства и архитектуры Донского государственного технического университета');
-insert into universities (name) values ('Багаевский филиал Южно-Российского государственного технического университета (Новочеркасского политехнического института)');
-insert into universities (name) values ('Волгодонский инженерно-технический институт - филиал Национального исследовательского ядерного университета ""МИФИ""');
-insert into universities (name) values ('Волгодонский институт экономики, управления и права (филиал) Южного федерального университета в г. Волгодонске');
-insert into universities (name) values ('Волгодонский филиал Московской открытой социальной академии');
-insert into universities (name) values ('Гуковский институт экономики и права - Филиал Ростовского государственного экономического университета (РИНХ)');
-insert into universities (name) values ('Донской государственный аграрный университет');
-insert into universities (name) values ('Донской государственный технический университет');
-insert into universities (name) values ('Донской институт дистанционного образования');
-insert into universities (name) values ('Донской филиал Евразийского открытого института');
-insert into universities (name) values ('Донской юридический институт');
-insert into universities (name) values ('Инженерно-технологическая академия ЮФУ (ТРТИ)');
-insert into universities (name) values ('Институт водного транспорта имени Г.Я. Седова - филиал Государственного морского университета имени адмирала Ф.Ф.Ушакова');
-insert into universities (name) values ('Институт открытого образования');
-insert into universities (name) values ('Институт сферы обслуживания и предпринимательства (филиал) Донского государственного технического университета в г. Шахты');
-insert into universities (name) values ('Каменский институт (филиал) Южно-Российского государственного технического университета (Новочеркасского политехнического института)');
-insert into universities (name) values ('Красносулинский филиал Южно-Российского государственного технического университета (Новочеркасского политехнического института),');
-insert into universities (name) values ('Новочеркасский инженерно-мелиоративный институт имени А.К. Кортунова Донского государственного аграрного университета');
-insert into universities (name) values ('Новошахтинский филиал Южно-Российского государственного технического университета (Новочеркасского политехнического института)');
-insert into universities (name) values ('Ростовская государственная консерватория (академия) имени С.В. Рахманинова');
-insert into universities (name) values ('Ростовский военный институт ракетных войск имени Главного маршала артиллерии М.И. Неделина');
-insert into universities (name) values ('Ростовский государственный медицинский университет');
-insert into universities (name) values ('Ростовский государственный университет путей сообщения');
-insert into universities (name) values ('Ростовский государственный экономический университет (РИНХ)');
-insert into universities (name) values ('Ростовский (г. Ростов-на-Дону) юридический институт (филиал) Всероссийского государственного университета юстиции');
-insert into universities (name) values ('Ростовский институт защиты предпринимателя');
-insert into universities (name) values ('РОСТОВСКИЙ ИНСТИТУТ ИНОСТРАННЫХ ЯЗЫКОВ');
-insert into universities (name) values ('Ростовский институт кооперации (филиал) Белгородского университета кооперации, экономики и права');
-insert into universities (name) values ('Ростовский институт (филиал) Российского государственного торгово-экономического университета');
-insert into universities (name) values ('Ростовский международный институт экономики и управления');
-insert into universities (name) values ('Ростовский-на-Дону филиал Московской академии предпринимательства при Правительстве Москвы');
-insert into universities (name) values ('Ростовский социально-экономический институт');
-insert into universities (name) values ('Ростовский технологический институт сервиса и туризма (филиал) Южно-Российского государственного университета экономики и сервиса');
-insert into universities (name) values ('Ростовский филиал Волжского государственного университета водного транспорта');
-insert into universities (name) values ('Ростовский филиал Московского государственного технического университета гражданской авиации');
-insert into universities (name) values ('Ростовский филиал Российской академии правосудия (г. Ростов-на-Дону)');
-insert into universities (name) values ('Ростовский филиал Российской таможенной академии');
-insert into universities (name) values ('Ростовский филиал Санкт-Петербургского государственного университета культуры и искусств');
-insert into universities (name) values ('Ростовский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Ростовский юридический институт');
-insert into universities (name) values ('Северо-Кавказский филиал Московского технического университета связи и информатики');
-insert into universities (name) values ('Таганрогский институт имени А.П.Чехова (филиал) Ростовского государственного экономического университета');
-insert into universities (name) values ('Таганрогский институт управления и экономики');
-insert into universities (name) values ('Таганрогский политехнический институт - филиал Донского государственного технического университета');
-insert into universities (name) values ('Таганрогский филиал Российского нового университета');
-insert into universities (name) values ('Технологический институт (филиал) Донского государственного технического университета');
-insert into universities (name) values ('Филиал (г. Донецк, Ростовская область) ИНСТИТУТА УПРАВЛЕНИЯ, БИЗНЕСА И ПРАВА');
-insert into universities (name) values ('Филиал Донского государственного технического университета в г. Волгодонске Ростовской области');
-insert into universities (name) values ('Филиал ИНСТИТУТА УПРАВЛЕНИЯ, БИЗНЕСА И ПРАВА в г. Сальске');
-insert into universities (name) values ('Филиал Московского государственного университета технологий и управления в г. Ростове-на-Дону');
-insert into universities (name) values ('Филиал Московского института защиты предпринимателя');
-insert into universities (name) values ('Филиал Московского института предпринимательства и права в г. Ростов-на-Дону');
-insert into universities (name) values ('филиал Московского нового юридического института в г. Новошахтинске');
-insert into universities (name) values ('Филиал Российского государственного гидрометеорологического университета в г. Ростове-на-Дону');
-insert into universities (name) values ('Филиал Ростовского государственного экономического университета РИНХ в г. Миллерово');
-insert into universities (name) values ('Филиал Столичной финансово-гуманитарной академии в г. Волгодонске');
-insert into universities (name) values ('Филиал Южного федерального университета в г. Новошахтинске Ростовской области');
-insert into universities (name) values ('Филиал Южного федерального университета в станице Вешенской Ростовской области');
-insert into universities (name) values ('Филиал Южно-Российского государственного технического университета (Новочеркасского политехнического института) в городе Белая Калитва');
-insert into universities (name) values ('Шахтинский институт (филиал) ЮРГПУ(НПИ) им. М.И. Платова');
-insert into universities (name) values ('Шахтинский филиал Гуманитарного института (г. Москва)');
-insert into universities (name) values ('Шахтинский филиал Южно-Российского гуманитарного института');
-insert into universities (name) values ('Южно-Российский государственный политехнический университет (НПИ) имени М. И. Платова');
-insert into universities (name) values ('Южно-Российский гуманитарный институт (г. Ростов-на-Дону)');
-insert into universities (name) values ('Южно-Российский институт - филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации');
-insert into universities (name) values ('Южно-Российский психологический институт');
-insert into universities (name) values ('Южный университет (г. Ростов-на-Дону)');
-insert into universities (name) values ('Южный федеральный университет');
-insert into universities (name) values ('Академия права и управления Федеральной службы исполнения наказаний');
-insert into universities (name) values ('Региональный институт бизнеса и управления');
-insert into universities (name) values ('Рязанский государственный агротехнологический университет имени П.А. Костычева');
-insert into universities (name) values ('Рязанский государственный медицинский университет имени академика И.П. Павлова');
-insert into universities (name) values ('Рязанский государственный радиотехнический университет');
-insert into universities (name) values ('Рязанский государственный университет имени С.А. Есенина');
-insert into universities (name) values ('Рязанский заочный институт (филиал) Московского государственного университета культуры и искусств');
-insert into universities (name) values ('Рязанский институт открытого образования');
-insert into universities (name) values ('Рязанский институт управления и права');
-insert into universities (name) values ('Рязанский институт (филиал) Московского политехнического университета');
-insert into universities (name) values ('Рязанский институт экономики филиал Санкт-Петербургского университета управления и экономики');
-insert into universities (name) values ('Рязанский филиал Академии права и управления (института)');
-insert into universities (name) values ('Рязанский филиал Академического правового института');
-insert into universities (name) values ('Рязанский филиал Московского государственного университета путей сообщения');
-insert into universities (name) values ('Рязанский филиал Московского университета Министерства внутренних дел Российской Федерации');
-insert into universities (name) values ('Рязанский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Рязанское высшее воздушно-десантное командное училище (военный институт) имени генерала армии В.Ф. Маргелова (филиал) Военного учебно-научного центра Сухопутных войск ""Общевойсковая академия Вооруженных Сил Российской Федерации""');
-insert into universities (name) values ('Современный технический институт');
-insert into universities (name) values ('Филиал Московского института экономики, менеджмента и права в г. Рязани');
-insert into universities (name) values ('Филиал Московского психолого-социального университета в г. Рязани');
-insert into universities (name) values ('Филиал Рязанского государственного радиотехнического университета в г. Сасово Рязанской области');
-insert into universities (name) values ('Архитектурно-строительный институт Самарского государственного технического университета');
-insert into universities (name) values ('Волжский университет имени В.Н. Татищева (институт)');
-insert into universities (name) values ('Институт менеджмента, маркетинга и права');
-insert into universities (name) values ('Институт Телеинфо');
-insert into universities (name) values ('Медицинский институт «РЕАВИЗ»');
-insert into universities (name) values ('Международный институт рынка');
-insert into universities (name) values ('Поволжский государственный университет сервиса');
-insert into universities (name) values ('Поволжский государственный университет телекоммуникаций и информатики');
-insert into universities (name) values ('Поволжский институт бизнеса');
-insert into universities (name) values ('Поволжский филиал Международного университета в Москве (гуманитарного)');
-insert into universities (name) values ('Самарская академия государственного и муниципального управления');
-insert into universities (name) values ('Самарская государственная областная академия (Наяновой)');
-insert into universities (name) values ('Самарская государственная сельскохозяйственная академия');
-insert into universities (name) values ('Самарская гуманитарная академия');
-insert into universities (name) values ('Самарский военно-медицинский институт');
-insert into universities (name) values ('Самарский государственный институт культуры');
-insert into universities (name) values ('Самарский государственный медицинский университет');
-insert into universities (name) values ('Самарский государственный социально-педагогический университет');
-insert into universities (name) values ('Самарский государственный технический университет');
-insert into universities (name) values ('Самарский государственный университет');
-insert into universities (name) values ('Самарский государственный университет путей сообщения');
-insert into universities (name) values ('Самарский государственный экономический университет');
-insert into universities (name) values ('Самарский институт бизнеса и управления');
-insert into universities (name) values ('Самарский институт - высшая школа приватизации и предпринимательства');
-insert into universities (name) values ('Самарский институт медико-социальной реабилитологии');
-insert into universities (name) values ('Самарский институт управления');
-insert into universities (name) values ('Самарский институт (филиал) Российского государственного торгово-экономического университета');
-insert into universities (name) values ('Самарский институт (филиал) Российского экономического университета имени Г.В. Плеханова');
-insert into universities (name) values ('Самарский национальный исследовательский университет имени академика С.П. Королева');
-insert into universities (name) values ('Самарский филиал Волжского государственного университета водного транспорта');
-insert into universities (name) values ('Самарский филиал Московского городского педагогического университета');
-insert into universities (name) values ('Самарский филиал Новгородского государственного университета имени Ярослава Мудрого');
-insert into universities (name) values ('Самарский филиал Санкт-Петербургского Гуманитарного университета профсоюзов');
-insert into universities (name) values ('Самарский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Самарский филиал Университета Российской академии образования');
-insert into universities (name) values ('Самарский юридический институт Федеральной службы исполнения наказаний');
-insert into universities (name) values ('Сызранский филиал Самарского государственного экономического университета');
-insert into universities (name) values ('Тольяттинская академия управления');
-insert into universities (name) values ('Тольяттинский государственный университет');
-insert into universities (name) values ('Тольяттинский институт Восточной экономико-юридической гуманитарной академии (филиал)');
-insert into universities (name) values ('Тольяттинский институт искусств');
-insert into universities (name) values ('Тольяттинский филиал Института коммерции и права');
-insert into universities (name) values ('Тольяттинский филиал Международного института рынка');
-insert into universities (name) values ('Тольяттинский филиал Московского государственного университета пищевых производств');
-insert into universities (name) values ('Тольяттинский филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации');
-insert into universities (name) values ('Тольяттинский филиал Самарского государственного университета');
-insert into universities (name) values ('Тольяттинский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Филиал Московского государственного университета технологий и управления в г. Самаре');
-insert into universities (name) values ('Филиал Московского экономико-финансового института в г. Самаре');
-insert into universities (name) values ('филиал Самарского государственного технического университета в г. Сызрани');
-insert into universities (name) values ('Филиал Самарского государственного экономического университета в г. Тольятти');
-insert into universities (name) values ('Филиал Самарской гуманитарной академии в г. Тольятти');
-insert into universities (name) values ('Филиал Санкт-Петербургского института внешнеэкономических связей, экономики и права в г. Тольятти Самарской области');
-insert into universities (name) values ('Академический институт гуманитарного образования');
-insert into universities (name) values ('Академия Русского балета имени А.Я. Вагановой');
-insert into universities (name) values ('Балтийская академия туризма и предпринимательства');
-insert into universities (name) values ('Балтийский государственный технический университет ВОЕНМЕХ им. Д.Ф. Устинова');
-insert into universities (name) values ('Балтийский Гуманитарный Институт');
-insert into universities (name) values ('Балтийский институт иностранных языков и межкультурного сотрудничества');
-insert into universities (name) values ('Балтийский институт экологии, политики и права');
-insert into universities (name) values ('Военная академия материально-технического обеспечения им. генерала армии А.В. Хрулева');
-insert into universities (name) values ('Военная академия связи им. Маршала Советского Союза С.М. Буденного');
-insert into universities (name) values ('Военно-космическая академия имени А.Ф. Можайского');
-insert into universities (name) values ('Военно-медицинская академия имени С.М. Кирова');
-insert into universities (name) values ('Военно-морской институт радиоэлектроники имени А.С. Попова (филиал) Военного учебно-научного центра Военно-Морского Флота ""Военно-морская академия имени Адмирала Флота Советского Союза Н.Г. Кузнецова""');
-insert into universities (name) values ('Военно-транспортный университет железнодорожных войск');
-insert into universities (name) values ('Военный инженерно-технический университет');
-insert into universities (name) values ('Военный учебно-научный центр Военно-Морского Флота «Военно-морская академия имени Адмирала Флота Советского Союза Н.Г. Кузнецова»');
-insert into universities (name) values ('Восточно-Европейский институт психоанализа');
-insert into universities (name) values ('Восточный институт');
-insert into universities (name) values ('Высшая религиозно-философская школа (институт)');
-insert into universities (name) values ('Высшая школа народных искусств (институт)');
-insert into universities (name) values ('Высшая школа печати и медиатехнологий');
-insert into universities (name) values ('Высшая школа технологии и энергетики СПбГУПТД');
-insert into universities (name) values ('Высшая школа экономики в Санкт-Петербурге');
-insert into universities (name) values ('Государственный университет морского и речного флота имени адмирала С.О. Макарова');
-insert into universities (name) values ('Институт декоративно-прикладного искусства');
-insert into universities (name) values ('Институт заочного обучения Санкт-Петербургского горного университета');
-insert into universities (name) values ('Институт иностранных языков (г. Санкт-Петербург)');
-insert into universities (name) values ('Институт правоведения и предпринимательства');
-insert into universities (name) values ('Институт практической психологии ""Иматон""');
-insert into universities (name) values ('Институт специальной педагогики и психологии');
-insert into universities (name) values ('Институт телевидения, бизнеса и дизайна');
-insert into universities (name) values ('Институт холода и биотехнологий Санкт-Петербургского национального исследовательского университета информационных технологий, механики и оптики');
-insert into universities (name) values ('Институт экономики и финансов');
-insert into universities (name) values ('Ленинградский государственный университет имени А.С. Пушкина');
-insert into universities (name) values ('Международный Банковский Институт');
-insert into universities (name) values ('Межрегиональный институт экономики и права при МПА ЕврАзЭС');
-insert into universities (name) values ('Михайловская военная артиллерийская академия');
-insert into universities (name) values ('Морской корпус Петра Великого Санкт-Петербургского военно-морского института');
-insert into universities (name) values ('Национальный государственный университет физической культуры, спорта и здоровья имени П.Ф. Лесгафта, Санкт-Петербург');
-insert into universities (name) values ('Национальный открытый институт России г. Санкт-Петербург');
-insert into universities (name) values ('Невский институт управления и дизайна');
-insert into universities (name) values ('Невский институт языка и культуры');
-insert into universities (name) values ('Первый Санкт-Петербургский государственный медицинский университет им. акад. И. П. Павлова');
-insert into universities (name) values ('Петербургский государственный университет путей сообщения императора Александра I');
-insert into universities (name) values ('Петербургский институт иудаики');
-insert into universities (name) values ('Российский государственный гидрометеорологический университет');
-insert into universities (name) values ('Российский государственный педагогический университет имени А. И. Герцена');
-insert into universities (name) values ('Русская Христианская Гуманитарная Академия');
-insert into universities (name) values ('Санкт-Петербургская государственная академия ветеринарной медицины');
-insert into universities (name) values ('Санкт-Петербургская государственная академия театрального искусства');
-insert into universities (name) values ('Санкт-Петербургская государственная консерватория (академия) им. Н.А. Римского-Корсакова');
-insert into universities (name) values ('Санкт-Петербургская государственная химико-фармацевтическая академия');
-insert into universities (name) values ('Санкт-Петербургская государственная художественно-промышленная академия имени А. Л. Штиглица');
-insert into universities (name) values ('Санкт-Петербургская юридическая академия');
-insert into universities (name) values ('Санкт-Петербургский академический университет - научно-образовательный центр нанотехнологий РАН (Академический университет РАН)');
-insert into universities (name) values ('Санкт-Петербургский военный институт внутренних войск');
-insert into universities (name) values ('Санкт-Петербургский горный университет');
-insert into universities (name) values ('Санкт-Петербургский государственный аграрный университет');
-insert into universities (name) values ('Санкт-Петербургский государственный академический институт живописи, скульптуры и архитектуры имени И.Е. Репина');
-insert into universities (name) values ('Санкт-Петербургский государственный архитектурно-строительный университет');
-insert into universities (name) values ('Санкт-Петербургский государственный институт культуры');
-insert into universities (name) values ('Санкт-Петербургский государственный институт психологии и социальной работы');
-insert into universities (name) values ('Санкт-Петербургский государственный лесотехнический университет имени С.М. Кирова');
-insert into universities (name) values ('Санкт-Петербургский государственный морской технический университет');
-insert into universities (name) values ('Санкт-Петербургский государственный педиатрический медицинский университет');
-insert into universities (name) values ('Санкт-Петербургский государственный технологический институт (технический университет)');
-insert into universities (name) values ('Санкт-Петербургский государственный торгово-экономический университет');
-insert into universities (name) values ('Санкт-Петербургский государственный университет');
-insert into universities (name) values ('Санкт-Петербургский государственный университет аэрокосмического приборостроения');
-insert into universities (name) values ('Санкт-Петербургский государственный университет гражданской авиации');
-insert into universities (name) values ('Санкт-Петербургский государственный университет кино и телевидения');
-insert into universities (name) values ('Санкт-Петербургский государственный университет промышленных технологий и дизайна');
-insert into universities (name) values ('Санкт-Петербургский государственный университет телекоммуникаций им. проф. М.А. Бонч-Бруевича');
-insert into universities (name) values ('Санкт-Петербургский государственный экономический университет');
-insert into universities (name) values ('Санкт-Петербургский государственный электротехнический университет ЛЭТИ им. В.И. Ульянова (Ленина)');
-insert into universities (name) values ('Санкт-Петербургский Гуманитарный университет профсоюзов');
-insert into universities (name) values ('Санкт-Петербургский имени В.Б. Бобкова филиал Российской таможенной академии');
-insert into universities (name) values ('Санкт-Петербургский институт внешнеэкономических связей, экономики и права');
-insert into universities (name) values ('Санкт-Петербургский институт гостеприимства');
-insert into universities (name) values ('Санкт-Петербургский институт гуманитарного образования');
-insert into universities (name) values ('Санкт-Петербургский институт искусств и реставрации');
-insert into universities (name) values ('Санкт-Петербургский институт машиностроения');
-insert into universities (name) values ('Санкт-Петербургский институт управления и права');
-insert into universities (name) values ('Санкт-Петербургский институт управления персоналом');
-insert into universities (name) values ('Санкт-Петербургский Институт экономики и управления');
-insert into universities (name) values ('Санкт-Петербургский институт экономики, культуры и делового администрирования');
-insert into universities (name) values ('Санкт-Петербургский медико-технический институт');
-insert into universities (name) values ('Санкт-Петербургский национальный-исследовательский университет информационных технологий, механики и оптики');
-insert into universities (name) values ('Санкт-Петербургский политехнический университет Петра Великого');
-insert into universities (name) values ('Санкт-Петербургский университет Государственной противопожарной службы');
-insert into universities (name) values ('Санкт-Петербургский университет Министерства внутренних дел Российской Федерации');
-insert into universities (name) values ('Санкт-Петербургский университет технологий управления и экономики');
-insert into universities (name) values ('Санкт-Петербургский филиал Института бизнеса и политики (ИБП)');
-insert into universities (name) values ('Санкт-Петербургский филиал Медицинского института «РЕАВИЗ»');
-insert into universities (name) values ('Санкт-Петербургский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Санкт-Петербургский филиал Финансового Университета при Правительстве Российской Федерации');
-insert into universities (name) values ('Санкт-Петербургский юридический институт (филиал) Академии Генеральной прокуратуры Российской Федерации');
-insert into universities (name) values ('Северо-Западный государственный медицинский университет имени И.И. Мечникова');
-insert into universities (name) values ('Северо-Западный (г. Санкт-Петербург) филиал Всероссийского государственного университета юстиции');
-insert into universities (name) values ('Северо-Западный институт управления');
-insert into universities (name) values ('Северо-Западный открытый технический университет');
-insert into universities (name) values ('Северо-Западный филиал Российской академии правосудия (г. Санкт-Петербург)');
-insert into universities (name) values ('Смольный университет Российской академии образования');
-insert into universities (name) values ('Театральный институт ""Школа русской драмы"" имени И.О. Горбачева');
-insert into universities (name) values ('Юридический институт (Санкт-Петербург)');
-insert into universities (name) values ('Балаковский институт техники, технологии и управления (филиал) Саратовского государственного технического университета');
-insert into universities (name) values ('Балаковский филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации');
-insert into universities (name) values ('Балаковский филиал Саратовской государственной юридической академии');
-insert into universities (name) values ('Балаковский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Балашовский институт (филиал) Саратовского государственного университета имени Н.Г. Чернышевского');
-insert into universities (name) values ('Балашовский филиал Саратовского государственного аграрного университета имени Н.И. Вавилова');
-insert into universities (name) values ('Балашовский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Вольский филиал Военной академии материально-технического обеспечения им. генерала армии А.В. Хрулева');
-insert into universities (name) values ('Межрегиональный юридический институт филиал Саратовской государственной академии права');
-insert into universities (name) values ('Национальный исследовательский Саратовский государственный университет имени Н.Г. Чернышевского');
-insert into universities (name) values ('Поволжский (г. Саратов) юридический институт (филиал) Всероссийского государственного университета юстиции');
-insert into universities (name) values ('Поволжский институт им. П.А. Столыпина - филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации');
-insert into universities (name) values ('Поволжский институт управления имени П.А. Столыпина - филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации');
-insert into universities (name) values ('Поволжский кооперативный институт (филиал) Российского университета кооперации');
-insert into universities (name) values ('Поволжский филиал Московского государственного университета путей сообщения');
-insert into universities (name) values ('Саратовская государственная консерватория (академия) им. Л.В. Собинова');
-insert into universities (name) values ('Саратовская государственная юридическая академия');
-insert into universities (name) values ('Саратовский военно-медицинский институт');
-insert into universities (name) values ('Саратовский военный институт внутренних войск');
-insert into universities (name) values ('Саратовский государственный аграрный университет имени Н.И. Вавилова');
-insert into universities (name) values ('Саратовский государственный медицинский университет имени В. И. Разумовского');
-insert into universities (name) values ('Саратовский государственный технический университет имени Гагарина Ю.А.');
-insert into universities (name) values ('Саратовский институт бизнеса и информационных технологий');
-insert into universities (name) values ('Саратовский социально-экономический институт (филиал) Российского экономического университета имени Г.В. Плеханова');
-insert into universities (name) values ('Саратовский филиал Медицинского института «РЕАВИЗ»');
-insert into universities (name) values ('Саратовский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Саратовский юридический институт адвокатуры');
-insert into universities (name) values ('Филиал Института экономики и антикризисного управления в г. Вольске');
-insert into universities (name) values ('Энгельсский технологический институт Саратовского государственного технического университета');
-insert into universities (name) values ('Юридический институт предпринимательства и агробизнеса Саратовской государственной академии права');
-insert into universities (name) values ('Сахалинский государственный университет');
-insert into universities (name) values ('Сахалинский гуманитарно-технологический институт');
-insert into universities (name) values ('Сахалинский институт железнодорожного транспорта - филиал Дальневосточного государственного университета путей сообщения в г. Южно-Сахалинске');
-insert into universities (name) values ('Сахалинское высшее морское училище им. Т.Б. Гуженко филиал МГУ им.адм. Г.И. Невельского');
-insert into universities (name) values ('Южно-Сахалинский институт коммерции и предпринимательства');
-insert into universities (name) values ('Южно-Сахалинский институт (филиал) Российского государственного торгово-экономического университета');
-insert into universities (name) values ('Южно-Сахалинский филиал Дальневосточного юридического института Министерства внутренних дел Российской Федерации');
-insert into universities (name) values ('Гуманитарный университет');
-insert into universities (name) values ('Европейско-Азиатский институт управления и предпринимательства');
-insert into universities (name) values ('Екатеринбургская академия современного искусства');
-insert into universities (name) values ('Екатеринбургский государственный театральный институт');
-insert into universities (name) values ('Екатеринбургский институт физической культуры (филиал) Уральского государственного университета физической культуры');
-insert into universities (name) values ('Екатеринбургский филиал Академии труда и социальных отношений');
-insert into universities (name) values ('Екатеринбургский филиал Московского государственного гуманитарного университета имени М.А. Шолохова');
-insert into universities (name) values ('Екатеринбургский филиал Московского института предпринимательства и права');
-insert into universities (name) values ('Екатеринбургский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Екатеринбургский филиал Университета Российской академии образования');
-insert into universities (name) values ('Екатеринбургское высшее артиллерийское командное училище (военный институт) (филиал) Военного учебно-научного центра Сухопутных войск ""Общевойсковая академия Вооруженных Сил Российской Федерации""');
-insert into universities (name) values ('Зареченский технологический институт - филиал Пензенского государственного технологического университета');
-insert into universities (name) values ('Институт международных связей');
-insert into universities (name) values ('Институт менеджмента и рынка');
-insert into universities (name) values ('Каменск-Уральский филиал Уральского государственного экономического университета');
-insert into universities (name) values ('Нижнетагильская государственная социально-педагогическая академия');
-insert into universities (name) values ('Нижнетагильский архитектурный институт (филиал) Уральской государственной архитектурно-художественной академии');
-insert into universities (name) values ('Нижнетагильский (г. Нижний Тагил Свердловской области) филиал Международного юридического института');
-insert into universities (name) values ('Нижнетагильский технологический институт (филиал) Уральского федерального университета имени первого Президента России Б.Н. Ельцина');
-insert into universities (name) values ('Нижнетагильский филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации');
-insert into universities (name) values ('Нижнетагильский филиал Уральского института экономики, управления и права');
-insert into universities (name) values ('Новоуральский технологический институт - филиал Национального исследовательского ядерного университета ""МИФИ""');
-insert into universities (name) values ('Новоуральский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Политехнический институт (филиал) Уральского федерального университета имени первого Президента России Б.Н. Ельцина в г. Каменске-Уральском');
-insert into universities (name) values ('Российский государственный профессионально-педагогический университет');
-insert into universities (name) values ('Технологический институт - филиал Национального исследовательского ядерного университета МИФИ');
-insert into universities (name) values ('Уральская государственная консерватория (академия) имени М. П. Мусоргского');
-insert into universities (name) values ('Уральский государственный аграрный университет');
-insert into universities (name) values ('Уральский государственный архитектурно-художественный университет');
-insert into universities (name) values ('Уральский государственный горный университет');
-insert into universities (name) values ('Уральский государственный лесотехнический университет');
-insert into universities (name) values ('Уральский государственный медицинский университет');
-insert into universities (name) values ('Уральский государственный педагогический университет');
-insert into universities (name) values ('Уральский государственный университет путей сообщения');
-insert into universities (name) values ('Уральский государственный экономический университет');
-insert into universities (name) values ('Уральский государственный юридический университет');
-insert into universities (name) values ('Уральский гуманитарный институт (г. Екатеринбург)');
-insert into universities (name) values ('Уральский институт бизнеса им. И. А. Ильина');
-insert into universities (name) values ('Уральский институт Государственной противопожарной службы');
-insert into universities (name) values ('Уральский институт коммерции и права');
-insert into universities (name) values ('Уральский институт туризма - филиал Российской международной академии туризма');
-insert into universities (name) values ('Уральский институт - филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации');
-insert into universities (name) values ('Уральский институт фондового рынка');
-insert into universities (name) values ('Уральский институт экономики, управления и права');
-insert into universities (name) values ('Уральский международный институт туризма');
-insert into universities (name) values ('Уральский технический институт связи и информатики (филиал) Сибирского государственного университета телекоммуникаций и информатики');
-insert into universities (name) values ('Уральский федеральный университет имени первого Президента России Б.Н. Ельцина');
-insert into universities (name) values ('Уральский филиал Российского государственного университета туризма и сервиса');
-insert into universities (name) values ('Уральский филиал Российской школы частного права (института)');
-insert into universities (name) values ('Уральский финансово-юридический институт');
-insert into universities (name) values ('Уральский юридический институт');
-insert into universities (name) values ('Филиал Международного института экономики и права в городе Екатеринбурге');
-insert into universities (name) values ('Филиал Российского государственного профессионально-педагогического университета в г. Березовском');
-insert into universities (name) values ('Филиал Сибирского государственного университета физической культуры и спорта в г. Березовском');
-insert into universities (name) values ('Филиал Удмуртского государственного университета в городе Нижняя Тура');
-insert into universities (name) values ('Филиал Уральского государственного педагогического университета в г. Каменске-Уральском');
-insert into universities (name) values ('Филиал Уральского государственного университета путей сообщения в г. Нижнем Тагиле');
-insert into universities (name) values ('Филиал Уральского государственного экономического университета в г. Нижнем Тагиле');
-insert into universities (name) values ('Филиал Уральского федерального университета имени первого Президента России Б.Н. Ельцина в г. Алапаевске');
-insert into universities (name) values ('Филиал Уральского федерального университета имени первого Президента России Б.Н. Ельцина в г. Верхняя Салда');
-insert into universities (name) values ('Филиал Уральского федерального университета имени первого Президента России Б.Н. Ельцина в г. Ирбите');
-insert into universities (name) values ('Филиал Уральского федерального университета имени первого Президента России Б.Н. Ельцина в г. Краснотурьинске');
-insert into universities (name) values ('Филиал Уральского федерального университета имени первого Президента России Б.Н. Ельцина в г. Красноуральске');
-insert into universities (name) values ('Филиал Уральского федерального университета имени первого Президента России Б.Н. Ельцина в г. Невьянске');
-insert into universities (name) values ('Филиал Уральского федерального университета имени первого Президента России Б.Н. Ельцина в г. Первоуральске');
-insert into universities (name) values ('Филиал Уральского федерального университета имени первого Президента России Б.Н. Ельцина в г. Серове');
-insert into universities (name) values ('Филиал Уральского федерального университета имени первого Президента России Б.Н. Ельцина в г. Среднеуральске');
-insert into universities (name) values ('Институт экономики и права (филиал) Академии труда и социальных отношений в г. Севастополе');
-insert into universities (name) values ('Крымский филиал государственного морского университета имени адмирала Ф.Ф. Ушакова');
-insert into universities (name) values ('Севастопольский государственный университет');
-insert into universities (name) values ('Севастопольский филиал Российского экономического университета имени Г.В. Плеханова');
-insert into universities (name) values ('Филиал Московского государственного университета имени М.В. Ломоносова в городе Севастополе');
-insert into universities (name) values ('Военная академия войсковой противовоздушной обороны Вооруженных Сил Российской Федерации имени Маршала Советского Союза А.М. Василевского');
-insert into universities (name) values ('Вяземский филиал Российской международной академии туризма');
-insert into universities (name) values ('Вяземский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Сафоновский филиал Московского политехнического университета');
-insert into universities (name) values ('Смоленская государственная академия физической культуры, спорта и туризма');
-insert into universities (name) values ('Смоленская государственная сельскохозяйственная академия');
-insert into universities (name) values ('Смоленская Православная Духовная Семинария Русской Православной Церкви');
-insert into universities (name) values ('Смоленский государственный институт искусств');
-insert into universities (name) values ('Смоленский государственный медицинский университет');
-insert into universities (name) values ('Смоленский государственный университет');
-insert into universities (name) values ('Смоленский гуманитарный университет');
-insert into universities (name) values ('Смоленский институт бизнеса и предпринимательства');
-insert into universities (name) values ('Смоленский институт экономики - филиал Санкт-Петербургского университета управления и экономики');
-insert into universities (name) values ('Смоленский филиал Академии права и управления (институт)');
-insert into universities (name) values ('Смоленский филиал Всероссийского заочного финансово-экономического института');
-insert into universities (name) values ('Смоленский филиал Международного юридического института');
-insert into universities (name) values ('Смоленский филиал Московского автомобильно-дорожного государственного технического университета');
-insert into universities (name) values ('Смоленский филиал Московского государственного университета путей сообщения');
-insert into universities (name) values ('Смоленский филиал Московского университета Министерства внутренних дел Российской Федерации');
-insert into universities (name) values ('Смоленский филиал Российского государственного торгово-экономического университета');
-insert into universities (name) values ('Смоленский филиал Российского университета кооперации');
-insert into universities (name) values ('Смоленский филиал Российского экономического университета имени Г.В. Плеханова');
-insert into universities (name) values ('Смоленский филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации');
-insert into universities (name) values ('Смоленский филиал Саратовской государственной академии права');
-insert into universities (name) values ('Смоленский филиал Современной гуманитарной академии');
-insert into universities (name) values ('филиал Московского государственного индустриального университета в г. Вязьме Смоленской области');
-insert into universities (name) values ('Филиал Московского государственного индустриального университета в г. Рославль');
-insert into universities (name) values ('филиал Московского государственного университета технологий и управления в г. Вязьме Смоленской области');
-insert into universities (name) values ('Филиал Московского государственного университета технологий и управления в г. Смоленске');
-insert into universities (name) values ('филиал Московского нового юридического института в г. Смоленске');
-insert into universities (name) values ('Филиал Московского психолого-социального университета в г. Рославле Смоленской области');
-insert into universities (name) values ('Филиал Национального исследовательского университета ""МЭИ"" в г. Смоленске');
-insert into universities (name) values ('Филиал Санкт-Петербургского института внешнеэкономических связей, экономики и права в г. Смоленске');
-insert into universities (name) values ('Буденновский филиал Института Дружбы народов Кавказа');
-insert into universities (name) values ('Георгиевский филиал Невинномысского государственного гуманитарно-технического института');
-insert into universities (name) values ('Голицынский пограничный институт Федеральной службы безопасности Российской Федерации (филиал в г. Ставрополе)');
-insert into universities (name) values ('Ессентукский институт управления, бизнеса и права');
-insert into universities (name) values ('Железноводский филиал Московского государственного гуманитарного университета имени М.А. Шолохова');
-insert into universities (name) values ('Институт дружбы народов Кавказа');
-insert into universities (name) values ('Институт сервиса и технологий (филиал) Донского государственного технического университета в г. Пятигорске Ставропольского края');
-insert into universities (name) values ('Институт управления, бизнеса и права (г. Пятигорск)');
-insert into universities (name) values ('Институт экономики и управления (г. Пятигорск)');
-insert into universities (name) values ('Кисловодский гуманитарно-технический институт');
-insert into universities (name) values ('Кисловодский филиал Московского государственного института индустрии туризма имени Ю.А.Сенкевича');
-insert into universities (name) values ('Минераловодский филиал Академии права и управления (институт)');
-insert into universities (name) values ('Минераловодский филиал Московской открытой социальной академии');
-insert into universities (name) values ('Невинномысский государственный гуманитарно-технический институт');
-insert into universities (name) values ('Невинномысский институт экономики, управления и права');
-insert into universities (name) values ('Невинномысский технологический институт (филиал) Северо-Кавказского федерального университета');
-insert into universities (name) values ('Пятигорский государственный университет');
-insert into universities (name) values ('Пятигорский институт курортной рекреации и гостеприимства - филиал Российской международной академии туризма');
-insert into universities (name) values ('Пятигорский медико-фармацевтический институт – филиал Волгоградского государственного медицинского университета');
-insert into universities (name) values ('Пятигорский филиал Санкт-Петербургского государственного университета аэрокосмического приборостроения');
-insert into universities (name) values ('Пятигорский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Северо-Кавказский гуманитарный институт');
-insert into universities (name) values ('Северо-Кавказский институт - филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации');
-insert into universities (name) values ('Северо-Кавказский социальный институт');
-insert into universities (name) values ('Северо-Кавказский федеральный университет');
-insert into universities (name) values ('Северо-Кавказский филиал Белгородского государственного технологического университета им. В. Г. Шухова');
-insert into universities (name) values ('Северо-Кавказский филиал Московского автомобильно-дорожного государственного технического университета (МАДИ)');
-insert into universities (name) values ('Северо-Кавказский филиал Московского гуманитарно-экономического института');
-insert into universities (name) values ('Ставропольский государственный аграрный университет');
-insert into universities (name) values ('Ставропольский государственный медицинский университет');
-insert into universities (name) values ('Ставропольский государственный педагогический институт');
-insert into universities (name) values ('Ставропольский институт бизнеса и технологий ""Бизнестранс""');
-insert into universities (name) values ('Ставропольский институт имени В.Д. Чурсина');
-insert into universities (name) values ('Ставропольский институт управления');
-insert into universities (name) values ('Ставропольский институт экономики и управления имени О.В. Казначеева (филиал) Пятигорского государственного технологического университета');
-insert into universities (name) values ('Ставропольский кооперативный институт (филиал) Белгородского университета кооперации, экономики и права');
-insert into universities (name) values ('Ставропольский университет');
-insert into universities (name) values ('Ставропольский филиал Краснодарского университета Министерства внутренних дел Российской Федерации');
-insert into universities (name) values ('Ставропольский филиал Московского гуманитарно-экономического института');
-insert into universities (name) values ('Ставропольский филиал Московского института предпринимательства и права');
-insert into universities (name) values ('Ставропольский филиал Московского педагогического государственного университета');
-insert into universities (name) values ('Ставропольский филиал Пятигорского государственного лингвистического университета');
-insert into universities (name) values ('Ставропольский филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации');
-insert into universities (name) values ('Ставропольский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Ставропольский филиал Южно-Российского гуманитарного института');
-insert into universities (name) values ('Ставропольский финансово-экономический институт');
-insert into universities (name) values ('Технологический институт сервиса (филиал) Донского государственного технического университета в г. Ставрополе Ставропольского края');
-insert into universities (name) values ('Филиал Донского государственного технического университета в г. Ессентуки');
-insert into universities (name) values ('Филиал Московского института предпринимательства и права в г. Минеральные Воды');
-insert into universities (name) values ('Филиал Московского технологического университета в г. Ставрополе');
-insert into universities (name) values ('Филиал Российского государственного гуманитарного университета в г. Георгиевске Ставропольского края');
-insert into universities (name) values ('Филиал Российского государственного социального университета в г. Пятигорске Ставропольского края');
-insert into universities (name) values ('Филиал Российского экономического университета имени Г.В. Плеханова в г. Пятигорске Ставропольского края');
-insert into universities (name) values ('Филиал Ростовского государственного университета путей сообщения в г. Минеральные Воды');
-insert into universities (name) values ('Филиал Ростовского государственного экономического университета (РИНХ) в г. Кисловодске Ставропольского края');
-insert into universities (name) values ('Филиал Северо-Кавказского федерального университета в г. Пятигорске');
-insert into universities (name) values ('Филиал Ставропольского государственного педагогического института в г. Буденновске');
-insert into universities (name) values ('Филиал Ставропольского государственного педагогического института в г. Ессентуки');
-insert into universities (name) values ('Филиал Ставропольского государственного педагогического института в г. Железноводске');
-insert into universities (name) values ('Филиал Ставропольского института имени В.Д. Чурсина в г. Георгиевске');
-insert into universities (name) values ('Филиал Южного федерального университета в г. Георгиевске Ставропольского края');
-insert into universities (name) values ('Филиал Южного федерального университета в г. Железноводске Ставропольского края');
-insert into universities (name) values ('Второй Тамбовский филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации');
-insert into universities (name) values ('Мичуринский государственный аграрный университет');
-insert into universities (name) values ('Мичуринский филиал Российского университета кооперации');
-insert into universities (name) values ('Педагогический институт Мичуринского государственного аграрного университета');
-insert into universities (name) values ('Тамбовский военный авиационный инженерный институт');
-insert into universities (name) values ('Тамбовский государственный музыкально-педагогический институт им. С.В. Рахманинова');
-insert into universities (name) values ('Тамбовский государственный технический университет');
-insert into universities (name) values ('Тамбовский государственный университет имени Г.Р.Державина');
-insert into universities (name) values ('Тамбовский филиал Московского государственного университета культуры и искусств');
-insert into universities (name) values ('Тамбовский филиал Московского университета Министерства внутренних дел Российской Федерации');
-insert into universities (name) values ('Тамбовский филиал Московской открытой социальной академии');
-insert into universities (name) values ('Тамбовский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Филиал Московского государственного университета технологий и управления в г. Мичуринске Тамбовской области');
-insert into universities (name) values ('Филиал Московского нового юридического института в г. Тамбове');
-insert into universities (name) values ('Филиал Московского психолого-социального университета в г. Уварово Тамбовской области');
-insert into universities (name) values ('Институт ""Верхневолжье""');
-insert into universities (name) values ('Конаковский филиал Евразийского открытого института');
-insert into universities (name) values ('Конаковский филиал Российской международной академии туризма');
-insert into universities (name) values ('Тверская государственная сельскохозяйственная академия');
-insert into universities (name) values ('Тверской государственный медицинский университет');
-insert into universities (name) values ('Тверской государственный технический университет');
-insert into universities (name) values ('Тверской государственный университет');
-insert into universities (name) values ('Тверской институт экологии и права');
-insert into universities (name) values ('Тверской институт экономики и менеджмента');
-insert into universities (name) values ('Тверской филиал Московского гуманитарно-экономического института');
-insert into universities (name) values ('Тверской филиал Московского университета Министерства внутренних дел Российской Федерации');
-insert into universities (name) values ('Тверской филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации');
-insert into universities (name) values ('Тверской филиал Современной гуманитарной академии');
-insert into universities (name) values ('Филиал Государственной академии славянской культуры в г. Твери');
-insert into universities (name) values ('Филиал Московского государственного университета технологий и управления им. К.Г.Разумовского в г. Твери');
-insert into universities (name) values ('Филиал Московского психолого-социального университета в г. Конаково Тверской области');
-insert into universities (name) values ('Филиал Московского психолого-социального университета в г. Удомле Тверской области');
-insert into universities (name) values ('Филиал Санкт-Петербургского института внешнеэкономических связей, экономики и права в г. Удомле Тверской области');
-insert into universities (name) values ('Филиал Тверского государственного технического университета в г. Ржеве Тверской области');
-insert into universities (name) values ('Западно-Сибирский филиал Российской академии правосудия (г. Томск)');
-insert into universities (name) values ('Национальный исследовательский Томский государственный университет');
-insert into universities (name) values ('Национальный исследовательский Томский политехнический университет');
-insert into universities (name) values ('Северский технологический институт - филиал Национального исследовательского ядерного университета ""МИФИ""');
-insert into universities (name) values ('Сибирский государственный медицинский университет');
-insert into universities (name) values ('Томский государственный архитектурно-строительный университет');
-insert into universities (name) values ('Томский государственный педагогический университет');
-insert into universities (name) values ('Томский государственный университет систем управления и радиоэлектроники');
-insert into universities (name) values ('Томский заочный финансово-юридический институт');
-insert into universities (name) values ('Томский институт бизнеса');
-insert into universities (name) values ('Томский институт Восточной экономико-юридической гуманитарной академии (филиал)');
-insert into universities (name) values ('Томский сельскохозяйственный институт - филиал Новосибирского государственного аграрного университета');
-insert into universities (name) values ('Томский филиал Кузбасского института Федеральной службы исполнения наказаний (г. Томск)');
-insert into universities (name) values ('Томский филиал Московского государственного гуманитарного университета имени М.А. Шолохова');
-insert into universities (name) values ('Томский филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации');
-insert into universities (name) values ('Томский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Томский экономико-юридический институт');
-insert into universities (name) values ('Заокский христианский гуманитарно-экономический институт');
-insert into universities (name) values ('Институт законоведения и управления ВПА');
-insert into universities (name) values ('Институт экономики и управления');
-insert into universities (name) values ('Новомосковский институт Российского химико-технологического университета имени Д.И. Менделеева');
-insert into universities (name) values ('Новомосковский филиал Университета Российской академии образования');
-insert into universities (name) values ('Тульский государственный педагогический университет им. Л.Н.Толстого');
-insert into universities (name) values ('Тульский государственный университет');
-insert into universities (name) values ('Тульский (г. Тула) филиал Международного юридического института');
-insert into universities (name) values ('Тульский институт агробизнеса-филиал ФГБОУ ВПО РГАЗУ');
-insert into universities (name) values ('Тульский институт управления и бизнеса им. Н.Д. Демидова');
-insert into universities (name) values ('Тульский филиал Всероссийского государственного университета юстиции');
-insert into universities (name) values ('Тульский филиал Московского государственного университета культуры и искусств');
-insert into universities (name) values ('Тульский филиал Московского университета МВД России');
-insert into universities (name) values ('Тульский филиал Московской академии предпринимательства при Правительстве Москвы');
-insert into universities (name) values ('Тульский филиал Российского государственного торгово-экономического университета');
-insert into universities (name) values ('Тульский филиал Российского экономического университета имени Г.В. Плеханова');
-insert into universities (name) values ('Тульский филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации');
-insert into universities (name) values ('Тульский филиал Российской международной академии туризма');
-insert into universities (name) values ('Тульский филиал Современной гуманитарной академии');
-insert into universities (name) values ('Филиал Всероссийского заочного финансово-экономического института в г. Туле');
-insert into universities (name) values ('Филиал Российского государственного гидрометеорологического университета в г. Алексине Тульской области');
-insert into universities (name) values ('ЧОО ВО - Ассоциация ""Тульский университет (ТИЭИ)""');
-insert into universities (name) values ('Академический институт прикладной энергетики');
-insert into universities (name) values ('Государственный аграрный университет Северного Зауралья');
-insert into universities (name) values ('Западно-Сибирский Институт Финансов и Права');
-insert into universities (name) values ('Ишимский педагогический институт им П.П. Ершова (филиал) Тюменского государственного университета');
-insert into universities (name) values ('Лангепасский филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации');
-insert into universities (name) values ('Нефтеюганский филиал Томского государственного университета систем управления и радиоэлектроники');
-insert into universities (name) values ('Нижневартовский государственный университет');
+INSERT INTO universities (name) VALUES
+('Абаканский филиал Современной гуманитарной академии'),
+('Агинский филиал Современной гуманитарной академии'),
+('Адыгейский государственный университет'),
+('Адыгейский филиал Кубанского государственного медицинского университета в г. Майкопе'),
+('Адыгейский филиал Московской открытой социальной академии'),
+('Адыгейский филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации'),
+('Азово-Черноморский инженерный институт ФГБОУ ВПО «Донской государственный аграрный университет» в г. Зернограде'),
+('Азовский филиал Евразийского открытого института'),
+('Академический институт гуманитарного образования'),
+('Академический институт прикладной энергетики'),
+('Академический международный институт'),
+('Академический правовой институт'),
+('Академия бизнеса и предпринимательства'),
+('Академия Генеральной прокуратуры Российской Федерации'),
+('Академия Государственной противопожарной службы'),
+('Академия гражданской защиты МЧС России'),
+('Академия маркетинга и социально-информационных технологий - ИМСИТ (г. Краснодар)'),
+('Академия МНЭПУ'),
+('Академия права и управления Федеральной службы исполнения наказаний'),
+('Академия Русского балета имени А.Я. Вагановой'),
+('Академия социального образования'),
+('Академия социального управления'),
+('Академия строительства и архитектуры Донского государственного технического университета'),
+('Академия сферы социальных отношений'),
+('Академия труда и социальных отношений'),
+('Академия управления Министерства внутренних дел Российской Федерации'),
+('Академия Федеральной службы безопасности Российской Федерации'),
+('Академия Федеральной службы охраны Российской Федерации'),
+('Академия хорового искусства имени В.С. Попова'),
+('Александровский филиал Современной гуманитарной академии'),
+('Алтайский государственный аграрный университет'),
+('Алтайский государственный гуманитарно-педагогический университет имени В.М. Шукшина'),
+('Алтайский государственный институт культуры'),
+('Алтайский государственный медицинский университет'),
+('Алтайский государственный педагогический университет'),
+('Алтайский государственный технический университет им. И.И. Ползунова'),
+('Алтайский государственный университет'),
+('Алтайский институт труда и права (филиал) Академии труда и социальных отношений'),
+('Алтайский институт финансового управления'),
+('Алтайский институт экономики - филиал Санкт-Петербургского университета управления и экономики'),
+('Алтайский филиал Московского государственного института культуры'),
+('Алтайский филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации'),
+('Алтайский филиал Российской международной академии туризма'),
+('Алтайский экономико-юридический институт'),
+('Альметьевский государственный институт муниципальной службы'),
+('Альметьевский государственный нефтяной институт'),
+('Альметьевский институт Восточной экономико-юридической гуманитарной академии (филиал)'),
+('Альметьевский филиал Казанского государственного технического университета им. А.Н. Туполева'),
+('Альметьевский филиал Казанского инновационного университета имени В.Г.Тимирясова'),
+('Альметьевский филиал Университета управления ТИСБИ'),
+('Амурская государственная медицинская академия'),
+('Амурский государственный университет'),
+('Амурский институт железнодорожного транспорта - филиал Дальневосточного государственного университета путей сообщения в г. Свободном'),
+('Амурский филиал Морского государственного университета имени адмирала Г.И. Невельского'),
+('Анапский филиал Кубанского государственного аграрного университета'),
+('Анапский филиал Московского педагогического государственного университета'),
+('Анапский филиал Южного института менеджмента'),
+('Ангарский государственный технический университет'),
+('Ангарский филиал Сибирской академии права, экономики и управления'),
+('Апатитский филиал Мурманского государственного технического университета'),
+('Арзамасский политехнический институт (филиал) Нижегородского государственного технического университета им. Р.Е. Алексеева'),
+('Арзамасский филиал Нижегородского государственного университета им. Н.И. Лобачевского'),
+('Арзамасский филиал Российского университета кооперации'),
+('Арзамасский филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации'),
+('Арзамасский филиал Современной гуманитарной академии'),
+('Арктический государственный институт культуры и искусств'),
+('Арктический морской институт имени В.И. Воронина - филиал Государственного университета морского и речного флота имени адмирала С.О. Макарова'),
+('Армавирский государственный педагогический университет'),
+('Армавирский лингвистический социальный институт'),
+('Армавирский механико-технологический институт (филиал) Кубанского государственного технологического университета'),
+('Армавирский Православно-Социальный Институт'),
+('Армавирский социально-психологический институт'),
+('Армавирский филиал Современной гуманитарной академии'),
+('Арсеньевский технологический институт (филиал) Дальневосточного федерального университета'),
+('Архангельский филиал Современной гуманитарной академии'),
+('Архангельский филиал Финансового университета при Правительстве Российской Федерации'),
+('Архитектурно-строительный институт Самарского государственного технического университета'),
+('Астраханская государственная консерватория (академия)'),
+('Астраханский (г. Астрахань) филиал Международного юридического института'),
+('Астраханский государственный архитектурно-строительный университет'),
+('Астраханский государственный медицинский университет'),
+('Астраханский государственный технический университет'),
+('Астраханский государственный университет'),
+('Астраханский филиал Волжского государственного университета водного транспорта'),
+('Астраханский филиал Московского финансово-промышленного университета ""СИНЕРГИЯ""'),
+('Астраханский филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации'),
+('Астраханский филиал Саратовского государственного аграрного университета имени Н.И. Вавилова'),
+('Астраханский филиал Современной гуманитарной академии'),
+('Астраханский филиал Университета Российской академии образования'),
+('Астраханский филиал Южно-Российского гуманитарного института'),
+('Ачинский филиал Красноярского государственного аграрного университета'),
+('Ачинский филиал Современной гуманитарной академии'),
+('Багаевский филиал Южно-Российского государственного технического университета (Новочеркасского политехнического института)'),
+('Байкало-Амурский институт железнодорожного транспорта - филиал Дальневосточного государственного университета путей сообщения в г. Тынде'),
+('Байкальский государственный университет'),
+('Байкальский экономико-правовой институт'),
+('Балабановский филиал Московского педагогического государственного университета'),
+('Балаковский институт техники, технологии и управления (филиал) Саратовского государственного технического университета'),
+('Балаковский филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации'),
+('Балаковский филиал Саратовской государственной юридической академии'),
+('Балаковский филиал Современной гуманитарной академии'),
+('Балашовский институт (филиал) Саратовского государственного университета имени Н.Г. Чернышевского'),
+('Балашовский филиал Саратовского государственного аграрного университета имени Н.И. Вавилова'),
+('Балашовский филиал Современной гуманитарной академии'),
+('Балтийская академия туризма и предпринимательства'),
+('Балтийская государственная академия рыбопромыслового флота'),
+('Балтийский военно-морской институт имени Адмирала Ф.Ф. Ушакова (филиал) Военного учебно-научного центра Военно-Морского Флота ""Военно-морская академия имени Адмирала Флота Советского Союза Н.Г. Кузнецова""'),
+('Балтийский государственный технический университет ВОЕНМЕХ им. Д.Ф. Устинова'),
+('Балтийский Гуманитарный Институт'),
+('Балтийский институт иностранных языков и межкультурного сотрудничества'),
+('Балтийский институт экологии, политики и права'),
+('Балтийский институт экономики и финансов'),
+('Балтийский федеральный университет имени Иммануила Канта'),
+('Барнаульский филиал Московской академии предпринимательства при Правительстве Москвы'),
+('Барнаульский филиал Современной гуманитарной академии'),
+('Барнаульский филиал Финансового университета при Правительстве Российской Федерации'),
+('Барнаульский юридический институт'),
+('Башкирская академия государственной службы и управления при Президенте Республики Башкортостан'),
+('Башкирский государственный аграрный университет'),
+('Башкирский государственный медицинский университет'),
+('Башкирский государственный педагогический университет им. М.Акмуллы'),
+('Башкирский государственный университет'),
+('Башкирский институт социальных технологий (филиал) Академии труда и социальных отношений'),
+('Башкирский институт физической культуры (филиал) Уральского государственного университета физической культуры'),
+('Башкирский кооперативный институт (филиал) Российского университета кооперации'),
+('Белгородский государственный аграрный университет имени В. Я. Горина'),
+('Белгородский государственный институт искусств и культуры'),
+('Белгородский государственный национальный исследовательский университет'),
+('Белгородский государственный технологический университет им. В.Г. Шухова'),
+('Белгородский инженерно-экономический институт'),
+('Белгородский институт экономики и права'),
+('Белгородский университет кооперации, экономики и права'),
+('Белгородский филиал Московского государственного университета путей сообщения'),
+('Белгородский филиал Московского государственного университета экономики, статистики и информатики (МЭСИ)'),
+('Белгородский филиал Современной гуманитарной академии'),
+('Белгородский юридический институт Министерства внутренних дел Российской Федерации'),
+('Беловский институт (филиал) Кемеровского государственного университета'),
+('Березниковский филиал Пермского национального исследовательского политехнического университета'),
+('Библейско-богословский институт святого апостола Андрея'),
+('Бийский филиал Современной гуманитарной академии'),
+('Бийский филиал Университета ""Синергия""'),
+('Биробиджанский филиал Амурского государственного университета'),
+('Биробиджанский филиал Дальневосточного государственного аграрного университета'),
+('Биробиджанский филиал Современной гуманитарной академии'),
+('Бирский филиал Башкирского государственного университета'),
+('Благовещенский государственный педагогический университет'),
+('Благовещенский филиал Московской академии предпринимательства при Правительстве Москвы'),
+('Благовещенский филиал Современной гуманитарной академии'),
+('Бокситогорский институт (филиал) Ленинградского государственного университета имени А.С. Пушкина'),
+('Борисоглебский филиал Воронежского государственного университета'),
+('Борисоглебский филиал Института менеджмента, маркетинга и финансов'),
+('Борский филиал Нижегородского государственного университета им. Н.И. Лобачевского'),
+('Братский государственный университет'),
+('Бронницкий филиал Московского автомобильно-дорожного государственного технического университета (МАДИ)'),
+('Брянский государственный аграрный университет'),
+('Брянский государственный инженерно-технологический университет'),
+('Брянский государственный технический университет'),
+('Брянский государственный университет имени академика И.Г. Петровского'),
+('Брянский институт управления и бизнеса'),
+('Брянский филиал Академии права и управления (института)'),
+('Брянский филиал Московского государственного университета путей сообщения'),
+('Брянский филиал Московского государственного университета экономики, статистики и информатики (МЭСИ)'),
+('Брянский филиал Национального государственного Университета физической культуры, спорта и здоровья имени П.Ф. Лесгафта, Санкт-Петербург'),
+('Брянский филиал Российского государственного торгово-экономического университета'),
+('Брянский филиал Российского университета кооперации'),
+('Брянский филиал Российского экономического университета имени Г.В. Плеханова'),
+('Брянский филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации'),
+('Брянский филиал Современной гуманитарной академии'),
+('Брянский филиал Финансового университета при Правительстве Российской Федерации'),
+('Бугульминский филиал Казанского инновационного университета имени В.Г.Тимирясова'),
+('Бугульминский филиал Казанского национального исследовательского технического университета им. А.Н. Туполева-КАИ'),
+('Бугульминский филиал Казанского национального исследовательского технологического университета'),
+('Бугурусланский филиал Самарского института управления'),
+('Буденновский филиал Института Дружбы народов Кавказа'),
+('Бузулукский гуманитарно-технологический институт (филиал) Оренбургского государственного университета'),
+('Буйнакский филиал Современной гуманитарной академии'),
+('Бурятская государственная сельскохозяйственная академия имени В.Р. Филиппова'),
+('Бурятский государственный университет'),
+('Бурятский институт инфокоммуникаций (филиал) Сибирского государственного университета телекоммуникаций и информатики в городе Улан-Удэ'),
+('Бурятский филиал Академии труда и социальных отношений'),
+('Быковский филиал Современной гуманитарной академии'),
+('Великолукская государственная академия физической культуры и спорта'),
+('Великолукская государственная сельскохозяйственная академия'),
+('Великолукский филиал Петербургского государственного университета путей сообщения'),
+('Великолукский филиал Современной гуманитарной академии'),
+('Вельский филиал Современной гуманитарной академии'),
+('Владивостокский государственный университет экономики и сервиса'),
+('Владивостокский филиал Дальневосточного юридического института Министерства внутренних дел Российской Федерации'),
+('Владивостокский филиал Российской таможенной академии'),
+('Владивостокский филиал Санкт-Петербургского Гуманитарного университета профсоюзов'),
+('Владивостокский филиал Современной гуманитарной академии'),
+('Владикавказский институт моды'),
+('Владикавказский институт управления'),
+('Владикавказский институт экономики, управления и права (г. Владикавказ)'),
+('Владикавказский филиал Современной гуманитарной академии'),
+('Владикавказский филиал Финансового университета при Правительстве Российской Федерации'),
+('Владимирский государственный университет имени Александра Григорьевича и Николая Григорьевича Столетовых'),
+('Владимирский институт бизнеса'),
+('Владимирский институт туризма и гостеприимства'),
+('Владимирский филиал Московского финансово-юридического университета МФЮА'),
+('Владимирский филиал Российского университета кооперации'),
+('Владимирский филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации'),
+('Владимирский филиал Российской международной академии туризма'),
+('Владимирский филиал Современной гуманитарной академии'),
+('Владимирский филиал Финансового университета при Правительстве Российской Федерации'),
+('Владимирский юридический институт Федеральной службы исполнения наказаний'),
+('Военная академия войсковой противовоздушной обороны Вооруженных Сил Российской Федерации имени Маршала Советского Союза А.М. Василевского'),
+('Военная академия материально-технического обеспечения им. генерала армии А.В. Хрулева'),
+('Военная академия радиационной, химической и биологической защиты им. Маршала Советского Союза С.К. Тимошенко'),
+('Военная академия Ракетных войск стратегического назначения имени Петра Великого'),
+('Военная академия связи им. Маршала Советского Союза С.М. Буденного'),
+('Военно-космическая академия имени А.Ф. Можайского'),
+('Военно-медицинская академия имени С.М. Кирова'),
+('Военно-морской институт радиоэлектроники имени А.С. Попова (филиал) Военного учебно-научного центра Военно-Морского Флота ""Военно-морская академия имени Адмирала Флота Советского Союза Н.Г. Кузнецова""'),
+('Военно-технический университет при Федеральном агентстве специального строительства'),
+('Военно-транспортный университет железнодорожных войск'),
+('Военный авиационный инженерный университет'),
+('Военный инженерно-технический университет'),
+('Военный университет'),
+('Военный учебно-научный центр Военно-воздушных сил ""Военно-воздушная академия имени профессора Н.Е. Жуковского и Ю.А. Гагарина""'),
+('Военный учебно-научный центр Военно-Морского Флота «Военно-морская академия имени Адмирала Флота Советского Союза Н.Г. Кузнецова»'),
+('Военный учебно-научный центр Сухопутных войск «Общевойсковая академия Вооруженных Сил Российской Федерации»'),
+('Волго-Вятский институт (филиал) Университета имени О.Е. Кутафина (МГЮА)'),
+('Волго-Вятский филиал Московского технического университета связи и информатики'),
+('Волгоградская академия Министерства внутренних дел Российской Федерации'),
+('Волгоградская государственная академия физической культуры'),
+('Волгоградская консерватория (институт) имени П.А. Серебрякова'),
+('Волгоградский государственный аграрный университет'),
+('Волгоградский государственный институт искусств и культуры'),
+('Волгоградский государственный медицинский университет'),
+('Волгоградский государственный социально-педагогический университет'),
+('Волгоградский государственный технический университет'),
+('Волгоградский государственный университет'),
+('Волгоградский гуманитарный институт'),
+('Волгоградский институт бизнеса'),
+('Волгоградский институт экономики, социологии и права'),
+('Волгоградский кооперативный институт (филиал) Российского университета кооперации'),
+('Волгоградский филиал Академии труда и социальных отношений'),
+('Волгоградский филиал Института управления'),
+('Волгоградский филиал Международного славянского института'),
+('Волгоградский филиал Московского государственного университета путей сообщения'),
+('Волгоградский филиал Российского государственного торгово-экономического университета'),
+('Волгоградский филиал Российского экономического университета имени Г.В. Плеханова'),
+('Волгоградский филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации'),
+('Волгоградский филиал Современной гуманитарной академии'),
+('Волгоградский филиал Финансового университета при Правительстве Российской Федерации'),
+('Волгоградский юридический институт'),
+('Волгодонский инженерно-технический институт - филиал Национального исследовательского ядерного университета ""МИФИ""'),
+('Волгодонский институт экономики, управления и права (филиал) Южного федерального университета в г. Волгодонске'),
+('Волгодонский филиал Московской открытой социальной академии'),
+('Волжский (г. Волжский Волгоградской области) филиал Международного юридического института'),
+('Волжский государственный университет водного транспорта'),
+('Волжский гуманитарный институт (филиал) Волгоградского государственного университета'),
+('Волжский институт строительства и технологий (филиал) Волгоградского государственного архитектурно-строительного университета'),
+('Волжский институт экономики, педагогики и права'),
+('Волжский политехнический институт (филиал) Волгоградского государственного технического университета'),
+('Волжский университет имени В.Н. Татищева (институт)'),
+('Волжский филиал Казанского национального исследовательского технического университета им. А.Н. Туполева-КАИ'),
+('Волжский филиал Московского института рекламы, туризма, шоу-бизнеса'),
+('Волжский филиал Российской академии предпринимательства'),
+('Волжский филиал Современной гуманитарной академии'),
+('Волжско-Камский филиал Российской международной академии туризма'),
+('Вологодская государственная молочнохозяйственная академия имени Н.В. Верещагина'),
+('Вологодский государственный университет'),
+('Вологодский институт бизнеса'),
+('Вологодский институт права и экономики Федеральной службы исполнения наказаний'),
+('Вологодский филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации'),
+('Вологодский филиал Современной гуманитарной академии'),
+('Волоколамский институт гостеприимства - филиал Российской международной академии туризма'),
+('Вольский филиал Военной академии материально-технического обеспечения им. генерала армии А.В. Хрулева'),
+('Воркутинский филиал Современной гуманитарной академии'),
+('Воркутинский филиал Сыктывкарского государственного университета'),
+('Воркутинский филиал Университета Российской академии образования'),
+('Воркутинский филиал Ухтинского технического государственного университета'),
+('Воронежская государственная академия искусств'),
+('Воронежский государственный аграрный университет имени императора Петра I'),
+('Воронежский государственный институт физической культуры'),
+('Воронежский государственный лесотехнический университет имени Г.Ф. Морозова'),
+('Воронежский государственный медицинский университет им. Н.Н. Бурденко'),
+('Воронежский государственный педагогический университет'),
+('Воронежский государственный технический университет'),
+('Воронежский государственный университет'),
+('Воронежский государственный университет инженерных технологий'),
+('Воронежский институт высоких технологий'),
+('Воронежский институт инновационных систем'),
+('Воронежский институт кооперации (филиал) Белгородского университета кооперации, экономики и права'),
+('Воронежский институт Министерства внутренних дел Российской Федерации'),
+('Воронежский институт правительственной связи (филиал) Академии Федеральной службы охраны Российской Федерации'),
+('Воронежский институт Федеральной службы исполнения наказаний'),
+('Воронежский институт экономики и социального управления'),
+('Воронежский филиал Государственного университета морского и речного флота имени адмирала С.О. Макарова'),
+('Воронежский филиал Московского государственного университета путей сообщения'),
+('Воронежский филиал Московского гуманитарно-экономического института'),
+('Воронежский филиал Московской открытой социальной академии'),
+('Воронежский филиал Российского государственного торгово-экономического университета'),
+('Воронежский филиал Российского экономического университета имени Г.В. Плеханова'),
+('Воронежский филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации'),
+('Воронежский филиал Современной гуманитарной академии'),
+('Воронежский экономико-правовой институт'),
+('Воскресенский институт туризма - филиал Российской международной академии туризма'),
+('Воскресенский филиал Московского политехнического университета'),
+('Восточная экономико-юридическая гуманитарная академия'),
+('Восточно-Европейский институт психоанализа'),
+('Восточно-Сибирский государственный институт культуры'),
+('Восточно-Сибирский государственный университет технологий и управления'),
+('Восточно-Сибирский институт Министерства внутренних дел Российской Федерации'),
+('Восточно-Сибирский институт туризма - филиал Российской международной академии туризма'),
+('Восточно-Сибирский институт экономики и права'),
+('Восточно-Сибирский филиал Российской академии правосудия (г. Иркутск)'),
+('Восточный институт'),
+('Всероссийская академия внешней торговли Министерства экономического развития Российской Федерации'),
+('Всероссийский государственный университет кинематографии имени С.А.Герасимова'),
+('Всероссийский государственный университет юстиции (РПА Минюста России)'),
+('Второй Тамбовский филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации'),
+('Выборгский филиал Государственного университета морского и речного флота имени адмирала С.О. Макарова'),
+('Выборгский филиал Российского государственного педагогического университета им. А.И. Герцена'),
+('Выборгский филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации'),
+('Выборгский филиал Санкт-Петербургского государственного университета аэрокосмического приборостроения'),
+('Выксунский филиал Национального исследовательского технологического университета «МИСиС»'),
+('Выксунский филиал Нижегородского государственного технического университета им. Р.Е. Алексеева'),
+('Высшая религиозно-философская школа (институт)'),
+('Высшая школа корпоративного управления'),
+('Высшая школа музыки (институт) Республики Саха (Якутия)'),
+('Высшая школа народных искусств (институт)'),
+('Высшая школа печати и медиаиндустрии Московского политехнического университета'),
+('Высшая школа печати и медиатехнологий'),
+('Высшая школа психологии (Институт)'),
+('Высшая школа технологии и энергетики СПбГУПТД'),
+('Высшая школа финансов и менеджмента Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации'),
+('Высшая школа экономики в Санкт-Петербурге'),
+('Высшее театральное училище (институт) им. М.С. Щепкина при Государственном академическом Малом театре Росии'),
+('Вяземский филиал Российской международной академии туризма'),
+('Вяземский филиал Современной гуманитарной академии'),
+('Вятская государственная сельскохозяйственная академия'),
+('Вятский государственный университет'),
+('Вятский социально-экономический институт'),
+('Вятскополянский филиал Казанского государственного технического университета им. А.Н. Туполева'),
+('Георгиевский филиал Невинномысского государственного гуманитарно-технического института'),
+('Гжельский государственный университет'),
+('Голицынский пограничный институт Федеральной службы безопасности Российской Федерации'),
+('Голицынский пограничный институт Федеральной службы безопасности Российской Федерации (филиал в г. Ставрополе)'),
+('Горно-Алтайский государственный университет'),
+('Горно-Алтайский филиал Современной гуманитарной академии'),
+('Горский государственный аграрный университет'),
+('Государственная классическая академия имени Маймонида'),
+('Государственный аграрный университет Северного Зауралья'),
+('Государственный академический университет гуманитарных наук'),
+('Государственный институт русского языка им А.С. Пушкина'),
+('Государственный институт экономики, финансов, права и технологий'),
+('Государственный морской университет имени адмирала Ф.Ф. Ушакова'),
+('Государственный музыкально-педагогический институт имени М.М. Ипполитова-Иванова'),
+('Государственный университет морского и речного флота имени адмирала С.О. Макарова'),
+('Государственный университет по землеустройству'),
+('Государственный университет управления'),
+('Губкинский филиал Белгородского государственного технологического университета им. В.Г. Шухова'),
+('Губкинский филиал Современной гуманитарной академии'),
+('Гуковский институт экономики и права - Филиал Ростовского государственного экономического университета (РИНХ)'),
+('Гулькевичский филиал Северо-Кавказского института бизнеса, инженерных и информационных технологий'),
+('Гуманитарно-педагогическая академия филиал Крымского федерального университета имени В.И.Вернадского'),
+('Гуманитарно-Прогностический институт'),
+('Гуманитарно-социальный институт'),
+('Гуманитарно-Экологический Институт'),
+('Гуманитарно-экономический и информационно-технологический институт'),
+('Гуманитарно-экономический институт имени B.C. Черномырдина'),
+('Гуманитарно-экономический и технологический институт'),
+('Гуманитарный институт (г. Москва)'),
+('Гуманитарный институт имени П.А.Столыпина'),
+('Гуманитарный институт телевидения и радиовещания им. М.А. Литовчина'),
+('Гуманитарный университет'),
+('Дагестанский государственный аграрный университет имени М.М.Джамбулатова'),
+('Дагестанский государственный институт народного хозяйства при Правительстве Республики Дагестан'),
+('Дагестанский государственный медицинский университет'),
+('Дагестанский государственный педагогический университет'),
+('Дагестанский государственный технический университет'),
+('Дагестанский государственный университет'),
+('Дагестанский институт прикладного искусства, дизайна и архитектуры'),
+('Дагестанский кооперативный институт (филиал) Белгородского университета потребительской кооперации'),
+('Дагестанский филиал Российского государственного педагогического университета им. А. И. Герцена'),
+('Дагестанский филиал Университета Российской академии образования'),
+('Дальневосточное высшее военное командное училище (военный институт) имени Маршала Советского Союза К.К. Рокоссовского (филиал) Военного учебно-научного центра Сухопутных войск ""Общевойсковая академия Вооруженных Сил Российской Федерации""'),
+('Дальневосточный государственный аграрный университет'),
+('Дальневосточный государственный институт искусств'),
+('Дальневосточный государственный технический рыбохозяйственный университет'),
+('Дальневосточный институт управления, бизнеса и права'),
+('Дальневосточный федеральный университет'),
+('Дальневосточный филиал Всероссийской академии внешней торговли Министерства экономического развития Российской Федерации'),
+('Дальневосточный филиал Кузбасского института Федеральной службы исполнения наказаний (г. Уссурийск)'),
+('Дербентский гуманитарный институт'),
+('Дербентский филиал Московского государственного университета экономики, статистики и информатики'),
+('Дербентский филиал Московского педагогического государственного университета'),
+('Дербентский филиал Современной гуманитарной академии'),
+('Дзержинский политехнический институт (филиал) Нижегородского государственного технического университета им. Р.Е. Алексеева'),
+('Дзержинский филиал Нижегородского государственного университета им. Н.И. Лобачевского'),
+('Дзержинский филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации'),
+('Дзержинский филиал Современной гуманитарной академии'),
+('Дипломатическая академия'),
+('Дмитровский филиал Астраханского государственного технического университета'),
+('Дмитровский филиал Современной гуманитарной академии'),
+('Донской государственный аграрный университет'),
+('Донской государственный технический университет'),
+('Донской институт дистанционного образования'),
+('Донской филиал Евразийского открытого института'),
+('Донской юридический институт'),
+('Евразийский институт экономики, менеджмента, информатики'),
+('Евразийский открытый институт'),
+('Европейский Университет Права JUSTO'),
+('Европейско-Азиатский институт управления и предпринимательства'),
+('Егорьевский технологический институт (филиал) Московского государственного технологического университета ""Станкин""'),
+('Егорьевский филиал Московского педагогического государственного университета'),
+('Ейский филиал Современной гуманитарной академии'),
+('Екатеринбургская академия современного искусства'),
+('Екатеринбургский государственный театральный институт'),
+('Екатеринбургский институт физической культуры (филиал) Уральского государственного университета физической культуры'),
+('Екатеринбургский филиал Академии труда и социальных отношений'),
+('Екатеринбургский филиал Московского государственного гуманитарного университета имени М.А. Шолохова'),
+('Екатеринбургский филиал Московского института предпринимательства и права'),
+('Екатеринбургский филиал Современной гуманитарной академии'),
+('Екатеринбургский филиал Университета Российской академии образования'),
+('Екатеринбургское высшее артиллерийское командное училище (военный институт) (филиал) Военного учебно-научного центра Сухопутных войск ""Общевойсковая академия Вооруженных Сил Российской Федерации""'),
+('Елабужский институт (филиал) Казанского (Приволжского) федерального университета""'),
+('Елабужский филиал Института социальных и гуманитарных знаний'),
+('Елецкий государственный университет им. И.А. Бунина'),
+('Елецкий филиал Московского государственного университета путей сообщения'),
+('Елецкий филиал Современной гуманитарной академии'),
+('Енисейский филиал Сибирского государственного университета водного транспорта (в г. Красноярске)'),
+('Ессентукский институт управления, бизнеса и права'),
+('Железноводский филиал Московского государственного гуманитарного университета имени М.А. Шолохова'),
+('Железногорский филиал Курского института менеджмента, экономики и бизнеса'),
+('Железногорский филиал Современной гуманитарной академии'),
+('Забайкальский аграрный институт - филиал Иркутского государственного аграрного университета имени А.А.Ежевского'),
+('Забайкальский государственный университет'),
+('Забайкальский институт железнодорожного транспорта - филиал Иркутского государственного университета путей сообщения'),
+('Забайкальский институт предпринимательства - филиал Сибирского университета потребительской кооперации'),
+('Заокский христианский гуманитарно-экономический институт'),
+('Заочный финансово-экономический институт Финансового университета при Правительстве Российской федерации'),
+('Западно-Подмосковный институт туризма - филиал Российской международной академии туризма'),
+('Западно-Сибирский Институт Финансов и Права'),
+('Западно-Сибирский филиал Российской академии правосудия (г. Томск)'),
+('Западно-Уральский институт экономики и права'),
+('Западно-Уральский филиал Московской международной высшей школы бизнеса МИРБИС (Институт)'),
+('Зареченский технологический институт - филиал Пензенского государственного технологического университета'),
+('Зауральский гуманитарно-технологический институт'),
+('Зауральский филиал Башкирского государственного аграрного университета'),
+('Зеленоградское отделение ГБОУ ВПО МГПУ - Институт делового администрирования'),
+('Зеленодольский институт машиностроения и информационных технологий (филиал) Казанского государственного технического университета им. А.Н. Туполева'),
+('Зеленодольский филиал Казанского инновационного университета имени В.Г.Тимирясова'),
+('Ивангородский гуманитарно-технический институт (филиал) Санкт-Петербургского государственного университета аэрокосмического приборостроения'),
+('Ивановская государственная медицинская академия Министерства здравоохранения и социального развития Российской Федерации'),
+('Ивановская государственная сельскохозяйственная академия имени академика Д.К. Беляева'),
+('Ивановский (г. Иваново) филиал Международного юридического института'),
+('Ивановский государственный политехнический университет'),
+('Ивановский государственный университет'),
+('Ивановский государственный химико-технологический университет'),
+('Ивановский государственный энергетический университет имени В.И. Ленина'),
+('Ивановский институт Государственной противопожарной службы Министерства Российской Федерации по делам гражданской обороны, чрезвычайным ситуациям и ликвидации последствий стихийных бедствий'),
+('Ивановский филиал Владимирского юридического института Федеральной службы исполнения наказаний'),
+('Ивановский филиал Института управления'),
+('Ивановский филиал Российского государственного торгово-экономического университета'),
+('Ивановский филиал Российского университета кооперации'),
+('Ивановский филиал Российского экономического университета имени Г.В. Плеханова'),
+('Ивановский филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации'),
+('Ивановский филиал Современной гуманитарной академии'),
+('Ивантеевский филиал Московского политехнического университета'),
+('Ингушский государственный университет'),
+('Индустриальный институт'),
+('Инженерно-технологическая академия ЮФУ (ТРТИ)'),
+('Институт автомобильных технологий и управления'),
+('Институт архитектуры и строительства Волгоградского государственного технического университета'),
+('Институт береговой охраны Федеральной службы безопасности Российской Федерации'),
+('Институт бизнеса и делового администрирования (ИБДА) РАНХиГС'),
+('Институт бизнеса и дизайна'),
+('Институт бизнеса, информационных технологий и финансов'),
+('Институт бизнеса и права г. Москва'),
+('Институт бизнеса, психологии и управления'),
+('Институт ""Верхневолжье""'),
+('Институт водного транспорта имени Г.Я. Седова - филиал Государственного морского университета имени адмирала Ф.Ф.Ушакова'),
+('Институт гостиничного и туристического менеджмента'),
+('Институт государственного администрирования'),
+('Институт государственного управления, права и инновационных технологий'),
+('Институт государственной службы и управления (ИГСУ) РАНХиГС'),
+('Институт гуманитарного образования и информационных технологий'),
+('Институт декоративно-прикладного искусства'),
+('Институт деловой карьеры'),
+('Институт дружбы народов Кавказа'),
+('Институт европейских культур'),
+('Институт журналистики и литературного творчества'),
+('Институт законоведения и управления ВПА'),
+('Институт заочного обучения Санкт-Петербургского горного университета'),
+('Институт индустрии моды'),
+('Институт иностранных языков (г. Санкт-Петербург)'),
+('Институт информационных технологий, экономики и менеджмента'),
+('Институт искусства реставрации'),
+('Институт коммерции и права'),
+('Институт коммуникативных технологий'),
+('Институт Международного Бизнес Образования'),
+('Институт международного права и экономики имени А.С.Грибоедова'),
+('Институт международного права, экономики, гуманитарных наук и управления имени К.В. Россинского'),
+('Институт международной торговли и права'),
+('Институт международных связей'),
+('Институт международных социально-гуманитарных связей'),
+('Институт международных стандартов учета и управления'),
+('Институт международных экономических отношений'),
+('Институт международных экономических связей'),
+('Институт менеджмента и бизнеса'),
+('Институт менеджмента и информационных технологий (филиал) Санкт-Петербургского государственного политехнического университета в г. Череповце'),
+('Институт менеджмента и рынка'),
+('Институт менеджмента, маркетинга и права'),
+('Институт менеджмента, маркетинга и финансов'),
+('Институт менеджмента, экономики и инноваций'),
+('Институт механики и энергетики имени В.П. Горячкина Российского государственного аграрного университета - МСХА имени К.А. Тимирязева'),
+('Институт Мировой Экономики'),
+('Институт Мировой экономики и информатизации'),
+('Институт мировой экономики и финансов'),
+('Институт мировых цивилизаций'),
+('Институт Московская высшая школа социальных и экономических наук'),
+('Институт национальной безопасности и управления рисками'),
+('Институт недвижимости и строительного бизнеса'),
+('Институт непрерывного образования'),
+('Институт открытого образования'),
+('Институт права и экономики'),
+('Институт правоведения и предпринимательства'),
+('Институт правовой экономики'),
+('Институт практического востоковедения'),
+('Институт практической психологии ""Иматон""'),
+('Институт Практической Психологии и Психоанализа'),
+('Институт природообустройства имени А.Н. Костякова Российского государственного аграрного университета - МСХА имени К.А. Тимирязева'),
+('Институт профессионального образования'),
+('Институт профессиональных инноваций'),
+('Институт психологии'),
+('Институт психологии и педагогики'),
+('Институт психотерапии и клинической психологии'),
+('Институт русского театра'),
+('Институт рыночной экономики, социальной политики и права'),
+('Институт сервиса (г. Москва) (филиал) Российского государственного университета туризма и сервиса'),
+('Институт сервиса и технологий (филиал) Донского государственного технического университета в г. Пятигорске Ставропольского края'),
+('Институт современного искусства'),
+('Институт современного права и экономики'),
+('Институт современного управления, кино и телевидения'),
+('Институт современной экономики (г. Москва)'),
+('Институт современных технологий и экономики'),
+('Институт Содружества Независимых Государств'),
+('Институт социальной реабилитации Новосибирского государственного технического университета'),
+('Институт социально-экономического прогнозирования и моделирования'),
+('Институт социальных и гуманитарных знаний'),
+('Институт социальных наук'),
+('Институт специальной педагогики и психологии'),
+('Институт стран Востока'),
+('Институт сферы обслуживания и предпринимательства (филиал) Донского государственного технического университета в г. Шахты'),
+('Институт театрального искусства им. П.М. Ершова'),
+('Институт текстильной и легкой промышленности московского государственного университета технологий и управления'),
+('Институт телевидения, бизнеса и дизайна'),
+('Институт Телеинфо'),
+('Институт технологии и бизнеса'),
+('Институт технологии туризма'),
+('Институт традиционного прикладного искусства (Московский филиал) Высшей школы народных искусств (института)'),
+('Институт туризма и гостеприимства (г. Москва) (филиал) Российского государственного университета туризма и сервиса'),
+('Институт УНИК'),
+('Институт управления'),
+('Институт управления, бизнеса и права (г. Пятигорск)'),
+('Институт управления, бизнеса и технологий'),
+('Институт управления (г. Архангельск)'),
+('Институт управления (г. Набережные Челны)'),
+('Институт управления и информатики'),
+('Институт управления, информации и бизнеса'),
+('Институт управления и права'),
+('Институт управления, экономики, права и искусства'),
+('Институт Федеральной службы безопасности Российской Федерации (г. Нижний Новгород)'),
+('Институт финансов и права'),
+('Институт финансов, экономики и права офицеров запаса'),
+('Институт холода и биотехнологий Санкт-Петербургского национального исследовательского университета информационных технологий, механики и оптики'),
+('Институт цивилизации (г. Владикавказ)'),
+('Институт экономики'),
+('Институт экономики бизнеса'),
+('Институт экономики и антикризисного управления'),
+('Институт экономики и культуры (г. Москва)'),
+('Институт экономики и права (г. Воронеж)'),
+('Институт экономики и права (филиал) Академии труда и социальных отношений в г. Севастополе'),
+('Институт экономики и правоведения (г. Назрань)'),
+('Институт экономики и предпринимательства'),
+('Институт экономики и сервиса Уфимского государственного нефтяного технического университета'),
+('Институт экономики и социальных отношений'),
+('Институт экономики и управления'),
+('Институт экономики и управления в медицине и социальной сфере'),
+('Институт экономики и управления в промышленности'),
+('Институт экономики и управления в строительстве и промышленности'),
+('Институт экономики и управления (г. Пятигорск)'),
+('Институт экономики и финансов'),
+('Институт экономики и финансов Казанского (Приволжского) федерального университета'),
+('Институт экономики, права и гуманитарных специальностей'),
+('Институт экономики, финансов и права'),
+('Институт ЮжДАГ'),
+('Институт ядерной энергетики (филиал) Санкт-Петербургского государственного политехнического университета в г. Сосновый Бор'),
+('Институт языков и культур имени Л.Толстого'),
+('Иркутский государственный аграрный университет имени А.А.Ежевского'),
+('Иркутский государственный медицинский университет Министерства здравоохранения Российской Федерации'),
+('Иркутский государственный университет'),
+('Иркутский государственный университет путей сообщения'),
+('Иркутский институт международного туризма'),
+('Иркутский национальный исследовательский технический университет'),
+('Иркутский филиал Академии труда и социальных отношений'),
+('Иркутский филиал Московского государственного технического университета гражданской авиации'),
+('Иркутский филиал Российского государственного торгово-экономического университета'),
+('Иркутский филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации'),
+('Иркутский филиал Современной гуманитарной академии'),
+('Иркутский юридический институт (филиал) Всероссийского государственного университета юстиции'),
+('Ишимский педагогический институт им П.П. Ершова (филиал) Тюменского государственного университета'),
+('Йошкар-Олинский филиал Московского института государственного управления и права'),
+('Йошкар-Олинский филиал Современной гуманитарной академии'),
+('Кабардино-Балкарский государственный аграрный университет имени В.М. Кокова'),
+('Кабардино-Балкарский государственный университет им. Х.М. Бербекова'),
+('Кабардино-Балкарский институт бизнеса'),
+('Кавказский светский институт'),
+('Казанская государственная академия ветеринарной медицины им. Н.Э. Баумана'),
+('Казанская государственная консерватория (академия) имени Н.Г. Жиганова'),
+('Казанский государственный аграрный университет'),
+('Казанский государственный архитектурно-строительный университет'),
+('Казанский государственный медицинский университет'),
+('Казанский государственный университет культуры и искусств'),
+('Казанский государственный энергетический университет'),
+('Казанский инновационный университет имени В.Г. Тимирясова'),
+('Казанский институт предпринимательства и права'),
+('Казанский институт (филиал) Российского государственного торгово-экономического университета'),
+('Казанский институт финансов, экономики и информатики'),
+('Казанский кооперативный институт (филиал) Российского университета кооперации'),
+('Казанский национальный исследовательский технический университет им. А.Н. Туполева-КАИ'),
+('Казанский национальный исследовательский технологический университет'),
+('Казанский (Приволжский) федеральный университет'),
+('Казанский филиал Академии труда и социальных отношений'),
+('Казанский филиал Владимирского юридического института Федеральной службы исполнения наказаний'),
+('Казанский филиал Волжского государственного университета водного транспорта'),
+('Казанский филиал Московского государственного университета путей сообщения'),
+('Казанский филиал Московской Академии Предпринимательства при Правительстве Москвы'),
+('Казанский филиал Нижегородского государственного лингвистического университета им. Н.А. Добролюбова'),
+('Казанский филиал Поволжского государственного университета телекоммуникаций и информатики'),
+('Казанский филиал Российского государственного университета правосудия (г.Казань)'),
+('Казанский филиал Российской международной академии туризма'),
+('Казанский филиал Современной гуманитарной академии'),
+('Казанский юридический институт МВД РФ'),
+('Казанский юридический институт (филиал) Всероссийского государственного университета юстиции'),
+('Казанское высшее военное командное училище (военный институт) (филиал) Военного учебно-научного центра Сухопутных войск ""Общевойсковая академия Вооруженных Сил Российской Федерации""'),
+('Калининградский государственный технический университет'),
+('Калининградский институт туризма - филиал Российской международной академии туризма'),
+('Калининградский институт управления'),
+('Калининградский институт экономики - филиал Санкт-Петербургского университета управления и экономики'),
+('Калининградский пограничный институт Федеральной службы безопасности Российской Федерации'),
+('Калининградский филиал Евразийского открытого института'),
+('Калининградский филиал Международного университета в Москве'),
+('Калининградский филиал Московского государственного университета путей сообщения'),
+('Калининградский филиал Московского государственного университета экономики, статистики и информатики (МЭСИ)'),
+('Калининградский филиал Московского финансово-юридического университета МФЮА'),
+('Калининградский филиал Российского университета кооперации'),
+('Калининградский филиал Российского экономического университета имени Г.В. Плеханова'),
+('Калининградский филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации'),
+('Калининградский филиал Санкт-Петербургского государственного аграрного университета'),
+('Калининградский филиал Санкт-Петербургского университета МВД России'),
+('Калининградский филиал Санкт-Петербургского университета Министерства внутренних дел Российской Федерации'),
+('Калининградский филиал Современной гуманитарной академии'),
+('Калмыцкий государственный университет имени Б.Б. Городовикова'),
+('Калмыцкий филиал Московской академии экономики и права'),
+('Калужский государственный университет им. К.Э. Циолковского'),
+('Калужский институт туристского бизнеса - филиал Российской международной академии туризма'),
+('Калужский филиал Всероссийского государственного университета юстиции'),
+('Калужский филиал Международного славянского института'),
+('Калужский филиал Московского государственного технического университета имени Н.Э. Баумана'),
+('Калужский филиал Московского государственного университета путей сообщения'),
+('Калужский филиал Московского гуманитарно-экономического института'),
+('Калужский филиал Российского государственного аграрного университета - МСХА имени К.А. Тимирязева'),
+('Калужский филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации'),
+('Калужский филиал Современной гуманитарной академии'),
+('Калужский филиал Финансового университета при Правительстве Российской Федерации'),
+('Каменский институт (филиал) Южно-Российского государственного технического университета (Новочеркасского политехнического института)'),
+('Каменск-Уральский филиал Уральского государственного экономического университета'),
+('Камский институт'),
+('Камский институт искусств и дизайна'),
+('Камчатский государственный технический университет'),
+('Камчатский государственный университет им. Витуса Беринга'),
+('Камчатский филиал Российского университета кооперации'),
+('Камышинский технологический институт (филиал) Волгоградского государственного технического университета'),
+('Камышинский филиал Современной гуманитарной академии'),
+('Карачаево-Черкесский государственный университет имени У.Д. Алиева'),
+('Карачаево-Черкесский филиал Московской открытой социальной академии'),
+('Карачаево-Черкесский филиал Пятигорского государственного лингвистического университета'),
+('Карачевский филиал Орловского государственного университета имени И.С. Тургенева'),
+('Карельский институт туризма - филиал Российской международной академии туризма'),
+('Карельский региональный институт управления, экономики и права Петрозаводского государственного университета'),
+('Карельский филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации'),
+('Каспийский институт морского и речного транспорта - филиал Волжского государственного университета водного транспорта'),
+('Кемеровский государственный институт культуры'),
+('Кемеровский государственный медицинский университет'),
+('Кемеровский государственный сельскохозяйственный институт'),
+('Кемеровский государственный университет'),
+('Кемеровский институт (филиал) Российского экономического университета имени Г.В. Плеханова'),
+('Кемеровский технологический институт пищевой промышленности'),
+('Кемеровский филиал Московского государственного университета экономики, статистики и информатики (МЭСИ)'),
+('Кемеровский филиал Современной гуманитарной академии'),
+('Керченский государственный морской технологический университет'),
+('Кинешемский филиал Современной гуманитарной академии'),
+('Кирово-Чепецкий филиал Вятского социально-экономического института'),
+('Кировская государственная медицинская академия'),
+('Кировский институт иностранных языков'),
+('Кировский филиал Академии права и управления Федеральной службы исполнения наказаний'),
+('Кировский филиал Московского государственного университета путей сообщения'),
+('Кировский филиал Московского гуманитарно-экономического института'),
+('Кировский филиал Московского университета государственного управления'),
+('Кировский филиал Московской финансово-юридической академии'),
+('Кировский филиал Пермской государственной академии искусства и культуры'),
+('Кировский филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации'),
+('Кировский филиал Санкт-Петербургского Гуманитарного университета профсоюзов'),
+('Кировский филиал Современной гуманитарной академии'),
+('Кировский филиал Университета Российской академии образования'),
+('Кисловодский гуманитарно-технический институт'),
+('Кисловодский филиал Московского государственного института индустрии туризма имени Ю.А.Сенкевича'),
+('Ковровская государственная технологическая академия имени В.А. Дегтярева'),
+('Ковровский филиал Современной гуманитарной академии'),
+('Ковылкинский филиал Мордовского государственного университета имени Н.П. Огарева'),
+('Коломенский институт (филиал) Московского политехнического университета'),
+('Коломенский филиал Евразийского открытого института'),
+('Коломенский филиал Московской академии экономики и права'),
+('Коломенский филиал Современной гуманитарной академии'),
+('Коми государственный педагогический институт'),
+('Коми республиканская академия государственной службы и управления'),
+('Коми филиал Вятской государственной сельскохозяйственной академии'),
+('Коми филиал Кировской государственной медицинской академии Федерального агентства по здравоохранению и социальному развитию в г. Сыктывкаре'),
+('Конаковский филиал Евразийского открытого института'),
+('Конаковский филиал Российской международной академии туризма'),
+('Королёвский (г. Королёв Московской области) филиал Международного юридического института'),
+('Костромская государственная сельскохозяйственная академия'),
+('Костромской государственный университет'),
+('Костромской филиал Международной академии бизнеса и новых технологий'),
+('Костромской филиал Современной гуманитарной академии'),
+('Котельнический филиал Вятской государственной сельскохозяйственной академии'),
+('Котласский филиал Государственного университета морского и речного флота имени адмирала С.О. Макарова'),
+('Красногорский филиал Московской финансово-промышленной академии'),
+('Красногорский филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации'),
+('Краснодарский государственный институт культуры'),
+('Краснодарский кооперативный институт (филиал) Российского университета кооперации'),
+('Краснодарский муниципальный медицинский институт высшего сестринского образования'),
+('Краснодарский университет Министерства внутренних дел Российской Федерации'),
+('Краснодарский филиал Владимирского юридического института Федеральной службы исполнения наказаний'),
+('Краснодарский филиал Российского экономического университета им. Г.В. Плеханова'),
+('Краснодарский филиал Современной гуманитарной академии'),
+('Краснодарское высшее военное училище (военный институт) имени генерала армии С.М. Штеменко'),
+('Краснознаменский (г. Краснознаменск Московской области) филиал Международного юридического института'),
+('Краснознаменский филиал Университета ""Синергия""'),
+('Красносулинский филиал Южно-Российского государственного технического университета (Новочеркасского политехнического института),'),
+('Красноярская государственная академия музыки и театра'),
+('Красноярский государственный аграрный университет'),
+('Красноярский государственный медицинский университет имени профессора В.Ф. Войно-Ясенецкого'),
+('Красноярский государственный педагогический университет им. В.П. Астафьева'),
+('Красноярский государственный художественный институт'),
+('Красноярский институт железнодорожного транспорта - филиал Иркутского государственного университета путей сообщения в г. Красноярске'),
+('Красноярский институт социально-экономических наук'),
+('Красноярский институт экономики - филиал Санкт-Петербургского университета управления и экономики'),
+('Красноярский филиал Академии труда и социальных отношений'),
+('Красноярский филиал Московского государственного университета экономики, статистики и информатики (МЭСИ)'),
+('Красноярский филиал Российского экономического университета имени Г.В. Плеханова'),
+('Красноярский филиал Санкт-Петербургского государственного университета гражданской авиации'),
+('Красноярский филиал Санкт-Петербургского Гуманитарного университета профсоюзов'),
+('Красноярский филиал Современной гуманитарной академии'),
+('Красноярский филиал Университета Российской академии образования'),
+('Крымский инженерно-педагогический университет'),
+('Крымский институт бизнеса'),
+('Крымский университет культуры, искусств и туризма'),
+('Крымский федеральный университет имени В.И. Вернадского'),
+('Крымский филиал государственного морского университета имени адмирала Ф.Ф. Ушакова'),
+('Кстовский филиал Нижегородского государственного университета им. Н.И. Лобачевского'),
+('Кубанский государственный аграрный университет'),
+('Кубанский государственный медицинский университет'),
+('Кубанский государственный технологический университет'),
+('Кубанский государственный университет'),
+('Кубанский государственный университет физической культуры, спорта и туризма'),
+('Кубанский институт международного предпринимательства и менеджмента'),
+('Кубанский институт социоэкономики и права (филиал) Академии труда и социальных отношений'),
+('Кубанский медицинский институт'),
+('Кубанский социально-экономический институт'),
+('Кузбасский государственный технический университет имени Т.Ф. Горбачева'),
+('Кузбасский институт Федеральной службы исполнения наказаний'),
+('Кузбасский институт экономики и права'),
+('Кузбасский областной педагогический институт имени Н.М. Голянской'),
+('Кузнецкий институт информационных и управленческих технологий (филиал) Пензенского государственного университета'),
+('Куйбышевский филиал Новосибирского государственного педагогического университета'),
+('Кумертауский институт экономики и права'),
+('Кумертауский филиал Оренбургского государственного университета'),
+('Кумертауский филиал Уфимского государственного авиационного технического университета'),
+('Курганская государственная сельскохозяйственная академия имени Т.С. Мальцева'),
+('Курганский государственный университет (КГУ)'),
+('Курганский институт железнодорожного транспорта - филиал Уральского государственного университета путей сообщения в г. Кургане'),
+('Курганский филиал Академии труда и социальных отношений'),
+('Курганский филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации'),
+('Курганский филиал Современной гуманитарной академии'),
+('Курганский филиал Уральского института экономики, управления и права'),
+('Курская академия государственной и муниципальной службы (Академия госслужбы)'),
+('Курская государственная сельскохозяйственная академия имени профессора И.И. Иванова'),
+('Курский автодорожный институт'),
+('Курский государственный медицинский университет'),
+('Курский государственный университет'),
+('Курский гуманитарно-технический институт'),
+('Курский институт кооперации (филиал) Белгородского университета кооперации, экономики и права'),
+('Курский институт менеджмента, экономики и бизнеса'),
+('Курский медицинский институт'),
+('Курский технический институт'),
+('Курский филиал Орловского юридического института Министерства внутренних дел Российской Федерации'),
+('Курский филиал Российского государственного торгово-экономического университета'),
+('Курский филиал Современной гуманитарной академии'),
+('Курский филиал Финансового университета при Правительстве Российской Федерации'),
+('Кызылский филиал Современной гуманитарной академии'),
+('Лабинский филиал Северо-Кавказского института бизнеса, инженерных и информационных технологий'),
+('Лангепасский филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации'),
+('Ленинградский государственный университет имени А.С. Пушкина'),
+('Лениногорский филиал Казанского государственного технического университета им. А.Н. Туполева'),
+('Лесосибирский педагогический институт - филиал Сибирского федерального университета'),
+('Лесосибирский филиал Сибирского государственного университета науки и технологий имени академика М.Ф. Решетнева'),
+('Лесосибирский филиал Современной гуманитарной академии'),
+('Ливенский филиал Орловского государственного университета имени И.С. Тургенева'),
+('Линевский филиал Сибирской государственной геодезической академии'),
+('Липецкий государственный педагогический университет'),
+('Липецкий государственный технический университет'),
+('Липецкий кооперативный институт (филиал) Белгородского университета потребительской кооперации'),
+('Липецкий филиал Воронежского института Министерства внутренних дел Российской Федерации'),
+('Липецкий филиал Воронежского института Федеральной службы исполнения наказаний'),
+('Липецкий филиал Института менеджмента, маркетинга и финансов'),
+('Липецкий филиал Международного института компьютерных технологий'),
+('Липецкий филиал Московской гуманитарно-технической академии'),
+('Липецкий филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации'),
+('Липецкий филиал Современной Гуманитарной академии'),
+('Липецкий эколого-гуманитарный институт'),
+('Литературный институт имени А.М.Горького'),
+('Лужский институт (филиал) Ленинградского государственного университета имени А.С. Пушкина'),
+('Лысьвенский филиал Пермского национального исследовательского политехнического университета'),
+('Льговский филиал Современной гуманитарной академии'),
+('Магаданский институт экономики - филиал Санкт-Петербургского университета управления и экономики'),
+('Магаданский филиал Современной гуманитарной академии'),
+('Майкопский государственный технологический университет'),
+('Майкопский филиал Современной гуманитарной академии'),
+('Марийский государственный университет'),
+('Марийский филиал Московской открытой социальной академии'),
+('Махачкалинский филиал Московского автомобильно-дорожного государственного технического университета (МАДИ)'),
+('Махачкалинский филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации'),
+('Махачкалинский филиал Современной гуманитарной академии'),
+('Медицинский институт «РЕАВИЗ»'),
+('Международная академия бизнеса и управления'),
+('Международная академия оценки и консалтинга'),
+('Международная гуманитарно-техническая академия (институт)'),
+('Международный Банковский Институт'),
+('Международный еврейский институт экономики, финансов и права'),
+('Международный инновационный университет'),
+('Международный институт бизнес-образования'),
+('Международный институт гостиничного менеджмента и туризма'),
+('Международный институт делового администрирования ""ФРИДАС""'),
+('Международный институт ""ИНФО-Рутения""'),
+('Международный институт компьютерных технологий'),
+('Международный институт менеджмента ЛИНК'),
+('Международный институт рынка'),
+('Международный институт экономики и права'),
+('Международный славянский институт'),
+('Международный социально-гуманитарный институт'),
+('Международный университет в Москве'),
+('Международный университет природы, общества и человека ""Дубна"" (университет ""Дубна"")'),
+('Международный юридический институт'),
+('Междуреченский филиал Сибирского государственного индустриального университета'),
+('Межотраслевой институт подготовки кадров и информации'),
+('Межрегиональный институт экономики и права при МПА ЕврАзЭС'),
+('Межрегиональный открытый социальный институт'),
+('Межрегиональный юридический институт филиал Саратовской государственной академии права'),
+('Минераловодский филиал Академии права и управления (институт)'),
+('Минераловодский филиал Московской открытой социальной академии'),
+('Мирнинский филиал Томского политехнического университета'),
+('Михайловская военная артиллерийская академия'),
+('Мичуринский государственный аграрный университет'),
+('Мичуринский филиал Российского университета кооперации'),
+('Мордовский государственный педагогический институт имени М.Е. Евсевьева'),
+('Мордовский гуманитарный институт'),
+('Морской государственный университет имени адмирала Г.И. Невельского'),
+('Морской корпус Петра Великого Санкт-Петербургского военно-морского института'),
+('Московская академия образования Натальи Нестеровой'),
+('Московская академия предпринимательства при Правительстве г. Москвы'),
+('Московская академия рынка труда и информационных технологий'),
+('Московская академия экономики и права'),
+('Московская Высшая Школа Экономики - финансовый институт'),
+('Московская государственная академия ветеринарной медицины и биотехнологии имени К.И. Скрябина'),
+('Московская государственная академия водного транспорта'),
+('Московская государственная академия коммунального хозяйства и строительства'),
+('Московская государственная академия физической культуры'),
+('Московская государственная академия хореографии'),
+('Московская государственная консерватория (университет) имени П. И. Чайковского'),
+('Московская государственная художественно-промышленная академия им. С.Г. Строганова'),
+('Московская гуманитарно-техническая академия'),
+('Московская международная высшая школа бизнеса ""МИРБИС"" (Институт)'),
+('Московский авиационный институт (национальный исследовательский университет)'),
+('Московский автомобильно-дорожный государственный технический университет (МАДИ)'),
+('Московский архитектурный институт (государственная академия)'),
+('Московский банковский институт'),
+('Московский военный институт радиоэлектроники Космических войск'),
+('Московский горный институт Национального исследовательского технологического университета ""МИСИС""'),
+('Московский городской институт международного туризма'),
+('Московский городской институт современных психологических технологий'),
+('Московский городской педагогический университет'),
+('Московский городской университет управления Правительства Москвы'),
+('Московский государственный академический художественный институт имени В.И. Сурикова'),
+('Московский государственный вечерний металлургический институт'),
+('Московский государственный гуманитарно-экономический университет'),
+('Московский государственный гуманитарный университет имени М.А. Шолохова'),
+('Московский государственный индустриальный университет'),
+('Московский государственный институт индустрии туризма имени Ю.А. Сенкевича'),
+('Московский государственный институт культуры'),
+('Московский государственный институт международных отношений (университет)'),
+('Московский государственный институт музыки имени А.Г. Шнитке'),
+('Московский государственный лингвистический университет'),
+('Московский государственный медико-стоматологический университет имени А.И. Евдокимова'),
+('Московский государственный областной гуманитарный институт'),
+('Московский государственный областной университет'),
+('Московский государственный психолого-педагогический университет'),
+('Московский государственный строительный университет - национальный исследовательский университет'),
+('Московский государственный текстильный университет имени А.Н. Косыгина'),
+('Московский государственный технический университет гражданской авиации'),
+('Московский государственный технический университет имени Н.Э. Баумана (национальный исследовательский университет)'),
+('Московский государственный технологический университет ""Станкин""'),
+('Московский государственный университет геодезии и картографии'),
+('Московский государственный университет имени М.В. Ломоносова'),
+('Московский государственный университет пищевых производств'),
+('Московский государственный университет путей сообщения'),
+('Московский государственный университет технологий и управления имени К.Г. Разумовского'),
+('Московский государственный университет экономики, статистики и информатики'),
+('Московский государственный юридический университет имени О.Е. Кутафина'),
+('Московский гуманитарно-экономический институт'),
+('Московский гуманитарный институт'),
+('Московский гуманитарный институт имени Е.Р. Дашковой'),
+('Московский гуманитарный педагогический институт'),
+('Московский гуманитарный университет'),
+('Московский институт аналитической психологии и психоанализа'),
+('Московский институт банковского дела'),
+('Московский институт государственного и корпоративного управления'),
+('Московский институт государственного управления и права'),
+('Московский институт иностранных языков'),
+('Московский институт лингвистики'),
+('Московский институт мировой экономики и международных отношений'),
+('Московский институт национальных и региональных отношений'),
+('Московский институт открытого образования'),
+('Московский институт права'),
+('Московский институт предпринимательства и права'),
+('Московский институт психоанализа'),
+('Московский институт рекламы, туризма, шоу-бизнеса'),
+('Московский институт современного академического образования'),
+('Московский институт телевидения и радиовещания ""Останкино""'),
+('Московский институт управления'),
+('Московский институт управления и сервиса'),
+('Московский институт физической культуры и спорта'),
+('Московский институт экономики, политики и права'),
+('Московский институт электроники и математики Национального исследовательского университета ""Высшая школа экономики""'),
+('Московский институт энергобезопасности и энергосбережения'),
+('Московский институт юриспруденции'),
+('Московский информационно-технологический университет – Московский архитектурно-строительный институт'),
+('Московский Исламский Университет (Учреждение)'),
+('Московский медицинский институт ""РЕАВИЗ""'),
+('Московский налоговый институт'),
+('МОСКОВСКИЙ НОВЫЙ ЮРИДИЧЕСКИЙ ИНСТИТУТ'),
+('Московский областной институт управления'),
+('Московский областной институт управления и права'),
+('Московский областной филиал Московского университета МВД Российской Федерации'),
+('Московский областной филиал Санкт-Петербургского Гуманитарного университета профсоюзов Институт искусств и информационных технологий'),
+('Московский открытый институт'),
+('Московский открытый юридический институт'),
+('Московский педагогический государственный университет'),
+('Московский пограничный институт Федеральной службы безопасности Российской Федерации'),
+('Московский политехнический университет'),
+('Московский психолого-социальный университет'),
+('Московский региональный социально-экономический институт'),
+('Московский социально-педагогический институт'),
+('Московский социально-экономический институт'),
+('Московский технический университет связи и информатики'),
+('Московский технологический институт'),
+('Московский технологический университет'),
+('Московский транспортный институт'),
+('Московский университет имени С.Ю.Витте'),
+('Московский университет Министерства внутренних дел Российской Федерации имени В.Я. Кикотя'),
+('Московский университет ""ТУРО""'),
+('Московский физико-технический институт (государственный университет)'),
+('Московский филиал автономного образовательного учреждения Ленинградского государственного университета имени А.С. Пушкина'),
+('Московский филиал Российской международной академии туризма'),
+('Московский финансово-правовой институт'),
+('Московский финансово-экономический институт'),
+('Московский финансово-юридический университет МФЮА'),
+('Московский художественно-промышленный институт'),
+('Московский экономико-финансовый институт'),
+('Московский экономический институт'),
+('Московский экономический институт Высшая школа Современное образование'),
+('Московское высшее военное командное училище (военный институт) (филиал) Военного учебно-научного центра Сухопутных войск ""Общевойсковая академия Вооруженных Сил Российской Федерации""'),
+('Московской области Государственный социально-гуманитарный университет'),
+('Муниципальный институт г. Жуковского'),
+('Мурманская академия экономики и управления'),
+('Мурманский арктический государственный университет'),
+('Мурманский государственный технический университет'),
+('Мурманский институт экономики - филиал Санкт-Петербургской академии управления и экономики'),
+('Мурманский филиал Государственного университета морского и речного флота имени адмирала С.О. Макарова'),
+('Мурманский филиал Московской академии предпринимательства при Правительстве Москвы'),
+('Мурманский филиал Петербургского государственного университета путей сообщения'),
+('Мурманский филиал Российского университета кооперации'),
+('Мурманский филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации'),
+('Мурманский филиал Санкт-Петербургского Гуманитарного университета профсоюзов'),
+('Мурманский филиал Современной гуманитарной академии'),
+('Мурманский филиал Юридического института (г. Санкт-Петербург)'),
+('Муромский институт (филиал) Владимирского государственного университета имени Александра Григорьевича и Николая Григорьевича Столетовых'),
+('Муромский филиал Московского государственного университета путей сообщения'),
+('Мценский филиал Орловского государственного университета имени И.С. Тургенева'),
+('Мытищинский филиал МГТУ им. Н. Э. Баумана'),
+('Мытищинский филиал Московского государственного строительного университета'),
+('Набережночелнинский государственный педагогический университет'),
+('Набережночелнинский государственный торгово-технологический институт'),
+('Набережно-Челнинский институт Восточной экономико-юридической гуманитарной академии (филиал)'),
+('Набережночелнинский филиал Академии управления ТИСБИ'),
+('Набережночелнинский филиал Казанского государственного технического университета им. А.Н. Туполева'),
+('Набережночелнинский филиал Казанского инновационного университета имени В.Г.Тимирясова'),
+('Набережночелнинский филиал Поволжской государственной академии физической культуры, спорта и туризма'),
+('Набережночелнинский филиал Современной гуманитарной академии'),
+('Назранский филиал Современной гуманитарной академии'),
+('Нальчикский институт кооперации (филиал) Белгородского университета кооперации, экономики и права'),
+('Нальчикский филиал Краснодарского университета Министерства внутренних дел Российской Федерации'),
+('Нальчикский филиал Современной гуманитарной академии'),
+('Находкинский рыбопромышленный институт (филиал) Дальневосточного государственного технического рыбохозяйственного университета'),
+('Находкинский филиал Современной гуманитарной академии'),
+('Национальный государственный университет физической культуры, спорта и здоровья имени П.Ф. Лесгафта, Санкт-Петербург'),
+('Национальный институт бизнеса'),
+('Национальный Институт Дизайна'),
+('Национальный институт имени Екатерины Великой'),
+('Национальный институт моды'),
+('Национальный институт современного дизайна'),
+('Национальный институт финансовых рынков и управления'),
+('Национальный исследовательский Мордовский государственный университет им. Н. П. Огарёва'),
+('Национальный исследовательский Нижегородский государственный университет им. Н.И. Лобачевского'),
+('Национальный исследовательский Саратовский государственный университет имени Н.Г. Чернышевского'),
+('Национальный исследовательский технологический университет «МИСиС»'),
+('Национальный исследовательский Томский государственный университет'),
+('Национальный исследовательский Томский политехнический университет'),
+('Национальный исследовательский университет ""Высшая школа экономики""'),
+('Национальный исследовательский университет ""МИЭТ""'),
+('Национальный исследовательский университет ""МЭИ""'),
+('Национальный исследовательский ядерный университет ""МИФИ""'),
+('Национальный открытый институт России г. Санкт-Петербург'),
+('Невинномысский государственный гуманитарно-технический институт'),
+('Невинномысский институт экономики, управления и права'),
+('Невинномысский технологический институт (филиал) Северо-Кавказского федерального университета'),
+('Невский институт управления и дизайна'),
+('Невский институт языка и культуры'),
+('Нефтекамский филиал Башкирского государственного университета'),
+('Нефтеюганский филиал Томского государственного университета систем управления и радиоэлектроники'),
+('Нижегородская академия Министерства внутренних дел Российской Федерации'),
+('Нижегородская государственная консерватория (академия) имени М.И. Глинки'),
+('Нижегородская государственная медицинская академия'),
+('Нижегородская государственная сельскохозяйственная академия'),
+('Нижегородская правовая академия'),
+('Нижегородский (г. Нижний Новгород) филиал Международного юридического института при Министерстве юстиции Российской Федерации'),
+('Нижегородский государственный архитектурно-строительный университет'),
+('Нижегородский государственный инженерно-экономический университет'),
+('Нижегородский государственный лингвистический университет имени Н.А. Добролюбова'),
+('Нижегородский государственный педагогический университет имени Козьмы Минина'),
+('Нижегородский государственный технический университет им. Р.Е. Алексеева'),
+('Нижегородский институт менеджмента и бизнеса'),
+('Нижегородский институт управления - филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации'),
+('Нижегородский коммерческий институт'),
+('Нижегородский филиал Академии МНЭПУ'),
+('Нижегородский филиал Академии труда и социальных отношений'),
+('Нижегородский филиал Гуманитарного института (г. Москва)'),
+('Нижегородский филиал Института бизнеса и политики'),
+('Нижегородский филиал Московского государственного университета путей сообщения'),
+('Нижегородский филиал Московского государственного университета экономики, статистики и информатики (МЭСИ)'),
+('Нижегородский филиал Московского гуманитарно-экономического института'),
+('Нижегородский филиал Национального исследовательского университета ""Высшая школа экономики""'),
+('Нижегородский филиал Российского нового университета'),
+('Нижегородский филиал Современной гуманитарной академии'),
+('Нижегородский филиал Университета Российской академии образования'),
+('Нижегородское высшее военно-инженерное командное училище (военный институт)'),
+('Нижневартовский государственный университет'),
+('Нижнекамский институт открытого образования'),
+('Нижнекамский муниципальный институт'),
+('Нижнекамский филиал Академии управления ТИСБИ'),
+('Нижнекамский филиал Казанского инновационного университета имени В.Г.Тимирясова'),
+('Нижнекамский филиал Московского гуманитарно-экономического института'),
+('Нижнекамский химико-технологический институт (филиал) Казанского национального исследовательского технологического университета'),
+('Нижнеломовский филиал Пензенского государственного университета'),
+('Нижнетагильская государственная социально-педагогическая академия'),
+('Нижнетагильский архитектурный институт (филиал) Уральской государственной архитектурно-художественной академии'),
+('Нижнетагильский (г. Нижний Тагил Свердловской области) филиал Международного юридического института'),
+('Нижнетагильский технологический институт (филиал) Уральского федерального университета имени первого Президента России Б.Н. Ельцина'),
+('Нижнетагильский филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации'),
+('Нижнетагильский филиал Уральского института экономики, управления и права'),
+('Новгородский государственный университет имени Ярослава Мудрого'),
+('Новгородский филиал Российского университета кооперации'),
+('Новгородский филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации'),
+('Новгородский филиал Санкт-Петербургского института управления и права'),
+('Новгородский филиал Современной гуманитарной академии'),
+('Новокузнецкий институт (филиал) Кемеровского государственного университета'),
+('Новокузнецкий филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации'),
+('Новокузнецкий филиал Современной гуманитарной академии'),
+('Новомосковский институт Российского химико-технологического университета имени Д.И. Менделеева'),
+('Новомосковский филиал Университета Российской академии образования'),
+('Новороссийский политехнический институт (филиал) Кубанского государственного технологического университета'),
+('Новороссийский филиал Краснодарского университета Министерства внутренних дел Российской Федерации'),
+('Новороссийский филиал Московского гуманитарно-экономического института'),
+('Новороссийский филиал Пятигорского государственного лингвистического университета'),
+('Новороссийский филиал Современной гуманитарной академии'),
+('Новосибирская государственная консерватория (академия) имени М.И. Глинки'),
+('Новосибирский государственный аграрный университет'),
+('Новосибирский государственный архитектурно-строительный университет (Сибстрин)'),
+('Новосибирский государственный медицинский университет'),
+('Новосибирский государственный педагогический университет'),
+('Новосибирский государственный театральный институт'),
+('Новосибирский государственный технический университет'),
+('Новосибирский государственный университет архитектуры, дизайна и искусств'),
+('Новосибирский государственный университет экономики и управления ""НИНХ""'),
+('Новосибирский гуманитарный институт'),
+('Новосибирский институт экономики и менеджмента'),
+('Новосибирский институт экономики, психологии и права'),
+('Новосибирский национальный исследовательский государственный университет'),
+('Новосибирский технологический институт Российского государственного университета им. А.Н. Косыгина'),
+('Новосибирский филиал Московской финансово-юридической академии'),
+('Новосибирский филиал Российского государственного торгово-экономического университета'),
+('Новосибирский филиал Российской академии предпринимательства'),
+('Новосибирский филиал Санкт-Петербургского университета управления и экономики'),
+('Новосибирский филиал Современной гуманитарной академии'),
+('Новосибирский филиал Томского экономико-юридического института'),
+('Новосибирский юридический институт (филиал) Национального исследовательского Томского государственного университета'),
+('Новосибирское высшее военное командное училище (военный институт) (филиал) Военного учебно-научного центра Сухопутных войск ""Общевойсковая академия Вооруженных Сил Российской Федерации""'),
+('Новотроицкий филиал Национального исследовательского технологического университета «МИСиС»'),
+('Новоуральский технологический институт - филиал Национального исследовательского ядерного университета ""МИФИ""'),
+('Новоуральский филиал Современной гуманитарной академии'),
+('Новочеркасский инженерно-мелиоративный институт имени А.К. Кортунова Донского государственного аграрного университета'),
+('Новошахтинский филиал Южно-Российского государственного технического университета (Новочеркасского политехнического института)'),
+('Новый Гуманитарный институт'),
+('Новый сибирский институт'),
+('Нолинский филиал Вятской государственной сельскохозяйственной академии'),
+('Норильский государственный индустриальный институт'),
+('Норильский филиал Кисловодского института экономики и права'),
+('Норильский филиал Современной гуманитарной академии'),
+('Обнинский институт атомной энергетики - филиал Национального исследовательского ядерного университета ""МИФИ""'),
+('Обнинский филиал Современной гуманитарной академии'),
+('Одинцовский (г. Одинцово Московской области) филиал Международного юридического института'),
+('Одинцовский гуманитарный университет'),
+('Одинцовский филиал Российской международной академии туризма'),
+('Октемский филиал Якутской государственной сельскохозяйственной академии'),
+('Октябрьский филиал Современной гуманитарной академии'),
+('Олекминский филиал Якутской государственной сельскохозяйственной академии'),
+('Омская академия Министерства внутренних дел Российской Федерации'),
+('Омская гуманитарная академия'),
+('Омская юридическая академия'),
+('Омский государственный аграрный университет имени П.А.Столыпина'),
+('Омский государственный институт сервиса'),
+('Омский государственный медицинский университет'),
+('Омский государственный педагогический университет'),
+('Омский государственный технический университет'),
+('Омский государственный университет им. Ф.М. Достоевского'),
+('Омский государственный университет путей сообщения'),
+('Омский институт водного транспорта (филиал) Сибирского государственного университета водного транспорта'),
+('Омский институт международного менеджмента и иностранных языков ""Ин.яз.-Омск""'),
+('Омский институт (филиал) Российского государственного торгово-экономического университета'),
+('Омский региональный институт'),
+('Омский филиал Московского института иностранных языков'),
+('Омский филиал Московской финансово-промышленной академии'),
+('Омский филиал Современной гуманитарной академии'),
+('Омский филиал Финансового университета при Правительстве Российской Федерации'),
+('Омский экономический институт'),
+('Оренбургский государственный аграрный университет'),
+('Оренбургский государственный институт искусств им. Л. и М. Ростроповичей'),
+('Оренбургский государственный институт менеджмента'),
+('Оренбургский государственный медицинский университет'),
+('Оренбургский государственный педагогический университет'),
+('Оренбургский государственный университет'),
+('Оренбургский институт бизнеса и управления'),
+('Оренбургский институт путей сообщения - филиал Самарского государственного университета путей сообщения'),
+('Оренбургский институт (филиал) Университета имени О.Е. Кутафина (МГЮА)'),
+('Оренбургский институт экономики и культуры'),
+('Оренбургский филиал Академии труда и социальных отношений'),
+('Оренбургский филиал (заочного обучения) Уфимского юридического института МВД России'),
+('Оренбургский филиал Института бизнеса и политики'),
+('Оренбургский филиал Поволжского государственного университета телекоммуникаций и информатики'),
+('Оренбургский филиал Российского государственного торгово-экономического университета'),
+('Оренбургский филиал Российского экономического университета имени Г.В. Плеханова'),
+('Оренбургский филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации'),
+('Оренбургский филиал Современной гуманитарной академии'),
+('Орехово-Зуевский филиал Института экономики и предпринимательства'),
+('Орловский государственный аграрный университет'),
+('Орловский государственный институт культуры'),
+('Орловский государственный институт экономики и торговли'),
+('Орловский государственный университет имени И.С. Тургенева'),
+('Орловский филиал Московского государственного университета путей сообщения'),
+('Орловский филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации'),
+('Орловский филиал Современной гуманитарной академии'),
+('Орловский юридический институт'),
+('Орский гуманитарно-технологический институт (филиал) Оренбургского государственного университета'),
+('Орский филиал Московской финансово-юридической академии'),
+('Орский филиал Оренбургского государственного института менеджмента'),
+('Осинниковский филиал Сибирского государственного индустриального университета'),
+('Останкинский институт телевидения и радиовещания'),
+('Открытый Институт Муниципальных Проблем'),
+('Открытый юридический институт'),
+('Отрадненский гуманитарный институт'),
+('Павлово-Посадский филиал Российской международной академии туризма'),
+('Павлово-Посадский филиал Современной гуманитарной академии'),
+('Павловский филиал Нижегородского государственного университета им. Н.И. Лобачевского'),
+('Педагогический институт Владимирского государственного университета имени Александра Григорьевича и Николая Григорьевича Столетовых'),
+('Педагогический институт ВоГУ'),
+('Педагогический институт Мичуринского государственного аграрного университета'),
+('Пензенская государственная сельскохозяйственная академия'),
+('Пензенский артиллерийский инженерный институт имени Главного маршала артиллерии Н.Н. Воронова (филиал) Военного учебно-научного центра Сухопутных войск ""Общевойсковая академия Вооруженных Сил Российской Федерации""'),
+('Пензенский государственный педагогический университет имени В.Г. Белинского'),
+('Пензенский государственный технологический университет'),
+('Пензенский государственный университет'),
+('Пензенский государственный университет архитектуры и строительства'),
+('Пензенский региональный центр высшей школы (филиал) Российского Государственного Университета Инновационных Технологий и Предринимательства'),
+('Пензенский филиал Академии МНЭПУ'),
+('Пензенский филиал Современной гуманитарной академии'),
+('Первый Московский государственный медицинский университет имени И.М. Сеченова'),
+('Первый московский юридический институт'),
+('Первый Санкт-Петербургский государственный медицинский университет им. акад. И. П. Павлова'),
+('Пермская государственная сельскохозяйственная академия имени академика Д.Н. Прянишникова'),
+('Пермская государственная фармацевтическая академия Федерального агентства по здравоохранению и социальному развитию'),
+('Пермский военный институт внутренних войск'),
+('Пермский государственный гуманитарно-педагогический университет'),
+('Пермский государственный институт культуры'),
+('Пермский Государственный Медицинский Университет Имени Академика Е.А. Вагнера'),
+('Пермский государственный национальный исследовательский университет'),
+('Пермский гуманитарно-технологический институт'),
+('Пермский институт железнодорожного транспорта - филиал Уральского государственного университета путей сообщения в г. Перми'),
+('Пермский институт муниципального управления (Высшая школа приватизации и предпринимательства)'),
+('Пермский институт Федеральной службы исполнения наказаний'),
+('Пермский институт (филиал) Российского государственного торгово-экономического университета'),
+('Пермский институт (филиал) Российского экономического университета имени Г.В. Плеханова'),
+('Пермский институт экономики и финансов'),
+('Пермский национальный исследовательский политехнический университет'),
+('Пермский филиал Волжского государственного университета водного транспорта'),
+('Пермский филиал Евразийского открытого института'),
+('Пермский филиал Московского государственного университета экономики, статистики и информатики (МЭСИ)'),
+('Пермский филиал Национального исследовательского университета ""Высшая школа экономики""'),
+('Пермский филиал Нижегородской академии Министерства внутренних дел Российской Федерации'),
+('Пермский филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации'),
+('Пермский филиал Современной гуманитарной академии'),
+('Петербургский государственный университет путей сообщения императора Александра I'),
+('Петербургский институт иудаики'),
+('Петрозаводская государственная консерватория (академия) имени А.К. Глазунова'),
+('Петрозаводский государственный университет'),
+('Петрозаводский филиал Международного славянского института'),
+('Петрозаводский филиал Петербургского государственного университета путей сообщения'),
+('Петрозаводский филиал Современной гуманитарной академии'),
+('Петропавловск-Камчатский филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации'),
+('Петропавловск-Камчатский филиал Современной гуманитарной академии'),
+('Поволжская государственная академия физической культуры спорта и туризма'),
+('Поволжский государственный технологический университет'),
+('Поволжский государственный университет сервиса'),
+('Поволжский государственный университет телекоммуникаций и информатики'),
+('Поволжский (г. Саратов) юридический институт (филиал) Всероссийского государственного университета юстиции'),
+('Поволжский институт бизнеса'),
+('Поволжский институт им. П.А. Столыпина - филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации'),
+('Поволжский институт управления имени П.А. Столыпина - филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации'),
+('Поволжский кооперативный институт (филиал) Российского университета кооперации'),
+('Поволжский филиал Международного университета в Москве (гуманитарного)'),
+('Поволжский филиал Московского государственного университета путей сообщения'),
+('Пограничная академия Федеральной службы безопасности Российской Федерации'),
+('Подольский социально-спортивный институт'),
+('Подольский филиал Московского политехнического университета'),
+('Подольский филиал Современной гуманитарной академии'),
+('Покровский филиал Московского педагогического государственного университета'),
+('Политехнический институт (филиал) Северо-Восточного федерального университета имени М.К. Аммосова в г. Мирном'),
+('Политехнический институт (филиал) Уральского федерального университета имени первого Президента России Б.Н. Ельцина в г. Каменске-Уральском'),
+('Православный Свято-Тихоновский Гуманитарный Университет'),
+('Приамурский государственный университет имени Шолом-Алейхема'),
+('Приволжский филиал Российской академии правосудия (г. Нижний Новгород)'),
+('Прикамский социальный институт'),
+('Приладожский филиал Петрозаводского государственного университета'),
+('Приморская государственная сельскохозяйственная академия'),
+('Приморский институт железнодорожного транспорта - филиал Дальневосточного государственного университета путей сообщения в г. Уссурийске'),
+('Приморский филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации'),
+('Приморский филиал Сибирского университета потребительской кооперации'),
+('Прокопьевский филиал Московского политехнического университета'),
+('Прокопьевский филиал Сибирского государственного индустриального университета'),
+('Профессиональная образовательная организация ""Дагестанская академия образования и культуры""'),
+('Псковский государственный университет'),
+('Псковский филиал Академии права и управления (института)'),
+('Псковский филиал Академии права и управления Федеральной службы исполнения наказаний'),
+('Псковский филиал Московской открытой социальной академии'),
+('Псковский филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации'),
+('Псковский филиал Российской международной академии туризма'),
+('Псковский филиал Санкт-Петербургского государственного экономического университета'),
+('Псковский филиал Санкт-Петербургского института управления и права'),
+('Псковский филиал Современной гуманитарной академии'),
+('Пущинский государственный естественно-научный институт'),
+('Пятигорский государственный университет'),
+('Пятигорский институт курортной рекреации и гостеприимства - филиал Российской международной академии туризма'),
+('Пятигорский медико-фармацевтический институт – филиал Волгоградского государственного медицинского университета'),
+('Пятигорский филиал Санкт-Петербургского государственного университета аэрокосмического приборостроения'),
+('Пятигорский филиал Современной гуманитарной академии'),
+('Региональный институт бизнеса и управления'),
+('Региональный открытый социальный институт'),
+('Региональный финансово-экономический институт'),
+('Реутовский (г. Реутов Московской области) филиал Международного юридического института'),
+('Российская академия адвокатуры и нотариата'),
+('Российская академия живописи, ваяния и зодчества Ильи Глазунова'),
+('Российская академия музыки имени Гнесиных'),
+('Российская академия народного хозяйства и государственной службы при Президенте Российской Федерации'),
+('Российская академия предпринимательства'),
+('Российская государственная академия интеллектуальной собственности'),
+('Российская государственная специализированная академия искусств'),
+('Российская инженерная академия менеджмента и агробизнеса'),
+('Российская международная академия туризма'),
+('Российская таможенная академия'),
+('Российская школа частного права (институт)'),
+('Российская экономическая школа (Институт)'),
+('Российский государственный аграрный заочный университет'),
+('Российский государственный аграрный университет- МСХА имени К.А. Тимирязева'),
+('Российский государственный геологоразведочный университет имени Серго Орджоникидзе'),
+('Российский государственный гидрометеорологический университет'),
+('Российский государственный гуманитарный университет'),
+('Российский государственный педагогический университет имени А. И. Герцена'),
+('Российский государственный профессионально-педагогический университет'),
+('Российский государственный социальный университет'),
+('Российский государственный технологический университет имени К.Э. Циолковского Московского авиационного института (национального исследовательского университета)'),
+('Российский государственный торгово-экономический университет'),
+('Российский государственный университет имени А.Н. Косыгина Технологии. Дизайн. Искусство'),
+('Российский государственный университет инновационных технологий и предпринимательства'),
+('Российский государственный университет нефти и газа (национальный исследовательский университет) имени И.М, Губкина'),
+('Российский государственный университет правосудия'),
+('Российский государственный университет туризма и сервиса'),
+('Российский государственный университет физической культуры, спорта, молодежи и туризма (ГЦОЛИФК)'),
+('Российский исламский институт'),
+('Российский национальный исследовательский медицинский университет имени Н.И. Пирогова'),
+('Российский новый университет'),
+('Российский православный институт святого Иоанна Богослова'),
+('Российский университет дружбы народов'),
+('Российский университет кооперации'),
+('Российский университет театрального искусства - ГИТИС'),
+('Российский химико-технологический университет имени Д.И. Менделеева'),
+('Российский экономический университет имени Г.В. Плеханова'),
+('Ростовская государственная консерватория (академия) имени С.В. Рахманинова'),
+('Ростовский военный институт ракетных войск имени Главного маршала артиллерии М.И. Неделина'),
+('Ростовский государственный медицинский университет'),
+('Ростовский государственный университет путей сообщения'),
+('Ростовский государственный экономический университет (РИНХ)'),
+('Ростовский (г. Ростов-на-Дону) юридический институт (филиал) Всероссийского государственного университета юстиции'),
+('Ростовский институт защиты предпринимателя'),
+('РОСТОВСКИЙ ИНСТИТУТ ИНОСТРАННЫХ ЯЗЫКОВ'),
+('Ростовский институт кооперации (филиал) Белгородского университета кооперации, экономики и права'),
+('Ростовский институт (филиал) Российского государственного торгово-экономического университета'),
+('Ростовский международный институт экономики и управления'),
+('Ростовский-на-Дону филиал Московской академии предпринимательства при Правительстве Москвы'),
+('Ростовский социально-экономический институт'),
+('Ростовский технологический институт сервиса и туризма (филиал) Южно-Российского государственного университета экономики и сервиса'),
+('Ростовский филиал Волжского государственного университета водного транспорта'),
+('Ростовский филиал Московского государственного технического университета гражданской авиации'),
+('Ростовский филиал Российской академии правосудия (г. Ростов-на-Дону)'),
+('Ростовский филиал Российской таможенной академии'),
+('Ростовский филиал Санкт-Петербургского государственного университета культуры и искусств'),
+('Ростовский филиал Современной гуманитарной академии'),
+('Ростовский юридический институт'),
+('Рубцовский индустриальный институт (филиал) Алтайского государственного технического университета им. И.И. Ползунова'),
+('Рубцовский институт (филиал) Алтайского государственного университета'),
+('Рубцовский филиал Университета Российской академии образования'),
+('Рузаевский институт машиностроения (филиал) Мордовского государственного университета им. Н.П. Огарева'),
+('Русская Христианская Гуманитарная Академия'),
+('Русский институт управления имени В.П. Чернова'),
+('Рыльский филиал Современной гуманитарной академии'),
+('Рязанский государственный агротехнологический университет имени П.А. Костычева'),
+('Рязанский государственный медицинский университет имени академика И.П. Павлова'),
+('Рязанский государственный радиотехнический университет'),
+('Рязанский государственный университет имени С.А. Есенина'),
+('Рязанский заочный институт (филиал) Московского государственного университета культуры и искусств'),
+('Рязанский институт открытого образования'),
+('Рязанский институт управления и права'),
+('Рязанский институт (филиал) Московского политехнического университета'),
+('Рязанский институт экономики филиал Санкт-Петербургского университета управления и экономики'),
+('Рязанский филиал Академии права и управления (института)'),
+('Рязанский филиал Академического правового института'),
+('Рязанский филиал Московского государственного университета путей сообщения'),
+('Рязанский филиал Московского университета Министерства внутренних дел Российской Федерации'),
+('Рязанский филиал Современной гуманитарной академии'),
+('Рязанское высшее воздушно-десантное командное училище (военный институт) имени генерала армии В.Ф. Маргелова (филиал) Военного учебно-научного центра Сухопутных войск ""Общевойсковая академия Вооруженных Сил Российской Федерации""'),
+('Салаватский гуманитарный институт'),
+('Салаватский институт экономики и управления'),
+('Самарская академия государственного и муниципального управления'),
+('Самарская государственная областная академия (Наяновой)'),
+('Самарская государственная сельскохозяйственная академия'),
+('Самарская гуманитарная академия'),
+('Самарский военно-медицинский институт'),
+('Самарский государственный институт культуры'),
+('Самарский государственный медицинский университет'),
+('Самарский государственный социально-педагогический университет'),
+('Самарский государственный технический университет'),
+('Самарский государственный университет'),
+('Самарский государственный университет путей сообщения'),
+('Самарский государственный экономический университет'),
+('Самарский институт бизнеса и управления'),
+('Самарский институт - высшая школа приватизации и предпринимательства'),
+('Самарский институт медико-социальной реабилитологии'),
+('Самарский институт управления'),
+('Самарский институт (филиал) Российского государственного торгово-экономического университета'),
+('Самарский институт (филиал) Российского экономического университета имени Г.В. Плеханова'),
+('Самарский национальный исследовательский университет имени академика С.П. Королева'),
+('Самарский филиал Волжского государственного университета водного транспорта'),
+('Самарский филиал Московского городского педагогического университета'),
+('Самарский филиал Новгородского государственного университета имени Ярослава Мудрого'),
+('Самарский филиал Санкт-Петербургского Гуманитарного университета профсоюзов'),
+('Самарский филиал Современной гуманитарной академии'),
+('Самарский филиал Университета Российской академии образования'),
+('Самарский юридический институт Федеральной службы исполнения наказаний'),
+('Санкт-Петербургская государственная академия ветеринарной медицины'),
+('Санкт-Петербургская государственная академия театрального искусства'),
+('Санкт-Петербургская государственная консерватория (академия) им. Н.А. Римского-Корсакова'),
+('Санкт-Петербургская государственная химико-фармацевтическая академия'),
+('Санкт-Петербургская государственная художественно-промышленная академия имени А. Л. Штиглица'),
+('Санкт-Петербургская юридическая академия'),
+('Санкт-Петербургский академический университет - научно-образовательный центр нанотехнологий РАН (Академический университет РАН)'),
+('Санкт-Петербургский военный институт внутренних войск'),
+('Санкт-Петербургский горный университет'),
+('Санкт-Петербургский государственный аграрный университет'),
+('Санкт-Петербургский государственный академический институт живописи, скульптуры и архитектуры имени И.Е. Репина'),
+('Санкт-Петербургский государственный архитектурно-строительный университет'),
+('Санкт-Петербургский государственный институт культуры'),
+('Санкт-Петербургский государственный институт психологии и социальной работы'),
+('Санкт-Петербургский государственный лесотехнический университет имени С.М. Кирова'),
+('Санкт-Петербургский государственный морской технический университет'),
+('Санкт-Петербургский государственный педиатрический медицинский университет'),
+('Санкт-Петербургский государственный технологический институт (технический университет)'),
+('Санкт-Петербургский государственный торгово-экономический университет'),
+('Санкт-Петербургский государственный университет'),
+('Санкт-Петербургский государственный университет аэрокосмического приборостроения'),
+('Санкт-Петербургский государственный университет гражданской авиации'),
+('Санкт-Петербургский государственный университет кино и телевидения'),
+('Санкт-Петербургский государственный университет промышленных технологий и дизайна'),
+('Санкт-Петербургский государственный университет телекоммуникаций им. проф. М.А. Бонч-Бруевича'),
+('Санкт-Петербургский государственный экономический университет'),
+('Санкт-Петербургский государственный электротехнический университет ЛЭТИ им. В.И. Ульянова (Ленина)'),
+('Санкт-Петербургский Гуманитарный университет профсоюзов'),
+('Санкт-Петербургский имени В.Б. Бобкова филиал Российской таможенной академии'),
+('Санкт-Петербургский институт внешнеэкономических связей, экономики и права'),
+('Санкт-Петербургский институт гостеприимства'),
+('Санкт-Петербургский институт гуманитарного образования'),
+('Санкт-Петербургский институт искусств и реставрации'),
+('Санкт-Петербургский институт машиностроения'),
+('Санкт-Петербургский институт управления и права'),
+('Санкт-Петербургский институт управления персоналом'),
+('Санкт-Петербургский Институт экономики и управления'),
+('Санкт-Петербургский институт экономики, культуры и делового администрирования'),
+('Санкт-Петербургский медико-технический институт'),
+('Санкт-Петербургский национальный-исследовательский университет информационных технологий, механики и оптики'),
+('Санкт-Петербургский политехнический университет Петра Великого'),
+('Санкт-Петербургский университет Государственной противопожарной службы'),
+('Санкт-Петербургский университет Министерства внутренних дел Российской Федерации'),
+('Санкт-Петербургский университет технологий управления и экономики'),
+('Санкт-Петербургский филиал Института бизнеса и политики (ИБП)'),
+('Санкт-Петербургский филиал Медицинского института «РЕАВИЗ»'),
+('Санкт-Петербургский филиал Современной гуманитарной академии'),
+('Санкт-Петербургский филиал Финансового Университета при Правительстве Российской Федерации'),
+('Санкт-Петербургский юридический институт (филиал) Академии Генеральной прокуратуры Российской Федерации'),
+('Саранский кооперативный институт (филиал) Российского университета кооперации'),
+('Саранский филиал Нижегородской академии Министерства внутренних дел Российской Федерации'),
+('Саранский филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации'),
+('Саранский филиал Современной гуманитарной академии'),
+('Саратовская государственная консерватория (академия) им. Л.В. Собинова'),
+('Саратовская государственная юридическая академия'),
+('Саратовский военно-медицинский институт'),
+('Саратовский военный институт внутренних войск'),
+('Саратовский государственный аграрный университет имени Н.И. Вавилова'),
+('Саратовский государственный медицинский университет имени В. И. Разумовского'),
+('Саратовский государственный технический университет имени Гагарина Ю.А.'),
+('Саратовский институт бизнеса и информационных технологий'),
+('Саратовский социально-экономический институт (филиал) Российского экономического университета имени Г.В. Плеханова'),
+('Саратовский филиал Медицинского института «РЕАВИЗ»'),
+('Саратовский филиал Современной гуманитарной академии'),
+('Саратовский юридический институт адвокатуры'),
+('Саровский физико-технический институт - филиал Национального исследовательского ядерного университета ""МИФИ""'),
+('Саровский филиал Современной гуманитарной академии'),
+('Сафоновский филиал Московского политехнического университета'),
+('Саха государственная педагогическая академия'),
+('Сахалинский государственный университет'),
+('Сахалинский гуманитарно-технологический институт'),
+('Сахалинский институт железнодорожного транспорта - филиал Дальневосточного государственного университета путей сообщения в г. Южно-Сахалинске'),
+('Сахалинское высшее морское училище им. Т.Б. Гуженко филиал МГУ им.адм. Г.И. Невельского'),
+('Саяно-Шушенский филиал Сибирского федерального университета'),
+('Светский институт народов Кавказа'),
+('Свято-Филаретовский православно-христианский институт'),
+('Себряковский филиал Волгоградского государственного архитектурно-строительного университета'),
+('Севастопольский государственный университет'),
+('Севастопольский филиал Российского экономического университета имени Г.В. Плеханова'),
+('Северный (Арктический) федеральный университет имени М.В. Ломоносова'),
+('Северный государственный медицинский университет'),
+('Северный (г. Петрозаводск) филиал Всероссийского государственного университета юстиции'),
+('Северный институт предпринимательства'),
+('Северный филиал в г. Великий Новгород Российского государственного университета инновационных технологий и предпринимательства'),
+('Северный филиал Московского гуманитарно-экономического института'),
+('Северо-Восточный государственный университет'),
+('Северо-Восточный федеральный университет имени М.К. Аммосова'),
+('Северодвинский филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации'),
+('Северодвинский филиал Современной гуманитарной академии'),
+('Северо-Западный государственный медицинский университет имени И.И. Мечникова'),
+('Северо-Западный (г. Санкт-Петербург) филиал Всероссийского государственного университета юстиции'),
+('Северо-Западный институт управления'),
+('Северо-Западный институт (филиал) Университета имени О.Е. Кутафина (МГЮА)'),
+('Северо-Западный открытый технический университет'),
+('Северо-Западный филиал Московского гуманитарно-экономического института'),
+('Северо-Западный филиал Российской академии правосудия (г. Санкт-Петербург)'),
+('Северо-Кавказская государственная гуманитарно-технологическая академия'),
+('Северо-Кавказский (г. Махачкала) филиал Всероссийского государственного университета юстиции'),
+('Северо-Кавказский горно-металлургический институт (государственный технологический университет)'),
+('Северо-Кавказский государственный институт искусств'),
+('Северо-Кавказский государственный налоговый институт - филиал Всероссийской государственной налоговой академии Министерства финансов Российской Федерации, г. Махачкала'),
+('Северо-Кавказский гуманитарный институт'),
+('Северо-Кавказский институт бизнеса, инженерных и информационных технологий'),
+('Северо-Кавказский институт - филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации'),
+('Северо-Кавказский социальный институт'),
+('Северо-Кавказский федеральный университет'),
+('Северо-Кавказский филиал Белгородского государственного технологического университета им. В. Г. Шухова'),
+('Северо-Кавказский филиал Московского автомобильно-дорожного государственного технического университета (МАДИ)'),
+('Северо-Кавказский филиал Московского гуманитарно-экономического института'),
+('Северо-Кавказский филиал Московского технического университета связи и информатики'),
+('Северо-Кавказский филиал Российской академии правосудия (г. Краснодар)'),
+('Северо-Осетинская государственная медицинская академия'),
+('Северо-Осетинский государственный педагогический институт'),
+('Северо-Осетинский государственный университет имени Коста Левановича Хетагурова'),
+('Северо-осетинский институт экологии и безопасности жизнедеятельности'),
+('Северский технологический институт - филиал Национального исследовательского ядерного университета ""МИФИ""'),
+('Сергачский филиал Нижегородского государственного университета им. Н.И. Лобачевского'),
+('Сергиево-Посадский гуманитарный институт'),
+('Сергиево-Посадский филиал Московского педагогического государственного университета'),
+('Сердобский филиал Пензенского государственного университета'),
+('Серпуховской военный институт ракетных войск'),
+('Серпуховской филиал Российского государственного торгово-экономического университета'),
+('Сибайский институт (филиал) Башкирского государственного университета'),
+('Сибирская академия права, экономики и управления'),
+('Сибирская академия управления и массовых коммуникаций (институт)'),
+('Сибирская академия финансов и банковского дела'),
+('Сибирская государственная автомобильно-дорожная академия (СибАДИ)'),
+('Сибирский государственный индустриальный университет'),
+('Сибирский государственный медицинский университет'),
+('Сибирский государственный университет водного транспорта'),
+('Сибирский государственный университет геосистем и технологий'),
+('Сибирский государственный университет науки и технологий имени академика М.Ф. Решетнева'),
+('Сибирский государственный университет путей сообщения'),
+('Сибирский государственный университет телекоммуникаций и информатики'),
+('Сибирский государственный университет физической культуры и спорта'),
+('Сибирский институт бизнеса и информационных технологий'),
+('Сибирский институт бизнеса, управления и психологии'),
+('Сибирский институт международных отношений и регионоведения'),
+('Сибирский институт - филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации'),
+('Сибирский казачий институт технологий и управления (филиал) Московского государственного университета технологий и управления им. К.Г. Разумовского'),
+('Сибирский независимый институт'),
+('Сибирский университет потребительской кооперации'),
+('Сибирский федеральный университет'),
+('Сибирский филиал Международного института экономики и права'),
+('Сибирский юридический институт Федеральной службы Российской Федерации по контролю за оборотом наркотиков'),
+('Сколковский институт науки и технологий'),
+('Славяно-Греко-Латинская академия'),
+('Славянский деловой институт им. К.В. Нечаева (Митрополита Питирима)'),
+('Славянский технический рыбохозяйственный институт (филиал) Дальневосточного государственного технического рыбохозяйственного университета'),
+('Слободской филиал Вятского социально-экономического института'),
+('Смоленская государственная академия физической культуры, спорта и туризма'),
+('Смоленская государственная сельскохозяйственная академия'),
+('Смоленская Православная Духовная Семинария Русской Православной Церкви'),
+('Смоленский государственный институт искусств'),
+('Смоленский государственный медицинский университет'),
+('Смоленский государственный университет'),
+('Смоленский гуманитарный университет'),
+('Смоленский институт бизнеса и предпринимательства'),
+('Смоленский институт экономики - филиал Санкт-Петербургского университета управления и экономики'),
+('Смоленский филиал Академии права и управления (институт)'),
+('Смоленский филиал Всероссийского заочного финансово-экономического института'),
+('Смоленский филиал Международного юридического института'),
+('Смоленский филиал Московского автомобильно-дорожного государственного технического университета'),
+('Смоленский филиал Московского государственного университета путей сообщения'),
+('Смоленский филиал Московского университета Министерства внутренних дел Российской Федерации'),
+('Смоленский филиал Российского государственного торгово-экономического университета'),
+('Смоленский филиал Российского университета кооперации'),
+('Смоленский филиал Российского экономического университета имени Г.В. Плеханова'),
+('Смоленский филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации'),
+('Смоленский филиал Саратовской государственной академии права'),
+('Смоленский филиал Современной гуманитарной академии'),
+('Смольный университет Российской академии образования'),
+('Современная гуманитарная академия'),
+('Современный морской институт'),
+('Современный технический институт'),
+('Соликамский государственный педагогический институт'),
+('Сосновоборский филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации'),
+('Сосновоборский филиал Санкт-Петербургского государственного университета аэрокосмического приборостроения'),
+('Социально-педагогический институт'),
+('Социально-правовой институт экономической безопасности'),
+('Социально-экономический институт'),
+('Сочинский государственный университет'),
+('Сочинский институт Восточной экономико-юридической гуманитарной академии (филиал)'),
+('Сочинский институт курортной рекреации и гостеприимства - филиал Российской международной академии туризма'),
+('Сочинский институт моды, бизнеса и права'),
+('Сочинский институт (филиал) Российского университета дружбы народов'),
+('Сочинский институт экономики и информационных технологий'),
+('Сочинский морской институт'),
+('Сочинский филиал Московского автомобильно-дорожного государственного технического университета (МАДИ)'),
+('Сочинский филиал Московского института предпринимательства и права'),
+('Сочинский филиал Современной гуманитарной академии'),
+('Специализированный институт юриспруденции'),
+('Средне-Волжский (г. Саранск) филиал Всероссийского государственного университета юстиции'),
+('Среднерусский гуманитарно-технологический институт'),
+('Ставропольский государственный аграрный университет'),
+('Ставропольский государственный медицинский университет'),
+('Ставропольский государственный педагогический институт'),
+('Ставропольский институт бизнеса и технологий ""Бизнестранс""'),
+('Ставропольский институт имени В.Д. Чурсина'),
+('Ставропольский институт управления'),
+('Ставропольский институт экономики и управления имени О.В. Казначеева (филиал) Пятигорского государственного технологического университета'),
+('Ставропольский кооперативный институт (филиал) Белгородского университета кооперации, экономики и права'),
+('Ставропольский университет'),
+('Ставропольский филиал Краснодарского университета Министерства внутренних дел Российской Федерации'),
+('Ставропольский филиал Московского гуманитарно-экономического института'),
+('Ставропольский филиал Московского института предпринимательства и права'),
+('Ставропольский филиал Московского педагогического государственного университета'),
+('Ставропольский филиал Пятигорского государственного лингвистического университета'),
+('Ставропольский филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации'),
+('Ставропольский филиал Современной гуманитарной академии'),
+('Ставропольский филиал Южно-Российского гуманитарного института'),
+('Ставропольский финансово-экономический институт'),
+('Старооскольский технологический институт им. А.А. Угарова (филиал) Национального исследовательского технологического университета «МИСиС»'),
+('Старооскольский филиал Белгородского государственного университета'),
+('Старооскольский филиал Современной гуманитарной академии'),
+('Стерлитамакский институт физической культуры (филиал) Уральского государственного университета физической культуры'),
+('Стерлитамакский филиал Башкирского государственного университета'),
+('Стерлитамакский филиал Московского государственного гуманитарного университета имени М.А. Шолохова'),
+('Стерлитамакский филиал Современной гуманитарной академии'),
+('Столичная финансово-гуманитарная академия'),
+('Столичный гуманитарно-экономический институт'),
+('Столичный институт иностранных языков'),
+('Столичный институт переводчиков'),
+('Ступинский филиал Московского авиационного института (национального исследовательского университета)'),
+('Суджанский филиал Современной гуманитарной академии'),
+('Сызранский филиал Самарского государственного экономического университета'),
+('Сыктывкарский государственный университет имени Питирима Сорокина'),
+('Сыктывкарский лесной институт (филиал) Санкт-Петербургского государственного лесотехнического университета имени С.М. Кирова'),
+('Сыктывкарский филиал Нижегородского коммерческого института'),
+('Сыктывкарский филиал Российского университета кооперации'),
+('Сыктывкарский филиал Современной гуманитарной академии'),
+('Таганрогский институт имени А.П.Чехова (филиал) Ростовского государственного экономического университета'),
+('Таганрогский институт управления и экономики'),
+('Таганрогский политехнический институт - филиал Донского государственного технического университета'),
+('Таганрогский филиал Российского нового университета'),
+('Тайгинский институт железнодорожного транспорта - филиал Омского государственного университета путей сообщения'),
+('Тамбовский военный авиационный инженерный институт'),
+('Тамбовский государственный музыкально-педагогический институт им. С.В. Рахманинова'),
+('Тамбовский государственный технический университет'),
+('Тамбовский государственный университет имени Г.Р.Державина'),
+('Тамбовский филиал Московского государственного университета культуры и искусств'),
+('Тамбовский филиал Московского университета Министерства внутренних дел Российской Федерации'),
+('Тамбовский филиал Московской открытой социальной академии'),
+('Тамбовский филиал Современной гуманитарной академии'),
+('Тарский филиал Омского государственного аграрного университета'),
+('Таштагольский филиал Сибирского государственного индустриального университета'),
+('Тверская государственная сельскохозяйственная академия'),
+('Тверской государственный медицинский университет'),
+('Тверской государственный технический университет'),
+('Тверской государственный университет'),
+('Тверской институт экологии и права'),
+('Тверской институт экономики и менеджмента'),
+('Тверской филиал Московского гуманитарно-экономического института'),
+('Тверской филиал Московского университета Министерства внутренних дел Российской Федерации'),
+('Тверской филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации'),
+('Тверской филиал Современной гуманитарной академии'),
+('Театральный институт имени Бориса Щукина при Государственном академическом театре имени Евг. Вахтангова'),
+('Театральный институт ""Школа русской драмы"" имени И.О. Горбачева'),
+('Технический институт (филиал) Северо-Восточного федерального университета имени М.К. Аммосова в г. Нерюнгри'),
+('Технологический институт Северо-восточного федерального университета имени М.К.Аммосова'),
+('Технологический институт сервиса (филиал) Донского государственного технического университета в г. Ставрополе Ставропольского края'),
+('Технологический институт (филиал) Донского государственного технического университета'),
+('Технологический институт - филиал Национального исследовательского ядерного университета МИФИ'),
+('Тихоокеанский военно-морской институт имени С.О. Макарова (филиал) Военного учебно-научного центра Военно-Морского Флота ""Военно-морская академия имени Адмирала Флота Советского Союза Н.Г. Кузнецова""'),
+('Тихоокеанский государственный медицинский университет Министерства здравоохранения Российской федирации'),
+('Тихоокеанский государственный экономический университет'),
+('Тольяттинская академия управления'),
+('Тольяттинский государственный университет'),
+('Тольяттинский институт Восточной экономико-юридической гуманитарной академии (филиал)'),
+('Тольяттинский институт искусств'),
+('Тольяттинский филиал Института коммерции и права'),
+('Тольяттинский филиал Международного института рынка'),
+('Тольяттинский филиал Московского государственного университета пищевых производств'),
+('Тольяттинский филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации'),
+('Тольяттинский филиал Самарского государственного университета'),
+('Тольяттинский филиал Современной гуманитарной академии'),
+('Томский государственный архитектурно-строительный университет'),
+('Томский государственный педагогический университет'),
+('Томский государственный университет систем управления и радиоэлектроники'),
+('Томский заочный финансово-юридический институт'),
+('Томский институт бизнеса'),
+('Томский институт Восточной экономико-юридической гуманитарной академии (филиал)'),
+('Томский сельскохозяйственный институт - филиал Новосибирского государственного аграрного университета'),
+('Томский филиал Кузбасского института Федеральной службы исполнения наказаний (г. Томск)'),
+('Томский филиал Московского государственного гуманитарного университета имени М.А. Шолохова'),
+('Томский филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации'),
+('Томский филиал Современной гуманитарной академии'),
+('Томский экономико-юридический институт'),
+('Торгово-экономический институт Сибирского федерального университета'),
+('Тувинский государственный университет'),
+('Тульский государственный педагогический университет им. Л.Н.Толстого'),
+('Тульский государственный университет'),
+('Тульский (г. Тула) филиал Международного юридического института'),
+('Тульский институт агробизнеса-филиал ФГБОУ ВПО РГАЗУ'),
+('Тульский институт управления и бизнеса им. Н.Д. Демидова'),
+('Тульский филиал Всероссийского государственного университета юстиции'),
+('Тульский филиал Московского государственного университета культуры и искусств'),
+('Тульский филиал Московского университета МВД России'),
+('Тульский филиал Московской академии предпринимательства при Правительстве Москвы'),
+('Тульский филиал Российского государственного торгово-экономического университета'),
+('Тульский филиал Российского экономического университета имени Г.В. Плеханова'),
+('Тульский филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации'),
+('Тульский филиал Российской международной академии туризма'),
+('Тульский филиал Современной гуманитарной академии'),
+('Улан-Удэнский институт железнодорожного транспорта - филиал Иркутского государственного университета путей сообщения'),
+('Улан-Удэнский филиал заочного обучения Восточно-Сибирского института Министерства внутренних дел Российской Федерации'),
+('Улан-Удэнский филиал Современной гуманитарной академии'),
+('Университет Российской академии образования'),
+('Университет ""Синергия""'),
+('Университет управления ""ТИСБИ""'),
+('Уральская государственная консерватория (академия) имени М. П. Мусоргского'),
+('Уральский государственный аграрный университет'),
+('Уральский государственный архитектурно-художественный университет'),
+('Уральский государственный горный университет'),
+('Уральский государственный лесотехнический университет'),
+('Уральский государственный медицинский университет'),
+('Уральский государственный педагогический университет'),
+('Уральский государственный университет путей сообщения'),
+('Уральский государственный экономический университет'),
+('Уральский государственный юридический университет'),
+('Уральский гуманитарный институт (г. Екатеринбург)'),
+('Уральский гуманитарный институт г. Пермь'),
+('Уральский институт бизнеса им. И. А. Ильина'),
+('Уральский институт Государственной противопожарной службы'),
+('Уральский институт коммерции и права'),
+('Уральский институт туризма - филиал Российской международной академии туризма'),
+('Уральский институт - филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации'),
+('Уральский институт фондового рынка'),
+('Уральский институт экономики, управления и права'),
+('Уральский международный институт туризма'),
+('Уральский технический институт связи и информатики (филиал) Сибирского государственного университета телекоммуникаций и информатики'),
+('Уральский федеральный университет имени первого Президента России Б.Н. Ельцина'),
+('Уральский филиал Российского государственного университета туризма и сервиса'),
+('Уральский филиал Российской академии живописи, ваяния и зодчества'),
+('Уральский филиал Российской школы частного права (института)'),
+('Уральский финансово-юридический институт'),
+('Уральский юридический институт'),
+('Уссурийский филиал Современной гуманитарной академии'),
+('Уфимский государственный авиационный технический университет'),
+('Уфимский государственный институт искусств имени Загира Исмагилова'),
+('Уфимский государственный нефтяной технический университет'),
+('Уфимский институт коммерции и права'),
+('Уфимский институт путей сообщения - филиал Самарского государственного университета путей сообщения'),
+('Уфимский институт (филиал) Российского экономического университета имени Г.В. Плеханова'),
+('Уфимский филиал Московского государственного гуманитарного университета имени М.А. Шолохова'),
+('Уфимский филиал Московского института экономических преобразований'),
+('Уфимский филиал Современной гуманитарной академии'),
+('Уфимский филиал Уральской государственной юридической академии'),
+('Уфимский юридический институт'),
+('Ухтинский государственный технический университет'),
+('Ухтинский филиал Московского государственного университета путей сообщения'),
+('Ухтинский филиал Современной гуманитарной академии'),
+('Филиал Адыгейского государственного университета в г. Белореченске'),
+('Филиал Адыгейского государственного университета в г. Ейске'),
+('Филиал Адыгейского государственного университета в г. Сочи'),
+('Филиал Академии маркетинга и социально-информационных технологий - ИМСИТ (г. Краснодар) в г. Новороссийске'),
+('Филиал Алтайского государственного университета в г. Белокурихе'),
+('Филиал Алтайского государственного университета в г. Бийске'),
+('Филиал Алтайского государственного университета в г. Славгороде'),
+('Филиал Армавирского лингвистического социального института в г. Нальчике'),
+('Филиал Армавирского лингвистического социального института в г. Новороссийске'),
+('Филиал Армавирского лингвистического социального института в г. Тихорецке'),
+('Филиал Армавирского лингвистического социального института в г. Усть-Лабинске'),
+('Филиал Астраханского государственного университета в г. Знаменске Астраханской области'),
+('Филиал Байкальского государственного университета экономики и права в г. Братске'),
+('Филиал Байкальского государственного университета экономики и права в г. Усть-Илимске'),
+('Филиал Балтийского института экологии, политики и права в г. Мурманске'),
+('Филиал Брянского государственного университета имени академика И.Г.Петровского в г. Новозыбкове'),
+('Филиал ""Взлет"" Московского авиационного института (национального исследовательского университета) в г. Ахтубинске'),
+('Филиал Владивостокского государственного университета экономики и сервиса в г. Артеме'),
+('Филиал Владивостокского государственного университета экономики и сервиса в г. Находке'),
+('Филиал Владимирского государственного университета имени Александра Григорьевича и Николая Григорьевича Столетовых в г. Гусь-Хрустальный'),
+('Филиал Волгоградского государственного социально-педагогического университета в г. Михайловке Волгоградской области'),
+('Филиал Воронежского государственного технического университета в г. Борисоглебске'),
+('Филиал Воронежской государственной академии искусств в городе Белгороде'),
+('филиал Всероссийского заочного финансово-экономического института в г. Воронеже'),
+('Филиал Всероссийского заочного финансово-экономического института в г. Пензе'),
+('Филиал Всероссийского заочного финансово-экономического института в г. Туле'),
+('Филиал Вятского государственного гуманитарного университета в г. Вятские Поляны'),
+('Филиал (г. Анапа) Академического правового института'),
+('Филиал (г. Донецк, Ростовская область) ИНСТИТУТА УПРАВЛЕНИЯ, БИЗНЕСА И ПРАВА'),
+('филиал Государственного университета управления в г. Обнинске Калужской области'),
+('Филиал Государственной академии славянской культуры в г. Твери'),
+('Филиал Грозненского государственного нефтяного института имени академика М.Д. Миллионщикова в г. Дербенте'),
+('Филиал Дагестанского государственного педагогического университета в г. Буйнакске'),
+('Филиал Дагестанского государственного педагогического университета в г. Дербенте'),
+('Филиал Дагестанского государственного педагогического университета в г. Избербаше'),
+('Филиал Дагестанского государственного технического университета в г. Кизляре'),
+('Филиал Дагестанского государственного университета в г. Буйнакске'),
+('Филиал Дагестанского государственного университета в г. Дербенте'),
+('Филиал Дагестанского государственного университета в г. Избербаше'),
+('Филиал Дагестанского государственного университета в г. Каспийске'),
+('Филиал Дагестанского государственного университета в г. Кизилюрте'),
+('Филиал Дагестанского государственного университета в г. Кизляре'),
+('Филиал Дагестанского государственного университета в г. Хасавюрте'),
+('Филиал Дальневосточного федеральногой университета в г. Дальнегорске'),
+('Филиал Дальневосточного федеральногой университета в г. Дальнереченске'),
+('Филиал Дальневосточного федерального университета в г. Артеме'),
+('Филиал Дальневосточного федерального университета в г. Большой-Камень'),
+('Филиал Дальневосточного федерального университета в г. Находке'),
+('Филиал Дальневосточного федерального университета в г. Партизанске'),
+('Филиал Дальневосточного федерального университета в г. Петропавловске-Камчатском'),
+('Филиал Дальневосточного федерального университета в г. Уссурийске'),
+('Филиал Донского государственного технического университета в г. Волгодонске Ростовской области'),
+('Филиал Донского государственного технического университета в г. Ессентуки'),
+('Филиал Института международного права и экономики имени А.С. Грибоедова в г. Липецке'),
+('Филиал Института международного права и экономики имени А.С. Грибоедова в г. Мурманске'),
+('Филиал ИНСТИТУТА УПРАВЛЕНИЯ, БИЗНЕСА И ПРАВА в г. Сальске'),
+('Филиал Института экономики и антикризисного управления в г. Вольске'),
+('Филиал Института экономики и управления в медицине и социальной сфере (г. Белореченск)'),
+('Филиал Иркутского государственного технического университета в г. Усолье-Сибирском'),
+('Филиал Иркутского государственного университета в г. Братске'),
+('Филиал Иркутского государственного университета путей сообщения в г. Братске'),
+('Филиал Иркутского государственного университета путей сообщения в г. Северобайкальске'),
+('Филиал Казанского (Приволжского) федерального университета в г. Набережные Челны'),
+('Филиал Казанского (Приволжского) федерального университета в г. Чистополе'),
+('Филиал Кемеровского государственного университета в г. Анжеро-Судженске'),
+('Филиал ""Котельники"" Международного университета природы, общества и человека ""Дубна""'),
+('Филиал Красноярского государственного педагогического университета им. В.П. Астафьева в г. Минусинске'),
+('Филиал Красноярского государственного торгово-экономического института в г. Ачинске Красноярского края'),
+('Филиал Красноярского государственного художественного института'),
+('Филиал Кубанского государственного университета в г. Армавире'),
+('Филиал Кубанского государственного университета в г. Геленджике'),
+('Филиал Кубанского государственного университета в г. Горячий Ключ'),
+('Филиал Кубанского государственного университета в г. Кореновске'),
+('Филиал Кубанского государственного университета в г. Кропоткине'),
+('Филиал Кубанского государственного университета в г. Новороссийске'),
+('Филиал Кубанского государственного университета в г. Славянске-на-Кубани'),
+('Филиал Кубанского государственного университета в г. Тихорецке'),
+('Филиал Кубанского государственного университета в станице Ленинградской'),
+('Филиал Кубанского государственного университета в станице Отрадной'),
+('Филиал Кубанского государственного университета в станице Павловской'),
+('Филиал Кубанского государственного университета физической культуры, спорта и туризма в г. Ейске'),
+('Филиал Кубанского института международного предпринимательства и менеджмента в городе Кропоткине'),
+('Филиал Кузбасского государственного технического университета имени Т.Ф. Горбачева в г. Белово'),
+('Филиал Кузбасского государственного технического университета имени Т.Ф. Горбачева в г. Междуреченске'),
+('Филиал Кузбасского государственного технического университета имени Т.Ф. Горбачева в г. Новокузнецке'),
+('Филиал Кузбасского государственного технического университета имени Т.Ф. Горбачева в г. Прокопьевске'),
+('Филиал Кузбасской государственной педагогической академии в г. Кемерове'),
+('Филиал Магнитогорского государственного технического университета им. Г.И. Носова в г. Белорецке'),
+('Филиал Майкопского государственного технологического университета в поселке Яблоновском Республики Адыгея'),
+('Филиал Международного института экономики и права в городе Астрахани'),
+('Филиал Международного института экономики и права в городе Белорецке'),
+('Филиал Международного института экономики и права в городе Владивостоке'),
+('Филиал Международного института экономики и права в городе Волгограде'),
+('Филиал Международного института экономики и права в городе Екатеринбурге'),
+('Филиал Международного института экономики и права в городе Киселевске'),
+('Филиал Международного института экономики и права в городе Мурманске'),
+('Филиал Международного института экономики и права в городе Омске'),
+('Филиал Международного института экономики и права в городе Петрозаводске'),
+('Филиал Международного университета природы, общества и человека ""Дубна""- Дмитровский институт непрерывного образования'),
+('Филиал Московского государственного индустриального университета'),
+('филиал Московского государственного индустриального университета в г. Вязьме Смоленской области'),
+('филиал Московского государственного индустриального университета в г. Кинешме'),
+('филиал Московского государственного индустриального университета в г. Кирове'),
+('Филиал Московского государственного индустриального университета в г. Рославль'),
+('Филиал Московского государственного открытого университета в г. Ейске Краснодарского края'),
+('Филиал Московского государственного открытого университета в г. Кулебаки Нижегородской области'),
+('Филиал Московского государственного открытого университета в г. Шатуре Московской области'),
+('Филиал Московского государственного строительного университета в г. Дмитрове Московской области'),
+('Филиал Московского государственного строительного университета в г. Люберцы Московской области'),
+('Филиал Московского государственного строительного университета в г. Можайске Московской области'),
+('Филиал Московского государственного университета имени М.В. Ломоносова в городе Севастополе'),
+('Филиал Московского государственного университета имени М.В. Ломоносова в г. Пущино'),
+('Филиал Московского государственного университета культуры и искусств в городе Жуковском'),
+('Филиал Московского государственного университета культуры и искусств в городе Набережные Челны'),
+('Филиал Московского государственного университета культуры и искусств в городе Норильске'),
+('филиал Московского государственного университета технологий и управления в г. Волоколамске Московской области'),
+('филиал Московского государственного университета технологий и управления в г. Вязьме Смоленской области'),
+('Филиал Московского государственного университета технологий и управления в г. Липецке'),
+('филиал Московского государственного университета технологий и управления в г. Мелеузе (Республика Башкортостан)'),
+('Филиал Московского государственного университета технологий и управления в г. Мичуринске Тамбовской области'),
+('Филиал Московского государственного университета технологий и управления в г. Нижний Новгород'),
+('Филиал Московского государственного университета технологий и управления в г. Орехово-Зуево'),
+('Филиал Московского государственного университета технологий и управления в г. Ростове-на-Дону'),
+('Филиал Московского государственного университета технологий и управления в г. Самаре'),
+('Филиал Московского государственного университета технологий и управления в г. Смоленске'),
+('Филиал Московского государственного университета технологий и управления в г. Унече Брянской области'),
+('филиал Московского государственного университета технологий и управления имени К.Г. Разумовского в г. Калининграде'),
+('Филиал Московского государственного университета технологий и управления им. К.Г. Разумовского в г. Серпухове Московской области'),
+('Филиал Московского государственного университета технологий и управления им. К.Г.Разумовского в г. Твери'),
+('Филиал Московского института государственного управления и права в Курской области'),
+('Филиал Московского института государственного управления и права в Пермском крае'),
+('Филиал Московского института защиты предпринимателя'),
+('Филиал Московского института права в г. Курске'),
+('Филиал Московского института права в г. Нижний Новгород'),
+('Филиал Московского института права в г. Орске'),
+('Филиал Московского института предпринимательства и права в г. Дербенте'),
+('Филиал Московского института предпринимательства и права в г. Махачкале'),
+('Филиал Московского института предпринимательства и права в г. Минеральные Воды'),
+('Филиал Московского института предпринимательства и права в г. Новосибирске'),
+('Филиал Московского института предпринимательства и права в г. Ростов-на-Дону'),
+('Филиал Московского института экономики, менеджмента и права в г. Воронеже'),
+('Филиал Московского института экономики, менеджмента и права в г. Нижний Новгород'),
+('Филиал Московского института экономики, менеджмента и права в г. Рязани'),
+('Филиал Московского нового юридического института в г. Брянске'),
+('филиал Московского нового юридического института в г. Новошахтинске'),
+('филиал Московского нового юридического института в г. Смоленске'),
+('филиал Московского нового юридического института в г. Советске'),
+('Филиал Московского нового юридического института в г. Сочи'),
+('Филиал Московского нового юридического института в г. Тамбове'),
+('Филиал Московского нового юридического института в г. Юбилейный'),
+('Филиал Московского нового юридического института в п. Тучково Рузского района Московской области'),
+('Филиал Московского педагогического государственного университета в городе Новосибирске'),
+('Филиал Московского психолого-социального университета в г. Барнауле Алтайского края'),
+('Филиал Московского психолого-социального университета в г. Брянске'),
+('Филиал Московского психолого-социального университета в г. Железногорске Курской области'),
+('Филиал Московского психолого-социального университета в г. Йошкар-Ола Республики Марий Эл'),
+('Филиал Московского психолого-социального университета в г. Конаково Тверской области'),
+('Филиал Московского психолого-социального университета в г. Красноярске'),
+('Филиал Московского психолого-социального университета в г. Люберцы Московской области'),
+('Филиал Московского психолого-социального университета в г. Муроме Владимирской области'),
+('Филиал Московского психолого-социального университета в г. Одинцово Московской области'),
+('Филиал Московского психолого-социального университета в г. Рославле Смоленской области'),
+('Филиал Московского психолого-социального университета в г. Рязани'),
+('Филиал Московского психолого-социального университета в г. Стерлитамаке Республики Башкортостан'),
+('Филиал Московского психолого-социального университета в г. Уварово Тамбовской области'),
+('Филиал Московского психолого-социального университета в г. Удомле Тверской области'),
+('Филиал Московского психолого-социального университета в г. Черняховске Калининградской области'),
+('Филиал Московского психолого-социального университета в г. Электростали Московской области'),
+('Филиал Московского технологического института ""ВТУ"" в г. Оренбурге'),
+('Филиал Московского технологического университета в г. Сергиевом Посаде'),
+('Филиал Московского технологического университета в г. Серпухове'),
+('Филиал Московского технологического университета в г. Ставрополе'),
+('Филиал Московского технологического университета в г. Фрязино'),
+('Филиал Московского университета имени С.Ю. Витте в г. Пензе'),
+('Филиал Московского экономико-финансового института в г. Самаре'),
+('Филиал Московской государственной академии коммунального хозяйства и строительства в г. Дмитрове Московской области'),
+('Филиал Московской государственной академии коммунального хозяйства и строительства в г. Егорьевске'),
+('Филиал Московской государственной академии коммунального хозяйства и строительства в г. Можайске'),
+('Филиал Московской государственной академии коммунального хозяйства и строительства в г. Серпухове Московской области'),
+('Филиал Московской государственной академии коммунального хозяйства и строительства г. Люберцы Московской области'),
+('Филиал Национального исследовательского Томского государственного университета в г. Прокопьевске'),
+('Филиал Национального исследовательского Томского государственного университета в г. Юрге'),
+('Филиал Национального исследовательского университета ""МЭИ"" в г. Волжском'),
+('Филиал Национального исследовательского университета ""МЭИ"" в г. Смоленске'),
+('Филиал Новосибирского государственного архитектурно-строительного университета (Сибстрин) в г. Айхале'),
+('Филиал НОУ ВПО «Московский университет имени С.Ю. Витте» в г. Краснодаре'),
+('Филиал Омского государственного педагогического университета в г. Таре'),
+('Филиал Первого Московского юридического института'),
+('Филиал ""Протвино"" Международного университета природы, общества и человека ""Дубна""'),
+('Филиал ""Ракетно-космическая техника"" Московского авиационного института (национального исследовательского университета)'),
+('Филиал Российского государственного гидрометеорологического университета в г. Алексине Тульской области'),
+('Филиал Российского государственного гидрометеорологического университета в г. Ростове-на-Дону'),
+('Филиал Российского государственного гидрометеорологического университета в г. Туапсе Краснодарского края'),
+('Филиал Российского государственного гуманитарного университета в г. Балашихе'),
+('Филиал Российского государственного гуманитарного университета в г. Великий Новгород'),
+('филиал Российского государственного гуманитарного университета в г. Воскресенске Московской области'),
+('Филиал Российского государственного гуманитарного университета в г. Всеволожске Ленинградской области'),
+('Филиал Российского государственного гуманитарного университета в г. Георгиевске Ставропольского края'),
+('Филиал Российского государственного гуманитарного университета в г. Дмитрове'),
+('Филиал Российского государственного гуманитарного университета в г. Домодедово Московской области'),
+('Филиал Российского государственного гуманитарного университета в г. Калуге'),
+('Филиал Российского государственного гуманитарного университета в г. Костроме'),
+('Филиал Российского государственного гуманитарного университета в г. Красноярске'),
+('Филиал Российского государственного гуманитарного университета в г. Наро-Фоминске Московской области'),
+('Филиал Российского государственного гуманитарного университета в г. Нижний Новгород'),
+('Филиал Российского государственного гуманитарного университета в г. Павловский Посад'),
+('Филиал Российского государственного гуманитарного университета в г. Улан-Удэ Республики Бурятия'),
+('Филиал Российского государственного гуманитарного университета в г. Электростали'),
+('Филиал Российского государственного гуманитарного университета в г. Элисте'),
+('Филиал Российского государственного педагогического университета им.А.И.Герцена в г. Волхове'),
+('Филиал Российского государственного профессионально-педагогического университета в г. Березовском'),
+('Филиал Российского государственного профессионально-педагогического университета в г. Кемерово'),
+('Филиал Российского государственного профессионально-педагогического университета в г. Омске'),
+('Филиал Российского государственного социального университета в г. Дедовске Московской области'),
+('Филиал Российского государственного социального университета в г. Калуге'),
+('Филиал Российского государственного социального университета в г. Клину Московской области'),
+('Филиал Российского государственного социального университета в г. Павловский Посад Московской области'),
+('Филиал Российского государственного социального университета в г. Пятигорске Ставропольского края'),
+('Филиал Российского государственного социального университета в г. Сочи Краснодарского края'),
+('Филиал Российского государственного университета нефти и газа им. И.М. Губкина в г. Оренбурге'),
+('Филиал Российского государственного университета туризма и сервиса в г. Махачкале'),
+('Филиал Российского государственного университета туризма и сервиса в г. Перми'),
+('Филиал Российского государственного университета туризма и сервиса в г. Сочи'),
+('Филиал Российского государственного университета физической культуры, спорта, молодежи и туризма в г. Иркутске'),
+('Филиал Российского экономического университета имени Г.В. Плеханова в г. Пятигорске Ставропольского края'),
+('Филиал Ростовского государственного университета путей сообщения в г. Краснодаре'),
+('Филиал Ростовского государственного университета путей сообщения в г. Кропоткине'),
+('Филиал Ростовского государственного университета путей сообщения в г. Минеральные Воды'),
+('Филиал Ростовского государственного университета путей сообщения в г. Туапсе'),
+('Филиал Ростовского государственного экономического университета РИНХ в г. Ейске Краснодарского края'),
+('Филиал Ростовского государственного экономического университета (РИНХ) в г. Кисловодске Ставропольского края'),
+('Филиал Ростовского государственного экономического университета (РИНХ) в г. Махачкале Республики Дагестан'),
+('Филиал Ростовского государственного экономического университета РИНХ в г. Миллерово'),
+('Филиал Ростовского государственного экономического университета (РИНХ) в г. Черкесске Карачаево-Черкесской Республики'),
+('Филиал Рязанского государственного радиотехнического университета в г. Сасово Рязанской области'),
+('Филиал Самарского государственного технического университета в г. Белебее Республики Башкортостан'),
+('филиал Самарского государственного технического университета в г. Сызрани'),
+('Филиал Самарского государственного университета путей сообщения в г. Орске'),
+('Филиал Самарского государственного университета путей сообщения в г. Рузаевке'),
+('Филиал Самарского государственного экономического университета в г. Тольятти'),
+('Филиал Самарской гуманитарной академии в г. Тольятти'),
+('Филиал Санкт-Петербургского государственного университета кино и телевидения'),
+('Филиал Санкт-Петербургского государственного университета культуры и искусств в г. Архангельске'),
+('Филиал Санкт-Петербургского государственного университета культуры и искусств в г. Пскове'),
+('Филиал Санкт-Петербургского государственного экономического университета в г. Кизляре'),
+('Филиал Санкт-Петербургского государственного экономического университета в г. Череповце'),
+('Филиал Санкт-Петербургского института внешнеэкономических связей, экономики и права в г. Бокситогорске Ленинградской области'),
+('Филиал Санкт-Петербургского института внешнеэкономических связей, экономики и права в г. Волхове Ленинградской области'),
+('Филиал Санкт-Петербургского института внешнеэкономических связей, экономики и права в г. Гатчине Ленинградской области'),
+('Филиал Санкт-Петербургского института внешнеэкономических связей, экономики и права в г. Дзержинске Нижегородской области'),
+('Филиал Санкт-Петербургского института внешнеэкономических связей, экономики и права в г. Калининграде'),
+('Филиал Санкт-Петербургского института внешнеэкономических связей, экономики и права в г. Кирове'),
+('Филиал Санкт-Петербургского института внешнеэкономических связей, экономики и права в г. Краснодаре'),
+('Филиал Санкт-Петербургского института внешнеэкономических связей, экономики и права в г. Красноярске'),
+('Филиал Санкт-Петербургского института внешнеэкономических связей, экономики и права в г. Луге Ленинградской области'),
+('Филиал Санкт-Петербургского института внешнеэкономических связей, экономики и права в г. Москве'),
+('Филиал Санкт-Петербургского института внешнеэкономических связей, экономики и права в г. Наро-Фоминске Московской области'),
+('Филиал Санкт-Петербургского института внешнеэкономических связей, экономики и права в г. Новокузнецке Кемеровской области'),
+('Филиал Санкт-Петербургского института внешнеэкономических связей, экономики и права в г. Новосибирске'),
+('Филиал Санкт-Петербургского института внешнеэкономических связей, экономики и права в г. Перми'),
+('Филиал Санкт-Петербургского института внешнеэкономических связей, экономики и права в г. Смоленске'),
+('Филиал Санкт-Петербургского института внешнеэкономических связей, экономики и права в г. Тольятти Самарской области'),
+('Филиал Санкт-Петербургского института внешнеэкономических связей, экономики и права в г. Удомле Тверской области'),
+('Филиал Саратовской государственной академии права в г. Астрахани'),
+('филиал Северного (Арктического) федерального университета имени М.В. Ломоносова в г. Коряжме Архангельской области'),
+('Филиал Северного (Арктического) федерального университета имени М.В. Ломоносова в г. Северодвинске Архангельской области'),
+('Филиал Северо-Западного государственного заочного технического университета'),
+('Филиал Северо-Кавказского федерального университета в г. Пятигорске'),
+('Филиал Сибирского государственного университета науки и технологий имени академика М.Ф. Решетнева в г. Железногорске'),
+('Филиал Сибирского государственного университета путей сообщения в г. Новоалтайске'),
+('Филиал Сибирского государственного университета физической культуры и спорта в г. Березовском'),
+('Филиал Сибирского государственного университета физической культуры и спорта в г. Кемерово'),
+('Филиал Сочинского государственного университета в г. Анапе Краснодарского края'),
+('Филиал Сочинского государственного университета в г. Нижний Новгород Нижегородской области'),
+('Филиал Ставропольского государственного педагогического института в г. Буденновске'),
+('Филиал Ставропольского государственного педагогического института в г. Ессентуки'),
+('Филиал Ставропольского государственного педагогического института в г. Железноводске'),
+('Филиал Ставропольского института имени В.Д. Чурсина в г. Георгиевске'),
+('Филиал Ставропольского института имени В.Д. Чурсина в г. Кропоткине'),
+('Филиал Ставропольского института имени В.Д. Чурсина в г. Черкесске'),
+('Филиал Столичной финансово-гуманитарной академии в г. Владимире'),
+('Филиал Столичной финансово-гуманитарной академии в г. Волгодонске'),
+('Филиал Столичной финансово-гуманитарной академии в г. Вологде'),
+('Филиал Столичной финансово-гуманитарной академии в г. Мурманске'),
+('Филиал Столичной финансово-гуманитарной академии в г. Омске'),
+('Филиал Столичной финансово-гуманитарной академии в г. Орске'),
+('Филиал Столичной финансово-гуманитарной академии в г. Уфе'),
+('Филиал Столичной финансово-гуманитарной академии в г. Ухте'),
+('Филиал Столичной финансово-гуманитарной академии в г. Череповце'),
+('Филиал ""Стрела"" Московского авиационного института (национального исследовательского университета)'),
+('Филиал Тверского государственного технического университета в г. Ржеве Тверской области'),
+('Филиал Тихоокеанского государственного экономического университета в г. Арсеньеве Приморского края'),
+('Филиал Томского государственного архитектурно-строительного университета в г. Ленинске-Кузнецком'),
+('Филиал ""Угреша"" Международного университета природы, общества и человека ""Дубна""'),
+('Филиал Удмуртского государственного университета в городе Кудымкаре'),
+('Филиал Удмуртского государственного университета в городе Нижняя Тура'),
+('Филиал Уральского государственного педагогического университета в г. Каменске-Уральском'),
+('Филиал Уральского государственного университета путей сообщения в г. Нижнем Тагиле'),
+('Филиал Уральского государственного экономического университета в г. Нижнем Тагиле'),
+('Филиал Уральского федерального университета имени первого Президента России Б.Н. Ельцина в г. Алапаевске'),
+('Филиал Уральского федерального университета имени первого Президента России Б.Н. Ельцина в г. Верхняя Салда'),
+('Филиал Уральского федерального университета имени первого Президента России Б.Н. Ельцина в г. Ирбите'),
+('Филиал Уральского федерального университета имени первого Президента России Б.Н. Ельцина в г. Краснотурьинске'),
+('Филиал Уральского федерального университета имени первого Президента России Б.Н. Ельцина в г. Красноуральске'),
+('Филиал Уральского федерального университета имени первого Президента России Б.Н. Ельцина в г. Невьянске'),
+('Филиал Уральского федерального университета имени первого Президента России Б.Н. Ельцина в г. Первоуральске'),
+('Филиал Уральского федерального университета имени первого Президента России Б.Н. Ельцина в г. Серове'),
+('Филиал Уральского федерального университета имени первого Президента России Б.Н. Ельцина в г. Среднеуральске'),
+('Филиал Уральского федерального университета имени первого Президента России Б.Н. Ельцина в г. Чусовом'),
+('Филиал Уфимского государственного авиационного технического университета в г. Белорецке'),
+('Филиал Уфимского государственного авиационного технического университета в г. Ишимбае'),
+('Филиал Уфимского государственного авиационного технического университета в г. Нефтекамске'),
+('Филиал Уфимского государственного авиационного технического университета в г. Стерлитамаке'),
+('Филиал Уфимского государственного нефтяного технического университета в г. Октябрьском'),
+('Филиал Уфимского государственного нефтяного технического университета в г. Салавате'),
+('Филиал Уфимского государственного нефтяного технического университета в г. Стерлитамаке'),
+('Филиал Ухтинского государственного технического университета в г. Усинске'),
+('Филиал Финансового университета при Правительстве Российской Федерации в г.Барнауле'),
+('филиал Финансового университета при Правительстве Российской Федерации в г.Волгограде'),
+('филиал Финансового университета при Правительстве Российской Федерации в г.Калуге'),
+('филиал Финансового университета при Правительстве Российской Федерации в г.Кирове'),
+('Филиал Финансового университета при Правительстве Российской Федерации в г. Краснодаре'),
+('филиал Финансового университета при Правительстве Российской Федерации в г.Липецке'),
+('филиал Финансового университета при Правительстве Российской Федерации в г.Новороссийске'),
+('филиал Финансового университета при Правительстве Российской Федерации в г.Орле'),
+('филиал Финансового университета при Правительстве Российской Федерации в г.Уфе'),
+('Филиал Хакасского государственного университета'),
+('Филиал Челябинской государственной академии культуры и искусств'),
+('Филиал Южного федерального университета в г. Геленджике Краснодарского края'),
+('Филиал Южного федерального университета в г. Георгиевске Ставропольского края'),
+('Филиал Южного федерального университета в г. Ейске Краснодарского края'),
+('Филиал Южного федерального университета в г. Железноводске Ставропольского края'),
+('Филиал Южного федерального университета в г. Кизляре Республики Дагестан'),
+('Филиал Южного федерального университета в г. Махачкале Республики Дагестан'),
+('Филиал Южного федерального университета в г. Новошахтинске Ростовской области'),
+('Филиал Южного федерального университета в г. Черкесске Карачаево-Черкесской Республики'),
+('Филиал Южного федерального университета в станице Вешенской Ростовской области'),
+('Филиал Южного федерального университета в с. Учкекен Карачаево-Черкесской Республики'),
+('Филиал Южно-Российского государственного технического университета (Новочеркасского политехнического института) в городе Белая Калитва'),
+('Финансово-промышленный институт'),
+('Финансово-технологическая академия'),
+('Финансовый университет при Правительстве Российской Федерации'),
+('Хакасский государственный университет им. Н.Ф. Катанова'),
+('Хакасский институт бизнеса'),
+('Хакасский технический институт - филиал Сибирского федерального университета'),
+('Хакасский филиал Красноярского государственного аграрного университета'),
+('Хакасский филиал Российского экономического университета имени Г.В. Плеханова'),
+('Хасавюртовский филиал Современной гуманитарной академии'),
+('Химкинский филиал Российского университета кооперации'),
+('Центральный институт управления и экономики туристского бизнеса - филиал Российской международной академии туризма'),
+('Центральный филиал Российской академии правосудия (г. Воронеж)'),
+('Чайковский государственный институт физической культуры'),
+('Чайковский технологический институт (филиал) Ижевского государственного технического университета'),
+('Чайковский филиал Пермского национального исследовательского политехнического университета'),
+('Череповецкий военный инженерный институт радиоэлектроники'),
+('Череповецкий государственный университет'),
+('Череповецкий филиал Московской государственной академии водного транспорта'),
+('Череповецкий филиал Современной гуманитарной академии'),
+('Череповецкий филиал Университета Российской академии образования'),
+('Черкесский филиал Современной гуманитарной академии'),
+('Чеховский филиал Современной гуманитарной академии'),
+('Чистопольский филиал ""Восток"" Казанского государственного технического университета им. А. Н. Туполева'),
+('Чистопольский филиал Казанского инновационного университета имени В.Г.Тимирясова'),
+('Читинская государственная медицинская академия'),
+('Читинский институт (филиал) Байкальского государственного университета экономики и права'),
+('Читинский филиал Современной гуманитарной академии'),
+('ЧОО ВО - Ассоциация ""Тульский университет (ТИЭИ)""'),
+('Чурапчинский государственный институт физической культуры и спорта'),
+('Шадринский государственный педагогический институт'),
+('Шадринский филиал Московского педагогического государственного университета'),
+('Шахтинский институт (филиал) ЮРГПУ(НПИ) им. М.И. Платова'),
+('Шахтинский филиал Гуманитарного института (г. Москва)'),
+('Шахтинский филиал Южно-Российского гуманитарного института'),
+('Шахунский филиал Нижегородского государственного университета им. Н.И. Лобачевского'),
+('Школа-студия (институт) имени Вл.И. Немировича-Данченко при Московском Художественном академическом театре имени А.П. Чехова'),
+('Шуйский филиал Ивановского государственного университета'),
+('Экономико-правовой институт'),
+('Электростальский институт (филиал) Московского политехнического университета'),
+('Электростальский филиал Евразийского открытого института'),
+('Элистинский филиал Современной гуманитарной академии'),
+('Энгельсский технологический институт Саратовского государственного технического университета'),
+('Юго-Западный государственный университет (ЮЗГУ)'),
+('Южно-Российский государственный политехнический университет (НПИ) имени М. И. Платова'),
+('Южно-Российский гуманитарный институт (г. Ростов-на-Дону)'),
+('Южно-Российский институт международных отношений'),
+('Южно-Российский институт - филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации'),
+('Южно-Российский психологический институт'),
+('Южно-Сахалинский институт коммерции и предпринимательства'),
+('Южно-Сахалинский институт (филиал) Российского государственного торгово-экономического университета'),
+('Южно-Сахалинский филиал Дальневосточного юридического института Министерства внутренних дел Российской Федерации'),
+('Южно-Якутский институт железнодорожного транспорта - филиал Дальневосточного государственного университета путей сообщения в г. Нерюнгри'),
+('Южный институт менеджмента'),
+('Южный университет (г. Ростов-на-Дону)'),
+('Южный федеральный университет'),
+('Юргинский технологический институт (филиал) Национального исследовательского Томского политехнического университета'),
+('Юридический институт предпринимательства и агробизнеса Саратовской государственной академии права'),
+('Юридический институт (Санкт-Петербург)'),
+('Якутская государственная сельскохозяйственная академия'),
+('Якутский институт водного транспорта (филиал) Сибирского государственного университета водного транспорта'),
+('Якутский институт экономики филиал Санкт-Петербургского университета управления и экономики'),
+('Якутский филиал Дальневосточного юридического института Министерства внутренних дел Российской Федерации'),
+('Якутский филиал Московского государственного гуманитарного университета имени М.А. Шолохова'),
+('Якутский филиал Российского государственного университета туризма и сервиса'),
+('Якутский филиал Российской академии народного хозяйства и государственной службы при Президенте Российской Федерации'),
+('Якутский филиал Санкт-Петербургского Гуманитарного университета профсоюзов'),
+('Якутский филиал Сибирского университета потребительской кооперации'),
+('Якутский филиал Современной гуманитарной академии'),
+('Якутский экономико-правовой институт (филиал) Академии труда и социальных отношений'),
+('Яранский филиал Вятской государственной сельскохозяйственной академии');

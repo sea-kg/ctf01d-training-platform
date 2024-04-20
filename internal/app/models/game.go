@@ -5,8 +5,13 @@ import (
 )
 
 type Game struct {
-	Id          string    `db:"id"`
+	Id          int       `db:"id"`
 	StartTime   time.Time `db:"start_time"`
 	EndTime     time.Time `db:"end_time"`
 	Description string    `db:"description"`
+}
+
+type GameDetails struct {
+	Game
+	TeamDetails []*TeamDetails
 }

@@ -3,8 +3,8 @@ package view
 import "ctf01d/internal/app/models"
 
 type User struct {
-	Id        string `json:"id,omitempty"`
-	Username  string `json:"user_name,omitempty"`
+	Id        int    `json:"id"`
+	Username  string `json:"user_name"`
 	Role      string `json:"role,omitempty"`
 	AvatarUrl string `json:"avatar_url,omitempty"`
 	Status    string `json:"status,omitempty"`

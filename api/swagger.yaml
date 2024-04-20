@@ -429,6 +429,36 @@ paths:
       responses:
         '204':
           description: Service deleted successfully
+  /api/universities:
+    get:
+      summary: Retrieves a list of universities
+      description: |
+        This endpoint retrieves universities. It can optionally filter universities that match a specific term.
+      parameters:
+        - in: query
+          name: term
+          schema:
+            type: string
+          description: Optional search term to filter universities by name.
+          required: false
+      responses:
+        '200':
+          description: A JSON array of universities
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      description: The unique identifier of the university
+                      example: 1
+                    name:
+                      type: string
+                      description: The name of the university
+                      example: "Анапский филиал Кубанского государственного аграрного университета"
 components:
   schemas:
     UserRequest:
