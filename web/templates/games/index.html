@@ -12,9 +12,6 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-        }
-
-        .container {
             display: flex;
         }
 
@@ -46,32 +43,35 @@
             margin-bottom: 20px;
         }
 
-        .navigation a {
+        a {
             margin-right: 20px;
             text-decoration: none;
             color: blue;
         }
 
-        .navigation a:hover {
+        a:hover {
             text-decoration: underline;
+        }
+
+        .team-member {
+            margin-top: 10px;
         }
     </style>
 </head>
 
 <body>
-    <div class="container">
-        <div class="sidebar">
-            <h2>Games</h2>
-            <div id="games-list">
-                <!-- Team list will be loaded here -->
-            </div>
+    <div class="sidebar">
+        <h2>Games</h2>
+        <div id="games-list">
+            <!-- Games list will be loaded here -->
         </div>
-        <div class="content">
-            <div class="navigation">
-                <a href="/games/index.html">List Games</a>
-                <a href="/users/index.html">List Users</a>
-                <a href="/teams/index.html">List Teams</a>
-            </div>
+    </div>
+    <div class="content">
+        <div class="navigation">
+            <a href="/games/index.html">List Games</a>
+            <a href="/users/index.html">List Users</a>
+            <a href="/teams/index.html">List Teams</a>
+        </div>
             <h2>Create New Game</h2>
             <form id="create-game-form">
                 <input type="datetime-local" id="start-time" name="start_time" required>
@@ -80,6 +80,9 @@
 
                 <button type="submit">Create Game</button>
             </form>
+        <h2>Game Details</h2>
+        <div id="game-details">
+            <!-- Game details will be shown here -->
         </div>
     </div>
 
@@ -120,15 +123,46 @@
                         console.log('Games loaded:', games);
                         $('#games-list').empty();
                         games.forEach(function (game) {
-                            $('#games-list').append(`<div>
-                            <p>Start Time: ${game.start_time}</p>
-                            <p>End Time: ${game.end_time}</p>
-                            <p>Description: ${game.description}</p>
-                        </div>`);
+                            var gameDiv = $('<div>');
+                            var idP = $('<p>').text('Description: ');
+                            gameDiv.append(idP);
+                            var gameLink = $('<a>').text(game.description || 'Game ' + game.id);
+                            gameLink.on('click', function () {
+                                loadGameDetails(game.id);
+                            });
+                            idP.append(gameLink);
+                            gameDiv.append(`<p>Start Time: ${game.start_time}</p>`);
+                            gameDiv.append(`<p>End Time: ${game.end_time}</p>`);
+                            $('#games-list').append(gameDiv);
                         });
                     },
                     error: function () {
                         alert('Error loading games');
+                    }
+                });
+            }
+
+            function loadGameDetails(gameId) {
+                $.ajax({
+                    url: `/api/games/${gameId}`,
+                    method: 'GET',
+                    success: function (game) {
+                        var details = `<p>Start Time: ${game.start_time}</p>
+                                       <p>End Time: ${game.end_time}</p>
+                                       <p>Description: ${game.description}</p>
+                                       <h3>Teams</h3>`;
+                        game.team_details.forEach(function (team) {
+                            details += `<div><strong>${team.name}</strong> - ${team.description}
+                                        <h4>Members:</h4>`;
+                            team.members.forEach(function (member) {
+                                details += `<p class="team-member">${member.user_name}</p>`;
+                            });
+                            details += '</div>';
+                        });
+                        $('#game-details').html(details);
+                    },
+                    error: function () {
+                        alert('Error loading game details');
                     }
                 });
             }
