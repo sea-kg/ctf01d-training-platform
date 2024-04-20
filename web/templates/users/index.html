@@ -121,7 +121,7 @@
                     method: 'GET',
                     success: function (teams) {
                         var teamSelect = $('#team');
-                        teamSelect.empty(); // Очистка предыдущих значений
+                        teamSelect.empty();
                         teams.forEach(function (team) {
                             teamSelect.append(`<option value="${team.id}">${team.name}</option>`);
                         });

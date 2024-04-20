@@ -109,17 +109,17 @@
             $('#university').autocomplete({
                 source: function (request, response) {
                     $.ajax({
-                        url: '/api/universities',  // Путь к API, который возвращает список университетов
+                        url: '/api/universities',
                         dataType: 'json',
                         data: {
-                            term: request.term  // Параметр поиска, отправляемый на сервер
+                            term: request.term
                         },
                         success: function (data) {
                             response($.map(data, function (item) {
                                 return {
-                                    label: item.name,  // 'name' предполагается что это название университета
+                                    label: item.name,
                                     value: item.name,
-                                    id: item.id    // Сохраняем id университета в объекте для последующего использования
+                                    id: item.id
                                 };
                             }));
                         }

@@ -1,40 +1,35 @@
 INSERT INTO users (user_name, password_hash, role, avatar_url, status) VALUES
-('user1', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', 'player', 'https://robohash.org/user1', 'teammate'),
-('user2', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', 'player', 'https://robohash.org/user2', 'teammate'),
-('user3', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', 'player', 'https://robohash.org/user3', 'teammate'),
-('user4', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', 'player', 'https://robohash.org/user4', 'teammate'),
-('user5', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', 'player', 'https://robohash.org/user5', 'teammate'),
-('user6', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', 'player', 'https://robohash.org/user6', 'teammate'),
-('user7', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', 'player', 'https://robohash.org/user7', 'teammate'),
-('user8', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', 'player', 'https://robohash.org/user8', 'teammate'),
-('user9', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', 'player', 'https://robohash.org/user9', 'teammate'),
-('user10', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', 'player', 'https://robohash.org/user10', 'teammate'),
-('admin', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', 'admin', 'https://robohash.org/admin', '');
+('Neo', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', 'player', 'https://robohash.org/neo', 'active'),
+('Morpheus', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', 'player', 'https://robohash.org/morpheus', 'active'),
+('Trinity', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', 'player', 'https://robohash.org/trinity', 'active'),
+('Cipher', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', 'player', 'https://robohash.org/cipher', 'active'),
+('Seraph', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', 'player', 'https://robohash.org/seraph', 'active'),
+('Smith', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', 'player', 'https://robohash.org/smith', 'inactive'),
+('Oracle', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', 'player', 'https://robohash.org/oracle', 'active'),
+('Sati', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', 'player', 'https://robohash.org/sati', 'active'),
+('Apoc', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', 'player', 'https://robohash.org/apoc', 'active'),
+('Dozer', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', 'admin', 'https://robohash.org/dozer', '');
 
 INSERT INTO teams (name, description, university_id, social_links, avatar_url) VALUES
-('Team A', 'Description A', 401, '', 'https://robohash.org/A'),
-('Team B', 'Description B', 402, '', 'https://robohash.org/B'),
-('Team C', 'Description C', 403, '', 'https://robohash.org/C');
+('HackersX', 'Specialized in network attacks and defense', 401, '', 'https://robohash.org/hackersx'),
+('CodeRed', 'Expert in cryptography and steganography', 402, '', 'https://robohash.org/codered'),
+('NullByte', 'Skilled in web security and binary exploitation', 403, '', 'https://robohash.org/nullbyte');
 
 INSERT INTO team_members (user_id, team_id) VALUES
-(1, 4), (2, 4), (3, 4),
-(4, 5), (5, 5), (6, 5),
-(7, 6), (8, 6), (9, 6);
+(1, 1), (2, 1), (3, 1),
+(4, 2), (5, 2), (6, 2),
+(7, 3), (8, 3), (9, 3);
 
 INSERT INTO games (start_time, end_time, description) VALUES
-('2023-10-01 12:00:00', '2023-10-01 15:00:00', 'Game A'),
-('2023-10-02 12:00:00', '2023-10-02 15:00:00', 'Game B');
+('2023-10-01 12:00:00', '2023-10-01 15:00:00', 'Capture the Network Flags'),
+('2023-10-02 12:00:00', '2023-10-02 15:00:00', 'Decrypt the Hidden Messages');
 
 INSERT INTO team_games (team_id, game_id) VALUES
-(4, 1),
-(5, 1),
-(6, 2),
-(4, 2);
+(1, 1), (2, 1), (3, 2), (1, 2);
 
 INSERT INTO services (name, author, logo_url, description, is_public) VALUES
-('Service A', 'Author Biba', '', 'Service Description A', TRUE),
-('Service B', 'Author Boba', '', 'Service Description B', TRUE);
+('NetAttack', 'Phantom', '', 'Simulated network attack platform', TRUE),
+('CryptoBox', 'Enigma', '', 'Cryptography challenge service', TRUE);
 
 INSERT INTO game_services (game_id, service_id) VALUES
-(1, 1),
-(2, 2);
+(1, 1), (2, 2);
