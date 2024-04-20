@@ -32,7 +32,7 @@ func CreateUserHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 		Role:         user.Role,
 		Status:       user.Status,
 		PasswordHash: api_helpers.HashPassword(user.Password),
-		AvatarUrl:    api_helpers.PrepareAvatar(user.AvatarUrl),
+		AvatarUrl:    api_helpers.PrepareImage(user.AvatarUrl),
 	}
 	if err := userRepo.Create(r.Context(), newUser); err != nil {
 		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to create user: " + err.Error()})

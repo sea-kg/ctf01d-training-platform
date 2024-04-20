@@ -34,7 +34,7 @@ func CreateTeamHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 		SocialLinks:  team.SocialLinks,
 		Description:  team.Description,
 		UniversityId: team.UniversityId,
-		AvatarUrl:    api_helpers.PrepareAvatar(team.AvatarUrl),
+		AvatarUrl:    api_helpers.PrepareImage(team.AvatarUrl),
 	}
 	if err := teamRepo.Create(r.Context(), newTeam); err != nil {
 		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to create team: " + err.Error()})

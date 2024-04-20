@@ -18,7 +18,7 @@ func HashPassword(s string) string {
 	return hex.EncodeToString(h.Sum(nil))
 }
 
-func PrepareAvatar(avatarUrl string) string {
+func PrepareImage(avatarUrl string) string {
 	// fixme подумать что делать с http контентом
 	re := regexp.MustCompile(`(?i)^https?://.*\.(jpg|jpeg|png|gif)$`)
 	if re.MatchString(avatarUrl) {
