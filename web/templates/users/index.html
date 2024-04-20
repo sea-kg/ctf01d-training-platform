@@ -77,10 +77,10 @@
                         $('#user-list').empty();
                         users.forEach(function (user) {
                             $('#user-list').append(`<div>
-                                <p>Nick<b> ${user.user_name}</b></h4>
+                                <img src="${user.avatar_url}" alt="User Avatar" style="width:50px;height:50px;">
+                                <p>Nick: <b> ${user.user_name}</b></h4>
                                 <p>Role: ${user.role}</p>
                                 <p>Status: ${user.status}</p>
-                                <img src="${user.avatar_url}" alt="User Avatar" style="width:50px;height:50px;">
                                 <button onclick="deleteUser('${user.id}')">Delete</button>
                             </div>`);
                         });
