@@ -3,10 +3,10 @@ package api
 import (
 	"ctf01d/internal/app/models"
 	"ctf01d/internal/app/repository"
+	api_helpers "ctf01d/internal/app/utils"
 	"ctf01d/internal/app/view"
 	"database/sql"
 	"encoding/json"
-	"log"
 	"net/http"
 	"time"
 
@@ -22,11 +22,11 @@ type RequestGame struct {
 func CreateGameHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 	var game RequestGame
 	if err := json.NewDecoder(r.Body).Decode(&game); err != nil {
-		respondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Invalid request payload: " + err.Error()})
+		api_helpers.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Invalid request payload: " + err.Error()})
 		return
 	}
 	if game.EndTime.Before(game.StartTime) {
-		respondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "EndTime must be after StartTime"})
+		api_helpers.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "EndTime must be after StartTime"})
 		return
 	}
 	gameRepo := repository.NewGameRepository(db)
@@ -36,10 +36,10 @@ func CreateGameHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 		Description: game.Description,
 	}
 	if err := gameRepo.Create(r.Context(), newGame); err != nil {
-		respondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to create game: " + err.Error()})
+		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to create game: " + err.Error()})
 		return
 	}
-	respondWithJSON(w, http.StatusOK, map[string]string{"data": "Game created successfully"})
+	api_helpers.RespondWithJSON(w, http.StatusOK, map[string]string{"data": "Game created successfully"})
 }
 
 func DeleteGameHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
@@ -47,10 +47,10 @@ func DeleteGameHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 	id := vars["id"]
 	gameRepo := repository.NewGameRepository(db)
 	if err := gameRepo.Delete(r.Context(), id); err != nil {
-		respondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to delete game"})
+		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to delete game"})
 		return
 	}
-	respondWithJSON(w, http.StatusOK, map[string]string{"data": "Game deleted successfully"})
+	api_helpers.RespondWithJSON(w, http.StatusOK, map[string]string{"data": "Game deleted successfully"})
 }
 
 func GetGameByIdHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
@@ -59,27 +59,27 @@ func GetGameByIdHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 	gameRepo := repository.NewGameRepository(db)
 	game, err := gameRepo.GetById(r.Context(), id)
 	if err != nil {
-		respondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to fetch game"})
+		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to fetch game"})
 		return
 	}
-	respondWithJSON(w, http.StatusOK, view.NewGameFromModel(game))
+	api_helpers.RespondWithJSON(w, http.StatusOK, view.NewGameFromModel(game))
 }
 
 func ListGamesHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 	gameRepo := repository.NewGameRepository(db)
 	games, err := gameRepo.List(r.Context())
 	if err != nil {
-		respondWithJSON(w, http.StatusBadRequest, map[string]string{"error": err.Error()})
+		api_helpers.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": err.Error()})
 		return
 	}
-	respondWithJSON(w, http.StatusOK, view.NewGamesFromModels(games))
+	api_helpers.RespondWithJSON(w, http.StatusOK, view.NewGamesFromModels(games))
 }
 
 func UpdateGameHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 	// fixme update не проверяет есть ли запись в бд
 	var game RequestGame
 	if err := json.NewDecoder(r.Body).Decode(&game); err != nil {
-		respondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Invalid request payload"})
+		api_helpers.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Invalid request payload"})
 		return
 	}
 	gameRepo := repository.NewGameRepository(db)
@@ -93,25 +93,8 @@ func UpdateGameHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 	updateGame.Id = id
 	err := gameRepo.Update(r.Context(), updateGame)
 	if err != nil {
-		respondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": err.Error()})
+		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": err.Error()})
 		return
 	}
-	respondWithJSON(w, http.StatusOK, map[string]string{"data": "Game updated successfully"})
-}
-
-// fixme это общий респондер - надо его вынести отсюда
-func respondWithJSON(w http.ResponseWriter, code int, payload interface{}) {
-	w.Header().Set("Content-Type", "application/json")
-	response, err := json.Marshal(payload)
-	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
-		if _, err := w.Write([]byte(`{"error": "Error marshaling the response object"}`)); err != nil {
-			log.Printf("Error writing error response: %v", err)
-		}
-		return
-	}
-	w.WriteHeader(code)
-	if _, err := w.Write(response); err != nil {
-		log.Printf("Error writing response: %v", err)
-	}
+	api_helpers.RespondWithJSON(w, http.StatusOK, map[string]string{"data": "Game updated successfully"})
 }

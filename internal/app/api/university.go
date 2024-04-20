@@ -3,6 +3,7 @@ package api
 import (
 	"ctf01d/internal/app/models"
 	"ctf01d/internal/app/repository"
+	api_helpers "ctf01d/internal/app/utils"
 	"ctf01d/internal/app/view"
 	"database/sql"
 	"net/http"
@@ -22,9 +23,9 @@ func ListUniversitiesHandler(db *sql.DB, w http.ResponseWriter, r *http.Request)
 	}
 
 	if err != nil {
-		respondWithJSON(w, http.StatusBadRequest, map[string]string{"error": err.Error()})
+		api_helpers.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": err.Error()})
 		return
 	}
-	respondWithJSON(w, http.StatusOK, view.NewUniversitiesFromModels(universities))
+	api_helpers.RespondWithJSON(w, http.StatusOK, view.NewUniversitiesFromModels(universities))
 
 }

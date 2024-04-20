@@ -4,6 +4,7 @@ import (
 	"crypto/sha1"
 	"ctf01d/internal/app/models"
 	"ctf01d/internal/app/repository"
+	api_helpers "ctf01d/internal/app/utils"
 	"ctf01d/internal/app/view"
 	"database/sql"
 	"encoding/hex"
@@ -24,7 +25,7 @@ type RequestUser struct {
 func CreateUserHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 	var user RequestUser
 	if err := json.NewDecoder(r.Body).Decode(&user); err != nil {
-		respondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Invalid request payload"})
+		api_helpers.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Invalid request payload"})
 		return
 	}
 	userRepo := repository.NewUserRepository(db)
@@ -35,10 +36,10 @@ func CreateUserHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 		PasswordHash: HashPassword(user.Password),
 	}
 	if err := userRepo.Create(r.Context(), newUser); err != nil {
-		respondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to create user: " + err.Error()})
+		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to create user: " + err.Error()})
 		return
 	}
-	respondWithJSON(w, http.StatusOK, map[string]string{"data": "User created successfully"})
+	api_helpers.RespondWithJSON(w, http.StatusOK, map[string]string{"data": "User created successfully"})
 }
 
 // ей тут не место, вынести в - tool, добавить соль в конфиг и солить пароли
@@ -53,10 +54,10 @@ func DeleteUserHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 	id := vars["id"]
 	userRepo := repository.NewUserRepository(db)
 	if err := userRepo.Delete(r.Context(), id); err != nil {
-		respondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to delete user"})
+		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to delete user"})
 		return
 	}
-	respondWithJSON(w, http.StatusOK, map[string]string{"data": "User deleted successfully"})
+	api_helpers.RespondWithJSON(w, http.StatusOK, map[string]string{"data": "User deleted successfully"})
 }
 
 func GetUserByIdHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
@@ -65,27 +66,27 @@ func GetUserByIdHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 	userRepo := repository.NewUserRepository(db)
 	user, err := userRepo.GetById(r.Context(), id)
 	if err != nil {
-		respondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to fetch user"})
+		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to fetch user"})
 		return
 	}
-	respondWithJSON(w, http.StatusOK, view.NewUserFromModel(user))
+	api_helpers.RespondWithJSON(w, http.StatusOK, view.NewUserFromModel(user))
 }
 
 func ListUsersHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 	userRepo := repository.NewUserRepository(db)
 	users, err := userRepo.List(r.Context())
 	if err != nil {
-		respondWithJSON(w, http.StatusBadRequest, map[string]string{"error": err.Error()})
+		api_helpers.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": err.Error()})
 		return
 	}
-	respondWithJSON(w, http.StatusOK, view.NewUsersFromModels(users))
+	api_helpers.RespondWithJSON(w, http.StatusOK, view.NewUsersFromModels(users))
 }
 
 func UpdateUserHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 	// fixme update не проверяет есть ли запись в бд
 	var user RequestUser
 	if err := json.NewDecoder(r.Body).Decode(&user); err != nil {
-		respondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Invalid request payload"})
+		api_helpers.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Invalid request payload"})
 		return
 	}
 	userRepo := repository.NewUserRepository(db)
@@ -99,8 +100,8 @@ func UpdateUserHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 	updateUser.Id = id
 	err := userRepo.Update(r.Context(), updateUser)
 	if err != nil {
-		respondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": err.Error()})
+		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": err.Error()})
 		return
 	}
-	respondWithJSON(w, http.StatusOK, map[string]string{"data": "User updated successfully"})
+	api_helpers.RespondWithJSON(w, http.StatusOK, map[string]string{"data": "User updated successfully"})
 }
