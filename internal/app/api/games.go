@@ -8,6 +8,7 @@ import (
 	"database/sql"
 	"encoding/json"
 	"net/http"
+	"strconv"
 	"time"
 
 	"github.com/gorilla/mux"
@@ -55,14 +56,18 @@ func DeleteGameHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 
 func GetGameByIdHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
-	id := vars["id"]
-	gameRepo := repository.NewGameRepository(db)
-	game, err := gameRepo.GetById(r.Context(), id)
+	id, err := strconv.Atoi(vars["id"])
 	if err != nil {
-		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to fetch game"})
+		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": err.Error()})
 		return
 	}
-	api_helpers.RespondWithJSON(w, http.StatusOK, view.NewGameFromModel(game))
+	gameRepo := repository.NewGameRepository(db)
+	game, err := gameRepo.GetGameDetails(r.Context(), id) // короткий ответ, если нужен см. GetById
+	if err != nil {
+		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to fetch game: " + err.Error()})
+		return
+	}
+	api_helpers.RespondWithJSON(w, http.StatusOK, view.NewGameDetailsFromModel(game))
 }
 
 func ListGamesHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
@@ -89,7 +94,11 @@ func UpdateGameHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 		Description: game.Description,
 	}
 	vars := mux.Vars(r)
-	id := vars["id"]
+	id, err2 := strconv.Atoi(vars["id"])
+	if err2 != nil {
+		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": err2.Error()})
+		return
+	}
 	updateGame.Id = id
 	err := gameRepo.Update(r.Context(), updateGame)
 	if err != nil {

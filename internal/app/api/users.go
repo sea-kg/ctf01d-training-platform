@@ -8,6 +8,7 @@ import (
 	"database/sql"
 	"encoding/json"
 	"net/http"
+	"strconv"
 
 	"github.com/gorilla/mux"
 )
@@ -88,7 +89,11 @@ func UpdateUserHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 		Status:   user.Status,
 	}
 	vars := mux.Vars(r)
-	id := vars["id"]
+	id, err2 := strconv.Atoi(vars["id"])
+	if err2 != nil {
+		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": err2.Error()})
+		return
+	}
 	updateUser.Id = id
 	err := userRepo.Update(r.Context(), updateUser)
 	if err != nil {

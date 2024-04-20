@@ -3,7 +3,7 @@ package view
 import "ctf01d/internal/app/models"
 
 type University struct {
-	Id   string `json:"id"`
+	Id   int    `json:"id"`
 	Name string `json:"name"`
 }
 

@@ -1,6 +1,6 @@
 package models
 
 type University struct {
-	Id   string `db:"id"`
+	Id   int    `db:"id"`
 	Name string `db:"name"`
 }

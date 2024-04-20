@@ -1,7 +1,7 @@
 package models
 
 type Service struct {
-	Id          string `db:"id"`
+	Id          int    `db:"id"`
 	Name        string `db:"name"`
 	Author      string `db:"author"`
 	LogoUrl     string `db:"logo_url"`

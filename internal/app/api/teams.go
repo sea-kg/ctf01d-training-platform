@@ -8,6 +8,7 @@ import (
 	"database/sql"
 	"encoding/json"
 	"net/http"
+	"strconv"
 
 	"github.com/gorilla/mux"
 )
@@ -91,7 +92,11 @@ func UpdateTeamHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 		AvatarUrl:    team.AvatarUrl,
 	}
 	vars := mux.Vars(r)
-	id := vars["id"]
+	id, err := strconv.Atoi(vars["id"])
+	if err != nil {
+		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": err.Error()})
+		return
+	}
 	updateTeam.Id = id
 	if err := teamRepo.Update(r.Context(), updateTeam); err != nil {
 		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": err.Error()})
