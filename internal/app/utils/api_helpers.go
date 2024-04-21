@@ -1,21 +1,26 @@
 package api_helpers
 
 import (
-	"crypto/sha1"
-	"encoding/hex"
 	"encoding/json"
 	"log"
 	"net/http"
 	"net/url"
 	"regexp"
+
+	"golang.org/x/crypto/bcrypt"
 )
 
-// fixme тут ли ей место? вынести в - tool
-func HashPassword(s string) string {
-	h := sha1.New()
-	h.Write([]byte(s))
-	// fixme добавить соль в конфиг и солить пароли, переделать на bcrypt
-	return hex.EncodeToString(h.Sum(nil))
+func HashPassword(s string) (string, error) {
+	bytes, err := bcrypt.GenerateFromPassword([]byte(s), bcrypt.DefaultCost)
+	if err != nil {
+		return "", err
+	}
+	return string(bytes), nil
+}
+
+func CheckPasswordHash(s, hash string) bool {
+	err := bcrypt.CompareHashAndPassword([]byte(hash), []byte(s))
+	return err == nil
 }
 
 func PrepareImage(avatarUrl string) string {
