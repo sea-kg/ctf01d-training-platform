@@ -30,11 +30,16 @@ func CreateUserHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	userRepo := repository.NewUserRepository(db)
+	passwordHash, err := api_helpers.HashPassword(user.Password)
+	if err != nil {
+		api_helpers.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Invalid request payload: " + err.Error()})
+		return
+	}
 	newUser := &models.User{
 		Username:     user.Username,
 		Role:         user.Role,
 		Status:       user.Status,
-		PasswordHash: api_helpers.HashPassword(user.Password),
+		PasswordHash: passwordHash,
 		AvatarUrl:    api_helpers.PrepareImage(user.AvatarUrl),
 	}
 	if err := userRepo.Create(r.Context(), newUser); err != nil {
