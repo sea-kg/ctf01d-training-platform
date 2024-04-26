@@ -8,6 +8,14 @@ CREATE TABLE users (
     role VARCHAR(255) NOT NULL CHECK (role IN ('admin', 'player', 'guest'))
 );
 
+-- Сессии пользователей
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+CREATE TABLE sessions (
+    id uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
+    user_id INTEGER UNIQUE REFERENCES users(id),
+    expires_at TIMESTAMP NOT NULL
+);
+
 -- Университеты
 CREATE TABLE universities (
     id SERIAL PRIMARY KEY,

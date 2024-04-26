@@ -12,6 +12,49 @@ servers:
   - url: 'http://localhost:4102'
     description: Local server
 paths:
+  /api/users/login:
+    post:
+      tags:
+        - Users
+      summary: Login user
+      description: Authenticates a user by user_name and password, starts a new session, and returns a session cookie.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_name:
+                  type: string
+                  example: exampleUser
+                password:
+                  type: string
+                  format: password
+                  example: examplePass
+      responses:
+        200:
+          description: User logged in successfully. A session cookie is set.
+          headers:
+            Set-Cookie:
+              description: Session cookie which needs to be included in subsequent requests.
+              schema:
+                type: string
+                example: 'session_id=abc123; Path=/; Max-Age=345600; HttpOnly'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: string
+                    example: 'User logged in'
+        400:
+          description: Invalid request body
+        401:
+          description: Invalid user_name or password
+        500:
+          description: Internal Server Error
   /api/users:
     get:
       tags:

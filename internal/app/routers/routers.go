@@ -89,6 +89,9 @@ var apiRoutes = ApiRoutes{
 	ApiRoute{"ListUsers", strings.ToUpper("Get"), "/api/users", api.ListUsersHandler},
 	ApiRoute{"UpdateUser", strings.ToUpper("Put"), "/api/users/{id}", api.UpdateUserHandler},
 
+	ApiRoute{"LoginUser", strings.ToUpper("Post"), "/api/users/login", api.LoginSessionHandler},
+	ApiRoute{"LogoutUser", strings.ToUpper("Post"), "/api/users/logout", api.LogoutSessionHandler},
+
 	ApiRoute{"ListUniversities", strings.ToUpper("Get"), "/api/universities", api.ListUniversitiesHandler},
 }
 
