@@ -50,20 +50,17 @@ func LogoutSessionHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "No session found", http.StatusUnauthorized)
 		return
 	}
-
 	sessionRepo := repository.NewSessionRepository(db)
 	err = sessionRepo.DeleteSessionInDB(r.Context(), cookie.Value)
 	if err != nil {
 		http.Error(w, "Failed to delete session", http.StatusInternalServerError)
 		return
 	}
-
 	http.SetCookie(w, &http.Cookie{
 		Name:   "session_id",
 		Value:  "",
 		Path:   "/",
 		MaxAge: -1, // Удаление куки
 	})
-
-	w.Write([]byte("Logout successful!"))
+	api_helpers.RespondWithJSON(w, http.StatusOK, map[string]string{"data": "User logout successful"})
 }

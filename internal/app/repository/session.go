@@ -44,7 +44,11 @@ func (r *sessionRepo) StoreSessionInDB(ctx context.Context, userId int) (string,
 	return session, nil
 }
 
-// fixme - implement me
-func (r *sessionRepo) DeleteSessionInDB(ctx context.Context, cookie string) error {
+func (r *sessionRepo) DeleteSessionInDB(ctx context.Context, sessionId string) error {
+	query := "DELETE FROM sessions where id = $1"
+	_, err := r.db.ExecContext(ctx, query, sessionId)
+	if err != nil {
+		return err
+	}
 	return nil
 }
