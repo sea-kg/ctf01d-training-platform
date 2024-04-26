@@ -10,6 +10,7 @@ type UserRepository interface {
 	Create(ctx context.Context, user *models.User) error
 	AddUserToTeams(ctx context.Context, userId int, teamIds []string) error
 	GetById(ctx context.Context, id string) (*models.User, error)
+	GetByUserName(ctx context.Context, id string) (*models.User, error)
 	Update(ctx context.Context, user *models.User) error
 	Delete(ctx context.Context, id string) error
 	List(ctx context.Context) ([]*models.User, error)
@@ -46,6 +47,16 @@ func (r *userRepo) GetById(ctx context.Context, id string) (*models.User, error)
 	query := `SELECT id, user_name, avatar_url, role, status FROM users WHERE id = $1`
 	user := &models.User{}
 	err := r.db.QueryRowContext(ctx, query, id).Scan(&user.Id, &user.Username, &user.AvatarUrl, &user.Role, &user.Status)
+	if err != nil {
+		return nil, err
+	}
+	return user, nil
+}
+
+func (r *userRepo) GetByUserName(ctx context.Context, name string) (*models.User, error) {
+	query := `SELECT id, password_hash FROM users WHERE user_name = $1`
+	user := &models.User{}
+	err := r.db.QueryRowContext(ctx, query, name).Scan(&user.Id, &user.PasswordHash)
 	if err != nil {
 		return nil, err
 	}

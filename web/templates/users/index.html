@@ -79,7 +79,7 @@
             </div>
             <h2>Add New User</h2>
             <form id="add-user-form">
-                <input type="text" id="username" name="username" placeholder="Username" required>
+                <input type="text" id="user_name" name="username" placeholder="Username" required>
                 <select id="team" name="team" multiple>
                 </select>
                 <input type="password" id="password" name="password" placeholder="Password" required>
@@ -137,7 +137,7 @@
                 e.preventDefault();
                 var selectedTeams = $('#team').val();
                 var data = {
-                    user_name: $('#username').val(),
+                    user_name: $('#user_name').val(),
                     password: $('#password').val(),
                     avatar_url: $('#avatar_url').val(),
                     status: $('#status').val(),
