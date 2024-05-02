@@ -39,7 +39,7 @@ func (r *teamRepo) GetById(ctx context.Context, id string) (*models.Team, error)
 }
 
 func (r *teamRepo) Update(ctx context.Context, team *models.Team) error {
-	query := `UPDATE teams SET name = $1, description = $2 university = $3 social_links = $4 avatar_url = $5 WHERE id = $6`
+	query := `UPDATE teams SET name = $1, description = $2, university_id = $3, social_links = $4, avatar_url = $5 WHERE id = $6`
 	_, err := r.db.ExecContext(ctx, query, team.Name, team.Description, team.UniversityId, team.SocialLinks, team.AvatarUrl, team.Id)
 	return err
 }

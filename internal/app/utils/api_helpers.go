@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"net/url"
 	"regexp"
+	"strings"
 
 	"golang.org/x/crypto/bcrypt"
 )
@@ -24,12 +25,15 @@ func CheckPasswordHash(s, hash string) bool {
 }
 
 func PrepareImage(avatarUrl string) string {
+	// fixme подумать за генерацию аватарок, пока для mvp - сойдет robohash.org
+	if strings.Contains(avatarUrl, "robohash.org") {
+		return avatarUrl
+	}
 	// fixme подумать что делать с http контентом
 	re := regexp.MustCompile(`(?i)^https?://.*\.(jpg|jpeg|png|gif)$`)
 	if re.MatchString(avatarUrl) {
 		return avatarUrl
 	}
-	// fixme подумать за генерацию аватарок, пока для mvp - сойдет
 	return "https://robohash.org/" + url.QueryEscape(avatarUrl)
 }
 

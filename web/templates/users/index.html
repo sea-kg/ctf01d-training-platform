@@ -51,13 +51,13 @@
             margin-bottom: 20px;
         }
 
-        .navigation a {
+        a {
             margin-right: 20px;
             text-decoration: none;
             color: blue;
         }
 
-        .navigation a:hover {
+        a:hover {
             text-decoration: underline;
         }
     </style>
@@ -77,9 +77,10 @@
                 <a href="/users/index.html">List Users</a>
                 <a href="/teams/index.html">List Teams</a>
             </div>
-            <h2>Add New User</h2>
+            <h2 id="user-label">Add New User</h2>
             <form id="add-user-form">
-                <input type="text" id="user_name" name="username" placeholder="Username" required>
+                <input type="hidden" id="user_id" name="user_id">
+                <input type="text" id="user_name" name="user_name" placeholder="Username" required>
                 <select id="team" name="team" multiple>
                 </select>
                 <input type="password" id="password" name="password" placeholder="Password" required>
@@ -104,13 +105,29 @@
                     success: function (users) {
                         $('#user-list').empty();
                         users.forEach(function (user) {
-                            $('#user-list').append(`<div>
-                                <img src="${user.avatar_url}" alt="User Avatar" style="width:50px;height:50px;">
-                                <p>Nick: <b> ${user.user_name}</b></h4>
-                                <p>Role: ${user.role}</p>
-                                <p>Status: ${user.status}</p>
-                                <button onclick="deleteUser('${user.id}')">Delete</button>
-                            </div>`);
+                            var userInfoDiv = $('<div>').append(
+                                $('<img>').attr({
+                                    src: user.avatar_url,
+                                    alt: "User Avatar",
+                                    style: "width:50px;height:50px;"
+                                }),
+                                $('<p>').text('Nick: ').append($('<a>').text(user.user_name).click(function () {
+                                    $('#user_name').val(user.user_name);
+                                    $('#password').val('');
+                                    $('#avatar_url').val(user.avatar_url);
+                                    $('#status').val(user.status);
+                                    $('#role').val(user.role);
+                                    $('#user_id').val(user.id);
+                                    $('button[type=submit]').text('Update User');
+                                    $('#user-label').text('Update User');
+                                })),
+                                $('<p>').text(`Role: ${user.role}`),
+                                $('<p>').text(`Status: ${user.status}`),
+                                $('<button>').text('Delete').click(function () {
+                                    deleteUser(user.id);
+                                })
+                            );
+                            $('#user-list').append(userInfoDiv);
                         });
                     }
                 });
@@ -131,49 +148,53 @@
                     }
                 });
             }
+            function deleteUser(userId) {
+                $.ajax({
+                    url: `/api/users/${userId}`,
+                    method: 'DELETE',
+                    success: function () {
+                        alert('User deleted successfully!');
+                        loadUsers();
+                    },
+                    error: function () {
+                        alert('Error deleting user');
+                    }
+                });
+            }
             loadUsers();
             loadTeams();
             $('#add-user-form').on('submit', function (e) {
                 e.preventDefault();
-                var selectedTeams = $('#team').val();
+                var userId = $('#user_id').val();
+                var methodType = userId ? 'PUT' : 'POST';
+                var apiUrl = userId ? `/api/users/${userId}` : '/api/users';
                 var data = {
                     user_name: $('#user_name').val(),
                     password: $('#password').val(),
                     avatar_url: $('#avatar_url').val(),
                     status: $('#status').val(),
                     role: $('#role').val(),
-                    team_ids: selectedTeams
+                    team_ids: $('#team').val()
                 };
 
                 $.ajax({
-                    url: '/api/users',
-                    method: 'POST',
+                    url: apiUrl,
+                    method: methodType,
                     contentType: 'application/json',
                     data: JSON.stringify(data),
                     success: function (response) {
-                        alert('User added successfully!');
+                        alert('User added/updated successfully!');
                         loadUsers();
+                        $('#add-user-form').trigger("reset");
+                        $('#user-label').text('Add User');
+                        $('button[type=submit]').text('Add User');
                     },
                     error: function () {
-                        alert('Error adding user');
+                        alert('Error adding/updating user');
                     }
                 });
             });
         });
-
-        function deleteUser(userId) {
-            $.ajax({
-                url: `/api/users/${userId}`,
-                method: 'DELETE',
-                success: function () {
-                    alert('User deleted successfully!');
-                    // loadUsers(); fixme not work
-                },
-                error: function () {
-                    alert('Error deleting user');
-                }
-            });
-        }
     </script>
 </body>
 

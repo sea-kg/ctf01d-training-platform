@@ -60,7 +60,7 @@ func DeleteUserHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 	id := vars["id"]
 	userRepo := repository.NewUserRepository(db)
 	if err := userRepo.Delete(r.Context(), id); err != nil {
-		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to delete user"})
+		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to delete user" + err.Error()})
 		return
 	}
 	api_helpers.RespondWithJSON(w, http.StatusOK, map[string]string{"data": "User deleted successfully"})
@@ -95,11 +95,18 @@ func UpdateUserHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 		api_helpers.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Invalid request payload"})
 		return
 	}
+	passwordHash, err := api_helpers.HashPassword(user.Password)
+	if err != nil {
+		api_helpers.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Invalid request payload: " + err.Error()})
+		return
+	}
 	userRepo := repository.NewUserRepository(db)
 	updateUser := &models.User{
-		Username: user.Username,
-		Role:     user.Role,
-		Status:   user.Status,
+		Username:     user.Username,
+		Role:         user.Role,
+		Status:       user.Status,
+		PasswordHash: passwordHash,
+		AvatarUrl:    api_helpers.PrepareImage(user.AvatarUrl),
 	}
 	vars := mux.Vars(r)
 	id, err2 := strconv.Atoi(vars["id"])
@@ -108,7 +115,7 @@ func UpdateUserHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	updateUser.Id = id
-	err := userRepo.Update(r.Context(), updateUser)
+	err = userRepo.Update(r.Context(), updateUser)
 	if err != nil {
 		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": err.Error()})
 		return
