@@ -102,8 +102,11 @@ var frontRoutes = FrontRoutes{
 	FrontRoute{"ListUser", strings.ToUpper("Get"), "/users/index.html", func(w http.ResponseWriter, r *http.Request) {
 		renderTemplate(w, "users/index.html")
 	}},
-	FrontRoute{"ListUser", strings.ToUpper("Get"), "/teams/index.html", func(w http.ResponseWriter, r *http.Request) {
+	FrontRoute{"TeamUser", strings.ToUpper("Get"), "/teams/index.html", func(w http.ResponseWriter, r *http.Request) {
 		renderTemplate(w, "teams/index.html")
+	}},
+	FrontRoute{"ServiceUser", strings.ToUpper("Get"), "/services/index.html", func(w http.ResponseWriter, r *http.Request) {
+		renderTemplate(w, "services/index.html")
 	}},
 	FrontRoute{"Index", strings.ToUpper("Get"), "/", func(w http.ResponseWriter, r *http.Request) {
 		renderTemplate(w, "index.html")

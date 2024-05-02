@@ -66,22 +66,22 @@
 <body>
     <div class="container">
         <div class="sidebar">
-            <h2>Users</h2>
-            <div id="user-list">
-                <!-- User list will be loaded here -->
+            <h2>Services</h2>
+            <div id="service-list">
+                <!-- Service list will be loaded here -->
             </div>
         </div>
         <div class="content">
             <div class="navigation">
                 <a href="/games/index.html">List Games</a>
-                <a href="/users/index.html">List Users</a>
+                <a href="/services/index.html">List Users</a>
                 <a href="/teams/index.html">List Teams</a>
-                <a href="/servises/index.html">List Services</a>
+                <a href="/services/index.html">List Services</a>
             </div>
-            <h2 id="user-label">Add New User</h2>
-            <form id="add-user-form">
-                <input type="hidden" id="user_id" name="user_id">
-                <input type="text" id="user_name" name="user_name" placeholder="Username" required>
+            <h2 id="service-label">Add New Service</h2>
+            <form id="add-service-form">
+                <input type="hidden" id="service_id" name="service_id">
+                <input type="text" id="name" name="name" placeholder="Name" required>
                 <select id="team" name="team" multiple>
                 </select>
                 <input type="password" id="password" name="password" placeholder="Password" required>
@@ -92,43 +92,43 @@
                     <option value="player">Player</option>
                     <option value="player">Guest</option>
                 </select>
-                <button type="submit">Add User</button>
+                <button type="submit">Add Service</button>
             </form>
         </div>
     </div>
 
     <script>
         $(document).ready(function () {
-            function loadUsers() {
+            function loadServices() {
                 $.ajax({
-                    url: '/api/users',
+                    url: '/api/services',
                     method: 'GET',
-                    success: function (users) {
-                        $('#user-list').empty();
-                        users.forEach(function (user) {
-                            var userInfoDiv = $('<div>').append(
+                    success: function (services) {
+                        $('#service-list').empty();
+                        services.forEach(function (service) {
+                            var serviceInfoDiv = $('<div>').append(
                                 $('<img>').attr({
-                                    src: user.avatar_url,
-                                    alt: "User Avatar",
+                                    src: service.avatar_url,
+                                    alt: "Service Avatar",
                                     style: "width:50px;height:50px;"
                                 }),
-                                $('<p>').text('Nick: ').append($('<a>').text(user.user_name).click(function () {
-                                    $('#user_name').val(user.user_name);
-                                    $('#password').val('');
-                                    $('#avatar_url').val(user.avatar_url);
-                                    $('#status').val(user.status);
-                                    $('#role').val(user.role);
-                                    $('#user_id').val(user.id);
-                                    $('button[type=submit]').text('Update User');
-                                    $('#user-label').text('Update User');
+
+                                $('<p>').text('Nick: ').append($('<a>').text(service.name).click(function () {
+                                    $('#name').val(service.name);
+                                    $('#author').val(service.author);
+                                    $('#logo_url').val(service.logo_url);
+                                    $('#description').val(service.description);
+                                    $('#is_public').val(service.is_public);
+                                    $('button[type=submit]').text('Update Service');
+                                    $('#service-label').text('Update Service');
                                 })),
-                                $('<p>').text(`Role: ${user.role}`),
-                                $('<p>').text(`Status: ${user.status}`),
+                                $('<p>').text(`Role: ${service.role}`),
+                                $('<p>').text(`Status: ${service.status}`),
                                 $('<button>').text('Delete').click(function () {
-                                    deleteUser(user.id);
+                                    deleteService(service.id);
                                 })
                             );
-                            $('#user-list').append(userInfoDiv);
+                            $('#service-list').append(serviceInfoDiv);
                         });
                     }
                 });
@@ -149,33 +149,32 @@
                     }
                 });
             }
-            function deleteUser(userId) {
+            function deleteService(serviceId) {
                 $.ajax({
-                    url: `/api/users/${userId}`,
+                    url: `/api/services/${serviceId}`,
                     method: 'DELETE',
                     success: function () {
-                        alert('User deleted successfully!');
-                        loadUsers();
+                        alert('Service deleted successfully!');
+                        loadServices();
                     },
                     error: function () {
-                        alert('Error deleting user');
+                        alert('Error deleting service');
                     }
                 });
             }
-            loadUsers();
+            loadServices();
             loadTeams();
-            $('#add-user-form').on('submit', function (e) {
+            $('#add-service-form').on('submit', function (e) {
                 e.preventDefault();
-                var userId = $('#user_id').val();
-                var methodType = userId ? 'PUT' : 'POST';
-                var apiUrl = userId ? `/api/users/${userId}` : '/api/users';
+                var serviceId = $('#service_id').val();
+                var methodType = serviceId ? 'PUT' : 'POST';
+                var apiUrl = serviceId ? `/api/services/${serviceId}` : '/api/services';
                 var data = {
-                    user_name: $('#user_name').val(),
-                    password: $('#password').val(),
-                    avatar_url: $('#avatar_url').val(),
-                    status: $('#status').val(),
-                    role: $('#role').val(),
-                    team_ids: $('#team').val()
+                    name: $('#name').val(),
+                    author: $('#author').val(),
+                    logo_url: $('#logo_url').val(),
+                    description: $('#description').val(),
+                    is_public: $('#is_public').val()
                 };
 
                 $.ajax({
@@ -184,14 +183,14 @@
                     contentType: 'application/json',
                     data: JSON.stringify(data),
                     success: function (response) {
-                        alert('User added/updated successfully!');
-                        loadUsers();
-                        $('#add-user-form').trigger("reset");
-                        $('#user-label').text('Add User');
-                        $('button[type=submit]').text('Add User');
+                        alert('Service added/updated successfully!');
+                        loadServices();
+                        $('#add-service-form').trigger("reset");
+                        $('#service-label').text('Add Service');
+                        $('button[type=submit]').text('Add Service');
                     },
                     error: function () {
-                        alert('Error adding/updating user');
+                        alert('Error adding/updating service');
                     }
                 });
             });
