@@ -46,7 +46,11 @@ func CreateTeamHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 
 func DeleteTeamHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
-	id := vars["id"]
+	id, err := strconv.Atoi(vars["id"])
+	if err != nil {
+		api_helpers.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Bad request"})
+		return
+	}
 	teamRepo := repository.NewTeamRepository(db)
 	if err := teamRepo.Delete(r.Context(), id); err != nil {
 		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to delete team"})
@@ -57,7 +61,11 @@ func DeleteTeamHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 
 func GetTeamByIdHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
-	id := vars["id"]
+	id, err := strconv.Atoi(vars["id"])
+	if err != nil {
+		api_helpers.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Bad request"})
+		return
+	}
 	teamRepo := repository.NewTeamRepository(db)
 	team, err := teamRepo.GetById(r.Context(), id)
 	if err != nil {
