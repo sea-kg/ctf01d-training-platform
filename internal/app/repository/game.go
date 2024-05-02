@@ -12,7 +12,7 @@ type GameRepository interface {
 	GetById(ctx context.Context, id int) (*models.Game, error)
 	GetGameDetails(ctx context.Context, id int) (*models.GameDetails, error)
 	Update(ctx context.Context, game *models.Game) error
-	Delete(ctx context.Context, id string) error
+	Delete(ctx context.Context, id int) error
 	List(ctx context.Context) ([]*models.Game, error)
 }
 
@@ -106,7 +106,7 @@ func (r *gameRepo) Update(ctx context.Context, game *models.Game) error {
 	return err
 }
 
-func (r *gameRepo) Delete(ctx context.Context, id string) error {
+func (r *gameRepo) Delete(ctx context.Context, id int) error {
 	query := `DELETE FROM games WHERE id = $1`
 	_, err := r.db.ExecContext(ctx, query, id)
 	return err

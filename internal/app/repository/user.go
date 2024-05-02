@@ -9,10 +9,10 @@ import (
 type UserRepository interface {
 	Create(ctx context.Context, user *models.User) error
 	AddUserToTeams(ctx context.Context, userId int, teamIds []string) error
-	GetById(ctx context.Context, id string) (*models.User, error)
+	GetById(ctx context.Context, id int) (*models.User, error)
 	GetByUserName(ctx context.Context, id string) (*models.User, error)
 	Update(ctx context.Context, user *models.User) error
-	Delete(ctx context.Context, id string) error
+	Delete(ctx context.Context, id int) error
 	List(ctx context.Context) ([]*models.User, error)
 }
 
@@ -43,7 +43,7 @@ func (r *userRepo) AddUserToTeams(ctx context.Context, userId int, teamIds []str
 	return nil
 }
 
-func (r *userRepo) GetById(ctx context.Context, id string) (*models.User, error) {
+func (r *userRepo) GetById(ctx context.Context, id int) (*models.User, error) {
 	query := `SELECT id, user_name, avatar_url, role, status FROM users WHERE id = $1`
 	user := &models.User{}
 	err := r.db.QueryRowContext(ctx, query, id).Scan(&user.Id, &user.Username, &user.AvatarUrl, &user.Role, &user.Status)
@@ -69,7 +69,7 @@ func (r *userRepo) Update(ctx context.Context, user *models.User) error {
 	return err
 }
 
-func (r *userRepo) Delete(ctx context.Context, id string) error {
+func (r *userRepo) Delete(ctx context.Context, id int) error {
 	tx, err := r.db.BeginTx(ctx, nil)
 	if err != nil {
 		return err

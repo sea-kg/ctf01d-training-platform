@@ -45,7 +45,11 @@ func CreateGameHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 
 func DeleteGameHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
-	id := vars["id"]
+	id, err := strconv.Atoi(vars["id"])
+	if err != nil {
+		api_helpers.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Bad request"})
+		return
+	}
 	gameRepo := repository.NewGameRepository(db)
 	if err := gameRepo.Delete(r.Context(), id); err != nil {
 		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to delete game"})
@@ -58,7 +62,7 @@ func GetGameByIdHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	id, err := strconv.Atoi(vars["id"])
 	if err != nil {
-		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": err.Error()})
+		api_helpers.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Bad request"})
 		return
 	}
 	gameRepo := repository.NewGameRepository(db)

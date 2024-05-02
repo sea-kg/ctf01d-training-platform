@@ -27,5 +27,4 @@ func ListUniversitiesHandler(db *sql.DB, w http.ResponseWriter, r *http.Request)
 		return
 	}
 	api_helpers.RespondWithJSON(w, http.StatusOK, view.NewUniversitiesFromModels(universities))
-
 }

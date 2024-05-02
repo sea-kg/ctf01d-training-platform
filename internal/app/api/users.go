@@ -57,7 +57,11 @@ func CreateUserHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 
 func DeleteUserHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
-	id := vars["id"]
+	id, err := strconv.Atoi(vars["id"])
+	if err != nil {
+		api_helpers.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Bad request"})
+		return
+	}
 	userRepo := repository.NewUserRepository(db)
 	if err := userRepo.Delete(r.Context(), id); err != nil {
 		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to delete user" + err.Error()})
@@ -68,7 +72,11 @@ func DeleteUserHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 
 func GetUserByIdHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
-	id := vars["id"]
+	id, err := strconv.Atoi(vars["id"])
+	if err != nil {
+		api_helpers.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Bad request"})
+		return
+	}
 	userRepo := repository.NewUserRepository(db)
 	user, err := userRepo.GetById(r.Context(), id)
 	if err != nil {
@@ -82,7 +90,7 @@ func ListUsersHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 	userRepo := repository.NewUserRepository(db)
 	users, err := userRepo.List(r.Context())
 	if err != nil {
-		api_helpers.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": err.Error()})
+		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": err.Error()})
 		return
 	}
 	api_helpers.RespondWithJSON(w, http.StatusOK, view.NewUsersFromModels(users))
@@ -111,7 +119,7 @@ func UpdateUserHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	id, err2 := strconv.Atoi(vars["id"])
 	if err2 != nil {
-		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": err2.Error()})
+		api_helpers.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": err2.Error()})
 		return
 	}
 	updateUser.Id = id
