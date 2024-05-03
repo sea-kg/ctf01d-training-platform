@@ -1,10 +1,12 @@
-package api_helpers
+package helpers
 
 import (
 	"encoding/json"
+	"html/template"
 	"log"
 	"net/http"
 	"net/url"
+	"path/filepath"
 	"regexp"
 	"strings"
 
@@ -50,5 +52,19 @@ func RespondWithJSON(w http.ResponseWriter, code int, payload interface{}) {
 	w.WriteHeader(code)
 	if _, err := w.Write(response); err != nil {
 		log.Printf("Error writing response: %v", err)
+	}
+}
+
+var tmplPath = "web/templates/"
+
+func RenderTemplate(w http.ResponseWriter, tmpl string) {
+	t, err := template.ParseFiles(filepath.Join(tmplPath, tmpl))
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	err = t.Execute(w, nil)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
 }
