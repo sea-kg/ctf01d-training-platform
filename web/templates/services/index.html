@@ -112,7 +112,7 @@
                                     $('#author').val(service.author);
                                     $('#logo_url').val(service.logo_url);
                                     $('#description').val(service.description);
-                                    $('#is_public').val(service.is_public);
+                                    $('#is_public').prop('checked', service.is_public);
                                     $('button[type=submit]').text('Update Service');
                                     $('#service-label').text('Update Service');
                                 })),
@@ -168,7 +168,7 @@
                     author: $('#author').val(),
                     logo_url: $('#logo_url').val(),
                     description: $('#description').val(),
-                    is_public: $('#is_public').val()
+                    is_public: $('#is_public').prop('checked')
                 };
 
                 $.ajax({

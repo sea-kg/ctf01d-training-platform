@@ -1,20 +1,47 @@
 package api
 
 import (
+	"ctf01d/internal/app/models"
 	"ctf01d/internal/app/repository"
 	api_helpers "ctf01d/internal/app/utils"
 	"ctf01d/internal/app/view"
 	"database/sql"
+	"encoding/json"
 	"net/http"
 	"strconv"
 
 	"github.com/gorilla/mux"
 )
 
-// fixme implement
+type RequestService struct {
+	Name        string `json:"name"`
+	Author      string `json:"author"`
+	LogoUrl     string `json:"logo_url"`
+	Description string `json:"description"`
+	IsPublic    bool   `json:"is_public"`
+}
+
 func CreateServiceHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
-	w.WriteHeader(http.StatusOK)
+	var service RequestService
+	if err := json.NewDecoder(r.Body).Decode(&service); err != nil {
+		api_helpers.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Invalid request payload: " + err.Error()})
+		return
+	}
+
+	serviceRepo := repository.NewServiceRepository(db)
+	// fixme request to model надо вынести и переиспользовать
+	newService := &models.Service{
+		Name:        service.Name,
+		Author:      service.Author,
+		LogoUrl:     api_helpers.PrepareImage(service.LogoUrl),
+		Description: service.Description,
+		IsPublic:    service.IsPublic,
+	}
+	if err := serviceRepo.Create(r.Context(), newService); err != nil {
+		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to create service: " + err.Error()})
+		return
+	}
+	api_helpers.RespondWithJSON(w, http.StatusOK, map[string]string{"data": "Service created successfully"})
 }
 
 func DeleteServiceHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
@@ -29,7 +56,7 @@ func DeleteServiceHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to delete service"})
 		return
 	}
-	api_helpers.RespondWithJSON(w, http.StatusOK, map[string]string{"data": "Team deleted successfully"})
+	api_helpers.RespondWithJSON(w, http.StatusOK, map[string]string{"data": "Service deleted successfully"})
 }
 
 func GetServiceByIdHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
