@@ -75,11 +75,17 @@ func (r *userRepo) Delete(ctx context.Context, id int) error {
 		return err
 	}
 	if _, err := tx.ExecContext(ctx, "DELETE FROM team_members WHERE user_id = $1", id); err != nil {
-		tx.Rollback()
+		err2 := tx.Rollback()
+		if err2 != nil {
+			return err2
+		}
 		return err
 	}
 	if _, err := tx.ExecContext(ctx, "DELETE FROM users WHERE id = $1", id); err != nil {
-		tx.Rollback()
+		err2 := tx.Rollback()
+		if err2 != nil {
+			return err2
+		}
 		return err
 	}
 	return tx.Commit()
