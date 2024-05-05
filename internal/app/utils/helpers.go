@@ -3,7 +3,7 @@ package helpers
 import (
 	"encoding/json"
 	"html/template"
-	"log"
+	"log/slog"
 	"net/http"
 	"net/url"
 	"path/filepath"
@@ -45,13 +45,13 @@ func RespondWithJSON(w http.ResponseWriter, code int, payload interface{}) {
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		if _, err := w.Write([]byte(`{"error": "Error marshaling the response object"}`)); err != nil {
-			log.Printf("Error writing error response: %v", err)
+			slog.Error("Error writing error response: " + err.Error())
 		}
 		return
 	}
 	w.WriteHeader(code)
 	if _, err := w.Write(response); err != nil {
-		log.Printf("Error writing response: %v", err)
+		slog.Error("Error writing response: " + err.Error())
 	}
 }
 

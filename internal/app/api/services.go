@@ -7,6 +7,7 @@ import (
 	"ctf01d/internal/app/view"
 	"database/sql"
 	"encoding/json"
+	"log/slog"
 	"net/http"
 	"strconv"
 
@@ -24,10 +25,10 @@ type RequestService struct {
 func CreateServiceHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 	var service RequestService
 	if err := json.NewDecoder(r.Body).Decode(&service); err != nil {
-		api_helpers.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Invalid request payload: " + err.Error()})
+		slog.Warn(err.Error(), "handler", "CreateServiceHandler")
+		api_helpers.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Invalid request payload"})
 		return
 	}
-
 	serviceRepo := repository.NewServiceRepository(db)
 	// fixme request to model надо вынести и переиспользовать
 	newService := &models.Service{
@@ -38,7 +39,8 @@ func CreateServiceHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 		IsPublic:    service.IsPublic,
 	}
 	if err := serviceRepo.Create(r.Context(), newService); err != nil {
-		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to create service: " + err.Error()})
+		slog.Warn(err.Error(), "handler", "CreateServiceHandler")
+		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to create service"})
 		return
 	}
 	api_helpers.RespondWithJSON(w, http.StatusOK, map[string]string{"data": "Service created successfully"})
@@ -48,11 +50,13 @@ func DeleteServiceHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	id, err := strconv.Atoi(vars["id"])
 	if err != nil {
+		slog.Warn(err.Error(), "handler", "DeleteServiceHandler")
 		api_helpers.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Bad request"})
 		return
 	}
 	serviceRepo := repository.NewServiceRepository(db)
 	if err := serviceRepo.Delete(r.Context(), id); err != nil {
+		slog.Warn(err.Error(), "handler", "DeleteServiceHandler")
 		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to delete service"})
 		return
 	}
@@ -63,12 +67,14 @@ func GetServiceByIdHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	id, err := strconv.Atoi(vars["id"])
 	if err != nil {
+		slog.Warn(err.Error(), "handler", "GetServiceByIdHandler")
 		api_helpers.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Bad request"})
 		return
 	}
 	serviceRepo := repository.NewServiceRepository(db)
 	service, err := serviceRepo.GetById(r.Context(), id)
 	if err != nil {
+		slog.Warn(err.Error(), "handler", "GetServiceByIdHandler")
 		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to fetch service"})
 		return
 	}
@@ -79,7 +85,8 @@ func ListServicesHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 	serviceRepo := repository.NewServiceRepository(db)
 	services, err := serviceRepo.List(r.Context())
 	if err != nil {
-		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": err.Error()})
+		slog.Warn(err.Error(), "handler", "ListServicesHandler")
+		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to fetch services"})
 		return
 	}
 	api_helpers.RespondWithJSON(w, http.StatusOK, view.NewServiceFromModels(services))
