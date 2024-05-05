@@ -27,5 +27,8 @@ func main() {
 	slog.Info("Server started")
 	router := routers.NewRouter(db)
 
-	http.ListenAndServe(cfg.HTTP.Host+":"+cfg.HTTP.Port, router)
+	err = http.ListenAndServe(cfg.HTTP.Host+":"+cfg.HTTP.Port, router)
+	if err != nil {
+		slog.Error("Server error: " + err.Error())
+	}
 }
