@@ -7,6 +7,7 @@ import (
 	"ctf01d/internal/app/view"
 	"database/sql"
 	"encoding/json"
+	"log/slog"
 	"net/http"
 	"strconv"
 	"time"
@@ -23,7 +24,8 @@ type RequestGame struct {
 func CreateGameHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 	var game RequestGame
 	if err := json.NewDecoder(r.Body).Decode(&game); err != nil {
-		api_helpers.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Invalid request payload: " + err.Error()})
+		slog.Warn(err.Error(), "handler", "CreateGameHandler")
+		api_helpers.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Invalid request payload"})
 		return
 	}
 	if game.EndTime.Before(game.StartTime) {
@@ -37,7 +39,8 @@ func CreateGameHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 		Description: game.Description,
 	}
 	if err := gameRepo.Create(r.Context(), newGame); err != nil {
-		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to create game: " + err.Error()})
+		slog.Warn(err.Error(), "handler", "CreateGameHandler")
+		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to create game"})
 		return
 	}
 	api_helpers.RespondWithJSON(w, http.StatusOK, map[string]string{"data": "Game created successfully"})
@@ -45,9 +48,15 @@ func CreateGameHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 
 func DeleteGameHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
-	id := vars["id"]
+	id, err := strconv.Atoi(vars["id"])
+	if err != nil {
+		slog.Warn(err.Error(), "handler", "DeleteGameHandler")
+		api_helpers.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Bad request"})
+		return
+	}
 	gameRepo := repository.NewGameRepository(db)
 	if err := gameRepo.Delete(r.Context(), id); err != nil {
+		slog.Warn(err.Error(), "handler", "DeleteGameHandler")
 		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to delete game"})
 		return
 	}
@@ -58,13 +67,15 @@ func GetGameByIdHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	id, err := strconv.Atoi(vars["id"])
 	if err != nil {
-		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": err.Error()})
+		slog.Warn(err.Error(), "handler", "GetGameByIdHandler")
+		api_helpers.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Bad request"})
 		return
 	}
 	gameRepo := repository.NewGameRepository(db)
 	game, err := gameRepo.GetGameDetails(r.Context(), id) // короткий ответ, если нужен см. GetById
 	if err != nil {
-		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to fetch game: " + err.Error()})
+		slog.Warn(err.Error(), "handler", "GetGameByIdHandler")
+		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to fetch game"})
 		return
 	}
 	api_helpers.RespondWithJSON(w, http.StatusOK, view.NewGameDetailsFromModel(game))
@@ -74,7 +85,8 @@ func ListGamesHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 	gameRepo := repository.NewGameRepository(db)
 	games, err := gameRepo.List(r.Context())
 	if err != nil {
-		api_helpers.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": err.Error()})
+		slog.Warn(err.Error(), "handler", "ListGamesHandler")
+		api_helpers.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Failed to fetch games"})
 		return
 	}
 	api_helpers.RespondWithJSON(w, http.StatusOK, view.NewGamesFromModels(games))
@@ -84,6 +96,7 @@ func UpdateGameHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 	// fixme update не проверяет есть ли запись в бд
 	var game RequestGame
 	if err := json.NewDecoder(r.Body).Decode(&game); err != nil {
+		slog.Warn(err.Error(), "handler", "UpdateGameHandler")
 		api_helpers.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Invalid request payload"})
 		return
 	}
@@ -96,13 +109,15 @@ func UpdateGameHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	id, err2 := strconv.Atoi(vars["id"])
 	if err2 != nil {
-		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": err2.Error()})
+		slog.Warn(err2.Error(), "handler", "UpdateGameHandler")
+		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Invalid request payload"})
 		return
 	}
 	updateGame.Id = id
 	err := gameRepo.Update(r.Context(), updateGame)
 	if err != nil {
-		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": err.Error()})
+		slog.Warn(err.Error(), "handler", "UpdateGameHandler")
+		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Invalid request payload"})
 		return
 	}
 	api_helpers.RespondWithJSON(w, http.StatusOK, map[string]string{"data": "Game updated successfully"})

@@ -46,13 +46,13 @@
             margin-bottom: 20px;
         }
 
-        .navigation a {
+        a {
             margin-right: 20px;
             text-decoration: none;
             color: blue;
         }
 
-        .navigation a:hover {
+        a:hover {
             text-decoration: underline;
         }
     </style>
@@ -71,9 +71,11 @@
                 <a href="/games/index.html">List Games</a>
                 <a href="/users/index.html">List Users</a>
                 <a href="/teams/index.html">List Teams</a>
+                <a href="/services/index.html">List Services</a>
             </div>
-            <h2>Add New Team</h2>
+            <h2 id="user-label">Add New Team</h2>
             <form id="add-team-form">
+                <input type="hidden" id="team_id" name="team_id">
                 <input type="text" id="name" name="name" placeholder="Team name" required>
                 <input type="text" id="description" name="Description" placeholder="Description">
                 <input type="text" id="social_links" name="Social links" placeholder="Social links">
@@ -87,25 +89,54 @@
     </div>
 
     <script>
+        function deleteTeam(teamId) {
+            $.ajax({
+                url: `/api/teams/${teamId}`,
+                method: 'DELETE',
+                success: function () {
+                    alert('Team deleted successfully!');
+                    loadTeams();
+                },
+                error: function () {
+                    alert('Error deleting team');
+                }
+            });
+        }
+        function loadTeams() {
+            $.ajax({
+                url: '/api/teams',
+                method: 'GET',
+                success: function (teams) {
+                    $('#team-list').empty();
+                    teams.forEach(function (team) {
+                        var teamInfoDiv = $('<div>').append(
+                            $('<img>').attr({
+                                src: team.avatar_url,
+                                alt: "Team Avatar",
+                                style: "width:50px;height:50px;"
+                            }),
+                            $('<p>').text('Name: ').append($('<a>').text(team.name).click(function () {
+                                $('#name').val(team.name);
+                                $('#avatar_url').val(team.avatar_url);
+                                $('#team_id').val(team.id);
+                                $('#description').val(team.description);
+                                $('#social_links').val(team.social_links);
+                                $('button[type=submit]').text('Update Team');
+                                $('#user-label').text('Update Team');
+                            })),
+                            $('<p>').text(`Description: ${team.description}`),
+                            $('<p>').text(`University: ${team.university}`),
+                            $('<button>').text('Delete').click(function () {
+                                deleteTeam(team.id);
+                            })
+                        );
+                        $('#team-list').append(teamInfoDiv);
+                    });
+                }
+            });
+        }
         $(document).ready(function () {
-            function loadTeams() {
-                $.ajax({
-                    url: '/api/teams',
-                    method: 'GET',
-                    success: function (teams) {
-                        $('#team-list').empty();
-                        teams.forEach(function (team) {
-                            $('#team-list').append(`<div>
-                                <img src="${team.avatar_url}" alt="Team Avatar" style="width:50px;height:50px;">
-                                <p>Name: <b> ${team.name}</b></h4>
-                                <p>University: ${team.university}</p>
-                                <p>Description: ${team.description}</p>
-                                <button onclick="deleteTeam('${team.id}')">Delete</button>
-                            </div>`);
-                        });
-                    }
-                });
-            }
+            loadTeams();
             $('#university').autocomplete({
                 source: function (request, response) {
                     $.ajax({
@@ -128,53 +159,42 @@
                 minLength: 2,
                 select: function (event, ui) {
                     console.log("Selected: " + ui.item.label + ", ID: " + ui.item.id);
-
                     $('#university').val(ui.item.label);
                     $('#university_id').val(ui.item.id);
                     return false;
                 }
             });
-            loadTeams();
             $('#add-team-form').on('submit', function (e) {
                 e.preventDefault();
+                var teamId = $('#team_id').val();
+                var methodType = teamId ? 'PUT' : 'POST';
+                var apiUrl = teamId ? `/api/teams/${teamId}` : '/api/teams';
                 var data = {
                     name: $('#name').val(),
-                    password: $('#password').val(),
-                    social_links: $('#social_links').val(),
                     description: $('#description').val(),
+                    social_links: $('#social_links').val(),
                     avatar_url: $('#avatar_url').val(),
                     university_id: $('#university_id').val()
                 };
-
                 $.ajax({
-                    url: '/api/teams',
-                    method: 'POST',
+                    url: apiUrl,
+                    method: methodType,
                     contentType: 'application/json',
                     data: JSON.stringify(data),
                     success: function (response) {
-                        alert('Team added successfully!');
+                        alert('Team added/updated successfully!');
                         loadTeams();
+                        $('#add-team-form').trigger("reset");
+                        $('#team-label').text('Add Team');
+                        $('button[type=submit]').text('Add Team');
                     },
                     error: function () {
-                        alert('Error adding team');
+                        alert('Error adding/updating team');
                     }
                 });
             });
         });
-
-        function deleteTeam(teamId) {
-            $.ajax({
-                url: `/api/teams/${teamId}`,
-                method: 'DELETE',
-                success: function () {
-                    alert('Team deleted successfully!');
-                    // loadTeams(); fixme not work
-                },
-                error: function () {
-                    alert('Error deleting team');
-                }
-            });
-        }
     </script>
 </body>
+
 </html>

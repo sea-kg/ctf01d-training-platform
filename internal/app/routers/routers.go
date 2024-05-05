@@ -3,14 +3,13 @@ package routers
 import (
 	"database/sql"
 	"net/http"
-	"path/filepath"
 	"strings"
-	"text/template"
 
 	"github.com/gorilla/mux"
 
 	"ctf01d/internal/app/api"
 	"ctf01d/internal/app/logger"
+	"ctf01d/internal/app/web"
 )
 
 type ApiRoutes []ApiRoute
@@ -96,31 +95,9 @@ var apiRoutes = ApiRoutes{
 }
 
 var frontRoutes = FrontRoutes{
-	FrontRoute{"ListGame", strings.ToUpper("Get"), "/games/index.html", func(w http.ResponseWriter, r *http.Request) {
-		renderTemplate(w, "games/index.html")
-	}},
-	FrontRoute{"ListUser", strings.ToUpper("Get"), "/users/index.html", func(w http.ResponseWriter, r *http.Request) {
-		renderTemplate(w, "users/index.html")
-	}},
-	FrontRoute{"ListUser", strings.ToUpper("Get"), "/teams/index.html", func(w http.ResponseWriter, r *http.Request) {
-		renderTemplate(w, "teams/index.html")
-	}},
-	FrontRoute{"Index", strings.ToUpper("Get"), "/", func(w http.ResponseWriter, r *http.Request) {
-		renderTemplate(w, "index.html")
-	}},
-}
-
-// fixme унести
-var tmplPath = "web/templates/"
-
-func renderTemplate(w http.ResponseWriter, tmpl string) {
-	t, err := template.ParseFiles(filepath.Join(tmplPath, tmpl))
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-	err = t.Execute(w, nil)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-	}
+	FrontRoute{"ListGame", strings.ToUpper("Get"), "/games/index.html", web.ListGameHandler},
+	FrontRoute{"ListUser", strings.ToUpper("Get"), "/users/index.html", web.ListUserHandler},
+	FrontRoute{"TeamUser", strings.ToUpper("Get"), "/teams/index.html", web.TeamUserHandler},
+	FrontRoute{"ServiceUser", strings.ToUpper("Get"), "/services/index.html", web.ServiceUserHandler},
+	FrontRoute{"Index", strings.ToUpper("Get"), "/", web.IndexHandler},
 }

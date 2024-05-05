@@ -8,9 +8,9 @@ import (
 
 type TeamRepository interface {
 	Create(ctx context.Context, team *models.Team) error
-	GetById(ctx context.Context, id string) (*models.Team, error)
+	GetById(ctx context.Context, id int) (*models.Team, error)
 	Update(ctx context.Context, team *models.Team) error
-	Delete(ctx context.Context, id string) error
+	Delete(ctx context.Context, id int) error
 	List(ctx context.Context) ([]*models.Team, error)
 }
 
@@ -28,10 +28,13 @@ func (r *teamRepo) Create(ctx context.Context, team *models.Team) error {
 	return err
 }
 
-func (r *teamRepo) GetById(ctx context.Context, id string) (*models.Team, error) {
-	query := "SELECT t.*, u.name as university_name FROM teams t JOIN universities u ON t.university_id = u.id"
+func (r *teamRepo) GetById(ctx context.Context, id int) (*models.Team, error) {
+	query := `SELECT t.id, t.name, t.description, t.social_links, t.avatar_url, u.name as university_name
+			FROM teams t
+			JOIN universities u ON t.university_id = u.id
+			WHERE t.id = $1`
 	team := &models.Team{}
-	err := r.db.QueryRowContext(ctx, query, id).Scan(&team.Id, &team.Name, &team.Description, &team.UniversityId, &team.University, &team.SocialLinks, &team.AvatarUrl)
+	err := r.db.QueryRowContext(ctx, query, id).Scan(&team.Id, &team.Name, &team.Description, &team.SocialLinks, &team.AvatarUrl, &team.University)
 	if err != nil {
 		return nil, err
 	}
@@ -39,12 +42,12 @@ func (r *teamRepo) GetById(ctx context.Context, id string) (*models.Team, error)
 }
 
 func (r *teamRepo) Update(ctx context.Context, team *models.Team) error {
-	query := `UPDATE teams SET name = $1, description = $2 university = $3 social_links = $4 avatar_url = $5 WHERE id = $6`
+	query := `UPDATE teams SET name = $1, description = $2, university_id = $3, social_links = $4, avatar_url = $5 WHERE id = $6`
 	_, err := r.db.ExecContext(ctx, query, team.Name, team.Description, team.UniversityId, team.SocialLinks, team.AvatarUrl, team.Id)
 	return err
 }
 
-func (r *teamRepo) Delete(ctx context.Context, id string) error {
+func (r *teamRepo) Delete(ctx context.Context, id int) error {
 	query := `DELETE FROM teams WHERE id = $1`
 	_, err := r.db.ExecContext(ctx, query, id)
 	return err

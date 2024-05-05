@@ -5,6 +5,7 @@ import (
 	api_helpers "ctf01d/internal/app/utils"
 	"database/sql"
 	"encoding/json"
+	"log/slog"
 	"net/http"
 )
 
@@ -16,12 +17,14 @@ type RequestLogin struct {
 func LoginSessionHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 	var req RequestLogin
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+		slog.Warn(err.Error(), "handler", "LoginSessionHandler")
 		http.Error(w, "Invalid request body", http.StatusBadRequest)
 		return
 	}
 	userRepo := repository.NewUserRepository(db)
 	user, err := userRepo.GetByUserName(r.Context(), req.Username)
 	if err != nil || !api_helpers.CheckPasswordHash(req.Password, user.PasswordHash) {
+		slog.Warn(err.Error(), "handler", "LoginSessionHandler")
 		api_helpers.RespondWithJSON(w, http.StatusUnauthorized, map[string]string{"error": "Invalid password or user"})
 		return
 	}
@@ -29,7 +32,8 @@ func LoginSessionHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 	sessionRepo := repository.NewSessionRepository(db)
 	sessionId, err := sessionRepo.StoreSessionInDB(r.Context(), user.Id)
 	if err != nil {
-		http.Error(w, "Failed to store session in DB", http.StatusInternalServerError)
+		slog.Warn(err.Error(), "handler", "LoginSessionHandler")
+		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to store session"})
 		return
 	}
 
@@ -47,13 +51,15 @@ func LoginSessionHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 func LogoutSessionHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 	cookie, err := r.Cookie("session_id")
 	if err != nil {
-		http.Error(w, "No session found", http.StatusUnauthorized)
+		slog.Warn(err.Error(), "handler", "LogoutSessionHandler")
+		api_helpers.RespondWithJSON(w, http.StatusUnauthorized, map[string]string{"error": "No session found"})
 		return
 	}
 	sessionRepo := repository.NewSessionRepository(db)
 	err = sessionRepo.DeleteSessionInDB(r.Context(), cookie.Value)
 	if err != nil {
-		http.Error(w, "Failed to delete session", http.StatusInternalServerError)
+		slog.Warn(err.Error(), "handler", "LogoutSessionHandler")
+		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to delete session"})
 		return
 	}
 	http.SetCookie(w, &http.Cookie{

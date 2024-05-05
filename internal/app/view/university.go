@@ -15,9 +15,9 @@ func NewUniversityFromModel(u *models.University) *University {
 }
 
 func NewUniversitiesFromModels(ms []*models.University) []*University {
-	var universitys []*University
+	var universities []*University = []*University{}
 	for _, m := range ms {
-		universitys = append(universitys, NewUniversityFromModel(m))
+		universities = append(universities, NewUniversityFromModel(m))
 	}
-	return universitys
+	return universities
 }

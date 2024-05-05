@@ -20,7 +20,6 @@ func NewUniversityRepository(db *sql.DB) UniversityRepository {
 }
 
 func (repo *universityRepo) Search(ctx context.Context, query string) ([]*models.University, error) {
-	// rows, err := repo.db.QueryContext(ctx, "SELECT id, name FROM universities WHERE levenshtein(name, $1) <= 3 ORDER BY levenshtein(name, $1) LIMIT 10", query)
 	rows, err := repo.db.QueryContext(ctx, "SELECT id, name FROM universities WHERE name ILIKE '%' || $1 || '%' LIMIT 10", query)
 	if err != nil {
 		return nil, err

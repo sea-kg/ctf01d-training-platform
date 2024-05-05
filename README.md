@@ -50,3 +50,15 @@ attach to container
 ```shell
 $ docker exec -it ctf01d-postgres psql -U postgres
 ```
+
+## Hints
+
+fuzz api
+
+```
+docker run --net=host --volume /home/user/ctf01d-training-platform/api:/api/ ghcr.io/matusf/openapi-fuzzer run -s '/api/s
+wagger.yaml'  --url http://localhost:4102
+
+
+docker run --net=host  --volume /home/user/ctf01d-training-platform/api:/api/ kisspeter/apifuzzer --src_file '/api/swagger.yaml'  --url http://localhost:4102 -r /api/
+```

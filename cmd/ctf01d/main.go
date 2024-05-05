@@ -4,26 +4,31 @@ import (
 	config "ctf01d/configs"
 	"ctf01d/internal/app/routers"
 	"database/sql"
-	"log"
+	"log/slog"
 	"net/http"
+	"os"
 
 	_ "github.com/lib/pq"
 )
 
 func main() {
+	logger := slog.New(slog.NewTextHandler(os.Stdout, nil))
+	slog.SetDefault(logger)
+
 	cfg, err := config.NewConfig()
 	if err != nil {
-		log.Fatalf("Config error: %s", err)
+		slog.Error("Config error: " + err.Error())
 	}
 	db, err := sql.Open(cfg.DB.Driver, cfg.DB.DataSource)
 	if err != nil {
-		log.Fatal("Error connecting to the database: ", err)
+		slog.Error("Error connecting to the database: " + err.Error())
 	}
 	defer db.Close()
-	log.Printf("Server started")
+	slog.Info("Server started")
 	router := routers.NewRouter(db)
 
-	log.Fatal(
-		http.ListenAndServe(cfg.HTTP.Host+":"+cfg.HTTP.Port, router),
-	)
+	err = http.ListenAndServe(cfg.HTTP.Host+":"+cfg.HTTP.Port, router)
+	if err != nil {
+		slog.Error("Server error: " + err.Error())
+	}
 }

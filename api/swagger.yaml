@@ -17,7 +17,9 @@ paths:
       tags:
         - Users
       summary: Login user
-      description: Authenticates a user by user_name and password, starts a new session, and returns a session cookie.
+      description: >-
+        Authenticates a user by user_name and password, starts a new session,
+        and returns a session cookie.
       requestBody:
         required: true
         content:
@@ -33,14 +35,16 @@ paths:
                   format: password
                   example: examplePass
       responses:
-        200:
+        '200':
           description: User logged in successfully. A session cookie is set.
           headers:
             Set-Cookie:
-              description: Session cookie which needs to be included in subsequent requests.
+              description: >-
+                Session cookie which needs to be included in subsequent
+                requests.
               schema:
                 type: string
-                example: 'session_id=abc123; Path=/; Max-Age=345600; HttpOnly'
+                example: session_id=abc123; Path=/; Max-Age=345600; HttpOnly
           content:
             application/json:
               schema:
@@ -48,13 +52,14 @@ paths:
                 properties:
                   data:
                     type: string
-                    example: 'User logged in'
-        400:
+                    example: User logged in
+        '400':
           description: Invalid request body
-        401:
+        '401':
           description: Invalid user_name or password
-        500:
+        '500':
           description: Internal Server Error
+      parameters: []
   /api/users:
     get:
       tags:
@@ -72,6 +77,8 @@ paths:
                 items:
                   $ref: '#/components/schemas/UserResponse'
                 x-content-type: application/json
+        '500':
+          description: Failed response
     post:
       tags:
         - Users
@@ -85,8 +92,12 @@ paths:
               $ref: '#/components/schemas/UserRequest'
         required: true
       responses:
-        '201':
+        '200':
           description: User created successfully
+        '400':
+          description: Bad request
+        '500':
+          description: Failed response
   '/api/users/{id}':
     get:
       tags:
@@ -108,6 +119,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UserResponse'
+        '400':
+          description: Bad request
+        '500':
+          description: Failed response
     put:
       tags:
         - Users
@@ -130,6 +145,10 @@ paths:
       responses:
         '200':
           description: User updated successfully
+        '400':
+          description: Bad request
+        '500':
+          description: Failed response
     delete:
       tags:
         - Users
@@ -144,8 +163,13 @@ paths:
           schema:
             type: string
       responses:
-        '204':
+        '200':
           description: User deleted successfully
+        '500':
+          description: Failed response
+          content:
+            application/json:
+              schema: {}
   /api/games:
     get:
       tags:
@@ -163,6 +187,8 @@ paths:
                 items:
                   $ref: '#/components/schemas/GameResponse'
                 x-content-type: application/json
+        '400':
+          description: Bad request
     post:
       tags:
         - Games
@@ -176,8 +202,12 @@ paths:
               $ref: '#/components/schemas/GameRequest'
         required: true
       responses:
-        '201':
+        '200':
           description: Game created successfully
+        '400':
+          description: Bad request
+        '500':
+          description: Failed response
   '/api/games/{id}':
     get:
       tags:
@@ -199,6 +229,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GameResponse'
+        '400':
+          description: Bad request
+        '500':
+          description: Failed response
     put:
       tags:
         - Games
@@ -221,6 +255,16 @@ paths:
       responses:
         '200':
           description: Game updated successfully
+        '400':
+          description: Failed request
+          content:
+            application/json:
+              schema: {}
+        '500':
+          description: Failed response
+          content:
+            application/json:
+              schema: {}
     delete:
       tags:
         - Games
@@ -237,6 +281,10 @@ paths:
       responses:
         '200':
           description: Game deleted successfully
+        '400':
+          description: Bad request
+        '500':
+          description: Failed response
   /api/teams:
     get:
       tags:
@@ -254,6 +302,16 @@ paths:
                 items:
                   $ref: '#/components/schemas/TeamResponse'
                 x-content-type: application/json
+        '400':
+          description: Failed request
+          content:
+            application/json:
+              schema: {}
+        '500':
+          description: Failed response
+          content:
+            application/json:
+              schema: {}
     post:
       tags:
         - Teams
@@ -267,8 +325,18 @@ paths:
               $ref: '#/components/schemas/TeamRequest'
         required: true
       responses:
-        '201':
+        '200':
           description: Team created successfully
+        '400':
+          description: Failed request
+          content:
+            application/json:
+              schema: {}
+        '500':
+          description: Failed response
+          content:
+            application/json:
+              schema: {}
   '/api/teams/{id}':
     get:
       tags:
@@ -326,7 +394,7 @@ paths:
           schema:
             type: string
       responses:
-        '204':
+        '200':
           description: Team deleted successfully
   /api/results:
     get:
@@ -358,7 +426,7 @@ paths:
               $ref: '#/components/schemas/ResultRequest'
         required: true
       responses:
-        '201':
+        '200':
           description: Result created successfully
   '/api/results/{id}':
     get:
@@ -411,7 +479,7 @@ paths:
               $ref: '#/components/schemas/ServiceRequest'
         required: true
       responses:
-        '201':
+        '200':
           description: Service created successfully
   '/api/services/{id}':
     get:
@@ -470,13 +538,14 @@ paths:
           schema:
             type: string
       responses:
-        '204':
+        '200':
           description: Service deleted successfully
   /api/universities:
     get:
       summary: Retrieves a list of universities
-      description: |
-        This endpoint retrieves universities. It can optionally filter universities that match a specific term.
+      description: >
+        This endpoint retrieves universities. It can optionally filter
+        universities that match a specific term.
       parameters:
         - in: query
           name: term
@@ -501,7 +570,9 @@ paths:
                     name:
                       type: string
                       description: The name of the university
-                      example: "Анапский филиал Кубанского государственного аграрного университета"
+                      example: >-
+                        Анапский филиал Кубанского государственного аграрного
+                        университета
 components:
   schemas:
     UserRequest:
@@ -512,8 +583,11 @@ components:
           description: The name of the user
         role:
           type: string
-          enum: [ "admin", "player", "guest"]
-          example: "player"
+          enum:
+            - admin
+            - player
+            - guest
+          example: player
           description: 'The role of the user (admin, player or guest)'
         avatar_url:
           type: string
@@ -523,7 +597,7 @@ components:
           description: 'Status of the user (active, disabled)'
         password:
           type: string
-          description: 'User password'
+          description: User password
     UserResponse:
       type: object
       properties:
@@ -535,8 +609,11 @@ components:
           description: The name of the user
         role:
           type: string
-          enum: [ "admin", "player", "guest"]
-          example: "player"
+          enum:
+            - admin
+            - player
+            - guest
+          example: player
           description: 'The role of the user (admin, player or guest)'
         avatar_url:
           type: string

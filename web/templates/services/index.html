@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Main Page</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            display: flex;
+        }
+
+        .sidebar {
+            width: 60%;
+            background: #f3f3f3;
+            padding: 20px;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .content {
+            width: 40%;
+            padding: 20px;
+        }
+
+        input {
+            display: block;
+            width: 50%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+
+        select {
+            display: block;
+            width: 50%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        .navigation {
+            margin-bottom: 20px;
+        }
+
+        a {
+            margin-right: 20px;
+            text-decoration: none;
+            color: blue;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <h2>Services</h2>
+            <div id="service-list">
+                <!-- Service list will be loaded here -->
+            </div>
+        </div>
+        <div class="content">
+            <div class="navigation">
+                <a href="/games/index.html">List Games</a>
+                <a href="/services/index.html">List Users</a>
+                <a href="/teams/index.html">List Teams</a>
+                <a href="/services/index.html">List Services</a>
+            </div>
+            <h2 id="service-label">Add New Service</h2>
+            <form id="add-service-form">
+                <input type="hidden" id="service_id" name="service_id">
+                <input type="text" id="name" name="name" placeholder="Name" required>
+                <input type="text" id="author" name="author" placeholder="Author" required>
+                <input type="text" id="logo_url" name="logo_url" placeholder="Logo URL" required>
+                <textarea id="description" name="description" placeholder="Description" required></textarea>
+                <input type="checkbox" id="is_public" name="is_public"> Is Public<br>
+                <button type="submit">Add Service</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            function loadServices() {
+                $.ajax({
+                    url: '/api/services',
+                    method: 'GET',
+                    success: function (services) {
+                        $('#service-list').empty();
+                        services.forEach(function (service) {
+                            var serviceInfoDiv = $('<div>').append(
+                                $('<img>').attr({
+                                    src: service.avatar_url,
+                                    alt: "Service Avatar",
+                                    style: "width:50px;height:50px;"
+                                }),
+
+                                $('<p>').text('Nick: ').append($('<a>').text(service.name).click(function () {
+                                    $('#name').val(service.name);
+                                    $('#author').val(service.author);
+                                    $('#logo_url').val(service.logo_url);
+                                    $('#description').val(service.description);
+                                    $('#is_public').prop('checked', service.is_public);
+                                    $('button[type=submit]').text('Update Service');
+                                    $('#service-label').text('Update Service');
+                                })),
+                                $('<p>').text(`Role: ${service.role}`),
+                                $('<p>').text(`Status: ${service.status}`),
+                                $('<button>').text('Delete').click(function () {
+                                    deleteService(service.id);
+                                })
+                            );
+                            $('#service-list').append(serviceInfoDiv);
+                        });
+                    }
+                });
+            }
+            function loadTeams() {
+                $.ajax({
+                    url: '/api/teams',
+                    method: 'GET',
+                    success: function (teams) {
+                        var teamSelect = $('#team');
+                        teamSelect.empty();
+                        teams.forEach(function (team) {
+                            teamSelect.append(`<option value="${team.id}">${team.name}</option>`);
+                        });
+                    },
+                    error: function () {
+                        alert('Error loading teams');
+                    }
+                });
+            }
+            function deleteService(serviceId) {
+                $.ajax({
+                    url: `/api/services/${serviceId}`,
+                    method: 'DELETE',
+                    success: function () {
+                        alert('Service deleted successfully!');
+                        loadServices();
+                    },
+                    error: function () {
+                        alert('Error deleting service');
+                    }
+                });
+            }
+            loadServices();
+            loadTeams();
+            $('#add-service-form').on('submit', function (e) {
+                e.preventDefault();
+                var serviceId = $('#service_id').val();
+                var methodType = serviceId ? 'PUT' : 'POST';
+                var apiUrl = serviceId ? `/api/services/${serviceId}` : '/api/services';
+                var data = {
+                    name: $('#name').val(),
+                    author: $('#author').val(),
+                    logo_url: $('#logo_url').val(),
+                    description: $('#description').val(),
+                    is_public: $('#is_public').prop('checked')
+                };
+
+                $.ajax({
+                    url: apiUrl,
+                    method: methodType,
+                    contentType: 'application/json',
+                    data: JSON.stringify(data),
+                    success: function (response) {
+                        alert('Service added/updated successfully!');
+                        loadServices();
+                        $('#add-service-form').trigger("reset");
+                        $('#service-label').text('Add Service');
+                        $('button[type=submit]').text('Add Service');
+                    },
+                    error: function () {
+                        alert('Error adding/updating service');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

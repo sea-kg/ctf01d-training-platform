@@ -6,6 +6,7 @@ import (
 	api_helpers "ctf01d/internal/app/utils"
 	"ctf01d/internal/app/view"
 	"database/sql"
+	"log/slog"
 	"net/http"
 )
 
@@ -23,9 +24,9 @@ func ListUniversitiesHandler(db *sql.DB, w http.ResponseWriter, r *http.Request)
 	}
 
 	if err != nil {
-		api_helpers.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": err.Error()})
+		slog.Warn(err.Error(), "handler", "ListUniversitiesHandler")
+		api_helpers.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Failed to fetch universities"})
 		return
 	}
 	api_helpers.RespondWithJSON(w, http.StatusOK, view.NewUniversitiesFromModels(universities))
-
 }

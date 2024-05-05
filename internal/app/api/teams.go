@@ -7,6 +7,7 @@ import (
 	"ctf01d/internal/app/view"
 	"database/sql"
 	"encoding/json"
+	"log/slog"
 	"net/http"
 	"strconv"
 
@@ -24,7 +25,8 @@ type RequestTeam struct {
 func CreateTeamHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 	var team RequestTeam
 	if err := json.NewDecoder(r.Body).Decode(&team); err != nil {
-		api_helpers.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Invalid request payload: " + err.Error()})
+		slog.Warn(err.Error(), "handler", "CreateTeamHandler")
+		api_helpers.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Invalid request payload"})
 		return
 	}
 
@@ -38,7 +40,8 @@ func CreateTeamHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 		AvatarUrl:    api_helpers.PrepareImage(team.AvatarUrl),
 	}
 	if err := teamRepo.Create(r.Context(), newTeam); err != nil {
-		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to create team: " + err.Error()})
+		slog.Warn(err.Error(), "handler", "CreateTeamHandler")
+		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to create team"})
 		return
 	}
 	api_helpers.RespondWithJSON(w, http.StatusOK, map[string]string{"data": "Team created successfully"})
@@ -46,9 +49,15 @@ func CreateTeamHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 
 func DeleteTeamHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
-	id := vars["id"]
+	id, err := strconv.Atoi(vars["id"])
+	if err != nil {
+		slog.Warn(err.Error(), "handler", "DeleteTeamHandler")
+		api_helpers.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Bad request"})
+		return
+	}
 	teamRepo := repository.NewTeamRepository(db)
 	if err := teamRepo.Delete(r.Context(), id); err != nil {
+		slog.Warn(err.Error(), "handler", "DeleteTeamHandler")
 		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to delete team"})
 		return
 	}
@@ -57,10 +66,16 @@ func DeleteTeamHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 
 func GetTeamByIdHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
-	id := vars["id"]
+	id, err := strconv.Atoi(vars["id"])
+	if err != nil {
+		slog.Warn(err.Error(), "handler", "GetTeamByIdHandler")
+		api_helpers.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Bad request"})
+		return
+	}
 	teamRepo := repository.NewTeamRepository(db)
 	team, err := teamRepo.GetById(r.Context(), id)
 	if err != nil {
+		slog.Warn(err.Error(), "handler", "GetTeamByIdHandler")
 		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to fetch team"})
 		return
 	}
@@ -71,7 +86,8 @@ func ListTeamsHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 	teamRepo := repository.NewTeamRepository(db)
 	teams, err := teamRepo.List(r.Context())
 	if err != nil {
-		api_helpers.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": err.Error()})
+		slog.Warn(err.Error(), "handler", "ListTeamsHandler")
+		api_helpers.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Failed to fetch teams"})
 		return
 	}
 	api_helpers.RespondWithJSON(w, http.StatusOK, view.NewTeamsFromModels(teams))
@@ -80,6 +96,7 @@ func ListTeamsHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 func UpdateTeamHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 	var team RequestTeam
 	if err := json.NewDecoder(r.Body).Decode(&team); err != nil {
+		slog.Warn(err.Error(), "handler", "UpdateTeamHandler")
 		api_helpers.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Invalid request payload"})
 		return
 	}
@@ -94,12 +111,14 @@ func UpdateTeamHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	id, err := strconv.Atoi(vars["id"])
 	if err != nil {
-		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": err.Error()})
+		slog.Warn(err.Error(), "handler", "UpdateTeamHandler")
+		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to update team"})
 		return
 	}
 	updateTeam.Id = id
 	if err := teamRepo.Update(r.Context(), updateTeam); err != nil {
-		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": err.Error()})
+		slog.Warn(err.Error(), "handler", "UpdateTeamHandler")
+		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to update team"})
 		return
 	}
 	api_helpers.RespondWithJSON(w, http.StatusOK, map[string]string{"data": "Team updated successfully"})
