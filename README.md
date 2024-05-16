@@ -7,21 +7,18 @@ Service used go && psql
 ## Install requriments
 
 ```shell
-$ sudo apt install golang
 $ go mod download
 ```
 
 ## Build server
 
 ```shell
-$ cd src
-$ go build main.go
+$ go build cmd/ctf01d/main.go
 ```
 
 ## Run local dev server
 
 ```shell
-$ cd src
 $ go run cmd/ctf01d/main.go
 ```
 
@@ -55,7 +52,7 @@ $ docker exec -it ctf01d-postgres psql -U postgres
 
 fuzz api
 
-```
+```shell
 docker run --net=host --volume /home/user/ctf01d-training-platform/api:/api/ ghcr.io/matusf/openapi-fuzzer run -s '/api/s
 wagger.yaml'  --url http://localhost:4102
 
