@@ -6,7 +6,6 @@ lint:
 
 # Install requirements
 install:
-	sudo apt install golang
 	go mod download
 
 # Build the server executable
