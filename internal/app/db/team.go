@@ -1,4 +1,4 @@
-package models
+package db
 
 type Team struct {
 	Id           int    `db:"id"`

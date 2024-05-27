@@ -1,7 +1,7 @@
 package api
 
 import (
-	"ctf01d/internal/app/models"
+	dbmodels "ctf01d/internal/app/db"
 	"ctf01d/internal/app/repository"
 	api_helpers "ctf01d/internal/app/utils"
 	"ctf01d/internal/app/view"
@@ -14,7 +14,7 @@ func ListUniversitiesHandler(db *sql.DB, w http.ResponseWriter, r *http.Request)
 	queryParam := r.URL.Query().Get("term")
 
 	universityRepo := repository.NewUniversityRepository(db)
-	var universities []*models.University
+	var universities []*dbmodels.University
 	var err error
 
 	if queryParam != "" {

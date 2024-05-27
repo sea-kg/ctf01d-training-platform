@@ -1,6 +1,6 @@
 package view
 
-import "ctf01d/internal/app/models"
+import "ctf01d/internal/app/db"
 
 type User struct {
 	Id        int    `json:"id"`
@@ -10,7 +10,7 @@ type User struct {
 	Status    string `json:"status,omitempty"`
 }
 
-func NewUserFromModel(u *models.User) *User {
+func NewUserFromModel(u *db.User) *User {
 	return &User{
 		Id:        u.Id,
 		Username:  u.Username,
@@ -20,7 +20,7 @@ func NewUserFromModel(u *models.User) *User {
 	}
 }
 
-func NewUsersFromModels(ms []*models.User) []*User {
+func NewUsersFromModels(ms []*db.User) []*User {
 	var users []*User
 	for _, m := range ms {
 		users = append(users, NewUserFromModel(m))

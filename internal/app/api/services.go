@@ -1,7 +1,8 @@
 package api
 
 import (
-	"ctf01d/internal/app/models"
+	apimodels "ctf01d/internal/app/apimodels"
+	dbmodels "ctf01d/internal/app/db"
 	"ctf01d/internal/app/repository"
 	api_helpers "ctf01d/internal/app/utils"
 	"ctf01d/internal/app/view"
@@ -14,16 +15,8 @@ import (
 	"github.com/gorilla/mux"
 )
 
-type RequestService struct {
-	Name        string `json:"name"`
-	Author      string `json:"author"`
-	LogoUrl     string `json:"logo_url"`
-	Description string `json:"description"`
-	IsPublic    bool   `json:"is_public"`
-}
-
 func CreateServiceHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
-	var service RequestService
+	var service apimodels.ServiceRequest
 	if err := json.NewDecoder(r.Body).Decode(&service); err != nil {
 		slog.Warn(err.Error(), "handler", "CreateServiceHandler")
 		api_helpers.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Invalid request payload"})
@@ -31,11 +24,11 @@ func CreateServiceHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 	}
 	serviceRepo := repository.NewServiceRepository(db)
 	// fixme request to model надо вынести и переиспользовать
-	newService := &models.Service{
+	newService := &dbmodels.Service{
 		Name:        service.Name,
 		Author:      service.Author,
-		LogoUrl:     api_helpers.PrepareImage(service.LogoUrl),
-		Description: service.Description,
+		LogoUrl:     api_helpers.PrepareImage(*service.LogoUrl),
+		Description: *service.Description,
 		IsPublic:    service.IsPublic,
 	}
 	if err := serviceRepo.Create(r.Context(), newService); err != nil {

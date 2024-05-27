@@ -1,7 +1,8 @@
 package api
 
 import (
-	"ctf01d/internal/app/models"
+	apimodels "ctf01d/internal/app/apimodels"
+	dbmodels "ctf01d/internal/app/db"
 	"ctf01d/internal/app/repository"
 	api_helpers "ctf01d/internal/app/utils"
 	"ctf01d/internal/app/view"
@@ -14,16 +15,8 @@ import (
 	"github.com/gorilla/mux"
 )
 
-type RequestTeam struct {
-	Name         string `json:"name"`
-	SocialLinks  string `json:"social_links"`
-	Description  string `json:"description"`
-	AvatarUrl    string `json:"avatar_url"`
-	UniversityId string `json:"university_id"`
-}
-
 func CreateTeamHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
-	var team RequestTeam
+	var team apimodels.TeamRequest
 	if err := json.NewDecoder(r.Body).Decode(&team); err != nil {
 		slog.Warn(err.Error(), "handler", "CreateTeamHandler")
 		api_helpers.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Invalid request payload"})
@@ -32,12 +25,12 @@ func CreateTeamHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 
 	teamRepo := repository.NewTeamRepository(db)
 	// fixme request to model надо вынести и переиспользовать
-	newTeam := &models.Team{
+	newTeam := &dbmodels.Team{
 		Name:         team.Name,
-		SocialLinks:  team.SocialLinks,
-		Description:  team.Description,
+		SocialLinks:  *team.SocialLinks,
+		Description:  *team.Description,
 		UniversityId: team.UniversityId,
-		AvatarUrl:    api_helpers.PrepareImage(team.AvatarUrl),
+		AvatarUrl:    api_helpers.PrepareImage(*team.AvatarUrl),
 	}
 	if err := teamRepo.Create(r.Context(), newTeam); err != nil {
 		slog.Warn(err.Error(), "handler", "CreateTeamHandler")
@@ -94,19 +87,19 @@ func ListTeamsHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 }
 
 func UpdateTeamHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
-	var team RequestTeam
+	var team apimodels.TeamRequest
 	if err := json.NewDecoder(r.Body).Decode(&team); err != nil {
 		slog.Warn(err.Error(), "handler", "UpdateTeamHandler")
 		api_helpers.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Invalid request payload"})
 		return
 	}
 	teamRepo := repository.NewTeamRepository(db)
-	updateTeam := &models.Team{
+	updateTeam := &dbmodels.Team{
 		Name:         team.Name,
-		SocialLinks:  team.SocialLinks,
-		Description:  team.Description,
+		SocialLinks:  *team.SocialLinks,
+		Description:  *team.Description,
 		UniversityId: team.UniversityId,
-		AvatarUrl:    team.AvatarUrl,
+		AvatarUrl:    *team.AvatarUrl,
 	}
 	vars := mux.Vars(r)
 	id, err := strconv.Atoi(vars["id"])

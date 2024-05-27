@@ -1,4 +1,4 @@
-package models
+package db
 
 type University struct {
 	Id   int    `db:"id"`
