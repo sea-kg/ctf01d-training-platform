@@ -1,6 +1,7 @@
 package api
 
 import (
+	apimodels "ctf01d/internal/app/apimodels"
 	"ctf01d/internal/app/repository"
 	api_helpers "ctf01d/internal/app/utils"
 	"database/sql"
@@ -15,15 +16,15 @@ type RequestLogin struct {
 }
 
 func LoginSessionHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
-	var req RequestLogin
+	var req apimodels.PostApiUsersLoginJSONBody
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
 		slog.Warn(err.Error(), "handler", "LoginSessionHandler")
 		http.Error(w, "Invalid request body", http.StatusBadRequest)
 		return
 	}
 	userRepo := repository.NewUserRepository(db)
-	user, err := userRepo.GetByUserName(r.Context(), req.Username)
-	if err != nil || !api_helpers.CheckPasswordHash(req.Password, user.PasswordHash) {
+	user, err := userRepo.GetByUserName(r.Context(), *req.UserName)
+	if err != nil || !api_helpers.CheckPasswordHash(*req.Password, user.PasswordHash) {
 		slog.Warn(err.Error(), "handler", "LoginSessionHandler")
 		api_helpers.RespondWithJSON(w, http.StatusUnauthorized, map[string]string{"error": "Invalid password or user"})
 		return

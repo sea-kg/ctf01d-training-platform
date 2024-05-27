@@ -134,8 +134,8 @@ type TeamRequest struct {
 	// SocialLinks JSON string containing social media links of the team
 	SocialLinks *string `json:"social_links,omitempty"`
 
-	// University University or institution the team is associated with
-	University *string `json:"university,omitempty"`
+	// UniversityId University or institution the team is associated with
+	UniversityId int `json:"university_id"`
 }
 
 // TeamResponse defines model for TeamResponse.
@@ -183,7 +183,8 @@ type UserRequest struct {
 	Role *UserRequestRole `json:"role,omitempty"`
 
 	// Status Status of the user (active, disabled)
-	Status *string `json:"status,omitempty"`
+	Status  *string `json:"status,omitempty"`
+	TeamIds *[]int  `json:"team_ids,omitempty"`
 
 	// UserName The name of the user
 	UserName *string `json:"user_name,omitempty"`

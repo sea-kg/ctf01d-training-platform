@@ -174,7 +174,7 @@
                     description: $('#description').val(),
                     social_links: $('#social_links').val(),
                     avatar_url: $('#avatar_url').val(),
-                    university_id: $('#university_id').val()
+                    university_id: parseInt($('#university_id').val(), 10)
                 };
                 $.ajax({
                     url: apiUrl,

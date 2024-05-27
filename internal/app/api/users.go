@@ -42,8 +42,8 @@ func CreateUserHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to create user"})
 		return
 	}
-	if len(user.TeamsId) > 0 {
-		if err := userRepo.AddUserToTeams(r.Context(), newUser.Id, user.TeamsId); err != nil {
+	if len(*user.TeamIds) > 0 {
+		if err := userRepo.AddUserToTeams(r.Context(), newUser.Id, user.TeamIds); err != nil {
 			slog.Warn(err.Error(), "handler", "CreateUserHandler")
 			api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to add user to teams"})
 			return
@@ -106,7 +106,7 @@ func UpdateUserHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 		api_helpers.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Invalid request payload"})
 		return
 	}
-	passwordHash, err := api_helpers.HashPassword(user.Password)
+	passwordHash, err := api_helpers.HashPassword(*user.Password)
 	if err != nil {
 		slog.Warn(err.Error(), "handler", "UpdateUserHandler")
 		api_helpers.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Invalid request payload"})
@@ -118,7 +118,7 @@ func UpdateUserHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 		Role:         string(*user.Role),
 		Status:       *user.Status,
 		PasswordHash: passwordHash,
-		AvatarUrl:    api_helpers.PrepareImage(user.AvatarUrl),
+		AvatarUrl:    api_helpers.PrepareImage(*user.AvatarUrl),
 	}
 	vars := mux.Vars(r)
 	id, err2 := strconv.Atoi(vars["id"])

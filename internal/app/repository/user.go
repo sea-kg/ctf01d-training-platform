@@ -8,7 +8,7 @@ import (
 
 type UserRepository interface {
 	Create(ctx context.Context, user *models.User) error
-	AddUserToTeams(ctx context.Context, userId int, teamIds []string) error
+	AddUserToTeams(ctx context.Context, userId int, teamIds *[]int) error
 	GetById(ctx context.Context, id int) (*models.User, error)
 	GetByUserName(ctx context.Context, id string) (*models.User, error)
 	Update(ctx context.Context, user *models.User) error
@@ -33,13 +33,14 @@ func (r *userRepo) Create(ctx context.Context, user *models.User) error {
 	return nil
 }
 
-func (r *userRepo) AddUserToTeams(ctx context.Context, userId int, teamIds []string) error {
-	for _, teamId := range teamIds {
+func (r *userRepo) AddUserToTeams(ctx context.Context, userId int, teamIds *[]int) error {
+	for _, teamId := range *teamIds {
 		_, err := r.db.ExecContext(ctx, "INSERT INTO team_members (user_id, team_id) VALUES ($1, $2)", userId, teamId)
 		if err != nil {
 			return err
 		}
 	}
+
 	return nil
 }
 

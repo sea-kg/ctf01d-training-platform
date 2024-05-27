@@ -587,6 +587,12 @@ components:
         password:
           type: string
           description: User password
+        team_ids:
+          type: array
+          items:
+            type: integer
+            example: 1
+            description: Unique identifier for the result entry
     UserResponse:
       type: object
       properties:
@@ -747,6 +753,7 @@ components:
     TeamRequest:
       required:
         - name
+        - university_id
       type: object
       properties:
         name:
@@ -755,8 +762,8 @@ components:
         description:
           type: string
           description: A brief description of the team
-        university:
-          type: string
+        university_id:
+          type: integer
           description: University or institution the team is associated with
         social_links:
           type: string

@@ -175,7 +175,9 @@
                     avatar_url: $('#avatar_url').val(),
                     status: $('#status').val(),
                     role: $('#role').val(),
-                    team_ids: $('#team').val()
+                    team_ids: $('#team').val().map(function (id) {
+                        return parseInt(id, 10);
+                    })
                 };
 
                 $.ajax({
