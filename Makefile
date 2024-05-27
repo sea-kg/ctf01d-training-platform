@@ -10,7 +10,7 @@ install:
 
 # Build the server executable
 build:
-	go build main.go
+	go build cmd/ctf01d/main.go
 
 # Run the local development server
 run-server:
