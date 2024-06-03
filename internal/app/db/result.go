@@ -1,4 +1,4 @@
-package models
+package db
 
 type Result struct {
 	Id     int    `db:"id"`

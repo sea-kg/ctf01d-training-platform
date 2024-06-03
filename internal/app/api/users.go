@@ -1,7 +1,8 @@
 package api
 
 import (
-	"ctf01d/internal/app/models"
+	apimodels "ctf01d/internal/app/apimodels"
+	dbmodels "ctf01d/internal/app/db"
 	"ctf01d/internal/app/repository"
 	api_helpers "ctf01d/internal/app/utils"
 	"ctf01d/internal/app/view"
@@ -14,36 +15,27 @@ import (
 	"github.com/gorilla/mux"
 )
 
-type RequestUser struct {
-	Username  string   `json:"user_name"`
-	Role      string   `json:"role"`
-	AvatarUrl string   `json:"avatar_url"`
-	Status    string   `json:"status"`
-	Password  string   `json:"password"`
-	TeamsId   []string `json:"team_ids"`
-}
-
 func CreateUserHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 	// fixme обернуть в транзакцию, т.к. две вставки подряд
-	var user RequestUser
+	var user apimodels.UserRequest
 	if err := json.NewDecoder(r.Body).Decode(&user); err != nil {
 		slog.Warn(err.Error(), "handler", "CreateUserHandler")
 		api_helpers.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Invalid request payload"})
 		return
 	}
 	userRepo := repository.NewUserRepository(db)
-	passwordHash, err := api_helpers.HashPassword(user.Password)
+	passwordHash, err := api_helpers.HashPassword(*user.Password)
 	if err != nil {
 		slog.Warn(err.Error(), "handler", "CreateUserHandler")
 		api_helpers.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Invalid request payload"})
 		return
 	}
-	newUser := &models.User{
-		Username:     user.Username,
-		Role:         user.Role,
-		Status:       user.Status,
+	newUser := &dbmodels.User{
+		Username:     *user.UserName,
+		Role:         string(*user.Role),
+		Status:       *user.Status,
 		PasswordHash: passwordHash,
-		AvatarUrl:    api_helpers.PrepareImage(user.AvatarUrl),
+		AvatarUrl:    api_helpers.PrepareImage(*user.AvatarUrl),
 	}
 	if err := userRepo.Create(r.Context(), newUser); err != nil {
 		slog.Warn(err.Error(), "handler", "CreateUserHandler")
@@ -108,7 +100,7 @@ func ListUsersHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 
 func UpdateUserHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 	// fixme update не проверяет есть ли запись в бд
-	var user RequestUser
+	var user apimodels.UserRequest
 	if err := json.NewDecoder(r.Body).Decode(&user); err != nil {
 		slog.Warn(err.Error(), "handler", "UpdateUserHandler")
 		api_helpers.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Invalid request payload"})
@@ -121,10 +113,10 @@ func UpdateUserHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	userRepo := repository.NewUserRepository(db)
-	updateUser := &models.User{
-		Username:     user.Username,
-		Role:         user.Role,
-		Status:       user.Status,
+	updateUser := &dbmodels.User{
+		Username:     *user.UserName,
+		Role:         string(*user.Role),
+		Status:       *user.Status,
 		PasswordHash: passwordHash,
 		AvatarUrl:    api_helpers.PrepareImage(user.AvatarUrl),
 	}

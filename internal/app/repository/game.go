@@ -2,7 +2,7 @@ package repository
 
 import (
 	"context"
-	"ctf01d/internal/app/models"
+	models "ctf01d/internal/app/db"
 	"database/sql"
 	"time"
 )

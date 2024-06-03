@@ -1,7 +1,8 @@
 package api
 
 import (
-	"ctf01d/internal/app/models"
+	apimodels "ctf01d/internal/app/apimodels"
+	dbmodel "ctf01d/internal/app/db"
 	"ctf01d/internal/app/repository"
 	api_helpers "ctf01d/internal/app/utils"
 	"ctf01d/internal/app/view"
@@ -10,19 +11,12 @@ import (
 	"log/slog"
 	"net/http"
 	"strconv"
-	"time"
 
 	"github.com/gorilla/mux"
 )
 
-type RequestGame struct {
-	StartTime   time.Time `json:"start_time"`
-	EndTime     time.Time `json:"end_time"`
-	Description string    `json:"description"`
-}
-
 func CreateGameHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
-	var game RequestGame
+	var game apimodels.GameRequest
 	if err := json.NewDecoder(r.Body).Decode(&game); err != nil {
 		slog.Warn(err.Error(), "handler", "CreateGameHandler")
 		api_helpers.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Invalid request payload"})
@@ -33,10 +27,10 @@ func CreateGameHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	gameRepo := repository.NewGameRepository(db)
-	newGame := &models.Game{
+	newGame := &dbmodel.Game{
 		StartTime:   game.StartTime,
 		EndTime:     game.EndTime,
-		Description: game.Description,
+		Description: *game.Description,
 	}
 	if err := gameRepo.Create(r.Context(), newGame); err != nil {
 		slog.Warn(err.Error(), "handler", "CreateGameHandler")
@@ -94,17 +88,17 @@ func ListGamesHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 
 func UpdateGameHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 	// fixme update не проверяет есть ли запись в бд
-	var game RequestGame
+	var game apimodels.GameRequest
 	if err := json.NewDecoder(r.Body).Decode(&game); err != nil {
 		slog.Warn(err.Error(), "handler", "UpdateGameHandler")
 		api_helpers.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Invalid request payload"})
 		return
 	}
 	gameRepo := repository.NewGameRepository(db)
-	updateGame := &models.Game{
+	updateGame := &dbmodel.Game{
 		StartTime:   game.StartTime,
 		EndTime:     game.EndTime,
-		Description: game.Description,
+		Description: *game.Description,
 	}
 	vars := mux.Vars(r)
 	id, err2 := strconv.Atoi(vars["id"])

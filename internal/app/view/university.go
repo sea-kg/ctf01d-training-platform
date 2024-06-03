@@ -1,21 +1,19 @@
 package view
 
-import "ctf01d/internal/app/models"
+import (
+	apimodels "ctf01d/internal/app/apimodels"
+	"ctf01d/internal/app/db"
+)
 
-type University struct {
-	Id   int    `json:"id"`
-	Name string `json:"name"`
-}
-
-func NewUniversityFromModel(u *models.University) *University {
-	return &University{
+func NewUniversityFromModel(u *db.University) *apimodels.UniversityResponse {
+	return &apimodels.UniversityResponse{
 		Id:   u.Id,
 		Name: u.Name,
 	}
 }
 
-func NewUniversitiesFromModels(ms []*models.University) []*University {
-	var universities []*University = []*University{}
+func NewUniversitiesFromModels(ms []*db.University) []*apimodels.UniversityResponse {
+	var universities []*apimodels.UniversityResponse = []*apimodels.UniversityResponse{}
 	for _, m := range ms {
 		universities = append(universities, NewUniversityFromModel(m))
 	}

@@ -1,7 +1,7 @@
 package view
 
 import (
-	"ctf01d/internal/app/models"
+	"ctf01d/internal/app/db"
 	"time"
 )
 
@@ -32,7 +32,7 @@ type Member struct {
 	UserName string `json:"user_name"`
 }
 
-func NewGameFromModel(m *models.Game) *Game {
+func NewGameFromModel(m *db.Game) *Game {
 	return &Game{
 		Id:          m.Id,
 		StartTime:   m.StartTime,
@@ -41,7 +41,7 @@ func NewGameFromModel(m *models.Game) *Game {
 	}
 }
 
-func NewGameDetailsFromModel(m *models.GameDetails) *GameDetails {
+func NewGameDetailsFromModel(m *db.GameDetails) *GameDetails {
 	teams := make([]TeamDetails, 0, len(m.TeamDetails))
 	for _, t := range m.TeamDetails {
 		members := make([]Member, 0, len(t.Members))
@@ -67,7 +67,7 @@ func NewGameDetailsFromModel(m *models.GameDetails) *GameDetails {
 		Teams:       teams,
 	}
 }
-func NewGamesFromModels(ms []*models.Game) []*Game {
+func NewGamesFromModels(ms []*db.Game) []*Game {
 	var games []*Game
 	for _, m := range ms {
 		games = append(games, NewGameFromModel(m))

@@ -59,3 +59,9 @@ docker run --net=host --volume /home/user/ctf01d-training-platform/api:/api/ ghc
 
 docker run --net=host  --volume /home/user/ctf01d-training-platform/api:/api/ kisspeter/apifuzzer --src_file '/api/swagger.yaml'  --url http://localhost:4102 -r /api/
 ```
+
+### codogen
+
+```shell
+oapi-codegen -generate models -o internal/app/apimodels/models.go --package models api/swagger.yaml
+```

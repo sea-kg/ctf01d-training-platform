@@ -546,6 +546,8 @@ paths:
       description: >
         This endpoint retrieves universities. It can optionally filter
         universities that match a specific term.
+      tags:
+        - University
       parameters:
         - in: query
           name: term
@@ -559,20 +561,7 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    id:
-                      type: integer
-                      description: The unique identifier of the university
-                      example: 1
-                    name:
-                      type: string
-                      description: The name of the university
-                      example: >-
-                        Анапский филиал Кубанского государственного аграрного
-                        университета
+                $ref: '#/components/schemas/UniversitiesResponse'
 components:
   schemas:
     UserRequest:
@@ -738,7 +727,7 @@ components:
       type: object
       properties:
         id:
-          type: string
+          type: integer
           description: Unique identifier for the service
         name:
           type: string
@@ -782,7 +771,7 @@ components:
       type: object
       properties:
         id:
-          type: string
+          type: integer
           description: Unique identifier for the team
         name:
           type: string
@@ -799,6 +788,26 @@ components:
         avatar_url:
           type: string
           description: URL to the team's avatar
+    UniversityResponse:
+      type: object
+      required:
+        - id
+        - name
+      properties:
+        id:
+          type: integer
+          description: The unique identifier of the university
+          example: 1
+        name:
+          type: string
+          description: The name of the university
+          example: >-
+            Анапский филиал Кубанского государственного аграрного
+            университета
+    UniversitiesResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/UniversityResponse'
   links: {}
   callbacks: {}
 security: []

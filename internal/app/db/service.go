@@ -1,4 +1,4 @@
-package models
+package db
 
 type Service struct {
 	Id          int    `db:"id"`

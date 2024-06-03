@@ -1,29 +1,23 @@
 package view
 
-import "ctf01d/internal/app/models"
+import (
+	apimodels "ctf01d/internal/app/apimodels"
+	"ctf01d/internal/app/db"
+)
 
-type Team struct {
-	Id          int    `json:"id"`
-	Name        string `json:"name"`
-	Description string `json:"description,omitempty"`
-	University  string `json:"university,omitempty"`
-	SocialLinks string `json:"social_links,omitempty"`
-	AvatarUrl   string `json:"avatar_url,omitempty"`
-}
-
-func NewTeamFromModel(t *models.Team) *Team {
-	return &Team{
+func NewTeamFromModel(t *db.Team) *apimodels.TeamResponse {
+	return &apimodels.TeamResponse{
 		Id:          t.Id,
 		Name:        t.Name,
-		Description: t.Description,
-		University:  t.University,
-		SocialLinks: t.SocialLinks,
-		AvatarUrl:   t.AvatarUrl,
+		Description: &t.Description,
+		University:  &t.University,
+		SocialLinks: &t.SocialLinks,
+		AvatarUrl:   &t.AvatarUrl,
 	}
 }
 
-func NewTeamsFromModels(ts []*models.Team) []*Team {
-	var teams []*Team
+func NewTeamsFromModels(ts []*db.Team) []*apimodels.TeamResponse {
+	var teams []*apimodels.TeamResponse
 	for _, t := range ts {
 		teams = append(teams, NewTeamFromModel(t))
 	}
