@@ -18,7 +18,31 @@ run-server:
 
 # Run PostgreSQL container for local development
 run-db:
-	docker run -d --name ctf01d-postgres -e POSTGRES_DB=ctf01d -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -p 5432:5432 postgres
+	@if [ $$(docker ps -a -q -f name=ctf01d-postgres) ]; then \
+		echo "Container ctf01d-postgres already exists. Restarting..."; \
+		docker start ctf01d-postgres; \
+	else \
+		echo "Creating and starting container ctf01d-postgres..."; \
+		docker run -d --name ctf01d-postgres -e POSTGRES_DB=ctf01d -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -p 5432:5432 postgres; \
+	fi
+
+# Stop PostgreSQL container
+stop-db:
+	@if [ $$(docker ps -q -f name=ctf01d-postgres) ]; then \
+		echo "Stopping container ctf01d-postgres..."; \
+		docker stop ctf01d-postgres; \
+	else \
+		echo "Container ctf01d-postgres is not running."; \
+	fi
+
+# Revome PostgreSQL container
+remove-db:
+	@if [ $$(docker ps -a -q -f name=ctf01d-postgres) ]; then \
+		echo "Removing container ctf01d-postgres..."; \
+		docker rm -f ctf01d-postgres; \
+	else \
+		echo "Container ctf01d-postgres does not exist."; \
+	fi
 
 # Attach to the running PostgreSQL container
 attach-db:
