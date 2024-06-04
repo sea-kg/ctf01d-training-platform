@@ -1,3 +1,5 @@
 dckr_mysql/*
+pg_docker
 src/server
 vendor
+/pg_data
