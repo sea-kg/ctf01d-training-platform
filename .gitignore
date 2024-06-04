@@ -3,3 +3,4 @@ pg_docker
 src/server
 vendor
 /pg_data
+main
