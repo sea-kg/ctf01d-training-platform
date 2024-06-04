@@ -7,10 +7,14 @@ lint:
 # Install requirements
 install:
 	go mod download
+	go mod tidy
 
 # Build the server executable
 build:
 	go build cmd/ctf01d/main.go
+
+build-in-docker:
+	docker run --rm -v $(PWD):/app -w /app golang:1.22-bookworm go build cmd/ctf01d/main.go
 
 # Run the local development server
 run-server:
