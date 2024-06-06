@@ -1,5 +1,4 @@
 sql
 Dockerfile
 docker-compose.yml
-pg-data
-/pg_data
+/docker_tmp
