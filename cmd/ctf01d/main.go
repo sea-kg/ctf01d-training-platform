@@ -24,8 +24,8 @@ func main() {
 		slog.Error("Error connecting to the database: " + err.Error())
 	}
 	defer db.Close()
-	slog.Info("Server started")
 	router := routers.NewRouter(db)
+	slog.Info("Server started on " + cfg.HTTP.Host+":"+cfg.HTTP.Port)
 
 	err = http.ListenAndServe(cfg.HTTP.Host+":"+cfg.HTTP.Port, router)
 	if err != nil {
