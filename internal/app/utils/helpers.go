@@ -55,7 +55,7 @@ func RespondWithJSON(w http.ResponseWriter, code int, payload interface{}) {
 	}
 }
 
-var tmplPath = "web/templates/"
+var tmplPath = "html/templates/"
 
 func RenderTemplate(w http.ResponseWriter, tmpl string) {
 	t, err := template.ParseFiles(filepath.Join(tmplPath, tmpl))
