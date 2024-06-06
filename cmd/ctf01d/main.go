@@ -2,8 +2,8 @@ package main
 
 import (
 	config "ctf01d/configs"
-	"ctf01d/internal/app/routers"
 	models "ctf01d/internal/app/db"
+	"ctf01d/internal/app/routers"
 	"database/sql"
 	"log/slog"
 	"net/http"
@@ -16,12 +16,12 @@ func main() {
 	logger := slog.New(slog.NewTextHandler(os.Stdout, nil))
 	slog.SetDefault(logger)
 
-	slog.Error("Starting server...")
-
 	cfg, err := config.NewConfig()
 	if err != nil {
 		slog.Error("Config error: " + err.Error())
 	}
+
+	slog.Info("Connecting to the database ...")
 	db, err := sql.Open(cfg.DB.Driver, cfg.DB.DataSource)
 	if err != nil {
 		slog.Error("Error connecting to the database: " + err.Error())
@@ -36,7 +36,7 @@ func main() {
 	}
 	defer db.Close()
 	router := routers.NewRouter(db)
-	slog.Info("Server started on http://" + cfg.HTTP.Host+":"+cfg.HTTP.Port)
+	slog.Info("Server started on http://" + cfg.HTTP.Host + ":" + cfg.HTTP.Port)
 
 	err = http.ListenAndServe(cfg.HTTP.Host+":"+cfg.HTTP.Port, router)
 	if err != nil {
