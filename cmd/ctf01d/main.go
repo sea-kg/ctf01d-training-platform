@@ -31,7 +31,7 @@ func main() {
 		err := db.QueryRow(query).Scan(&last_update.Id, &last_update.StartTime, &last_update.UpdateId, &last_update.Description)
 		if err != nil {
 			slog.Error("Problem with database: " + err.Error())
-			return
+			// return
 		}
 	}
 	defer db.Close()
