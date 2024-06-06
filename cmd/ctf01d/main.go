@@ -25,7 +25,7 @@ func main() {
 	}
 	defer db.Close()
 	router := routers.NewRouter(db)
-	slog.Info("Server started on " + cfg.HTTP.Host+":"+cfg.HTTP.Port)
+	slog.Info("Server started on http://" + cfg.HTTP.Host+":"+cfg.HTTP.Port)
 
 	err = http.ListenAndServe(cfg.HTTP.Host+":"+cfg.HTTP.Port, router)
 	if err != nil {
