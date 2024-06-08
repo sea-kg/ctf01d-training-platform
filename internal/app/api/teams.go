@@ -24,7 +24,6 @@ func CreateTeamHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 	}
 
 	teamRepo := repository.NewTeamRepository(db)
-	// fixme request to model надо вынести и переиспользовать
 	newTeam := &dbmodels.Team{
 		Name:         team.Name,
 		SocialLinks:  *team.SocialLinks,

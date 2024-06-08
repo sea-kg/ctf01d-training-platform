@@ -23,7 +23,7 @@ func CreateUserHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 		api_helpers.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Invalid request payload"})
 		return
 	}
-	userRepo := repository.NewUserRepository(db)
+	repo := repository.NewUserRepository(db)
 	passwordHash, err := api_helpers.HashPassword(*user.Password)
 	if err != nil {
 		slog.Warn(err.Error(), "handler", "CreateUserHandler")
@@ -37,13 +37,13 @@ func CreateUserHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 		PasswordHash: passwordHash,
 		AvatarUrl:    api_helpers.PrepareImage(*user.AvatarUrl),
 	}
-	if err := userRepo.Create(r.Context(), newUser); err != nil {
+	if err := repo.Create(r.Context(), newUser); err != nil {
 		slog.Warn(err.Error(), "handler", "CreateUserHandler")
 		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to create user"})
 		return
 	}
 	if len(*user.TeamIds) > 0 {
-		if err := userRepo.AddUserToTeams(r.Context(), newUser.Id, user.TeamIds); err != nil {
+		if err := repo.AddUserToTeams(r.Context(), newUser.Id, user.TeamIds); err != nil {
 			slog.Warn(err.Error(), "handler", "CreateUserHandler")
 			api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to add user to teams"})
 			return
@@ -60,8 +60,8 @@ func DeleteUserHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 		api_helpers.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Bad request"})
 		return
 	}
-	userRepo := repository.NewUserRepository(db)
-	if err := userRepo.Delete(r.Context(), id); err != nil {
+	repo := repository.NewUserRepository(db)
+	if err := repo.Delete(r.Context(), id); err != nil {
 		slog.Warn(err.Error(), "handler", "DeleteUserHandler")
 		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to delete user"})
 		return
@@ -77,8 +77,8 @@ func GetUserByIdHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 		api_helpers.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Bad request"})
 		return
 	}
-	userRepo := repository.NewUserRepository(db)
-	user, err := userRepo.GetById(r.Context(), id)
+	repo := repository.NewUserRepository(db)
+	user, err := repo.GetById(r.Context(), id)
 	if err != nil {
 		slog.Warn(err.Error(), "handler", "GetUserByIdHandler")
 		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to fetch user"})
@@ -88,8 +88,8 @@ func GetUserByIdHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 }
 
 func ListUsersHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
-	userRepo := repository.NewUserRepository(db)
-	users, err := userRepo.List(r.Context())
+	repo := repository.NewUserRepository(db)
+	users, err := repo.List(r.Context())
 	if err != nil {
 		slog.Warn(err.Error(), "handler", "ListUsersHandler")
 		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": err.Error()})
@@ -112,7 +112,7 @@ func UpdateUserHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 		api_helpers.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Invalid request payload"})
 		return
 	}
-	userRepo := repository.NewUserRepository(db)
+	repo := repository.NewUserRepository(db)
 	updateUser := &dbmodels.User{
 		Username:     *user.UserName,
 		Role:         string(*user.Role),
@@ -128,7 +128,7 @@ func UpdateUserHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	updateUser.Id = id
-	err = userRepo.Update(r.Context(), updateUser)
+	err = repo.Update(r.Context(), updateUser)
 	if err != nil {
 		slog.Warn(err.Error(), "handler", "UpdateUserHandler")
 		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": err.Error()})

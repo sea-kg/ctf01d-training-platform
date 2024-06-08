@@ -13,14 +13,14 @@ import (
 func ListUniversitiesHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 	queryParam := r.URL.Query().Get("term")
 
-	universityRepo := repository.NewUniversityRepository(db)
+	repo := repository.NewUniversityRepository(db)
 	var universities []*dbmodels.University
 	var err error
 
 	if queryParam != "" {
-		universities, err = universityRepo.Search(r.Context(), queryParam)
+		universities, err = repo.Search(r.Context(), queryParam)
 	} else {
-		universities, err = universityRepo.List(r.Context())
+		universities, err = repo.List(r.Context())
 	}
 
 	if err != nil {

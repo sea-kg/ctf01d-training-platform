@@ -10,11 +10,6 @@ import (
 	"net/http"
 )
 
-type RequestLogin struct {
-	Username string `json:"user_name"`
-	Password string `json:"password"`
-}
-
 func LoginSessionHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 	var req apimodels.PostApiUsersLoginJSONBody
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
@@ -30,8 +25,8 @@ func LoginSessionHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	sessionRepo := repository.NewSessionRepository(db)
-	sessionId, err := sessionRepo.StoreSessionInDB(r.Context(), user.Id)
+	repo := repository.NewSessionRepository(db)
+	sessionId, err := repo.StoreSessionInDB(r.Context(), user.Id)
 	if err != nil {
 		slog.Warn(err.Error(), "handler", "LoginSessionHandler")
 		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to store session"})
@@ -56,8 +51,8 @@ func LogoutSessionHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 		api_helpers.RespondWithJSON(w, http.StatusUnauthorized, map[string]string{"error": "No session found"})
 		return
 	}
-	sessionRepo := repository.NewSessionRepository(db)
-	err = sessionRepo.DeleteSessionInDB(r.Context(), cookie.Value)
+	repo := repository.NewSessionRepository(db)
+	err = repo.DeleteSessionInDB(r.Context(), cookie.Value)
 	if err != nil {
 		slog.Warn(err.Error(), "handler", "LogoutSessionHandler")
 		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to delete session"})

@@ -26,13 +26,13 @@ func CreateGameHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 		api_helpers.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "EndTime must be after StartTime"})
 		return
 	}
-	gameRepo := repository.NewGameRepository(db)
+	repo := repository.NewGameRepository(db)
 	newGame := &dbmodel.Game{
 		StartTime:   game.StartTime,
 		EndTime:     game.EndTime,
 		Description: *game.Description,
 	}
-	if err := gameRepo.Create(r.Context(), newGame); err != nil {
+	if err := repo.Create(r.Context(), newGame); err != nil {
 		slog.Warn(err.Error(), "handler", "CreateGameHandler")
 		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to create game"})
 		return
@@ -48,8 +48,8 @@ func DeleteGameHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 		api_helpers.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Bad request"})
 		return
 	}
-	gameRepo := repository.NewGameRepository(db)
-	if err := gameRepo.Delete(r.Context(), id); err != nil {
+	repo := repository.NewGameRepository(db)
+	if err := repo.Delete(r.Context(), id); err != nil {
 		slog.Warn(err.Error(), "handler", "DeleteGameHandler")
 		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to delete game"})
 		return
@@ -65,8 +65,8 @@ func GetGameByIdHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 		api_helpers.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Bad request"})
 		return
 	}
-	gameRepo := repository.NewGameRepository(db)
-	game, err := gameRepo.GetGameDetails(r.Context(), id) // короткий ответ, если нужен см. GetById
+	repo := repository.NewGameRepository(db)
+	game, err := repo.GetGameDetails(r.Context(), id) // короткий ответ, если нужен см. GetById
 	if err != nil {
 		slog.Warn(err.Error(), "handler", "GetGameByIdHandler")
 		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to fetch game"})
@@ -76,8 +76,8 @@ func GetGameByIdHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 }
 
 func ListGamesHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
-	gameRepo := repository.NewGameRepository(db)
-	games, err := gameRepo.List(r.Context())
+	repo := repository.NewGameRepository(db)
+	games, err := repo.List(r.Context())
 	if err != nil {
 		slog.Warn(err.Error(), "handler", "ListGamesHandler")
 		api_helpers.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Failed to fetch games"})
@@ -94,7 +94,7 @@ func UpdateGameHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 		api_helpers.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Invalid request payload"})
 		return
 	}
-	gameRepo := repository.NewGameRepository(db)
+	repo := repository.NewGameRepository(db)
 	updateGame := &dbmodel.Game{
 		StartTime:   game.StartTime,
 		EndTime:     game.EndTime,
@@ -108,7 +108,7 @@ func UpdateGameHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	updateGame.Id = id
-	err := gameRepo.Update(r.Context(), updateGame)
+	err := repo.Update(r.Context(), updateGame)
 	if err != nil {
 		slog.Warn(err.Error(), "handler", "UpdateGameHandler")
 		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Invalid request payload"})
