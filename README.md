@@ -13,7 +13,7 @@ Roadmap [here](TODO.md)
 ├── cmd # main app
 │   └── ctf01d
 │       └── main.go
-├── configs # config
+├── config
 │   ├── config.go
 │   └── config.yml
 ├── internal
