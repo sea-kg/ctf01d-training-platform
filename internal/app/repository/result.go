@@ -8,10 +8,10 @@ import (
 
 type ResultRepository interface {
 	Create(ctx context.Context, result *models.Result) error
-	GetById(ctx context.Context, id string) (*models.Result, error)
+	GetById(ctx context.Context, id int) (*models.Result, error)
 	Update(ctx context.Context, result *models.Result) error
 	Delete(ctx context.Context, id string) error
-	List(ctx context.Context) ([]models.Result, error)
+	List(ctx context.Context) ([]*models.Result, error)
 }
 
 type resultRepo struct {
@@ -28,7 +28,7 @@ func (r *resultRepo) Create(ctx context.Context, result *models.Result) error {
 	return err
 }
 
-func (r *resultRepo) GetById(ctx context.Context, id string) (*models.Result, error) {
+func (r *resultRepo) GetById(ctx context.Context, id int) (*models.Result, error) {
 	query := `SELECT id, team_id, game_id, score, rank FROM results WHERE id = $1`
 	result := &models.Result{}
 	err := r.db.QueryRowContext(ctx, query, id).Scan(&result.Id, &result.TeamId, &result.GameId, &result.Score, &result.Rank)
@@ -50,7 +50,7 @@ func (r *resultRepo) Delete(ctx context.Context, id string) error {
 	return err
 }
 
-func (r *resultRepo) List(ctx context.Context) ([]models.Result, error) {
+func (r *resultRepo) List(ctx context.Context) ([]*models.Result, error) {
 	query := `SELECT id, team_id, game_id, score, rank FROM results`
 	rows, err := r.db.QueryContext(ctx, query)
 	if err != nil {
@@ -58,13 +58,13 @@ func (r *resultRepo) List(ctx context.Context) ([]models.Result, error) {
 	}
 	defer rows.Close()
 
-	var results []models.Result
+	var results []*models.Result
 	for rows.Next() {
 		var result models.Result
 		if err := rows.Scan(&result.Id, &result.TeamId, &result.GameId, &result.Score, &result.Rank); err != nil {
 			return nil, err
 		}
-		results = append(results, result)
+		results = append(results, &result)
 	}
 	return results, nil
 }

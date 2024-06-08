@@ -69,7 +69,7 @@ type ResultResponse struct {
 	GameId string `json:"game_id"`
 
 	// Id Unique identifier for the result entry
-	Id string `json:"id"`
+	Id int `json:"id"`
 
 	// Rank The rank achieved by the team in this game
 	Rank int `json:"rank"`
