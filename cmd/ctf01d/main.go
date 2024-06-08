@@ -2,7 +2,6 @@ package main
 
 import (
 	config "ctf01d/configs"
-	models "ctf01d/internal/app/db"
 	"ctf01d/internal/app/routers"
 	"database/sql"
 	"log/slog"
@@ -24,17 +23,17 @@ func main() {
 	slog.Info("Connecting to the database ...")
 	db, err := sql.Open(cfg.DB.Driver, cfg.DB.DataSource)
 	if err != nil {
-		slog.Error("Error connecting to the database: " + err.Error())
-	} else {
-		query := `SELECT update_id FROM database_updates WHERE id=(SELECT max(id) FROM database_updates)`
-		last_update := &models.DatabaseUpdate{}
-		err := db.QueryRow(query).Scan(&last_update.Id, &last_update.StartTime, &last_update.UpdateId, &last_update.Description)
-		if err != nil {
-			slog.Error("Problem with database: " + err.Error())
-			// return
-		}
+		slog.Error("Error opening database connection: " + err.Error())
+		return
 	}
 	defer db.Close()
+
+	if err := db.Ping(); err != nil {
+		slog.Error("Error pinging database: " + err.Error())
+		return
+	}
+	slog.Info("Database connection established successfully")
+
 	router := routers.NewRouter(db)
 	slog.Info("Server started on http://" + cfg.HTTP.Host + ":" + cfg.HTTP.Port)
 

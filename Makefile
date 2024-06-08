@@ -2,6 +2,7 @@
 
 # Lint the code with golangci-lint
 lint:
+	go fmt ./...
 	docker run --rm -v $(PWD):/app -w /app golangci/golangci-lint:latest golangci-lint run -v
 
 # Install requirements
