@@ -1,0 +1,180 @@
+<html>
+  <head>
+    <title>ctf01d training platform</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <base href="/">
+
+    <link href="./assets/css/bootstrap.min.css?v=1.0" rel="stylesheet" type='text/css' />
+    <link href="./assets/css/index.css?v=1.0" rel="stylesheet" type='text/css' />
+
+    <script src="./assets/js/jquery-3.7.1.min.js?v=1.1"></script>
+    <script src="./assets/js/tooltip.min.js?v=1.1"></script>
+    <script src="./assets/js/popper.min.js?v=1.1"></script>
+    <script src="./assets/js/bootstrap.min.js?v=1.0"></script>
+    <script src="./assets/js/bootstrap-notify.min.js?v=1.0"></script>
+    <script src="./assets/js/api.js?v=1.0"></script>
+    <script src="./assets/js/index.js?v=1.0"></script>
+</head>
+  <body>
+    <!-- MENU_BEGIN -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" id="menu_global">
+      <a class="navbar-brand" href="./">Ctf01d Training Platform</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <div class="nav-link" href="./games/" onclick="renderGamePage()">Games</div>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="./services/">Services</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="./teams/">Teams</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="./users/">Users</a>
+          </li>
+        </ul>
+        <div class="form-inline my-2 my-lg-0">
+          <button id="btn_signin" class="btn-menu-top-left btn btn-outline-success my-2 my-sm-0" style="display: none" onclick="showLoginForm()">Sign-in</button>
+          <div id="btn_profile" class="btn-menu-top-left btn btn-outline-success my-2 my-sm-0" style="display: none">...</div>
+          <button id="btn_signout" class="btn-menu-top-left btn btn-outline-success my-2 my-sm-0" style="display: none" onclick="doSignOut()">Sign-out</button>
+        </div>
+      </div>
+    </nav>
+    <!-- MENU_END -->
+
+    <div class="modal fade" id="modal_signin" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Sign-in</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <!-- label for="signin_username" class="col-form-label">Username:</label-->
+                <input type="text" class="form-control" id="signin_username" placeholder="Username" required>
+              </div>
+              <div class="form-group">
+                <!-- label for="signin_password" class="col-form-label">Password:</label -->
+                <input type="password" class="form-control" id="signin_password" placeholder="Password" required>
+              </div>
+            </form>
+            <div class="alert alert-danger" role="alert" style="display: none;" id="sign_error_info">
+              Something wrong
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" onclick="doSignin()">Sign-in</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- WELCOME PAGE -->
+    <div class="container spa-web-page" id="root_page">
+      <br>
+      <div class="card">
+        <div class="card-header">
+          <strong class="card-title">Welcome to ctf01d training platform!</strong>
+        </div>
+        <div class="card-body">
+          <div class="card-text">
+            <p>This service can prapare training attack-defence game, based on ctf01d jury system</p>
+            <p>Guthub: <a href="https://github.com/sea-kg/ctf01d-training-platform">https://github.com/sea-kg/ctf01d-training-platform</a></p>
+          </div>
+        </div>
+      </div>
+      <br>
+    </div>
+
+    <!-- GAMES PAGE -->
+    <div class="container spa-web-page" id="games_page">
+      <br>
+      <h2>Games</h2>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_create_game">
+        New Game
+      </button>
+      <br><br>
+      <div class="alert alert-danger" role="alert" style="display: none;" id="games_page_error">
+        Something wrong
+      </div>
+      <div class="list-group" id="games_page_list">
+      </div>
+      <br>
+    </div>
+
+    <div class="modal fade" id="modal_create_game" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">New Game</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <label for="game_create_start_time" class="col-form-label">Start Time:</label>
+                <input type="datetime-local" class="form-control" id="game_create_start_time" name="start_time" required>
+              </div>
+              <div class="form-group">
+                <label for="game_create_end_time" class="col-form-label">End Time:</label>
+                <input type="datetime-local" class="form-control" id="game_create_end_time" name="start_time" required>
+              </div>
+              <div class="form-group">
+                <label for="game_create_description" class="col-form-label">Description:</label>
+                <input type="text" class="form-control" id="game_create_description" name="description" required>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" onclick="gameCreate()">Create</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SERVICES PAGE -->
+    <div class="container spa-web-page" id="services_page">
+      <br>
+      <div class="card">
+        <div class="card-header">
+          <strong class="card-title">Services</strong>
+        </div>
+      </div>
+      <br>
+    </div>
+
+    <!-- TEAMS PAGE -->
+    <div class="container spa-web-page" id="teams_page">
+      <br>
+      <div class="card">
+        <div class="card-header">
+          <strong class="card-title">Teams</strong>
+        </div>
+      </div>
+      <br>
+    </div>
+
+    <!-- UNKNOWN PAGE -->
+    <div class="container spa-web-page" id="unknown_page">
+      <br>
+      <h1>Unknown page</h1>
+      <br>
+    </div>
+
+  </body>
+</html>

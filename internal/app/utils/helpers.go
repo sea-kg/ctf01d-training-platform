@@ -3,11 +3,9 @@ package helpers
 import (
 	"ctf01d/internal/app/server"
 	"encoding/json"
-	"html/template"
 	"log/slog"
 	"net/http"
 	"net/url"
-	"path/filepath"
 	"regexp"
 	"strings"
 
@@ -53,20 +51,6 @@ func RespondWithJSON(w http.ResponseWriter, code int, payload interface{}) {
 	w.WriteHeader(code)
 	if _, err := w.Write(response); err != nil {
 		slog.Error("Error writing response: " + err.Error())
-	}
-}
-
-var tmplPath = "html/templates/"
-
-func RenderTemplate(w http.ResponseWriter, tmpl string) {
-	t, err := template.ParseFiles(filepath.Join(tmplPath, tmpl))
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-	err = t.Execute(w, nil)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
 }
 
