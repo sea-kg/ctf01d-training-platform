@@ -7,4 +7,4 @@ logger:
 
 db:
   driver: postgres
-  data_source: postgres://postgres:postgres@localhost:5432/ctf01d?sslmode=disable
+  data_source: postgres://postgres:postgres@localhost:4112/ctf01d_training_platform?sslmode=disable

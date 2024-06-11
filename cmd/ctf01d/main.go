@@ -2,8 +2,8 @@ package main
 
 import (
 	"ctf01d/config"
+	"ctf01d/internal/app/database"
 	"ctf01d/internal/app/routers"
-	"database/sql"
 	"log/slog"
 	"net/http"
 	"os"
@@ -19,21 +19,12 @@ func main() {
 	if err != nil {
 		slog.Error("Config error: " + err.Error())
 	}
-
-	slog.Info("Connecting to the database ...")
-	db, err := sql.Open(cfg.DB.Driver, cfg.DB.DataSource)
+	db, err := database.InitDatabase()
 	if err != nil {
 		slog.Error("Error opening database connection: " + err.Error())
 		return
 	}
-	defer db.Close()
-
-	if err := db.Ping(); err != nil {
-		slog.Error("Error pinging database: " + err.Error())
-		return
-	}
 	slog.Info("Database connection established successfully")
-
 	router := routers.NewRouter(db)
 	slog.Info("Server started on http://" + cfg.HTTP.Host + ":" + cfg.HTTP.Port)
 

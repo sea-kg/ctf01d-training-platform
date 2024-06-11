@@ -1,17 +1,18 @@
 version: '2'
 
 services:
-  service2_db:
-    image: postgres:16
+  ctf_training_platform_db:
+    image: postgres:16.3
     restart: always
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: service2_go
-    ports:
-      - "5432:5432"
+      POSTGRES_DB: ctf01d_training_platform
+      PGPORT: 4112
+    # ports:
+    #   - "5432:4112"
     volumes:
-      - pg_data:/var/lib/postgresql/data/
+      - ./docker_tmp/pg_data:/var/lib/postgresql/data/
     networks:
       - service2_go_net
 

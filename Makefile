@@ -2,7 +2,7 @@
 
 # Lint the code with golangci-lint
 lint:
-	go fmt ./...
+	make fmt; \
 	@if ! [ -x "$$(command -v golangci-lint)" ]; then \
 		docker run --rm -v $(PWD):/app -w /app golangci/golangci-lint:latest golangci-lint run -v; \
 	else \
@@ -18,8 +18,14 @@ install:
 build:
 	go build cmd/ctf01d/main.go
 
+# Build the server executable in docker
 build-in-docker:
 	docker run --rm -v $(PWD):/app -w /app golang:1.22-bookworm go build cmd/ctf01d/main.go
+
+# format go files
+fmt:
+	go fmt ./internal/...; \
+	go fmt ./cmd/...;
 
 # Run the local development server
 run-server:
@@ -32,7 +38,14 @@ run-db:
 		docker start ctf01d-postgres; \
 	else \
 		echo "Creating and starting container ctf01d-postgres..."; \
-		docker run -d --name ctf01d-postgres -e POSTGRES_DB=ctf01d -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -p 5432:5432 postgres; \
+		docker run --rm -d \
+			-v $(PWD)/docker_tmp/pg_data:/var/lib/postgresql/data/ \
+			--name ctf01d-postgres \
+			-e POSTGRES_DB=ctf01d_training_platform \
+			-e POSTGRES_USER=postgres \
+			-e POSTGRES_PASSWORD=postgres \
+			-e PGPORT=4112 \
+			-p 4112:4112 postgres:16.3; \
 	fi
 
 # Stop PostgreSQL container
@@ -43,6 +56,13 @@ stop-db:
 	else \
 		echo "Container ctf01d-postgres is not running."; \
 	fi
+
+# cleanup db and restart db and rebuild main app
+test-updates-db:
+	make stop-db; \
+	sudo rm -rf docker_tmp/pg_data; \
+	make run-db; \
+	make build;
 
 # Revome PostgreSQL container
 remove-db:
