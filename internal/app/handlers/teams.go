@@ -1,29 +1,26 @@
-package api
+package handlers
 
 import (
-	apimodels "ctf01d/internal/app/apimodels"
-	dbmodels "ctf01d/internal/app/db"
-	"ctf01d/internal/app/repository"
-	api_helpers "ctf01d/internal/app/utils"
-	"ctf01d/internal/app/view"
-	"database/sql"
 	"encoding/json"
 	"log/slog"
 	"net/http"
-	"strconv"
 
-	"github.com/gorilla/mux"
+	dbmodels "ctf01d/internal/app/db"
+	"ctf01d/internal/app/repository"
+	"ctf01d/internal/app/server"
+	api_helpers "ctf01d/internal/app/utils"
+	"ctf01d/internal/app/view"
 )
 
-func CreateTeamHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
-	var team apimodels.TeamRequest
+func (h *Handlers) CreateTeam(w http.ResponseWriter, r *http.Request) {
+	var team server.TeamRequest
 	if err := json.NewDecoder(r.Body).Decode(&team); err != nil {
 		slog.Warn(err.Error(), "handler", "CreateTeamHandler")
 		api_helpers.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Invalid request payload"})
 		return
 	}
 
-	teamRepo := repository.NewTeamRepository(db)
+	teamRepo := repository.NewTeamRepository(h.DB)
 	newTeam := &dbmodels.Team{
 		Name:         team.Name,
 		SocialLinks:  *team.SocialLinks,
@@ -39,15 +36,8 @@ func CreateTeamHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 	api_helpers.RespondWithJSON(w, http.StatusOK, map[string]string{"data": "Team created successfully"})
 }
 
-func DeleteTeamHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
-	vars := mux.Vars(r)
-	id, err := strconv.Atoi(vars["id"])
-	if err != nil {
-		slog.Warn(err.Error(), "handler", "DeleteTeamHandler")
-		api_helpers.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Bad request"})
-		return
-	}
-	teamRepo := repository.NewTeamRepository(db)
+func (h *Handlers) DeleteTeam(w http.ResponseWriter, r *http.Request, id int) {
+	teamRepo := repository.NewTeamRepository(h.DB)
 	if err := teamRepo.Delete(r.Context(), id); err != nil {
 		slog.Warn(err.Error(), "handler", "DeleteTeamHandler")
 		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to delete team"})
@@ -56,15 +46,8 @@ func DeleteTeamHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 	api_helpers.RespondWithJSON(w, http.StatusOK, map[string]string{"data": "Team deleted successfully"})
 }
 
-func GetTeamByIdHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
-	vars := mux.Vars(r)
-	id, err := strconv.Atoi(vars["id"])
-	if err != nil {
-		slog.Warn(err.Error(), "handler", "GetTeamByIdHandler")
-		api_helpers.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Bad request"})
-		return
-	}
-	teamRepo := repository.NewTeamRepository(db)
+func (h *Handlers) GetTeamById(w http.ResponseWriter, r *http.Request, id int) {
+	teamRepo := repository.NewTeamRepository(h.DB)
 	team, err := teamRepo.GetById(r.Context(), id)
 	if err != nil {
 		slog.Warn(err.Error(), "handler", "GetTeamByIdHandler")
@@ -74,8 +57,8 @@ func GetTeamByIdHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 	api_helpers.RespondWithJSON(w, http.StatusOK, view.NewTeamFromModel(team))
 }
 
-func ListTeamsHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
-	teamRepo := repository.NewTeamRepository(db)
+func (h *Handlers) ListTeams(w http.ResponseWriter, r *http.Request) {
+	teamRepo := repository.NewTeamRepository(h.DB)
 	teams, err := teamRepo.List(r.Context())
 	if err != nil {
 		slog.Warn(err.Error(), "handler", "ListTeamsHandler")
@@ -85,27 +68,20 @@ func ListTeamsHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 	api_helpers.RespondWithJSON(w, http.StatusOK, view.NewTeamsFromModels(teams))
 }
 
-func UpdateTeamHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
-	var team apimodels.TeamRequest
+func (h *Handlers) UpdateTeam(w http.ResponseWriter, r *http.Request, id int) {
+	var team server.TeamRequest
 	if err := json.NewDecoder(r.Body).Decode(&team); err != nil {
 		slog.Warn(err.Error(), "handler", "UpdateTeamHandler")
 		api_helpers.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Invalid request payload"})
 		return
 	}
-	teamRepo := repository.NewTeamRepository(db)
+	teamRepo := repository.NewTeamRepository(h.DB)
 	updateTeam := &dbmodels.Team{
 		Name:         team.Name,
 		SocialLinks:  *team.SocialLinks,
 		Description:  *team.Description,
 		UniversityId: team.UniversityId,
 		AvatarUrl:    *team.AvatarUrl,
-	}
-	vars := mux.Vars(r)
-	id, err := strconv.Atoi(vars["id"])
-	if err != nil {
-		slog.Warn(err.Error(), "handler", "UpdateTeamHandler")
-		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to update team"})
-		return
 	}
 	updateTeam.Id = id
 	if err := teamRepo.Update(r.Context(), updateTeam); err != nil {

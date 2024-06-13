@@ -1,29 +1,26 @@
-package api
+package handlers
 
 import (
-	apimodels "ctf01d/internal/app/apimodels"
-	dbmodels "ctf01d/internal/app/db"
-	"ctf01d/internal/app/repository"
-	api_helpers "ctf01d/internal/app/utils"
-	"ctf01d/internal/app/view"
-	"database/sql"
 	"encoding/json"
 	"log/slog"
 	"net/http"
-	"strconv"
 
-	"github.com/gorilla/mux"
+	dbmodels "ctf01d/internal/app/db"
+	"ctf01d/internal/app/repository"
+	"ctf01d/internal/app/server"
+	api_helpers "ctf01d/internal/app/utils"
+	"ctf01d/internal/app/view"
 )
 
-func CreateUserHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
+func (h *Handlers) CreateUser(w http.ResponseWriter, r *http.Request) {
 	// fixme обернуть в транзакцию, т.к. две вставки подряд
-	var user apimodels.UserRequest
+	var user server.UserRequest
 	if err := json.NewDecoder(r.Body).Decode(&user); err != nil {
 		slog.Warn(err.Error(), "handler", "CreateUserHandler")
 		api_helpers.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Invalid request payload"})
 		return
 	}
-	repo := repository.NewUserRepository(db)
+	repo := repository.NewUserRepository(h.DB)
 	passwordHash, err := api_helpers.HashPassword(*user.Password)
 	slog.Info("user.password " + passwordHash)
 	if err != nil {
@@ -33,7 +30,7 @@ func CreateUserHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 	}
 	newUser := &dbmodels.User{
 		Username:     *user.UserName,
-		Role:         string(*user.Role),
+		Role:         *user.Role,
 		Status:       *user.Status,
 		PasswordHash: passwordHash,
 		AvatarUrl:    api_helpers.PrepareImage(*user.AvatarUrl),
@@ -53,15 +50,8 @@ func CreateUserHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 	api_helpers.RespondWithJSON(w, http.StatusOK, map[string]string{"data": "User created successfully"})
 }
 
-func DeleteUserHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
-	vars := mux.Vars(r)
-	id, err := strconv.Atoi(vars["id"])
-	if err != nil {
-		slog.Warn(err.Error(), "handler", "DeleteUserHandler")
-		api_helpers.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Bad request"})
-		return
-	}
-	repo := repository.NewUserRepository(db)
+func (h *Handlers) DeleteUser(w http.ResponseWriter, r *http.Request, id int) {
+	repo := repository.NewUserRepository(h.DB)
 	if err := repo.Delete(r.Context(), id); err != nil {
 		slog.Warn(err.Error(), "handler", "DeleteUserHandler")
 		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to delete user"})
@@ -70,15 +60,8 @@ func DeleteUserHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 	api_helpers.RespondWithJSON(w, http.StatusOK, map[string]string{"data": "User deleted successfully"})
 }
 
-func GetUserByIdHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
-	vars := mux.Vars(r)
-	id, err := strconv.Atoi(vars["id"])
-	if err != nil {
-		slog.Warn(err.Error(), "handler", "GetUserByIdHandler")
-		api_helpers.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Bad request"})
-		return
-	}
-	repo := repository.NewUserRepository(db)
+func (h *Handlers) GetUserById(w http.ResponseWriter, r *http.Request, id int) {
+	repo := repository.NewUserRepository(h.DB)
 	user, err := repo.GetById(r.Context(), id)
 	if err != nil {
 		slog.Warn(err.Error(), "handler", "GetUserByIdHandler")
@@ -88,8 +71,8 @@ func GetUserByIdHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 	api_helpers.RespondWithJSON(w, http.StatusOK, view.NewUserFromModel(user))
 }
 
-func ListUsersHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
-	repo := repository.NewUserRepository(db)
+func (h *Handlers) ListUsers(w http.ResponseWriter, r *http.Request) {
+	repo := repository.NewUserRepository(h.DB)
 	users, err := repo.List(r.Context())
 	if err != nil {
 		slog.Warn(err.Error(), "handler", "ListUsersHandler")
@@ -99,9 +82,9 @@ func ListUsersHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 	api_helpers.RespondWithJSON(w, http.StatusOK, view.NewUsersFromModels(users))
 }
 
-func UpdateUserHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
+func (h *Handlers) UpdateUser(w http.ResponseWriter, r *http.Request, id int) {
 	// fixme update не проверяет есть ли запись в бд
-	var user apimodels.UserRequest
+	var user server.UserRequest
 	if err := json.NewDecoder(r.Body).Decode(&user); err != nil {
 		slog.Warn(err.Error(), "handler", "UpdateUserHandler")
 		api_helpers.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Invalid request payload"})
@@ -113,20 +96,13 @@ func UpdateUserHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 		api_helpers.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Invalid request payload"})
 		return
 	}
-	repo := repository.NewUserRepository(db)
+	repo := repository.NewUserRepository(h.DB)
 	updateUser := &dbmodels.User{
 		Username:     *user.UserName,
-		Role:         string(*user.Role),
+		Role:         *user.Role,
 		Status:       *user.Status,
 		PasswordHash: passwordHash,
 		AvatarUrl:    api_helpers.PrepareImage(*user.AvatarUrl),
-	}
-	vars := mux.Vars(r)
-	id, err2 := strconv.Atoi(vars["id"])
-	if err2 != nil {
-		slog.Warn(err2.Error(), "handler", "UpdateUserHandler")
-		api_helpers.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": err2.Error()})
-		return
 	}
 	updateUser.Id = id
 	err = repo.Update(r.Context(), updateUser)

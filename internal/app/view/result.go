@@ -1,12 +1,12 @@
 package view
 
 import (
-	apimodels "ctf01d/internal/app/apimodels"
 	"ctf01d/internal/app/db"
+	"ctf01d/internal/app/server"
 )
 
-func NewResultFromModel(s *db.Result) *apimodels.ResultResponse {
-	return &apimodels.ResultResponse{
+func NewResultFromModel(s *db.Result) *server.ResultResponse {
+	return &server.ResultResponse{
 		Id:     s.Id,
 		GameId: s.GameId,
 		Rank:   s.Rank,
@@ -15,8 +15,8 @@ func NewResultFromModel(s *db.Result) *apimodels.ResultResponse {
 	}
 }
 
-func NewResultFromModels(rm []*db.Result) []*apimodels.ResultResponse {
-	var services []*apimodels.ResultResponse
+func NewResultFromModels(rm []*db.Result) []*server.ResultResponse {
+	var services []*server.ResultResponse
 	for _, s := range rm {
 		services = append(services, NewResultFromModel(s))
 	}

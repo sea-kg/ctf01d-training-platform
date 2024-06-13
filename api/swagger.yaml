@@ -631,7 +631,7 @@ components:
       type: object
       properties:
         id:
-          type: string
+          type: integer
           description: The unique identifier for the user
         user_name:
           type: string
@@ -677,7 +677,7 @@ components:
       type: object
       properties:
         id:
-          type: string
+          type: integer
           description: Unique identifier for the game
         start_time:
           type: string

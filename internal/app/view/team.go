@@ -1,12 +1,12 @@
 package view
 
 import (
-	apimodels "ctf01d/internal/app/apimodels"
 	"ctf01d/internal/app/db"
+	"ctf01d/internal/app/server"
 )
 
-func NewTeamFromModel(t *db.Team) *apimodels.TeamResponse {
-	return &apimodels.TeamResponse{
+func NewTeamFromModel(t *db.Team) *server.TeamResponse {
+	return &server.TeamResponse{
 		Id:          t.Id,
 		Name:        t.Name,
 		Description: &t.Description,
@@ -16,8 +16,8 @@ func NewTeamFromModel(t *db.Team) *apimodels.TeamResponse {
 	}
 }
 
-func NewTeamsFromModels(ts []*db.Team) []*apimodels.TeamResponse {
-	var teams []*apimodels.TeamResponse
+func NewTeamsFromModels(ts []*db.Team) []*server.TeamResponse {
+	var teams []*server.TeamResponse
 	for _, t := range ts {
 		teams = append(teams, NewTeamFromModel(t))
 	}

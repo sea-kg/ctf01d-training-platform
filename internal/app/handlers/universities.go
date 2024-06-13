@@ -1,19 +1,20 @@
-package api
+package handlers
 
 import (
-	dbmodels "ctf01d/internal/app/db"
-	"ctf01d/internal/app/repository"
-	api_helpers "ctf01d/internal/app/utils"
-	"ctf01d/internal/app/view"
-	"database/sql"
 	"log/slog"
 	"net/http"
+
+	dbmodels "ctf01d/internal/app/db"
+	"ctf01d/internal/app/repository"
+	"ctf01d/internal/app/server"
+	api_helpers "ctf01d/internal/app/utils"
+	"ctf01d/internal/app/view"
 )
 
-func ListUniversitiesHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
+func (h *Handlers) GetApiUniversities(w http.ResponseWriter, r *http.Request, params server.GetApiUniversitiesParams) {
 	queryParam := r.URL.Query().Get("term")
 
-	repo := repository.NewUniversityRepository(db)
+	repo := repository.NewUniversityRepository(h.DB)
 	var universities []*dbmodels.University
 	var err error
 
