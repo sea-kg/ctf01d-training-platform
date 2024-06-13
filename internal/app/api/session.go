@@ -11,7 +11,7 @@ import (
 )
 
 func LoginSessionHandler(db *sql.DB, w http.ResponseWriter, r *http.Request) {
-	var req apimodels.PostApiUsersLoginJSONBody
+	var req apimodels.PostApiLoginJSONBody
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
 		slog.Warn(err.Error(), "handler", "LoginSessionHandler")
 		http.Error(w, "Invalid request body", http.StatusBadRequest)

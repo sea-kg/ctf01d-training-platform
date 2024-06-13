@@ -67,6 +67,7 @@ func NewGameDetailsFromModel(m *db.GameDetails) *GameDetails {
 		Teams:       teams,
 	}
 }
+
 func NewGamesFromModels(ms []*db.Game) []*Game {
 	var games []*Game
 	for _, m := range ms {

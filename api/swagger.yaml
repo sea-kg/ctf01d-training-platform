@@ -12,10 +12,10 @@ servers:
   - url: 'http://localhost:4102'
     description: Local server
 paths:
-  /api/users/login:
+  /api/login:
     post:
       tags:
-        - Users
+        - Sessions
       summary: Login user
       description: >-
         Authenticates a user by user_name and password, starts a new session,
@@ -37,6 +37,40 @@ paths:
       responses:
         '200':
           description: User logged in successfully. A session cookie is set.
+          headers:
+            Set-Cookie:
+              description: >-
+                Session cookie which needs to be included in subsequent
+                requests.
+              schema:
+                type: string
+                example: session_id=abc123; Path=/; Max-Age=345600; HttpOnly
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: string
+                    example: User logged in
+        '400':
+          description: Invalid request body
+        '401':
+          description: Invalid user_name or password
+        '500':
+          description: Internal Server Error
+      parameters: []
+  /api/logout:
+    post:
+      tags:
+        - Sessions
+      summary: Logout user
+      description: >-
+        Authenticates a user by user_name and password, starts a new session,
+        and returns a session cookie.
+      responses:
+        '200':
+          description: User logout successfully. A session cookie is remove.
           headers:
             Set-Cookie:
               description: >-
@@ -111,7 +145,7 @@ paths:
           style: simple
           explode: false
           schema:
-            type: string
+            type: integer
       responses:
         '200':
           description: Detailed information of a user
@@ -135,7 +169,7 @@ paths:
           style: simple
           explode: false
           schema:
-            type: string
+            type: integer
       requestBody:
         content:
           application/json:
@@ -161,7 +195,7 @@ paths:
           style: simple
           explode: false
           schema:
-            type: string
+            type: integer
       responses:
         '200':
           description: User deleted successfully
@@ -221,7 +255,7 @@ paths:
           style: simple
           explode: false
           schema:
-            type: string
+            type: integer
       responses:
         '200':
           description: Detailed information of a game
@@ -245,7 +279,7 @@ paths:
           style: simple
           explode: false
           schema:
-            type: string
+            type: integer
       requestBody:
         content:
           application/json:
@@ -277,7 +311,7 @@ paths:
           style: simple
           explode: false
           schema:
-            type: string
+            type: integer
       responses:
         '200':
           description: Game deleted successfully
@@ -350,7 +384,7 @@ paths:
           style: simple
           explode: false
           schema:
-            type: string
+            type: integer
       responses:
         '200':
           description: Detailed information of a team
@@ -370,7 +404,7 @@ paths:
           style: simple
           explode: false
           schema:
-            type: string
+            type: integer
       requestBody:
         content:
           application/json:
@@ -392,7 +426,7 @@ paths:
           style: simple
           explode: false
           schema:
-            type: string
+            type: integer
       responses:
         '200':
           description: Team deleted successfully
@@ -441,7 +475,7 @@ paths:
           style: simple
           explode: false
           schema:
-            type: string
+            type: integer
       responses:
         '200':
           description: Detailed information of a result
@@ -494,7 +528,7 @@ paths:
           style: simple
           explode: false
           schema:
-            type: string
+            type: integer
       responses:
         '200':
           description: Detailed information of a service
@@ -514,7 +548,7 @@ paths:
           style: simple
           explode: false
           schema:
-            type: string
+            type: integer
       requestBody:
         content:
           application/json:
@@ -536,7 +570,7 @@ paths:
           style: simple
           explode: false
           schema:
-            type: string
+            type: integer
       responses:
         '200':
           description: Service deleted successfully

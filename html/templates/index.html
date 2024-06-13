@@ -64,7 +64,7 @@
         var user_name = $('#login-username').val();
         var password = $('#login-password').val();
         $.ajax({
-          url: '/api/users/login',
+          url: '/api/login',
           method: 'POST',
           contentType: 'application/json',
           data: JSON.stringify({ user_name: user_name, password: password }),
