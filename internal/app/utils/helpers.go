@@ -1,6 +1,7 @@
 package helpers
 
 import (
+	"ctf01d/internal/app/server"
 	"encoding/json"
 	"html/template"
 	"log/slog"
@@ -66,5 +67,31 @@ func RenderTemplate(w http.ResponseWriter, tmpl string) {
 	err = t.Execute(w, nil)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
+}
+
+func ConvertUserRequestRoleToUserResponseRole(role server.UserRequestRole) server.UserResponseRole {
+	switch role {
+	case server.UserRequestRoleAdmin:
+		return server.UserResponseRoleAdmin
+	case server.UserRequestRoleGuest:
+		return server.UserResponseRoleGuest
+	case server.UserRequestRolePlayer:
+		return server.UserResponseRolePlayer
+	default:
+		return ""
+	}
+}
+
+func ConvertUserResponseRoleToUserRequestRole(role server.UserResponseRole) server.UserRequestRole {
+	switch role {
+	case server.UserResponseRoleAdmin:
+		return server.UserRequestRoleAdmin
+	case server.UserResponseRoleGuest:
+		return server.UserRequestRoleGuest
+	case server.UserResponseRolePlayer:
+		return server.UserRequestRolePlayer
+	default:
+		return ""
 	}
 }

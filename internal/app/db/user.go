@@ -1,10 +1,12 @@
 package db
 
+import "ctf01d/internal/app/server"
+
 type User struct {
-	Id           int    `db:"id"`
-	Username     string `db:"user_name"`
-	Role         string `db:"role"`
-	AvatarUrl    string `db:"avatar_url"`
-	Status       string `db:"status"`
-	PasswordHash string `db:"password_hash"`
+	Id           int                    `db:"id"`
+	Username     string                 `db:"user_name"`
+	Role         server.UserRequestRole `db:"role"`
+	AvatarUrl    string                 `db:"avatar_url"`
+	Status       string                 `db:"status"`
+	PasswordHash string                 `db:"password_hash"`
 }
