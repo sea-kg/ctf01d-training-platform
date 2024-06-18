@@ -4,15 +4,17 @@ import (
 	"context"
 	models "ctf01d/internal/app/db"
 	"database/sql"
+
+	openapi_types "github.com/oapi-codegen/runtime/types"
 )
 
 type UserRepository interface {
 	Create(ctx context.Context, user *models.User) error
-	AddUserToTeams(ctx context.Context, userId int, teamIds *[]int) error
-	GetById(ctx context.Context, id int) (*models.User, error)
+	AddUserToTeams(ctx context.Context, userId openapi_types.UUID, teamIds *[]openapi_types.UUID) error
+	GetById(ctx context.Context, id openapi_types.UUID) (*models.User, error)
 	GetByUserName(ctx context.Context, id string) (*models.User, error)
 	Update(ctx context.Context, user *models.User) error
-	Delete(ctx context.Context, id int) error
+	Delete(ctx context.Context, id openapi_types.UUID) error
 	List(ctx context.Context) ([]*models.User, error)
 }
 
@@ -34,7 +36,7 @@ func (r *userRepo) Create(ctx context.Context, user *models.User) error {
 	return nil
 }
 
-func (r *userRepo) AddUserToTeams(ctx context.Context, userId int, teamIds *[]int) error {
+func (r *userRepo) AddUserToTeams(ctx context.Context, userId openapi_types.UUID, teamIds *[]openapi_types.UUID) error {
 	for _, teamId := range *teamIds {
 		_, err := r.db.ExecContext(ctx, "INSERT INTO team_members (user_id, team_id) VALUES ($1, $2)", userId, teamId)
 		if err != nil {
@@ -45,7 +47,7 @@ func (r *userRepo) AddUserToTeams(ctx context.Context, userId int, teamIds *[]in
 	return nil
 }
 
-func (r *userRepo) GetById(ctx context.Context, id int) (*models.User, error) {
+func (r *userRepo) GetById(ctx context.Context, id openapi_types.UUID) (*models.User, error) {
 	query := `SELECT id, display_name, user_name, avatar_url, role, status FROM users WHERE id = $1`
 	user := &models.User{}
 	err := r.db.QueryRowContext(ctx, query, id).Scan(&user.Id, &user.DisplayName, &user.Username, &user.AvatarUrl, &user.Role, &user.Status)
@@ -71,7 +73,7 @@ func (r *userRepo) Update(ctx context.Context, user *models.User) error {
 	return err
 }
 
-func (r *userRepo) Delete(ctx context.Context, id int) error {
+func (r *userRepo) Delete(ctx context.Context, id openapi_types.UUID) error {
 	tx, err := r.db.BeginTx(ctx, nil)
 	if err != nil {
 		return err

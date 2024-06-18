@@ -10,6 +10,8 @@ import (
 	"ctf01d/internal/app/server"
 	api_helpers "ctf01d/internal/app/utils"
 	"ctf01d/internal/app/view"
+
+	openapi_types "github.com/oapi-codegen/runtime/types"
 )
 
 func (h *Handlers) CreateService(w http.ResponseWriter, r *http.Request) {
@@ -35,7 +37,7 @@ func (h *Handlers) CreateService(w http.ResponseWriter, r *http.Request) {
 	api_helpers.RespondWithJSON(w, http.StatusOK, map[string]string{"data": "Service created successfully"})
 }
 
-func (h *Handlers) DeleteService(w http.ResponseWriter, r *http.Request, id int) {
+func (h *Handlers) DeleteService(w http.ResponseWriter, r *http.Request, id openapi_types.UUID) {
 	repo := repository.NewServiceRepository(h.DB)
 	if err := repo.Delete(r.Context(), id); err != nil {
 		slog.Warn(err.Error(), "handler", "DeleteServiceHandler")
@@ -45,7 +47,7 @@ func (h *Handlers) DeleteService(w http.ResponseWriter, r *http.Request, id int)
 	api_helpers.RespondWithJSON(w, http.StatusOK, map[string]string{"data": "Service deleted successfully"})
 }
 
-func (h *Handlers) GetServiceById(w http.ResponseWriter, r *http.Request, id int) {
+func (h *Handlers) GetServiceById(w http.ResponseWriter, r *http.Request, id openapi_types.UUID) {
 	repo := repository.NewServiceRepository(h.DB)
 	service, err := repo.GetById(r.Context(), id)
 	if err != nil {
@@ -68,7 +70,7 @@ func (h *Handlers) ListServices(w http.ResponseWriter, r *http.Request) {
 }
 
 // fixme implement
-func (h *Handlers) UpdateService(w http.ResponseWriter, r *http.Request, id int) {
+func (h *Handlers) UpdateService(w http.ResponseWriter, r *http.Request, id openapi_types.UUID) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusNotImplemented)
 }

@@ -3,33 +3,35 @@ package view
 import (
 	"ctf01d/internal/app/db"
 	"time"
+
+	openapi_types "github.com/oapi-codegen/runtime/types"
 )
 
 type Game struct {
-	Id          int       `json:"id"`
-	StartTime   time.Time `json:"start_time"`
-	EndTime     time.Time `json:"end_time"`
-	Description string    `json:"description,omitempty"`
+	Id          openapi_types.UUID `json:"id"`
+	StartTime   time.Time          `json:"start_time"`
+	EndTime     time.Time          `json:"end_time"`
+	Description string             `json:"description,omitempty"`
 }
 
 type GameDetails struct {
-	Id          int           `json:"id"`
-	StartTime   time.Time     `json:"start_time"`
-	EndTime     time.Time     `json:"end_time"`
-	Description string        `json:"description,omitempty"`
-	Teams       []TeamDetails `json:"team_details,omitempty"`
+	Id          openapi_types.UUID `json:"id"`
+	StartTime   time.Time          `json:"start_time"`
+	EndTime     time.Time          `json:"end_time"`
+	Description string             `json:"description,omitempty"`
+	Teams       []TeamDetails      `json:"team_details,omitempty"`
 }
 
 type TeamDetails struct {
-	Id          int      `json:"id"`
-	Name        string   `json:"name"`
-	Description string   `json:"description"`
-	Members     []Member `json:"members"`
+	Id          openapi_types.UUID `json:"id"`
+	Name        string             `json:"name"`
+	Description string             `json:"description"`
+	Members     []Member           `json:"members"`
 }
 
 type Member struct {
-	Id       int    `json:"id"`
-	UserName string `json:"user_name"`
+	Id       openapi_types.UUID `json:"id"`
+	UserName string             `json:"user_name"`
 }
 
 func NewGameFromModel(m *db.Game) *Game {

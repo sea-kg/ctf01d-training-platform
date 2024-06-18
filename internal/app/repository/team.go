@@ -4,13 +4,15 @@ import (
 	"context"
 	models "ctf01d/internal/app/db"
 	"database/sql"
+
+	openapi_types "github.com/oapi-codegen/runtime/types"
 )
 
 type TeamRepository interface {
 	Create(ctx context.Context, team *models.Team) error
-	GetById(ctx context.Context, id int) (*models.Team, error)
+	GetById(ctx context.Context, id openapi_types.UUID) (*models.Team, error)
 	Update(ctx context.Context, team *models.Team) error
-	Delete(ctx context.Context, id int) error
+	Delete(ctx context.Context, id openapi_types.UUID) error
 	List(ctx context.Context) ([]*models.Team, error)
 }
 
@@ -28,7 +30,7 @@ func (r *teamRepo) Create(ctx context.Context, team *models.Team) error {
 	return err
 }
 
-func (r *teamRepo) GetById(ctx context.Context, id int) (*models.Team, error) {
+func (r *teamRepo) GetById(ctx context.Context, id openapi_types.UUID) (*models.Team, error) {
 	query := `SELECT t.id, t.name, t.description, t.social_links, t.avatar_url, u.name as university_name
 			FROM teams t
 			JOIN universities u ON t.university_id = u.id
@@ -47,7 +49,7 @@ func (r *teamRepo) Update(ctx context.Context, team *models.Team) error {
 	return err
 }
 
-func (r *teamRepo) Delete(ctx context.Context, id int) error {
+func (r *teamRepo) Delete(ctx context.Context, id openapi_types.UUID) error {
 	query := `DELETE FROM teams WHERE id = $1`
 	_, err := r.db.ExecContext(ctx, query, id)
 	return err

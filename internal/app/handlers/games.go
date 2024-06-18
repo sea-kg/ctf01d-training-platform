@@ -11,6 +11,8 @@ import (
 	"ctf01d/internal/app/server"
 	api_helpers "ctf01d/internal/app/utils"
 	"ctf01d/internal/app/view"
+
+	openapi_types "github.com/oapi-codegen/runtime/types"
 )
 
 type Handlers struct {
@@ -42,7 +44,7 @@ func (h *Handlers) CreateGame(w http.ResponseWriter, r *http.Request) {
 	api_helpers.RespondWithJSON(w, http.StatusOK, map[string]string{"data": "Game created successfully"})
 }
 
-func (h *Handlers) DeleteGame(w http.ResponseWriter, r *http.Request, id int) {
+func (h *Handlers) DeleteGame(w http.ResponseWriter, r *http.Request, id openapi_types.UUID) {
 	repo := repository.NewGameRepository(h.DB)
 	if err := repo.Delete(r.Context(), id); err != nil {
 		slog.Warn(err.Error(), "handler", "DeleteGame")
@@ -52,7 +54,7 @@ func (h *Handlers) DeleteGame(w http.ResponseWriter, r *http.Request, id int) {
 	api_helpers.RespondWithJSON(w, http.StatusOK, map[string]string{"data": "Game deleted successfully"})
 }
 
-func (h *Handlers) GetGameById(w http.ResponseWriter, r *http.Request, id int) {
+func (h *Handlers) GetGameById(w http.ResponseWriter, r *http.Request, id openapi_types.UUID) {
 	repo := repository.NewGameRepository(h.DB)
 	game, err := repo.GetGameDetails(r.Context(), id) // короткий ответ, если нужен см. GetById
 	if err != nil {
@@ -74,7 +76,7 @@ func (h *Handlers) ListGames(w http.ResponseWriter, r *http.Request) {
 	api_helpers.RespondWithJSON(w, http.StatusOK, view.NewGamesFromModels(games))
 }
 
-func (h *Handlers) UpdateGame(w http.ResponseWriter, r *http.Request, id int) {
+func (h *Handlers) UpdateGame(w http.ResponseWriter, r *http.Request, id openapi_types.UUID) {
 	// fixme update не проверяет есть ли запись в бд
 	var game server.GameRequest
 	if err := json.NewDecoder(r.Body).Decode(&game); err != nil {

@@ -10,6 +10,8 @@ import (
 	"ctf01d/internal/app/server"
 	api_helpers "ctf01d/internal/app/utils"
 	"ctf01d/internal/app/view"
+
+	openapi_types "github.com/oapi-codegen/runtime/types"
 )
 
 func (h *Handlers) CreateUser(w http.ResponseWriter, r *http.Request) {
@@ -50,7 +52,7 @@ func (h *Handlers) CreateUser(w http.ResponseWriter, r *http.Request) {
 	api_helpers.RespondWithJSON(w, http.StatusOK, map[string]string{"data": "User created successfully"})
 }
 
-func (h *Handlers) DeleteUser(w http.ResponseWriter, r *http.Request, id int) {
+func (h *Handlers) DeleteUser(w http.ResponseWriter, r *http.Request, id openapi_types.UUID) {
 	repo := repository.NewUserRepository(h.DB)
 	if err := repo.Delete(r.Context(), id); err != nil {
 		slog.Warn(err.Error(), "handler", "DeleteUserHandler")
@@ -60,7 +62,7 @@ func (h *Handlers) DeleteUser(w http.ResponseWriter, r *http.Request, id int) {
 	api_helpers.RespondWithJSON(w, http.StatusOK, map[string]string{"data": "User deleted successfully"})
 }
 
-func (h *Handlers) GetUserById(w http.ResponseWriter, r *http.Request, id int) {
+func (h *Handlers) GetUserById(w http.ResponseWriter, r *http.Request, id openapi_types.UUID) {
 	repo := repository.NewUserRepository(h.DB)
 	user, err := repo.GetById(r.Context(), id)
 	if err != nil {
@@ -82,7 +84,7 @@ func (h *Handlers) ListUsers(w http.ResponseWriter, r *http.Request) {
 	api_helpers.RespondWithJSON(w, http.StatusOK, view.NewUsersFromModels(users))
 }
 
-func (h *Handlers) UpdateUser(w http.ResponseWriter, r *http.Request, id int) {
+func (h *Handlers) UpdateUser(w http.ResponseWriter, r *http.Request, id openapi_types.UUID) {
 	// fixme update не проверяет есть ли запись в бд
 	var user server.UserRequest
 	if err := json.NewDecoder(r.Body).Decode(&user); err != nil {
