@@ -9,7 +9,7 @@ Roadmap [here](TODO.md)
 ```sh
 .
 ├── api # http openapi schema
-│   └── swagger.yaml
+│   └── openapi.yaml
 ├── cmd # main app
 │   └── ctf01d
 │       └── main.go
@@ -82,10 +82,10 @@ $ go run cmd/ctf01d/main.go
 will be available on - [http://localhost:4102](http://localhost:4102)
 
 
-### Generate code from swagger schema
+### Generate code from openapi schema
 
 ```shell
-	oapi-codegen -generate models,chi -o internal/app/server/server.gen.go --package routers api/swagger.yaml
+	oapi-codegen -generate models,chi -o internal/app/server/server.gen.go --package routers api/openapi.yaml
 ```
 
 ## DataBase
@@ -119,9 +119,9 @@ $ docker exec -it ctf01d-postgres psql -U postgres
 ### fuzz api
 
 ```shell
-docker run --net=host --volume /home/user/ctf01d-training-platform/api:/api/ ghcr.io/matusf/openapi-fuzzer run -s '/api/swagger.yaml' --url http://localhost:4102
+docker run --net=host --volume /home/user/ctf01d-training-platform/api:/api/ ghcr.io/matusf/openapi-fuzzer run -s '/api/openapi.yaml' --url http://localhost:4102
 
-docker run --net=host --volume /home/user/ctf01d-training-platform/api:/api/ kisspeter/apifuzzer --src_file '/api/swagger.yaml' --url http://localhost:4102 -r /api/
+docker run --net=host --volume /home/user/ctf01d-training-platform/api:/api/ kisspeter/apifuzzer --src_file '/api/openapi.yaml' --url http://localhost:4102 -r /api/
 ```
 
 

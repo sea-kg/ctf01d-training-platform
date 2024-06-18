@@ -79,4 +79,4 @@ attach-db:
 
 # Generate Go server boilerplate from OpenAPI 3
 codegen:
-	oapi-codegen -generate models,chi -o internal/app/server/server.gen.go --package server api/swagger.yaml
+	oapi-codegen -generate models,chi -o internal/app/server/server.gen.go --package server api/openapi.yaml
