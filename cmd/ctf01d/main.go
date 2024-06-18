@@ -29,14 +29,16 @@ func main() {
 	}
 	slog.Info("Database connection established successfully")
 	defer db.Close()
-	r := chi.NewRouter()
-	h := &handlers.Handlers{
+	router := chi.NewRouter() // TODO .StrictSlash(true)
+	hndlrs := &handlers.Handlers{
 		DB: db,
 	}
-	s := handlers.NewServerInterfaceWrapper(h)
+	svr := handlers.NewServerInterfaceWrapper(hndlrs)
 
-	r.Mount("/", server.HandlerFromMux(s, r))
-	err = http.ListenAndServe(cfg.HTTP.Host+":"+cfg.HTTP.Port, r)
+	router.Mount("/api/", server.HandlerFromMux(svr, router))
+	router.Mount("/", http.HandlerFunc(server.NewHtmlRouter))
+
+	err = http.ListenAndServe(cfg.HTTP.Host+":"+cfg.HTTP.Port, router)
 	if err != nil {
 		slog.Error("Server error: " + err.Error())
 	}

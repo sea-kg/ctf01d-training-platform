@@ -124,3 +124,12 @@ docker run --net=host --volume /home/user/ctf01d-training-platform/api:/api/ ghc
 docker run --net=host --volume /home/user/ctf01d-training-platform/api:/api/ kisspeter/apifuzzer --src_file '/api/swagger.yaml' --url http://localhost:4102 -r /api/
 ```
 
+
+## oapi-codegen
+
+install:
+
+```
+$ go install github.com/oapi-codegen/oapi-codegen/v2/cmd/oapi-codegen@latest
+$ export PATH="$PATH:$HOME/bin:$HOME/go/bin"
+```

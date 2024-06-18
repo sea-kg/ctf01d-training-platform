@@ -3,7 +3,7 @@
 # Lint the code with golangci-lint
 lint:
 	make fmt; \
-	@if ! [ -x "$$(command -v golangci-lint)" ]; then \
+	if ! [ -x "$$(command -v golangci-lint)" ]; then \
 		docker run --rm -v $(PWD):/app -w /app golangci/golangci-lint:latest golangci-lint run -v; \
 	else \
 		golangci-lint run; \
