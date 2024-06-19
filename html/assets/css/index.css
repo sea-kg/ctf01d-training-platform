@@ -30,3 +30,8 @@ body,html{
 .btn-menu-top-left {
     margin-left: 10px;
 }
+
+.services-card {
+    display: inline-block;
+    margin: 10px;
+}

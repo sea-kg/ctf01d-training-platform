@@ -150,12 +150,64 @@
     <!-- SERVICES PAGE -->
     <div class="container spa-web-page" id="services_page">
       <br>
-      <div class="card">
-        <div class="card-header">
-          <strong class="card-title">Services</strong>
-        </div>
+      <h2>Services</h2>
+      <button type="button" class="btn btn-primary" onclick="showCreateService()">
+        New Service
+      </button>
+      <br><br>
+      <div class="alert alert-danger" role="alert" style="display: none;" id="services_page_error">
+        Something wrong
+      </div>
+      <div id="services_page_list">
       </div>
       <br>
+    </div>
+
+    <div class="modal fade" id="modal_edit_or_create_service" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="title_service_create_or_update">New Service</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <input type="hidden" id="service_update_service_id" value="0" name="service_id">
+              <div class="form-group">
+                <label for="service_create_name" class="col-form-label">Name:</label>
+                <input type="text" class="form-control" id="service_create_name" placeholder="Name" required>
+              </div>
+              <div class="form-group">
+                <label for="service_create_author" class="col-form-label">Author:</label>
+                <input type="text" class="form-control" id="service_create_author" placeholder="Author" required>
+              </div>
+              <div class="form-group">
+                <label for="service_create_logo_url" class="col-form-label">Logo URL:</label>
+                <input type="text" class="form-control" id="service_create_logo_url" placeholder="Logo URL" required>
+              </div>
+              <div class="form-group">
+                <label for="service_create_description" class="col-form-label">Description:</label>
+                <input type="text" class="form-control" id="service_create_description" placeholder="Description" name="description" required>
+              </div>
+              <div class="form-group">
+                <label for="service_create_is_public" class="col-form-label">Is public?</label>
+                <input type="checkbox" class="form-control" id="service_create_is_public" name="is_public" required>
+              </div>
+
+              <!-- div class="form-group">
+                <label for="game_create_start_time" class="col-form-label">Start Time:</label>
+                <input type="datetime-local" class="form-control" id="game_create_start_time" name="start_time" required>
+              </div -->
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" id="btn_service_create_or_update" onclick="serviceCreateOrUpdate()">Create</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- TEAMS PAGE -->
