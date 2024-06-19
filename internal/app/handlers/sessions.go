@@ -10,8 +10,8 @@ import (
 	api_helpers "ctf01d/internal/app/utils"
 )
 
-func (h *Handlers) PostApiLogin(w http.ResponseWriter, r *http.Request) {
-	var req server.PostApiLoginJSONBody
+func (h *Handlers) PostApiV1AuthSignin(w http.ResponseWriter, r *http.Request) {
+	var req server.PostApiV1AuthSigninJSONBody
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
 		slog.Warn(err.Error(), "handler", "LoginSessionHandler")
 		http.Error(w, "Invalid request body", http.StatusBadRequest)
@@ -44,7 +44,7 @@ func (h *Handlers) PostApiLogin(w http.ResponseWriter, r *http.Request) {
 	api_helpers.RespondWithJSON(w, http.StatusOK, map[string]string{"data": "User logged in"})
 }
 
-func (h *Handlers) PostApiLogout(w http.ResponseWriter, r *http.Request) {
+func (h *Handlers) PostApiV1AuthSignout(w http.ResponseWriter, r *http.Request) {
 	cookie, err := r.Cookie("session_id")
 	if err != nil {
 		slog.Warn(err.Error(), "handler", "LogoutSessionHandler")

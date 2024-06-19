@@ -34,12 +34,12 @@ func (siw *ServerInterfaceWrapper) UpdateGame(w http.ResponseWriter, r *http.Req
 	siw.handlers.UpdateGame(w, r, id)
 }
 
-func (siw *ServerInterfaceWrapper) PostApiLogin(w http.ResponseWriter, r *http.Request) {
-	siw.handlers.PostApiLogin(w, r)
+func (siw *ServerInterfaceWrapper) PostApiV1AuthSignin(w http.ResponseWriter, r *http.Request) {
+	siw.handlers.PostApiV1AuthSignin(w, r)
 }
 
-func (siw *ServerInterfaceWrapper) PostApiLogout(w http.ResponseWriter, r *http.Request) {
-	siw.handlers.PostApiLogout(w, r)
+func (siw *ServerInterfaceWrapper) PostApiV1AuthSignout(w http.ResponseWriter, r *http.Request) {
+	siw.handlers.PostApiV1AuthSignout(w, r)
 }
 
 func (siw *ServerInterfaceWrapper) ListResults(w http.ResponseWriter, r *http.Request) {

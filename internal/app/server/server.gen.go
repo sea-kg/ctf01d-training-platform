@@ -219,16 +219,16 @@ type UserResponse struct {
 // UserResponseRole The role of the user (admin, player or guest)
 type UserResponseRole string
 
-// PostApiLoginJSONBody defines parameters for PostApiLogin.
-type PostApiLoginJSONBody struct {
-	Password *string `json:"password,omitempty"`
-	UserName *string `json:"user_name,omitempty"`
-}
-
 // GetApiUniversitiesParams defines parameters for GetApiUniversities.
 type GetApiUniversitiesParams struct {
 	// Term Optional search term to filter universities by name.
 	Term *string `form:"term,omitempty" json:"term,omitempty"`
+}
+
+// PostApiV1AuthSigninJSONBody defines parameters for PostApiV1AuthSignin.
+type PostApiV1AuthSigninJSONBody struct {
+	Password *string `json:"password,omitempty"`
+	UserName *string `json:"user_name,omitempty"`
 }
 
 // CreateGameJSONRequestBody defines body for CreateGame for application/json ContentType.
@@ -236,9 +236,6 @@ type CreateGameJSONRequestBody = GameRequest
 
 // UpdateGameJSONRequestBody defines body for UpdateGame for application/json ContentType.
 type UpdateGameJSONRequestBody = GameRequest
-
-// PostApiLoginJSONRequestBody defines body for PostApiLogin for application/json ContentType.
-type PostApiLoginJSONRequestBody PostApiLoginJSONBody
 
 // CreateResultJSONRequestBody defines body for CreateResult for application/json ContentType.
 type CreateResultJSONRequestBody = ResultRequest
@@ -261,6 +258,9 @@ type CreateUserJSONRequestBody = UserRequest
 // UpdateUserJSONRequestBody defines body for UpdateUser for application/json ContentType.
 type UpdateUserJSONRequestBody = UserRequest
 
+// PostApiV1AuthSigninJSONRequestBody defines body for PostApiV1AuthSignin for application/json ContentType.
+type PostApiV1AuthSigninJSONRequestBody PostApiV1AuthSigninJSONBody
+
 // ServerInterface represents all server handlers.
 type ServerInterface interface {
 	// List all games
@@ -278,12 +278,6 @@ type ServerInterface interface {
 	// Update a game
 	// (PUT /api/games/{id})
 	UpdateGame(w http.ResponseWriter, r *http.Request, id int)
-	// Login user
-	// (POST /api/login)
-	PostApiLogin(w http.ResponseWriter, r *http.Request)
-	// Logout user
-	// (POST /api/logout)
-	PostApiLogout(w http.ResponseWriter, r *http.Request)
 	// List all results
 	// (GET /api/results)
 	ListResults(w http.ResponseWriter, r *http.Request)
@@ -341,6 +335,12 @@ type ServerInterface interface {
 	// Update a user
 	// (PUT /api/users/{id})
 	UpdateUser(w http.ResponseWriter, r *http.Request, id int)
+	// Login user
+	// (POST /api/v1/auth/signin)
+	PostApiV1AuthSignin(w http.ResponseWriter, r *http.Request)
+	// Logout user
+	// (POST /api/v1/auth/signout)
+	PostApiV1AuthSignout(w http.ResponseWriter, r *http.Request)
 }
 
 // Unimplemented server implementation that returns http.StatusNotImplemented for each endpoint.
@@ -374,18 +374,6 @@ func (_ Unimplemented) GetGameById(w http.ResponseWriter, r *http.Request, id in
 // Update a game
 // (PUT /api/games/{id})
 func (_ Unimplemented) UpdateGame(w http.ResponseWriter, r *http.Request, id int) {
-	w.WriteHeader(http.StatusNotImplemented)
-}
-
-// Login user
-// (POST /api/login)
-func (_ Unimplemented) PostApiLogin(w http.ResponseWriter, r *http.Request) {
-	w.WriteHeader(http.StatusNotImplemented)
-}
-
-// Logout user
-// (POST /api/logout)
-func (_ Unimplemented) PostApiLogout(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusNotImplemented)
 }
 
@@ -503,6 +491,18 @@ func (_ Unimplemented) UpdateUser(w http.ResponseWriter, r *http.Request, id int
 	w.WriteHeader(http.StatusNotImplemented)
 }
 
+// Login user
+// (POST /api/v1/auth/signin)
+func (_ Unimplemented) PostApiV1AuthSignin(w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(http.StatusNotImplemented)
+}
+
+// Logout user
+// (POST /api/v1/auth/signout)
+func (_ Unimplemented) PostApiV1AuthSignout(w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(http.StatusNotImplemented)
+}
+
 // ServerInterfaceWrapper converts contexts to parameters.
 type ServerInterfaceWrapper struct {
 	Handler            ServerInterface
@@ -611,36 +611,6 @@ func (siw *ServerInterfaceWrapper) UpdateGame(w http.ResponseWriter, r *http.Req
 
 	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		siw.Handler.UpdateGame(w, r, id)
-	}))
-
-	for _, middleware := range siw.HandlerMiddlewares {
-		handler = middleware(handler)
-	}
-
-	handler.ServeHTTP(w, r.WithContext(ctx))
-}
-
-// PostApiLogin operation middleware
-func (siw *ServerInterfaceWrapper) PostApiLogin(w http.ResponseWriter, r *http.Request) {
-	ctx := r.Context()
-
-	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		siw.Handler.PostApiLogin(w, r)
-	}))
-
-	for _, middleware := range siw.HandlerMiddlewares {
-		handler = middleware(handler)
-	}
-
-	handler.ServeHTTP(w, r.WithContext(ctx))
-}
-
-// PostApiLogout operation middleware
-func (siw *ServerInterfaceWrapper) PostApiLogout(w http.ResponseWriter, r *http.Request) {
-	ctx := r.Context()
-
-	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		siw.Handler.PostApiLogout(w, r)
 	}))
 
 	for _, middleware := range siw.HandlerMiddlewares {
@@ -1058,6 +1028,36 @@ func (siw *ServerInterfaceWrapper) UpdateUser(w http.ResponseWriter, r *http.Req
 	handler.ServeHTTP(w, r.WithContext(ctx))
 }
 
+// PostApiV1AuthSignin operation middleware
+func (siw *ServerInterfaceWrapper) PostApiV1AuthSignin(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+
+	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		siw.Handler.PostApiV1AuthSignin(w, r)
+	}))
+
+	for _, middleware := range siw.HandlerMiddlewares {
+		handler = middleware(handler)
+	}
+
+	handler.ServeHTTP(w, r.WithContext(ctx))
+}
+
+// PostApiV1AuthSignout operation middleware
+func (siw *ServerInterfaceWrapper) PostApiV1AuthSignout(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+
+	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		siw.Handler.PostApiV1AuthSignout(w, r)
+	}))
+
+	for _, middleware := range siw.HandlerMiddlewares {
+		handler = middleware(handler)
+	}
+
+	handler.ServeHTTP(w, r.WithContext(ctx))
+}
+
 type UnescapedCookieParamError struct {
 	ParamName string
 	Err       error
@@ -1187,12 +1187,6 @@ func HandlerWithOptions(si ServerInterface, options ChiServerOptions) http.Handl
 		r.Put(options.BaseURL+"/api/games/{id}", wrapper.UpdateGame)
 	})
 	r.Group(func(r chi.Router) {
-		r.Post(options.BaseURL+"/api/login", wrapper.PostApiLogin)
-	})
-	r.Group(func(r chi.Router) {
-		r.Post(options.BaseURL+"/api/logout", wrapper.PostApiLogout)
-	})
-	r.Group(func(r chi.Router) {
 		r.Get(options.BaseURL+"/api/results", wrapper.ListResults)
 	})
 	r.Group(func(r chi.Router) {
@@ -1248,6 +1242,12 @@ func HandlerWithOptions(si ServerInterface, options ChiServerOptions) http.Handl
 	})
 	r.Group(func(r chi.Router) {
 		r.Put(options.BaseURL+"/api/users/{id}", wrapper.UpdateUser)
+	})
+	r.Group(func(r chi.Router) {
+		r.Post(options.BaseURL+"/api/v1/auth/signin", wrapper.PostApiV1AuthSignin)
+	})
+	r.Group(func(r chi.Router) {
+		r.Post(options.BaseURL+"/api/v1/auth/signout", wrapper.PostApiV1AuthSignout)
 	})
 
 	return r
