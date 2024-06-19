@@ -42,6 +42,10 @@ func (siw *ServerInterfaceWrapper) PostApiV1AuthSignout(w http.ResponseWriter, r
 	siw.handlers.PostApiV1AuthSignout(w, r)
 }
 
+func (siw *ServerInterfaceWrapper) ValidateSession(w http.ResponseWriter, r *http.Request) {
+	siw.handlers.ValidateSession(w, r)
+}
+
 func (siw *ServerInterfaceWrapper) ListResults(w http.ResponseWriter, r *http.Request) {
 	siw.handlers.ListResults(w, r)
 }

@@ -263,6 +263,9 @@ type UpdateUserJSONRequestBody = UserRequest
 
 // ServerInterface represents all server handlers.
 type ServerInterface interface {
+	// Validate current session and return user role
+	// (GET /api/v1/auth/session)
+	ValidateSession(w http.ResponseWriter, r *http.Request)
 	// Login user
 	// (POST /api/v1/auth/signin)
 	PostApiV1AuthSignin(w http.ResponseWriter, r *http.Request)
@@ -346,6 +349,12 @@ type ServerInterface interface {
 // Unimplemented server implementation that returns http.StatusNotImplemented for each endpoint.
 
 type Unimplemented struct{}
+
+// Validate current session and return user role
+// (GET /api/v1/auth/session)
+func (_ Unimplemented) ValidateSession(w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(http.StatusNotImplemented)
+}
 
 // Login user
 // (POST /api/v1/auth/signin)
@@ -511,6 +520,21 @@ type ServerInterfaceWrapper struct {
 }
 
 type MiddlewareFunc func(http.Handler) http.Handler
+
+// ValidateSession operation middleware
+func (siw *ServerInterfaceWrapper) ValidateSession(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+
+	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		siw.Handler.ValidateSession(w, r)
+	}))
+
+	for _, middleware := range siw.HandlerMiddlewares {
+		handler = middleware(handler)
+	}
+
+	handler.ServeHTTP(w, r.WithContext(ctx))
+}
 
 // PostApiV1AuthSignin operation middleware
 func (siw *ServerInterfaceWrapper) PostApiV1AuthSignin(w http.ResponseWriter, r *http.Request) {
@@ -1171,6 +1195,9 @@ func HandlerWithOptions(si ServerInterface, options ChiServerOptions) http.Handl
 		ErrorHandlerFunc:   options.ErrorHandlerFunc,
 	}
 
+	r.Group(func(r chi.Router) {
+		r.Get(options.BaseURL+"/api/v1/auth/session", wrapper.ValidateSession)
+	})
 	r.Group(func(r chi.Router) {
 		r.Post(options.BaseURL+"/api/v1/auth/signin", wrapper.PostApiV1AuthSignin)
 	})
