@@ -70,5 +70,5 @@ func (h *Handlers) ListServices(w http.ResponseWriter, r *http.Request) {
 // fixme implement
 func (h *Handlers) UpdateService(w http.ResponseWriter, r *http.Request, id int) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
-	w.WriteHeader(http.StatusOK)
+	w.WriteHeader(http.StatusNotImplemented)
 }

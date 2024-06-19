@@ -154,7 +154,7 @@ function doSignin() {
     })
 }
 
-function renderGamePage() {
+function renderGamesPage() {
     $('.spa-web-page').css({"display": ""})
     $('#games_page').css({"display": "block"})
     if (window.location.pathname != "/games/") {
@@ -187,6 +187,162 @@ function renderGamePage() {
     })
 }
 
+function serviceCreateOrUpdate() {
+    $('#services_page_error').css({"display": "none"});
+    $('#services_page_error').html("");
+
+    var service_id = $('#service_update_service_id').val();
+
+    var serviceName = $('#service_create_name').val();
+    var serviceAuthor = $('#service_create_author').val();
+    var serviceLogoUrl = $('#service_create_logo_url').val();
+    var serviceDescription = $('#service_create_description').val();
+    var serviceIsPublic = $('#service_create_is_public').prop('checked')
+    if (service_id == 0) {
+        window.ctf01d_tp_api.service_create({
+            name: serviceName,
+            author: serviceAuthor,
+            logo_url: serviceLogoUrl,
+            description: serviceDescription,
+            is_public: serviceIsPublic,
+        }).fail(function(res) {
+            $('#services_page_error').css({
+                "display": "block"
+            });
+            $('#services_page_error').html("Error creating service");
+            console.error(res);
+        }).done(function(res) {
+            console.log(res)
+            $('#modal_edit_or_create_service').modal('hide');
+            showSuccessNotification('Service created successfully!')
+            renderServicesPage();
+        })
+    } else {
+        window.ctf01d_tp_api.service_update(service_id, {
+            name: serviceName,
+            author: serviceAuthor,
+            logo_url: serviceLogoUrl,
+            description: serviceDescription,
+            is_public: serviceIsPublic,
+        }).fail(function(res) {
+            $('#services_page_error').css({
+                "display": "block"
+            });
+            $('#services_page_error').html("Error updating service");
+            console.error(res);
+        }).done(function(res) {
+            console.log(res)
+            $('#modal_edit_or_create_service').modal('hide');
+            showSuccessNotification('Service updated successfully!')
+            renderServicesPage();
+        })
+    }
+}
+
+function deleteService(service_id) {
+    $('#services_page_error').css({"display": "none"});
+    $('#services_page_error').html("");
+    window.ctf01d_tp_api.service_delete(service_id).fail(function(res) {
+        $('#services_page_error').css({
+            "display": "block"
+        });
+        $('#services_page_error').html("Error delete service");
+        console.error("services_list", res);
+    }).done(function(res) {
+        showSuccessNotification('Service deleted successfully!')
+        renderServicesPage();
+    })
+}
+
+function showCreateService() {
+    $('#services_page_error').css({"display": "none"});
+    $('#services_page_error').html("");
+
+    $('#service_update_service_id').val(0);
+    $('#service_create_name').val("");
+    $('#service_create_author').val("");
+    $('#service_create_logo_url').val("");
+    $('#service_create_description').val("");
+    $('#service_create_is_public').prop('checked', false);
+    $('#btn_service_create_or_update').html("Create");
+    $('#title_service_create_or_update').html("New Service");
+    $('#modal_edit_or_create_service').modal('show');
+}
+
+function showUpdateService(service_id) {
+    $('#services_page_error').css({"display": "none"});
+    $('#services_page_error').html("");
+    $('#btn_service_create_or_update').html("Update");
+
+    window.ctf01d_tp_api.service_info(service_id).fail(function(res) {
+        $('#services_page_error').css({
+            "display": "block"
+        });
+        $('#services_page_error').html("Error get service info");
+    }).done(function(res) {
+        console.log("showUpdateService", res)
+        $('#service_update_service_id').val(res["id"])
+        $('#title_service_create_or_update').html("Update Service #" + res["id"]);
+        $('#service_create_name').val(res["name"]);
+        $('#service_create_author').val(res["name"]);
+        $('#service_create_logo_url').val(res["logo_url"]);
+        $('#service_create_description').val(res["description"]);
+        if (res["is_public"]) {
+            $('#service_create_is_public').prop('checked', true);
+        } else {
+            $('#service_create_is_public').prop('checked', false);
+        }
+        $('#modal_edit_or_create_service').modal('show');
+    })
+}
+
+function renderServicesPage() {
+    $('.spa-web-page').css({"display": ""})
+    $('#services_page').css({"display": "block"})
+    $('#services_page_error').css({"display": "none"});
+    $('#services_page_error').html("");
+    if (window.location.pathname != "/services/") {
+        window.location.href = "/services/";
+    }
+    window.ctf01d_tp_api.services_list().fail(function(res) {
+        $('#services_page_error').css({
+            "display": "block"
+        });
+        $('#services_page_error').html("Error loading services");
+        console.error("services_list", res);
+    }).done(function(res) {
+        var servicesHtml = ""
+        for (var i in res) {
+            var service_info = res[i];
+            console.log("service_info", service_info);
+            servicesHtml += '<div class="card services-card" style="width: 18rem;">';
+            servicesHtml += '  <img class="card-img-top" src="' + service_info.logo_url + '" alt="Image of service">';
+            servicesHtml += '  <div class="card-body">';
+            servicesHtml += '    <h5 class="card-title">#' + service_info.id + ' ' + escapeHtml(service_info.name) + '</h5>'; // TODO uuid
+            servicesHtml += '    <p class="card-text">' + escapeHtml(service_info.description) + ' by ' + escapeHtml(service_info.author) + '</p>';
+            // TODO
+            // servicesHtml += '    <small>' + getHumanTimeHasPassed(new Date(game_info.end_time)) + '</small>';
+            servicesHtml += '  </div>';
+            servicesHtml += '  <ul class="list-group list-group-flush">';
+            servicesHtml += '    <li class="list-group-item">Cras justo odio</li>';
+            servicesHtml += '    <li class="list-group-item">Dapibus ac facilisis in</li>';
+            servicesHtml += '    <li class="list-group-item">Vestibulum at eros</li>';
+            servicesHtml += '  </ul>';
+            servicesHtml += '  <div class="card-body">';
+            servicesHtml += '    <button class="btn btn-primary" onclick="showUpdateService(' + service_info.id + ');">Update</button>';
+            servicesHtml += '    <button class="btn btn-danger" onclick="deleteService(' + service_info.id + ');">Delete</button>';
+            servicesHtml += '  </div>';
+            servicesHtml += '</div>';
+
+            // servicesHtml += '  <div id="game_teams_' + game_info.id + '"> ' + new Date(game_info.end_time) + '</div>';
+            // servicesHtml += '</div>';
+            // updateGameTeams('service_teams_' + game_info.id, game_info.id)
+        }
+        $('#services_page_list').html(servicesHtml);
+    })
+}
+
+
 function renderPage(pathname) {
     console.log("pathname", pathname)
     if (pathname == "/") {
@@ -195,12 +351,9 @@ function renderPage(pathname) {
         })
         $('#root_page').css({"display": "block"})
     } else if (isGamesPage(pathname)) {
-        renderGamePage();
+        renderGamesPage();
     } else if (isServicesPage(pathname)) {
-        $('.spa-web-page').css({
-            "display": ""
-        })
-        $('#services_page').css({"display": "block"})
+        renderServicesPage();
     } else if (isTeamPage(pathname)) {
         $('#teams_page').css({"display": "block"})
         $('.spa-web-page').css({
