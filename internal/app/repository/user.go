@@ -25,11 +25,12 @@ func NewUserRepository(db *sql.DB) UserRepository {
 }
 
 func (r *userRepo) Create(ctx context.Context, user *models.User) error {
-	query := `INSERT INTO users (user_name, avatar_url, role, status, password_hash) VALUES ($1, $2, $3, $4, $5) RETURNING id`
-	err := r.db.QueryRowContext(ctx, query, user.Username, user.AvatarUrl, user.Role, user.Status, user.PasswordHash).Scan(&user.Id)
+	query := `INSERT INTO users (display_name, user_name, avatar_url, role, status, password_hash) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id`
+	err := r.db.QueryRowContext(ctx, query, user.DisplayName, user.Username, user.AvatarUrl, user.Role, user.Status, user.PasswordHash).Scan(&user.Id)
 	if err != nil {
 		return err
 	}
+
 	return nil
 }
 
@@ -45,9 +46,9 @@ func (r *userRepo) AddUserToTeams(ctx context.Context, userId int, teamIds *[]in
 }
 
 func (r *userRepo) GetById(ctx context.Context, id int) (*models.User, error) {
-	query := `SELECT id, user_name, avatar_url, role, status FROM users WHERE id = $1`
+	query := `SELECT id, display_name, user_name, avatar_url, role, status FROM users WHERE id = $1`
 	user := &models.User{}
-	err := r.db.QueryRowContext(ctx, query, id).Scan(&user.Id, &user.Username, &user.AvatarUrl, &user.Role, &user.Status)
+	err := r.db.QueryRowContext(ctx, query, id).Scan(&user.Id, &user.DisplayName, &user.Username, &user.AvatarUrl, &user.Role, &user.Status)
 	if err != nil {
 		return nil, err
 	}
@@ -65,8 +66,8 @@ func (r *userRepo) GetByUserName(ctx context.Context, name string) (*models.User
 }
 
 func (r *userRepo) Update(ctx context.Context, user *models.User) error {
-	query := `UPDATE users SET user_name = $1, avatar_url = $2, role = $3, status = $4, password_hash = $5 WHERE id = $6`
-	_, err := r.db.ExecContext(ctx, query, user.Username, user.AvatarUrl, user.Role, user.Status, user.PasswordHash, user.Id)
+	query := `UPDATE users SET user_name = $1, avatar_url = $2, role = $3, status = $4, password_hash = $5, login = $6 WHERE id = $7`
+	_, err := r.db.ExecContext(ctx, query, user.Username, user.AvatarUrl, user.Role, user.Status, user.PasswordHash, user.DisplayName, user.Id)
 	return err
 }
 
@@ -93,7 +94,7 @@ func (r *userRepo) Delete(ctx context.Context, id int) error {
 }
 
 func (r *userRepo) List(ctx context.Context) ([]*models.User, error) {
-	query := `SELECT id, user_name, avatar_url, role, status FROM users`
+	query := `SELECT id, display_name, user_name, avatar_url, role, status FROM users`
 	rows, err := r.db.QueryContext(ctx, query)
 	if err != nil {
 		return nil, err
@@ -103,7 +104,7 @@ func (r *userRepo) List(ctx context.Context) ([]*models.User, error) {
 	var users []*models.User
 	for rows.Next() {
 		var user models.User
-		if err := rows.Scan(&user.Id, &user.Username, &user.AvatarUrl, &user.Role, &user.Status); err != nil {
+		if err := rows.Scan(&user.Id, &user.DisplayName, &user.Username, &user.AvatarUrl, &user.Role, &user.Status); err != nil {
 			return nil, err
 		}
 		users = append(users, &user)

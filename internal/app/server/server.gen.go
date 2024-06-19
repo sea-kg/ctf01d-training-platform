@@ -181,6 +181,9 @@ type UserRequest struct {
 	// AvatarUrl URL to the user's avatar
 	AvatarUrl *string `json:"avatar_url,omitempty"`
 
+	// DisplayName The name of the user
+	DisplayName *string `json:"display_name,omitempty"`
+
 	// Password User password
 	Password *string `json:"password,omitempty"`
 
@@ -191,7 +194,7 @@ type UserRequest struct {
 	Status  *string `json:"status,omitempty"`
 	TeamIds *[]int  `json:"team_ids,omitempty"`
 
-	// UserName The name of the user
+	// UserName The login of the user
 	UserName *string `json:"user_name,omitempty"`
 }
 
@@ -203,6 +206,9 @@ type UserResponse struct {
 	// AvatarUrl URL to the user's avatar
 	AvatarUrl *string `json:"avatar_url,omitempty"`
 
+	// DisplayName The name of the user
+	DisplayName *string `json:"display_name,omitempty"`
+
 	// Id The unique identifier for the user
 	Id *int `json:"id,omitempty"`
 
@@ -212,7 +218,7 @@ type UserResponse struct {
 	// Status Status of the user (active, disabled)
 	Status *string `json:"status,omitempty"`
 
-	// UserName The name of the user
+	// UserName The login of the user
 	UserName *string `json:"user_name,omitempty"`
 }
 
@@ -266,7 +272,7 @@ type ServerInterface interface {
 	// Validate current session and return user role
 	// (GET /api/v1/auth/session)
 	ValidateSession(w http.ResponseWriter, r *http.Request)
-	// Login user
+	// Sign in user
 	// (POST /api/v1/auth/signin)
 	PostApiV1AuthSignin(w http.ResponseWriter, r *http.Request)
 	// Logout user
@@ -356,7 +362,7 @@ func (_ Unimplemented) ValidateSession(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusNotImplemented)
 }
 
-// Login user
+// Sign in user
 // (POST /api/v1/auth/signin)
 func (_ Unimplemented) PostApiV1AuthSignin(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusNotImplemented)

@@ -13,14 +13,14 @@ import (
 func (h *Handlers) PostApiV1AuthSignin(w http.ResponseWriter, r *http.Request) {
 	var req server.PostApiV1AuthSigninJSONBody
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
-		slog.Warn(err.Error(), "handler", "LoginSessionHandler")
+		slog.Warn(err.Error(), "handler", "PostApiV1AuthSignin")
 		http.Error(w, "Invalid request body", http.StatusBadRequest)
 		return
 	}
 	userRepo := repository.NewUserRepository(h.DB)
 	user, err := userRepo.GetByUserName(r.Context(), *req.UserName)
 	if err != nil || !api_helpers.CheckPasswordHash(*req.Password, user.PasswordHash) {
-		slog.Warn(err.Error(), "handler", "LoginSessionHandler")
+		slog.Warn(err.Error(), "handler", "PostApiV1AuthSignin")
 		api_helpers.RespondWithJSON(w, http.StatusUnauthorized, map[string]string{"error": "Invalid password or user"})
 		return
 	}
@@ -28,7 +28,7 @@ func (h *Handlers) PostApiV1AuthSignin(w http.ResponseWriter, r *http.Request) {
 	repo := repository.NewSessionRepository(h.DB)
 	sessionId, err := repo.StoreSessionInDB(r.Context(), user.Id)
 	if err != nil {
-		slog.Warn(err.Error(), "handler", "LoginSessionHandler")
+		slog.Warn(err.Error(), "handler", "PostApiV1AuthSignin")
 		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to store session"})
 		return
 	}
@@ -47,14 +47,14 @@ func (h *Handlers) PostApiV1AuthSignin(w http.ResponseWriter, r *http.Request) {
 func (h *Handlers) PostApiV1AuthSignout(w http.ResponseWriter, r *http.Request) {
 	cookie, err := r.Cookie("session_id")
 	if err != nil {
-		slog.Warn(err.Error(), "handler", "LogoutSessionHandler")
+		slog.Warn(err.Error(), "handler", "PostApiV1AuthSignout")
 		api_helpers.RespondWithJSON(w, http.StatusUnauthorized, map[string]string{"error": "No session found"})
 		return
 	}
 	repo := repository.NewSessionRepository(h.DB)
 	err = repo.DeleteSessionInDB(r.Context(), cookie.Value)
 	if err != nil {
-		slog.Warn(err.Error(), "handler", "LogoutSessionHandler")
+		slog.Warn(err.Error(), "handler", "PostApiV1AuthSignout")
 		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to delete session"})
 		return
 	}

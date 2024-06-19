@@ -1,882 +1,888 @@
-openapi: 3.0.0
-info:
-  title: CTF Management API
-  description: 'API for managing CTF (Capture The Flag) games, teams, users, and services.'
-  contact: {}
-  version: 1.0.0
-servers:
-  - url: 'https://ctf01d.com'
-    description: Production server
-  - url: 'https://staging.ctf01d.com'
-    description: Staging server
-  - url: 'http://localhost:4102'
-    description: Local server
-paths:
-  /api/v1/auth/signin:
-    post:
-      tags:
-        - Sessions
-      summary: Login user
-      description: >-
-        Authenticates a user by user_name and password, starts a new session,
-        and returns a session cookie.
-      requestBody:
-        required: true
-        content:
-          application/json:
+  openapi: 3.0.0
+  info:
+    title: CTF Management API
+    description: 'API for managing CTF (Capture The Flag) games, teams, users, and services.'
+    contact: {}
+    version: 1.0.0
+  servers:
+    - url: 'https://ctf01d.com'
+      description: Production server
+    - url: 'https://staging.ctf01d.com'
+      description: Staging server
+    - url: 'http://localhost:4102'
+      description: Local server
+  paths:
+    /api/v1/auth/signin:
+      post:
+        tags:
+          - Sessions
+        summary: Sign in user
+        description: >-
+          Authenticates a user by user_name and password, starts a new session,
+          and returns a session cookie.
+        requestBody:
+          required: true
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user_name:
+                    type: string
+                    example: exampleUser
+                  password:
+                    type: string
+                    format: password
+                    example: examplePass
+        responses:
+          '200':
+            description: User logged in successfully. A session cookie is set.
+            headers:
+              Set-Cookie:
+                description: >-
+                  Session cookie which needs to be included in subsequent
+                  requests.
+                schema:
+                  type: string
+                  example: session_id=abc123; Path=/; Max-Age=345600; HttpOnly
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    data:
+                      type: string
+                      example: User logged in
+          '400':
+            description: Invalid request body
+          '401':
+            description: Invalid user_name or password
+          '500':
+            description: Internal Server Error
+        parameters: []
+    /api/v1/auth/signout:
+      post:
+        tags:
+          - Sessions
+        summary: Logout user
+        description: >-
+          Authenticates a user by user_name and password, starts a new session,
+          and returns a session cookie.
+        responses:
+          '200':
+            description: User logout successfully. A session cookie is remove.
+            headers:
+              Set-Cookie:
+                description: >-
+                  Session cookie which needs to be included in subsequent
+                  requests.
+                schema:
+                  type: string
+                  example: session_id=abc123; Path=/; Max-Age=345600; HttpOnly
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    data:
+                      type: string
+                      example: User logged in
+          '400':
+            description: Invalid request body
+          '401':
+            description: Invalid user_name or password
+          '500':
+            description: Internal Server Error
+        parameters: []
+    /api/v1/auth/session:
+      get:
+        summary: Validate current session and return user role
+        description: Check if the current session is valid and return the user's role.
+        operationId: validateSession
+        tags:
+          - Sessions
+        responses:
+          '200':
+            description: Session validation result
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    valid:
+                      type: boolean
+                      description: Indicates if the current session is valid
+                    role:
+                      type: string
+                      example: "admin"
+                      description: The role of the current user
+                      nullable: true
+                    name:
+                      type: string
+                      example: "r00t"
+                      description: The name of the current user
+                      nullable: true
+    /api/v1/users:
+      get:
+        tags:
+          - Users
+        summary: List all users
+        operationId: listUsers
+        parameters: []
+        responses:
+          '200':
+            description: A list of users
+            content:
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/UserResponse'
+                  x-content-type: application/json
+          '500':
+            description: Failed response
+      post:
+        tags:
+          - Users
+        summary: Create a new user
+        operationId: createUser
+        parameters: []
+        requestBody:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserRequest'
+          required: true
+        responses:
+          '200':
+            description: User created successfully
+          '400':
+            description: Bad request
+          '500':
+            description: Failed response
+    '/api/v1/users/{id}':
+      get:
+        tags:
+          - Users
+        summary: Get a user by ID
+        operationId: getUserById
+        parameters:
+          - name: id
+            in: path
+            required: true
+            style: simple
+            explode: false
             schema:
-              type: object
-              properties:
-                user_name:
-                  type: string
-                  example: exampleUser
-                password:
-                  type: string
-                  format: password
-                  example: examplePass
-      responses:
-        '200':
-          description: User logged in successfully. A session cookie is set.
-          headers:
-            Set-Cookie:
-              description: >-
-                Session cookie which needs to be included in subsequent
-                requests.
-              schema:
-                type: string
-                example: session_id=abc123; Path=/; Max-Age=345600; HttpOnly
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  data:
-                    type: string
-                    example: User logged in
-        '400':
-          description: Invalid request body
-        '401':
-          description: Invalid user_name or password
-        '500':
-          description: Internal Server Error
-      parameters: []
-  /api/v1/auth/signout:
-    post:
-      tags:
-        - Sessions
-      summary: Logout user
-      description: >-
-        Authenticates a user by user_name and password, starts a new session,
-        and returns a session cookie.
-      responses:
-        '200':
-          description: User logout successfully. A session cookie is remove.
-          headers:
-            Set-Cookie:
-              description: >-
-                Session cookie which needs to be included in subsequent
-                requests.
-              schema:
-                type: string
-                example: session_id=abc123; Path=/; Max-Age=345600; HttpOnly
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  data:
-                    type: string
-                    example: User logged in
-        '400':
-          description: Invalid request body
-        '401':
-          description: Invalid user_name or password
-        '500':
-          description: Internal Server Error
-      parameters: []
-  /api/v1/auth/session:
-    get:
-      summary: Validate current session and return user role
-      description: Check if the current session is valid and return the user's role.
-      operationId: validateSession
-      tags:
-        - Sessions
-      responses:
-        '200':
-          description: Session validation result
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  valid:
-                    type: boolean
-                    description: Indicates if the current session is valid
-                  role:
-                    type: string
-                    example: "admin"
-                    description: The role of the current user
-                    nullable: true
-                  name:
-                    type: string
-                    example: "r00t"
-                    description: The name of the current user
-                    nullable: true
-  /api/v1/users:
-    get:
-      tags:
-        - Users
-      summary: List all users
-      operationId: listUsers
-      parameters: []
-      responses:
-        '200':
-          description: A list of users
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
+              type: integer
+        responses:
+          '200':
+            description: Detailed information of a user
+            content:
+              application/json:
+                schema:
                   $ref: '#/components/schemas/UserResponse'
-                x-content-type: application/json
-        '500':
-          description: Failed response
-    post:
-      tags:
-        - Users
-      summary: Create a new user
-      operationId: createUser
-      parameters: []
-      requestBody:
-        content:
-          application/json:
+          '400':
+            description: Bad request
+          '500':
+            description: Failed response
+      put:
+        tags:
+          - Users
+        summary: Update a user
+        operationId: updateUser
+        parameters:
+          - name: id
+            in: path
+            required: true
+            style: simple
+            explode: false
             schema:
-              $ref: '#/components/schemas/UserRequest'
-        required: true
-      responses:
-        '200':
-          description: User created successfully
-        '400':
-          description: Bad request
-        '500':
-          description: Failed response
-  '/api/v1/users/{id}':
-    get:
-      tags:
-        - Users
-      summary: Get a user by ID
-      operationId: getUserById
-      parameters:
-        - name: id
-          in: path
-          required: true
-          style: simple
-          explode: false
-          schema:
-            type: integer
-      responses:
-        '200':
-          description: Detailed information of a user
+              type: integer
+        requestBody:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UserResponse'
-        '400':
-          description: Bad request
-        '500':
-          description: Failed response
-    put:
-      tags:
-        - Users
-      summary: Update a user
-      operationId: updateUser
-      parameters:
-        - name: id
-          in: path
+                $ref: '#/components/schemas/UserRequest'
           required: true
-          style: simple
-          explode: false
-          schema:
-            type: integer
-      requestBody:
-        content:
-          application/json:
+        responses:
+          '200':
+            description: User updated successfully
+          '400':
+            description: Bad request
+          '500':
+            description: Failed response
+      delete:
+        tags:
+          - Users
+        summary: Delete a user
+        operationId: deleteUser
+        parameters:
+          - name: id
+            in: path
+            required: true
+            style: simple
+            explode: false
             schema:
-              $ref: '#/components/schemas/UserRequest'
-        required: true
-      responses:
-        '200':
-          description: User updated successfully
-        '400':
-          description: Bad request
-        '500':
-          description: Failed response
-    delete:
-      tags:
-        - Users
-      summary: Delete a user
-      operationId: deleteUser
-      parameters:
-        - name: id
-          in: path
-          required: true
-          style: simple
-          explode: false
-          schema:
-            type: integer
-      responses:
-        '200':
-          description: User deleted successfully
-        '500':
-          description: Failed response
-          content:
-            application/json:
-              schema: {}
-  /api/v1/games:
-    get:
-      tags:
-        - Games
-      summary: List all games
-      operationId: listGames
-      parameters: []
-      responses:
-        '200':
-          description: A list of games
+              type: integer
+        responses:
+          '200':
+            description: User deleted successfully
+          '500':
+            description: Failed response
+            content:
+              application/json:
+                schema: {}
+    /api/v1/games:
+      get:
+        tags:
+          - Games
+        summary: List all games
+        operationId: listGames
+        parameters: []
+        responses:
+          '200':
+            description: A list of games
+            content:
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/GameResponse'
+                  x-content-type: application/json
+          '400':
+            description: Bad request
+      post:
+        tags:
+          - Games
+        summary: Create a new game
+        operationId: createGame
+        parameters: []
+        requestBody:
           content:
             application/json:
               schema:
-                type: array
-                items:
+                $ref: '#/components/schemas/GameRequest'
+          required: true
+        responses:
+          '200':
+            description: Game created successfully
+          '400':
+            description: Bad request
+          '500':
+            description: Failed response
+    '/api/v1/games/{id}':
+      get:
+        tags:
+          - Games
+        summary: Get a game by ID
+        operationId: getGameById
+        parameters:
+          - name: id
+            in: path
+            required: true
+            style: simple
+            explode: false
+            schema:
+              type: integer
+        responses:
+          '200':
+            description: Detailed information of a game
+            content:
+              application/json:
+                schema:
                   $ref: '#/components/schemas/GameResponse'
-                x-content-type: application/json
-        '400':
-          description: Bad request
-    post:
-      tags:
-        - Games
-      summary: Create a new game
-      operationId: createGame
-      parameters: []
-      requestBody:
-        content:
-          application/json:
+          '400':
+            description: Bad request
+          '500':
+            description: Failed response
+      put:
+        tags:
+          - Games
+        summary: Update a game
+        operationId: updateGame
+        parameters:
+          - name: id
+            in: path
+            required: true
+            style: simple
+            explode: false
             schema:
-              $ref: '#/components/schemas/GameRequest'
-        required: true
-      responses:
-        '200':
-          description: Game created successfully
-        '400':
-          description: Bad request
-        '500':
-          description: Failed response
-  '/api/v1/games/{id}':
-    get:
-      tags:
-        - Games
-      summary: Get a game by ID
-      operationId: getGameById
-      parameters:
-        - name: id
-          in: path
-          required: true
-          style: simple
-          explode: false
-          schema:
-            type: integer
-      responses:
-        '200':
-          description: Detailed information of a game
+              type: integer
+        requestBody:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GameResponse'
-        '400':
-          description: Bad request
-        '500':
-          description: Failed response
-    put:
-      tags:
-        - Games
-      summary: Update a game
-      operationId: updateGame
-      parameters:
-        - name: id
-          in: path
+                $ref: '#/components/schemas/GameRequest'
           required: true
-          style: simple
-          explode: false
-          schema:
-            type: integer
-      requestBody:
-        content:
-          application/json:
+        responses:
+          '200':
+            description: Game updated successfully
+          '400':
+            description: Failed request
+            content:
+              application/json:
+                schema: {}
+          '500':
+            description: Failed response
+            content:
+              application/json:
+                schema: {}
+      delete:
+        tags:
+          - Games
+        summary: Delete a game
+        operationId: deleteGame
+        parameters:
+          - name: id
+            in: path
+            required: true
+            style: simple
+            explode: false
             schema:
-              $ref: '#/components/schemas/GameRequest'
-        required: true
-      responses:
-        '200':
-          description: Game updated successfully
-        '400':
-          description: Failed request
-          content:
-            application/json:
-              schema: {}
-        '500':
-          description: Failed response
-          content:
-            application/json:
-              schema: {}
-    delete:
-      tags:
-        - Games
-      summary: Delete a game
-      operationId: deleteGame
-      parameters:
-        - name: id
-          in: path
-          required: true
-          style: simple
-          explode: false
-          schema:
-            type: integer
-      responses:
-        '200':
-          description: Game deleted successfully
-        '400':
-          description: Bad request
-        '500':
-          description: Failed response
-  /api/v1/teams:
-    get:
-      tags:
-        - Teams
-      summary: List all teams
-      operationId: listTeams
-      parameters: []
-      responses:
-        '200':
-          description: A list of teams
+              type: integer
+        responses:
+          '200':
+            description: Game deleted successfully
+          '400':
+            description: Bad request
+          '500':
+            description: Failed response
+    /api/v1/teams:
+      get:
+        tags:
+          - Teams
+        summary: List all teams
+        operationId: listTeams
+        parameters: []
+        responses:
+          '200':
+            description: A list of teams
+            content:
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/TeamResponse'
+                  x-content-type: application/json
+          '400':
+            description: Failed request
+            content:
+              application/json:
+                schema: {}
+          '500':
+            description: Failed response
+            content:
+              application/json:
+                schema: {}
+      post:
+        tags:
+          - Teams
+        summary: Create a new team
+        operationId: createTeam
+        parameters: []
+        requestBody:
           content:
             application/json:
               schema:
-                type: array
-                items:
+                $ref: '#/components/schemas/TeamRequest'
+          required: true
+        responses:
+          '200':
+            description: Team created successfully
+          '400':
+            description: Failed request
+            content:
+              application/json:
+                schema: {}
+          '500':
+            description: Failed response
+            content:
+              application/json:
+                schema: {}
+    '/api/v1/teams/{id}':
+      get:
+        tags:
+          - Teams
+        summary: Get a team by ID
+        operationId: getTeamById
+        parameters:
+          - name: id
+            in: path
+            required: true
+            style: simple
+            explode: false
+            schema:
+              type: integer
+        responses:
+          '200':
+            description: Detailed information of a team
+            content:
+              application/json:
+                schema:
                   $ref: '#/components/schemas/TeamResponse'
-                x-content-type: application/json
-        '400':
-          description: Failed request
-          content:
-            application/json:
-              schema: {}
-        '500':
-          description: Failed response
-          content:
-            application/json:
-              schema: {}
-    post:
-      tags:
-        - Teams
-      summary: Create a new team
-      operationId: createTeam
-      parameters: []
-      requestBody:
-        content:
-          application/json:
+      put:
+        tags:
+          - Teams
+        summary: Update a team
+        operationId: updateTeam
+        parameters:
+          - name: id
+            in: path
+            required: true
+            style: simple
+            explode: false
             schema:
-              $ref: '#/components/schemas/TeamRequest'
-        required: true
-      responses:
-        '200':
-          description: Team created successfully
-        '400':
-          description: Failed request
-          content:
-            application/json:
-              schema: {}
-        '500':
-          description: Failed response
-          content:
-            application/json:
-              schema: {}
-  '/api/v1/teams/{id}':
-    get:
-      tags:
-        - Teams
-      summary: Get a team by ID
-      operationId: getTeamById
-      parameters:
-        - name: id
-          in: path
-          required: true
-          style: simple
-          explode: false
-          schema:
-            type: integer
-      responses:
-        '200':
-          description: Detailed information of a team
+              type: integer
+        requestBody:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TeamResponse'
-    put:
-      tags:
-        - Teams
-      summary: Update a team
-      operationId: updateTeam
-      parameters:
-        - name: id
-          in: path
+                $ref: '#/components/schemas/TeamRequest'
           required: true
-          style: simple
-          explode: false
-          schema:
-            type: integer
-      requestBody:
-        content:
-          application/json:
+        responses:
+          '200':
+            description: Team updated successfully
+      delete:
+        tags:
+          - Teams
+        summary: Delete a team
+        operationId: deleteTeam
+        parameters:
+          - name: id
+            in: path
+            required: true
+            style: simple
+            explode: false
             schema:
-              $ref: '#/components/schemas/TeamRequest'
-        required: true
-      responses:
-        '200':
-          description: Team updated successfully
-    delete:
-      tags:
-        - Teams
-      summary: Delete a team
-      operationId: deleteTeam
-      parameters:
-        - name: id
-          in: path
-          required: true
-          style: simple
-          explode: false
-          schema:
-            type: integer
-      responses:
-        '200':
-          description: Team deleted successfully
-  /api/v1/results:
-    get:
-      tags:
-        - Results
-      summary: List all results
-      operationId: listResults
-      parameters: []
-      responses:
-        '200':
-          description: A list of game results
+              type: integer
+        responses:
+          '200':
+            description: Team deleted successfully
+    /api/v1/results:
+      get:
+        tags:
+          - Results
+        summary: List all results
+        operationId: listResults
+        parameters: []
+        responses:
+          '200':
+            description: A list of game results
+            content:
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ResultResponse'
+                  x-content-type: application/json
+      post:
+        tags:
+          - Results
+        summary: Create a new result
+        operationId: createResult
+        parameters: []
+        requestBody:
           content:
             application/json:
               schema:
-                type: array
-                items:
+                $ref: '#/components/schemas/ResultRequest'
+          required: true
+        responses:
+          '200':
+            description: Result created successfully
+    '/api/v1/results/{id}':
+      get:
+        tags:
+          - Results
+        summary: Get a result by ID
+        operationId: getResultById
+        parameters:
+          - name: id
+            in: path
+            required: true
+            style: simple
+            explode: false
+            schema:
+              type: integer
+        responses:
+          '200':
+            description: Detailed information of a result
+            content:
+              application/json:
+                schema:
                   $ref: '#/components/schemas/ResultResponse'
-                x-content-type: application/json
-    post:
-      tags:
-        - Results
-      summary: Create a new result
-      operationId: createResult
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ResultRequest'
-        required: true
-      responses:
-        '200':
-          description: Result created successfully
-  '/api/v1/results/{id}':
-    get:
-      tags:
-        - Results
-      summary: Get a result by ID
-      operationId: getResultById
-      parameters:
-        - name: id
-          in: path
+    /api/v1/services:
+      get:
+        tags:
+          - Services
+        summary: List all services
+        operationId: listServices
+        parameters: []
+        responses:
+          '200':
+            description: A list of services
+            content:
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ServiceResponse'
+                  x-content-type: application/json
+      post:
+        tags:
+          - Services
+        summary: Create a new service
+        operationId: createService
+        parameters: []
+        requestBody:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceRequest'
           required: true
-          style: simple
-          explode: false
-          schema:
-            type: integer
-      responses:
-        '200':
-          description: Detailed information of a result
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ResultResponse'
-  /api/v1/services:
-    get:
-      tags:
-        - Services
-      summary: List all services
-      operationId: listServices
-      parameters: []
-      responses:
-        '200':
-          description: A list of services
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
+        responses:
+          '200':
+            description: Service created successfully
+    '/api/v1/services/{id}':
+      get:
+        tags:
+          - Services
+        summary: Get a service by ID
+        operationId: getServiceById
+        parameters:
+          - name: id
+            in: path
+            required: true
+            style: simple
+            explode: false
+            schema:
+              type: integer
+        responses:
+          '200':
+            description: Detailed information of a service
+            content:
+              application/json:
+                schema:
                   $ref: '#/components/schemas/ServiceResponse'
-                x-content-type: application/json
-    post:
-      tags:
-        - Services
-      summary: Create a new service
-      operationId: createService
-      parameters: []
-      requestBody:
-        content:
-          application/json:
+      put:
+        tags:
+          - Services
+        summary: Update a service
+        operationId: updateService
+        parameters:
+          - name: id
+            in: path
+            required: true
+            style: simple
+            explode: false
             schema:
-              $ref: '#/components/schemas/ServiceRequest'
-        required: true
-      responses:
-        '200':
-          description: Service created successfully
-  '/api/v1/services/{id}':
-    get:
-      tags:
-        - Services
-      summary: Get a service by ID
-      operationId: getServiceById
-      parameters:
-        - name: id
-          in: path
-          required: true
-          style: simple
-          explode: false
-          schema:
-            type: integer
-      responses:
-        '200':
-          description: Detailed information of a service
+              type: integer
+        requestBody:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ServiceResponse'
-    put:
-      tags:
-        - Services
-      summary: Update a service
-      operationId: updateService
-      parameters:
-        - name: id
-          in: path
+                $ref: '#/components/schemas/ServiceRequest'
           required: true
-          style: simple
-          explode: false
-          schema:
-            type: integer
-      requestBody:
-        content:
-          application/json:
+        responses:
+          '200':
+            description: Service updated successfully
+      delete:
+        tags:
+          - Services
+        summary: Delete a service
+        operationId: deleteService
+        parameters:
+          - name: id
+            in: path
+            required: true
+            style: simple
+            explode: false
             schema:
-              $ref: '#/components/schemas/ServiceRequest'
-        required: true
-      responses:
-        '200':
-          description: Service updated successfully
-    delete:
-      tags:
-        - Services
-      summary: Delete a service
-      operationId: deleteService
-      parameters:
-        - name: id
-          in: path
-          required: true
-          style: simple
-          explode: false
-          schema:
-            type: integer
-      responses:
-        '200':
-          description: Service deleted successfully
-  /api/v1/universities:
-    get:
-      summary: Retrieves a list of universities
-      description: >
-        This endpoint retrieves universities. It can optionally filter
-        universities that match a specific term.
-      tags:
-        - University
-      parameters:
-        - in: query
-          name: term
-          schema:
+              type: integer
+        responses:
+          '200':
+            description: Service deleted successfully
+    /api/v1/universities:
+      get:
+        summary: Retrieves a list of universities
+        description: >
+          This endpoint retrieves universities. It can optionally filter
+          universities that match a specific term.
+        tags:
+          - University
+        parameters:
+          - in: query
+            name: term
+            schema:
+              type: string
+            description: Optional search term to filter universities by name.
+            required: false
+        responses:
+          '200':
+            description: A JSON array of universities
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/UniversitiesResponse'
+  components:
+    schemas:
+      UserRequest:
+        type: object
+        properties:
+          display_name:
             type: string
-          description: Optional search term to filter universities by name.
-          required: false
-      responses:
-        '200':
-          description: A JSON array of universities
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UniversitiesResponse'
-components:
-  schemas:
-    UserRequest:
-      type: object
-      properties:
-        user_name:
-          type: string
-          description: The name of the user
-        role:
-          type: string
-          enum:
-            - admin
-            - player
-            - guest
-          example: player
-          description: 'The role of the user (admin, player or guest)'
-        avatar_url:
-          type: string
-          description: URL to the user's avatar
-        status:
-          type: string
-          description: 'Status of the user (active, disabled)'
-        password:
-          type: string
-          description: User password
-        team_ids:
-          type: array
-          items:
+            description: The name of the user
+          user_name:
+            type: string
+            description: The login of the user
+          role:
+            type: string
+            enum:
+              - admin
+              - player
+              - guest
+            example: player
+            description: 'The role of the user (admin, player or guest)'
+          avatar_url:
+            type: string
+            description: URL to the user's avatar
+          status:
+            type: string
+            description: 'Status of the user (active, disabled)'
+          password:
+            type: string
+            description: User password
+          team_ids:
+            type: array
+            items:
+              type: integer
+              example: 1
+              description: Unique identifier for the result entry
+      UserResponse:
+        type: object
+        properties:
+          id:
             type: integer
-            example: 1
+            description: The unique identifier for the user
+          display_name:
+            type: string
+            description: The name of the user
+          user_name:
+            type: string
+            description: The login of the user
+          role:
+            type: string
+            enum:
+              - admin
+              - player
+              - guest
+            example: player
+            description: 'The role of the user (admin, player or guest)'
+          avatar_url:
+            type: string
+            description: URL to the user's avatar
+          status:
+            type: string
+            description: 'Status of the user (active, disabled)'
+      GameRequest:
+        required:
+          - end_time
+          - start_time
+        type: object
+        properties:
+          start_time:
+            type: string
+            description: The start time of the game
+            format: date-time
+            example: '2000-01-23T04:56:07.000Z'
+          end_time:
+            type: string
+            description: The end time of the game
+            format: date-time
+            example: '2000-01-24T04:56:07.000Z'
+          description:
+            type: string
+            description: A brief description of the game
+      GameResponse:
+        required:
+          - end_time
+          - id
+          - start_time
+        type: object
+        properties:
+          id:
+            type: integer
+            description: Unique identifier for the game
+          start_time:
+            type: string
+            description: The start time of the game
+            format: date-time
+            example: '2000-01-23T04:56:07.000Z'
+          end_time:
+            type: string
+            description: The end time of the game
+            format: date-time
+            example: '2000-01-24T04:56:07.000Z'
+          description:
+            type: string
+            description: A brief description of the game
+      ResultRequest:
+        required:
+          - game_id
+          - rank
+          - score
+          - team_id
+        type: object
+        properties:
+          team_id:
+            type: string
+            description: Identifier of the team this result belongs to
+          game_id:
+            type: string
+            description: Identifier of the game this result is for
+          score:
+            type: integer
+            description: The score achieved by the team
+          rank:
+            type: integer
+            description: The rank achieved by the team in this game
+      ResultResponse:
+        required:
+          - id
+          - game_id
+          - rank
+          - score
+          - team_id
+        type: object
+        properties:
+          id:
+            type: integer
             description: Unique identifier for the result entry
-    UserResponse:
-      type: object
-      properties:
-        id:
-          type: integer
-          description: The unique identifier for the user
-        user_name:
-          type: string
-          description: The name of the user
-        role:
-          type: string
-          enum:
-            - admin
-            - player
-            - guest
-          example: player
-          description: 'The role of the user (admin, player or guest)'
-        avatar_url:
-          type: string
-          description: URL to the user's avatar
-        status:
-          type: string
-          description: 'Status of the user (active, disabled)'
-    GameRequest:
-      required:
-        - end_time
-        - start_time
-      type: object
-      properties:
-        start_time:
-          type: string
-          description: The start time of the game
-          format: date-time
-          example: '2000-01-23T04:56:07.000Z'
-        end_time:
-          type: string
-          description: The end time of the game
-          format: date-time
-          example: '2000-01-24T04:56:07.000Z'
-        description:
-          type: string
-          description: A brief description of the game
-    GameResponse:
-      required:
-        - end_time
-        - id
-        - start_time
-      type: object
-      properties:
-        id:
-          type: integer
-          description: Unique identifier for the game
-        start_time:
-          type: string
-          description: The start time of the game
-          format: date-time
-          example: '2000-01-23T04:56:07.000Z'
-        end_time:
-          type: string
-          description: The end time of the game
-          format: date-time
-          example: '2000-01-24T04:56:07.000Z'
-        description:
-          type: string
-          description: A brief description of the game
-    ResultRequest:
-      required:
-        - game_id
-        - rank
-        - score
-        - team_id
-      type: object
-      properties:
-        team_id:
-          type: string
-          description: Identifier of the team this result belongs to
-        game_id:
-          type: string
-          description: Identifier of the game this result is for
-        score:
-          type: integer
-          description: The score achieved by the team
-        rank:
-          type: integer
-          description: The rank achieved by the team in this game
-    ResultResponse:
-      required:
-        - id
-        - game_id
-        - rank
-        - score
-        - team_id
-      type: object
-      properties:
-        id:
-          type: integer
-          description: Unique identifier for the result entry
-        team_id:
-          type: string
-          description: Identifier of the team this result belongs to
-        game_id:
-          type: string
-          description: Identifier of the game this result is for
-        score:
-          type: integer
-          description: The score achieved by the team
-        rank:
-          type: integer
-          description: The rank achieved by the team in this game
-    ServiceRequest:
-      required:
-        - author
-        - is_public
-        - name
-      type: object
-      properties:
-        name:
-          type: string
-          description: Name of the service
-        author:
-          type: string
-          description: Author of the service
-        logo_url:
-          type: string
-          description: URL to the logo of the service
-        description:
-          type: string
-          description: A brief description of the service
-        is_public:
-          type: boolean
-          description: Boolean indicating if the service is public
-    ServiceResponse:
-      required:
-        - author
-        - id
-        - is_public
-        - name
-      type: object
-      properties:
-        id:
-          type: integer
-          description: Unique identifier for the service
-        name:
-          type: string
-          description: Name of the service
-        author:
-          type: string
-          description: Author of the service
-        logo_url:
-          type: string
-          description: URL to the logo of the service
-        description:
-          type: string
-          description: A brief description of the service
-        is_public:
-          type: boolean
-          description: Boolean indicating if the service is public
-    TeamRequest:
-      required:
-        - name
-        - university_id
-      type: object
-      properties:
-        name:
-          type: string
-          description: Name of the team
-        description:
-          type: string
-          description: A brief description of the team
-        university_id:
-          type: integer
-          description: University or institution the team is associated with
-        social_links:
-          type: string
-          description: JSON string containing social media links of the team
-        avatar_url:
-          type: string
-          description: URL to the team's avatar
-    TeamResponse:
-      required:
-        - id
-        - name
-      type: object
-      properties:
-        id:
-          type: integer
-          description: Unique identifier for the team
-        name:
-          type: string
-          description: Name of the team
-        description:
-          type: string
-          description: A brief description of the team
-        university:
-          type: string
-          description: University or institution the team is associated with
-        social_links:
-          type: string
-          description: JSON string containing social media links of the team
-        avatar_url:
-          type: string
-          description: URL to the team's avatar
-    UniversityResponse:
-      type: object
-      required:
-        - id
-        - name
-      properties:
-        id:
-          type: integer
-          description: The unique identifier of the university
-          example: 1
-        name:
-          type: string
-          description: The name of the university
-          example: >-
-            Анапский филиал Кубанского государственного аграрного
-            университета
-    UniversitiesResponse:
-      type: array
-      items:
-        $ref: '#/components/schemas/UniversityResponse'
-  links: {}
-  callbacks: {}
-security: []
+          team_id:
+            type: string
+            description: Identifier of the team this result belongs to
+          game_id:
+            type: string
+            description: Identifier of the game this result is for
+          score:
+            type: integer
+            description: The score achieved by the team
+          rank:
+            type: integer
+            description: The rank achieved by the team in this game
+      ServiceRequest:
+        required:
+          - author
+          - is_public
+          - name
+        type: object
+        properties:
+          name:
+            type: string
+            description: Name of the service
+          author:
+            type: string
+            description: Author of the service
+          logo_url:
+            type: string
+            description: URL to the logo of the service
+          description:
+            type: string
+            description: A brief description of the service
+          is_public:
+            type: boolean
+            description: Boolean indicating if the service is public
+      ServiceResponse:
+        required:
+          - author
+          - id
+          - is_public
+          - name
+        type: object
+        properties:
+          id:
+            type: integer
+            description: Unique identifier for the service
+          name:
+            type: string
+            description: Name of the service
+          author:
+            type: string
+            description: Author of the service
+          logo_url:
+            type: string
+            description: URL to the logo of the service
+          description:
+            type: string
+            description: A brief description of the service
+          is_public:
+            type: boolean
+            description: Boolean indicating if the service is public
+      TeamRequest:
+        required:
+          - name
+          - university_id
+        type: object
+        properties:
+          name:
+            type: string
+            description: Name of the team
+          description:
+            type: string
+            description: A brief description of the team
+          university_id:
+            type: integer
+            description: University or institution the team is associated with
+          social_links:
+            type: string
+            description: JSON string containing social media links of the team
+          avatar_url:
+            type: string
+            description: URL to the team's avatar
+      TeamResponse:
+        required:
+          - id
+          - name
+        type: object
+        properties:
+          id:
+            type: integer
+            description: Unique identifier for the team
+          name:
+            type: string
+            description: Name of the team
+          description:
+            type: string
+            description: A brief description of the team
+          university:
+            type: string
+            description: University or institution the team is associated with
+          social_links:
+            type: string
+            description: JSON string containing social media links of the team
+          avatar_url:
+            type: string
+            description: URL to the team's avatar
+      UniversityResponse:
+        type: object
+        required:
+          - id
+          - name
+        properties:
+          id:
+            type: integer
+            description: The unique identifier of the university
+            example: 1
+          name:
+            type: string
+            description: The name of the university
+            example: >-
+              Анапский филиал Кубанского государственного аграрного
+              университета
+      UniversitiesResponse:
+        type: array
+        items:
+          $ref: '#/components/schemas/UniversityResponse'
+    links: {}
+    callbacks: {}
+  security: []
