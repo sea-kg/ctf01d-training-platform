@@ -66,3 +66,8 @@ func (h *Handlers) PostApiV1AuthSignout(w http.ResponseWriter, r *http.Request) 
 	})
 	api_helpers.RespondWithJSON(w, http.StatusOK, map[string]string{"data": "User logout successful"})
 }
+
+func (h *Handlers) ValidateSession(w http.ResponseWriter, r *http.Request) {
+	// implement me
+	api_helpers.RespondWithJSON(w, http.StatusOK, map[string]string{"role": "Admin", "name": "R00t"})
+}

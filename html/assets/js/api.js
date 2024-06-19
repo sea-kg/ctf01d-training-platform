@@ -33,10 +33,11 @@ window.ctf01d_tp_api.auth_signin = function(auth_data) {
       });
 }
 
-window.ctf01d_tp_api.auth_session = function() {
+window.ctf01d_tp_api.auth_session = function (auth_data) {
     return $.ajax({
         url: '/api/v1/auth/session',
         method: 'GET',
         contentType: 'application/json',
+        data: JSON.stringify(auth_data),
       });
 }

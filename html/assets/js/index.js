@@ -228,6 +228,6 @@ $(document).ready(function () {
         $('#btn_signin').css({"display": "none"});
         $('#btn_signout').css({"display": "inline-block"});
         $('#btn_profile').css({"display": "inline-block"});
-        $('#btn_profile').html(res.username + "(" + res.userrole + ")");
+        $('#btn_profile').html(res.name + " (" + res.role + ")");
     })
 })
