@@ -94,7 +94,7 @@ paths:
         '500':
           description: Internal Server Error
       parameters: []
-  /api/users:
+  /api/v1/users:
     get:
       tags:
         - Users
@@ -132,7 +132,7 @@ paths:
           description: Bad request
         '500':
           description: Failed response
-  '/api/users/{id}':
+  '/api/v1/users/{id}':
     get:
       tags:
         - Users
@@ -204,7 +204,7 @@ paths:
           content:
             application/json:
               schema: {}
-  /api/games:
+  /api/v1/games:
     get:
       tags:
         - Games
@@ -242,7 +242,7 @@ paths:
           description: Bad request
         '500':
           description: Failed response
-  '/api/games/{id}':
+  '/api/v1/games/{id}':
     get:
       tags:
         - Games
@@ -319,7 +319,7 @@ paths:
           description: Bad request
         '500':
           description: Failed response
-  /api/teams:
+  /api/v1/teams:
     get:
       tags:
         - Teams
@@ -371,7 +371,7 @@ paths:
           content:
             application/json:
               schema: {}
-  '/api/teams/{id}':
+  '/api/v1/teams/{id}':
     get:
       tags:
         - Teams
@@ -430,7 +430,7 @@ paths:
       responses:
         '200':
           description: Team deleted successfully
-  /api/results:
+  /api/v1/results:
     get:
       tags:
         - Results
@@ -462,7 +462,7 @@ paths:
       responses:
         '200':
           description: Result created successfully
-  '/api/results/{id}':
+  '/api/v1/results/{id}':
     get:
       tags:
         - Results
@@ -483,7 +483,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResultResponse'
-  /api/services:
+  /api/v1/services:
     get:
       tags:
         - Services
@@ -515,7 +515,7 @@ paths:
       responses:
         '200':
           description: Service created successfully
-  '/api/services/{id}':
+  '/api/v1/services/{id}':
     get:
       tags:
         - Services
@@ -574,7 +574,7 @@ paths:
       responses:
         '200':
           description: Service deleted successfully
-  /api/universities:
+  /api/v1/universities:
     get:
       summary: Retrieves a list of universities
       description: >

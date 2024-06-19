@@ -219,17 +219,20 @@ type UserResponse struct {
 // UserResponseRole The role of the user (admin, player or guest)
 type UserResponseRole string
 
-// GetApiUniversitiesParams defines parameters for GetApiUniversities.
-type GetApiUniversitiesParams struct {
-	// Term Optional search term to filter universities by name.
-	Term *string `form:"term,omitempty" json:"term,omitempty"`
-}
-
 // PostApiV1AuthSigninJSONBody defines parameters for PostApiV1AuthSignin.
 type PostApiV1AuthSigninJSONBody struct {
 	Password *string `json:"password,omitempty"`
 	UserName *string `json:"user_name,omitempty"`
 }
+
+// GetApiV1UniversitiesParams defines parameters for GetApiV1Universities.
+type GetApiV1UniversitiesParams struct {
+	// Term Optional search term to filter universities by name.
+	Term *string `form:"term,omitempty" json:"term,omitempty"`
+}
+
+// PostApiV1AuthSigninJSONRequestBody defines body for PostApiV1AuthSignin for application/json ContentType.
+type PostApiV1AuthSigninJSONRequestBody PostApiV1AuthSigninJSONBody
 
 // CreateGameJSONRequestBody defines body for CreateGame for application/json ContentType.
 type CreateGameJSONRequestBody = GameRequest
@@ -258,238 +261,91 @@ type CreateUserJSONRequestBody = UserRequest
 // UpdateUserJSONRequestBody defines body for UpdateUser for application/json ContentType.
 type UpdateUserJSONRequestBody = UserRequest
 
-// PostApiV1AuthSigninJSONRequestBody defines body for PostApiV1AuthSignin for application/json ContentType.
-type PostApiV1AuthSigninJSONRequestBody PostApiV1AuthSigninJSONBody
-
 // ServerInterface represents all server handlers.
 type ServerInterface interface {
-	// List all games
-	// (GET /api/games)
-	ListGames(w http.ResponseWriter, r *http.Request)
-	// Create a new game
-	// (POST /api/games)
-	CreateGame(w http.ResponseWriter, r *http.Request)
-	// Delete a game
-	// (DELETE /api/games/{id})
-	DeleteGame(w http.ResponseWriter, r *http.Request, id int)
-	// Get a game by ID
-	// (GET /api/games/{id})
-	GetGameById(w http.ResponseWriter, r *http.Request, id int)
-	// Update a game
-	// (PUT /api/games/{id})
-	UpdateGame(w http.ResponseWriter, r *http.Request, id int)
-	// List all results
-	// (GET /api/results)
-	ListResults(w http.ResponseWriter, r *http.Request)
-	// Create a new result
-	// (POST /api/results)
-	CreateResult(w http.ResponseWriter, r *http.Request)
-	// Get a result by ID
-	// (GET /api/results/{id})
-	GetResultById(w http.ResponseWriter, r *http.Request, id int)
-	// List all services
-	// (GET /api/services)
-	ListServices(w http.ResponseWriter, r *http.Request)
-	// Create a new service
-	// (POST /api/services)
-	CreateService(w http.ResponseWriter, r *http.Request)
-	// Delete a service
-	// (DELETE /api/services/{id})
-	DeleteService(w http.ResponseWriter, r *http.Request, id int)
-	// Get a service by ID
-	// (GET /api/services/{id})
-	GetServiceById(w http.ResponseWriter, r *http.Request, id int)
-	// Update a service
-	// (PUT /api/services/{id})
-	UpdateService(w http.ResponseWriter, r *http.Request, id int)
-	// List all teams
-	// (GET /api/teams)
-	ListTeams(w http.ResponseWriter, r *http.Request)
-	// Create a new team
-	// (POST /api/teams)
-	CreateTeam(w http.ResponseWriter, r *http.Request)
-	// Delete a team
-	// (DELETE /api/teams/{id})
-	DeleteTeam(w http.ResponseWriter, r *http.Request, id int)
-	// Get a team by ID
-	// (GET /api/teams/{id})
-	GetTeamById(w http.ResponseWriter, r *http.Request, id int)
-	// Update a team
-	// (PUT /api/teams/{id})
-	UpdateTeam(w http.ResponseWriter, r *http.Request, id int)
-	// Retrieves a list of universities
-	// (GET /api/universities)
-	GetApiUniversities(w http.ResponseWriter, r *http.Request, params GetApiUniversitiesParams)
-	// List all users
-	// (GET /api/users)
-	ListUsers(w http.ResponseWriter, r *http.Request)
-	// Create a new user
-	// (POST /api/users)
-	CreateUser(w http.ResponseWriter, r *http.Request)
-	// Delete a user
-	// (DELETE /api/users/{id})
-	DeleteUser(w http.ResponseWriter, r *http.Request, id int)
-	// Get a user by ID
-	// (GET /api/users/{id})
-	GetUserById(w http.ResponseWriter, r *http.Request, id int)
-	// Update a user
-	// (PUT /api/users/{id})
-	UpdateUser(w http.ResponseWriter, r *http.Request, id int)
 	// Login user
 	// (POST /api/v1/auth/signin)
 	PostApiV1AuthSignin(w http.ResponseWriter, r *http.Request)
 	// Logout user
 	// (POST /api/v1/auth/signout)
 	PostApiV1AuthSignout(w http.ResponseWriter, r *http.Request)
+	// List all games
+	// (GET /api/v1/games)
+	ListGames(w http.ResponseWriter, r *http.Request)
+	// Create a new game
+	// (POST /api/v1/games)
+	CreateGame(w http.ResponseWriter, r *http.Request)
+	// Delete a game
+	// (DELETE /api/v1/games/{id})
+	DeleteGame(w http.ResponseWriter, r *http.Request, id int)
+	// Get a game by ID
+	// (GET /api/v1/games/{id})
+	GetGameById(w http.ResponseWriter, r *http.Request, id int)
+	// Update a game
+	// (PUT /api/v1/games/{id})
+	UpdateGame(w http.ResponseWriter, r *http.Request, id int)
+	// List all results
+	// (GET /api/v1/results)
+	ListResults(w http.ResponseWriter, r *http.Request)
+	// Create a new result
+	// (POST /api/v1/results)
+	CreateResult(w http.ResponseWriter, r *http.Request)
+	// Get a result by ID
+	// (GET /api/v1/results/{id})
+	GetResultById(w http.ResponseWriter, r *http.Request, id int)
+	// List all services
+	// (GET /api/v1/services)
+	ListServices(w http.ResponseWriter, r *http.Request)
+	// Create a new service
+	// (POST /api/v1/services)
+	CreateService(w http.ResponseWriter, r *http.Request)
+	// Delete a service
+	// (DELETE /api/v1/services/{id})
+	DeleteService(w http.ResponseWriter, r *http.Request, id int)
+	// Get a service by ID
+	// (GET /api/v1/services/{id})
+	GetServiceById(w http.ResponseWriter, r *http.Request, id int)
+	// Update a service
+	// (PUT /api/v1/services/{id})
+	UpdateService(w http.ResponseWriter, r *http.Request, id int)
+	// List all teams
+	// (GET /api/v1/teams)
+	ListTeams(w http.ResponseWriter, r *http.Request)
+	// Create a new team
+	// (POST /api/v1/teams)
+	CreateTeam(w http.ResponseWriter, r *http.Request)
+	// Delete a team
+	// (DELETE /api/v1/teams/{id})
+	DeleteTeam(w http.ResponseWriter, r *http.Request, id int)
+	// Get a team by ID
+	// (GET /api/v1/teams/{id})
+	GetTeamById(w http.ResponseWriter, r *http.Request, id int)
+	// Update a team
+	// (PUT /api/v1/teams/{id})
+	UpdateTeam(w http.ResponseWriter, r *http.Request, id int)
+	// Retrieves a list of universities
+	// (GET /api/v1/universities)
+	GetApiV1Universities(w http.ResponseWriter, r *http.Request, params GetApiV1UniversitiesParams)
+	// List all users
+	// (GET /api/v1/users)
+	ListUsers(w http.ResponseWriter, r *http.Request)
+	// Create a new user
+	// (POST /api/v1/users)
+	CreateUser(w http.ResponseWriter, r *http.Request)
+	// Delete a user
+	// (DELETE /api/v1/users/{id})
+	DeleteUser(w http.ResponseWriter, r *http.Request, id int)
+	// Get a user by ID
+	// (GET /api/v1/users/{id})
+	GetUserById(w http.ResponseWriter, r *http.Request, id int)
+	// Update a user
+	// (PUT /api/v1/users/{id})
+	UpdateUser(w http.ResponseWriter, r *http.Request, id int)
 }
 
 // Unimplemented server implementation that returns http.StatusNotImplemented for each endpoint.
 
 type Unimplemented struct{}
-
-// List all games
-// (GET /api/games)
-func (_ Unimplemented) ListGames(w http.ResponseWriter, r *http.Request) {
-	w.WriteHeader(http.StatusNotImplemented)
-}
-
-// Create a new game
-// (POST /api/games)
-func (_ Unimplemented) CreateGame(w http.ResponseWriter, r *http.Request) {
-	w.WriteHeader(http.StatusNotImplemented)
-}
-
-// Delete a game
-// (DELETE /api/games/{id})
-func (_ Unimplemented) DeleteGame(w http.ResponseWriter, r *http.Request, id int) {
-	w.WriteHeader(http.StatusNotImplemented)
-}
-
-// Get a game by ID
-// (GET /api/games/{id})
-func (_ Unimplemented) GetGameById(w http.ResponseWriter, r *http.Request, id int) {
-	w.WriteHeader(http.StatusNotImplemented)
-}
-
-// Update a game
-// (PUT /api/games/{id})
-func (_ Unimplemented) UpdateGame(w http.ResponseWriter, r *http.Request, id int) {
-	w.WriteHeader(http.StatusNotImplemented)
-}
-
-// List all results
-// (GET /api/results)
-func (_ Unimplemented) ListResults(w http.ResponseWriter, r *http.Request) {
-	w.WriteHeader(http.StatusNotImplemented)
-}
-
-// Create a new result
-// (POST /api/results)
-func (_ Unimplemented) CreateResult(w http.ResponseWriter, r *http.Request) {
-	w.WriteHeader(http.StatusNotImplemented)
-}
-
-// Get a result by ID
-// (GET /api/results/{id})
-func (_ Unimplemented) GetResultById(w http.ResponseWriter, r *http.Request, id int) {
-	w.WriteHeader(http.StatusNotImplemented)
-}
-
-// List all services
-// (GET /api/services)
-func (_ Unimplemented) ListServices(w http.ResponseWriter, r *http.Request) {
-	w.WriteHeader(http.StatusNotImplemented)
-}
-
-// Create a new service
-// (POST /api/services)
-func (_ Unimplemented) CreateService(w http.ResponseWriter, r *http.Request) {
-	w.WriteHeader(http.StatusNotImplemented)
-}
-
-// Delete a service
-// (DELETE /api/services/{id})
-func (_ Unimplemented) DeleteService(w http.ResponseWriter, r *http.Request, id int) {
-	w.WriteHeader(http.StatusNotImplemented)
-}
-
-// Get a service by ID
-// (GET /api/services/{id})
-func (_ Unimplemented) GetServiceById(w http.ResponseWriter, r *http.Request, id int) {
-	w.WriteHeader(http.StatusNotImplemented)
-}
-
-// Update a service
-// (PUT /api/services/{id})
-func (_ Unimplemented) UpdateService(w http.ResponseWriter, r *http.Request, id int) {
-	w.WriteHeader(http.StatusNotImplemented)
-}
-
-// List all teams
-// (GET /api/teams)
-func (_ Unimplemented) ListTeams(w http.ResponseWriter, r *http.Request) {
-	w.WriteHeader(http.StatusNotImplemented)
-}
-
-// Create a new team
-// (POST /api/teams)
-func (_ Unimplemented) CreateTeam(w http.ResponseWriter, r *http.Request) {
-	w.WriteHeader(http.StatusNotImplemented)
-}
-
-// Delete a team
-// (DELETE /api/teams/{id})
-func (_ Unimplemented) DeleteTeam(w http.ResponseWriter, r *http.Request, id int) {
-	w.WriteHeader(http.StatusNotImplemented)
-}
-
-// Get a team by ID
-// (GET /api/teams/{id})
-func (_ Unimplemented) GetTeamById(w http.ResponseWriter, r *http.Request, id int) {
-	w.WriteHeader(http.StatusNotImplemented)
-}
-
-// Update a team
-// (PUT /api/teams/{id})
-func (_ Unimplemented) UpdateTeam(w http.ResponseWriter, r *http.Request, id int) {
-	w.WriteHeader(http.StatusNotImplemented)
-}
-
-// Retrieves a list of universities
-// (GET /api/universities)
-func (_ Unimplemented) GetApiUniversities(w http.ResponseWriter, r *http.Request, params GetApiUniversitiesParams) {
-	w.WriteHeader(http.StatusNotImplemented)
-}
-
-// List all users
-// (GET /api/users)
-func (_ Unimplemented) ListUsers(w http.ResponseWriter, r *http.Request) {
-	w.WriteHeader(http.StatusNotImplemented)
-}
-
-// Create a new user
-// (POST /api/users)
-func (_ Unimplemented) CreateUser(w http.ResponseWriter, r *http.Request) {
-	w.WriteHeader(http.StatusNotImplemented)
-}
-
-// Delete a user
-// (DELETE /api/users/{id})
-func (_ Unimplemented) DeleteUser(w http.ResponseWriter, r *http.Request, id int) {
-	w.WriteHeader(http.StatusNotImplemented)
-}
-
-// Get a user by ID
-// (GET /api/users/{id})
-func (_ Unimplemented) GetUserById(w http.ResponseWriter, r *http.Request, id int) {
-	w.WriteHeader(http.StatusNotImplemented)
-}
-
-// Update a user
-// (PUT /api/users/{id})
-func (_ Unimplemented) UpdateUser(w http.ResponseWriter, r *http.Request, id int) {
-	w.WriteHeader(http.StatusNotImplemented)
-}
 
 // Login user
 // (POST /api/v1/auth/signin)
@@ -503,6 +359,150 @@ func (_ Unimplemented) PostApiV1AuthSignout(w http.ResponseWriter, r *http.Reque
 	w.WriteHeader(http.StatusNotImplemented)
 }
 
+// List all games
+// (GET /api/v1/games)
+func (_ Unimplemented) ListGames(w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(http.StatusNotImplemented)
+}
+
+// Create a new game
+// (POST /api/v1/games)
+func (_ Unimplemented) CreateGame(w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(http.StatusNotImplemented)
+}
+
+// Delete a game
+// (DELETE /api/v1/games/{id})
+func (_ Unimplemented) DeleteGame(w http.ResponseWriter, r *http.Request, id int) {
+	w.WriteHeader(http.StatusNotImplemented)
+}
+
+// Get a game by ID
+// (GET /api/v1/games/{id})
+func (_ Unimplemented) GetGameById(w http.ResponseWriter, r *http.Request, id int) {
+	w.WriteHeader(http.StatusNotImplemented)
+}
+
+// Update a game
+// (PUT /api/v1/games/{id})
+func (_ Unimplemented) UpdateGame(w http.ResponseWriter, r *http.Request, id int) {
+	w.WriteHeader(http.StatusNotImplemented)
+}
+
+// List all results
+// (GET /api/v1/results)
+func (_ Unimplemented) ListResults(w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(http.StatusNotImplemented)
+}
+
+// Create a new result
+// (POST /api/v1/results)
+func (_ Unimplemented) CreateResult(w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(http.StatusNotImplemented)
+}
+
+// Get a result by ID
+// (GET /api/v1/results/{id})
+func (_ Unimplemented) GetResultById(w http.ResponseWriter, r *http.Request, id int) {
+	w.WriteHeader(http.StatusNotImplemented)
+}
+
+// List all services
+// (GET /api/v1/services)
+func (_ Unimplemented) ListServices(w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(http.StatusNotImplemented)
+}
+
+// Create a new service
+// (POST /api/v1/services)
+func (_ Unimplemented) CreateService(w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(http.StatusNotImplemented)
+}
+
+// Delete a service
+// (DELETE /api/v1/services/{id})
+func (_ Unimplemented) DeleteService(w http.ResponseWriter, r *http.Request, id int) {
+	w.WriteHeader(http.StatusNotImplemented)
+}
+
+// Get a service by ID
+// (GET /api/v1/services/{id})
+func (_ Unimplemented) GetServiceById(w http.ResponseWriter, r *http.Request, id int) {
+	w.WriteHeader(http.StatusNotImplemented)
+}
+
+// Update a service
+// (PUT /api/v1/services/{id})
+func (_ Unimplemented) UpdateService(w http.ResponseWriter, r *http.Request, id int) {
+	w.WriteHeader(http.StatusNotImplemented)
+}
+
+// List all teams
+// (GET /api/v1/teams)
+func (_ Unimplemented) ListTeams(w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(http.StatusNotImplemented)
+}
+
+// Create a new team
+// (POST /api/v1/teams)
+func (_ Unimplemented) CreateTeam(w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(http.StatusNotImplemented)
+}
+
+// Delete a team
+// (DELETE /api/v1/teams/{id})
+func (_ Unimplemented) DeleteTeam(w http.ResponseWriter, r *http.Request, id int) {
+	w.WriteHeader(http.StatusNotImplemented)
+}
+
+// Get a team by ID
+// (GET /api/v1/teams/{id})
+func (_ Unimplemented) GetTeamById(w http.ResponseWriter, r *http.Request, id int) {
+	w.WriteHeader(http.StatusNotImplemented)
+}
+
+// Update a team
+// (PUT /api/v1/teams/{id})
+func (_ Unimplemented) UpdateTeam(w http.ResponseWriter, r *http.Request, id int) {
+	w.WriteHeader(http.StatusNotImplemented)
+}
+
+// Retrieves a list of universities
+// (GET /api/v1/universities)
+func (_ Unimplemented) GetApiV1Universities(w http.ResponseWriter, r *http.Request, params GetApiV1UniversitiesParams) {
+	w.WriteHeader(http.StatusNotImplemented)
+}
+
+// List all users
+// (GET /api/v1/users)
+func (_ Unimplemented) ListUsers(w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(http.StatusNotImplemented)
+}
+
+// Create a new user
+// (POST /api/v1/users)
+func (_ Unimplemented) CreateUser(w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(http.StatusNotImplemented)
+}
+
+// Delete a user
+// (DELETE /api/v1/users/{id})
+func (_ Unimplemented) DeleteUser(w http.ResponseWriter, r *http.Request, id int) {
+	w.WriteHeader(http.StatusNotImplemented)
+}
+
+// Get a user by ID
+// (GET /api/v1/users/{id})
+func (_ Unimplemented) GetUserById(w http.ResponseWriter, r *http.Request, id int) {
+	w.WriteHeader(http.StatusNotImplemented)
+}
+
+// Update a user
+// (PUT /api/v1/users/{id})
+func (_ Unimplemented) UpdateUser(w http.ResponseWriter, r *http.Request, id int) {
+	w.WriteHeader(http.StatusNotImplemented)
+}
+
 // ServerInterfaceWrapper converts contexts to parameters.
 type ServerInterfaceWrapper struct {
 	Handler            ServerInterface
@@ -511,6 +511,36 @@ type ServerInterfaceWrapper struct {
 }
 
 type MiddlewareFunc func(http.Handler) http.Handler
+
+// PostApiV1AuthSignin operation middleware
+func (siw *ServerInterfaceWrapper) PostApiV1AuthSignin(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+
+	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		siw.Handler.PostApiV1AuthSignin(w, r)
+	}))
+
+	for _, middleware := range siw.HandlerMiddlewares {
+		handler = middleware(handler)
+	}
+
+	handler.ServeHTTP(w, r.WithContext(ctx))
+}
+
+// PostApiV1AuthSignout operation middleware
+func (siw *ServerInterfaceWrapper) PostApiV1AuthSignout(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+
+	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		siw.Handler.PostApiV1AuthSignout(w, r)
+	}))
+
+	for _, middleware := range siw.HandlerMiddlewares {
+		handler = middleware(handler)
+	}
+
+	handler.ServeHTTP(w, r.WithContext(ctx))
+}
 
 // ListGames operation middleware
 func (siw *ServerInterfaceWrapper) ListGames(w http.ResponseWriter, r *http.Request) {
@@ -892,14 +922,14 @@ func (siw *ServerInterfaceWrapper) UpdateTeam(w http.ResponseWriter, r *http.Req
 	handler.ServeHTTP(w, r.WithContext(ctx))
 }
 
-// GetApiUniversities operation middleware
-func (siw *ServerInterfaceWrapper) GetApiUniversities(w http.ResponseWriter, r *http.Request) {
+// GetApiV1Universities operation middleware
+func (siw *ServerInterfaceWrapper) GetApiV1Universities(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 
 	var err error
 
 	// Parameter object where we will unmarshal all parameters from the context
-	var params GetApiUniversitiesParams
+	var params GetApiV1UniversitiesParams
 
 	// ------------- Optional query parameter "term" -------------
 
@@ -910,7 +940,7 @@ func (siw *ServerInterfaceWrapper) GetApiUniversities(w http.ResponseWriter, r *
 	}
 
 	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		siw.Handler.GetApiUniversities(w, r, params)
+		siw.Handler.GetApiV1Universities(w, r, params)
 	}))
 
 	for _, middleware := range siw.HandlerMiddlewares {
@@ -1019,36 +1049,6 @@ func (siw *ServerInterfaceWrapper) UpdateUser(w http.ResponseWriter, r *http.Req
 
 	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		siw.Handler.UpdateUser(w, r, id)
-	}))
-
-	for _, middleware := range siw.HandlerMiddlewares {
-		handler = middleware(handler)
-	}
-
-	handler.ServeHTTP(w, r.WithContext(ctx))
-}
-
-// PostApiV1AuthSignin operation middleware
-func (siw *ServerInterfaceWrapper) PostApiV1AuthSignin(w http.ResponseWriter, r *http.Request) {
-	ctx := r.Context()
-
-	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		siw.Handler.PostApiV1AuthSignin(w, r)
-	}))
-
-	for _, middleware := range siw.HandlerMiddlewares {
-		handler = middleware(handler)
-	}
-
-	handler.ServeHTTP(w, r.WithContext(ctx))
-}
-
-// PostApiV1AuthSignout operation middleware
-func (siw *ServerInterfaceWrapper) PostApiV1AuthSignout(w http.ResponseWriter, r *http.Request) {
-	ctx := r.Context()
-
-	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		siw.Handler.PostApiV1AuthSignout(w, r)
 	}))
 
 	for _, middleware := range siw.HandlerMiddlewares {
@@ -1172,82 +1172,82 @@ func HandlerWithOptions(si ServerInterface, options ChiServerOptions) http.Handl
 	}
 
 	r.Group(func(r chi.Router) {
-		r.Get(options.BaseURL+"/api/games", wrapper.ListGames)
-	})
-	r.Group(func(r chi.Router) {
-		r.Post(options.BaseURL+"/api/games", wrapper.CreateGame)
-	})
-	r.Group(func(r chi.Router) {
-		r.Delete(options.BaseURL+"/api/games/{id}", wrapper.DeleteGame)
-	})
-	r.Group(func(r chi.Router) {
-		r.Get(options.BaseURL+"/api/games/{id}", wrapper.GetGameById)
-	})
-	r.Group(func(r chi.Router) {
-		r.Put(options.BaseURL+"/api/games/{id}", wrapper.UpdateGame)
-	})
-	r.Group(func(r chi.Router) {
-		r.Get(options.BaseURL+"/api/results", wrapper.ListResults)
-	})
-	r.Group(func(r chi.Router) {
-		r.Post(options.BaseURL+"/api/results", wrapper.CreateResult)
-	})
-	r.Group(func(r chi.Router) {
-		r.Get(options.BaseURL+"/api/results/{id}", wrapper.GetResultById)
-	})
-	r.Group(func(r chi.Router) {
-		r.Get(options.BaseURL+"/api/services", wrapper.ListServices)
-	})
-	r.Group(func(r chi.Router) {
-		r.Post(options.BaseURL+"/api/services", wrapper.CreateService)
-	})
-	r.Group(func(r chi.Router) {
-		r.Delete(options.BaseURL+"/api/services/{id}", wrapper.DeleteService)
-	})
-	r.Group(func(r chi.Router) {
-		r.Get(options.BaseURL+"/api/services/{id}", wrapper.GetServiceById)
-	})
-	r.Group(func(r chi.Router) {
-		r.Put(options.BaseURL+"/api/services/{id}", wrapper.UpdateService)
-	})
-	r.Group(func(r chi.Router) {
-		r.Get(options.BaseURL+"/api/teams", wrapper.ListTeams)
-	})
-	r.Group(func(r chi.Router) {
-		r.Post(options.BaseURL+"/api/teams", wrapper.CreateTeam)
-	})
-	r.Group(func(r chi.Router) {
-		r.Delete(options.BaseURL+"/api/teams/{id}", wrapper.DeleteTeam)
-	})
-	r.Group(func(r chi.Router) {
-		r.Get(options.BaseURL+"/api/teams/{id}", wrapper.GetTeamById)
-	})
-	r.Group(func(r chi.Router) {
-		r.Put(options.BaseURL+"/api/teams/{id}", wrapper.UpdateTeam)
-	})
-	r.Group(func(r chi.Router) {
-		r.Get(options.BaseURL+"/api/universities", wrapper.GetApiUniversities)
-	})
-	r.Group(func(r chi.Router) {
-		r.Get(options.BaseURL+"/api/users", wrapper.ListUsers)
-	})
-	r.Group(func(r chi.Router) {
-		r.Post(options.BaseURL+"/api/users", wrapper.CreateUser)
-	})
-	r.Group(func(r chi.Router) {
-		r.Delete(options.BaseURL+"/api/users/{id}", wrapper.DeleteUser)
-	})
-	r.Group(func(r chi.Router) {
-		r.Get(options.BaseURL+"/api/users/{id}", wrapper.GetUserById)
-	})
-	r.Group(func(r chi.Router) {
-		r.Put(options.BaseURL+"/api/users/{id}", wrapper.UpdateUser)
-	})
-	r.Group(func(r chi.Router) {
 		r.Post(options.BaseURL+"/api/v1/auth/signin", wrapper.PostApiV1AuthSignin)
 	})
 	r.Group(func(r chi.Router) {
 		r.Post(options.BaseURL+"/api/v1/auth/signout", wrapper.PostApiV1AuthSignout)
+	})
+	r.Group(func(r chi.Router) {
+		r.Get(options.BaseURL+"/api/v1/games", wrapper.ListGames)
+	})
+	r.Group(func(r chi.Router) {
+		r.Post(options.BaseURL+"/api/v1/games", wrapper.CreateGame)
+	})
+	r.Group(func(r chi.Router) {
+		r.Delete(options.BaseURL+"/api/v1/games/{id}", wrapper.DeleteGame)
+	})
+	r.Group(func(r chi.Router) {
+		r.Get(options.BaseURL+"/api/v1/games/{id}", wrapper.GetGameById)
+	})
+	r.Group(func(r chi.Router) {
+		r.Put(options.BaseURL+"/api/v1/games/{id}", wrapper.UpdateGame)
+	})
+	r.Group(func(r chi.Router) {
+		r.Get(options.BaseURL+"/api/v1/results", wrapper.ListResults)
+	})
+	r.Group(func(r chi.Router) {
+		r.Post(options.BaseURL+"/api/v1/results", wrapper.CreateResult)
+	})
+	r.Group(func(r chi.Router) {
+		r.Get(options.BaseURL+"/api/v1/results/{id}", wrapper.GetResultById)
+	})
+	r.Group(func(r chi.Router) {
+		r.Get(options.BaseURL+"/api/v1/services", wrapper.ListServices)
+	})
+	r.Group(func(r chi.Router) {
+		r.Post(options.BaseURL+"/api/v1/services", wrapper.CreateService)
+	})
+	r.Group(func(r chi.Router) {
+		r.Delete(options.BaseURL+"/api/v1/services/{id}", wrapper.DeleteService)
+	})
+	r.Group(func(r chi.Router) {
+		r.Get(options.BaseURL+"/api/v1/services/{id}", wrapper.GetServiceById)
+	})
+	r.Group(func(r chi.Router) {
+		r.Put(options.BaseURL+"/api/v1/services/{id}", wrapper.UpdateService)
+	})
+	r.Group(func(r chi.Router) {
+		r.Get(options.BaseURL+"/api/v1/teams", wrapper.ListTeams)
+	})
+	r.Group(func(r chi.Router) {
+		r.Post(options.BaseURL+"/api/v1/teams", wrapper.CreateTeam)
+	})
+	r.Group(func(r chi.Router) {
+		r.Delete(options.BaseURL+"/api/v1/teams/{id}", wrapper.DeleteTeam)
+	})
+	r.Group(func(r chi.Router) {
+		r.Get(options.BaseURL+"/api/v1/teams/{id}", wrapper.GetTeamById)
+	})
+	r.Group(func(r chi.Router) {
+		r.Put(options.BaseURL+"/api/v1/teams/{id}", wrapper.UpdateTeam)
+	})
+	r.Group(func(r chi.Router) {
+		r.Get(options.BaseURL+"/api/v1/universities", wrapper.GetApiV1Universities)
+	})
+	r.Group(func(r chi.Router) {
+		r.Get(options.BaseURL+"/api/v1/users", wrapper.ListUsers)
+	})
+	r.Group(func(r chi.Router) {
+		r.Post(options.BaseURL+"/api/v1/users", wrapper.CreateUser)
+	})
+	r.Group(func(r chi.Router) {
+		r.Delete(options.BaseURL+"/api/v1/users/{id}", wrapper.DeleteUser)
+	})
+	r.Group(func(r chi.Router) {
+		r.Get(options.BaseURL+"/api/v1/users/{id}", wrapper.GetUserById)
+	})
+	r.Group(func(r chi.Router) {
+		r.Put(options.BaseURL+"/api/v1/users/{id}", wrapper.UpdateUser)
 	})
 
 	return r

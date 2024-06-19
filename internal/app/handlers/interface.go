@@ -94,8 +94,8 @@ func (siw *ServerInterfaceWrapper) UpdateTeam(w http.ResponseWriter, r *http.Req
 	siw.handlers.UpdateTeam(w, r, id)
 }
 
-func (siw *ServerInterfaceWrapper) GetApiUniversities(w http.ResponseWriter, r *http.Request, params server.GetApiUniversitiesParams) {
-	siw.handlers.GetApiUniversities(w, r, params)
+func (siw *ServerInterfaceWrapper) GetApiV1Universities(w http.ResponseWriter, r *http.Request, params server.GetApiV1UniversitiesParams) {
+	siw.handlers.GetApiV1Universities(w, r, params)
 }
 
 func (siw *ServerInterfaceWrapper) ListUsers(w http.ResponseWriter, r *http.Request) {
