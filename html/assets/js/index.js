@@ -319,15 +319,16 @@ function renderServicesPage() {
             servicesHtml += '  <img class="card-img-top" src="' + service_info.logo_url + '" alt="Image of service">';
             servicesHtml += '  <div class="card-body">';
             servicesHtml += '    <h5 class="card-title">#' + service_info.id + ' ' + escapeHtml(service_info.name) + '</h5>'; // TODO uuid
-            servicesHtml += '    <p class="card-text">' + escapeHtml(service_info.description) + ' by ' + escapeHtml(service_info.author) + '</p>';
+            servicesHtml += '    <p class="card-text">' + escapeHtml(service_info.description) + '</p>';
+            servicesHtml += '    <p class="card-text"> by ' + escapeHtml(service_info.author) + '</p>';
             // TODO
             // servicesHtml += '    <small>' + getHumanTimeHasPassed(new Date(game_info.end_time)) + '</small>';
             servicesHtml += '  </div>';
-            servicesHtml += '  <ul class="list-group list-group-flush">';
-            servicesHtml += '    <li class="list-group-item">Cras justo odio</li>';
-            servicesHtml += '    <li class="list-group-item">Dapibus ac facilisis in</li>';
-            servicesHtml += '    <li class="list-group-item">Vestibulum at eros</li>';
-            servicesHtml += '  </ul>';
+            // servicesHtml += '  <ul class="list-group list-group-flush">';
+            // servicesHtml += '    <li class="list-group-item">Cras justo odio</li>';
+            // servicesHtml += '    <li class="list-group-item">Dapibus ac facilisis in</li>';
+            // servicesHtml += '    <li class="list-group-item">Vestibulum at eros</li>';
+            // servicesHtml += '  </ul>';
             servicesHtml += '  <div class="card-body">';
             servicesHtml += '    <button class="btn btn-primary" onclick="showUpdateService(' + service_info.id + ');">Update</button>';
             servicesHtml += '    <button class="btn btn-danger" onclick="deleteService(' + service_info.id + ');">Delete</button>';

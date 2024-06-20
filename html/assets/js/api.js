@@ -44,14 +44,14 @@ window.ctf01d_tp_api.auth_session = function (auth_data) {
 
 window.ctf01d_tp_api.services_list = function() {
     return $.ajax({
-        url: '/api/services',
+        url: '/api/v1/services',
         method: 'GET',
     });
 }
 
 window.ctf01d_tp_api.service_create = function(service_data) {
     return $.ajax({
-        url: '/api/services',
+        url: '/api/v1/services',
         method: 'POST',
         contentType: 'application/json',
         data: JSON.stringify(service_data),
@@ -60,7 +60,7 @@ window.ctf01d_tp_api.service_create = function(service_data) {
 
 window.ctf01d_tp_api.service_update = function(service_id, service_data) {
     return $.ajax({
-        url: '/api/services/' + service_id,
+        url: '/api/v1/services/' + service_id,
         method: 'PUT',
         contentType: 'application/json',
         data: JSON.stringify(service_data),
@@ -69,14 +69,14 @@ window.ctf01d_tp_api.service_update = function(service_id, service_data) {
 
 window.ctf01d_tp_api.service_delete = function(service_id) {
     return $.ajax({
-        url: '/api/services/' + service_id,
+        url: '/api/v1/services/' + service_id,
         method: 'DELETE',
     });
 }
 
 window.ctf01d_tp_api.service_info = function(service_id) {
     return $.ajax({
-        url: '/api/services/' + service_id,
+        url: '/api/v1/services/' + service_id,
         method: 'GET',
     });
 }

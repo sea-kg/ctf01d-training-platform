@@ -35,3 +35,8 @@ body,html{
     display: inline-block;
     margin: 10px;
 }
+
+.services-card .card-img-top {
+    width: 286px;
+    height: 286px;
+}
