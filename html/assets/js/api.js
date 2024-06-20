@@ -30,7 +30,16 @@ window.ctf01d_tp_api.auth_signin = function(auth_data) {
         method: 'POST',
         contentType: 'application/json',
         data: JSON.stringify(auth_data),
-      });
+    });
+}
+
+window.ctf01d_tp_api.auth_signout = function(auth_data) {
+    return $.ajax({
+        url: '/api/v1/auth/signout',
+        method: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify(auth_data),
+    });
 }
 
 window.ctf01d_tp_api.auth_session = function (auth_data) {
@@ -39,7 +48,7 @@ window.ctf01d_tp_api.auth_session = function (auth_data) {
         method: 'GET',
         contentType: 'application/json',
         data: JSON.stringify(auth_data),
-      });
+    });
 }
 
 window.ctf01d_tp_api.services_list = function() {

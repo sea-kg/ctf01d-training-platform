@@ -154,6 +154,15 @@ function doSignin() {
     })
 }
 
+function doSignOut() {
+    window.ctf01d_tp_api.auth_signout().fail(function(res) {
+        console.error(res);
+    }).done(function(res) {
+        showSuccessNotification('Sing out successfull!');
+        window.location.reload();
+    })
+}
+
 function renderGamesPage() {
     $('.spa-web-page').css({"display": ""})
     $('#games_page').css({"display": "block"})

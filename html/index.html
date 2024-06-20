@@ -42,8 +42,17 @@
         </ul>
         <div class="form-inline my-2 my-lg-0">
           <button id="btn_signin" class="btn-menu-top-left btn btn-outline-success my-2 my-sm-0" style="display: none" onclick="showLoginForm()">Sign-in</button>
-          <div id="btn_profile" class="btn-menu-top-left btn btn-outline-success my-2 my-sm-0" style="display: none">...</div>
-          <button id="btn_signout" class="btn-menu-top-left btn btn-outline-success my-2 my-sm-0" style="display: none" onclick="doSignOut()">Sign-out</button>
+          <div class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="btn_profile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              User
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <div class="dropdown-item" id="btn_my_teams" onclick="showMyTeams()">My Team(s)</div>
+              <div class="dropdown-item" id="btn_my_services" onclick="showMyServices()">My Service(s)</div>
+              <div class="dropdown-divider"></div>
+              <div class="dropdown-item" id="btn_signout" onclick="doSignOut()">Sign-out</div>
+            </div>
+          </div>
         </div>
       </div>
     </nav>
