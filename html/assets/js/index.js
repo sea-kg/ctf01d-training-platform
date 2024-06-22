@@ -339,8 +339,8 @@ function renderServicesPage() {
             // servicesHtml += '    <li class="list-group-item">Vestibulum at eros</li>';
             // servicesHtml += '  </ul>';
             servicesHtml += '  <div class="card-body">';
-            servicesHtml += '    <button class="btn btn-primary" onclick="showUpdateService(' + service_info.id + ');">Update</button>';
-            servicesHtml += '    <button class="btn btn-danger" onclick="deleteService(' + service_info.id + ');">Delete</button>';
+            servicesHtml += '    <button class="btn btn-primary" onclick="showUpdateService(\'' + service_info.id + '\');">Update</button>';
+            servicesHtml += '    <button class="btn btn-danger" onclick="deleteService(\'' + service_info.id + '\');">Delete</button>';
             servicesHtml += '  </div>';
             servicesHtml += '</div>';
 
