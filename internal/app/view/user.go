@@ -8,21 +8,23 @@ import (
 )
 
 type User struct {
-	Id        int    `json:"id"`
-	Username  string `json:"user_name"`
-	Role      string `json:"role,omitempty"`
-	AvatarUrl string `json:"avatar_url,omitempty"`
-	Status    string `json:"status,omitempty"`
+	Id          int    `json:"id"`
+	DisplayName string `json:"display_name"`
+	Username    string `json:"user_name"`
+	Role        string `json:"role,omitempty"`
+	AvatarUrl   string `json:"avatar_url,omitempty"`
+	Status      string `json:"status,omitempty"`
 }
 
 func NewUserFromModel(u *db.User) *server.UserResponse {
 	userRole := helpers.ConvertUserRequestRoleToUserResponseRole(u.Role)
 	return &server.UserResponse{
-		Id:        &u.Id,
-		UserName:  &u.Username,
-		Role:      &userRole,
-		AvatarUrl: &u.AvatarUrl,
-		Status:    &u.Status,
+		Id:          &u.Id,
+		UserName:    &u.Username,
+		DisplayName: &u.DisplayName,
+		Role:        &userRole,
+		AvatarUrl:   &u.AvatarUrl,
+		Status:      &u.Status,
 	}
 }
 
