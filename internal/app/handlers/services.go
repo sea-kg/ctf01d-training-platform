@@ -5,6 +5,7 @@ import (
 	"log/slog"
 	"net/http"
 
+	dbmodel "ctf01d/internal/app/db"
 	dbmodels "ctf01d/internal/app/db"
 	"ctf01d/internal/app/repository"
 	"ctf01d/internal/app/server"
@@ -69,10 +70,29 @@ func (h *Handlers) ListServices(w http.ResponseWriter, r *http.Request) {
 	api_helpers.RespondWithJSON(w, http.StatusOK, view.NewServiceFromModels(services))
 }
 
-// fixme implement
 func (h *Handlers) UpdateService(w http.ResponseWriter, r *http.Request, id openapi_types.UUID) {
-	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
-	w.WriteHeader(http.StatusNotImplemented)
+	var sr server.ServiceRequest
+	if err := json.NewDecoder(r.Body).Decode(&sr); err != nil {
+		slog.Warn(err.Error(), "handler", "UpdateService")
+		api_helpers.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Invalid request payload"})
+		return
+	}
+	repo := repository.NewServiceRepository(h.DB)
+	service := &dbmodel.Service{
+		Id:          id,
+		Name:        sr.Name,
+		Author:      sr.Author,
+		LogoUrl:     *sr.LogoUrl,
+		Description: *sr.Description,
+		IsPublic:    sr.IsPublic,
+	}
+	err := repo.Update(r.Context(), service)
+	if err != nil {
+		slog.Warn(err.Error(), "handler", "UpdateService")
+		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Invalid request payload"})
+		return
+	}
+	api_helpers.RespondWithJSON(w, http.StatusOK, map[string]string{"data": "Game updated successfully"})
 }
 
 // fixme implement

@@ -41,7 +41,7 @@ func (r *serviceRepo) GetById(ctx context.Context, id openapi_types.UUID) (*mode
 }
 
 func (r *serviceRepo) Update(ctx context.Context, service *models.Service) error {
-	query := `UPDATE services SET name = $1, author = $2, author = $3, logo_url = $4, description = $5, is_public = $6 WHERE id = $7`
+	query := `UPDATE services SET name = $1, author = $2, logo_url = $3, description = $4, is_public = $5 WHERE id = $6`
 	_, err := r.db.ExecContext(ctx, query, service.Name, service.Author, service.LogoUrl, service.Description, service.IsPublic, service.Id)
 	return err
 }
