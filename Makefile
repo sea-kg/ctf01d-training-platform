@@ -75,7 +75,7 @@ remove-db:
 
 # Attach to the running PostgreSQL container
 attach-db:
-	docker exec -it ctf01d-postgres psql -U postgres
+	docker exec -it ctf01d-postgres psql -U postgres -d ctf01d_training_platform
 
 # Generate Go server boilerplate from OpenAPI 3
 codegen:

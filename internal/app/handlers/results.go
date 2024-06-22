@@ -10,6 +10,8 @@ import (
 	"ctf01d/internal/app/server"
 	api_helpers "ctf01d/internal/app/utils"
 	"ctf01d/internal/app/view"
+
+	openapi_types "github.com/oapi-codegen/runtime/types"
 )
 
 func (h *Handlers) CreateResult(w http.ResponseWriter, r *http.Request) {
@@ -34,7 +36,7 @@ func (h *Handlers) CreateResult(w http.ResponseWriter, r *http.Request) {
 	api_helpers.RespondWithJSON(w, http.StatusOK, map[string]string{"data": "Game created successfully"})
 }
 
-func (h *Handlers) GetResultById(w http.ResponseWriter, r *http.Request, id int) {
+func (h *Handlers) GetResultById(w http.ResponseWriter, r *http.Request, id openapi_types.UUID) {
 	repo := repository.NewResultRepository(h.DB)
 	result, err := repo.GetById(r.Context(), id)
 	if err != nil {

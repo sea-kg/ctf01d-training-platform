@@ -4,11 +4,13 @@ import (
 	"context"
 	models "ctf01d/internal/app/db"
 	"database/sql"
+
+	openapi_types "github.com/oapi-codegen/runtime/types"
 )
 
 type ResultRepository interface {
 	Create(ctx context.Context, result *models.Result) error
-	GetById(ctx context.Context, id int) (*models.Result, error)
+	GetById(ctx context.Context, id openapi_types.UUID) (*models.Result, error)
 	Update(ctx context.Context, result *models.Result) error
 	Delete(ctx context.Context, id string) error
 	List(ctx context.Context) ([]*models.Result, error)
@@ -28,7 +30,7 @@ func (r *resultRepo) Create(ctx context.Context, result *models.Result) error {
 	return err
 }
 
-func (r *resultRepo) GetById(ctx context.Context, id int) (*models.Result, error) {
+func (r *resultRepo) GetById(ctx context.Context, id openapi_types.UUID) (*models.Result, error) {
 	query := `SELECT id, team_id, game_id, score, rank FROM results WHERE id = $1`
 	result := &models.Result{}
 	err := r.db.QueryRowContext(ctx, query, id).Scan(&result.Id, &result.TeamId, &result.GameId, &result.Score, &result.Rank)

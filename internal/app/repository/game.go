@@ -4,15 +4,18 @@ import (
 	"context"
 	models "ctf01d/internal/app/db"
 	"database/sql"
+
 	"time"
+
+	openapi_types "github.com/oapi-codegen/runtime/types"
 )
 
 type GameRepository interface {
 	Create(ctx context.Context, game *models.Game) error
-	GetById(ctx context.Context, id int) (*models.Game, error)
-	GetGameDetails(ctx context.Context, id int) (*models.GameDetails, error)
+	GetById(ctx context.Context, id openapi_types.UUID) (*models.Game, error)
+	GetGameDetails(ctx context.Context, id openapi_types.UUID) (*models.GameDetails, error)
 	Update(ctx context.Context, game *models.Game) error
-	Delete(ctx context.Context, id int) error
+	Delete(ctx context.Context, id openapi_types.UUID) error
 	List(ctx context.Context) ([]*models.Game, error)
 }
 
@@ -30,7 +33,7 @@ func (r *gameRepo) Create(ctx context.Context, game *models.Game) error {
 	return err
 }
 
-func (r *gameRepo) GetGameDetails(ctx context.Context, id int) (*models.GameDetails, error) {
+func (r *gameRepo) GetGameDetails(ctx context.Context, id openapi_types.UUID) (*models.GameDetails, error) {
 	query := `
         SELECT g.id, g.start_time, g.end_time, g.description, t.id, t.name, t.description, u.id, u.user_name
         FROM games g
@@ -47,28 +50,21 @@ func (r *gameRepo) GetGameDetails(ctx context.Context, id int) (*models.GameDeta
 	defer rows.Close()
 
 	gameDetails := &models.GameDetails{}
-	teams := map[int]*models.TeamDetails{}
+	teams := map[openapi_types.UUID]*models.TeamDetails{}
 
 	for rows.Next() {
-		var gameId int
+		var gameId openapi_types.UUID
 		var startTime, endTime time.Time
 		var description string
-		var teamId int
+		var teamId openapi_types.UUID
 		var teamName string
 		var teamDescription string
-		var userId int
+		var userId openapi_types.UUID
 		var userName string
 
 		err := rows.Scan(&gameId, &startTime, &endTime, &description, &teamId, &teamName, &teamDescription, &userId, &userName)
 		if err != nil {
 			return nil, err
-		}
-
-		if gameDetails.Id == 0 {
-			gameDetails.Id = gameId
-			gameDetails.StartTime = startTime
-			gameDetails.EndTime = endTime
-			gameDetails.Description = description
 		}
 
 		if team, ok := teams[teamId]; ok {
@@ -90,7 +86,7 @@ func (r *gameRepo) GetGameDetails(ctx context.Context, id int) (*models.GameDeta
 	return gameDetails, nil
 }
 
-func (r *gameRepo) GetById(ctx context.Context, id int) (*models.Game, error) {
+func (r *gameRepo) GetById(ctx context.Context, id openapi_types.UUID) (*models.Game, error) {
 	query := `SELECT id, start_time, end_time, description FROM games WHERE id = $1`
 	game := &models.Game{}
 	err := r.db.QueryRowContext(ctx, query, id).Scan(&game.Id, &game.StartTime, &game.EndTime, &game.Description)
@@ -106,7 +102,7 @@ func (r *gameRepo) Update(ctx context.Context, game *models.Game) error {
 	return err
 }
 
-func (r *gameRepo) Delete(ctx context.Context, id int) error {
+func (r *gameRepo) Delete(ctx context.Context, id openapi_types.UUID) error {
 	query := `DELETE FROM games WHERE id = $1`
 	_, err := r.db.ExecContext(ctx, query, id)
 	return err

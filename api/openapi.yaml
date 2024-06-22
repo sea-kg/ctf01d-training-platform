@@ -160,20 +160,21 @@ paths:
           description: Bad request
         '500':
           description: Failed response
-  '/api/v1/users/{id}':
+  '/api/v1/users/{uuid}':
     get:
       tags:
         - Users
       summary: Get a user by ID
       operationId: getUserById
       parameters:
-        - name: id
+        - name: uuid
           in: path
           required: true
           style: simple
           explode: false
           schema:
-            type: integer
+            type: string
+            format: uuid
       responses:
         '200':
           description: Detailed information of a user
@@ -191,13 +192,14 @@ paths:
       summary: Update a user
       operationId: updateUser
       parameters:
-        - name: id
+        - name: uuid
           in: path
           required: true
           style: simple
           explode: false
           schema:
-            type: integer
+            type: string
+            format: uuid
       requestBody:
         content:
           application/json:
@@ -217,13 +219,14 @@ paths:
       summary: Delete a user
       operationId: deleteUser
       parameters:
-        - name: id
+        - name: uuid
           in: path
           required: true
           style: simple
           explode: false
           schema:
-            type: integer
+            type: string
+            format: uuid
       responses:
         '200':
           description: User deleted successfully
@@ -270,20 +273,21 @@ paths:
           description: Bad request
         '500':
           description: Failed response
-  '/api/v1/games/{id}':
+  '/api/v1/games/{uuid}':
     get:
       tags:
         - Games
       summary: Get a game by ID
       operationId: getGameById
       parameters:
-        - name: id
+        - name: uuid
           in: path
           required: true
           style: simple
           explode: false
           schema:
-            type: integer
+            type: string
+            format: uuid
       responses:
         '200':
           description: Detailed information of a game
@@ -301,13 +305,14 @@ paths:
       summary: Update a game
       operationId: updateGame
       parameters:
-        - name: id
+        - name: uuid
           in: path
           required: true
           style: simple
           explode: false
           schema:
-            type: integer
+            type: string
+            format: uuid
       requestBody:
         content:
           application/json:
@@ -333,13 +338,14 @@ paths:
       summary: Delete a game
       operationId: deleteGame
       parameters:
-        - name: id
+        - name: uuid
           in: path
           required: true
           style: simple
           explode: false
           schema:
-            type: integer
+            type: string
+            format: uuid
       responses:
         '200':
           description: Game deleted successfully
@@ -399,20 +405,21 @@ paths:
           content:
             application/json:
               schema: {}
-  '/api/v1/teams/{id}':
+  '/api/v1/teams/{uuid}':
     get:
       tags:
         - Teams
       summary: Get a team by ID
       operationId: getTeamById
       parameters:
-        - name: id
+        - name: uuid
           in: path
           required: true
           style: simple
           explode: false
           schema:
-            type: integer
+            type: string
+            format: uuid
       responses:
         '200':
           description: Detailed information of a team
@@ -426,13 +433,14 @@ paths:
       summary: Update a team
       operationId: updateTeam
       parameters:
-        - name: id
+        - name: uuid
           in: path
           required: true
           style: simple
           explode: false
           schema:
-            type: integer
+            type: string
+            format: uuid
       requestBody:
         content:
           application/json:
@@ -448,13 +456,14 @@ paths:
       summary: Delete a team
       operationId: deleteTeam
       parameters:
-        - name: id
+        - name: uuid
           in: path
           required: true
           style: simple
           explode: false
           schema:
-            type: integer
+            type: string
+            format: uuid
       responses:
         '200':
           description: Team deleted successfully
@@ -490,20 +499,21 @@ paths:
       responses:
         '200':
           description: Result created successfully
-  '/api/v1/results/{id}':
+  '/api/v1/results/{uuid}':
     get:
       tags:
         - Results
       summary: Get a result by ID
       operationId: getResultById
       parameters:
-        - name: id
+        - name: uuid
           in: path
           required: true
           style: simple
           explode: false
           schema:
-            type: integer
+            type: string
+            format: uuid
       responses:
         '200':
           description: Detailed information of a result
@@ -543,20 +553,21 @@ paths:
       responses:
         '200':
           description: Service created successfully
-  '/api/v1/services/{id}':
+  '/api/v1/services/{uuid}':
     get:
       tags:
         - Services
       summary: Get a service by ID
       operationId: getServiceById
       parameters:
-        - name: id
+        - name: uuid
           in: path
           required: true
           style: simple
           explode: false
           schema:
-            type: integer
+            type: string
+            format: uuid
       responses:
         '200':
           description: Detailed information of a service
@@ -570,13 +581,14 @@ paths:
       summary: Update a service
       operationId: updateService
       parameters:
-        - name: id
+        - name: uuid
           in: path
           required: true
           style: simple
           explode: false
           schema:
-            type: integer
+            type: string
+            format: uuid
       requestBody:
         content:
           application/json:
@@ -592,13 +604,14 @@ paths:
       summary: Delete a service
       operationId: deleteService
       parameters:
-        - name: id
+        - name: uuid
           in: path
           required: true
           style: simple
           explode: false
           schema:
-            type: integer
+            type: string
+            format: uuid
       responses:
         '200':
           description: Service deleted successfully
@@ -655,14 +668,16 @@ components:
         team_ids:
           type: array
           items:
-            type: integer
+            type: string
+            format: uuid
             example: 1
             description: Unique identifier for the result entry
     UserResponse:
       type: object
       properties:
         id:
-          type: integer
+          type: string
+          format: uuid
           description: The unique identifier for the user
         display_name:
           type: string
@@ -711,7 +726,8 @@ components:
       type: object
       properties:
         id:
-          type: integer
+          type: string
+          format: uuid
           description: Unique identifier for the game
         start_time:
           type: string
@@ -756,7 +772,8 @@ components:
       type: object
       properties:
         id:
-          type: integer
+          type: string
+          format: uuid
           description: Unique identifier for the result entry
         team_id:
           type: string
@@ -801,7 +818,8 @@ components:
       type: object
       properties:
         id:
-          type: integer
+          type: string
+          format: uuid
           description: Unique identifier for the service
         name:
           type: string
@@ -846,7 +864,8 @@ components:
       type: object
       properties:
         id:
-          type: integer
+          type: string
+          format: uuid
           description: Unique identifier for the team
         name:
           type: string
@@ -870,7 +889,8 @@ components:
         - name
       properties:
         id:
-          type: integer
+          type: string
+          format: uuid
           description: The unique identifier of the university
           example: 1
         name:

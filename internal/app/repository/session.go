@@ -5,11 +5,13 @@ import (
 	"database/sql"
 	"fmt"
 	"time"
+
+	openapi_types "github.com/oapi-codegen/runtime/types"
 )
 
 type SessionRepository interface {
 	GetSessionFromDB(ctx context.Context, sessionId string) (int, error)
-	StoreSessionInDB(ctx context.Context, userId int) (string, error)
+	StoreSessionInDB(ctx context.Context, userId openapi_types.UUID) (string, error)
 	DeleteSessionInDB(ctx context.Context, cookie string) error
 }
 
@@ -27,7 +29,7 @@ func (r *sessionRepo) GetSessionFromDB(ctx context.Context, sessionId string) (i
 	return userId, err
 }
 
-func (r *sessionRepo) StoreSessionInDB(ctx context.Context, userId int) (string, error) {
+func (r *sessionRepo) StoreSessionInDB(ctx context.Context, userId openapi_types.UUID) (string, error) {
 	var session string
 	query := `
 		INSERT INTO sessions (user_id, expires_at)

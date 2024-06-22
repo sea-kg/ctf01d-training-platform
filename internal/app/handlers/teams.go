@@ -10,6 +10,8 @@ import (
 	"ctf01d/internal/app/server"
 	api_helpers "ctf01d/internal/app/utils"
 	"ctf01d/internal/app/view"
+
+	openapi_types "github.com/oapi-codegen/runtime/types"
 )
 
 func (h *Handlers) CreateTeam(w http.ResponseWriter, r *http.Request) {
@@ -36,7 +38,7 @@ func (h *Handlers) CreateTeam(w http.ResponseWriter, r *http.Request) {
 	api_helpers.RespondWithJSON(w, http.StatusOK, map[string]string{"data": "Team created successfully"})
 }
 
-func (h *Handlers) DeleteTeam(w http.ResponseWriter, r *http.Request, id int) {
+func (h *Handlers) DeleteTeam(w http.ResponseWriter, r *http.Request, id openapi_types.UUID) {
 	teamRepo := repository.NewTeamRepository(h.DB)
 	if err := teamRepo.Delete(r.Context(), id); err != nil {
 		slog.Warn(err.Error(), "handler", "DeleteTeamHandler")
@@ -46,7 +48,7 @@ func (h *Handlers) DeleteTeam(w http.ResponseWriter, r *http.Request, id int) {
 	api_helpers.RespondWithJSON(w, http.StatusOK, map[string]string{"data": "Team deleted successfully"})
 }
 
-func (h *Handlers) GetTeamById(w http.ResponseWriter, r *http.Request, id int) {
+func (h *Handlers) GetTeamById(w http.ResponseWriter, r *http.Request, id openapi_types.UUID) {
 	teamRepo := repository.NewTeamRepository(h.DB)
 	team, err := teamRepo.GetById(r.Context(), id)
 	if err != nil {
@@ -68,7 +70,7 @@ func (h *Handlers) ListTeams(w http.ResponseWriter, r *http.Request) {
 	api_helpers.RespondWithJSON(w, http.StatusOK, view.NewTeamsFromModels(teams))
 }
 
-func (h *Handlers) UpdateTeam(w http.ResponseWriter, r *http.Request, id int) {
+func (h *Handlers) UpdateTeam(w http.ResponseWriter, r *http.Request, id openapi_types.UUID) {
 	var team server.TeamRequest
 	if err := json.NewDecoder(r.Body).Decode(&team); err != nil {
 		slog.Warn(err.Error(), "handler", "UpdateTeamHandler")
