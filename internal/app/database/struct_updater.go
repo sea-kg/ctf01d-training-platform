@@ -38,6 +38,8 @@ func RegisterAllUpdates() map[string][]DatabaseUpdateFunc {
 	allUpdates = RegisterDatabaseUpdate(allUpdates, DatabaseUpdate_update0012_update0013)
 	allUpdates = RegisterDatabaseUpdate(allUpdates, DatabaseUpdate_update0013_update0013testdata)
 	allUpdates = RegisterDatabaseUpdate(allUpdates, DatabaseUpdate_update0013_update0014)
+	allUpdates = RegisterDatabaseUpdate(allUpdates, DatabaseUpdate_update0014_update0015)
+	allUpdates = RegisterDatabaseUpdate(allUpdates, DatabaseUpdate_update0015_update0015testdata)
 	return allUpdates
 }
 
@@ -196,7 +198,7 @@ func InitDatabase() (*sql.DB, error) {
 							defer db.Close()
 							return db, err
 						}
-						slog.Info("Successfully applyed update " + fromUpdateId + " -> " + toUpdateId + " (" + description + ")")
+						slog.Info("Successfully applied update " + fromUpdateId + " -> " + toUpdateId + " (" + description + ")")
 						alreadyCheckedUpdates = append(alreadyCheckedUpdates, toUpdateId)
 						installedSomeUpdate = true // try find next updates
 					}
