@@ -123,3 +123,11 @@ func (siw *ServerInterfaceWrapper) GetUserById(w http.ResponseWriter, r *http.Re
 func (siw *ServerInterfaceWrapper) UpdateUser(w http.ResponseWriter, r *http.Request, id openapi_types.UUID) {
 	siw.handlers.UpdateUser(w, r, id)
 }
+
+func (siw *ServerInterfaceWrapper) PostApiV1ServicesUuidUploadChecker(w http.ResponseWriter, r *http.Request, id openapi_types.UUID) {
+	siw.handlers.PostApiV1ServicesUuidUploadChecker(w, r, id)
+}
+
+func (siw *ServerInterfaceWrapper) PostApiV1ServicesUuidUploadService(w http.ResponseWriter, r *http.Request, id openapi_types.UUID) {
+	siw.handlers.PostApiV1ServicesUuidUploadService(w, r, id)
+}

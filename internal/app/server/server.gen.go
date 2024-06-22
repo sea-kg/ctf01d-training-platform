@@ -232,6 +232,16 @@ type PostApiV1AuthSigninJSONBody struct {
 	UserName *string `json:"user_name,omitempty"`
 }
 
+// PostApiV1ServicesUuidUploadCheckerMultipartBody defines parameters for PostApiV1ServicesUuidUploadChecker.
+type PostApiV1ServicesUuidUploadCheckerMultipartBody struct {
+	File *openapi_types.File `json:"file,omitempty"`
+}
+
+// PostApiV1ServicesUuidUploadServiceMultipartBody defines parameters for PostApiV1ServicesUuidUploadService.
+type PostApiV1ServicesUuidUploadServiceMultipartBody struct {
+	File *openapi_types.File `json:"file,omitempty"`
+}
+
 // GetApiV1UniversitiesParams defines parameters for GetApiV1Universities.
 type GetApiV1UniversitiesParams struct {
 	// Term Optional search term to filter universities by name.
@@ -255,6 +265,12 @@ type CreateServiceJSONRequestBody = ServiceRequest
 
 // UpdateServiceJSONRequestBody defines body for UpdateService for application/json ContentType.
 type UpdateServiceJSONRequestBody = ServiceRequest
+
+// PostApiV1ServicesUuidUploadCheckerMultipartRequestBody defines body for PostApiV1ServicesUuidUploadChecker for multipart/form-data ContentType.
+type PostApiV1ServicesUuidUploadCheckerMultipartRequestBody PostApiV1ServicesUuidUploadCheckerMultipartBody
+
+// PostApiV1ServicesUuidUploadServiceMultipartRequestBody defines body for PostApiV1ServicesUuidUploadService for multipart/form-data ContentType.
+type PostApiV1ServicesUuidUploadServiceMultipartRequestBody PostApiV1ServicesUuidUploadServiceMultipartBody
 
 // CreateTeamJSONRequestBody defines body for CreateTeam for application/json ContentType.
 type CreateTeamJSONRequestBody = TeamRequest
@@ -318,6 +334,12 @@ type ServerInterface interface {
 	// Update a service
 	// (PUT /api/v1/services/{uuid})
 	UpdateService(w http.ResponseWriter, r *http.Request, uuid openapi_types.UUID)
+	// Upload zip-archive
+	// (POST /api/v1/services/{uuid}/upload/checker)
+	PostApiV1ServicesUuidUploadChecker(w http.ResponseWriter, r *http.Request, uuid openapi_types.UUID)
+	// Upload zip service
+	// (POST /api/v1/services/{uuid}/upload/service)
+	PostApiV1ServicesUuidUploadService(w http.ResponseWriter, r *http.Request, uuid openapi_types.UUID)
 	// List all teams
 	// (GET /api/v1/teams)
 	ListTeams(w http.ResponseWriter, r *http.Request)
@@ -450,6 +472,18 @@ func (_ Unimplemented) GetServiceById(w http.ResponseWriter, r *http.Request, uu
 // Update a service
 // (PUT /api/v1/services/{uuid})
 func (_ Unimplemented) UpdateService(w http.ResponseWriter, r *http.Request, uuid openapi_types.UUID) {
+	w.WriteHeader(http.StatusNotImplemented)
+}
+
+// Upload zip-archive
+// (POST /api/v1/services/{uuid}/upload/checker)
+func (_ Unimplemented) PostApiV1ServicesUuidUploadChecker(w http.ResponseWriter, r *http.Request, uuid openapi_types.UUID) {
+	w.WriteHeader(http.StatusNotImplemented)
+}
+
+// Upload zip service
+// (POST /api/v1/services/{uuid}/upload/service)
+func (_ Unimplemented) PostApiV1ServicesUuidUploadService(w http.ResponseWriter, r *http.Request, uuid openapi_types.UUID) {
 	w.WriteHeader(http.StatusNotImplemented)
 }
 
@@ -836,6 +870,58 @@ func (siw *ServerInterfaceWrapper) UpdateService(w http.ResponseWriter, r *http.
 
 	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		siw.Handler.UpdateService(w, r, uuid)
+	}))
+
+	for _, middleware := range siw.HandlerMiddlewares {
+		handler = middleware(handler)
+	}
+
+	handler.ServeHTTP(w, r.WithContext(ctx))
+}
+
+// PostApiV1ServicesUuidUploadChecker operation middleware
+func (siw *ServerInterfaceWrapper) PostApiV1ServicesUuidUploadChecker(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+
+	var err error
+
+	// ------------- Path parameter "uuid" -------------
+	var uuid openapi_types.UUID
+
+	err = runtime.BindStyledParameterWithOptions("simple", "uuid", chi.URLParam(r, "uuid"), &uuid, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationPath, Explode: false, Required: true})
+	if err != nil {
+		siw.ErrorHandlerFunc(w, r, &InvalidParamFormatError{ParamName: "uuid", Err: err})
+		return
+	}
+
+	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		siw.Handler.PostApiV1ServicesUuidUploadChecker(w, r, uuid)
+	}))
+
+	for _, middleware := range siw.HandlerMiddlewares {
+		handler = middleware(handler)
+	}
+
+	handler.ServeHTTP(w, r.WithContext(ctx))
+}
+
+// PostApiV1ServicesUuidUploadService operation middleware
+func (siw *ServerInterfaceWrapper) PostApiV1ServicesUuidUploadService(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+
+	var err error
+
+	// ------------- Path parameter "uuid" -------------
+	var uuid openapi_types.UUID
+
+	err = runtime.BindStyledParameterWithOptions("simple", "uuid", chi.URLParam(r, "uuid"), &uuid, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationPath, Explode: false, Required: true})
+	if err != nil {
+		siw.ErrorHandlerFunc(w, r, &InvalidParamFormatError{ParamName: "uuid", Err: err})
+		return
+	}
+
+	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		siw.Handler.PostApiV1ServicesUuidUploadService(w, r, uuid)
 	}))
 
 	for _, middleware := range siw.HandlerMiddlewares {
@@ -1249,6 +1335,12 @@ func HandlerWithOptions(si ServerInterface, options ChiServerOptions) http.Handl
 	})
 	r.Group(func(r chi.Router) {
 		r.Put(options.BaseURL+"/api/v1/services/{uuid}", wrapper.UpdateService)
+	})
+	r.Group(func(r chi.Router) {
+		r.Post(options.BaseURL+"/api/v1/services/{uuid}/upload/checker", wrapper.PostApiV1ServicesUuidUploadChecker)
+	})
+	r.Group(func(r chi.Router) {
+		r.Post(options.BaseURL+"/api/v1/services/{uuid}/upload/service", wrapper.PostApiV1ServicesUuidUploadService)
 	})
 	r.Group(func(r chi.Router) {
 		r.Get(options.BaseURL+"/api/v1/teams", wrapper.ListTeams)

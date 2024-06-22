@@ -74,3 +74,15 @@ func (h *Handlers) UpdateService(w http.ResponseWriter, r *http.Request, id open
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusNotImplemented)
 }
+
+// fixme implement
+func (h *Handlers) PostApiV1ServicesUuidUploadChecker(w http.ResponseWriter, r *http.Request, id openapi_types.UUID) {
+	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
+	w.WriteHeader(http.StatusNotImplemented)
+}
+
+// fixme implement
+func (h *Handlers) PostApiV1ServicesUuidUploadService(w http.ResponseWriter, r *http.Request, id openapi_types.UUID) {
+	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
+	w.WriteHeader(http.StatusNotImplemented)
+}
