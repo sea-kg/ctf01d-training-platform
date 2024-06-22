@@ -175,6 +175,7 @@ paths:
           schema:
             type: string
             format: uuid
+            example: 81e17cb6-5c46-4934-b6d5-5c8356712cb6
       responses:
         '200':
           description: Detailed information of a user
@@ -200,6 +201,7 @@ paths:
           schema:
             type: string
             format: uuid
+            example: 81e17cb6-5c46-4934-b6d5-5c8356712cb6
       requestBody:
         content:
           application/json:
@@ -227,6 +229,7 @@ paths:
           schema:
             type: string
             format: uuid
+            example: 81e17cb6-5c46-4934-b6d5-5c8356712cb6
       responses:
         '200':
           description: User deleted successfully
@@ -288,6 +291,7 @@ paths:
           schema:
             type: string
             format: uuid
+            example: 81e17cb6-5c46-4934-b6d5-5c8356712cb6
       responses:
         '200':
           description: Detailed information of a game
@@ -313,6 +317,7 @@ paths:
           schema:
             type: string
             format: uuid
+            example: 81e17cb6-5c46-4934-b6d5-5c8356712cb6
       requestBody:
         content:
           application/json:
@@ -346,6 +351,7 @@ paths:
           schema:
             type: string
             format: uuid
+            example: 81e17cb6-5c46-4934-b6d5-5c8356712cb6
       responses:
         '200':
           description: Game deleted successfully
@@ -420,6 +426,7 @@ paths:
           schema:
             type: string
             format: uuid
+            example: 81e17cb6-5c46-4934-b6d5-5c8356712cb6
       responses:
         '200':
           description: Detailed information of a team
@@ -441,6 +448,7 @@ paths:
           schema:
             type: string
             format: uuid
+            example: 81e17cb6-5c46-4934-b6d5-5c8356712cb6
       requestBody:
         content:
           application/json:
@@ -464,6 +472,7 @@ paths:
           schema:
             type: string
             format: uuid
+            example: 81e17cb6-5c46-4934-b6d5-5c8356712cb6
       responses:
         '200':
           description: Team deleted successfully
@@ -514,6 +523,7 @@ paths:
           schema:
             type: string
             format: uuid
+            example: 81e17cb6-5c46-4934-b6d5-5c8356712cb6
       responses:
         '200':
           description: Detailed information of a result
@@ -568,6 +578,7 @@ paths:
           schema:
             type: string
             format: uuid
+            example: 81e17cb6-5c46-4934-b6d5-5c8356712cb6
       responses:
         '200':
           description: Detailed information of a service
@@ -589,6 +600,7 @@ paths:
           schema:
             type: string
             format: uuid
+            example: 81e17cb6-5c46-4934-b6d5-5c8356712cb6
       requestBody:
         content:
           application/json:
@@ -612,9 +624,72 @@ paths:
           schema:
             type: string
             format: uuid
+            example: 81e17cb6-5c46-4934-b6d5-5c8356712cb6
       responses:
         '200':
           description: Service deleted successfully
+  /api/v1/services/{uuid}/upload/checker:
+    post:
+      tags:
+        - Services
+      summary: Upload zip-archive
+      description: |
+          Handler for upload zip-archive with checker
+      parameters:
+        - in: path
+          name: uuid
+          required: true
+          schema:
+            type: string
+            format: uuid
+            example: 81e17cb6-5c46-4934-b6d5-5c8356712cb6
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+      responses:
+        '200':
+          description: Success upload
+          content:
+            application/json:
+              {}
+  /api/v1/services/{uuid}/upload/service:
+    post:
+      summary: Upload zip service
+      description: |
+          Upload zip archive with service code images and etc...
+      tags:
+        - Services
+      parameters:
+        - in: path
+          name: uuid
+          required: true
+          schema:
+            type: string
+            format: uuid
+            example: 81e17cb6-5c46-4934-b6d5-5c8356712cb6
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+      responses:
+        '200':
+          description: Success upload
+          content:
+            application/json:
+              {}
   /api/v1/universities:
     get:
       summary: Retrieves a list of universities
@@ -670,7 +745,7 @@ components:
           items:
             type: string
             format: uuid
-            example: 1
+            example: 81e17cb6-5c46-4934-b6d5-5c8356712cb6
             description: Unique identifier for the result entry
     UserResponse:
       type: object
@@ -892,7 +967,7 @@ components:
           type: string
           format: uuid
           description: The unique identifier of the university
-          example: 1
+          example: 81e17cb6-5c46-4934-b6d5-5c8356712cb6
         name:
           type: string
           description: The name of the university
