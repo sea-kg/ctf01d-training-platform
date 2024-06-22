@@ -2,7 +2,6 @@ package database
 
 import (
 	"database/sql"
-	"fmt"
 	"log"
 	"log/slog"
 	"runtime"
@@ -35,8 +34,9 @@ func DatabaseUpdate_update0013_update0013testdata(db *sql.DB, getInfo bool) (str
 		if err := rows.Scan(&id); err != nil {
 			log.Fatalf("Error scanning row: %v", err)
 		}
-		query := fmt.Sprintf("UPDATE users SET display_name = '%s' WHERE id = %d", fake.Person().Name(), id)
-		_, err := db.Exec(query)
+		name := fake.Person().Name()
+		query := "UPDATE users SET display_name = $1 WHERE id = $2;"
+		_, err := db.Exec(query, name, id)
 		if err != nil {
 			slog.Error("Problem with update, query: " + query + "\n   error:" + err.Error())
 			return fromUpdateId, toUpdateId, description, err
