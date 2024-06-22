@@ -89,3 +89,31 @@ window.ctf01d_tp_api.service_info = function(service_id) {
         method: 'GET',
     });
 }
+
+window.ctf01d_tp_api.univercities_list = function(term) {
+    if (term === undefined) {
+        term = ""
+    }
+    return $.ajax({
+        url: '/api/v1/universities',
+        method: 'GET',
+        dataType: 'json',
+        data: {
+            term: term
+        },
+    });
+}
+
+window.ctf01d_tp_api.teams_list = function() {
+    return $.ajax({
+        url: '/api/v1/teams',
+        method: 'GET',
+    });
+}
+
+window.ctf01d_tp_api.team_delete = function(team_id) {
+    return $.ajax({
+        url: '/api/v1/teams/' + team_id,
+        method: 'DELETE',
+    });
+}

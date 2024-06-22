@@ -352,6 +352,125 @@ function renderServicesPage() {
     })
 }
 
+function preloadUniversities() {
+    window.caches.universities = []
+    if (window.caches.universities.length > 0) {
+        console.log("List of univercity already filled");
+    } else {
+        window.ctf01d_tp_api.univercities_list().done(function(res) {
+            console.log(res)
+        })
+    };
+}
+
+function showCreateTeam() {
+    $('#teams_page_error').css({"display": "none"});
+    $('#teams_page_error').html("");
+
+    preloadUniversities();
+
+    $('#team_update_team_id').val(0);
+    $('#team_create_name').val("");
+    $('#team_create_description').val("");
+    $('#team_create_social_links').val("");
+    $('#team_create_avatar_url').val("");
+    $('#team_create_university').unbind()
+    $('#team_create_university').val("");
+    $('#team_create_university_id').val(0);
+    $('#btn_team_create_or_update').html("Create");
+    $('#title_team_create_or_update').html("New Service");
+    $('#modal_edit_or_create_team').modal('show');
+
+    // $('#team_create_university').autocomplete({
+    //     source: function (request, response) {
+    //         $.ajax({
+    //             url: '/api/universities',
+    //             dataType: 'json',
+    //             data: {
+    //                 term: request.term
+    //             },
+    //             success: function (data) {
+    //                 response($.map(data, function (item) {
+    //                     return {
+    //                         label: item.name,
+    //                         value: item.name,
+    //                         id: item.id
+    //                     };
+    //                 }));
+    //             }
+    //         });
+    //     },
+    //     minLength: 2,
+    //     select: function (event, ui) {
+    //         console.log("Selected: " + ui.item.label + ", ID: " + ui.item.id);
+    //         $('#team_create_university').val(ui.item.label);
+    //         $('#team_create_university_id').val(ui.item.id);
+    //         return false;
+    //     }
+    // });
+}
+
+function deleteTeam(team_id) {
+    $('#teams_page_error').css({"display": "none"});
+    $('#teams_page_error').html("");
+    window.ctf01d_tp_api.teams_delete(team_id).fail(function(res) {
+        $('#teams_page_error').css({
+            "display": "block"
+        });
+        $('#teams_page_error').html("Error delete team");
+        console.error("teams_list", res);
+    }).done(function(res) {
+        showSuccessNotification('Teams deleted successfully!')
+        renderTeamsPage();
+    })
+}
+
+function renderTeamsPage() {
+    $('.spa-web-page').css({"display": ""})
+    $('#teams_page').css({"display": "block"})
+    $('#teams_page_error').css({"display": "none"});
+    $('#teams_page_error').html("");
+    if (window.location.pathname != "/teams/") {
+        window.location.href = "/teams/";
+    }
+    window.ctf01d_tp_api.teams_list().fail(function(res) {
+        $('#teams_page_error').css({
+            "display": "block"
+        });
+        $('#teams_page_error').html("Error loading services");
+        console.error("teams_list", res);
+    }).done(function(res) {
+        var teamsHtml = ""
+        for (var i in res) {
+            var team_info = res[i];
+            console.log("team_info", team_info);
+            teamsHtml += '<div class="card services-card" style="width: 18rem;">';
+            teamsHtml += '  <img class="card-img-top" src="' + team_info.avatar_url + '" alt="Image of service">';
+            teamsHtml += '  <div class="card-body">';
+            teamsHtml += '    <h5 class="card-title">Team #' + team_info.id + ' ' + escapeHtml(team_info.name) + '</h5>'; // TODO uuid
+            teamsHtml += '    <p class="card-text">' + escapeHtml(team_info.description) + '</p>';
+            // teamsHtml += '    <p class="card-text"> by ' + escapeHtml(team_info.author) + '</p>';
+            // TODO
+            // teamsHtml += '    <small>' + getHumanTimeHasPassed(new Date(game_info.end_time)) + '</small>';
+            teamsHtml += '  </div>';
+            teamsHtml += '  <ul class="list-group list-group-flush">';
+            teamsHtml += '    <li class="list-group-item">' + escapeHtml(team_info.university) + '</li>';
+            // teamsHtml += '    <li class="list-group-item">Dapibus ac facilisis in</li>';
+            // teamsHtml += '    <li class="list-group-item">Vestibulum at eros</li>';
+            teamsHtml += '  </ul>';
+            teamsHtml += '  <div class="card-body">';
+            teamsHtml += '    <button class="btn btn-primary" onclick="showUpdateTeam(' + team_info.id + ');">Update</button>';
+            teamsHtml += '    <button class="btn btn-danger" onclick="deleteTeam(' + team_info.id + ');">Delete</button>';
+            teamsHtml += '  </div>';
+            teamsHtml += '</div>';
+
+            // teamsHtml += '  <div id="game_teams_' + game_info.id + '"> ' + new Date(game_info.end_time) + '</div>';
+            // teamsHtml += '</div>';
+            // updateGameTeams('service_teams_' + game_info.id, game_info.id)
+        }
+        $('#teams_page_list').html(teamsHtml);
+    })
+}
 
 function renderPage(pathname) {
     console.log("pathname", pathname)
@@ -365,10 +484,7 @@ function renderPage(pathname) {
     } else if (isServicesPage(pathname)) {
         renderServicesPage();
     } else if (isTeamPage(pathname)) {
-        $('#teams_page').css({"display": "block"})
-        $('.spa-web-page').css({
-            "display": ""
-        })
+        renderTeamsPage();
     } else {
         $('.spa-web-page').css({
             "display": ""
@@ -376,7 +492,6 @@ function renderPage(pathname) {
         $('#unknown_page').css({"display": "block"})
     }
 }
-
 
 $(document).ready(function () {
     console.log("Ready")
