@@ -39,7 +39,7 @@ func (r *gameRepo) GetGameDetails(ctx context.Context, id openapi_types.UUID) (*
         FROM games g
         JOIN team_games tg ON g.id = tg.game_id
         JOIN teams t ON tg.team_id = t.id
-        JOIN team_members tm ON t.id = tm.team_id
+        JOIN profiles tm ON t.id = tm.team_id
         JOIN users u ON tm.user_id = u.id
         WHERE g.id = $1;
     `

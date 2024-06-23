@@ -160,14 +160,14 @@ paths:
           description: Bad request
         '500':
           description: Failed response
-  '/api/v1/users/{uuid}':
+  '/api/v1/users/{userId}':
     get:
       tags:
         - Users
       summary: Get a user by ID
       operationId: getUserById
       parameters:
-        - name: uuid
+        - name: userId
           in: path
           required: true
           style: simple
@@ -193,7 +193,7 @@ paths:
       summary: Update a user
       operationId: updateUser
       parameters:
-        - name: uuid
+        - name: userId
           in: path
           required: true
           style: simple
@@ -221,7 +221,7 @@ paths:
       summary: Delete a user
       operationId: deleteUser
       parameters:
-        - name: uuid
+        - name: userId
           in: path
           required: true
           style: simple
@@ -276,14 +276,14 @@ paths:
           description: Bad request
         '500':
           description: Failed response
-  '/api/v1/games/{uuid}':
+  '/api/v1/games/{gameId}':
     get:
       tags:
         - Games
       summary: Get a game by ID
       operationId: getGameById
       parameters:
-        - name: uuid
+        - name: gameId
           in: path
           required: true
           style: simple
@@ -309,7 +309,7 @@ paths:
       summary: Update a game
       operationId: updateGame
       parameters:
-        - name: uuid
+        - name: gameId
           in: path
           required: true
           style: simple
@@ -343,7 +343,7 @@ paths:
       summary: Delete a game
       operationId: deleteGame
       parameters:
-        - name: uuid
+        - name: gameId
           in: path
           required: true
           style: simple
@@ -411,14 +411,14 @@ paths:
           content:
             application/json:
               schema: {}
-  '/api/v1/teams/{uuid}':
+  '/api/v1/teams/{teamId}':
     get:
       tags:
         - Teams
       summary: Get a team by ID
       operationId: getTeamById
       parameters:
-        - name: uuid
+        - name: teamId
           in: path
           required: true
           style: simple
@@ -440,7 +440,7 @@ paths:
       summary: Update a team
       operationId: updateTeam
       parameters:
-        - name: uuid
+        - name: teamId
           in: path
           required: true
           style: simple
@@ -464,7 +464,7 @@ paths:
       summary: Delete a team
       operationId: deleteTeam
       parameters:
-        - name: uuid
+        - name: teamId
           in: path
           required: true
           style: simple
@@ -476,6 +476,66 @@ paths:
       responses:
         '200':
           description: Team deleted successfully
+  /api/v1/teams/{teamId}/join/{userId}:
+    post:
+      tags:
+        - Teams
+      summary: Connect user with team
+      parameters:
+        - in: path
+          name: teamId
+          required: true
+          schema:
+            type: string
+            format: uuid
+          description: The ID of the team
+        - in: path
+          name: userId
+          required: true
+          schema:
+            type: string
+            format: uuid
+          description: The ID of the user
+      responses:
+        '200':
+          description: Connect successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+  /api/v1/teams/{teamId}/leave/{userId}:
+    post:
+      tags:
+        - Teams
+      summary: Leave user from team
+      parameters:
+        - in: path
+          name: teamId
+          required: true
+          schema:
+            type: string
+            format: uuid
+          description: The ID of the team
+        - in: path
+          name: userId
+          required: true
+          schema:
+            type: string
+            format: uuid
+          description: The ID of the user
+      responses:
+        '200':
+          description: Left successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
   /api/v1/results:
     get:
       tags:
@@ -508,14 +568,14 @@ paths:
       responses:
         '200':
           description: Result created successfully
-  '/api/v1/results/{uuid}':
+  '/api/v1/results/{resultId}':
     get:
       tags:
         - Results
       summary: Get a result by ID
       operationId: getResultById
       parameters:
-        - name: uuid
+        - name: resultId
           in: path
           required: true
           style: simple
@@ -563,14 +623,14 @@ paths:
       responses:
         '200':
           description: Service created successfully
-  '/api/v1/services/{uuid}':
+  '/api/v1/services/{serviceId}':
     get:
       tags:
         - Services
       summary: Get a service by ID
       operationId: getServiceById
       parameters:
-        - name: uuid
+        - name: serviceId
           in: path
           required: true
           style: simple
@@ -592,7 +652,7 @@ paths:
       summary: Update a service
       operationId: updateService
       parameters:
-        - name: uuid
+        - name: serviceId
           in: path
           required: true
           style: simple
@@ -616,7 +676,7 @@ paths:
       summary: Delete a service
       operationId: deleteService
       parameters:
-        - name: uuid
+        - name: serviceId
           in: path
           required: true
           style: simple
@@ -628,7 +688,7 @@ paths:
       responses:
         '200':
           description: Service deleted successfully
-  /api/v1/services/{uuid}/upload/checker:
+  /api/v1/services/{serviceId}/upload/checker:
     post:
       tags:
         - Services
@@ -637,7 +697,7 @@ paths:
           Handler for upload zip-archive with checker
       parameters:
         - in: path
-          name: uuid
+          name: serviceId
           required: true
           schema:
             type: string
@@ -659,7 +719,7 @@ paths:
           content:
             application/json:
               {}
-  /api/v1/services/{uuid}/upload/service:
+  /api/v1/services/{serviceId}/upload/service:
     post:
       summary: Upload zip service
       description: |
@@ -668,7 +728,7 @@ paths:
         - Services
       parameters:
         - in: path
-          name: uuid
+          name: serviceId
           required: true
           schema:
             type: string
