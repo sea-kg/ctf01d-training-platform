@@ -38,7 +38,7 @@ func (r *userRepo) Create(ctx context.Context, user *models.User) error {
 
 func (r *userRepo) AddUserToTeams(ctx context.Context, userId openapi_types.UUID, teamIds *[]openapi_types.UUID) error {
 	for _, teamId := range *teamIds {
-		_, err := r.db.ExecContext(ctx, "INSERT INTO team_members (user_id, team_id) VALUES ($1, $2)", userId, teamId)
+		_, err := r.db.ExecContext(ctx, "INSERT INTO profiles (user_id, team_id) VALUES ($1, $2)", userId, teamId)
 		if err != nil {
 			return err
 		}
@@ -78,7 +78,7 @@ func (r *userRepo) Delete(ctx context.Context, id openapi_types.UUID) error {
 	if err != nil {
 		return err
 	}
-	if _, err := tx.ExecContext(ctx, "DELETE FROM team_members WHERE user_id = $1", id); err != nil {
+	if _, err := tx.ExecContext(ctx, "DELETE FROM profiles WHERE user_id = $1", id); err != nil {
 		err2 := tx.Rollback()
 		if err2 != nil {
 			return err2
