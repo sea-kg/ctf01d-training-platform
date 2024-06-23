@@ -151,6 +151,9 @@ function doSignin() {
         console.log(res);
         showSuccessNotification('Login successful!');
         $('#modal_signin').modal('hide');
+        setTimeout(function () {
+            window.location.reload();
+        }, 1000);
     })
 }
 

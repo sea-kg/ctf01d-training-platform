@@ -7,7 +7,9 @@ import (
 
 	"ctf01d/internal/app/repository"
 	"ctf01d/internal/app/server"
+	"ctf01d/internal/app/utils"
 	api_helpers "ctf01d/internal/app/utils"
+	openapi_types "github.com/oapi-codegen/runtime/types"
 )
 
 func (h *Handlers) PostApiV1AuthSignin(w http.ResponseWriter, r *http.Request) {
@@ -26,6 +28,8 @@ func (h *Handlers) PostApiV1AuthSignin(w http.ResponseWriter, r *http.Request) {
 	}
 
 	repo := repository.NewSessionRepository(h.DB)
+	// slog.Info("user.Id " + openapi_types.UUID(user.Id).String())
+
 	sessionId, err := repo.StoreSessionInDB(r.Context(), user.Id)
 	if err != nil {
 		slog.Warn(err.Error(), "handler", "PostApiV1AuthSignin")
@@ -68,6 +72,33 @@ func (h *Handlers) PostApiV1AuthSignout(w http.ResponseWriter, r *http.Request) 
 }
 
 func (h *Handlers) ValidateSession(w http.ResponseWriter, r *http.Request) {
-	// implement me
-	api_helpers.RespondWithJSON(w, http.StatusOK, map[string]string{"role": "Admin", "name": "R00t"})
+	cookie, err := r.Cookie("session_id")
+	if err != nil {
+		slog.Warn(err.Error(), "handler", "PostApiV1AuthSession")
+		api_helpers.RespondWithJSON(w, http.StatusUnauthorized, map[string]string{"error": "No session found"})
+		return
+	}
+	// slog.Info("cookie.Value, " + cookie.Value)
+	repo := repository.NewSessionRepository(h.DB)
+	var userId openapi_types.UUID
+	userId, err = repo.GetSessionFromDB(r.Context(), cookie.Value)
+	if err != nil {
+		slog.Warn(err.Error(), "handler", "PostApiV1AuthSession")
+		api_helpers.RespondWithJSON(w, http.StatusUnauthorized, map[string]string{"error": "No user or session found"})
+		return
+	}
+	// slog.Info("ValidateSession user.Id " + openapi_types.UUID(userId).String())
+
+	userRepo := repository.NewUserRepository(h.DB)
+	user, err := userRepo.GetById(r.Context(), userId)
+	if err != nil {
+		slog.Warn(err.Error(), "handler", "PostApiV1AuthSession")
+		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Could not find user by user id"})
+		return
+	}
+	var res = make(map[string]string)
+	res["name"] = user.DisplayName
+	res["role"] = helpers.ConvertUserRequestRoleToString(user.Role)
+
+	api_helpers.RespondWithJSON(w, http.StatusOK, res)
 }
