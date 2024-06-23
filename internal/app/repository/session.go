@@ -3,7 +3,6 @@ package repository
 import (
 	"context"
 	"database/sql"
-	"fmt"
 	"time"
 
 	openapi_types "github.com/oapi-codegen/runtime/types"
@@ -44,7 +43,6 @@ func (r *sessionRepo) StoreSessionInDB(ctx context.Context, userId openapi_types
 		RETURNING id
 		`
 	err := r.db.QueryRowContext(ctx, query, userId, time.Now().Add(96*time.Hour)).Scan(&session)
-	fmt.Println(session)
 	if err != nil {
 		return "", err
 	}
