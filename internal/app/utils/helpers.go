@@ -67,6 +67,19 @@ func ConvertUserRequestRoleToUserResponseRole(role server.UserRequestRole) serve
 	}
 }
 
+func ConvertUserRequestRoleToString(role server.UserRequestRole) string {
+	switch role {
+	case server.UserRequestRoleAdmin:
+		return "admin"
+	case server.UserRequestRoleGuest:
+		return "guest"
+	case server.UserRequestRolePlayer:
+		return "player"
+	default:
+		return ""
+	}
+}
+
 func ConvertUserResponseRoleToUserRequestRole(role server.UserResponseRole) server.UserRequestRole {
 	switch role {
 	case server.UserResponseRoleAdmin:

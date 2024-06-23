@@ -133,3 +133,12 @@ install:
 $ go install github.com/oapi-codegen/oapi-codegen/v2/cmd/oapi-codegen@latest
 $ export PATH="$PATH:$HOME/bin:$HOME/go/bin"
 ```
+
+
+## Database local
+
+```
+$ make run-db
+$ psql postgresql://postgres:postgres@localhost:4112/ctf01d_training_platform
+ctf01d_training_platform=# 
+```
