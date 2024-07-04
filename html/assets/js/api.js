@@ -26,7 +26,7 @@ window.ctf01d_tp_api.game_create = function(game_data) {
 
 window.ctf01d_tp_api.auth_signin = function(auth_data) {
     return $.ajax({
-        url: '/api/v1/auth/signin',
+        url: '/api/v1/auth/sign_in',
         method: 'POST',
         contentType: 'application/json',
         data: JSON.stringify(auth_data),
@@ -35,7 +35,7 @@ window.ctf01d_tp_api.auth_signin = function(auth_data) {
 
 window.ctf01d_tp_api.auth_signout = function(auth_data) {
     return $.ajax({
-        url: '/api/v1/auth/signout',
+        url: '/api/v1/auth/sign_out',
         method: 'POST',
         contentType: 'application/json',
         data: JSON.stringify(auth_data),

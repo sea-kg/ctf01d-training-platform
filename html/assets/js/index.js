@@ -145,7 +145,7 @@ function doSignin() {
         password: password,
     }).fail(function(res) {
         $('#sign_error_info').css({"display": ""});
-        $('#sign_error_info').html('Signin failed. Check username and password.');
+        $('#sign_error_info').html('SignIn failed. Check username and password.');
         console.error(res);
     }).done(function(res) {
         console.log(res);

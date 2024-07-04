@@ -36,12 +36,12 @@ func (siw *ServerInterfaceWrapper) UpdateGame(w http.ResponseWriter, r *http.Req
 	siw.handlers.UpdateGame(w, r, id)
 }
 
-func (siw *ServerInterfaceWrapper) PostApiV1AuthSignin(w http.ResponseWriter, r *http.Request) {
-	siw.handlers.PostApiV1AuthSignin(w, r)
+func (siw *ServerInterfaceWrapper) PostApiV1AuthSignIn(w http.ResponseWriter, r *http.Request) {
+	siw.handlers.PostApiV1AuthSignIn(w, r)
 }
 
-func (siw *ServerInterfaceWrapper) PostApiV1AuthSignout(w http.ResponseWriter, r *http.Request) {
-	siw.handlers.PostApiV1AuthSignout(w, r)
+func (siw *ServerInterfaceWrapper) PostApiV1AuthSignOut(w http.ResponseWriter, r *http.Request) {
+	siw.handlers.PostApiV1AuthSignOut(w, r)
 }
 
 func (siw *ServerInterfaceWrapper) ValidateSession(w http.ResponseWriter, r *http.Request) {

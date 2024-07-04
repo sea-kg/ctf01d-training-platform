@@ -256,8 +256,8 @@ type UserResponse struct {
 // UserResponseRole The role of the user (admin, player or guest)
 type UserResponseRole string
 
-// PostApiV1AuthSigninJSONBody defines parameters for PostApiV1AuthSignin.
-type PostApiV1AuthSigninJSONBody struct {
+// PostApiV1AuthSignInJSONBody defines parameters for PostApiV1AuthSignIn.
+type PostApiV1AuthSignInJSONBody struct {
 	Password *string `json:"password,omitempty"`
 	UserName *string `json:"user_name,omitempty"`
 }
@@ -278,8 +278,8 @@ type GetApiV1UniversitiesParams struct {
 	Term *string `form:"term,omitempty" json:"term,omitempty"`
 }
 
-// PostApiV1AuthSigninJSONRequestBody defines body for PostApiV1AuthSignin for application/json ContentType.
-type PostApiV1AuthSigninJSONRequestBody PostApiV1AuthSigninJSONBody
+// PostApiV1AuthSignInJSONRequestBody defines body for PostApiV1AuthSignIn for application/json ContentType.
+type PostApiV1AuthSignInJSONRequestBody PostApiV1AuthSignInJSONBody
 
 // CreateGameJSONRequestBody defines body for CreateGame for application/json ContentType.
 type CreateGameJSONRequestBody = GameRequest
@@ -320,11 +320,11 @@ type ServerInterface interface {
 	// (GET /api/v1/auth/session)
 	ValidateSession(w http.ResponseWriter, r *http.Request)
 	// Sign in user
-	// (POST /api/v1/auth/signin)
-	PostApiV1AuthSignin(w http.ResponseWriter, r *http.Request)
+	// (POST /api/v1/auth/sign_in)
+	PostApiV1AuthSignIn(w http.ResponseWriter, r *http.Request)
 	// Logout user
-	// (POST /api/v1/auth/signout)
-	PostApiV1AuthSignout(w http.ResponseWriter, r *http.Request)
+	// (POST /api/v1/auth/sign_out)
+	PostApiV1AuthSignOut(w http.ResponseWriter, r *http.Request)
 	// List all games
 	// (GET /api/v1/games)
 	ListGames(w http.ResponseWriter, r *http.Request)
@@ -425,14 +425,14 @@ func (_ Unimplemented) ValidateSession(w http.ResponseWriter, r *http.Request) {
 }
 
 // Sign in user
-// (POST /api/v1/auth/signin)
-func (_ Unimplemented) PostApiV1AuthSignin(w http.ResponseWriter, r *http.Request) {
+// (POST /api/v1/auth/sign_in)
+func (_ Unimplemented) PostApiV1AuthSignIn(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusNotImplemented)
 }
 
 // Logout user
-// (POST /api/v1/auth/signout)
-func (_ Unimplemented) PostApiV1AuthSignout(w http.ResponseWriter, r *http.Request) {
+// (POST /api/v1/auth/sign_out)
+func (_ Unimplemented) PostApiV1AuthSignOut(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusNotImplemented)
 }
 
@@ -634,12 +634,12 @@ func (siw *ServerInterfaceWrapper) ValidateSession(w http.ResponseWriter, r *htt
 	handler.ServeHTTP(w, r.WithContext(ctx))
 }
 
-// PostApiV1AuthSignin operation middleware
-func (siw *ServerInterfaceWrapper) PostApiV1AuthSignin(w http.ResponseWriter, r *http.Request) {
+// PostApiV1AuthSignIn operation middleware
+func (siw *ServerInterfaceWrapper) PostApiV1AuthSignIn(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 
 	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		siw.Handler.PostApiV1AuthSignin(w, r)
+		siw.Handler.PostApiV1AuthSignIn(w, r)
 	}))
 
 	for _, middleware := range siw.HandlerMiddlewares {
@@ -649,12 +649,12 @@ func (siw *ServerInterfaceWrapper) PostApiV1AuthSignin(w http.ResponseWriter, r 
 	handler.ServeHTTP(w, r.WithContext(ctx))
 }
 
-// PostApiV1AuthSignout operation middleware
-func (siw *ServerInterfaceWrapper) PostApiV1AuthSignout(w http.ResponseWriter, r *http.Request) {
+// PostApiV1AuthSignOut operation middleware
+func (siw *ServerInterfaceWrapper) PostApiV1AuthSignOut(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 
 	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		siw.Handler.PostApiV1AuthSignout(w, r)
+		siw.Handler.PostApiV1AuthSignOut(w, r)
 	}))
 
 	for _, middleware := range siw.HandlerMiddlewares {
@@ -1445,10 +1445,10 @@ func HandlerWithOptions(si ServerInterface, options ChiServerOptions) http.Handl
 		r.Get(options.BaseURL+"/api/v1/auth/session", wrapper.ValidateSession)
 	})
 	r.Group(func(r chi.Router) {
-		r.Post(options.BaseURL+"/api/v1/auth/signin", wrapper.PostApiV1AuthSignin)
+		r.Post(options.BaseURL+"/api/v1/auth/sign_in", wrapper.PostApiV1AuthSignIn)
 	})
 	r.Group(func(r chi.Router) {
-		r.Post(options.BaseURL+"/api/v1/auth/signout", wrapper.PostApiV1AuthSignout)
+		r.Post(options.BaseURL+"/api/v1/auth/sign_out", wrapper.PostApiV1AuthSignOut)
 	})
 	r.Group(func(r chi.Router) {
 		r.Get(options.BaseURL+"/api/v1/games", wrapper.ListGames)
