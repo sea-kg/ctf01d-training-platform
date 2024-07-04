@@ -54,6 +54,24 @@ type GameResponse struct {
 	StartTime time.Time `json:"start_time"`
 }
 
+// ProfileResponse The response schema for a user's profile, including id, timestamps, team name, and team history.
+type ProfileResponse struct {
+	// CreatedAt The timestamp when the user profile was created.
+	CreatedAt *time.Time `json:"created_at,omitempty"`
+
+	// Id The unique identifier for the user.
+	Id *openapi_types.UUID `json:"id,omitempty"`
+
+	// TeamHistory The list of teams the user has been part of, including the periods of membership.
+	TeamHistory *[]TeamHistory `json:"team_history,omitempty"`
+
+	// TeamName The current name of the user's team.
+	TeamName *string `json:"team_name,omitempty"`
+
+	// UpdatedAt The timestamp when the user profile was last updated.
+	UpdatedAt *time.Time `json:"updated_at,omitempty"`
+}
+
 // ResultRequest defines model for ResultRequest.
 type ResultRequest struct {
 	// GameId Identifier of the game this result is for
@@ -123,6 +141,18 @@ type ServiceResponse struct {
 	LogoUrl *string `json:"logo_url,omitempty"`
 
 	// Name Name of the service
+	Name string `json:"name"`
+}
+
+// TeamHistory The schema for recording the history of teams a user has joined and left.
+type TeamHistory struct {
+	// Join The timestamp when the user joined the team.
+	Join time.Time `json:"join"`
+
+	// Left The timestamp when the user left the team.
+	Left *time.Time `json:"left,omitempty"`
+
+	// Name The name of the team.
 	Name string `json:"name"`
 }
 
@@ -379,6 +409,9 @@ type ServerInterface interface {
 	// Update a user
 	// (PUT /api/v1/users/{userId})
 	UpdateUser(w http.ResponseWriter, r *http.Request, userId openapi_types.UUID)
+	// Get a profile by user ID
+	// (GET /api/v1/users/{userId}/profile)
+	GetProfileById(w http.ResponseWriter, r *http.Request, userId openapi_types.UUID)
 }
 
 // Unimplemented server implementation that returns http.StatusNotImplemented for each endpoint.
@@ -568,6 +601,12 @@ func (_ Unimplemented) GetUserById(w http.ResponseWriter, r *http.Request, userI
 // Update a user
 // (PUT /api/v1/users/{userId})
 func (_ Unimplemented) UpdateUser(w http.ResponseWriter, r *http.Request, userId openapi_types.UUID) {
+	w.WriteHeader(http.StatusNotImplemented)
+}
+
+// Get a profile by user ID
+// (GET /api/v1/users/{userId}/profile)
+func (_ Unimplemented) GetProfileById(w http.ResponseWriter, r *http.Request, userId openapi_types.UUID) {
 	w.WriteHeader(http.StatusNotImplemented)
 }
 
@@ -1263,6 +1302,32 @@ func (siw *ServerInterfaceWrapper) UpdateUser(w http.ResponseWriter, r *http.Req
 	handler.ServeHTTP(w, r.WithContext(ctx))
 }
 
+// GetProfileById operation middleware
+func (siw *ServerInterfaceWrapper) GetProfileById(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+
+	var err error
+
+	// ------------- Path parameter "userId" -------------
+	var userId openapi_types.UUID
+
+	err = runtime.BindStyledParameterWithOptions("simple", "userId", chi.URLParam(r, "userId"), &userId, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationPath, Explode: false, Required: true})
+	if err != nil {
+		siw.ErrorHandlerFunc(w, r, &InvalidParamFormatError{ParamName: "userId", Err: err})
+		return
+	}
+
+	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		siw.Handler.GetProfileById(w, r, userId)
+	}))
+
+	for _, middleware := range siw.HandlerMiddlewares {
+		handler = middleware(handler)
+	}
+
+	handler.ServeHTTP(w, r.WithContext(ctx))
+}
+
 type UnescapedCookieParamError struct {
 	ParamName string
 	Err       error
@@ -1468,6 +1533,9 @@ func HandlerWithOptions(si ServerInterface, options ChiServerOptions) http.Handl
 	})
 	r.Group(func(r chi.Router) {
 		r.Put(options.BaseURL+"/api/v1/users/{userId}", wrapper.UpdateUser)
+	})
+	r.Group(func(r chi.Router) {
+		r.Get(options.BaseURL+"/api/v1/users/{userId}/profile", wrapper.GetProfileById)
 	})
 
 	return r

@@ -120,6 +120,10 @@ func (siw *ServerInterfaceWrapper) GetUserById(w http.ResponseWriter, r *http.Re
 	siw.handlers.GetUserById(w, r, id)
 }
 
+func (siw *ServerInterfaceWrapper) GetProfileById(w http.ResponseWriter, r *http.Request, id openapi_types.UUID) {
+	siw.handlers.GetProfileById(w, r, id)
+}
+
 func (siw *ServerInterfaceWrapper) UpdateUser(w http.ResponseWriter, r *http.Request, id openapi_types.UUID) {
 	siw.handlers.UpdateUser(w, r, id)
 }

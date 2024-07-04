@@ -12,6 +12,7 @@ type UserRepository interface {
 	Create(ctx context.Context, user *models.User) error
 	AddUserToTeams(ctx context.Context, userId openapi_types.UUID, teamIds *[]openapi_types.UUID) error
 	GetById(ctx context.Context, id openapi_types.UUID) (*models.User, error)
+	GetProfileWithHistory(ctx context.Context, id openapi_types.UUID) (*models.ProfileWithHistory, error)
 	GetByUserName(ctx context.Context, id string) (*models.User, error)
 	Update(ctx context.Context, user *models.User) error
 	Delete(ctx context.Context, id openapi_types.UUID) error
@@ -45,6 +46,42 @@ func (r *userRepo) AddUserToTeams(ctx context.Context, userId openapi_types.UUID
 	}
 
 	return nil
+}
+
+func (r *userRepo) GetProfileWithHistory(ctx context.Context, id openapi_types.UUID) (*models.ProfileWithHistory, error) {
+	query := `
+		SELECT teams.name, created_at, updated_at
+		FROM profiles JOIN teams on profiles.current_team_id=teams.id
+		WHERE profiles.user_id = $1
+	`
+	profile := models.Profile{}
+	err := r.db.QueryRowContext(ctx, query, id).Scan(&profile.CurrentTeam, &profile.CreatedAt, &profile.UpdatedAt)
+	if err != nil {
+		return nil, err
+	}
+	query = `
+	SELECT joined_at, left_at, name
+		FROM team_history
+		JOIN teams ON teams.id = team_history.team_id
+		WHERE user_id = $1
+	`
+	rows, err := r.db.QueryContext(ctx, query, id)
+	var history []models.ProfileTeams
+	for rows.Next() {
+		var team models.ProfileTeams
+		err := rows.Scan(&team.JoinedAt, &team.LeftAt, &team.Name)
+		if err != nil {
+			return nil, err
+		}
+		history = append(history, team)
+	}
+	if err != nil {
+		return nil, err
+	}
+	return &models.ProfileWithHistory{
+		Profile: profile,
+		History: history,
+	}, nil
 }
 
 func (r *userRepo) GetById(ctx context.Context, id openapi_types.UUID) (*models.User, error) {

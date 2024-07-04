@@ -238,6 +238,33 @@ paths:
           content:
             application/json:
               schema: {}
+  '/api/v1/users/{userId}/profile':
+    get:
+      tags:
+        - Users
+      summary: Get a profile by user ID
+      operationId: getProfileById
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+            example: 81e17cb6-5c46-4934-b6d5-5c8356712cb6
+      responses:
+        '200':
+          description: Detailed information of a profile
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProfileResponse'
+        '400':
+          description: Bad request
+        '500':
+          description: Failed response
   /api/v1/games:
     get:
       tags:
@@ -807,6 +834,50 @@ components:
             format: uuid
             example: 81e17cb6-5c46-4934-b6d5-5c8356712cb6
             description: Unique identifier for the result entry
+    ProfileResponse:
+      type: object
+      description: The response schema for a user's profile, including id, timestamps, team name, and team history.
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: The unique identifier for the user.
+        created_at:
+          type: string
+          format: date-time
+          description: The timestamp when the user profile was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: The timestamp when the user profile was last updated.
+        team_name:
+          type: string
+          description: The current name of the user's team.
+        team_history:
+          type: array
+          description: The list of teams the user has been part of, including the periods of membership.
+          items:
+            $ref: '#/components/schemas/TeamHistory'
+    TeamHistory:
+      required:
+        - name
+        - join
+      type: object
+      description: The schema for recording the history of teams a user has joined and left.
+      properties:
+        name:
+          type: string
+          description: The name of the team.
+        join:
+          type: string
+          format: date-time
+          description: The timestamp when the user joined the team.
+          example: '2024-01-23T04:56:07.000Z'
+        left:
+          type: string
+          format: date-time
+          description: The timestamp when the user left the team.
+          example: '2024-01-23T04:56:07.000Z'
     UserResponse:
       type: object
       properties:
@@ -844,12 +915,12 @@ components:
           type: string
           description: The start time of the game
           format: date-time
-          example: '2000-01-23T04:56:07.000Z'
+          example: '2024-01-23T04:56:07.000Z'
         end_time:
           type: string
           description: The end time of the game
           format: date-time
-          example: '2000-01-24T04:56:07.000Z'
+          example: '2024-01-24T04:56:07.000Z'
         description:
           type: string
           description: A brief description of the game
@@ -868,12 +939,12 @@ components:
           type: string
           description: The start time of the game
           format: date-time
-          example: '2000-01-23T04:56:07.000Z'
+          example: '2024-01-23T04:56:07.000Z'
         end_time:
           type: string
           description: The end time of the game
           format: date-time
-          example: '2000-01-24T04:56:07.000Z'
+          example: '2024-01-24T04:56:07.000Z'
         description:
           type: string
           description: A brief description of the game
