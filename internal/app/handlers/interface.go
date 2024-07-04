@@ -120,14 +120,26 @@ func (siw *ServerInterfaceWrapper) GetUserById(w http.ResponseWriter, r *http.Re
 	siw.handlers.GetUserById(w, r, id)
 }
 
+func (siw *ServerInterfaceWrapper) GetProfileById(w http.ResponseWriter, r *http.Request, id openapi_types.UUID) {
+	siw.handlers.GetProfileById(w, r, id)
+}
+
 func (siw *ServerInterfaceWrapper) UpdateUser(w http.ResponseWriter, r *http.Request, id openapi_types.UUID) {
 	siw.handlers.UpdateUser(w, r, id)
 }
 
-func (siw *ServerInterfaceWrapper) PostApiV1ServicesUuidUploadChecker(w http.ResponseWriter, r *http.Request, id openapi_types.UUID) {
+func (siw *ServerInterfaceWrapper) PostApiV1ServicesServiceIdUploadChecker(w http.ResponseWriter, r *http.Request, id openapi_types.UUID) {
 	siw.handlers.PostApiV1ServicesUuidUploadChecker(w, r, id)
 }
 
-func (siw *ServerInterfaceWrapper) PostApiV1ServicesUuidUploadService(w http.ResponseWriter, r *http.Request, id openapi_types.UUID) {
+func (siw *ServerInterfaceWrapper) PostApiV1ServicesServiceIdUploadService(w http.ResponseWriter, r *http.Request, id openapi_types.UUID) {
 	siw.handlers.PostApiV1ServicesUuidUploadService(w, r, id)
+}
+
+func (siw *ServerInterfaceWrapper) PostApiV1TeamsTeamIdJoinUserId(w http.ResponseWriter, r *http.Request, teamId openapi_types.UUID, userId openapi_types.UUID) {
+	siw.handlers.PostApiV1TeamsTeamIdJoinUserId(w, r, teamId, userId)
+}
+
+func (siw *ServerInterfaceWrapper) PostApiV1TeamsTeamIdLeaveUserId(w http.ResponseWriter, r *http.Request, teamId openapi_types.UUID, userId openapi_types.UUID) {
+	siw.handlers.PostApiV1TeamsTeamIdLeaveUserId(w, r, teamId, userId)
 }

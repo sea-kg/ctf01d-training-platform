@@ -160,14 +160,14 @@ paths:
           description: Bad request
         '500':
           description: Failed response
-  '/api/v1/users/{uuid}':
+  '/api/v1/users/{userId}':
     get:
       tags:
         - Users
       summary: Get a user by ID
       operationId: getUserById
       parameters:
-        - name: uuid
+        - name: userId
           in: path
           required: true
           style: simple
@@ -193,7 +193,7 @@ paths:
       summary: Update a user
       operationId: updateUser
       parameters:
-        - name: uuid
+        - name: userId
           in: path
           required: true
           style: simple
@@ -221,7 +221,7 @@ paths:
       summary: Delete a user
       operationId: deleteUser
       parameters:
-        - name: uuid
+        - name: userId
           in: path
           required: true
           style: simple
@@ -238,6 +238,33 @@ paths:
           content:
             application/json:
               schema: {}
+  '/api/v1/users/{userId}/profile':
+    get:
+      tags:
+        - Users
+      summary: Get a profile by user ID
+      operationId: getProfileById
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+            example: 81e17cb6-5c46-4934-b6d5-5c8356712cb6
+      responses:
+        '200':
+          description: Detailed information of a profile
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProfileResponse'
+        '400':
+          description: Bad request
+        '500':
+          description: Failed response
   /api/v1/games:
     get:
       tags:
@@ -276,14 +303,14 @@ paths:
           description: Bad request
         '500':
           description: Failed response
-  '/api/v1/games/{uuid}':
+  '/api/v1/games/{gameId}':
     get:
       tags:
         - Games
       summary: Get a game by ID
       operationId: getGameById
       parameters:
-        - name: uuid
+        - name: gameId
           in: path
           required: true
           style: simple
@@ -309,7 +336,7 @@ paths:
       summary: Update a game
       operationId: updateGame
       parameters:
-        - name: uuid
+        - name: gameId
           in: path
           required: true
           style: simple
@@ -343,7 +370,7 @@ paths:
       summary: Delete a game
       operationId: deleteGame
       parameters:
-        - name: uuid
+        - name: gameId
           in: path
           required: true
           style: simple
@@ -411,14 +438,14 @@ paths:
           content:
             application/json:
               schema: {}
-  '/api/v1/teams/{uuid}':
+  '/api/v1/teams/{teamId}':
     get:
       tags:
         - Teams
       summary: Get a team by ID
       operationId: getTeamById
       parameters:
-        - name: uuid
+        - name: teamId
           in: path
           required: true
           style: simple
@@ -440,7 +467,7 @@ paths:
       summary: Update a team
       operationId: updateTeam
       parameters:
-        - name: uuid
+        - name: teamId
           in: path
           required: true
           style: simple
@@ -464,7 +491,7 @@ paths:
       summary: Delete a team
       operationId: deleteTeam
       parameters:
-        - name: uuid
+        - name: teamId
           in: path
           required: true
           style: simple
@@ -476,6 +503,66 @@ paths:
       responses:
         '200':
           description: Team deleted successfully
+  /api/v1/teams/{teamId}/join/{userId}:
+    post:
+      tags:
+        - Teams
+      summary: Connect user with team
+      parameters:
+        - in: path
+          name: teamId
+          required: true
+          schema:
+            type: string
+            format: uuid
+          description: The ID of the team
+        - in: path
+          name: userId
+          required: true
+          schema:
+            type: string
+            format: uuid
+          description: The ID of the user
+      responses:
+        '200':
+          description: Connect successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+  /api/v1/teams/{teamId}/leave/{userId}:
+    post:
+      tags:
+        - Teams
+      summary: Leave user from team
+      parameters:
+        - in: path
+          name: teamId
+          required: true
+          schema:
+            type: string
+            format: uuid
+          description: The ID of the team
+        - in: path
+          name: userId
+          required: true
+          schema:
+            type: string
+            format: uuid
+          description: The ID of the user
+      responses:
+        '200':
+          description: Left successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
   /api/v1/results:
     get:
       tags:
@@ -508,14 +595,14 @@ paths:
       responses:
         '200':
           description: Result created successfully
-  '/api/v1/results/{uuid}':
+  '/api/v1/results/{resultId}':
     get:
       tags:
         - Results
       summary: Get a result by ID
       operationId: getResultById
       parameters:
-        - name: uuid
+        - name: resultId
           in: path
           required: true
           style: simple
@@ -563,14 +650,14 @@ paths:
       responses:
         '200':
           description: Service created successfully
-  '/api/v1/services/{uuid}':
+  '/api/v1/services/{serviceId}':
     get:
       tags:
         - Services
       summary: Get a service by ID
       operationId: getServiceById
       parameters:
-        - name: uuid
+        - name: serviceId
           in: path
           required: true
           style: simple
@@ -592,7 +679,7 @@ paths:
       summary: Update a service
       operationId: updateService
       parameters:
-        - name: uuid
+        - name: serviceId
           in: path
           required: true
           style: simple
@@ -616,7 +703,7 @@ paths:
       summary: Delete a service
       operationId: deleteService
       parameters:
-        - name: uuid
+        - name: serviceId
           in: path
           required: true
           style: simple
@@ -628,7 +715,7 @@ paths:
       responses:
         '200':
           description: Service deleted successfully
-  /api/v1/services/{uuid}/upload/checker:
+  /api/v1/services/{serviceId}/upload/checker:
     post:
       tags:
         - Services
@@ -637,7 +724,7 @@ paths:
           Handler for upload zip-archive with checker
       parameters:
         - in: path
-          name: uuid
+          name: serviceId
           required: true
           schema:
             type: string
@@ -659,7 +746,7 @@ paths:
           content:
             application/json:
               {}
-  /api/v1/services/{uuid}/upload/service:
+  /api/v1/services/{serviceId}/upload/service:
     post:
       summary: Upload zip service
       description: |
@@ -668,7 +755,7 @@ paths:
         - Services
       parameters:
         - in: path
-          name: uuid
+          name: serviceId
           required: true
           schema:
             type: string
@@ -747,6 +834,50 @@ components:
             format: uuid
             example: 81e17cb6-5c46-4934-b6d5-5c8356712cb6
             description: Unique identifier for the result entry
+    ProfileResponse:
+      type: object
+      description: The response schema for a user's profile, including id, timestamps, team name, and team history.
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: The unique identifier for the user.
+        created_at:
+          type: string
+          format: date-time
+          description: The timestamp when the user profile was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: The timestamp when the user profile was last updated.
+        team_name:
+          type: string
+          description: The current name of the user's team.
+        team_history:
+          type: array
+          description: The list of teams the user has been part of, including the periods of membership.
+          items:
+            $ref: '#/components/schemas/TeamHistory'
+    TeamHistory:
+      required:
+        - name
+        - join
+      type: object
+      description: The schema for recording the history of teams a user has joined and left.
+      properties:
+        name:
+          type: string
+          description: The name of the team.
+        join:
+          type: string
+          format: date-time
+          description: The timestamp when the user joined the team.
+          example: '2024-01-23T04:56:07.000Z'
+        left:
+          type: string
+          format: date-time
+          description: The timestamp when the user left the team.
+          example: '2024-01-23T04:56:07.000Z'
     UserResponse:
       type: object
       properties:
@@ -784,12 +915,12 @@ components:
           type: string
           description: The start time of the game
           format: date-time
-          example: '2000-01-23T04:56:07.000Z'
+          example: '2024-01-23T04:56:07.000Z'
         end_time:
           type: string
           description: The end time of the game
           format: date-time
-          example: '2000-01-24T04:56:07.000Z'
+          example: '2024-01-24T04:56:07.000Z'
         description:
           type: string
           description: A brief description of the game
@@ -808,12 +939,12 @@ components:
           type: string
           description: The start time of the game
           format: date-time
-          example: '2000-01-23T04:56:07.000Z'
+          example: '2024-01-23T04:56:07.000Z'
         end_time:
           type: string
           description: The end time of the game
           format: date-time
-          example: '2000-01-24T04:56:07.000Z'
+          example: '2024-01-24T04:56:07.000Z'
         description:
           type: string
           description: A brief description of the game

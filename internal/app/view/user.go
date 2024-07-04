@@ -7,15 +7,6 @@ import (
 	helpers "ctf01d/internal/app/utils"
 )
 
-type User struct {
-	Id          int    `json:"id"`
-	DisplayName string `json:"display_name"`
-	Username    string `json:"user_name"`
-	Role        string `json:"role,omitempty"`
-	AvatarUrl   string `json:"avatar_url,omitempty"`
-	Status      string `json:"status,omitempty"`
-}
-
 func NewUserFromModel(u *db.User) *server.UserResponse {
 	userRole := helpers.ConvertUserRequestRoleToUserResponseRole(u.Role)
 	return &server.UserResponse{
