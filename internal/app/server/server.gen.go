@@ -385,12 +385,15 @@ type ServerInterface interface {
 	// Update a team
 	// (PUT /api/v1/teams/{teamId})
 	UpdateTeam(w http.ResponseWriter, r *http.Request, teamId openapi_types.UUID)
-	// Connect user with team
-	// (POST /api/v1/teams/{teamId}/join/{userId})
-	PostApiV1TeamsTeamIdJoinUserId(w http.ResponseWriter, r *http.Request, teamId openapi_types.UUID, userId openapi_types.UUID)
 	// Leave user from team
-	// (POST /api/v1/teams/{teamId}/leave/{userId})
-	PostApiV1TeamsTeamIdLeaveUserId(w http.ResponseWriter, r *http.Request, teamId openapi_types.UUID, userId openapi_types.UUID)
+	// (DELETE /api/v1/teams/{teamId}/users/{userId})
+	DeleteApiV1TeamsTeamIdUsersUserId(w http.ResponseWriter, r *http.Request, teamId openapi_types.UUID, userId openapi_types.UUID)
+	// Connect user with team
+	// (POST /api/v1/teams/{teamId}/users/{userId})
+	PostApiV1TeamsTeamIdUsersUserId(w http.ResponseWriter, r *http.Request, teamId openapi_types.UUID, userId openapi_types.UUID)
+	// Approve connected user with team lead
+	// (PUT /api/v1/teams/{teamId}/users/{userId})
+	PutApiV1TeamsTeamIdUsersUserId(w http.ResponseWriter, r *http.Request, teamId openapi_types.UUID, userId openapi_types.UUID)
 	// Retrieves a list of universities
 	// (GET /api/v1/universities)
 	GetApiV1Universities(w http.ResponseWriter, r *http.Request, params GetApiV1UniversitiesParams)
@@ -556,15 +559,21 @@ func (_ Unimplemented) UpdateTeam(w http.ResponseWriter, r *http.Request, teamId
 	w.WriteHeader(http.StatusNotImplemented)
 }
 
-// Connect user with team
-// (POST /api/v1/teams/{teamId}/join/{userId})
-func (_ Unimplemented) PostApiV1TeamsTeamIdJoinUserId(w http.ResponseWriter, r *http.Request, teamId openapi_types.UUID, userId openapi_types.UUID) {
+// Leave user from team
+// (DELETE /api/v1/teams/{teamId}/users/{userId})
+func (_ Unimplemented) DeleteApiV1TeamsTeamIdUsersUserId(w http.ResponseWriter, r *http.Request, teamId openapi_types.UUID, userId openapi_types.UUID) {
 	w.WriteHeader(http.StatusNotImplemented)
 }
 
-// Leave user from team
-// (POST /api/v1/teams/{teamId}/leave/{userId})
-func (_ Unimplemented) PostApiV1TeamsTeamIdLeaveUserId(w http.ResponseWriter, r *http.Request, teamId openapi_types.UUID, userId openapi_types.UUID) {
+// Connect user with team
+// (POST /api/v1/teams/{teamId}/users/{userId})
+func (_ Unimplemented) PostApiV1TeamsTeamIdUsersUserId(w http.ResponseWriter, r *http.Request, teamId openapi_types.UUID, userId openapi_types.UUID) {
+	w.WriteHeader(http.StatusNotImplemented)
+}
+
+// Approve connected user with team lead
+// (PUT /api/v1/teams/{teamId}/users/{userId})
+func (_ Unimplemented) PutApiV1TeamsTeamIdUsersUserId(w http.ResponseWriter, r *http.Request, teamId openapi_types.UUID, userId openapi_types.UUID) {
 	w.WriteHeader(http.StatusNotImplemented)
 }
 
@@ -1096,8 +1105,8 @@ func (siw *ServerInterfaceWrapper) UpdateTeam(w http.ResponseWriter, r *http.Req
 	handler.ServeHTTP(w, r.WithContext(ctx))
 }
 
-// PostApiV1TeamsTeamIdJoinUserId operation middleware
-func (siw *ServerInterfaceWrapper) PostApiV1TeamsTeamIdJoinUserId(w http.ResponseWriter, r *http.Request) {
+// DeleteApiV1TeamsTeamIdUsersUserId operation middleware
+func (siw *ServerInterfaceWrapper) DeleteApiV1TeamsTeamIdUsersUserId(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 
 	var err error
@@ -1121,7 +1130,7 @@ func (siw *ServerInterfaceWrapper) PostApiV1TeamsTeamIdJoinUserId(w http.Respons
 	}
 
 	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		siw.Handler.PostApiV1TeamsTeamIdJoinUserId(w, r, teamId, userId)
+		siw.Handler.DeleteApiV1TeamsTeamIdUsersUserId(w, r, teamId, userId)
 	}))
 
 	for _, middleware := range siw.HandlerMiddlewares {
@@ -1131,8 +1140,8 @@ func (siw *ServerInterfaceWrapper) PostApiV1TeamsTeamIdJoinUserId(w http.Respons
 	handler.ServeHTTP(w, r.WithContext(ctx))
 }
 
-// PostApiV1TeamsTeamIdLeaveUserId operation middleware
-func (siw *ServerInterfaceWrapper) PostApiV1TeamsTeamIdLeaveUserId(w http.ResponseWriter, r *http.Request) {
+// PostApiV1TeamsTeamIdUsersUserId operation middleware
+func (siw *ServerInterfaceWrapper) PostApiV1TeamsTeamIdUsersUserId(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 
 	var err error
@@ -1156,7 +1165,42 @@ func (siw *ServerInterfaceWrapper) PostApiV1TeamsTeamIdLeaveUserId(w http.Respon
 	}
 
 	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		siw.Handler.PostApiV1TeamsTeamIdLeaveUserId(w, r, teamId, userId)
+		siw.Handler.PostApiV1TeamsTeamIdUsersUserId(w, r, teamId, userId)
+	}))
+
+	for _, middleware := range siw.HandlerMiddlewares {
+		handler = middleware(handler)
+	}
+
+	handler.ServeHTTP(w, r.WithContext(ctx))
+}
+
+// PutApiV1TeamsTeamIdUsersUserId operation middleware
+func (siw *ServerInterfaceWrapper) PutApiV1TeamsTeamIdUsersUserId(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+
+	var err error
+
+	// ------------- Path parameter "teamId" -------------
+	var teamId openapi_types.UUID
+
+	err = runtime.BindStyledParameterWithOptions("simple", "teamId", chi.URLParam(r, "teamId"), &teamId, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationPath, Explode: false, Required: true})
+	if err != nil {
+		siw.ErrorHandlerFunc(w, r, &InvalidParamFormatError{ParamName: "teamId", Err: err})
+		return
+	}
+
+	// ------------- Path parameter "userId" -------------
+	var userId openapi_types.UUID
+
+	err = runtime.BindStyledParameterWithOptions("simple", "userId", chi.URLParam(r, "userId"), &userId, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationPath, Explode: false, Required: true})
+	if err != nil {
+		siw.ErrorHandlerFunc(w, r, &InvalidParamFormatError{ParamName: "userId", Err: err})
+		return
+	}
+
+	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		siw.Handler.PutApiV1TeamsTeamIdUsersUserId(w, r, teamId, userId)
 	}))
 
 	for _, middleware := range siw.HandlerMiddlewares {
@@ -1511,10 +1555,13 @@ func HandlerWithOptions(si ServerInterface, options ChiServerOptions) http.Handl
 		r.Put(options.BaseURL+"/api/v1/teams/{teamId}", wrapper.UpdateTeam)
 	})
 	r.Group(func(r chi.Router) {
-		r.Post(options.BaseURL+"/api/v1/teams/{teamId}/join/{userId}", wrapper.PostApiV1TeamsTeamIdJoinUserId)
+		r.Delete(options.BaseURL+"/api/v1/teams/{teamId}/users/{userId}", wrapper.DeleteApiV1TeamsTeamIdUsersUserId)
 	})
 	r.Group(func(r chi.Router) {
-		r.Post(options.BaseURL+"/api/v1/teams/{teamId}/leave/{userId}", wrapper.PostApiV1TeamsTeamIdLeaveUserId)
+		r.Post(options.BaseURL+"/api/v1/teams/{teamId}/users/{userId}", wrapper.PostApiV1TeamsTeamIdUsersUserId)
+	})
+	r.Group(func(r chi.Router) {
+		r.Put(options.BaseURL+"/api/v1/teams/{teamId}/users/{userId}", wrapper.PutApiV1TeamsTeamIdUsersUserId)
 	})
 	r.Group(func(r chi.Router) {
 		r.Get(options.BaseURL+"/api/v1/universities", wrapper.GetApiV1Universities)

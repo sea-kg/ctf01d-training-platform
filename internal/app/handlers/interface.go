@@ -136,10 +136,14 @@ func (siw *ServerInterfaceWrapper) PostApiV1ServicesServiceIdUploadService(w htt
 	siw.handlers.PostApiV1ServicesUuidUploadService(w, r, id)
 }
 
-func (siw *ServerInterfaceWrapper) PostApiV1TeamsTeamIdJoinUserId(w http.ResponseWriter, r *http.Request, teamId openapi_types.UUID, userId openapi_types.UUID) {
-	siw.handlers.PostApiV1TeamsTeamIdJoinUserId(w, r, teamId, userId)
+func (siw *ServerInterfaceWrapper) PostApiV1TeamsTeamIdUsersUserId(w http.ResponseWriter, r *http.Request, teamId openapi_types.UUID, userId openapi_types.UUID) {
+	siw.handlers.JoinTeamUser(w, r, teamId, userId)
 }
 
-func (siw *ServerInterfaceWrapper) PostApiV1TeamsTeamIdLeaveUserId(w http.ResponseWriter, r *http.Request, teamId openapi_types.UUID, userId openapi_types.UUID) {
-	siw.handlers.PostApiV1TeamsTeamIdLeaveUserId(w, r, teamId, userId)
+func (siw *ServerInterfaceWrapper) DeleteApiV1TeamsTeamIdUsersUserId(w http.ResponseWriter, r *http.Request, teamId openapi_types.UUID, userId openapi_types.UUID) {
+	siw.handlers.LeaveTeamUser(w, r, teamId, userId)
+}
+
+func (siw *ServerInterfaceWrapper) PutApiV1TeamsTeamIdUsersUserId(w http.ResponseWriter, r *http.Request, teamId openapi_types.UUID, userId openapi_types.UUID) {
+	siw.handlers.ApproveTeamUser(w, r, teamId, userId)
 }

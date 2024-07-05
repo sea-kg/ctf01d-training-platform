@@ -503,7 +503,7 @@ paths:
       responses:
         '200':
           description: Team deleted successfully
-  /api/v1/teams/{teamId}/join/{userId}:
+  /api/v1/teams/{teamId}/users/{userId}:
     post:
       tags:
         - Teams
@@ -533,8 +533,36 @@ paths:
                 properties:
                   message:
                     type: string
-  /api/v1/teams/{teamId}/leave/{userId}:
-    post:
+    put:
+      tags:
+        - Teams
+      summary: Approve connected user with team lead
+      parameters:
+        - in: path
+          name: teamId
+          required: true
+          schema:
+            type: string
+            format: uuid
+          description: The ID of the team
+        - in: path
+          name: userId
+          required: true
+          schema:
+            type: string
+            format: uuid
+          description: The ID of the user
+      responses:
+        '200':
+          description: Approve successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+    delete:
       tags:
         - Teams
       summary: Leave user from team

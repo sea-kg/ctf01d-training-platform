@@ -94,12 +94,17 @@ func (h *Handlers) UpdateTeam(w http.ResponseWriter, r *http.Request, id openapi
 	api_helpers.RespondWithJSON(w, http.StatusOK, map[string]string{"data": "Team updated successfully"})
 }
 
-func (h *Handlers) PostApiV1TeamsTeamIdJoinUserId(w http.ResponseWriter, r *http.Request, teamId openapi_types.UUID, userId openapi_types.UUID) {
+func (h *Handlers) JoinTeamUser(w http.ResponseWriter, r *http.Request, teamId openapi_types.UUID, userId openapi_types.UUID) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusNotImplemented)
 }
 
-func (h *Handlers) PostApiV1TeamsTeamIdLeaveUserId(w http.ResponseWriter, r *http.Request, teamId openapi_types.UUID, userId openapi_types.UUID) {
+func (h *Handlers) LeaveTeamUser(w http.ResponseWriter, r *http.Request, teamId openapi_types.UUID, userId openapi_types.UUID) {
+	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
+	w.WriteHeader(http.StatusNotImplemented)
+}
+
+func (h *Handlers) ApproveTeamUser(w http.ResponseWriter, r *http.Request, teamId openapi_types.UUID, userId openapi_types.UUID) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusNotImplemented)
 }
