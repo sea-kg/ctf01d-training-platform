@@ -41,7 +41,7 @@
           </li>
         </ul>
         <div class="form-inline my-2 my-lg-0">
-          <button id="btn_signin" class="btn-menu-top-left btn btn-outline-success my-2 my-sm-0" style="display: none" onclick="showLoginForm()">Sign-in</button>
+          <button id="btn_sign_in" class="btn-menu-top-left btn btn-outline-success my-2 my-sm-0" style="display: none" onclick="showLoginForm()">Sign-in</button>
           <div class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="btn_profile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               User
@@ -50,7 +50,7 @@
               <div class="dropdown-item" id="btn_my_teams" onclick="showMyTeams()">My Team(s)</div>
               <div class="dropdown-item" id="btn_my_services" onclick="showMyServices()">My Service(s)</div>
               <div class="dropdown-divider"></div>
-              <div class="dropdown-item" id="btn_signout" onclick="doSignOut()">Sign-out</div>
+              <div class="dropdown-item" id="btn_sign_out" onclick="doSignOut()">Sign-out</div>
             </div>
           </div>
         </div>
@@ -226,6 +226,22 @@
         <div class="card-header">
           <strong class="card-title">Teams</strong>
         </div>
+      </div>
+      <br>
+    </div>
+
+    <!-- USERS PAGE -->
+    <div class="container spa-web-page" id="users_page">
+      <br>
+      <h2>Users</h2>
+      <button type="button" class="btn btn-primary" onclick="showCreateUser()">
+        New User
+      </button>
+      <br><br>
+      <div class="alert alert-danger" role="alert" style="display: none;" id="services_page_error">
+        Something wrong
+      </div>
+      <div id="users_page_list">
       </div>
       <br>
     </div>

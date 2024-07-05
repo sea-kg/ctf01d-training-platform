@@ -28,8 +28,12 @@ function isServicesPage(pathname) {
     return pathname == "/services" || pathname == "/services/";
 }
 
-function isTeamPage(pathname) {
+function isTeamsPage(pathname) {
     return pathname == "/teams" || pathname == "/teams/";
+}
+
+function isUsersPage(pathname) {
+    return pathname == "/users" || pathname == "/users/";
 }
 
 function getHumanTimeHasPassed(dt_end) {
@@ -128,14 +132,14 @@ function showLoginForm() {
     $('#signin_password').unbind();
     $('#signin_password').keypress(function (e) {
         if (e.which == 13) {
-            doSignin();
+            doSignIn();
             return false; // <---- Add this line
         }
     });
     $('#modal_signin').modal('show');
 }
 
-function doSignin() {
+function doSignIn() {
     var username = $('#signin_username').val();
     var password = $('#signin_password').val();
     $('#sign_error_info').html('')
@@ -355,6 +359,43 @@ function renderServicesPage() {
     })
 }
 
+function renderUsersPage() {
+    $('.spa-web-page').css({ "display": "" })
+    $('#users_page').css({ "display": "block" })
+    $('#users_page_error').css({ "display": "none" });
+    $('#users_page_error').html("");
+    if (window.location.pathname != "/users/") {
+        window.location.href = "/users/";
+    }
+    window.ctf01d_tp_api.users_list().fail(function (res) {
+        $('#users_page_error').css({
+            "display": "block"
+        });
+        $('#users_page_error').html("Error loading users");
+        console.error("users_list", res);
+    }).done(function (res) {
+        var usersHtml = ""
+        for (var i in res) {
+            var user_info = res[i];
+            console.log("user_info", user_info);
+            usersHtml += '<div class="card services-card" style="width: 20rem;">';
+            usersHtml += '  <img class="users-card-avatar" src="' + user_info.avatar_url + '" alt="Image of user">';
+            usersHtml += '  <div class="card-body">';
+            usersHtml += '    <h5 class="card-title">@' + user_info.user_name + ' - ' + escapeHtml(user_info.display_name) + '</h5>';
+            usersHtml += '    <p class="card-text"> ' + escapeHtml(user_info.id) + '</p>';
+            usersHtml += '    <p class="card-subtitle mb-2 text-muted"> role ' + escapeHtml(user_info.role) + '</p>';
+            usersHtml += '    <p class="card-text"> state ' + escapeHtml(user_info.status) + '</p>';
+            usersHtml += '  </div>';
+            usersHtml += '  <div class="card-body">';
+            usersHtml += '    <button class="btn btn-secondary" onclick="showProfileUser(\'' + user_info.id + '\');">Profile</button>';
+            usersHtml += '    <button class="btn btn-primary" onclick="showUpdateUser(\'' + user_info.id + '\');">Update</button>';
+            usersHtml += '    <button class="btn btn-danger" onclick="deleteUser(\'' + user_info.id + '\');">Delete</button>';
+            usersHtml += '  </div>';
+            usersHtml += '</div>';
+        }
+        $('#users_page_list').html(usersHtml);
+    })
+}
 
 function renderPage(pathname) {
     console.log("pathname", pathname)
@@ -367,7 +408,9 @@ function renderPage(pathname) {
         renderGamesPage();
     } else if (isServicesPage(pathname)) {
         renderServicesPage();
-    } else if (isTeamPage(pathname)) {
+    } else if (isUsersPage(pathname)) {
+        renderUsersPage();
+    } else if (isTeamsPage(pathname)) {
         $('#teams_page').css({"display": "block"})
         $('.spa-web-page').css({
             "display": ""
@@ -387,12 +430,12 @@ $(document).ready(function () {
 
     window.ctf01d_tp_api.auth_session().fail(function(res) {
         console.error(res);
-        $('#btn_signin').css({"display": "inline-block"});
-        $('#btn_signout').css({"display": "none"});
+        $('#btn_sign_in').css({"display": "inline-block"});
+        $('#btn_sign_out').css({"display": "none"});
         $('#btn_profile').css({"display": "none"});
     }).done(function(res) {
-        $('#btn_signin').css({"display": "none"});
-        $('#btn_signout').css({"display": "inline-block"});
+        $('#btn_sign_in').css({"display": "none"});
+        $('#btn_sign_out').css({"display": "inline-block"});
         $('#btn_profile').css({"display": "inline-block"});
         $('#btn_profile').html(res.name + " (" + res.role + ")");
     })

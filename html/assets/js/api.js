@@ -89,3 +89,49 @@ window.ctf01d_tp_api.service_info = function(service_id) {
         method: 'GET',
     });
 }
+
+window.ctf01d_tp_api.users_list = function (user_data) {
+    return $.ajax({
+        url: '/api/v1/users',
+        method: 'GET',
+    });
+}
+
+window.ctf01d_tp_api.user_create = function (user_data) {
+    return $.ajax({
+        url: '/api/v1/users',
+        method: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify(user_data),
+    });
+}
+
+window.ctf01d_tp_api.user_update = function (user_id, user_data) {
+    return $.ajax({
+        url: '/api/v1/users/' + user_id,
+        method: 'PUT',
+        contentType: 'application/json',
+        data: JSON.stringify(user_data),
+    });
+}
+
+window.ctf01d_tp_api.user_delete = function (user_id) {
+    return $.ajax({
+        url: '/api/v1/users/' + user_id,
+        method: 'DELETE',
+    });
+}
+
+window.ctf01d_tp_api.user_info = function (user_id) {
+    return $.ajax({
+        url: '/api/v1/users/' + user_id,
+        method: 'GET',
+    });
+}
+
+window.ctf01d_tp_api.user_profile = function (user_id) {
+    return $.ajax({
+        url: '/api/v1/users/' + user_id + '/profile',
+        method: 'GET',
+    });
+}
