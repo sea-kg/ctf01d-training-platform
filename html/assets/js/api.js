@@ -90,6 +90,13 @@ window.ctf01d_tp_api.service_info = function(service_id) {
     });
 }
 
+window.ctf01d_tp_api.teams_list = function () {
+    return $.ajax({
+        url: '/api/v1/teams',
+        method: 'GET',
+    });
+}
+
 window.ctf01d_tp_api.users_list = function (user_data) {
     return $.ajax({
         url: '/api/v1/users',
