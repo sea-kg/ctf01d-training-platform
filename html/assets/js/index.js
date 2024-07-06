@@ -121,27 +121,27 @@ function gameCreate() {
 function showLoginForm() {
     $('#sign_error_info').html('')
     $('#sign_error_info').css({"display": "none"});
-    $('#signin_username').focus();
-    $('#signin_username').unbind();
-    $('#signin_username').keypress(function (e) {
+    $('#sign_in_username').focus();
+    $('#sign_in_username').unbind();
+    $('#sign_in_username').keypress(function (e) {
         if (e.which == 13) {
-            $('#signin_password').focus();
+            $('#sign_in_password').focus();
             return false; // <---- Add this line
         }
     });
-    $('#signin_password').unbind();
-    $('#signin_password').keypress(function (e) {
+    $('#sign_in_password').unbind();
+    $('#sign_in_password').keypress(function (e) {
         if (e.which == 13) {
             doSignIn();
             return false; // <---- Add this line
         }
     });
-    $('#modal_signin').modal('show');
+    $('#modal_sign_in').modal('show');
 }
 
 function doSignIn() {
-    var username = $('#signin_username').val();
-    var password = $('#signin_password').val();
+    var username = $('#sign_in_username').val();
+    var password = $('#sign_in_password').val();
     $('#sign_error_info').html('')
     $('#sign_error_info').css({"display": "none"});
     window.ctf01d_tp_api.auth_signin({
@@ -154,7 +154,7 @@ function doSignIn() {
     }).done(function(res) {
         console.log(res);
         showSuccessNotification('Login successful!');
-        $('#modal_signin').modal('hide');
+        $('#modal_sign_in').modal('hide');
         setTimeout(function () {
             window.location.reload();
         }, 1000);
@@ -359,25 +359,102 @@ function renderServicesPage() {
     })
 }
 
+function showCreateUser() {
+    $('#users_page_error').css({ "display": "none" });
+    $('#users_page_error').html("");
+
+    $('#user_update_user_id').val(0);
+    $('#user_create_name').val("");
+    $('#user_create_display_name').val("");
+    $('#user_create_avatar_url').val("");
+    $('#user_create_password').val("");
+    $('#user_create_status').val("");
+    $('#user_create_role').val("guest");
+    $('#user_create_team').empty(); // Clear teams
+
+    loadTeams(); // Load teams into the select element
+
+    $('#btn_user_create_or_update').html("Create");
+    $('#title_user_create_or_update').html("New User");
+    $('#modal_edit_or_create_user').modal('show');
+}
+
+function loadTeams() {
+    window.ctf01d_tp_api.teams_list().done(function (teams) {
+        var teamSelect = $('#user_create_team');
+        teams.forEach(function (team) {
+            teamSelect.append(`<option value="${team.id}">${team.name}</option>`);
+        });
+    }).fail(function () {
+        alert('Error loading teams');
+    });
+}
+
+function userCreateOrUpdate() {
+    $('#users_page_error').css({ "display": "none" });
+    $('#users_page_error').html("");
+
+    var user_id = $('#user_update_user_id').val();
+
+    var userName = $('#user_create_name').val();
+    var userDisplayName = $('#user_create_display_name').val();
+    var userAvatarUrl = $('#user_create_avatar_url').val();
+    var userPassword = $('#user_create_password').val();
+    var userStatus = $('#user_create_status').val();
+    var userRole = $('#user_create_role').val();
+    var userTeams = $('#user_create_team').val().map(function (id) {
+        return id;
+    });
+
+    var userData = {
+        user_name: userName,
+        display_name: userDisplayName,
+        avatar_url: userAvatarUrl,
+        password: userPassword,
+        status: userStatus,
+        role: userRole,
+        team_ids: userTeams
+    };
+
+    if (user_id == 0) {
+        window.ctf01d_tp_api.user_create(userData).fail(function (res) {
+            $('#users_page_error').css({ "display": "block" });
+            $('#users_page_error').html("Error creating user");
+            console.error(res);
+        }).done(function (res) {
+            $('#modal_edit_or_create_user').modal('hide');
+            showSuccessNotification('User created successfully!');
+            renderUsersPage();
+        });
+    } else {
+        window.ctf01d_tp_api.user_update(user_id, userData).fail(function (res) {
+            $('#users_page_error').css({ "display": "block" });
+            $('#users_page_error').html("Error updating user");
+            console.error(res);
+        }).done(function (res) {
+            $('#modal_edit_or_create_user').modal('hide');
+            showSuccessNotification('User updated successfully!');
+            renderUsersPage();
+        });
+    }
+}
+
 function renderUsersPage() {
-    $('.spa-web-page').css({ "display": "" })
-    $('#users_page').css({ "display": "block" })
+    $('.spa-web-page').css({ "display": "" });
+    $('#users_page').css({ "display": "block" });
     $('#users_page_error').css({ "display": "none" });
     $('#users_page_error').html("");
     if (window.location.pathname != "/users/") {
         window.location.href = "/users/";
     }
     window.ctf01d_tp_api.users_list().fail(function (res) {
-        $('#users_page_error').css({
-            "display": "block"
-        });
+        $('#users_page_error').css({ "display": "block" });
         $('#users_page_error').html("Error loading users");
         console.error("users_list", res);
     }).done(function (res) {
         var usersHtml = ""
         for (var i in res) {
             var user_info = res[i];
-            console.log("user_info", user_info);
             usersHtml += '<div class="card services-card" style="width: 20rem;">';
             usersHtml += '  <img class="users-card-avatar" src="' + user_info.avatar_url + '" alt="Image of user">';
             usersHtml += '  <div class="card-body">';
@@ -387,14 +464,14 @@ function renderUsersPage() {
             usersHtml += '    <p class="card-text"> state ' + escapeHtml(user_info.status) + '</p>';
             usersHtml += '  </div>';
             usersHtml += '  <div class="card-body">';
-            usersHtml += '    <button class="btn btn-secondary" onclick="showProfileUser(\'' + user_info.id + '\');">Profile</button>';
+            usersHtml += '    <button class="btn btn-secondary" onclick="showMyTeams(\'' + user_info.id + '\');">Profile</button>';
             usersHtml += '    <button class="btn btn-primary" onclick="showUpdateUser(\'' + user_info.id + '\');">Update</button>';
             usersHtml += '    <button class="btn btn-danger" onclick="deleteUser(\'' + user_info.id + '\');">Delete</button>';
             usersHtml += '  </div>';
             usersHtml += '</div>';
         }
         $('#users_page_list').html(usersHtml);
-    })
+    });
 }
 
 function renderPage(pathname) {
@@ -421,6 +498,28 @@ function renderPage(pathname) {
         })
         $('#unknown_page').css({"display": "block"})
     }
+}
+
+function showMyTeams(userId) {
+    window.ctf01d_tp_api.user_profile(userId).fail(function (res) {
+        $('#my_teams_content').html('<div class="alert alert-danger">Fail to fetch profile</div>');
+        $('#modal_my_teams').modal('show');
+        console.error("profile", res);
+    }).done(function (data) {
+        var teamHistoryHtml = '<div class="team-history">';
+        for (var i in data.team_history) {
+            var team = data.team_history[i];
+            teamHistoryHtml += '<div class="team">';
+            teamHistoryHtml += '<div class="team-name">' + team.name + '</div>';
+            teamHistoryHtml += '<div class="team-dates">Joined at: ' + new Date(team.join).toLocaleString() +
+                (team.left ? ', Left at: ' + new Date(team.left).toLocaleString() : ', ... ') + '</div>';
+            teamHistoryHtml += '</div>';
+        }
+        teamHistoryHtml += '</div>';
+        var currentTeamHtml = '<div class="current-team"><strong>Current Team: </strong>' + data.team_name + '</div>';
+        $('#my_teams_content').html(currentTeamHtml + teamHistoryHtml);
+        $('#modal_my_teams').modal('show');
+    });
 }
 
 

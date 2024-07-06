@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
   <head>
     <title>ctf01d training platform</title>
@@ -6,17 +7,17 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <base href="/">
 
-    <link href="./assets/css/bootstrap.min.css?v=1.0" rel="stylesheet" type='text/css' />
+    <link href="./assets/css/vendor/bootstrap.min.css?v=1.0" rel="stylesheet" type='text/css' />
     <link href="./assets/css/index.css?v=1.0" rel="stylesheet" type='text/css' />
 
-    <script src="./assets/js/jquery-3.7.1.min.js?v=1.1"></script>
-    <script src="./assets/js/tooltip.min.js?v=1.1"></script>
-    <script src="./assets/js/popper.min.js?v=1.1"></script>
-    <script src="./assets/js/bootstrap.min.js?v=1.0"></script>
-    <script src="./assets/js/bootstrap-notify.min.js?v=1.0"></script>
+    <script src="./assets/js/vendor/jquery-3.7.1.min.js?v=1.1"></script>
+    <script src="./assets/js/vendor/tooltip.min.js?v=1.1"></script>
+    <script src="./assets/js/vendor/popper.min.js?v=1.1"></script>
+    <script src="./assets/js/vendor/bootstrap.min.js?v=1.0"></script>
+    <script src="./assets/js/vendor/bootstrap-notify.min.js?v=1.0"></script>
     <script src="./assets/js/api.js?v=1.0"></script>
     <script src="./assets/js/index.js?v=1.0"></script>
-</head>
+  </head>
   <body>
     <!-- MENU_BEGIN -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light" id="menu_global">
@@ -47,7 +48,7 @@
               User
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <div class="dropdown-item" id="btn_my_teams" onclick="showMyTeams()">My Team(s)</div>
+              <div class="dropdown-item" id="btn_my_teams" onclick="showMyTeams('2d10ba59-4e45-4b05-86e4-9a135b444c50')">My Team(s)</div> <!-- fixme use id from session -->
               <div class="dropdown-item" id="btn_my_services" onclick="showMyServices()">My Service(s)</div>
               <div class="dropdown-divider"></div>
               <div class="dropdown-item" id="btn_sign_out" onclick="doSignOut()">Sign-out</div>
@@ -58,7 +59,8 @@
     </nav>
     <!-- MENU_END -->
 
-    <div class="modal fade" id="modal_signin" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- MODAL_SIGN_IN -->
+    <div class="modal fade" id="modal_sign_in" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -70,12 +72,12 @@
           <div class="modal-body">
             <form>
               <div class="form-group">
-                <!-- label for="signin_username" class="col-form-label">Username:</label-->
-                <input type="text" class="form-control" id="signin_username" placeholder="Username" required>
+                <!-- label for="sign_in_username" class="col-form-label">Username:</label-->
+                <input type="text" class="form-control" id="sign_in_username" placeholder="Username" required>
               </div>
               <div class="form-group">
-                <!-- label for="signin_password" class="col-form-label">Password:</label -->
-                <input type="password" class="form-control" id="signin_password" placeholder="Password" required>
+                <!-- label for="sign_in_password" class="col-form-label">Password:</label -->
+                <input type="password" class="form-control" id="sign_in_password" placeholder="Password" required>
               </div>
             </form>
             <div class="alert alert-danger" role="alert" style="display: none;" id="sign_error_info">
@@ -83,12 +85,36 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-primary" onclick="doSignin()">Sign-in</button>
+            <button type="button" class="btn btn-primary" onclick="doSignIn()">Sign-in</button>
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           </div>
         </div>
       </div>
     </div>
+    <!-- MODAL_SIGN_IN_END -->
+
+    <!-- MY TEAMS MODAL -->
+    <div class="modal fade" id="modal_my_teams" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">My teams</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div id="my_teams_content">
+              <!-- Team history content will be inserted here -->
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- MY TEAMS MODAL END -->
 
     <!-- WELCOME PAGE -->
     <div class="container spa-web-page" id="root_page">
@@ -99,8 +125,8 @@
         </div>
         <div class="card-body">
           <div class="card-text">
-            <p>This service can prapare training attack-defence game, based on ctf01d jury system</p>
-            <p>Guthub: <a href="https://github.com/sea-kg/ctf01d-training-platform">https://github.com/sea-kg/ctf01d-training-platform</a></p>
+            <p>This service can prepare training attack-defense game, based on ctf01d jury system</p>
+            <p>Github: <a href="https://github.com/sea-kg/ctf01d-training-platform">https://github.com/sea-kg/ctf01d-training-platform</a></p>
           </div>
         </div>
       </div>
@@ -244,6 +270,66 @@
       <div id="users_page_list">
       </div>
       <br>
+    </div>
+    <div class="modal fade" id="modal_edit_or_create_user" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="title_user_create_or_update">New User</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form id="add-user-form">
+              <input type="hidden" id="user_update_user_id" value="0" name="user_id">
+              <div class="form-group">
+                <label for="user_create_name" class="col-form-label">Username:</label>
+                <input type="text" class="form-control" id="user_create_name" name="user_name" placeholder="Username"
+                  required>
+              </div>
+              <div class="form-group">
+                <label for="user_create_display_name" class="col-form-label">Display Name:</label>
+                <input type="text" class="form-control" id="user_create_display_name" name="display_name"
+                  placeholder="Display Name">
+              </div>
+              <div class="form-group">
+                <label for="user_create_avatar_url" class="col-form-label">Avatar URL:</label>
+                <input type="text" class="form-control" id="user_create_avatar_url" name="avatar_url"
+                  placeholder="Avatar URL">
+              </div>
+              <div class="form-group">
+                <label for="user_create_password" class="col-form-label">Password:</label>
+                <input type="password" class="form-control" id="user_create_password" name="password" placeholder="Password"
+                  required>
+              </div>
+              <div class="form-group">
+                <label for="user_create_status" class="col-form-label">Status:</label>
+                <input type="text" class="form-control" id="user_create_status" name="status" placeholder="Status">
+              </div>
+              <div class="form-group">
+                <label for="user_create_role" class="col-form-label">Role:</label>
+                <select class="form-control" id="user_create_role" name="role">
+                  <option value="admin">Admin</option>
+                  <option value="player">Player</option>
+                  <option value="guest">Guest</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="user_create_team" class="col-form-label">Team:</label>
+                <select class="form-control" id="user_create_team" name="team" multiple>
+                  <!-- Teams will be loaded here -->
+                </select>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" id="btn_user_create_or_update"
+              onclick="userCreateOrUpdate()">Create</button>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- UNKNOWN PAGE -->
