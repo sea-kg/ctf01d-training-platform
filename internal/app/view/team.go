@@ -10,7 +10,7 @@ func NewTeamFromModel(t *db.Team) *server.TeamResponse {
 		Id:          t.Id,
 		Name:        t.Name,
 		Description: &t.Description,
-		University:  &t.University,
+		University:  t.University,
 		SocialLinks: &t.SocialLinks,
 		AvatarUrl:   &t.AvatarUrl,
 	}

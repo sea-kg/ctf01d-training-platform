@@ -56,7 +56,7 @@ func (r *teamRepo) Delete(ctx context.Context, id openapi_types.UUID) error {
 }
 
 func (r *teamRepo) List(ctx context.Context) ([]*models.Team, error) {
-	query := "SELECT t.*, u.name as university_name FROM teams t JOIN universities u ON t.university_id = u.id"
+	query := "SELECT t.*, u.name as university_name FROM teams t LEFT JOIN universities u ON t.university_id = u.id"
 	rows, err := r.db.QueryContext(ctx, query)
 	if err != nil {
 		return nil, err
@@ -66,7 +66,7 @@ func (r *teamRepo) List(ctx context.Context) ([]*models.Team, error) {
 	var teams []*models.Team
 	for rows.Next() {
 		var team models.Team
-		if err := rows.Scan(&team.Id, &team.Name, &team.Description, &team.UniversityId, &team.SocialLinks, &team.AvatarUrl, &team.University); err != nil {
+		if err := rows.Scan(&team.Name, &team.Description, &team.SocialLinks, &team.AvatarUrl, &team.Id, &team.UniversityId, &team.University); err != nil {
 			return nil, err
 		}
 		teams = append(teams, &team)

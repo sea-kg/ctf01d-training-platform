@@ -27,7 +27,7 @@ func (h *Handlers) CreateTeam(w http.ResponseWriter, r *http.Request) {
 		Name:         team.Name,
 		SocialLinks:  *team.SocialLinks,
 		Description:  *team.Description,
-		UniversityId: team.UniversityId,
+		UniversityId: &team.UniversityId,
 		AvatarUrl:    api_helpers.PrepareImage(*team.AvatarUrl),
 	}
 	if err := teamRepo.Create(r.Context(), newTeam); err != nil {
@@ -82,7 +82,7 @@ func (h *Handlers) UpdateTeam(w http.ResponseWriter, r *http.Request, id openapi
 		Name:         team.Name,
 		SocialLinks:  *team.SocialLinks,
 		Description:  *team.Description,
-		UniversityId: team.UniversityId,
+		UniversityId: &team.UniversityId,
 		AvatarUrl:    *team.AvatarUrl,
 	}
 	updateTeam.Id = id
