@@ -85,7 +85,7 @@ will be available on - [http://localhost:4102](http://localhost:4102)
 ### Generate code from openapi schema
 
 ```shell
-	oapi-codegen -generate models,chi -o internal/app/server/server.gen.go --package routers api/openapi.yaml
+oapi-codegen -generate models,chi -o internal/app/server/server.gen.go --package routers api/openapi.yaml
 ```
 
 ## DataBase
@@ -140,5 +140,5 @@ $ export PATH="$PATH:$HOME/bin:$HOME/go/bin"
 ```
 $ make run-db
 $ psql postgresql://postgres:postgres@localhost:4112/ctf01d_training_platform
-ctf01d_training_platform=# 
+ctf01d_training_platform=#
 ```
