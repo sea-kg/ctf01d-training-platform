@@ -4,3 +4,12 @@ src/server
 vendor
 /docker_tmp
 main
+html/assets/js/.babelrc
+html/assets/js/.gitignore
+html/assets/js/git_push.sh
+html/assets/js/mocha.opts
+html/assets/js/.openapi-generator/
+html/assets/js/.openapi-generator-ignore
+html/assets/js/package.json
+html/assets/js/README.md
+html/assets/js/openapitools.json
