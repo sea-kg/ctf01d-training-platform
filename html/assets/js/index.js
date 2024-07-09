@@ -144,7 +144,7 @@ function doSignIn() {
     var password = $('#sign_in_password').val();
     $('#sign_error_info').html('')
     $('#sign_error_info').css({"display": "none"});
-    window.ctf01d_tp_api.auth_signin({
+    window.ctf01d_tp_api.auth_sign_in({
         user_name: username,
         password: password,
     }).fail(function(res) {
@@ -162,7 +162,7 @@ function doSignIn() {
 }
 
 function doSignOut() {
-    window.ctf01d_tp_api.auth_signout().fail(function(res) {
+    window.ctf01d_tp_api.auth_sign_out().fail(function(res) {
         console.error(res);
     }).done(function(res) {
         showSuccessNotification('Sing out successfull!');

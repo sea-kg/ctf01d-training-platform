@@ -24,7 +24,7 @@ window.ctf01d_tp_api.game_create = function(game_data) {
     });
 }
 
-window.ctf01d_tp_api.auth_signin = function(auth_data) {
+window.ctf01d_tp_api.auth_sign_in = function(auth_data) {
     return $.ajax({
         url: '/api/v1/auth/sign_in',
         method: 'POST',
@@ -33,7 +33,7 @@ window.ctf01d_tp_api.auth_signin = function(auth_data) {
     });
 }
 
-window.ctf01d_tp_api.auth_signout = function(auth_data) {
+window.ctf01d_tp_api.auth_sign_out = function(auth_data) {
     return $.ajax({
         url: '/api/v1/auth/sign_out',
         method: 'POST',
