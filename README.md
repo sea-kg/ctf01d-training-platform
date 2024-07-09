@@ -125,11 +125,11 @@ docker run --net=host --volume /home/user/ctf01d-training-platform/api:/api/ kis
 ```
 
 
-## oapi-codegen
+## Generate Go server boilerplate from OpenAPI 3 - oapi-codegen
 
 install:
 
-```
+```shell
 $ go install github.com/oapi-codegen/oapi-codegen/v2/cmd/oapi-codegen@latest
 $ export PATH="$PATH:$HOME/bin:$HOME/go/bin"
 ```
@@ -137,7 +137,7 @@ $ export PATH="$PATH:$HOME/bin:$HOME/go/bin"
 
 ## Database local
 
-```
+```shell
 $ make run-db
 $ psql postgresql://postgres:postgres@localhost:4112/ctf01d_training_platform
 ctf01d_training_platform=#
