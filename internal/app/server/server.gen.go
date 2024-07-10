@@ -144,6 +144,17 @@ type ServiceResponse struct {
 	Name string `json:"name"`
 }
 
+// SessionResponse defines model for SessionResponse.
+type SessionResponse struct {
+	Id *openapi_types.UUID `json:"id,omitempty"`
+
+	// Name The name of the current user
+	Name *string `json:"name"`
+
+	// Role The role of the current user
+	Role *string `json:"role"`
+}
+
 // TeamHistory The schema for recording the history of teams a user has joined and left.
 type TeamHistory struct {
 	// Join The timestamp when the user joined the team.

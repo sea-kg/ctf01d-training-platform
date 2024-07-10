@@ -8,6 +8,7 @@ import (
 	"ctf01d/internal/app/repository"
 	"ctf01d/internal/app/server"
 	api_helpers "ctf01d/internal/app/utils"
+	"ctf01d/internal/app/view"
 
 	openapi_types "github.com/oapi-codegen/runtime/types"
 )
@@ -96,9 +97,5 @@ func (h *Handlers) ValidateSession(w http.ResponseWriter, r *http.Request) {
 		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Could not find user by user id"})
 		return
 	}
-	var res = make(map[string]string)
-	res["name"] = user.DisplayName
-	res["role"] = api_helpers.ConvertUserRequestRoleToString(user.Role)
-
-	api_helpers.RespondWithJSON(w, http.StatusOK, res)
+	api_helpers.RespondWithJSON(w, http.StatusOK, view.NewSessionFromModel(user))
 }

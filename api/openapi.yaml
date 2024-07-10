@@ -107,21 +107,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  valid:
-                    type: boolean
-                    description: Indicates if the current session is valid
-                  role:
-                    type: string
-                    example: "admin"
-                    description: The role of the current user
-                    nullable: true
-                  name:
-                    type: string
-                    example: "r00t"
-                    description: The name of the current user
-                    nullable: true
+                $ref: '#/components/schemas/SessionResponse'
   /api/v1/users:
     get:
       tags:
@@ -1137,6 +1123,23 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/UniversityResponse'
+    SessionResponse:
+      type: object
+      properties:
+        role:
+          type: string
+          example: "admin"
+          description: The role of the current user
+          nullable: true
+        name:
+          type: string
+          example: "r00t"
+          description: The name of the current user
+          nullable: true
+        id:
+          type: string
+          example: "a8a5d938-1bc7-4b69-942d-9c00fc166fb6"
+          format: uuid
   links: {}
   callbacks: {}
 security: []
