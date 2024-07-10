@@ -2,6 +2,7 @@ package config
 
 import (
 	"fmt"
+	"log/slog"
 
 	"github.com/ilyakaznacheev/cleanenv"
 )
@@ -19,7 +20,7 @@ type (
 	}
 
 	Log struct {
-		Level string `env-required:"true" yaml:"log_level"   env:"LOG_LEVEL"`
+		Level string `env-required:"true" yaml:"log_level" env:"LOG_LEVEL"`
 	}
 
 	DB struct {
@@ -42,4 +43,19 @@ func NewConfig() (*Config, error) {
 	}
 
 	return cfg, nil
+}
+
+func (c *Config) ParseLogLevel(level string) slog.Level {
+	switch level {
+	case "debug":
+		return slog.LevelDebug
+	case "info":
+		return slog.LevelInfo
+	case "warn":
+		return slog.LevelWarn
+	case "error":
+		return slog.LevelError
+	default:
+		return slog.LevelInfo
+	}
 }

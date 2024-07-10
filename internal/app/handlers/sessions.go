@@ -28,7 +28,7 @@ func (h *Handlers) PostApiV1AuthSignIn(w http.ResponseWriter, r *http.Request) {
 	}
 
 	repo := repository.NewSessionRepository(h.DB)
-	// slog.Info("user.Id " + openapi_types.UUID(user.Id).String())
+	slog.Debug("user.Id " + openapi_types.UUID(user.Id).String())
 
 	sessionId, err := repo.StoreSessionInDB(r.Context(), user.Id)
 	if err != nil {
@@ -78,7 +78,7 @@ func (h *Handlers) ValidateSession(w http.ResponseWriter, r *http.Request) {
 		api_helpers.RespondWithJSON(w, http.StatusUnauthorized, map[string]string{"error": "No session found"})
 		return
 	}
-	// slog.Info("cookie.Value, " + cookie.Value)
+	slog.Debug("cookie.Value, " + cookie.Value)
 	repo := repository.NewSessionRepository(h.DB)
 	var userId openapi_types.UUID
 	userId, err = repo.GetSessionFromDB(r.Context(), cookie.Value)
@@ -87,7 +87,7 @@ func (h *Handlers) ValidateSession(w http.ResponseWriter, r *http.Request) {
 		api_helpers.RespondWithJSON(w, http.StatusUnauthorized, map[string]string{"error": "No user or session found"})
 		return
 	}
-	// slog.Info("ValidateSession user.Id " + openapi_types.UUID(userId).String())
+	slog.Debug("ValidateSession user.Id " + openapi_types.UUID(userId).String())
 
 	userRepo := repository.NewUserRepository(h.DB)
 	user, err := userRepo.GetById(r.Context(), userId)

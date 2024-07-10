@@ -15,13 +15,18 @@ import (
 )
 
 func main() {
-	logger := slog.New(slog.NewTextHandler(os.Stdout, nil))
-	slog.SetDefault(logger)
 
 	cfg, err := config.NewConfig()
 	if err != nil {
 		slog.Error("Config error: " + err.Error())
+		os.Exit(1)
 	}
+	logger := slog.New(slog.NewTextHandler(os.Stdout, &slog.HandlerOptions{
+		Level: slog.Level(
+			cfg.ParseLogLevel(cfg.Log.Level),
+		),
+	}))
+	slog.SetDefault(logger)
 	db, err := database.InitDatabase()
 	if err != nil {
 		slog.Error("Error opening database connection: " + err.Error())
