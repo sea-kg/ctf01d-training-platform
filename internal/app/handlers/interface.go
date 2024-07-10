@@ -12,13 +12,22 @@ type Handlers struct {
 	DB *sql.DB
 }
 
-// ServerInterfaceWrapper wraps Handlers to conform to the generated interface
 type ServerInterfaceWrapper struct {
 	handlers *Handlers
 }
 
 func NewServerInterfaceWrapper(handlers *Handlers) *ServerInterfaceWrapper {
 	return &ServerInterfaceWrapper{handlers: handlers}
+}
+
+type SessionServerInterfaceWrapper struct {
+	sessionHandler *SessionHandler
+}
+
+func NewSessionServerInterfaceWrapper(handlers *Handlers) *SessionServerInterfaceWrapper {
+	return &SessionServerInterfaceWrapper{
+		sessionHandler: NewSessionHandler(handlers),
+	}
 }
 
 func (siw *ServerInterfaceWrapper) ListGames(w http.ResponseWriter, r *http.Request) {
@@ -41,16 +50,16 @@ func (siw *ServerInterfaceWrapper) UpdateGame(w http.ResponseWriter, r *http.Req
 	siw.handlers.UpdateGame(w, r, id)
 }
 
-func (siw *ServerInterfaceWrapper) PostApiV1AuthSignIn(w http.ResponseWriter, r *http.Request) {
-	siw.handlers.PostApiV1AuthSignIn(w, r)
+func (siw *SessionServerInterfaceWrapper) PostApiV1AuthSignIn(w http.ResponseWriter, r *http.Request) {
+	siw.sessionHandler.PostApiV1AuthSignIn(w, r)
 }
 
-func (siw *ServerInterfaceWrapper) PostApiV1AuthSignOut(w http.ResponseWriter, r *http.Request) {
-	siw.handlers.PostApiV1AuthSignOut(w, r)
+func (siw *SessionServerInterfaceWrapper) PostApiV1AuthSignOut(w http.ResponseWriter, r *http.Request) {
+	siw.sessionHandler.PostApiV1AuthSignOut(w, r)
 }
 
-func (siw *ServerInterfaceWrapper) ValidateSession(w http.ResponseWriter, r *http.Request) {
-	siw.handlers.ValidateSession(w, r)
+func (siw *SessionServerInterfaceWrapper) ValidateSession(w http.ResponseWriter, r *http.Request) {
+	siw.sessionHandler.ValidateSession(w, r)
 }
 
 func (siw *ServerInterfaceWrapper) ListResults(w http.ResponseWriter, r *http.Request) {
