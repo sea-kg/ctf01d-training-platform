@@ -2,10 +2,15 @@ package handlers
 
 import (
 	"ctf01d/internal/app/server"
+	"database/sql"
 	"net/http"
 
 	openapi_types "github.com/oapi-codegen/runtime/types"
 )
+
+type Handlers struct {
+	DB *sql.DB
+}
 
 // ServerInterfaceWrapper wraps Handlers to conform to the generated interface
 type ServerInterfaceWrapper struct {

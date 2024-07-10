@@ -1,7 +1,6 @@
 package handlers
 
 import (
-	"database/sql"
 	"encoding/json"
 	"log/slog"
 	"net/http"
@@ -14,10 +13,6 @@ import (
 
 	openapi_types "github.com/oapi-codegen/runtime/types"
 )
-
-type Handlers struct {
-	DB *sql.DB
-}
 
 func (h *Handlers) CreateGame(w http.ResponseWriter, r *http.Request) {
 	var game server.GameRequest
