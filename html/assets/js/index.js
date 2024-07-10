@@ -1,3 +1,4 @@
+import { ApiClient } from "./generated/src";
 
 var entityMap = {
     '&': '&amp;',

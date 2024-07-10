@@ -82,4 +82,4 @@ server-codegen:
 	oapi-codegen -generate models,chi -o internal/app/server/server.gen.go --package server api/openapi.yaml
 
 client-codegen:
-	docker run --rm -v ${PWD}/api/openapi.yaml:/local/api/openapi.yaml -v ${PWD}/html/assets/js/generated:/local/html/assets/js/generated openapitools/openapi-generator-cli generate -i /local/api/openapi.yaml -g javascript -o /local/html/assets/js/generated  --global-property apiDocs=false,modelDocs=false,apiTests=false,modelTests=false
+	docker run --rm -v ${PWD}/api/openapi.yaml:/local/api/openapi.yaml -v ${PWD}/html/assets/js/generated:/local/html/assets/js/generated openapitools/openapi-generator-cli generate -i /local/api/openapi.yaml -g javascript -o /local/html/assets/js/generated  --global-property apiDocs=false,modelDocs=false,apiTests=false,modelTests=false,generateAliasAsModel=false
