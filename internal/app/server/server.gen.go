@@ -13,6 +13,24 @@ import (
 	openapi_types "github.com/oapi-codegen/runtime/types"
 )
 
+// Defines values for ProfileResponseTeamRole.
+const (
+	ProfileResponseTeamRoleCaptain     ProfileResponseTeamRole = "captain"
+	ProfileResponseTeamRoleGuest       ProfileResponseTeamRole = "guest"
+	ProfileResponseTeamRoleOwner       ProfileResponseTeamRole = "owner"
+	ProfileResponseTeamRolePlayer      ProfileResponseTeamRole = "player"
+	ProfileResponseTeamRoleViceCaptain ProfileResponseTeamRole = "vice-captain"
+)
+
+// Defines values for TeamHistoryRole.
+const (
+	TeamHistoryRoleCaptain     TeamHistoryRole = "captain"
+	TeamHistoryRoleGuest       TeamHistoryRole = "guest"
+	TeamHistoryRoleOwner       TeamHistoryRole = "owner"
+	TeamHistoryRolePlayer      TeamHistoryRole = "player"
+	TeamHistoryRoleViceCaptain TeamHistoryRole = "vice-captain"
+)
+
 // Defines values for UserRequestRole.
 const (
 	UserRequestRoleAdmin  UserRequestRole = "admin"
@@ -57,20 +75,26 @@ type GameResponse struct {
 // ProfileResponse The response schema for a user's profile, including id, timestamps, team name, and team history.
 type ProfileResponse struct {
 	// CreatedAt The timestamp when the user profile was created.
-	CreatedAt *time.Time `json:"created_at,omitempty"`
+	CreatedAt time.Time `json:"created_at"`
 
 	// Id The unique identifier for the user.
-	Id *openapi_types.UUID `json:"id,omitempty"`
+	Id openapi_types.UUID `json:"id"`
 
 	// TeamHistory The list of teams the user has been part of, including the periods of membership.
 	TeamHistory *[]TeamHistory `json:"team_history,omitempty"`
 
 	// TeamName The current name of the user's team.
-	TeamName *string `json:"team_name,omitempty"`
+	TeamName string `json:"team_name"`
+
+	// TeamRole The current role of the user's team.
+	TeamRole ProfileResponseTeamRole `json:"team_role"`
 
 	// UpdatedAt The timestamp when the user profile was last updated.
 	UpdatedAt *time.Time `json:"updated_at,omitempty"`
 }
+
+// ProfileResponseTeamRole The current role of the user's team.
+type ProfileResponseTeamRole string
 
 // ResultRequest defines model for ResultRequest.
 type ResultRequest struct {
@@ -165,7 +189,13 @@ type TeamHistory struct {
 
 	// Name The name of the team.
 	Name string `json:"name"`
+
+	// Role Role of the user's team.
+	Role TeamHistoryRole `json:"role"`
 }
+
+// TeamHistoryRole Role of the user's team.
+type TeamHistoryRole string
 
 // TeamRequest defines model for TeamRequest.
 type TeamRequest struct {

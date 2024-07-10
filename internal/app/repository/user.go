@@ -51,17 +51,17 @@ func (r *userRepo) AddUserToTeams(ctx context.Context, userId openapi_types.UUID
 
 func (r *userRepo) GetProfileWithHistory(ctx context.Context, id openapi_types.UUID) (*models.ProfileWithHistory, error) {
 	query := `
-		SELECT teams.name, created_at, updated_at
+		SELECT profiles.id, teams.name, role, created_at, updated_at
 		FROM profiles JOIN teams on profiles.current_team_id=teams.id
 		WHERE profiles.user_id = $1
 	`
 	profile := models.Profile{}
-	err := r.db.QueryRowContext(ctx, query, id).Scan(&profile.CurrentTeam, &profile.CreatedAt, &profile.UpdatedAt)
+	err := r.db.QueryRowContext(ctx, query, id).Scan(&profile.Id, &profile.CurrentTeam, &profile.Role, &profile.CreatedAt, &profile.UpdatedAt)
 	if err != nil {
 		return nil, err
 	}
 	query = `
-	SELECT joined_at, left_at, name
+	SELECT joined_at, left_at, name, role
 		FROM team_history
 		JOIN teams ON teams.id = team_history.team_id
 		WHERE user_id = $1
@@ -70,7 +70,7 @@ func (r *userRepo) GetProfileWithHistory(ctx context.Context, id openapi_types.U
 	var history []models.ProfileTeams
 	for rows.Next() {
 		var team models.ProfileTeams
-		err := rows.Scan(&team.JoinedAt, &team.LeftAt, &team.Name)
+		err := rows.Scan(&team.JoinedAt, &team.LeftAt, &team.Name, &team.Role)
 		if err != nil {
 			return nil, err
 		}

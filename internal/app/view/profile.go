@@ -8,9 +8,11 @@ import (
 
 func NewProfileFromModel(p *db.ProfileWithHistory) *server.ProfileResponse {
 	return &server.ProfileResponse{
-		CreatedAt:   &p.Profile.CreatedAt,
+		Id:          p.Profile.Id,
+		CreatedAt:   p.Profile.CreatedAt,
 		UpdatedAt:   &p.Profile.UpdatedAt,
-		TeamName:    &p.Profile.CurrentTeam,
+		TeamName:    p.Profile.CurrentTeam,
+		TeamRole:    server.ProfileResponseTeamRole(p.Profile.Role),
 		TeamHistory: makeTeamHistory(p.History),
 	}
 }
@@ -22,6 +24,7 @@ func makeTeamHistory(tms []db.ProfileTeams) *[]server.TeamHistory {
 			Join: tm.JoinedAt,
 			Left: tm.LeftAt,
 			Name: tm.Name,
+			Role: server.TeamHistoryRole(tm.Role),
 		})
 	}
 	return &out
