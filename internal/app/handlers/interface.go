@@ -1,9 +1,10 @@
 package handlers
 
 import (
-	"ctf01d/internal/app/server"
 	"database/sql"
 	"net/http"
+
+	"ctf01d/internal/app/server"
 
 	openapi_types "github.com/oapi-codegen/runtime/types"
 )

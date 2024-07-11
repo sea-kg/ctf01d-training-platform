@@ -1,8 +1,9 @@
 package view
 
 import (
-	"ctf01d/internal/app/db"
 	"time"
+
+	"ctf01d/internal/app/db"
 
 	openapi_types "github.com/oapi-codegen/runtime/types"
 )

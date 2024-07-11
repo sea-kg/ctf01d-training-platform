@@ -10,7 +10,6 @@ import (
 )
 
 func DatabaseUpdate_update0013_update0013testdata(db *sql.DB, getInfo bool) (string, string, string, error) {
-
 	// WARNING!!!
 	// Do not change the update if it has already been installed by other developers or in production.
 	// To correct the database, create a new update and register it in the list of updates.

@@ -2,8 +2,9 @@ package repository
 
 import (
 	"context"
-	models "ctf01d/internal/app/db"
 	"database/sql"
+
+	models "ctf01d/internal/app/db"
 
 	openapi_types "github.com/oapi-codegen/runtime/types"
 )

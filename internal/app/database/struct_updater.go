@@ -1,14 +1,14 @@
 package database
 
 import (
-	"ctf01d/config"
-	// models "ctf01d/internal/app/db"
 	"database/sql"
 	"log/slog"
 	"reflect"
 	"runtime"
 	"strings"
 	"time"
+
+	"ctf01d/config"
 )
 
 type DatabaseUpdateFunc func(db *sql.DB, getInfo bool) (string, string, string, error)
@@ -172,7 +172,7 @@ func InitDatabase() (*sql.DB, error) {
 	allUpdates := RegisterAllUpdates()
 
 	var alreadyCheckedUpdates []string
-	var installedSomeUpdate = true
+	installedSomeUpdate := true
 
 	for installedSomeUpdate { // while
 		installedSomeUpdate = false

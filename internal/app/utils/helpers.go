@@ -1,13 +1,14 @@
 package helpers
 
 import (
-	"ctf01d/internal/app/server"
 	"encoding/json"
 	"log/slog"
 	"net/http"
 	"net/url"
 	"regexp"
 	"strings"
+
+	"ctf01d/internal/app/server"
 
 	"golang.org/x/crypto/bcrypt"
 )
