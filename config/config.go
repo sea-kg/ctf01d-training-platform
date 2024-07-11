@@ -29,10 +29,10 @@ type (
 	}
 )
 
-func NewConfig() (*Config, error) {
+func NewConfig(path string) (*Config, error) {
 	cfg := &Config{}
 
-	err := cleanenv.ReadConfig("./config/config.yml", cfg)
+	err := cleanenv.ReadConfig(path, cfg)
 	if err != nil {
 		return nil, fmt.Errorf("%w", err)
 	}

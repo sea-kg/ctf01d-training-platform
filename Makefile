@@ -58,11 +58,25 @@ stop-db:
 	fi
 
 # cleanup db and restart db and rebuild main app
-test-updates-db:
+reset-db:
 	make stop-db; \
 	sudo rm -rf docker_tmp/pg_data; \
 	make run-db; \
 	make build;
+
+# Setup test database and run tests
+test-db:
+	# Ensure the PostgreSQL container is running
+	@if ! [ $$(docker ps -q -f name=ctf01d-postgres) ]; then \
+		echo "Starting PostgreSQL container..."; \
+		docker start ctf01d-postgres; \
+	fi
+	# Remove test database if it exists
+	@docker exec -it ctf01d-postgres psql -U postgres -c "DROP DATABASE IF EXISTS ctf01d_training_platform_test;"
+	# Create a new test database
+	@docker exec -it ctf01d-postgres psql -U postgres -c "CREATE DATABASE ctf01d_training_platform_test;"
+	# Run the tests
+	@go test -v ./test/server_integration_test.go
 
 # Revome PostgreSQL container
 remove-db:

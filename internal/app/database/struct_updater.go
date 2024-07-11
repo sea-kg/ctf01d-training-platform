@@ -139,14 +139,8 @@ func contains(s []string, e string) bool {
 	return false
 }
 
-func InitDatabase() (*sql.DB, error) {
+func InitDatabase(cfg *config.Config) (*sql.DB, error) {
 	slog.Info("Initing database...")
-	cfg, err := config.NewConfig()
-	if err != nil {
-		slog.Error("Config error: " + err.Error())
-		return nil, err
-	}
-
 	db, err := sql.Open(cfg.DB.Driver, cfg.DB.DataSource)
 	if err != nil {
 		slog.Error("Error connecting to the database: " + err.Error())

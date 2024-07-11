@@ -106,7 +106,7 @@ func (r *userRepo) GetByUserName(ctx context.Context, name string) (*models.User
 }
 
 func (r *userRepo) Update(ctx context.Context, user *models.User) error {
-	query := `UPDATE users SET user_name = $1, avatar_url = $2, role = $3, status = $4, password_hash = $5, login = $6 WHERE id = $7`
+	query := `UPDATE users SET user_name = $1, avatar_url = $2, role = $3, status = $4, password_hash = $5, display_name = $6 WHERE id = $7`
 	_, err := r.db.ExecContext(ctx, query, user.Username, user.AvatarUrl, user.Role, user.Status, user.PasswordHash, user.DisplayName, user.Id)
 	return err
 }

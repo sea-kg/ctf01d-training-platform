@@ -15,7 +15,7 @@ import (
 )
 
 func main() {
-	cfg, err := config.NewConfig()
+	cfg, err := config.NewConfig("./config/config.development.yml")
 	if err != nil {
 		slog.Error("Config error: " + err.Error())
 		os.Exit(1)
@@ -26,7 +26,7 @@ func main() {
 		),
 	}))
 	slog.SetDefault(logger)
-	db, err := database.InitDatabase()
+	db, err := database.InitDatabase(cfg)
 	if err != nil {
 		slog.Error("Error opening database connection: " + err.Error())
 		return
