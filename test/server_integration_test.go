@@ -2,10 +2,11 @@ package server
 
 import (
 	"bytes"
+	"database/sql"
 	"encoding/json"
-	"fmt"
 	"net/http"
 	"net/http/httptest"
+	"os"
 	"testing"
 
 	"ctf01d/config"
@@ -13,25 +14,33 @@ import (
 	"ctf01d/internal/app/handlers"
 	"ctf01d/internal/app/server"
 
-	"github.com/jaswdr/faker"
-	_ "github.com/lib/pq"
-
-	"github.com/go-chi/chi/v5"
 	"github.com/go-openapi/loads"
 	"github.com/go-openapi/spec"
+	"github.com/jaswdr/faker"
+	_ "github.com/lib/pq"
 	"github.com/tidwall/gjson"
+
+	"github.com/go-chi/chi/v5"
 )
 
-func NewTestRouter() (http.Handler, error) {
+var db *sql.DB
+
+func TestMain(m *testing.M) {
 	cfg, err := config.NewConfig("../config/config.test.yml")
 	if err != nil {
-		return nil, err
-	}
-	db, err := database.InitDatabase(cfg)
-	if err != nil {
-		return nil, err
+		panic(err)
 	}
 
+	db, err = database.InitDatabase(cfg)
+	if err != nil {
+		panic(err)
+	}
+	code := m.Run()
+	db.Close()
+	os.Exit(code)
+}
+
+func NewTestRouter() (http.Handler, error) {
 	hndlrs := &handlers.Handlers{
 		DB: db,
 	}
@@ -64,7 +73,6 @@ func TestUserCRUD(t *testing.T) {
 			"password":     fake.Internet().Password(),
 		}
 		body, _ := json.Marshal(user)
-		fmt.Println(user)
 		req, _ := http.NewRequest("POST", "/api/v1/users", bytes.NewBuffer(body))
 		req.Header.Set("Content-Type", "application/json")
 		rr := httptest.NewRecorder()
@@ -160,9 +168,136 @@ func TestUserCRUD(t *testing.T) {
 		}
 	})
 
-	// 5. Удаление пользователя по ID
+	// 5. Получение профиля пользователя по ID (его нет, поэтому ожидаем 404)
+	t.Run("User Profile by ID", func(t *testing.T) {
+		req, _ := http.NewRequest("GET", "/api/v1/users/"+userID+"/profile", nil)
+		rr := httptest.NewRecorder()
+		r.ServeHTTP(rr, req)
+
+		if rr.Code != http.StatusNotFound {
+			t.Fatalf("expected status code 404, got %v", rr.Code)
+		}
+	})
+
+	// 6. Удаление пользователя по ID
 	t.Run("Delete User by ID", func(t *testing.T) {
 		req, _ := http.NewRequest("DELETE", "/api/v1/users/"+userID, nil)
+		rr := httptest.NewRecorder()
+		r.ServeHTTP(rr, req)
+
+		if rr.Code != http.StatusOK {
+			t.Fatalf("expected status code 200, got %v", rr.Code)
+		}
+	})
+}
+
+func TestServiceCRUD(t *testing.T) {
+	r, err := NewTestRouter()
+	if err != nil {
+		t.Fatalf("failed to initialize router: %v", err)
+	}
+
+	var serviceID string
+	faker := faker.New()
+
+	// 1. Создание сервиса
+	t.Run("Create Service", func(t *testing.T) {
+		service := map[string]interface{}{
+			"name":        faker.Company().Name(),
+			"author":      faker.Person().Name(),
+			"logo_url":    faker.Internet().URL(),
+			"description": faker.Lorem().Sentence(10),
+			"is_public":   faker.Bool(),
+		}
+		body, _ := json.Marshal(service)
+		req, _ := http.NewRequest("POST", "/api/v1/services", bytes.NewBuffer(body))
+		req.Header.Set("Content-Type", "application/json")
+		rr := httptest.NewRecorder()
+		r.ServeHTTP(rr, req)
+
+		if rr.Code != http.StatusOK {
+			t.Fatalf("expected status code 200, got %v", rr.Code)
+		}
+	})
+
+	// 2. Получение всех сервисов и использование ID последнего
+	t.Run("Get All Services", func(t *testing.T) {
+		req, _ := http.NewRequest("GET", "/api/v1/services", nil)
+		rr := httptest.NewRecorder()
+		r.ServeHTTP(rr, req)
+
+		if rr.Code != http.StatusOK {
+			t.Fatalf("expected status code 200, got %v", rr.Code)
+		}
+
+		var services []map[string]interface{}
+		if err := json.Unmarshal(rr.Body.Bytes(), &services); err != nil {
+			t.Fatalf("could not unmarshal response: %v", err)
+		}
+
+		if len(services) == 0 {
+			t.Fatalf("expected at least one service")
+		}
+
+		lastService := services[len(services)-1]
+		serviceID = lastService["id"].(string)
+		if serviceID == "" {
+			t.Fatalf("expected service ID in response")
+		}
+	})
+
+	// 3. Получение сервиса по ID
+	t.Run("Get Service by ID", func(t *testing.T) {
+		req, _ := http.NewRequest("GET", "/api/v1/services/"+serviceID, nil)
+		rr := httptest.NewRecorder()
+		r.ServeHTTP(rr, req)
+
+		if rr.Code != http.StatusOK {
+			t.Fatalf("expected status code 200, got %v", rr.Code)
+		}
+
+		var response map[string]interface{}
+		if err := json.Unmarshal(rr.Body.Bytes(), &response); err != nil {
+			t.Fatalf("could not unmarshal response: %v", err)
+		}
+
+		if response["id"] != serviceID {
+			t.Fatalf("expected service ID %v, got %v", serviceID, response["id"])
+		}
+	})
+
+	// 4. Обновление сервиса по ID
+	t.Run("Update Service by ID", func(t *testing.T) {
+		updatedService := map[string]interface{}{
+			"name":        faker.Company().Name(),
+			"author":      faker.Person().Name(),
+			"logo_url":    faker.Internet().URL(),
+			"description": faker.Lorem().Sentence(10),
+			"is_public":   faker.Bool(),
+		}
+		body, _ := json.Marshal(updatedService)
+		req, _ := http.NewRequest("PUT", "/api/v1/services/"+serviceID, bytes.NewBuffer(body))
+		req.Header.Set("Content-Type", "application/json")
+		rr := httptest.NewRecorder()
+		r.ServeHTTP(rr, req)
+
+		if rr.Code != http.StatusOK {
+			t.Fatalf("expected status code 200, got %v", rr.Code)
+		}
+
+		var response map[string]interface{}
+		if err := json.Unmarshal(rr.Body.Bytes(), &response); err != nil {
+			t.Fatalf("could not unmarshal response: %v", err)
+		}
+
+		if response["data"] != "Game updated successfully" {
+			t.Fatalf("expected 'Game updated successfully', got %v", response["data"])
+		}
+	})
+
+	// 5. Удаление сервиса по ID
+	t.Run("Delete Service by ID", func(t *testing.T) {
+		req, _ := http.NewRequest("DELETE", "/api/v1/services/"+serviceID, nil)
 		rr := httptest.NewRecorder()
 		r.ServeHTTP(rr, req)
 

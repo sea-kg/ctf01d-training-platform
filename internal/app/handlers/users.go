@@ -77,8 +77,8 @@ func (h *Handlers) GetProfileById(w http.ResponseWriter, r *http.Request, id ope
 	repo := repository.NewUserRepository(h.DB)
 	userProfile, err := repo.GetProfileWithHistory(r.Context(), id)
 	if err != nil {
-		slog.Warn(err.Error(), "handler", "GetProfileByIdHandler")
-		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to fetch user"})
+		slog.Info(err.Error(), "handler", "GetProfileByIdHandler")
+		api_helpers.RespondWithJSON(w, http.StatusNotFound, map[string]string{"data": "User have not profile"})
 		return
 	}
 	api_helpers.RespondWithJSON(w, http.StatusOK, view.NewProfileFromModel(userProfile))
