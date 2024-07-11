@@ -20,19 +20,13 @@ type GameDetails struct {
 	StartTime   time.Time          `json:"start_time"`
 	EndTime     time.Time          `json:"end_time"`
 	Description string             `json:"description,omitempty"`
-	Teams       []TeamDetails      `json:"team_details,omitempty"`
+	Teams       []Teams            `json:"team_details,omitempty"`
 }
 
-type TeamDetails struct {
+type Teams struct {
 	Id          openapi_types.UUID `json:"id"`
 	Name        string             `json:"name"`
 	Description string             `json:"description"`
-	Members     []Member           `json:"members"`
-}
-
-type Member struct {
-	Id       openapi_types.UUID `json:"id"`
-	UserName string             `json:"user_name"`
 }
 
 func NewGameFromModel(m *db.Game) *Game {
@@ -45,20 +39,12 @@ func NewGameFromModel(m *db.Game) *Game {
 }
 
 func NewGameDetailsFromModel(m *db.GameDetails) *GameDetails {
-	teams := make([]TeamDetails, 0, len(m.TeamDetails))
-	for _, t := range m.TeamDetails {
-		members := make([]Member, 0, len(t.Members))
-		for _, u := range t.Members {
-			members = append(members, Member{
-				Id:       u.Id,
-				UserName: u.Username,
-			})
-		}
-		teams = append(teams, TeamDetails{
+	teams := make([]Teams, 0, len(m.Teams))
+	for _, t := range m.Teams {
+		teams = append(teams, Teams{
 			Id:          t.Id,
 			Name:        t.Name,
 			Description: t.Description,
-			Members:     members,
 		})
 	}
 

@@ -11,8 +11,3 @@ type Team struct {
 	SocialLinks  string `db:"social_links"`
 	AvatarUrl    string `db:"avatar_url"`
 }
-
-type TeamDetails struct {
-	Team
-	Members []*User
-}

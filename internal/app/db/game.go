@@ -15,5 +15,5 @@ type Game struct {
 
 type GameDetails struct {
 	Game
-	TeamDetails []*TeamDetails
+	Teams []*Team
 }

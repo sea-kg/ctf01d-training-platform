@@ -7,6 +7,7 @@ import (
 
 	models "ctf01d/internal/app/db"
 
+	"github.com/google/uuid"
 	openapi_types "github.com/oapi-codegen/runtime/types"
 )
 
@@ -35,12 +36,10 @@ func (r *gameRepo) Create(ctx context.Context, game *models.Game) error {
 
 func (r *gameRepo) GetGameDetails(ctx context.Context, id openapi_types.UUID) (*models.GameDetails, error) {
 	query := `
-        SELECT g.id, g.start_time, g.end_time, g.description, t.id, t.name, t.description, u.id, u.user_name
+        SELECT g.id, g.start_time, g.end_time, g.description, t.id, t.name, t.description
         FROM games g
-        JOIN team_games tg ON g.id = tg.game_id
-        JOIN teams t ON tg.team_id = t.id
-        JOIN profiles tm ON t.id = tm.current_team_id
-        JOIN users u ON tm.user_id = u.id
+        LEFT JOIN team_games tg ON g.id = tg.game_id
+        LEFT JOIN teams t ON tg.team_id = t.id
         WHERE g.id = $1;
     `
 	rows, err := r.db.QueryContext(ctx, query, id)
@@ -50,39 +49,43 @@ func (r *gameRepo) GetGameDetails(ctx context.Context, id openapi_types.UUID) (*
 	defer rows.Close()
 
 	gameDetails := &models.GameDetails{}
-	teams := map[openapi_types.UUID]*models.TeamDetails{}
+	teams := make(map[uuid.UUID]models.Team)
 
 	for rows.Next() {
 		var gameId openapi_types.UUID
 		var startTime, endTime time.Time
 		var description string
-		var teamId openapi_types.UUID
-		var teamName string
-		var teamDescription string
-		var userId openapi_types.UUID
-		var userName string
+		var teamId sql.NullString
+		var teamName sql.NullString
+		var teamDescription sql.NullString
 
-		err := rows.Scan(&gameId, &startTime, &endTime, &description, &teamId, &teamName, &teamDescription, &userId, &userName)
+		err := rows.Scan(&gameId, &startTime, &endTime, &description, &teamId, &teamName, &teamDescription)
 		if err != nil {
 			return nil, err
 		}
 
-		if team, ok := teams[teamId]; ok {
-			team.Members = append(team.Members, &models.User{Id: userId, Username: userName})
-		} else {
-			newTeam := &models.TeamDetails{
-				Team: models.Team{
-					Id:          teamId,
-					Name:        teamName,
-					Description: teamDescription,
-				},
-				Members: []*models.User{{Id: userId, Username: userName}},
+		gameDetails.Id = id
+		gameDetails.StartTime = startTime
+		gameDetails.EndTime = endTime
+		gameDetails.Description = description
+		if teamId.Valid {
+			teamUUID, err := uuid.Parse(teamId.String)
+			if err != nil {
+				return nil, err
 			}
-
-			teams[teamId] = newTeam
-			gameDetails.TeamDetails = append(gameDetails.TeamDetails, newTeam)
+			team := models.Team{
+				Id:          teamUUID,
+				Name:        teamName.String,
+				Description: teamDescription.String,
+			}
+			teams[teamUUID] = team
 		}
 	}
+
+	for _, team := range teams {
+		gameDetails.Teams = append(gameDetails.Teams, &team)
+	}
+
 	return gameDetails, nil
 }
 
