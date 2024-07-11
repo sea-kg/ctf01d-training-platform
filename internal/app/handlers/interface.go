@@ -134,12 +134,12 @@ func (siw *ServerInterfaceWrapper) UpdateUser(w http.ResponseWriter, r *http.Req
 	siw.handlers.UpdateUser(w, r, id)
 }
 
-func (siw *ServerInterfaceWrapper) PostApiV1ServicesServiceIdUploadChecker(w http.ResponseWriter, r *http.Request, id openapi_types.UUID) {
-	siw.handlers.PostApiV1ServicesUuidUploadChecker(w, r, id)
+func (siw *ServerInterfaceWrapper) PostApiV1ServicesServiceIdChecker(w http.ResponseWriter, r *http.Request, id openapi_types.UUID) {
+	siw.handlers.PostApiV1ServicesUuidChecker(w, r, id)
 }
 
-func (siw *ServerInterfaceWrapper) PostApiV1ServicesServiceIdUploadService(w http.ResponseWriter, r *http.Request, id openapi_types.UUID) {
-	siw.handlers.PostApiV1ServicesUuidUploadService(w, r, id)
+func (siw *ServerInterfaceWrapper) PostApiV1ServicesServiceIdService(w http.ResponseWriter, r *http.Request, id openapi_types.UUID) {
+	siw.handlers.PostApiV1ServicesUuidService(w, r, id)
 }
 
 func (siw *ServerInterfaceWrapper) PostApiV1TeamsTeamIdUsersUserId(w http.ResponseWriter, r *http.Request, teamId openapi_types.UUID, userId openapi_types.UUID) {

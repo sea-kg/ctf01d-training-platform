@@ -729,7 +729,7 @@ paths:
       responses:
         '200':
           description: Service deleted successfully
-  /api/v1/services/{serviceId}/upload/checker:
+  /api/v1/services/{serviceId}/checker:
     post:
       tags:
         - Services
@@ -760,7 +760,7 @@ paths:
           content:
             application/json:
               {}
-  /api/v1/services/{serviceId}/upload/service:
+  /api/v1/services/{serviceId}/service:
     post:
       summary: Upload zip service
       description: |

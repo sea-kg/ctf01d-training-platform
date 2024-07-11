@@ -273,13 +273,13 @@ type PostApiV1AuthSignInJSONBody struct {
 	UserName *string `json:"user_name,omitempty"`
 }
 
-// PostApiV1ServicesServiceIdUploadCheckerMultipartBody defines parameters for PostApiV1ServicesServiceIdUploadChecker.
-type PostApiV1ServicesServiceIdUploadCheckerMultipartBody struct {
+// PostApiV1ServicesServiceIdCheckerMultipartBody defines parameters for PostApiV1ServicesServiceIdChecker.
+type PostApiV1ServicesServiceIdCheckerMultipartBody struct {
 	File *openapi_types.File `json:"file,omitempty"`
 }
 
-// PostApiV1ServicesServiceIdUploadServiceMultipartBody defines parameters for PostApiV1ServicesServiceIdUploadService.
-type PostApiV1ServicesServiceIdUploadServiceMultipartBody struct {
+// PostApiV1ServicesServiceIdServiceMultipartBody defines parameters for PostApiV1ServicesServiceIdService.
+type PostApiV1ServicesServiceIdServiceMultipartBody struct {
 	File *openapi_types.File `json:"file,omitempty"`
 }
 
@@ -307,11 +307,11 @@ type CreateServiceJSONRequestBody = ServiceRequest
 // UpdateServiceJSONRequestBody defines body for UpdateService for application/json ContentType.
 type UpdateServiceJSONRequestBody = ServiceRequest
 
-// PostApiV1ServicesServiceIdUploadCheckerMultipartRequestBody defines body for PostApiV1ServicesServiceIdUploadChecker for multipart/form-data ContentType.
-type PostApiV1ServicesServiceIdUploadCheckerMultipartRequestBody PostApiV1ServicesServiceIdUploadCheckerMultipartBody
+// PostApiV1ServicesServiceIdCheckerMultipartRequestBody defines body for PostApiV1ServicesServiceIdChecker for multipart/form-data ContentType.
+type PostApiV1ServicesServiceIdCheckerMultipartRequestBody PostApiV1ServicesServiceIdCheckerMultipartBody
 
-// PostApiV1ServicesServiceIdUploadServiceMultipartRequestBody defines body for PostApiV1ServicesServiceIdUploadService for multipart/form-data ContentType.
-type PostApiV1ServicesServiceIdUploadServiceMultipartRequestBody PostApiV1ServicesServiceIdUploadServiceMultipartBody
+// PostApiV1ServicesServiceIdServiceMultipartRequestBody defines body for PostApiV1ServicesServiceIdService for multipart/form-data ContentType.
+type PostApiV1ServicesServiceIdServiceMultipartRequestBody PostApiV1ServicesServiceIdServiceMultipartBody
 
 // CreateTeamJSONRequestBody defines body for CreateTeam for application/json ContentType.
 type CreateTeamJSONRequestBody = TeamRequest
@@ -376,11 +376,11 @@ type ServerInterface interface {
 	// (PUT /api/v1/services/{serviceId})
 	UpdateService(w http.ResponseWriter, r *http.Request, serviceId openapi_types.UUID)
 	// Upload zip-archive
-	// (POST /api/v1/services/{serviceId}/upload/checker)
-	PostApiV1ServicesServiceIdUploadChecker(w http.ResponseWriter, r *http.Request, serviceId openapi_types.UUID)
+	// (POST /api/v1/services/{serviceId}/checker)
+	PostApiV1ServicesServiceIdChecker(w http.ResponseWriter, r *http.Request, serviceId openapi_types.UUID)
 	// Upload zip service
-	// (POST /api/v1/services/{serviceId}/upload/service)
-	PostApiV1ServicesServiceIdUploadService(w http.ResponseWriter, r *http.Request, serviceId openapi_types.UUID)
+	// (POST /api/v1/services/{serviceId}/service)
+	PostApiV1ServicesServiceIdService(w http.ResponseWriter, r *http.Request, serviceId openapi_types.UUID)
 	// List all teams
 	// (GET /api/v1/teams)
 	ListTeams(w http.ResponseWriter, r *http.Request)
@@ -529,14 +529,14 @@ func (_ Unimplemented) UpdateService(w http.ResponseWriter, r *http.Request, ser
 }
 
 // Upload zip-archive
-// (POST /api/v1/services/{serviceId}/upload/checker)
-func (_ Unimplemented) PostApiV1ServicesServiceIdUploadChecker(w http.ResponseWriter, r *http.Request, serviceId openapi_types.UUID) {
+// (POST /api/v1/services/{serviceId}/checker)
+func (_ Unimplemented) PostApiV1ServicesServiceIdChecker(w http.ResponseWriter, r *http.Request, serviceId openapi_types.UUID) {
 	w.WriteHeader(http.StatusNotImplemented)
 }
 
 // Upload zip service
-// (POST /api/v1/services/{serviceId}/upload/service)
-func (_ Unimplemented) PostApiV1ServicesServiceIdUploadService(w http.ResponseWriter, r *http.Request, serviceId openapi_types.UUID) {
+// (POST /api/v1/services/{serviceId}/service)
+func (_ Unimplemented) PostApiV1ServicesServiceIdService(w http.ResponseWriter, r *http.Request, serviceId openapi_types.UUID) {
 	w.WriteHeader(http.StatusNotImplemented)
 }
 
@@ -956,8 +956,8 @@ func (siw *ServerInterfaceWrapper) UpdateService(w http.ResponseWriter, r *http.
 	handler.ServeHTTP(w, r.WithContext(ctx))
 }
 
-// PostApiV1ServicesServiceIdUploadChecker operation middleware
-func (siw *ServerInterfaceWrapper) PostApiV1ServicesServiceIdUploadChecker(w http.ResponseWriter, r *http.Request) {
+// PostApiV1ServicesServiceIdChecker operation middleware
+func (siw *ServerInterfaceWrapper) PostApiV1ServicesServiceIdChecker(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 
 	var err error
@@ -972,7 +972,7 @@ func (siw *ServerInterfaceWrapper) PostApiV1ServicesServiceIdUploadChecker(w htt
 	}
 
 	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		siw.Handler.PostApiV1ServicesServiceIdUploadChecker(w, r, serviceId)
+		siw.Handler.PostApiV1ServicesServiceIdChecker(w, r, serviceId)
 	}))
 
 	for _, middleware := range siw.HandlerMiddlewares {
@@ -982,8 +982,8 @@ func (siw *ServerInterfaceWrapper) PostApiV1ServicesServiceIdUploadChecker(w htt
 	handler.ServeHTTP(w, r.WithContext(ctx))
 }
 
-// PostApiV1ServicesServiceIdUploadService operation middleware
-func (siw *ServerInterfaceWrapper) PostApiV1ServicesServiceIdUploadService(w http.ResponseWriter, r *http.Request) {
+// PostApiV1ServicesServiceIdService operation middleware
+func (siw *ServerInterfaceWrapper) PostApiV1ServicesServiceIdService(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 
 	var err error
@@ -998,7 +998,7 @@ func (siw *ServerInterfaceWrapper) PostApiV1ServicesServiceIdUploadService(w htt
 	}
 
 	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		siw.Handler.PostApiV1ServicesServiceIdUploadService(w, r, serviceId)
+		siw.Handler.PostApiV1ServicesServiceIdService(w, r, serviceId)
 	}))
 
 	for _, middleware := range siw.HandlerMiddlewares {
@@ -1545,10 +1545,10 @@ func HandlerWithOptions(si ServerInterface, options ChiServerOptions) http.Handl
 		r.Put(options.BaseURL+"/api/v1/services/{serviceId}", wrapper.UpdateService)
 	})
 	r.Group(func(r chi.Router) {
-		r.Post(options.BaseURL+"/api/v1/services/{serviceId}/upload/checker", wrapper.PostApiV1ServicesServiceIdUploadChecker)
+		r.Post(options.BaseURL+"/api/v1/services/{serviceId}/checker", wrapper.PostApiV1ServicesServiceIdChecker)
 	})
 	r.Group(func(r chi.Router) {
-		r.Post(options.BaseURL+"/api/v1/services/{serviceId}/upload/service", wrapper.PostApiV1ServicesServiceIdUploadService)
+		r.Post(options.BaseURL+"/api/v1/services/{serviceId}/service", wrapper.PostApiV1ServicesServiceIdService)
 	})
 	r.Group(func(r chi.Router) {
 		r.Get(options.BaseURL+"/api/v1/teams", wrapper.ListTeams)
