@@ -474,6 +474,215 @@ function renderUsersPage() {
     });
 }
 
+window.inited_autocomplete_universities = false;
+window.cache_universities = {
+    "": "00000000-0000-0000-0000-000000000000",
+    "Без университета": "00000000-0000-0000-0000-000000000000",
+}
+
+function initAutocomleteUniversities() {
+    if (window.inited_autocomplete_universities) {
+        return;
+    }
+    window.inited_autocomplete_universities = true;
+
+    // Docs look here: https://bootstrap-autocomplete.readthedocs.io/en/latest/
+
+    $('#team_create_university').autoComplete({
+        resolver: 'custom',
+        minLength: 1,
+        events: {
+            search: function (qry, callback) {
+                // let's do a custom ajax call
+                ctf01d_tp_api.univercities_list(qry).fail(function() {
+                    callback([
+                        { "value": window.cache_universities[""], "text": "Без университета" },
+                    ]);
+                }).done(function(res) {
+                    console.log(res);
+                    var _list = [];
+                    for (var i = 0; i < res.length; i++) {
+                        var _guid = res[i]["id"];
+                        var _name = res[i]["name"];
+                        window.cache_universities[_name] = _guid;
+                        _list.push({ "value": _guid, "text": _name });
+                    }
+                    _list.push({ "value": window.cache_universities[""], "text": "Без университета" });
+                    callback(_list);
+                });
+            }
+        }
+    });
+}
+
+function showCreateTeam() {
+    $('#teams_edit_or_create_team_error').css({ "display": "none" });
+    $('#teams_edit_or_create_team_error').html("");
+
+    initAutocomleteUniversities();
+
+    $('#team_update_team_id').val("");
+    $('#team_create_name').val("");
+    $('#team_create_description').val("");
+    $('#team_create_social_links').val("");
+    $('#team_create_avatar_url').val("");
+    $('#team_create_university').val("");
+    $('#btn_team_create_or_update').html("Create");
+    $('#title_team_create_or_update').html("New Team");
+    $('#modal_edit_or_create_team').modal('show');
+}
+
+function showUpdateTeam(team_id) {
+    $('#teams_edit_or_create_team_error').css({ "display": "none" });
+    $('#teams_edit_or_create_team_error').html("");
+
+    $('#title_team_create_or_update').html("Update Team");
+    $('#btn_team_create_or_update').html("Update");
+
+    console.log("team_id", team_id);
+    initAutocomleteUniversities();
+
+    $('#btn_service_create_or_update').html("Update");
+
+    window.ctf01d_tp_api.team_info(team_id).fail(function(res) {
+        $('#teams_edit_or_create_team_error').css({
+            "display": "block"
+        });
+        $('#teams_edit_or_create_team_error').html("Error get team info");
+    }).done(function(res) {
+        console.log("showUpdateTeam", res)
+        $('#team_update_team_id').val(res["id"]);
+        $('#title_team_create_or_update').html("Update Team #" + res["id"]);
+
+        $('#team_create_name').val(res["name"]);
+        $('#team_create_description').val(res["description"]);
+        $('#team_create_social_links').val(res["social_links"]);
+        $('#team_create_avatar_url').val(res["avatar_url"]);
+        $('#team_create_university').val(res["university"]);
+
+        // fill cache
+        ctf01d_tp_api.univercities_list(res["university"]).done(function(res) {
+            for (var i = 0; i < res.length; i++) {
+                var _guid = res[i]["id"];
+                var _name = res[i]["name"];
+                window.cache_universities[_name] = _guid;
+                console.log(window.cache_universities)
+            }
+        })
+        $('#modal_edit_or_create_team').modal('show');
+    })
+}
+
+function deleteTeam(team_id) {
+    $('#teams_page_error').css({"display": "none"});
+    $('#teams_page_error').html("");
+    window.ctf01d_tp_api.team_delete(team_id).fail(function(res) {
+        $('#teams_page_error').css({
+            "display": "block"
+        });
+        $('#teams_page_error').html("Error delete team");
+        console.error("teams_list", res);
+    }).done(function(res) {
+        showSuccessNotification('Teams deleted successfully!')
+        renderTeamsPage();
+    })
+}
+
+function teamCreateOrUpdate() {
+    $('#teams_edit_or_create_team_error').css({ "display": "none" });
+    $('#teams_edit_or_create_team_error').html("");
+
+    var team_id = $('#team_update_team_id').val();
+
+    var team_name = $('#team_create_name').val();
+    var team_description = $('#team_create_description').val();
+    var team_social_links = $('#team_create_social_links').val();
+    var team_avatar_url = $('#team_create_avatar_url').val();
+    var team_university_name = $('#team_create_university').val();
+    var team_university_id = window.cache_universities[team_university_name];
+
+    var team_data = {
+        name: team_name,
+        description: team_description,
+        social_links: team_social_links,
+        avatar_url: team_avatar_url,
+        university_id: team_university_id
+    };
+
+    if (team_id == "") {
+        window.ctf01d_tp_api.team_create(team_data).fail(function (res) {
+            $('#teams_edit_or_create_team_error').css({ "display": "block" });
+            $('#teams_edit_or_create_team_error').html("Error creating team");
+            console.error("team_create: ", res);
+            if (res.responseJSON !== undefined) {
+                $('#teams_edit_or_create_team_error').html("Error creating team: " + res.responseJSON["error"]);
+            }
+        }).done(function (res) {
+            $('#modal_edit_or_create_team').modal('hide');
+            showSuccessNotification('Team created successfully!');
+            renderTeamsPage();
+        });
+    } else {
+        window.ctf01d_tp_api.team_update(team_id, team_data).fail(function (res) {
+            $('#teams_edit_or_create_team_error').css({ "display": "block" });
+            $('#teams_edit_or_create_team_error').html("Error updating user");
+            console.error(res);
+        }).done(function (res) {
+            console.log(res);
+            $('#modal_edit_or_create_team').modal('hide');
+            showSuccessNotification('Team updated successfully!');
+            renderTeamsPage();
+        });
+    }
+}
+
+function renderTeamsPage() {
+    $('.spa-web-page').css({"display": ""})
+    $('#teams_page').css({"display": "block"})
+    $('#teams_page_error').css({"display": "none"});
+    $('#teams_page_error').html("");
+    if (window.location.pathname != "/teams/") {
+        window.location.href = "/teams/";
+    }
+    window.ctf01d_tp_api.teams_list().fail(function(res) {
+        $('#teams_page_error').css({
+            "display": "block"
+        });
+        $('#teams_page_error').html("Error loading services");
+        console.error("teams_list", res);
+    }).done(function(res) {
+        var teamsHtml = ""
+        for (var i in res) {
+            var team_info = res[i];
+            console.log("team_info", team_info);
+            teamsHtml += '<div class="card services-card" style="width: 18rem;">';
+            teamsHtml += '  <img class="card-img-top" src="' + team_info.avatar_url + '" alt="Image of service">';
+            teamsHtml += '  <div class="card-body">';
+            teamsHtml += '    <h5 class="card-title"><small>team#' + team_info.id + '</small><br>' + escapeHtml(team_info.name) + '</h5>'; // TODO uuid
+            teamsHtml += '    <p class="card-text">' + escapeHtml(team_info.description) + '</p>';
+            // teamsHtml += '    <p class="card-text"> by ' + escapeHtml(team_info.author) + '</p>';
+            // TODO
+            // teamsHtml += '    <small>' + getHumanTimeHasPassed(new Date(game_info.end_time)) + '</small>';
+            teamsHtml += '  </div>';
+            teamsHtml += '  <ul class="list-group list-group-flush">';
+            teamsHtml += '    <li class="list-group-item">' + escapeHtml(team_info.university) + '</li>';
+            // teamsHtml += '    <li class="list-group-item">Dapibus ac facilisis in</li>';
+            // teamsHtml += '    <li class="list-group-item">Vestibulum at eros</li>';
+            teamsHtml += '  </ul>';
+            teamsHtml += '  <div class="card-body">';
+            teamsHtml += '    <button class="btn btn-primary" onclick="showUpdateTeam(\'' + team_info.id + '\');">Update</button>';
+            teamsHtml += '    <button class="btn btn-danger" onclick="deleteTeam(\'' + team_info.id + '\');">Delete</button>';
+            teamsHtml += '  </div>';
+            teamsHtml += '</div>';
+
+            // teamsHtml += '  <div id="game_teams_' + game_info.id + '"> ' + new Date(game_info.end_time) + '</div>';
+            // teamsHtml += '</div>';
+            // updateGameTeams('service_teams_' + game_info.id, game_info.id)
+        }
+        $('#teams_page_list').html(teamsHtml);
+    })
+}
+
 function renderPage(pathname) {
     console.log("pathname", pathname)
     if (pathname == "/") {
@@ -488,10 +697,7 @@ function renderPage(pathname) {
     } else if (isUsersPage(pathname)) {
         renderUsersPage();
     } else if (isTeamsPage(pathname)) {
-        $('#teams_page').css({"display": "block"})
-        $('.spa-web-page').css({
-            "display": ""
-        })
+        renderTeamsPage();
     } else {
         $('.spa-web-page').css({
             "display": ""
@@ -522,10 +728,9 @@ function showMyTeams(userId) {
     });
 }
 
-
-$(document).ready(function () {
-    console.log("Ready")
-    renderPage(window.location.pathname)
+$(document).ready(function() {
+    console.log("Ready");
+    renderPage(window.location.pathname);
 
     window.ctf01d_tp_api.auth_session().fail(function(res) {
         console.error(res);

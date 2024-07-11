@@ -1069,7 +1069,8 @@ components:
           type: string
           description: A brief description of the team
         university_id:
-          type: integer
+          type: string
+          format: uuid
           description: University or institution the team is associated with
         social_links:
           type: string

@@ -15,6 +15,7 @@
     <script src="./assets/js/vendor/popper.min.js?v=1.1"></script>
     <script src="./assets/js/vendor/bootstrap.min.js?v=1.0"></script>
     <script src="./assets/js/vendor/bootstrap-notify.min.js?v=1.0"></script>
+    <script src="https://cdn.jsdelivr.net/gh/xcash/bootstrap-autocomplete@v2.3.7/dist/latest/bootstrap-autocomplete.min.js"></script>
     <script src="./assets/js/api.js?v=1.0"></script>
     <script src="./assets/js/index.js?v=1.0"></script>
   </head>
@@ -248,12 +249,63 @@
     <!-- TEAMS PAGE -->
     <div class="container spa-web-page" id="teams_page">
       <br>
-      <div class="card">
-        <div class="card-header">
-          <strong class="card-title">Teams</strong>
-        </div>
+      <button type="button" class="btn btn-primary" data-toggle="modal" onclick="showCreateTeam()">
+        New Team
+      </button>
+      <br><br>
+      <div class="alert alert-danger" role="alert" style="display: none;" id="teams_page_error">
+        Something wrong
+      </div>
+      <div id="teams_page_list">
       </div>
       <br>
+    </div>
+
+    <div class="modal fade" id="modal_edit_or_create_team" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="title_team_create_or_update">New Team</h5>
+          </div>
+          <div class="modal-body">
+            <form>
+              <input type="hidden" id="team_update_team_id" value="" name="team_id">
+              <div class="form-group">
+                <label for="team_create_name" class="col-form-label">Name:</label>
+                <input type="text" class="form-control" id="team_create_name" placeholder="Name" required>
+              </div>
+              <div class="form-group">
+                <label for="team_create_description" class="col-form-label">Description:</label>
+                <input type="text" class="form-control" id="team_create_description" placeholder="Description" name="description" required>
+              </div>
+              <div class="form-group">
+                <label for="team_create_social_links" class="col-form-label">Social Link:</label>
+                <input type="text" class="form-control" id="team_create_social_links" placeholder="Social Link" required>
+              </div>
+              <div class="form-group">
+                <label for="team_create_avatar_url" class="col-form-label">Avatar URL:</label>
+                <input type="text" class="form-control" id="team_create_avatar_url" placeholder="Avatar URL" required>
+              </div>
+              <div class="form-group">
+                <label for="team_create_university" class="col-form-label">Университет</label>
+                <input type="text" id="team_create_university" class="form-control basicAutoComplete" placeholder="Начните набирать..." required autocomplete="off"></input>
+                <div id="choose_list_university"></div>
+              </div>
+              <!-- div class="form-group">
+                <label for="game_create_start_time" class="col-form-label">Start Time:</label>
+                <input type="datetime-local" class="form-control" id="game_create_start_time" name="start_time" required>
+              </div -->
+            </form>
+            <div class="alert alert-danger" role="alert" style="display: none;" id="teams_edit_or_create_team_error">
+              Something wrong
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" id="btn_team_create_or_update" onclick="teamCreateOrUpdate()">Create</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- USERS PAGE -->
@@ -271,6 +323,7 @@
       </div>
       <br>
     </div>
+
     <div class="modal fade" id="modal_edit_or_create_user" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">

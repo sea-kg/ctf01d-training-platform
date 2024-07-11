@@ -182,7 +182,7 @@ type TeamRequest struct {
 	SocialLinks *string `json:"social_links,omitempty"`
 
 	// UniversityId University or institution the team is associated with
-	UniversityId int `json:"university_id"`
+	UniversityId openapi_types.UUID `json:"university_id"`
 }
 
 // TeamResponse defines model for TeamResponse.
