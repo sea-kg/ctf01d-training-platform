@@ -24,7 +24,7 @@ func (h *Handlers) CreateUser(w http.ResponseWriter, r *http.Request) {
 	}
 	repo := repository.NewUserRepository(h.DB)
 	passwordHash, err := api_helpers.HashPassword(*user.Password)
-	slog.Info("user.password " + passwordHash)
+	slog.Debug("user.password " + passwordHash)
 	if err != nil {
 		slog.Warn(err.Error(), "handler", "CreateUserHandler")
 		api_helpers.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Invalid request payload"})
@@ -42,7 +42,7 @@ func (h *Handlers) CreateUser(w http.ResponseWriter, r *http.Request) {
 		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to create user"})
 		return
 	}
-	if len(*user.TeamIds) > 0 {
+	if user.TeamIds != nil && len(*user.TeamIds) > 0 {
 		if err := repo.AddUserToTeams(r.Context(), newUser.Id, user.TeamIds); err != nil {
 			slog.Warn(err.Error(), "handler", "CreateUserHandler")
 			api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to add user to teams"})
@@ -112,6 +112,7 @@ func (h *Handlers) UpdateUser(w http.ResponseWriter, r *http.Request, id openapi
 	repo := repository.NewUserRepository(h.DB)
 	updateUser := &dbmodels.User{
 		Username:     *user.UserName,
+		DisplayName:  *user.DisplayName,
 		Role:         *user.Role,
 		Status:       *user.Status,
 		PasswordHash: passwordHash,
