@@ -307,6 +307,119 @@ func TestServiceCRUD(t *testing.T) {
 	})
 }
 
+func TestTeamCRUD(t *testing.T) {
+	r, err := NewTestRouter()
+	if err != nil {
+		t.Fatalf("failed to initialize router: %v", err)
+	}
+
+	var teamID string
+	faker := faker.New()
+	// 1. Создание команды
+	t.Run("Create Team", func(t *testing.T) {
+		team := map[string]interface{}{
+			"name":         faker.Gamer().Tag(),
+			"description":  faker.Lorem().Sentence(10),
+			"social_links": faker.Internet().URL(),
+			"avatar_url":   faker.Internet().URL(),
+		}
+		body, _ := json.Marshal(team)
+		req, _ := http.NewRequest("POST", "/api/v1/teams", bytes.NewBuffer(body))
+		req.Header.Set("Content-Type", "application/json")
+		rr := httptest.NewRecorder()
+		r.ServeHTTP(rr, req)
+
+		if rr.Code != http.StatusOK {
+			t.Fatalf("expected status code 200, got %v", rr.Code)
+		}
+	})
+
+	// 2. Получение всех команд и использование ID последней
+	t.Run("Get All Teams", func(t *testing.T) {
+		req, _ := http.NewRequest("GET", "/api/v1/teams", nil)
+		rr := httptest.NewRecorder()
+		r.ServeHTTP(rr, req)
+
+		if rr.Code != http.StatusOK {
+			t.Fatalf("expected status code 200, got %v", rr.Code)
+		}
+
+		var teams []map[string]interface{}
+		if err := json.Unmarshal(rr.Body.Bytes(), &teams); err != nil {
+			t.Fatalf("could not unmarshal response: %v", err)
+		}
+
+		if len(teams) == 0 {
+			t.Fatalf("expected at least one team")
+		}
+
+		lastTeam := teams[len(teams)-1]
+		teamID = lastTeam["id"].(string)
+		if teamID == "" {
+			t.Fatalf("expected team ID in response")
+		}
+	})
+
+	// 3. Получение команды по ID
+	t.Run("Get Team by ID", func(t *testing.T) {
+		req, _ := http.NewRequest("GET", "/api/v1/teams/"+teamID, nil)
+		rr := httptest.NewRecorder()
+		r.ServeHTTP(rr, req)
+
+		if rr.Code != http.StatusOK {
+			t.Fatalf("expected status code 200, got %v", rr.Code)
+		}
+
+		var response map[string]interface{}
+		if err := json.Unmarshal(rr.Body.Bytes(), &response); err != nil {
+			t.Fatalf("could not unmarshal response: %v", err)
+		}
+
+		if response["id"] != teamID {
+			t.Fatalf("expected team ID %v, got %v", teamID, response["id"])
+		}
+	})
+
+	// 4. Обновление команды по ID
+	t.Run("Update Team by ID", func(t *testing.T) {
+		updatedTeam := map[string]interface{}{
+			"name":         faker.Gamer().Tag(),
+			"description":  faker.Lorem().Sentence(10),
+			"social_links": faker.Internet().URL(),
+			"avatar_url":   faker.Internet().URL(),
+		}
+		body, _ := json.Marshal(updatedTeam)
+		req, _ := http.NewRequest("PUT", "/api/v1/teams/"+teamID, bytes.NewBuffer(body))
+		req.Header.Set("Content-Type", "application/json")
+		rr := httptest.NewRecorder()
+		r.ServeHTTP(rr, req)
+
+		if rr.Code != http.StatusOK {
+			t.Fatalf("expected status code 200, got %v", rr.Code)
+		}
+
+		var response map[string]interface{}
+		if err := json.Unmarshal(rr.Body.Bytes(), &response); err != nil {
+			t.Fatalf("could not unmarshal response: %v", err)
+		}
+
+		if response["data"] != "Team updated successfully" {
+			t.Fatalf("expected 'Team updated successfully, got %v", response["data"])
+		}
+	})
+
+	// 5. Удаление команды по ID
+	t.Run("Delete Team by ID", func(t *testing.T) {
+		req, _ := http.NewRequest("DELETE", "/api/v1/teams/"+teamID, nil)
+		rr := httptest.NewRecorder()
+		r.ServeHTTP(rr, req)
+
+		if rr.Code != http.StatusOK {
+			t.Fatalf("expected status code 200, got %v", rr.Code)
+		}
+	})
+}
+
 func TestAPIEndpoints(t *testing.T) {
 	t.Skip()
 	doc, err := loads.Spec("../api/openapi.yaml")
