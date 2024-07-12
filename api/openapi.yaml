@@ -20,7 +20,7 @@ paths:
       description: >-
         Authenticates a user by user_name and password, starts a new session,
         and returns a session cookie.
-      operationId: SignInUser
+      operationId: signInUser
       requestBody:
         required: true
         content:
