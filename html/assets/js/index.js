@@ -716,13 +716,13 @@ function showMyTeams(userId) {
         for (var i in data.team_history) {
             var team = data.team_history[i];
             teamHistoryHtml += '<div class="team">';
-            teamHistoryHtml += '<div class="team-name">' + team.name + '</div>';
+            teamHistoryHtml += '<div class="team-name">[' + team.name + '] ' + team.role + '</div>';
             teamHistoryHtml += '<div class="team-dates">Joined at: ' + new Date(team.join).toLocaleString() +
                 (team.left ? ', Left at: ' + new Date(team.left).toLocaleString() : ', ... ') + '</div>';
             teamHistoryHtml += '</div>';
         }
         teamHistoryHtml += '</div>';
-        var currentTeamHtml = '<div class="current-team"><strong>Current Team: </strong>' + data.team_name + '</div>';
+        var currentTeamHtml = '<div class="current-team"><strong>Current Team: </strong>[' + data.team_name + '] ' + data.team_role + '</div>';
         $('#my_teams_content').html(currentTeamHtml + teamHistoryHtml);
         $('#modal_my_teams').modal('show');
     });

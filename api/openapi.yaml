@@ -892,6 +892,11 @@ components:
     ProfileResponse:
       type: object
       description: The response schema for a user's profile, including id, timestamps, team name, and team history.
+      required:
+        - id
+        - created_at
+        - team_name
+        - team_role
       properties:
         id:
           type: string
@@ -908,6 +913,15 @@ components:
         team_name:
           type: string
           description: The current name of the user's team.
+        team_role:
+          type: string
+          description: The current role of the user's team.
+          enum:
+            - owner
+            - captain
+            - vice-captain
+            - player
+            - guest
         team_history:
           type: array
           description: The list of teams the user has been part of, including the periods of membership.
@@ -917,12 +931,22 @@ components:
       required:
         - name
         - join
+        - role
       type: object
       description: The schema for recording the history of teams a user has joined and left.
       properties:
         name:
           type: string
           description: The name of the team.
+        role:
+          type: string
+          description: Role of the user's team.
+          enum:
+            - owner
+            - captain
+            - vice-captain
+            - player
+            - guest
         join:
           type: string
           format: date-time
