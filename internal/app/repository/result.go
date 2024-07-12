@@ -31,10 +31,10 @@ func (r *resultRepo) Create(ctx context.Context, result *models.Result) error {
 	return err
 }
 
-func (r *resultRepo) GetById(ctx context.Context, id openapi_types.UUID) (*models.Result, error) {
+func (r *resultRepo) GetById(ctx context.Context, gameId openapi_types.UUID) (*models.Result, error) {
 	query := `SELECT id, team_id, game_id, score, rank FROM results WHERE id = $1`
 	result := &models.Result{}
-	err := r.db.QueryRowContext(ctx, query, id).Scan(&result.Id, &result.TeamId, &result.GameId, &result.Score, &result.Rank)
+	err := r.db.QueryRowContext(ctx, query, gameId).Scan(&result.Id, &result.TeamId, &result.GameId, &result.Score, &result.Rank)
 	if err != nil {
 		return nil, err
 	}

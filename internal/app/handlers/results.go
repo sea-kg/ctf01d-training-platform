@@ -14,7 +14,7 @@ import (
 	openapi_types "github.com/oapi-codegen/runtime/types"
 )
 
-func (h *Handlers) CreateResult(w http.ResponseWriter, r *http.Request) {
+func (h *Handlers) CreateResult(w http.ResponseWriter, r *http.Request, gameId openapi_types.UUID) {
 	var result server.ResultRequest
 	if err := json.NewDecoder(r.Body).Decode(&result); err != nil {
 		slog.Warn(err.Error(), "handler", "CreateResultHandler")
@@ -36,24 +36,18 @@ func (h *Handlers) CreateResult(w http.ResponseWriter, r *http.Request) {
 	api_helpers.RespondWithJSON(w, http.StatusOK, map[string]string{"data": "Game created successfully"})
 }
 
-func (h *Handlers) GetResultById(w http.ResponseWriter, r *http.Request, id openapi_types.UUID) {
+func (h *Handlers) GetResult(w http.ResponseWriter, r *http.Request, gameId openapi_types.UUID) {
 	repo := repository.NewResultRepository(h.DB)
-	result, err := repo.GetById(r.Context(), id)
+	result, err := repo.GetById(r.Context(), gameId)
 	if err != nil {
-		slog.Warn(err.Error(), "handler", "GetGameByIdHandler")
-		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to fetch result"})
+		slog.Warn(err.Error(), "handler", "GetResult")
+		api_helpers.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Failed to fetch result"})
 		return
 	}
 	api_helpers.RespondWithJSON(w, http.StatusOK, view.NewResultFromModel(result))
 }
 
-func (h *Handlers) ListResults(w http.ResponseWriter, r *http.Request) {
-	repo := repository.NewResultRepository(h.DB)
-	results, err := repo.List(r.Context())
-	if err != nil {
-		slog.Warn(err.Error(), "handler", "ListGamesHandler")
-		api_helpers.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Failed to fetch results"})
-		return
-	}
-	api_helpers.RespondWithJSON(w, http.StatusOK, view.NewResultFromModels(results))
+func (h *Handlers) UpdateResult(w http.ResponseWriter, r *http.Request, teamId openapi_types.UUID, userId openapi_types.UUID) {
+	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
+	w.WriteHeader(http.StatusNotImplemented)
 }

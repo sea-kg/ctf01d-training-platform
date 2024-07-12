@@ -11,7 +11,7 @@ import (
 	"ctf01d/internal/app/view"
 )
 
-func (h *Handlers) GetApiV1Universities(w http.ResponseWriter, r *http.Request, params server.GetApiV1UniversitiesParams) {
+func (h *Handlers) ListUniversities(w http.ResponseWriter, r *http.Request, params server.ListUniversitiesParams) {
 	queryParam := r.URL.Query().Get("term")
 
 	repo := repository.NewUniversityRepository(h.DB)
