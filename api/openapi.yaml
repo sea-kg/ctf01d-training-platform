@@ -144,6 +144,17 @@ paths:
       responses:
         '200':
           description: User created successfully
+          content:
+            application/json:
+              schema:
+                required:
+                  - data
+                type: object
+                properties:
+                  data:
+                    type: string
+                    description: Name of the service
+                    example: "User created successfully"
         '400':
           description: Bad request
         '500':
