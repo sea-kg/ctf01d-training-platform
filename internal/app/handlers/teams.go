@@ -16,6 +16,7 @@ import (
 
 func (h *Handlers) CreateTeam(w http.ResponseWriter, r *http.Request) {
 	var team server.TeamRequest
+	var err error
 	if err := json.NewDecoder(r.Body).Decode(&team); err != nil {
 		slog.Warn(err.Error(), "handler", "CreateTeamHandler")
 		api_helpers.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Invalid request payload"})
@@ -30,12 +31,12 @@ func (h *Handlers) CreateTeam(w http.ResponseWriter, r *http.Request) {
 		UniversityId: team.UniversityId,
 		AvatarUrl:    api_helpers.PrepareImage(*team.AvatarUrl),
 	}
-	if err := teamRepo.Create(r.Context(), newTeam); err != nil {
+	if newTeam, err = teamRepo.Create(r.Context(), newTeam); err != nil {
 		slog.Warn(err.Error(), "handler", "CreateTeamHandler")
 		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to create team"})
 		return
 	}
-	api_helpers.RespondWithJSON(w, http.StatusOK, map[string]string{"data": "Team created successfully"})
+	api_helpers.RespondWithJSON(w, http.StatusOK, view.NewTeamFromModel(newTeam))
 }
 
 func (h *Handlers) DeleteTeam(w http.ResponseWriter, r *http.Request, id openapi_types.UUID) {

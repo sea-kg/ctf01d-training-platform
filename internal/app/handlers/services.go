@@ -17,6 +17,7 @@ import (
 
 func (h *Handlers) CreateService(w http.ResponseWriter, r *http.Request) {
 	var service server.ServiceRequest
+	var err error
 	if err := json.NewDecoder(r.Body).Decode(&service); err != nil {
 		slog.Warn(err.Error(), "handler", "CreateServiceHandler")
 		api_helpers.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Invalid request payload"})
@@ -30,12 +31,12 @@ func (h *Handlers) CreateService(w http.ResponseWriter, r *http.Request) {
 		Description: *service.Description,
 		IsPublic:    service.IsPublic,
 	}
-	if err := repo.Create(r.Context(), newService); err != nil {
+	if newService, err = repo.Create(r.Context(), newService); err != nil {
 		slog.Warn(err.Error(), "handler", "CreateServiceHandler")
 		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to create service"})
 		return
 	}
-	api_helpers.RespondWithJSON(w, http.StatusOK, map[string]string{"data": "Service created successfully"})
+	api_helpers.RespondWithJSON(w, http.StatusOK, view.NewServiceFromModel(newService))
 }
 
 func (h *Handlers) DeleteService(w http.ResponseWriter, r *http.Request, id openapi_types.UUID) {

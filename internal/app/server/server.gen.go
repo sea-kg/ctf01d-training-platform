@@ -45,6 +45,36 @@ const (
 	UserResponseRolePlayer UserResponseRole = "player"
 )
 
+// CreateGameResponse defines model for CreateGameResponse.
+type CreateGameResponse struct {
+	Data string             `json:"data"`
+	Id   openapi_types.UUID `json:"id"`
+}
+
+// CreateResultResponse defines model for CreateResultResponse.
+type CreateResultResponse struct {
+	Data string             `json:"data"`
+	Id   openapi_types.UUID `json:"id"`
+}
+
+// CreateServiceResponse defines model for CreateServiceResponse.
+type CreateServiceResponse struct {
+	Data string             `json:"data"`
+	Id   openapi_types.UUID `json:"id"`
+}
+
+// CreateTeamResponse defines model for CreateTeamResponse.
+type CreateTeamResponse struct {
+	Data string             `json:"data"`
+	Id   openapi_types.UUID `json:"id"`
+}
+
+// CreateUserResponse defines model for CreateUserResponse.
+type CreateUserResponse struct {
+	Data string             `json:"data"`
+	Id   openapi_types.UUID `json:"id"`
+}
+
 // GameRequest defines model for GameRequest.
 type GameRequest struct {
 	// Description A brief description of the game

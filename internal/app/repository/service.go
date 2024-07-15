@@ -10,7 +10,7 @@ import (
 )
 
 type ServiceRepository interface {
-	Create(ctx context.Context, service *models.Service) error
+	Create(ctx context.Context, service *models.Service) (*models.Service, error)
 	GetById(ctx context.Context, id openapi_types.UUID) (*models.Service, error)
 	Update(ctx context.Context, service *models.Service) error
 	Delete(ctx context.Context, id openapi_types.UUID) error
@@ -25,10 +25,17 @@ func NewServiceRepository(db *sql.DB) ServiceRepository {
 	return &serviceRepo{db: db}
 }
 
-func (r *serviceRepo) Create(ctx context.Context, service *models.Service) error {
-	query := `INSERT INTO services (name, author, logo_url, description, is_public) VALUES ($1, $2, $3, $4, $5)`
-	_, err := r.db.ExecContext(ctx, query, service.Name, service.Author, service.LogoUrl, service.Description, service.IsPublic)
-	return err
+func (r *serviceRepo) Create(ctx context.Context, service *models.Service) (*models.Service, error) {
+	query := `INSERT INTO services (name, author, logo_url, description, is_public)
+	          VALUES ($1, $2, $3, $4, $5)
+	          RETURNING id, name, author, logo_url, description, is_public`
+	row := r.db.QueryRowContext(ctx, query, service.Name, service.Author, service.LogoUrl, service.Description, service.IsPublic)
+	var createdService models.Service
+	err := row.Scan(&createdService.Id, &createdService.Name, &createdService.Author, &createdService.LogoUrl, &createdService.Description, &createdService.IsPublic)
+	if err != nil {
+		return nil, err
+	}
+	return &createdService, nil
 }
 
 func (r *serviceRepo) GetById(ctx context.Context, id openapi_types.UUID) (*models.Service, error) {

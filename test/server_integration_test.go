@@ -15,11 +15,8 @@ import (
 	"ctf01d/internal/app/handlers"
 	"ctf01d/internal/app/server"
 
-	"github.com/go-openapi/loads"
-	"github.com/go-openapi/spec"
 	"github.com/jaswdr/faker"
 	_ "github.com/lib/pq"
-	"github.com/tidwall/gjson"
 
 	"github.com/go-chi/chi/v5"
 )
@@ -531,51 +528,4 @@ func TestGameCRUD(t *testing.T) {
 			t.Fatalf("expected status code 200, got %v", rr.Code)
 		}
 	})
-}
-
-func TestAPIEndpoints(t *testing.T) {
-	t.Skip()
-	doc, err := loads.Spec("../api/openapi.yaml")
-	if err != nil {
-		t.Fatalf("failed to load spec: %v", err)
-	}
-
-	r, err := NewTestRouter()
-	if err != nil {
-		t.Fatalf("failed to initialize router: %v", err)
-	}
-
-	for path, pathItem := range doc.Spec().Paths.Paths {
-		if pathItem.Get != nil {
-			t.Run("GET "+path, func(t *testing.T) {
-				req, err := http.NewRequest("GET", path, nil)
-				if err != nil {
-					t.Fatal(err)
-				}
-
-				rr := httptest.NewRecorder()
-
-				r.ServeHTTP(rr, req)
-
-				if status := rr.Code; status != http.StatusOK {
-					t.Errorf("handler returned wrong status code for %s: got %v want %v", path, status, http.StatusOK)
-				}
-
-				expectedSchema := pathItem.Get.Responses.StatusCodeResponses[http.StatusOK].Schema
-
-				if !validateJSONSchema(rr.Body.String(), expectedSchema) {
-					t.Errorf("handler returned unexpected body for %s: got %v", path, rr.Body.String())
-				}
-			})
-		}
-	}
-}
-
-func validateJSONSchema(responseBody string, expectedSchema *spec.Schema) bool {
-	expectedJSON, err := json.Marshal(expectedSchema)
-	if err != nil {
-		return false
-	}
-
-	return gjson.Get(responseBody, "").String() == string(expectedJSON)
 }

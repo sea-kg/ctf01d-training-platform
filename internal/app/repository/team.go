@@ -10,7 +10,7 @@ import (
 )
 
 type TeamRepository interface {
-	Create(ctx context.Context, team *models.Team) error
+	Create(ctx context.Context, team *models.Team) (*models.Team, error)
 	GetById(ctx context.Context, id openapi_types.UUID) (*models.Team, error)
 	Update(ctx context.Context, team *models.Team) error
 	Delete(ctx context.Context, id openapi_types.UUID) error
@@ -25,10 +25,17 @@ func NewTeamRepository(db *sql.DB) TeamRepository {
 	return &teamRepo{db: db}
 }
 
-func (r *teamRepo) Create(ctx context.Context, team *models.Team) error {
-	query := `INSERT INTO teams (name, description, university_id, social_links, avatar_url) VALUES ($1, $2, $3, $4, $5)`
-	_, err := r.db.ExecContext(ctx, query, team.Name, team.Description, team.UniversityId, team.SocialLinks, team.AvatarUrl)
-	return err
+func (r *teamRepo) Create(ctx context.Context, team *models.Team) (*models.Team, error) {
+	query := `INSERT INTO teams (name, description, university_id, social_links, avatar_url)
+	          VALUES ($1, $2, $3, $4, $5)
+	          RETURNING id, name, description, university_id, social_links, avatar_url`
+	row := r.db.QueryRowContext(ctx, query, team.Name, team.Description, team.UniversityId, team.SocialLinks, team.AvatarUrl)
+	var createdTeam models.Team
+	err := row.Scan(&createdTeam.Id, &createdTeam.Name, &createdTeam.Description, &createdTeam.UniversityId, &createdTeam.SocialLinks, &createdTeam.AvatarUrl)
+	if err != nil {
+		return nil, err
+	}
+	return &createdTeam, nil
 }
 
 func (r *teamRepo) GetById(ctx context.Context, id openapi_types.UUID) (*models.Team, error) {

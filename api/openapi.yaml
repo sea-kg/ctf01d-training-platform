@@ -147,14 +147,7 @@ paths:
           content:
             application/json:
               schema:
-                required:
-                  - data
-                type: object
-                properties:
-                  data:
-                    type: string
-                    description: Name of the service
-                    example: "User created successfully"
+                $ref: '#/components/schemas/CreateUserResponse'
         '400':
           description: Bad request
         '500':
@@ -297,7 +290,10 @@ paths:
         required: true
       responses:
         '200':
-          description: Game created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateGameResponse'
         '400':
           description: Bad request
         '500':
@@ -426,7 +422,10 @@ paths:
         required: true
       responses:
         '200':
-          description: Team created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateTeamResponse'
         '400':
           description: Failed request
           content:
@@ -614,7 +613,10 @@ paths:
         required: true
       responses:
         '200':
-          description: Result created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateResultResponse'
     get:
       tags:
         - Results
@@ -712,7 +714,10 @@ paths:
         required: true
       responses:
         '200':
-          description: Service created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateServiceResponse'
   '/api/v1/services/{serviceId}':
     get:
       tags:
@@ -900,6 +905,71 @@ components:
             format: uuid
             example: 81e17cb6-5c46-4934-b6d5-5c8356712cb6
             description: Unique identifier for the result entry
+    CreateUserResponse:
+      type: object
+      required:
+        - data
+        - id
+      properties:
+        data:
+          type: string
+          example: "User created successfully"
+        id:
+          type: string
+          format: uuid
+          example: 81e17cb6-5c46-4934-b6d5-5c8356712cb6
+    CreateTeamResponse:
+      type: object
+      required:
+        - data
+        - id
+      properties:
+        data:
+          type: string
+          example: "Team created successfully"
+        id:
+          type: string
+          format: uuid
+          example: 81e17cb6-5c46-4934-b6d5-5c8356712cb6
+    CreateServiceResponse:
+      type: object
+      required:
+        - data
+        - id
+      properties:
+        data:
+          type: string
+          example: "Service created successfully"
+        id:
+          type: string
+          format: uuid
+          example: 81e17cb6-5c46-4934-b6d5-5c8356712cb6
+    CreateGameResponse:
+      type: object
+      required:
+        - data
+        - id
+      properties:
+        data:
+          type: string
+          example: "Game created successfully"
+        id:
+          type: string
+          format: uuid
+          example: 81e17cb6-5c46-4934-b6d5-5c8356712cb6
+    CreateResultResponse:
+      type: object
+      required:
+        - data
+        - id
+      properties:
+        data:
+          type: string
+          example: "Result created successfully"
+        id:
+          type: string
+          format: uuid
+          example: 81e17cb6-5c46-4934-b6d5-5c8356712cb6
     ProfileResponse:
       type: object
       description: The response schema for a user's profile, including id, timestamps, team name, and team history.

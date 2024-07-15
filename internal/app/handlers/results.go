@@ -16,6 +16,7 @@ import (
 
 func (h *Handlers) CreateResult(w http.ResponseWriter, r *http.Request, gameId openapi_types.UUID) {
 	var result server.ResultRequest
+	var err error
 	if err := json.NewDecoder(r.Body).Decode(&result); err != nil {
 		slog.Warn(err.Error(), "handler", "CreateResultHandler")
 		api_helpers.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Invalid request payload"})
@@ -28,12 +29,12 @@ func (h *Handlers) CreateResult(w http.ResponseWriter, r *http.Request, gameId o
 		Score:  result.Score,
 		Rank:   result.Rank,
 	}
-	if err := repo.Create(r.Context(), newResult); err != nil {
-		slog.Warn(err.Error(), "handler", "CreateGameHandler")
+	if newResult, err = repo.Create(r.Context(), newResult); err != nil {
+		slog.Warn(err.Error(), "handler", "CreateResultHandler")
 		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to create result"})
 		return
 	}
-	api_helpers.RespondWithJSON(w, http.StatusOK, map[string]string{"data": "Game created successfully"})
+	api_helpers.RespondWithJSON(w, http.StatusOK, view.NewResultFromModel(newResult))
 }
 
 func (h *Handlers) GetResult(w http.ResponseWriter, r *http.Request, gameId openapi_types.UUID) {

@@ -16,6 +16,7 @@ import (
 
 func (h *Handlers) CreateGame(w http.ResponseWriter, r *http.Request) {
 	var game server.GameRequest
+	var err error
 	if err := json.NewDecoder(r.Body).Decode(&game); err != nil {
 		slog.Warn(err.Error(), "handler", "CreateGame")
 		api_helpers.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Invalid request payload"})
@@ -31,12 +32,14 @@ func (h *Handlers) CreateGame(w http.ResponseWriter, r *http.Request) {
 		EndTime:     game.EndTime,
 		Description: *game.Description,
 	}
-	if err := repo.Create(r.Context(), newGame); err != nil {
+
+	newGame, err = repo.Create(r.Context(), newGame)
+	if err != nil {
 		slog.Warn(err.Error(), "handler", "CreateGame")
 		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to create game"})
 		return
 	}
-	api_helpers.RespondWithJSON(w, http.StatusOK, map[string]string{"data": "Game created successfully"})
+	api_helpers.RespondWithJSON(w, http.StatusOK, view.NewGameFromModel(newGame))
 }
 
 func (h *Handlers) DeleteGame(w http.ResponseWriter, r *http.Request, id openapi_types.UUID) {

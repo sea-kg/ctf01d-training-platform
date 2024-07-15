@@ -37,7 +37,7 @@ func (h *Handlers) CreateUser(w http.ResponseWriter, r *http.Request) {
 		PasswordHash: passwordHash,
 		AvatarUrl:    api_helpers.PrepareImage(*user.AvatarUrl),
 	}
-	if err := repo.Create(r.Context(), newUser); err != nil {
+	if newUser, err = repo.Create(r.Context(), newUser); err != nil {
 		slog.Warn(err.Error(), "handler", "CreateUserHandler")
 		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to create user"})
 		return
@@ -49,7 +49,8 @@ func (h *Handlers) CreateUser(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 	}
-	api_helpers.RespondWithJSON(w, http.StatusOK, map[string]string{"data": "User created successfully"})
+	api_helpers.RespondWithJSON(w, http.StatusOK, view.NewUserFromModel(newUser))
+
 }
 
 func (h *Handlers) DeleteUser(w http.ResponseWriter, r *http.Request, id openapi_types.UUID) {
