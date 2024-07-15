@@ -130,7 +130,7 @@ $ docker exec -it ctf01d-postgres psql -U postgres
 ### create new migrate file
 
 ```shell
-go run scripts/create-migration.go # Created new migration file: internal/app/migrations/psql/update0022_update0023.go
+go run scripts/create-migration/main.go # Created new migration file: internal/app/migrations/psql/update0022_update0023.go
 ```
 
 ## Experimental

@@ -4,3 +4,5 @@ src/server
 vendor
 /docker_tmp
 main
+api/openapi_dereferenced.yaml
+test/__debug_*

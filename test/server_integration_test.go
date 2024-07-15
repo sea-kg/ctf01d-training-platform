@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"database/sql"
 	"encoding/json"
+	"fmt"
 	"net/http"
 	"net/http/httptest"
 	"os"
@@ -15,14 +16,18 @@ import (
 	migration "ctf01d/internal/app/migrations/psql"
 	"ctf01d/internal/app/server"
 
+	"github.com/go-openapi/loads"
+	"github.com/go-openapi/spec"
 	"github.com/jaswdr/faker"
 	_ "github.com/lib/pq"
+	"github.com/tidwall/gjson"
 
 	"github.com/go-chi/chi/v5"
 )
 
 var db *sql.DB
 var r *chi.Mux
+var doc *loads.Document
 
 func TestMain(m *testing.M) {
 	cfg, err := config.NewConfig("../config/config.test.yml")
@@ -35,6 +40,12 @@ func TestMain(m *testing.M) {
 		panic(err)
 	}
 	NewTestRouter()
+
+	doc, err = loads.Spec("../api/openapi_dereferenced.yaml")
+	if err != nil {
+		panic(err)
+	}
+
 	code := m.Run()
 	db.Close()
 	os.Exit(code)
@@ -51,6 +62,15 @@ func NewTestRouter() (http.Handler, error) {
 	r.Mount("/", http.HandlerFunc(server.NewHtmlRouter))
 
 	return r, nil
+}
+
+func validateJSONSchema(responseBody string, expectedSchema *spec.Schema) bool {
+	expectedJSON, err := json.Marshal(expectedSchema)
+	if err != nil {
+		return false
+	}
+
+	return gjson.Get(responseBody, "").String() == string(expectedJSON)
 }
 
 func TestUserCRUD(t *testing.T) {
@@ -95,6 +115,14 @@ func TestUserCRUD(t *testing.T) {
 				t.Fatalf("expected %v for key %v, got %v", value, key, response[key])
 			}
 		}
+
+		schema := doc.Spec().Paths.Paths["/api/v1/users"].Post.Responses.StatusCodeResponses[http.StatusOK].Schema
+		schema2 := doc.Spec().Paths
+		schema3 := doc.Spec().Paths.Paths["/api/v1/users"].Post.Responses.StatusCodeResponses[http.StatusOK]
+		fmt.Println(schema2, schema3)
+		if !validateJSONSchema(rr.Body.String(), schema) {
+			t.Errorf("response does not match schema: got %v", rr.Body.String())
+		}
 	})
 
 	// 2. Получение всех пользователей и использование ID последнего
@@ -120,6 +148,11 @@ func TestUserCRUD(t *testing.T) {
 		userID = lastUser["id"].(string)
 		if userID == "" {
 			t.Fatalf("expected user ID in response")
+		}
+
+		schema := doc.Spec().Paths.Paths["/api/v1/users"].Get.Responses.StatusCodeResponses[http.StatusOK].Schema
+		if !validateJSONSchema(rr.Body.String(), schema) {
+			t.Errorf("response does not match schema: got %v", rr.Body.String())
 		}
 	})
 
@@ -147,6 +180,10 @@ func TestUserCRUD(t *testing.T) {
 			if key != "password" && response[key] != value {
 				t.Fatalf("expected %v for key %v, got %v", value, key, response[key])
 			}
+		}
+		schema := doc.Spec().Paths.Paths["/api/v1/users/{id}"].Get.Responses.StatusCodeResponses[http.StatusOK].Schema
+		if !validateJSONSchema(rr.Body.String(), schema) {
+			t.Errorf("response does not match schema: got %v", rr.Body.String())
 		}
 	})
 
@@ -198,6 +235,10 @@ func TestUserCRUD(t *testing.T) {
 				t.Fatalf("expected %v for key %v, got %v", value, key, updatedResponse[key])
 			}
 		}
+		schema := doc.Spec().Paths.Paths["/api/v1/users/{id}"].Put.Responses.StatusCodeResponses[http.StatusOK].Schema
+		if !validateJSONSchema(rr.Body.String(), schema) {
+			t.Errorf("response does not match schema: got %v", rr.Body.String())
+		}
 	})
 
 	// 5. Получение профиля пользователя по ID (его нет, поэтому ожидаем 404)
@@ -219,6 +260,11 @@ func TestUserCRUD(t *testing.T) {
 
 		if rr.Code != http.StatusOK {
 			t.Fatalf("expected status code 200, got %v", rr.Code)
+		}
+
+		schema := doc.Spec().Paths.Paths["/api/v1/users/{id}"].Delete.Responses.StatusCodeResponses[http.StatusOK].Schema
+		if !validateJSONSchema(rr.Body.String(), schema) {
+			t.Errorf("response does not match schema: got %v", rr.Body.String())
 		}
 	})
 }
@@ -263,6 +309,10 @@ func TestServiceCRUD(t *testing.T) {
 				t.Fatalf("expected %v for key %v, got %v", value, key, response[key])
 			}
 		}
+		schema := doc.Spec().Paths.Paths["/api/v1/services"].Post.Responses.StatusCodeResponses[http.StatusOK].Schema
+		if !validateJSONSchema(rr.Body.String(), schema) {
+			t.Errorf("response does not match schema: got %v", rr.Body.String())
+		}
 	})
 
 	// 2. Получение всех сервисов и использование ID последнего
@@ -288,6 +338,11 @@ func TestServiceCRUD(t *testing.T) {
 		serviceID = lastService["id"].(string)
 		if serviceID == "" {
 			t.Fatalf("expected service ID in response")
+		}
+
+		schema := doc.Spec().Paths.Paths["/api/v1/services"].Get.Responses.StatusCodeResponses[http.StatusOK].Schema
+		if !validateJSONSchema(rr.Body.String(), schema) {
+			t.Errorf("response does not match schema: got %v", rr.Body.String())
 		}
 	})
 
@@ -315,6 +370,10 @@ func TestServiceCRUD(t *testing.T) {
 			if response[key] != value {
 				t.Fatalf("expected %v for key %v, got %v", value, key, response[key])
 			}
+		}
+		schema := doc.Spec().Paths.Paths["/api/v1/services/{id}"].Get.Responses.StatusCodeResponses[http.StatusOK].Schema
+		if !validateJSONSchema(rr.Body.String(), schema) {
+			t.Errorf("response does not match schema: got %v", rr.Body.String())
 		}
 	})
 
@@ -365,6 +424,11 @@ func TestServiceCRUD(t *testing.T) {
 				t.Fatalf("expected %v for key %v, got %v", value, key, updatedResponse[key])
 			}
 		}
+
+		schema := doc.Spec().Paths.Paths["/api/v1/services/{id}"].Put.Responses.StatusCodeResponses[http.StatusOK].Schema
+		if !validateJSONSchema(rr.Body.String(), schema) {
+			t.Errorf("response does not match schema: got %v", rr.Body.String())
+		}
 	})
 
 	// 5. Удаление сервиса по ID
@@ -375,6 +439,11 @@ func TestServiceCRUD(t *testing.T) {
 
 		if rr.Code != http.StatusOK {
 			t.Fatalf("expected status code 200, got %v", rr.Code)
+		}
+
+		schema := doc.Spec().Paths.Paths["/api/v1/services/{id}"].Delete.Responses.StatusCodeResponses[http.StatusOK].Schema
+		if !validateJSONSchema(rr.Body.String(), schema) {
+			t.Errorf("response does not match schema: got %v", rr.Body.String())
 		}
 	})
 }
@@ -418,6 +487,10 @@ func TestTeamCRUD(t *testing.T) {
 				t.Fatalf("expected %v for key %v, got %v", value, key, response[key])
 			}
 		}
+		schema := doc.Spec().Paths.Paths["/api/v1/teams"].Post.Responses.StatusCodeResponses[http.StatusOK].Schema
+		if !validateJSONSchema(rr.Body.String(), schema) {
+			t.Errorf("response does not match schema: got %v", rr.Body.String())
+		}
 	})
 
 	// 2. Получение всех команд и использование ID последней
@@ -443,6 +516,11 @@ func TestTeamCRUD(t *testing.T) {
 		teamID = lastTeam["id"].(string)
 		if teamID == "" {
 			t.Fatalf("expected team ID in response")
+		}
+
+		schema := doc.Spec().Paths.Paths["/api/v1/teams"].Get.Responses.StatusCodeResponses[http.StatusOK].Schema
+		if !validateJSONSchema(rr.Body.String(), schema) {
+			t.Errorf("response does not match schema: got %v", rr.Body.String())
 		}
 	})
 
@@ -471,6 +549,10 @@ func TestTeamCRUD(t *testing.T) {
 				t.Fatalf("expected %v for key %v, got %v", value, key, response[key])
 			}
 		}
+		schema := doc.Spec().Paths.Paths["/api/v1/teams/{id}"].Get.Responses.StatusCodeResponses[http.StatusOK].Schema
+		if !validateJSONSchema(rr.Body.String(), schema) {
+			t.Errorf("response does not match schema: got %v", rr.Body.String())
+		}
 	})
 
 	// 4. Обновление команды по ID
@@ -497,7 +579,12 @@ func TestTeamCRUD(t *testing.T) {
 		}
 
 		if response["data"] != "Team updated successfully" {
-			t.Fatalf("expected 'Team updated successfully, got %v", response["data"])
+			t.Fatalf("expected success message, got %v", response["data"])
+		}
+
+		schema := doc.Spec().Paths.Paths["/api/v1/teams/{id}"].Put.Responses.StatusCodeResponses[http.StatusOK].Schema
+		if !validateJSONSchema(rr.Body.String(), schema) {
+			t.Errorf("response does not match schema: got %v", rr.Body.String())
 		}
 
 		// Проверка всех полей ответа после обновления
@@ -529,6 +616,11 @@ func TestTeamCRUD(t *testing.T) {
 
 		if rr.Code != http.StatusOK {
 			t.Fatalf("expected status code 200, got %v", rr.Code)
+		}
+
+		schema := doc.Spec().Paths.Paths["/api/v1/teams/{id}"].Delete.Responses.StatusCodeResponses[http.StatusOK].Schema
+		if !validateJSONSchema(rr.Body.String(), schema) {
+			t.Errorf("response does not match schema: got %v", rr.Body.String())
 		}
 	})
 }
@@ -571,6 +663,10 @@ func TestGameCRUD(t *testing.T) {
 				t.Fatalf("expected %v for key %v, got %v", value, key, response[key])
 			}
 		}
+		schema := doc.Spec().Paths.Paths["/api/v1/games"].Post.Responses.StatusCodeResponses[http.StatusOK].Schema
+		if !validateJSONSchema(rr.Body.String(), schema) {
+			t.Errorf("response does not match schema: got %v", rr.Body.String())
+		}
 	})
 
 	// 2. Получение всех игр и использование ID последней
@@ -596,6 +692,11 @@ func TestGameCRUD(t *testing.T) {
 		gameID = lastGame["id"].(string)
 		if gameID == "" {
 			t.Fatalf("expected game ID in response")
+		}
+
+		schema := doc.Spec().Paths.Paths["/api/v1/games"].Get.Responses.StatusCodeResponses[http.StatusOK].Schema
+		if !validateJSONSchema(rr.Body.String(), schema) {
+			t.Errorf("response does not match schema: got %v", rr.Body.String())
 		}
 	})
 
@@ -624,6 +725,10 @@ func TestGameCRUD(t *testing.T) {
 				t.Fatalf("expected %v for key %v, got %v", value, key, response[key])
 			}
 		}
+		schema := doc.Spec().Paths.Paths["/api/v1/games/{id}"].Get.Responses.StatusCodeResponses[http.StatusOK].Schema
+		if !validateJSONSchema(rr.Body.String(), schema) {
+			t.Errorf("response does not match schema: got %v", rr.Body.String())
+		}
 	})
 
 	// 4. Обновление игры по ID
@@ -649,7 +754,12 @@ func TestGameCRUD(t *testing.T) {
 		}
 
 		if response["data"] != "Game updated successfully" {
-			t.Fatalf("expected 'Game updated successfully', got %v", response["data"])
+			t.Fatalf("expected success message, got %v", response["data"])
+		}
+
+		schema := doc.Spec().Paths.Paths["/api/v1/games/{id}"].Put.Responses.StatusCodeResponses[http.StatusOK].Schema
+		if !validateJSONSchema(rr.Body.String(), schema) {
+			t.Errorf("response does not match schema: got %v", rr.Body.String())
 		}
 
 		// Проверка всех полей ответа после обновления
@@ -681,6 +791,11 @@ func TestGameCRUD(t *testing.T) {
 
 		if rr.Code != http.StatusOK {
 			t.Fatalf("expected status code 200, got %v", rr.Code)
+		}
+
+		schema := doc.Spec().Paths.Paths["/api/v1/games/{id}"].Delete.Responses.StatusCodeResponses[http.StatusOK].Schema
+		if !validateJSONSchema(rr.Body.String(), schema) {
+			t.Errorf("response does not match schema: got %v", rr.Body.String())
 		}
 	})
 }
