@@ -135,7 +135,7 @@ type ResultRequest struct {
 	Rank int `json:"rank"`
 
 	// Score The score achieved by the team
-	Score int `json:"score"`
+	Score float64 `json:"score"`
 
 	// TeamId Identifier of the team this result belongs to
 	TeamId string `json:"team_id"`
@@ -153,7 +153,7 @@ type ResultResponse struct {
 	Rank int `json:"rank"`
 
 	// Score The score achieved by the team
-	Score int `json:"score"`
+	Score float64 `json:"score"`
 
 	// TeamId Identifier of the team this result belongs to
 	TeamId string `json:"team_id"`

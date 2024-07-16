@@ -1123,7 +1123,8 @@ components:
           type: string
           description: Identifier of the game this result is for
         score:
-          type: integer
+          type: number
+          format: double
           description: The score achieved by the team
         rank:
           type: integer
@@ -1148,7 +1149,8 @@ components:
           type: string
           description: Identifier of the game this result is for
         score:
-          type: integer
+          type: number
+          format: double
           description: The score achieved by the team
         rank:
           type: integer

@@ -45,6 +45,7 @@ func RegisterAllUpdates() map[string][]DatabaseUpdateFunc {
 	allUpdates = RegisterDatabaseUpdate(allUpdates, DatabaseUpdate_update0016_update0016testdata)
 	allUpdates = RegisterDatabaseUpdate(allUpdates, DatabaseUpdate_update0016_update0017_no_university)
 	allUpdates = RegisterDatabaseUpdate(allUpdates, DatabaseUpdate_update0017_update0018)
+	allUpdates = RegisterDatabaseUpdate(allUpdates, DatabaseUpdate_update0018_update0019)
 	return allUpdates
 }
 
@@ -182,7 +183,7 @@ func InitDatabase(cfg *config.Config) (*sql.DB, error) {
 					if contains(alreadyCheckedUpdates, toUpdateId) {
 						continue
 					} else if contains(installedUpdates, toUpdateId) && !contains(alreadyCheckedUpdates, toUpdateId) {
-						slog.Info("Update already installed " + fromUpdateId + " -> " + toUpdateId)
+						slog.Debug("Update already installed " + fromUpdateId + " -> " + toUpdateId)
 						alreadyCheckedUpdates = append(alreadyCheckedUpdates, toUpdateId)
 					} else {
 						_, _, _, err := update_func(db, false)
