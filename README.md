@@ -114,6 +114,12 @@ $ docker run -d --name ctf01d-postgres -e POSTGRES_DB=ctf01d -e POSTGRES_USER=po
 $ docker exec -it ctf01d-postgres psql -U postgres
 ```
 
+### create new migrate file
+
+```shell
+go run scripts/create-migration.go # Created new migration file: internal/app/database/update0022_update0023.go
+```
+
 ## Experimental
 
 ### fuzz api
