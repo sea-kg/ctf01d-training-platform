@@ -287,17 +287,17 @@ type UserRequest struct {
 	DisplayName *string `json:"display_name,omitempty"`
 
 	// Password User password
-	Password *string `json:"password,omitempty"`
+	Password string `json:"password"`
 
 	// Role The role of the user (admin, player or guest)
-	Role *UserRequestRole `json:"role,omitempty"`
+	Role UserRequestRole `json:"role"`
 
 	// Status Status of the user (active, disabled)
-	Status  *string               `json:"status,omitempty"`
+	Status  string                `json:"status"`
 	TeamIds *[]openapi_types.UUID `json:"team_ids,omitempty"`
 
 	// UserName The login of the user
-	UserName *string `json:"user_name,omitempty"`
+	UserName string `json:"user_name"`
 }
 
 // UserRequestRole The role of the user (admin, player or guest)

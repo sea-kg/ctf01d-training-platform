@@ -874,6 +874,11 @@ components:
   schemas:
     UserRequest:
       type: object
+      required:
+        - user_name
+        - role
+        - status
+        - password
       properties:
         display_name:
           type: string

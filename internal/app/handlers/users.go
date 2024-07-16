@@ -23,7 +23,7 @@ func (h *Handlers) CreateUser(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	repo := repository.NewUserRepository(h.DB)
-	passwordHash, err := api_helpers.HashPassword(*user.Password)
+	passwordHash, err := api_helpers.HashPassword(user.Password)
 	slog.Debug("user.password " + passwordHash)
 	if err != nil {
 		slog.Warn(err.Error(), "handler", "CreateUserHandler")
@@ -31,10 +31,10 @@ func (h *Handlers) CreateUser(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	newUser := &dbmodels.User{
-		Username:     *user.UserName,
+		Username:     user.UserName,
 		DisplayName:  *user.DisplayName,
-		Role:         *user.Role,
-		Status:       *user.Status,
+		Role:         user.Role,
+		Status:       user.Status,
 		PasswordHash: passwordHash,
 		AvatarUrl:    api_helpers.PrepareImage(*user.AvatarUrl),
 	}
@@ -105,7 +105,7 @@ func (h *Handlers) UpdateUser(w http.ResponseWriter, r *http.Request, id openapi
 		api_helpers.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Invalid request payload"})
 		return
 	}
-	passwordHash, err := api_helpers.HashPassword(*user.Password)
+	passwordHash, err := api_helpers.HashPassword(user.Password)
 	if err != nil {
 		slog.Warn(err.Error(), "handler", "UpdateUserHandler")
 		api_helpers.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Invalid request payload"})
@@ -113,10 +113,10 @@ func (h *Handlers) UpdateUser(w http.ResponseWriter, r *http.Request, id openapi
 	}
 	repo := repository.NewUserRepository(h.DB)
 	updateUser := &dbmodels.User{
-		Username:     *user.UserName,
+		Username:     user.UserName,
 		DisplayName:  *user.DisplayName,
-		Role:         *user.Role,
-		Status:       *user.Status,
+		Role:         user.Role,
+		Status:       user.Status,
 		PasswordHash: passwordHash,
 		AvatarUrl:    api_helpers.PrepareImage(*user.AvatarUrl),
 	}
