@@ -24,7 +24,6 @@ func (h *Handlers) CreateUser(w http.ResponseWriter, r *http.Request) {
 	}
 	repo := repository.NewUserRepository(h.DB)
 	passwordHash, err := api_helpers.HashPassword(user.Password)
-	slog.Debug("user.password " + passwordHash)
 	if err != nil {
 		slog.Warn(err.Error(), "handler", "CreateUserHandler")
 		api_helpers.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Invalid request payload"})

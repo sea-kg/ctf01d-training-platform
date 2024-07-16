@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"ctf01d/internal/app/server"
+	"ctf01d/pkg/avatar"
 
 	openapi_types "github.com/oapi-codegen/runtime/types"
 )
@@ -160,4 +161,16 @@ func (siw *ServerInterfaceWrapper) UploadService(w http.ResponseWriter, r *http.
 
 func (siw *ServerInterfaceWrapper) ConnectUserWithTeamUserId(w http.ResponseWriter, r *http.Request, teamId openapi_types.UUID, userId openapi_types.UUID) {
 	siw.handlers.JoinTeamUser(w, r, teamId, userId)
+}
+
+func (siw *ServerInterfaceWrapper) UniqueAvatar(w http.ResponseWriter, r *http.Request, username string) {
+	xMax := 100
+	yMax := 100
+	blockSize := 20
+	steps := 8
+
+	imageBytes := avatar.GenerateAvatar(username, xMax, yMax, blockSize, steps)
+
+	w.Header().Set("Content-Type", "image/png")
+	w.Write(imageBytes)
 }

@@ -870,6 +870,24 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UniversitiesResponse'
+  /api/v1/avatar/{username}:
+    get:
+      summary: Get a unique avatar for the username
+      operationId: uniqueAvatar
+      parameters:
+        - in: path
+          name: username
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Unique avatar image
+          content:
+            image/png:
+              schema:
+                type: string
+                format: binary
 components:
   schemas:
     UserRequest:

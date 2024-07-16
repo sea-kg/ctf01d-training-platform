@@ -399,6 +399,9 @@ type ServerInterface interface {
 	// Sign out user
 	// (POST /api/v1/auth/sign_out)
 	SignOutUser(w http.ResponseWriter, r *http.Request)
+	// Get a unique avatar for the username
+	// (GET /api/v1/avatar/{username})
+	UniqueAvatar(w http.ResponseWriter, r *http.Request, username string)
 	// List all games
 	// (GET /api/v1/games)
 	ListGames(w http.ResponseWriter, r *http.Request)
@@ -513,6 +516,12 @@ func (_ Unimplemented) SignInUser(w http.ResponseWriter, r *http.Request) {
 // Sign out user
 // (POST /api/v1/auth/sign_out)
 func (_ Unimplemented) SignOutUser(w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(http.StatusNotImplemented)
+}
+
+// Get a unique avatar for the username
+// (GET /api/v1/avatar/{username})
+func (_ Unimplemented) UniqueAvatar(w http.ResponseWriter, r *http.Request, username string) {
 	w.WriteHeader(http.StatusNotImplemented)
 }
 
@@ -747,6 +756,32 @@ func (siw *ServerInterfaceWrapper) SignOutUser(w http.ResponseWriter, r *http.Re
 
 	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		siw.Handler.SignOutUser(w, r)
+	}))
+
+	for _, middleware := range siw.HandlerMiddlewares {
+		handler = middleware(handler)
+	}
+
+	handler.ServeHTTP(w, r.WithContext(ctx))
+}
+
+// UniqueAvatar operation middleware
+func (siw *ServerInterfaceWrapper) UniqueAvatar(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+
+	var err error
+
+	// ------------- Path parameter "username" -------------
+	var username string
+
+	err = runtime.BindStyledParameterWithOptions("simple", "username", chi.URLParam(r, "username"), &username, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationPath, Explode: false, Required: true})
+	if err != nil {
+		siw.ErrorHandlerFunc(w, r, &InvalidParamFormatError{ParamName: "username", Err: err})
+		return
+	}
+
+	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		siw.Handler.UniqueAvatar(w, r, username)
 	}))
 
 	for _, middleware := range siw.HandlerMiddlewares {
@@ -1624,6 +1659,9 @@ func HandlerWithOptions(si ServerInterface, options ChiServerOptions) http.Handl
 	})
 	r.Group(func(r chi.Router) {
 		r.Post(options.BaseURL+"/api/v1/auth/sign_out", wrapper.SignOutUser)
+	})
+	r.Group(func(r chi.Router) {
+		r.Get(options.BaseURL+"/api/v1/avatar/{username}", wrapper.UniqueAvatar)
 	})
 	r.Group(func(r chi.Router) {
 		r.Get(options.BaseURL+"/api/v1/games", wrapper.ListGames)

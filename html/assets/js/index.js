@@ -456,8 +456,8 @@ function renderUsersPage() {
         for (var i in res) {
             var user_info = res[i];
             usersHtml += '<div class="card services-card" style="width: 20rem;">';
-            usersHtml += '  <img class="users-card-avatar" src="' + user_info.avatar_url + '" alt="Image of user">';
             usersHtml += '  <div class="card-body">';
+            usersHtml += '    <img class="users-card-avatar" src="' + user_info.avatar_url + '" alt="Image of user">';
             usersHtml += '    <h5 class="card-title">@' + user_info.user_name + ' - ' + escapeHtml(user_info.display_name) + '</h5>';
             usersHtml += '    <p class="card-text"> ' + escapeHtml(user_info.id) + '</p>';
             usersHtml += '    <p class="card-subtitle mb-2 text-muted"> role ' + escapeHtml(user_info.role) + '</p>';

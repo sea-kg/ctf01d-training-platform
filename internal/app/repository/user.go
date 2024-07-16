@@ -39,6 +39,7 @@ func (r *userRepo) Create(ctx context.Context, user *models.User) error {
 	}
 	return nil
 }
+
 func (r *userRepo) AddUserToTeams(ctx context.Context, userId openapi_types.UUID, teamIds *[]openapi_types.UUID) error {
 	for _, teamId := range *teamIds {
 		_, err := r.db.ExecContext(ctx, "INSERT INTO profiles (user_id, current_team_id) VALUES ($1, $2)", userId, teamId)
