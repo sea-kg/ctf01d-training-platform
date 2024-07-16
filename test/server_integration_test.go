@@ -234,16 +234,16 @@ func TestServiceCRUD(t *testing.T) {
 
 	var serviceID string
 	var createdService map[string]interface{}
-	faker := faker.New()
+	fake := faker.New()
 
 	// 1. Создание сервиса
 	t.Run("Create Service", func(t *testing.T) {
 		createdService = map[string]interface{}{
-			"name":        faker.Company().Name(),
-			"author":      faker.Person().Name(),
-			"logo_url":    faker.Internet().URL() + "image.png",
-			"description": faker.Lorem().Sentence(10),
-			"is_public":   faker.Bool(),
+			"name":        fake.Company().Name(),
+			"author":      fake.Person().Name(),
+			"logo_url":    fake.Internet().URL() + "image.png",
+			"description": fake.Lorem().Sentence(10),
+			"is_public":   fake.Bool(),
 		}
 		body, _ := json.Marshal(createdService)
 		req, _ := http.NewRequest("POST", "/api/v1/services", bytes.NewBuffer(body))
@@ -329,11 +329,11 @@ func TestServiceCRUD(t *testing.T) {
 	// 4. Обновление сервиса по ID
 	t.Run("Update Service by ID", func(t *testing.T) {
 		updatedService := map[string]interface{}{
-			"name":        faker.Company().Name(),
-			"author":      faker.Person().Name(),
-			"logo_url":    faker.Internet().URL() + "image.png",
-			"description": faker.Lorem().Sentence(10),
-			"is_public":   faker.Bool(),
+			"name":        fake.Company().Name(),
+			"author":      fake.Person().Name(),
+			"logo_url":    fake.Internet().URL() + "image.png",
+			"description": fake.Lorem().Sentence(10),
+			"is_public":   fake.Bool(),
 		}
 		body, _ := json.Marshal(updatedService)
 		req, _ := http.NewRequest("PUT", "/api/v1/services/"+serviceID, bytes.NewBuffer(body))
@@ -395,15 +395,15 @@ func TestTeamCRUD(t *testing.T) {
 
 	var teamID string
 	var createdTeam map[string]interface{}
-	faker := faker.New()
+	fake := faker.New()
 
 	// 1. Создание команды
 	t.Run("Create Team", func(t *testing.T) {
 		createdTeam = map[string]interface{}{
-			"name":         faker.Gamer().Tag(),
-			"description":  faker.Lorem().Sentence(10),
-			"social_links": faker.Internet().URL(),
-			"avatar_url":   faker.Internet().URL() + "image.png",
+			"name":         fake.Gamer().Tag(),
+			"description":  fake.Lorem().Sentence(10),
+			"social_links": fake.Internet().URL(),
+			"avatar_url":   fake.Internet().URL() + "image.png",
 		}
 		body, _ := json.Marshal(createdTeam)
 		req, _ := http.NewRequest("POST", "/api/v1/teams", bytes.NewBuffer(body))
@@ -489,10 +489,10 @@ func TestTeamCRUD(t *testing.T) {
 	// 4. Обновление команды по ID
 	t.Run("Update Team by ID", func(t *testing.T) {
 		updatedTeam := map[string]interface{}{
-			"name":         faker.Gamer().Tag(),
-			"description":  faker.Lorem().Sentence(10),
-			"social_links": faker.Internet().URL(),
-			"avatar_url":   faker.Internet().URL() + "image.png",
+			"name":         fake.Gamer().Tag(),
+			"description":  fake.Lorem().Sentence(10),
+			"social_links": fake.Internet().URL(),
+			"avatar_url":   fake.Internet().URL() + "image.png",
 		}
 		body, _ := json.Marshal(updatedTeam)
 		req, _ := http.NewRequest("PUT", "/api/v1/teams/"+teamID, bytes.NewBuffer(body))
@@ -554,14 +554,14 @@ func TestGameCRUD(t *testing.T) {
 
 	var gameID string
 	var createdGame map[string]interface{}
-	faker := faker.New()
+	fake := faker.New()
 
 	// 1. Создание игры
 	t.Run("Create Game", func(t *testing.T) {
 		createdGame = map[string]interface{}{
 			"start_time":  time.Date(2023, 7, 16, 0, 0, 0, 0, time.UTC).Format(time.RFC3339),
 			"end_time":    time.Date(2023, 7, 17, 0, 0, 0, 0, time.UTC).Format(time.RFC3339),
-			"description": faker.Lorem().Sentence(10),
+			"description": fake.Lorem().Sentence(10),
 		}
 		body, _ := json.Marshal(createdGame)
 		req, _ := http.NewRequest("POST", "/api/v1/games", bytes.NewBuffer(body))
@@ -649,7 +649,7 @@ func TestGameCRUD(t *testing.T) {
 		updatedGame := map[string]interface{}{
 			"start_time":  time.Date(2023, 7, 16, 0, 0, 0, 0, time.UTC).Format(time.RFC3339),
 			"end_time":    time.Date(2023, 7, 17, 0, 0, 0, 0, time.UTC).Format(time.RFC3339),
-			"description": faker.Lorem().Sentence(10),
+			"description": fake.Lorem().Sentence(10),
 		}
 		body, _ := json.Marshal(updatedGame)
 		req, _ := http.NewRequest("PUT", "/api/v1/games/"+gameID, bytes.NewBuffer(body))
