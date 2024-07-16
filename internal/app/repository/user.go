@@ -10,7 +10,7 @@ import (
 )
 
 type UserRepository interface {
-	Create(ctx context.Context, user *models.User) (*models.User, error)
+	Create(ctx context.Context, user *models.User) error
 	AddUserToTeams(ctx context.Context, userId openapi_types.UUID, teamIds *[]openapi_types.UUID) error
 	GetById(ctx context.Context, id openapi_types.UUID) (*models.User, error)
 	GetProfileWithHistory(ctx context.Context, id openapi_types.UUID) (*models.ProfileWithHistory, error)
@@ -28,17 +28,16 @@ func NewUserRepository(db *sql.DB) UserRepository {
 	return &userRepo{db: db}
 }
 
-func (r *userRepo) Create(ctx context.Context, user *models.User) (*models.User, error) {
+func (r *userRepo) Create(ctx context.Context, user *models.User) error {
 	query := `INSERT INTO users (display_name, user_name, avatar_url, role, status, password_hash)
 	          VALUES ($1, $2, $3, $4, $5, $6)
 	          RETURNING id, display_name, user_name, avatar_url, role, status, password_hash`
 	row := r.db.QueryRowContext(ctx, query, user.DisplayName, user.Username, user.AvatarUrl, user.Role, user.Status, user.PasswordHash)
-	var createdUser models.User
-	err := row.Scan(&createdUser.Id, &createdUser.DisplayName, &createdUser.Username, &createdUser.AvatarUrl, &createdUser.Role, &createdUser.Status, &createdUser.PasswordHash)
+	err := row.Scan(&user.Id, &user.DisplayName, &user.Username, &user.AvatarUrl, &user.Role, &user.Status, &user.PasswordHash)
 	if err != nil {
-		return nil, err
+		return err
 	}
-	return &createdUser, nil
+	return nil
 }
 func (r *userRepo) AddUserToTeams(ctx context.Context, userId openapi_types.UUID, teamIds *[]openapi_types.UUID) error {
 	for _, teamId := range *teamIds {

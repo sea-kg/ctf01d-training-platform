@@ -31,7 +31,7 @@ func (h *Handlers) CreateTeam(w http.ResponseWriter, r *http.Request) {
 		UniversityId: team.UniversityId,
 		AvatarUrl:    api_helpers.PrepareImage(*team.AvatarUrl),
 	}
-	if newTeam, err = teamRepo.Create(r.Context(), newTeam); err != nil {
+	if err = teamRepo.Create(r.Context(), newTeam); err != nil {
 		slog.Warn(err.Error(), "handler", "CreateTeamHandler")
 		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to create team"})
 		return

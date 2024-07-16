@@ -10,7 +10,7 @@ import (
 )
 
 type ResultRepository interface {
-	Create(ctx context.Context, result *models.Result) (*models.Result, error)
+	Create(ctx context.Context, result *models.Result) error
 	GetById(ctx context.Context, id openapi_types.UUID) (*models.Result, error)
 	Update(ctx context.Context, result *models.Result) error
 	Delete(ctx context.Context, id string) error
@@ -25,17 +25,16 @@ func NewResultRepository(db *sql.DB) ResultRepository {
 	return &resultRepo{db: db}
 }
 
-func (r *resultRepo) Create(ctx context.Context, result *models.Result) (*models.Result, error) {
+func (r *resultRepo) Create(ctx context.Context, result *models.Result) error {
 	query := `INSERT INTO results (team_id, game_id, score, rank)
 	          VALUES ($1, $2, $3, $4)
 	          RETURNING id, team_id, game_id, score, rank`
 	row := r.db.QueryRowContext(ctx, query, result.TeamId, result.GameId, result.Score, result.Rank)
-	var createdResult models.Result
-	err := row.Scan(&createdResult.Id, &createdResult.TeamId, &createdResult.GameId, &createdResult.Score, &createdResult.Rank)
+	err := row.Scan(&result.Id, &result.TeamId, &result.GameId, &result.Score, &result.Rank)
 	if err != nil {
-		return nil, err
+		return err
 	}
-	return &createdResult, nil
+	return nil
 }
 
 func (r *resultRepo) GetById(ctx context.Context, gameId openapi_types.UUID) (*models.Result, error) {

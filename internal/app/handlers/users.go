@@ -32,12 +32,13 @@ func (h *Handlers) CreateUser(w http.ResponseWriter, r *http.Request) {
 	}
 	newUser := &dbmodels.User{
 		Username:     *user.UserName,
+		DisplayName:  *user.DisplayName,
 		Role:         *user.Role,
 		Status:       *user.Status,
 		PasswordHash: passwordHash,
 		AvatarUrl:    api_helpers.PrepareImage(*user.AvatarUrl),
 	}
-	if newUser, err = repo.Create(r.Context(), newUser); err != nil {
+	if err = repo.Create(r.Context(), newUser); err != nil {
 		slog.Warn(err.Error(), "handler", "CreateUserHandler")
 		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to create user"})
 		return

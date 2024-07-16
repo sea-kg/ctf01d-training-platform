@@ -12,7 +12,7 @@ import (
 )
 
 type GameRepository interface {
-	Create(ctx context.Context, game *models.Game) (*models.Game, error)
+	Create(ctx context.Context, game *models.Game) error
 	GetById(ctx context.Context, id openapi_types.UUID) (*models.Game, error)
 	GetGameDetails(ctx context.Context, id openapi_types.UUID) (*models.GameDetails, error)
 	Update(ctx context.Context, game *models.Game) error
@@ -28,17 +28,16 @@ func NewGameRepository(db *sql.DB) GameRepository {
 	return &gameRepo{db: db}
 }
 
-func (r *gameRepo) Create(ctx context.Context, game *models.Game) (*models.Game, error) {
+func (r *gameRepo) Create(ctx context.Context, game *models.Game) error {
 	query := `INSERT INTO games (start_time, end_time, description)
 	          VALUES ($1, $2, $3)
 	          RETURNING id, start_time, end_time, description`
 	row := r.db.QueryRowContext(ctx, query, game.StartTime, game.EndTime, game.Description)
-	var createdGame models.Game
-	err := row.Scan(&createdGame.Id, &createdGame.StartTime, &createdGame.EndTime, &createdGame.Description)
+	err := row.Scan(&game.Id, &game.StartTime, &game.EndTime, &game.Description)
 	if err != nil {
-		return nil, err
+		return err
 	}
-	return &createdGame, nil
+	return nil
 }
 
 func (r *gameRepo) GetGameDetails(ctx context.Context, id openapi_types.UUID) (*models.GameDetails, error) {

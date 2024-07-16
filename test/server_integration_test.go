@@ -58,11 +58,12 @@ func TestUserCRUD(t *testing.T) {
 	}
 
 	var userID string
-	// 1. Создание пользователя
+	var createdUser map[string]interface{}
 	fake := faker.New()
 
+	// 1. Создание пользователя
 	t.Run("Create User", func(t *testing.T) {
-		user := map[string]interface{}{
+		createdUser = map[string]interface{}{
 			"display_name": fake.Person().Name(),
 			"user_name":    fake.Gamer().Tag(),
 			"role":         "player",
@@ -70,7 +71,7 @@ func TestUserCRUD(t *testing.T) {
 			"status":       "active",
 			"password":     fake.Internet().Password(),
 		}
-		body, _ := json.Marshal(user)
+		body, _ := json.Marshal(createdUser)
 		req, _ := http.NewRequest("POST", "/api/v1/users", bytes.NewBuffer(body))
 		req.Header.Set("Content-Type", "application/json")
 		rr := httptest.NewRecorder()
@@ -85,8 +86,17 @@ func TestUserCRUD(t *testing.T) {
 			t.Fatalf("could not unmarshal response: %v", err)
 		}
 
-		if response["data"] != "User created successfully" {
-			t.Fatalf("expected success message, got %v", response["data"])
+		userID = response["id"].(string)
+		if userID == "" {
+			t.Fatalf("expected user ID in response")
+		}
+
+		delete(createdUser, "password") // Убираем поле с паролем
+		// Проверка всех полей ответа
+		for key, value := range createdUser {
+			if response[key] != value {
+				t.Fatalf("expected %v for key %v, got %v", value, key, response[key])
+			}
 		}
 	})
 
@@ -134,6 +144,13 @@ func TestUserCRUD(t *testing.T) {
 		if response["id"] != userID {
 			t.Fatalf("expected user ID %v, got %v", userID, response["id"])
 		}
+
+		// Проверка всех полей ответа
+		for key, value := range createdUser {
+			if key != "password" && response[key] != value {
+				t.Fatalf("expected %v for key %v, got %v", value, key, response[key])
+			}
+		}
 	})
 
 	// 4. Обновление пользователя по ID
@@ -163,6 +180,26 @@ func TestUserCRUD(t *testing.T) {
 
 		if response["data"] != "User updated successfully" {
 			t.Fatalf("expected success message, got %v", response["data"])
+		}
+
+		// Проверка всех полей ответа после обновления
+		req, _ = http.NewRequest("GET", "/api/v1/users/"+userID, nil)
+		rr = httptest.NewRecorder()
+		r.ServeHTTP(rr, req)
+
+		if rr.Code != http.StatusOK {
+			t.Fatalf("expected status code 200, got %v", rr.Code)
+		}
+
+		var updatedResponse map[string]interface{}
+		if err := json.Unmarshal(rr.Body.Bytes(), &updatedResponse); err != nil {
+			t.Fatalf("could not unmarshal response: %v", err)
+		}
+
+		for key, value := range updatedUser {
+			if key != "password" && updatedResponse[key] != value {
+				t.Fatalf("expected %v for key %v, got %v", value, key, updatedResponse[key])
+			}
 		}
 	})
 
@@ -196,18 +233,19 @@ func TestServiceCRUD(t *testing.T) {
 	}
 
 	var serviceID string
+	var createdService map[string]interface{}
 	faker := faker.New()
 
 	// 1. Создание сервиса
 	t.Run("Create Service", func(t *testing.T) {
-		service := map[string]interface{}{
+		createdService = map[string]interface{}{
 			"name":        faker.Company().Name(),
 			"author":      faker.Person().Name(),
-			"logo_url":    faker.Internet().URL(),
+			"logo_url":    faker.Internet().URL() + "image.png",
 			"description": faker.Lorem().Sentence(10),
 			"is_public":   faker.Bool(),
 		}
-		body, _ := json.Marshal(service)
+		body, _ := json.Marshal(createdService)
 		req, _ := http.NewRequest("POST", "/api/v1/services", bytes.NewBuffer(body))
 		req.Header.Set("Content-Type", "application/json")
 		rr := httptest.NewRecorder()
@@ -215,6 +253,23 @@ func TestServiceCRUD(t *testing.T) {
 
 		if rr.Code != http.StatusOK {
 			t.Fatalf("expected status code 200, got %v", rr.Code)
+		}
+
+		var response map[string]interface{}
+		if err := json.Unmarshal(rr.Body.Bytes(), &response); err != nil {
+			t.Fatalf("could not unmarshal response: %v", err)
+		}
+
+		serviceID = response["id"].(string)
+		if serviceID == "" {
+			t.Fatalf("expected service ID in response")
+		}
+
+		// Проверка всех полей ответа
+		for key, value := range createdService {
+			if response[key] != value {
+				t.Fatalf("expected %v for key %v, got %v", value, key, response[key])
+			}
 		}
 	})
 
@@ -262,6 +317,13 @@ func TestServiceCRUD(t *testing.T) {
 		if response["id"] != serviceID {
 			t.Fatalf("expected service ID %v, got %v", serviceID, response["id"])
 		}
+
+		// Проверка всех полей ответа
+		for key, value := range createdService {
+			if response[key] != value {
+				t.Fatalf("expected %v for key %v, got %v", value, key, response[key])
+			}
+		}
 	})
 
 	// 4. Обновление сервиса по ID
@@ -269,7 +331,7 @@ func TestServiceCRUD(t *testing.T) {
 		updatedService := map[string]interface{}{
 			"name":        faker.Company().Name(),
 			"author":      faker.Person().Name(),
-			"logo_url":    faker.Internet().URL(),
+			"logo_url":    faker.Internet().URL() + "image.png",
 			"description": faker.Lorem().Sentence(10),
 			"is_public":   faker.Bool(),
 		}
@@ -288,8 +350,28 @@ func TestServiceCRUD(t *testing.T) {
 			t.Fatalf("could not unmarshal response: %v", err)
 		}
 
-		if response["data"] != "Game updated successfully" {
-			t.Fatalf("expected 'Game updated successfully', got %v", response["data"])
+		if response["data"] != "Service updated successfully" {
+			t.Fatalf("expected 'Service updated successfully', got %v", response["data"])
+		}
+
+		// Проверка всех полей ответа после обновления
+		req, _ = http.NewRequest("GET", "/api/v1/services/"+serviceID, nil)
+		rr = httptest.NewRecorder()
+		r.ServeHTTP(rr, req)
+
+		if rr.Code != http.StatusOK {
+			t.Fatalf("expected status code 200, got %v", rr.Code)
+		}
+
+		var updatedResponse map[string]interface{}
+		if err := json.Unmarshal(rr.Body.Bytes(), &updatedResponse); err != nil {
+			t.Fatalf("could not unmarshal response: %v", err)
+		}
+
+		for key, value := range updatedService {
+			if updatedResponse[key] != value {
+				t.Fatalf("expected %v for key %v, got %v", value, key, updatedResponse[key])
+			}
 		}
 	})
 
@@ -312,16 +394,18 @@ func TestTeamCRUD(t *testing.T) {
 	}
 
 	var teamID string
+	var createdTeam map[string]interface{}
 	faker := faker.New()
+
 	// 1. Создание команды
 	t.Run("Create Team", func(t *testing.T) {
-		team := map[string]interface{}{
+		createdTeam = map[string]interface{}{
 			"name":         faker.Gamer().Tag(),
 			"description":  faker.Lorem().Sentence(10),
 			"social_links": faker.Internet().URL(),
-			"avatar_url":   faker.Internet().URL(),
+			"avatar_url":   faker.Internet().URL() + "image.png",
 		}
-		body, _ := json.Marshal(team)
+		body, _ := json.Marshal(createdTeam)
 		req, _ := http.NewRequest("POST", "/api/v1/teams", bytes.NewBuffer(body))
 		req.Header.Set("Content-Type", "application/json")
 		rr := httptest.NewRecorder()
@@ -329,6 +413,23 @@ func TestTeamCRUD(t *testing.T) {
 
 		if rr.Code != http.StatusOK {
 			t.Fatalf("expected status code 200, got %v", rr.Code)
+		}
+
+		var response map[string]interface{}
+		if err := json.Unmarshal(rr.Body.Bytes(), &response); err != nil {
+			t.Fatalf("could not unmarshal response: %v", err)
+		}
+
+		teamID = response["id"].(string)
+		if teamID == "" {
+			t.Fatalf("expected team ID in response")
+		}
+
+		// Проверка всех полей ответа
+		for key, value := range createdTeam {
+			if response[key] != value {
+				t.Fatalf("expected %v for key %v, got %v", value, key, response[key])
+			}
 		}
 	})
 
@@ -376,6 +477,13 @@ func TestTeamCRUD(t *testing.T) {
 		if response["id"] != teamID {
 			t.Fatalf("expected team ID %v, got %v", teamID, response["id"])
 		}
+
+		// Проверка всех полей ответа
+		for key, value := range createdTeam {
+			if response[key] != value {
+				t.Fatalf("expected %v for key %v, got %v", value, key, response[key])
+			}
+		}
 	})
 
 	// 4. Обновление команды по ID
@@ -384,7 +492,7 @@ func TestTeamCRUD(t *testing.T) {
 			"name":         faker.Gamer().Tag(),
 			"description":  faker.Lorem().Sentence(10),
 			"social_links": faker.Internet().URL(),
-			"avatar_url":   faker.Internet().URL(),
+			"avatar_url":   faker.Internet().URL() + "image.png",
 		}
 		body, _ := json.Marshal(updatedTeam)
 		req, _ := http.NewRequest("PUT", "/api/v1/teams/"+teamID, bytes.NewBuffer(body))
@@ -403,6 +511,26 @@ func TestTeamCRUD(t *testing.T) {
 
 		if response["data"] != "Team updated successfully" {
 			t.Fatalf("expected 'Team updated successfully, got %v", response["data"])
+		}
+
+		// Проверка всех полей ответа после обновления
+		req, _ = http.NewRequest("GET", "/api/v1/teams/"+teamID, nil)
+		rr = httptest.NewRecorder()
+		r.ServeHTTP(rr, req)
+
+		if rr.Code != http.StatusOK {
+			t.Fatalf("expected status code 200, got %v", rr.Code)
+		}
+
+		var updatedResponse map[string]interface{}
+		if err := json.Unmarshal(rr.Body.Bytes(), &updatedResponse); err != nil {
+			t.Fatalf("could not unmarshal response: %v", err)
+		}
+
+		for key, value := range updatedTeam {
+			if updatedResponse[key] != value {
+				t.Fatalf("expected %v for key %v, got %v", value, key, updatedResponse[key])
+			}
 		}
 	})
 
@@ -425,16 +553,17 @@ func TestGameCRUD(t *testing.T) {
 	}
 
 	var gameID string
+	var createdGame map[string]interface{}
 	faker := faker.New()
 
 	// 1. Создание игры
 	t.Run("Create Game", func(t *testing.T) {
-		game := map[string]interface{}{
-			"start_time":  time.Now(),
-			"end_time":    time.Now(),
+		createdGame = map[string]interface{}{
+			"start_time":  time.Date(2023, 7, 16, 0, 0, 0, 0, time.UTC).Format(time.RFC3339),
+			"end_time":    time.Date(2023, 7, 17, 0, 0, 0, 0, time.UTC).Format(time.RFC3339),
 			"description": faker.Lorem().Sentence(10),
 		}
-		body, _ := json.Marshal(game)
+		body, _ := json.Marshal(createdGame)
 		req, _ := http.NewRequest("POST", "/api/v1/games", bytes.NewBuffer(body))
 		req.Header.Set("Content-Type", "application/json")
 		rr := httptest.NewRecorder()
@@ -442,6 +571,23 @@ func TestGameCRUD(t *testing.T) {
 
 		if rr.Code != http.StatusOK {
 			t.Fatalf("expected status code 200, got %v", rr.Code)
+		}
+
+		var response map[string]interface{}
+		if err := json.Unmarshal(rr.Body.Bytes(), &response); err != nil {
+			t.Fatalf("could not unmarshal response: %v", err)
+		}
+
+		gameID = response["id"].(string)
+		if gameID == "" {
+			t.Fatalf("expected game ID in response")
+		}
+
+		// Проверка всех полей ответа
+		for key, value := range createdGame {
+			if response[key] != value {
+				t.Fatalf("expected %v for key %v, got %v", value, key, response[key])
+			}
 		}
 	})
 
@@ -489,13 +635,20 @@ func TestGameCRUD(t *testing.T) {
 		if response["id"] != gameID {
 			t.Fatalf("expected game ID %v, got %v", gameID, response["id"])
 		}
+
+		// Проверка всех полей ответа
+		for key, value := range createdGame {
+			if response[key] != value {
+				t.Fatalf("expected %v for key %v, got %v", value, key, response[key])
+			}
+		}
 	})
 
 	// 4. Обновление игры по ID
 	t.Run("Update Game by ID", func(t *testing.T) {
 		updatedGame := map[string]interface{}{
-			"start_time":  time.Now(),
-			"end_time":    time.Now(),
+			"start_time":  time.Date(2023, 7, 16, 0, 0, 0, 0, time.UTC).Format(time.RFC3339),
+			"end_time":    time.Date(2023, 7, 17, 0, 0, 0, 0, time.UTC).Format(time.RFC3339),
 			"description": faker.Lorem().Sentence(10),
 		}
 		body, _ := json.Marshal(updatedGame)
@@ -515,6 +668,26 @@ func TestGameCRUD(t *testing.T) {
 
 		if response["data"] != "Game updated successfully" {
 			t.Fatalf("expected 'Game updated successfully', got %v", response["data"])
+		}
+
+		// Проверка всех полей ответа после обновления
+		req, _ = http.NewRequest("GET", "/api/v1/games/"+gameID, nil)
+		rr = httptest.NewRecorder()
+		r.ServeHTTP(rr, req)
+
+		if rr.Code != http.StatusOK {
+			t.Fatalf("expected status code 200, got %v", rr.Code)
+		}
+
+		var updatedResponse map[string]interface{}
+		if err := json.Unmarshal(rr.Body.Bytes(), &updatedResponse); err != nil {
+			t.Fatalf("could not unmarshal response: %v", err)
+		}
+
+		for key, value := range updatedGame {
+			if updatedResponse[key] != value {
+				t.Fatalf("expected %v for key %v, got %v", value, key, updatedResponse[key])
+			}
 		}
 	})
 

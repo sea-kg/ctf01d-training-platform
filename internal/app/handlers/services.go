@@ -31,7 +31,7 @@ func (h *Handlers) CreateService(w http.ResponseWriter, r *http.Request) {
 		Description: *service.Description,
 		IsPublic:    service.IsPublic,
 	}
-	if newService, err = repo.Create(r.Context(), newService); err != nil {
+	if err = repo.Create(r.Context(), newService); err != nil {
 		slog.Warn(err.Error(), "handler", "CreateServiceHandler")
 		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to create service"})
 		return
@@ -93,7 +93,7 @@ func (h *Handlers) UpdateService(w http.ResponseWriter, r *http.Request, id open
 		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Invalid request payload"})
 		return
 	}
-	api_helpers.RespondWithJSON(w, http.StatusOK, map[string]string{"data": "Game updated successfully"})
+	api_helpers.RespondWithJSON(w, http.StatusOK, map[string]string{"data": "Service updated successfully"})
 }
 
 // fixme implement

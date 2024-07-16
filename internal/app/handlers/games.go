@@ -33,7 +33,7 @@ func (h *Handlers) CreateGame(w http.ResponseWriter, r *http.Request) {
 		Description: *game.Description,
 	}
 
-	newGame, err = repo.Create(r.Context(), newGame)
+	err = repo.Create(r.Context(), newGame)
 	if err != nil {
 		slog.Warn(err.Error(), "handler", "CreateGame")
 		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to create game"})

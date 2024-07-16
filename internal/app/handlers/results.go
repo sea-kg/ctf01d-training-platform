@@ -29,7 +29,7 @@ func (h *Handlers) CreateResult(w http.ResponseWriter, r *http.Request, gameId o
 		Score:  result.Score,
 		Rank:   result.Rank,
 	}
-	if newResult, err = repo.Create(r.Context(), newResult); err != nil {
+	if err = repo.Create(r.Context(), newResult); err != nil {
 		slog.Warn(err.Error(), "handler", "CreateResultHandler")
 		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to create result"})
 		return
