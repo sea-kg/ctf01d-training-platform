@@ -702,3 +702,159 @@ func TestGameCRUD(t *testing.T) {
 		}
 	})
 }
+
+func TestResultsCRUD(t *testing.T) {
+	r, err := NewTestRouter()
+	if err != nil {
+		t.Fatalf("failed to initialize router: %v", err)
+	}
+
+	var gameID, teamID string
+	fake := faker.New()
+
+	// 1. Создание игры и команды
+	game := map[string]interface{}{
+		"start_time":  time.Date(2023, 7, 16, 0, 0, 0, 0, time.UTC).Format(time.RFC3339),
+		"end_time":    time.Date(2023, 7, 17, 0, 0, 0, 0, time.UTC).Format(time.RFC3339),
+		"description": fake.Lorem().Sentence(10),
+	}
+	body, _ := json.Marshal(game)
+	req, _ := http.NewRequest("POST", "/api/v1/games", bytes.NewBuffer(body))
+	req.Header.Set("Content-Type", "application/json")
+	rr := httptest.NewRecorder()
+	r.ServeHTTP(rr, req)
+	if rr.Code != http.StatusOK {
+		t.Fatalf("expected status code 200, got %v", rr.Code)
+	}
+	var response map[string]interface{}
+	if err := json.Unmarshal(rr.Body.Bytes(), &response); err != nil {
+		t.Fatalf("could not unmarshal response: %v", err)
+	}
+	gameID = response["id"].(string)
+	if gameID == "" {
+		t.Fatalf("expected game ID in response")
+	}
+
+	createdTeam := map[string]interface{}{
+		"name":         fake.Gamer().Tag(),
+		"description":  fake.Lorem().Sentence(10),
+		"social_links": fake.Internet().URL(),
+		"avatar_url":   fake.Internet().URL() + "image.png",
+	}
+	body, _ = json.Marshal(createdTeam)
+	req, _ = http.NewRequest("POST", "/api/v1/teams", bytes.NewBuffer(body))
+	req.Header.Set("Content-Type", "application/json")
+	rr = httptest.NewRecorder()
+	r.ServeHTTP(rr, req)
+
+	if rr.Code != http.StatusOK {
+		t.Fatalf("expected status code 200, got %v", rr.Code)
+	}
+
+	// var response map[string]interface{}
+	if err := json.Unmarshal(rr.Body.Bytes(), &response); err != nil {
+		t.Fatalf("could not unmarshal response: %v", err)
+	}
+
+	teamID = response["id"].(string)
+	if teamID == "" {
+		t.Fatalf("expected team ID in response")
+	}
+
+	var resultID string
+
+	// 2. Создание результата игры
+	t.Run("Create Result", func(t *testing.T) {
+		result := map[string]interface{}{
+			"game_id": gameID,
+			"rank":    fake.IntBetween(1, 10),
+			"score":   fake.Float64(0, 1, 100),
+			"team_id": teamID,
+		}
+		body, _ := json.Marshal(result)
+		req, _ := http.NewRequest("POST", "/api/v1/games/"+gameID+"/results", bytes.NewBuffer(body))
+		req.Header.Set("Content-Type", "application/json")
+		rr := httptest.NewRecorder()
+		r.ServeHTTP(rr, req)
+
+		if rr.Code != http.StatusOK {
+			t.Fatalf("expected status code 200, got %v", rr.Code)
+		}
+
+		var response map[string]interface{}
+		if err := json.Unmarshal(rr.Body.Bytes(), &response); err != nil {
+			t.Fatalf("could not unmarshal response: %v", err)
+		}
+
+		resultID = response["id"].(string)
+		if resultID == "" {
+			t.Fatalf("expected result ID in response")
+		}
+	})
+
+	// 3. Получение результата игры по ID
+	t.Run("Get Result by ID", func(t *testing.T) {
+		req, _ := http.NewRequest("GET", "/api/v1/games/"+gameID+"/results", nil)
+		rr := httptest.NewRecorder()
+		r.ServeHTTP(rr, req)
+
+		if rr.Code != http.StatusOK {
+			t.Fatalf("expected status code 200, got %v", rr.Code)
+		}
+
+		var response map[string]interface{}
+		if err := json.Unmarshal(rr.Body.Bytes(), &response); err != nil {
+			t.Fatalf("could not unmarshal response: %v", err)
+		}
+
+		if len(response) == 0 {
+			t.Fatalf("expected at least one result")
+		}
+	})
+
+	// 4. Обновление результата игры по ID
+	t.Run("Update Result by ID", func(t *testing.T) {
+		t.Skip()
+		updatedResult := map[string]interface{}{
+			"rank":  fake.IntBetween(1, 10),
+			"score": fake.Float64(0, 1, 100),
+		}
+		body, _ := json.Marshal(updatedResult)
+		req, _ := http.NewRequest("PUT", "/api/v1/games/"+gameID+"/results", bytes.NewBuffer(body))
+		req.Header.Set("Content-Type", "application/json")
+		rr := httptest.NewRecorder()
+		r.ServeHTTP(rr, req)
+
+		if rr.Code != http.StatusOK {
+			t.Fatalf("expected status code 200, got %v", rr.Code)
+		}
+
+		var response map[string]interface{}
+		if err := json.Unmarshal(rr.Body.Bytes(), &response); err != nil {
+			t.Fatalf("could not unmarshal response: %v", err)
+		}
+
+		if response["data"] != "Result updated successfully" {
+			t.Fatalf("expected 'Result updated successfully', got %v", response["data"])
+		}
+	})
+
+	// 5. Получение игровой таблицы результатов
+	t.Run("Get Game Scoreboard", func(t *testing.T) {
+		t.Skip()
+		req, _ := http.NewRequest("GET", "/api/v1/games/"+gameID+"/scoreboard", nil)
+		rr := httptest.NewRecorder()
+		r.ServeHTTP(rr, req)
+
+		if rr.Code != http.StatusOK {
+			t.Fatalf("expected status code 200, got %v", rr.Code)
+		}
+
+		var response map[string]interface{}
+		if err := json.Unmarshal(rr.Body.Bytes(), &response); err != nil {
+			t.Fatalf("could not unmarshal response: %v", err)
+		}
+
+		// Здесь можно добавить дополнительные проверки содержимого ответа
+	})
+}

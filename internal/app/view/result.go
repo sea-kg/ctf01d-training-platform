@@ -14,11 +14,3 @@ func NewResultFromModel(s *db.Result) *server.ResultResponse {
 		TeamId: s.TeamId,
 	}
 }
-
-func NewResultFromModels(rm []*db.Result) []*server.ResultResponse {
-	var services []*server.ResultResponse
-	for _, s := range rm {
-		services = append(services, NewResultFromModel(s))
-	}
-	return services
-}

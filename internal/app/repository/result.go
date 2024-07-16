@@ -38,7 +38,7 @@ func (r *resultRepo) Create(ctx context.Context, result *models.Result) error {
 }
 
 func (r *resultRepo) GetById(ctx context.Context, gameId openapi_types.UUID) (*models.Result, error) {
-	query := `SELECT id, team_id, game_id, score, rank FROM results WHERE id = $1`
+	query := `SELECT id, team_id, game_id, score, rank FROM results WHERE game_id = $1 order by rank`
 	result := &models.Result{}
 	err := r.db.QueryRowContext(ctx, query, gameId).Scan(&result.Id, &result.TeamId, &result.GameId, &result.Score, &result.Rank)
 	if err != nil {
