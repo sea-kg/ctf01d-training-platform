@@ -31,11 +31,11 @@ func (h *Handlers) CreateUser(w http.ResponseWriter, r *http.Request) {
 	}
 	newUser := &dbmodels.User{
 		Username:     user.UserName,
-		DisplayName:  *user.DisplayName,
+		DisplayName:  api_helpers.ToNullString(user.DisplayName),
 		Role:         user.Role,
 		Status:       user.Status,
 		PasswordHash: passwordHash,
-		AvatarUrl:    api_helpers.PrepareImage(*user.AvatarUrl),
+		AvatarUrl:    api_helpers.ToNullString(user.AvatarUrl),
 	}
 	if err = repo.Create(r.Context(), newUser); err != nil {
 		slog.Warn(err.Error(), "handler", "CreateUserHandler")
@@ -113,11 +113,11 @@ func (h *Handlers) UpdateUser(w http.ResponseWriter, r *http.Request, id openapi
 	repo := repository.NewUserRepository(h.DB)
 	updateUser := &dbmodels.User{
 		Username:     user.UserName,
-		DisplayName:  *user.DisplayName,
+		DisplayName:  api_helpers.ToNullString(user.DisplayName),
 		Role:         user.Role,
 		Status:       user.Status,
 		PasswordHash: passwordHash,
-		AvatarUrl:    api_helpers.PrepareImage(*user.AvatarUrl),
+		AvatarUrl:    api_helpers.ToNullString(user.AvatarUrl),
 	}
 	updateUser.Id = id
 	err = repo.Update(r.Context(), updateUser)

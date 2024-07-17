@@ -29,7 +29,7 @@ func (h *Handlers) CreateTeam(w http.ResponseWriter, r *http.Request) {
 		SocialLinks:  *team.SocialLinks,
 		Description:  *team.Description,
 		UniversityId: team.UniversityId,
-		AvatarUrl:    api_helpers.PrepareImage(*team.AvatarUrl),
+		AvatarUrl:    api_helpers.ToNullString(team.AvatarUrl),
 	}
 	if err = teamRepo.Create(r.Context(), newTeam); err != nil {
 		slog.Warn(err.Error(), "handler", "CreateTeamHandler")
@@ -84,7 +84,7 @@ func (h *Handlers) UpdateTeam(w http.ResponseWriter, r *http.Request, id openapi
 		SocialLinks:  *team.SocialLinks,
 		Description:  *team.Description,
 		UniversityId: team.UniversityId,
-		AvatarUrl:    *team.AvatarUrl,
+		AvatarUrl:    api_helpers.ToNullString(team.AvatarUrl),
 	}
 	updateTeam.Id = id
 	if err := teamRepo.Update(r.Context(), updateTeam); err != nil {

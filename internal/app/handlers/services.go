@@ -27,7 +27,7 @@ func (h *Handlers) CreateService(w http.ResponseWriter, r *http.Request) {
 	newService := &dbmodels.Service{
 		Name:        service.Name,
 		Author:      service.Author,
-		LogoUrl:     api_helpers.PrepareImage(*service.LogoUrl),
+		LogoUrl:     api_helpers.ToNullString(service.LogoUrl),
 		Description: *service.Description,
 		IsPublic:    service.IsPublic,
 	}
@@ -83,7 +83,7 @@ func (h *Handlers) UpdateService(w http.ResponseWriter, r *http.Request, id open
 		Id:          id,
 		Name:        sr.Name,
 		Author:      sr.Author,
-		LogoUrl:     *sr.LogoUrl,
+		LogoUrl:     api_helpers.ToNullString(sr.LogoUrl),
 		Description: *sr.Description,
 		IsPublic:    sr.IsPublic,
 	}

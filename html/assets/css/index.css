@@ -44,7 +44,7 @@ body,html{
 .users-card-avatar {
     object-fit: cover;
     object-position: top center;
-    border-radius: 50%;
+    border-radius: 0%;
     width: 80px;
     height: 80px;
 }

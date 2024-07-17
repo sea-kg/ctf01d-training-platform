@@ -9,12 +9,18 @@ import (
 
 func NewUserFromModel(u *db.User) *server.UserResponse {
 	userRole := helpers.ConvertUserRequestRoleToUserResponseRole(u.Role)
+	var avatarUrl string
+	if u.AvatarUrl.Valid {
+		avatarUrl = u.AvatarUrl.String
+	} else {
+		avatarUrl = helpers.WithDefault(u.Username)
+	}
 	return &server.UserResponse{
 		Id:          &u.Id,
 		UserName:    &u.Username,
-		DisplayName: &u.DisplayName,
+		DisplayName: &u.DisplayName.String,
 		Role:        &userRole,
-		AvatarUrl:   &u.AvatarUrl,
+		AvatarUrl:   &avatarUrl,
 		Status:      &u.Status,
 	}
 }

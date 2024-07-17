@@ -1,12 +1,11 @@
 package helpers
 
 import (
+	"database/sql"
 	"encoding/json"
 	"log/slog"
 	"net/http"
 	"net/url"
-	"regexp"
-	"strings"
 
 	"ctf01d/internal/app/server"
 
@@ -26,17 +25,21 @@ func CheckPasswordHash(s, hash string) bool {
 	return err == nil
 }
 
-func PrepareImage(avatarUrl string) string {
-	// fixme подумать за генерацию аватарок, пока для mvp - сойдет robohash.org
-	if strings.Contains(avatarUrl, "robohash.org") {
-		return avatarUrl
+func ToNullString(s *string) sql.NullString {
+	if s == nil {
+		return sql.NullString{
+			String: "",
+			Valid:  false,
+		}
 	}
-	// fixme подумать что делать с http контентом
-	re := regexp.MustCompile(`(?i)^https?://.*\.(jpg|jpeg|png|gif)$`)
-	if re.MatchString(avatarUrl) {
-		return avatarUrl
+	return sql.NullString{
+		String: *s,
+		Valid:  true,
 	}
-	return "https://robohash.org/" + url.QueryEscape(avatarUrl)
+}
+
+func WithDefault(img string) string {
+	return "http://localhost:4102/api/v1/avatar/" + url.QueryEscape(img)
 }
 
 func RespondWithJSON(w http.ResponseWriter, code int, payload interface{}) {

@@ -8,20 +8,44 @@ import (
 	"image/color"
 	"image/png"
 	"log"
-	"math/rand"
 	"sort"
 	"strconv"
 	"unicode"
 )
 
-func Render(username string, x, y int) bool {
+func GenerateAvatar(username string, xMax, yMax, blockSize int, steps int) []byte {
+	gradient := generateGradient(username, steps)
+	img := image.NewRGBA(image.Rect(0, 0, xMax, yMax))
+	stepsCount := len(gradient)
+
+	for x := 0; x < xMax/2; x += blockSize {
+		for y := 0; y < yMax; y += blockSize {
+
+			index := (x + y) / blockSize % stepsCount
+			col := gradient[index]
+
+			if render(username, x, y) {
+				for i := 0; i < blockSize; i++ {
+					for j := 0; j < blockSize; j++ {
+						img.Set(x+i, y+j, col)
+						img.Set(xMax-x-i-1, y+j, col)
+					}
+				}
+			}
+		}
+	}
+	var buf bytes.Buffer
+	if err := png.Encode(&buf, img); err != nil {
+		log.Fatalf("failed to encode image: %v", err)
+	}
+
+	return buf.Bytes()
+}
+
+func render(username string, x, y int) bool {
 	hash := generateHash(username + strconv.Itoa(x) + strconv.Itoa(y))
 	val := hexToInt(hash[:8]) // Используем первые 8 символов хеша
 	return val%4 > 1
-}
-
-func RandInt() int {
-	return rand.Intn(256)
 }
 
 func generateHash(s string) string {
@@ -35,7 +59,7 @@ func hexToInt(hexStr string) int {
 	return int(val)
 }
 
-func GenerateGradient(username string, steps int) []color.RGBA {
+func generateGradient(username string, steps int) []color.RGBA {
 
 	runes := []rune(username)
 	for i, r := range runes {
@@ -63,33 +87,4 @@ func GenerateGradient(username string, steps int) []color.RGBA {
 		}
 	}
 	return gradient
-}
-
-func GenerateAvatar(username string, xMax, yMax, blockSize int, steps int) []byte {
-	gradient := GenerateGradient(username, steps)
-	img := image.NewRGBA(image.Rect(0, 0, xMax, yMax))
-	stepsCount := len(gradient)
-
-	for x := 0; x < xMax/2; x += blockSize {
-		for y := 0; y < yMax; y += blockSize {
-
-			index := (x + y) / blockSize % stepsCount
-			col := gradient[index]
-
-			if Render(username, x, y) {
-				for i := 0; i < blockSize; i++ {
-					for j := 0; j < blockSize; j++ {
-						img.Set(x+i, y+j, col)
-						img.Set(xMax-x-i-1, y+j, col)
-					}
-				}
-			}
-		}
-	}
-	var buf bytes.Buffer
-	if err := png.Encode(&buf, img); err != nil {
-		log.Fatalf("failed to encode image: %v", err)
-	}
-
-	return buf.Bytes()
 }
