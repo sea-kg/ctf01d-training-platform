@@ -152,11 +152,11 @@ func (siw *ServerInterfaceWrapper) UpdateUser(w http.ResponseWriter, r *http.Req
 }
 
 func (siw *ServerInterfaceWrapper) UploadChecker(w http.ResponseWriter, r *http.Request, id openapi_types.UUID) {
-	siw.handlers.PostApiV1ServicesUuidChecker(w, r, id)
+	siw.handlers.UploadChecker(w, r, id)
 }
 
 func (siw *ServerInterfaceWrapper) UploadService(w http.ResponseWriter, r *http.Request, id openapi_types.UUID) {
-	siw.handlers.PostApiV1ServicesUuidService(w, r, id)
+	siw.handlers.UploadService(w, r, id)
 }
 
 func (siw *ServerInterfaceWrapper) ConnectUserWithTeamUserId(w http.ResponseWriter, r *http.Request, teamId openapi_types.UUID, userId openapi_types.UUID) {
