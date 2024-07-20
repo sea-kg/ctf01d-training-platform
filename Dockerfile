@@ -1,23 +1,27 @@
 FROM golang:1.22-bookworm as builder
-LABEL "maintainer"="Evgenii Sopov <mrseakg@gmail.com>"
-LABEL "repository"="https://github.com/sea-kg/ctf01d"
 
-WORKDIR /go/src/app
+WORKDIR /ctf01d.ru
 
-COPY ./src/go.mod ./
+COPY ./go.mod ./
+COPY ./go.sum ./
 
 RUN go mod tidy
 
-COPY ./src/ ./
+COPY ./ ./
 
-FROM alpine:latest
+RUN CGO_ENABLED=0 GOOS=linux go build -o server ./cmd/ctf01d/main.go
+
+FROM alpine:latest as prod
+LABEL "maintainer"="Evgenii Sopov <mrseakg@gmail.com>"
+LABEL "repository"="https://github.com/sea-kg/ctf01d"
 RUN apk --no-cache add ca-certificates
 
-WORKDIR /root/
+WORKDIR /ctf01d.ru
 
-COPY --from=builder /app/server .
+COPY --from=builder /ctf01d.ru/server .
+COPY --from=builder /ctf01d.ru/config/ ./config/
+COPY --from=builder /ctf01d.ru/html/ ./html/
 
-EXPOSE 4202
+EXPOSE 4102
 
 CMD ["./server"]
-

@@ -177,7 +177,6 @@ func InitDatabase(cfg *config.Config) (*sql.DB, error) {
 		installedSomeUpdate = false
 		installedUpdates, _ := getInstalledDatabaseVersions(db)
 		for _, installed_update_id := range installedUpdates {
-			slog.Debug("Installed_update: " + installed_update_id)
 			updates, found_update := allUpdates[installed_update_id]
 			if found_update {
 				for _, update_func := range updates {
@@ -206,6 +205,7 @@ func InitDatabase(cfg *config.Config) (*sql.DB, error) {
 					}
 				}
 			}
+			slog.Debug("Installed update: " + installed_update_id)
 		}
 	}
 	// successfully
