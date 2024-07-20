@@ -74,7 +74,7 @@ func insertUpdateInfo(db *sql.DB, fromUpdateId string, toUpdateId string, descri
 		")"
 	_, err := db.Exec(query, getTimestampNow(), fromUpdateId, toUpdateId, description)
 	if err != nil {
-		slog.Error("insertUpdateInfo: " + err.Error())
+		slog.Error("InsertUpdateInfo: " + err.Error())
 		return err
 	}
 	return nil
@@ -86,7 +86,7 @@ func getInstalledDatabaseVersions(db *sql.DB) ([]string, error) {
 	rows, err := db.Query(query)
 	if err != nil {
 		if err == sql.ErrNoRows {
-			slog.Warn("database_updates - No rows")
+			slog.Warn("Database_updates - No rows")
 			err = insertUpdateInfo(db, "", "update0000", "Added table database_updates")
 			if err != nil {
 				slog.Error("Problem with insert into database_updates (1) " + err.Error())
@@ -177,7 +177,7 @@ func InitDatabase(cfg *config.Config) (*sql.DB, error) {
 		installedSomeUpdate = false
 		installedUpdates, _ := getInstalledDatabaseVersions(db)
 		for _, installed_update_id := range installedUpdates {
-			slog.Debug("installed_update: " + installed_update_id)
+			slog.Debug("Installed_update: " + installed_update_id)
 			updates, found_update := allUpdates[installed_update_id]
 			if found_update {
 				for _, update_func := range updates {
