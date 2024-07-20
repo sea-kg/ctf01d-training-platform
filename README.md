@@ -61,6 +61,29 @@ Roadmap [here](TODO.md)
 
 ## Development
 
+### Install go on `Ubuntu 24.04 LTS`
+
+```shell
+$ snap install go --classic 
+```
+
+also you will need docker
+
+### Build and start from source code 
+
+```shell
+$ make run-db
+...
+$ make build
+$ ./main
+```
+
+And then open
+http://localhost:4102/
+
+Default admin credentials: admin/admin 
+
+
 ### Install requirements
 
 ```shell
