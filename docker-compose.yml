@@ -1,4 +1,4 @@
-version: '2'
+version: "2"
 
 services:
   ctf_training_platform_db:
@@ -9,28 +9,21 @@ services:
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: ctf01d_training_platform
       PGPORT: 4112
-    # ports:
-    #   - "5432:4112"
     volumes:
       - ./docker_tmp/pg_data:/var/lib/postgresql/data/
     networks:
-      - service2_go_net
+      - ctf01d_net
 
-  service2_backend:
+  ctf01d_backend:
     build: .
     depends_on:
-      - service2_go_db
-    environment:
-      SERVICE2_GO_MYSQL_HOST: service2_go_db
-      SERVICE2_GO_MYSQL_DBNAME: service2_go
-      SERVICE2_GO_MYSQL_USER: service2_go
-      SERVICE2_GO_MYSQL_PASSWORD: service2_go
+      - ctf_training_platform_db
     ports:
       - "4102:4102"
     restart: always
     networks:
-      - service2_go_net
+      - ctf01d_net
 
 networks:
-  service2_go_net:
+  ctf01d_net:
     driver: bridge
