@@ -159,10 +159,6 @@ func (siw *ServerInterfaceWrapper) UploadService(w http.ResponseWriter, r *http.
 	siw.handlers.UploadService(w, r, id)
 }
 
-func (siw *ServerInterfaceWrapper) ConnectUserWithTeamUserId(w http.ResponseWriter, r *http.Request, teamId openapi_types.UUID, userId openapi_types.UUID) {
-	siw.handlers.JoinTeamUser(w, r, teamId, userId)
-}
-
 func (siw *ServerInterfaceWrapper) UniqueAvatar(w http.ResponseWriter, r *http.Request, username string) {
 	xMax := 100
 	yMax := 100

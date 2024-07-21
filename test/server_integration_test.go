@@ -11,8 +11,8 @@ import (
 	"time"
 
 	"ctf01d/config"
-	"ctf01d/internal/app/database"
 	"ctf01d/internal/app/handlers"
+	migration "ctf01d/internal/app/migrations/psql"
 	"ctf01d/internal/app/server"
 
 	"github.com/jaswdr/faker"
@@ -29,7 +29,7 @@ func TestMain(m *testing.M) {
 		panic(err)
 	}
 
-	db, err = database.InitDatabase(cfg)
+	db, err = migration.InitDatabase(cfg)
 	if err != nil {
 		panic(err)
 	}
@@ -854,7 +854,5 @@ func TestResultsCRUD(t *testing.T) {
 		if err := json.Unmarshal(rr.Body.Bytes(), &response); err != nil {
 			t.Fatalf("could not unmarshal response: %v", err)
 		}
-
-		// Здесь можно добавить дополнительные проверки содержимого ответа
 	})
 }
