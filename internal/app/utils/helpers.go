@@ -39,7 +39,7 @@ func ToNullString(s *string) sql.NullString {
 }
 
 func WithDefault(img string) string {
-	return "http://localhost:4102/api/v1/avatar/" + url.QueryEscape(img)
+	return "api/v1/avatar/" + url.QueryEscape(img)
 }
 
 func RespondWithJSON(w http.ResponseWriter, code int, payload interface{}) {
