@@ -702,7 +702,208 @@ func TestGameCRUD(t *testing.T) {
 		}
 	})
 }
+func TestTeamMembersCRUD(t *testing.T) {
+	r, err := NewTestRouter()
+	if err != nil {
+		t.Fatalf("failed to initialize router: %v", err)
+	}
 
+	var teamID string
+	var userID string
+	var memberID string
+	fake := faker.New()
+
+	// Создание команды для тестирования
+	createdTeam := map[string]interface{}{
+		"name":         fake.Gamer().Tag(),
+		"description":  fake.Lorem().Sentence(10),
+		"social_links": fake.Internet().URL(),
+		"avatar_url":   fake.Internet().URL() + "image.png",
+	}
+	body, _ := json.Marshal(createdTeam)
+	req, _ := http.NewRequest("POST", "/api/v1/teams", bytes.NewBuffer(body))
+	req.Header.Set("Content-Type", "application/json")
+	rr := httptest.NewRecorder()
+	r.ServeHTTP(rr, req)
+
+	if rr.Code != http.StatusOK {
+		t.Fatalf("expected status code 200, got %v", rr.Code)
+	}
+
+	var response map[string]interface{}
+	if err := json.Unmarshal(rr.Body.Bytes(), &response); err != nil {
+		t.Fatalf("could not unmarshal response: %v", err)
+	}
+
+	teamID = response["id"].(string)
+	if teamID == "" {
+		t.Fatalf("expected team ID in response")
+	}
+
+	// Создание пользователя для тестирования
+	createdUser := map[string]interface{}{
+		"display_name": fake.Person().Name(),
+		"user_name":    fake.Gamer().Tag(),
+		"role":         "player",
+		"avatar_url":   "http://example.com/avatar.png",
+		"status":       "active",
+		"password":     fake.Internet().Password(),
+	}
+	body, _ = json.Marshal(createdUser)
+	req, _ = http.NewRequest("POST", "/api/v1/users", bytes.NewBuffer(body))
+	req.Header.Set("Content-Type", "application/json")
+	rr = httptest.NewRecorder()
+	r.ServeHTTP(rr, req)
+
+	if rr.Code != http.StatusOK {
+		t.Fatalf("expected status code 200, got %v", rr.Code)
+	}
+
+	if err := json.Unmarshal(rr.Body.Bytes(), &response); err != nil {
+		t.Fatalf("could not unmarshal response: %v", err)
+	}
+
+	userID = response["id"].(string)
+	if userID == "" {
+		t.Fatalf("expected user ID in response")
+	}
+
+	// 1. Добавление участника в команду
+	t.Run("Add Member to Team", func(t *testing.T) {
+		member := map[string]interface{}{
+			"user_id": userID,
+			"role":    "player",
+		}
+		body, _ := json.Marshal(member)
+		req, _ := http.NewRequest("POST", "/api/v1/teams/"+teamID+"/members/"+userID, bytes.NewBuffer(body))
+		req.Header.Set("Content-Type", "application/json")
+		rr := httptest.NewRecorder()
+		r.ServeHTTP(rr, req)
+
+		if rr.Code != http.StatusOK {
+			t.Fatalf("expected status code 200, got %v", rr.Code)
+		}
+
+		var response map[string]interface{}
+		if err := json.Unmarshal(rr.Body.Bytes(), &response); err != nil {
+			t.Fatalf("could not unmarshal response: %v", err)
+		}
+	})
+
+	// 1.5. Подтверждение добавления участника в команду
+	t.Run("Approve Member to Team", func(t *testing.T) {
+		req, _ := http.NewRequest("PUT", "/api/v1/teams/"+teamID+"/members/"+userID, nil)
+		req.Header.Set("Content-Type", "application/json")
+		rr := httptest.NewRecorder()
+		r.ServeHTTP(rr, req)
+
+		if rr.Code != http.StatusOK {
+			t.Fatalf("expected status code 200, got %v", rr.Code)
+		}
+
+		var response map[string]interface{}
+		if err := json.Unmarshal(rr.Body.Bytes(), &response); err != nil {
+			t.Fatalf("could not unmarshal response: %v", err)
+		}
+	})
+
+	// 2. Получение списка участников команды
+	t.Run("Get All Team Members", func(t *testing.T) {
+		req, _ := http.NewRequest("GET", "/api/v1/teams/"+teamID+"/members", nil)
+		rr := httptest.NewRecorder()
+		r.ServeHTTP(rr, req)
+
+		if rr.Code != http.StatusOK {
+			t.Fatalf("expected status code 200, got %v", rr.Code)
+		}
+
+		var members []map[string]interface{}
+		if err := json.Unmarshal(rr.Body.Bytes(), &members); err != nil {
+			t.Fatalf("could not unmarshal response: %v", err)
+		}
+
+		if len(members) == 0 {
+			t.Fatalf("expected at least one member")
+		}
+
+		lastMember := members[len(members)-1]
+		if lastMember["id"].(string) != userID {
+			t.Fatalf("expected member ID %v, got %v", userID, lastMember["id"])
+		}
+	})
+
+	// 3. Обновление роли участника в команде
+	t.Run("Update Member Role", func(t *testing.T) {
+		t.Skip()
+		updatedMember := map[string]interface{}{
+			"role": "captain",
+		}
+		body, _ := json.Marshal(updatedMember)
+		req, _ := http.NewRequest("PUT", "/api/v1/teams/"+teamID+"/members/"+userID, bytes.NewBuffer(body))
+		req.Header.Set("Content-Type", "application/json")
+		rr := httptest.NewRecorder()
+		r.ServeHTTP(rr, req)
+
+		if rr.Code != http.StatusOK {
+			t.Fatalf("expected status code 200, got %v", rr.Code)
+		}
+
+		var response map[string]interface{}
+		if err := json.Unmarshal(rr.Body.Bytes(), &response); err != nil {
+			t.Fatalf("could not unmarshal response: %v", err)
+		}
+
+		// Проверка обновленной роли
+		req, _ = http.NewRequest("GET", "/api/v1/teams/"+teamID+"/members", nil)
+		rr = httptest.NewRecorder()
+		r.ServeHTTP(rr, req)
+
+		if rr.Code != http.StatusOK {
+			t.Fatalf("expected status code 200, got %v", rr.Code)
+		}
+
+		var members []map[string]interface{}
+		if err := json.Unmarshal(rr.Body.Bytes(), &members); err != nil {
+			t.Fatalf("could not unmarshal response: %v", err)
+		}
+
+		lastMember := members[len(members)-1]
+		if lastMember["role"] != "captain" {
+			t.Fatalf("expected role 'captain', got %v", lastMember["role"])
+		}
+	})
+
+	// 4. Удаление участника из команды
+	t.Run("Delete Member from Team", func(t *testing.T) {
+		req, _ := http.NewRequest("DELETE", "/api/v1/teams/"+teamID+"/members/"+userID, nil)
+		rr := httptest.NewRecorder()
+		r.ServeHTTP(rr, req)
+
+		if rr.Code != http.StatusOK {
+			t.Fatalf("expected status code 200, got %v", rr.Code)
+		}
+
+		// Проверка удаления
+		req, _ = http.NewRequest("GET", "/api/v1/teams/"+teamID+"/members", nil)
+		rr = httptest.NewRecorder()
+		r.ServeHTTP(rr, req)
+
+		if rr.Code != http.StatusOK {
+			t.Fatalf("expected status code 200, got %v", rr.Code)
+		}
+
+		var members []map[string]interface{}
+		if err := json.Unmarshal(rr.Body.Bytes(), &members); err != nil {
+			t.Fatalf("could not unmarshal response: %v", err)
+		}
+
+		for _, member := range members {
+			if member["id"].(string) == memberID {
+				t.Fatalf("expected member ID %v to be deleted", memberID)
+			}
+		}
+	})
+}
 func TestResultsCRUD(t *testing.T) {
 	r, err := NewTestRouter()
 	if err != nil {

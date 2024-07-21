@@ -123,6 +123,10 @@ func (siw *ServerInterfaceWrapper) ApproveUserWithTeam(w http.ResponseWriter, r 
 	siw.handlers.ApproveTeamUser(w, r, teamId, userId)
 }
 
+func (siw *ServerInterfaceWrapper) TeamMembers(w http.ResponseWriter, r *http.Request, teamId openapi_types.UUID) {
+	siw.handlers.TeamMembers(w, r, teamId)
+}
+
 func (siw *ServerInterfaceWrapper) ListUniversities(w http.ResponseWriter, r *http.Request, params server.ListUniversitiesParams) {
 	siw.handlers.ListUniversities(w, r, params)
 }

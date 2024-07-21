@@ -40,7 +40,7 @@ func (r *teamRepo) Create(ctx context.Context, team *models.Team) error {
 func (r *teamRepo) GetById(ctx context.Context, id openapi_types.UUID) (*models.Team, error) {
 	query := `SELECT t.id, t.name, t.description, t.social_links, t.avatar_url, u.name as university_name
 			FROM teams t
-			JOIN universities u ON t.university_id = u.id
+			LEFT JOIN universities u ON t.university_id = u.id
 			WHERE t.id = $1`
 	team := &models.Team{}
 	err := r.db.QueryRowContext(ctx, query, id).Scan(&team.Id, &team.Name, &team.Description, &team.SocialLinks, &team.AvatarUrl, &team.University)

@@ -95,17 +95,56 @@ func (h *Handlers) UpdateTeam(w http.ResponseWriter, r *http.Request, id openapi
 	api_helpers.RespondWithJSON(w, http.StatusOK, map[string]string{"data": "Team updated successfully"})
 }
 
-func (h *Handlers) LeaveTeamUser(w http.ResponseWriter, r *http.Request, teamId openapi_types.UUID, userId openapi_types.UUID) {
-	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
-	w.WriteHeader(http.StatusNotImplemented)
-}
-
-func (h *Handlers) ApproveTeamUser(w http.ResponseWriter, r *http.Request, teamId openapi_types.UUID, userId openapi_types.UUID) {
-	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
-	w.WriteHeader(http.StatusNotImplemented)
-}
-
+// Создает запись в таблице запросов на добавление участника в команду
 func (h *Handlers) ConnectUserWithTeam(w http.ResponseWriter, r *http.Request, teamId openapi_types.UUID, userId openapi_types.UUID) {
-	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
-	w.WriteHeader(http.StatusNotImplemented)
+	// fixme move Role to openapi request
+	type request struct {
+		Role string `json:"role"`
+	}
+
+	var req request
+	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+	teamRepo := repository.NewTeamMemberRequestRepository(h.DB)
+
+	err := teamRepo.ConnectUserWithTeam(r.Context(), teamId, userId, req.Role)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	api_helpers.RespondWithJSON(w, http.StatusOK, map[string]string{"data": "User create request to join the team"})
+}
+
+// Обновляет запись в таблице запросов и добавляет пользователя в команду
+func (h *Handlers) ApproveTeamUser(w http.ResponseWriter, r *http.Request, teamId openapi_types.UUID, userId openapi_types.UUID) {
+	teamRepo := repository.NewTeamMemberRequestRepository(h.DB)
+	err := teamRepo.ApproveTeamUser(r.Context(), teamId, userId)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	api_helpers.RespondWithJSON(w, http.StatusOK, map[string]string{"data": "User approved and added to team successfully"})
+}
+
+// Удаляет пользователя из команды
+func (h *Handlers) LeaveTeamUser(w http.ResponseWriter, r *http.Request, teamId openapi_types.UUID, userId openapi_types.UUID) {
+	teamRepo := repository.NewTeamMemberRequestRepository(h.DB)
+	err := teamRepo.LeaveTeamUser(r.Context(), teamId, userId)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	api_helpers.RespondWithJSON(w, http.StatusOK, map[string]string{"data": "User removed from team successfully"})
+}
+
+func (h *Handlers) TeamMembers(w http.ResponseWriter, r *http.Request, teamId openapi_types.UUID) {
+	teamRepo := repository.NewTeamMemberRequestRepository(h.DB)
+	members, err := teamRepo.TeamMembers(r.Context(), teamId)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	api_helpers.RespondWithJSON(w, http.StatusOK, view.NewUsersFromModels(members))
 }

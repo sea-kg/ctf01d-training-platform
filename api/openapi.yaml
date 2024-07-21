@@ -501,7 +501,31 @@ paths:
       responses:
         '200':
           description: Team deleted successfully
-  /api/v1/teams/{teamId}/users/{userId}:
+  /api/v1/teams/{teamId}/members:
+    get:
+      tags:
+        - Teams
+      summary: Get all members of a team
+      operationId: teamMembers
+      parameters:
+        - in: path
+          name: teamId
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: List of team members
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserResponse'
+        '404':
+          description: Team not found
+  /api/v1/teams/{teamId}/members/{userId}:
     post:
       tags:
         - Teams
@@ -530,7 +554,7 @@ paths:
               schema:
                 type: object
                 properties:
-                  message:
+                  data:
                     type: string
     put:
       tags:
@@ -560,7 +584,7 @@ paths:
               schema:
                 type: object
                 properties:
-                  message:
+                  data:
                     type: string
     delete:
       tags:
@@ -590,7 +614,7 @@ paths:
               schema:
                 type: object
                 properties:
-                  message:
+                  data:
                     type: string
   /api/v1/games/{gameId}/results:
     post:
