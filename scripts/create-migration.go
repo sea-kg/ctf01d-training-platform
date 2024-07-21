@@ -10,7 +10,7 @@ import (
 )
 
 func main() {
-	dir := "./internal/app/database/"
+	dir := "./internal/app/migrations/psql/"
 	files, err := ioutil.ReadDir(dir)
 	if err != nil {
 		log.Fatal(err)
@@ -36,7 +36,7 @@ func main() {
 	newFileName := fmt.Sprintf("update%04d_update%04d.go", maxUpdate, nextUpdate)
 	newFilePath := filepath.Join(dir, newFileName)
 
-	template := fmt.Sprintf(`package database
+	template := fmt.Sprintf(`package migration
 
 import (
 	"database/sql"

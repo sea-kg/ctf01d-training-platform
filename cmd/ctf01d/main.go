@@ -6,8 +6,8 @@ import (
 	"os"
 
 	"ctf01d/config"
-	"ctf01d/internal/app/database"
 	"ctf01d/internal/app/handlers"
+	migration "ctf01d/internal/app/migrations/psql"
 	"ctf01d/internal/app/server"
 
 	"github.com/go-chi/chi/v5"
@@ -32,7 +32,7 @@ func main() {
 	}))
 	slog.SetDefault(logger)
 	slog.Info("Config path is - " + path)
-	db, err := database.InitDatabase(cfg)
+	db, err := migration.InitDatabase(cfg)
 	if err != nil {
 		slog.Error("Error opening database connection: " + err.Error())
 		return
