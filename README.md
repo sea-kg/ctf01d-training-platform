@@ -2,7 +2,7 @@
 
 Service used go && psql
 
-Roadmap [here](TODO.md)
+[Roadmap](docs/ROADMAP.md) & [Concept](docs/CONCEPT.md)
 
 ## Project structure
 
@@ -92,7 +92,7 @@ oapi-codegen -generate models,chi -o internal/app/server/server.gen.go --package
 
 ### psql
 
-connect to db configure in `src/config/config.yaml`
+connect to db configure in `src/config/config.#{STAGE}.yaml`
 
 ```yaml
 ...
