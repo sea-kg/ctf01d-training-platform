@@ -22,6 +22,7 @@ import (
 )
 
 var db *sql.DB
+var r *chi.Mux
 
 func TestMain(m *testing.M) {
 	cfg, err := config.NewConfig("../config/config.test.yml")
@@ -33,18 +34,19 @@ func TestMain(m *testing.M) {
 	if err != nil {
 		panic(err)
 	}
+	NewTestRouter()
 	code := m.Run()
 	db.Close()
 	os.Exit(code)
 }
 
 func NewTestRouter() (http.Handler, error) {
-	hndlrs := &handlers.Handlers{
+	h := &handlers.Handlers{
 		DB: db,
 	}
-	svr := handlers.NewServerInterfaceWrapper(hndlrs)
+	svr := handlers.NewServerInterfaceWrapper(h)
 
-	r := chi.NewRouter()
+	r = chi.NewRouter()
 	r.Mount("/api/", server.HandlerFromMux(svr, r))
 	r.Mount("/", http.HandlerFunc(server.NewHtmlRouter))
 
@@ -52,11 +54,6 @@ func NewTestRouter() (http.Handler, error) {
 }
 
 func TestUserCRUD(t *testing.T) {
-	r, err := NewTestRouter()
-	if err != nil {
-		t.Fatalf("failed to initialize router: %v", err)
-	}
-
 	var userID string
 	var createdUser map[string]interface{}
 	fake := faker.New()
@@ -227,11 +224,6 @@ func TestUserCRUD(t *testing.T) {
 }
 
 func TestServiceCRUD(t *testing.T) {
-	r, err := NewTestRouter()
-	if err != nil {
-		t.Fatalf("failed to initialize router: %v", err)
-	}
-
 	var serviceID string
 	var createdService map[string]interface{}
 	fake := faker.New()
@@ -388,11 +380,6 @@ func TestServiceCRUD(t *testing.T) {
 }
 
 func TestTeamCRUD(t *testing.T) {
-	r, err := NewTestRouter()
-	if err != nil {
-		t.Fatalf("failed to initialize router: %v", err)
-	}
-
 	var teamID string
 	var createdTeam map[string]interface{}
 	fake := faker.New()
@@ -547,11 +534,6 @@ func TestTeamCRUD(t *testing.T) {
 }
 
 func TestGameCRUD(t *testing.T) {
-	r, err := NewTestRouter()
-	if err != nil {
-		t.Fatalf("failed to initialize router: %v", err)
-	}
-
 	var gameID string
 	var createdGame map[string]interface{}
 	fake := faker.New()
@@ -703,11 +685,6 @@ func TestGameCRUD(t *testing.T) {
 	})
 }
 func TestTeamMembersCRUD(t *testing.T) {
-	r, err := NewTestRouter()
-	if err != nil {
-		t.Fatalf("failed to initialize router: %v", err)
-	}
-
 	var teamID string
 	var userID string
 	var memberID string
@@ -905,11 +882,6 @@ func TestTeamMembersCRUD(t *testing.T) {
 	})
 }
 func TestResultsCRUD(t *testing.T) {
-	r, err := NewTestRouter()
-	if err != nil {
-		t.Fatalf("failed to initialize router: %v", err)
-	}
-
 	var gameID, teamID string
 	fake := faker.New()
 
