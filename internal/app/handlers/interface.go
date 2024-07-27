@@ -1,18 +1,12 @@
 package handlers
 
 import (
-	"database/sql"
 	"net/http"
 
 	"ctf01d/internal/app/server"
-	"ctf01d/pkg/avatar"
 
 	openapi_types "github.com/oapi-codegen/runtime/types"
 )
-
-type Handlers struct {
-	DB *sql.DB
-}
 
 // ServerInterfaceWrapper wraps Handlers to conform to the generated interface
 type ServerInterfaceWrapper struct {
@@ -111,16 +105,16 @@ func (siw *ServerInterfaceWrapper) UpdateTeam(w http.ResponseWriter, r *http.Req
 	siw.handlers.UpdateTeam(w, r, id)
 }
 
-func (siw *ServerInterfaceWrapper) ConnectUserWithTeam(w http.ResponseWriter, r *http.Request, teamId openapi_types.UUID, userId openapi_types.UUID) {
-	siw.handlers.ConnectUserWithTeam(w, r, teamId, userId)
+func (siw *ServerInterfaceWrapper) ConnectUserTeam(w http.ResponseWriter, r *http.Request, teamId openapi_types.UUID, userId openapi_types.UUID) {
+	siw.handlers.ConnectUserTeam(w, r, teamId, userId)
 }
 
 func (siw *ServerInterfaceWrapper) LeaveUserFromTeam(w http.ResponseWriter, r *http.Request, teamId openapi_types.UUID, userId openapi_types.UUID) {
-	siw.handlers.LeaveTeamUser(w, r, teamId, userId)
+	siw.handlers.LeaveUserFromTeam(w, r, teamId, userId)
 }
 
-func (siw *ServerInterfaceWrapper) ApproveUserWithTeam(w http.ResponseWriter, r *http.Request, teamId openapi_types.UUID, userId openapi_types.UUID) {
-	siw.handlers.ApproveTeamUser(w, r, teamId, userId)
+func (siw *ServerInterfaceWrapper) ApproveUserTeam(w http.ResponseWriter, r *http.Request, teamId openapi_types.UUID, userId openapi_types.UUID) {
+	siw.handlers.ApproveUserTeam(w, r, teamId, userId)
 }
 
 func (siw *ServerInterfaceWrapper) TeamMembers(w http.ResponseWriter, r *http.Request, teamId openapi_types.UUID) {
@@ -164,13 +158,5 @@ func (siw *ServerInterfaceWrapper) UploadService(w http.ResponseWriter, r *http.
 }
 
 func (siw *ServerInterfaceWrapper) UniqueAvatar(w http.ResponseWriter, r *http.Request, username string) {
-	xMax := 100
-	yMax := 100
-	blockSize := 20
-	steps := 8
-
-	imageBytes := avatar.GenerateAvatar(username, xMax, yMax, blockSize, steps)
-
-	w.Header().Set("Content-Type", "image/png")
-	w.Write(imageBytes)
+	siw.handlers.UniqueAvatar(w, r, username)
 }

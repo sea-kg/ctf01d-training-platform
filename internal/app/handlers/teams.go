@@ -96,7 +96,7 @@ func (h *Handlers) UpdateTeam(w http.ResponseWriter, r *http.Request, id openapi
 }
 
 // Создает запись в таблице запросов на добавление участника в команду
-func (h *Handlers) ConnectUserWithTeam(w http.ResponseWriter, r *http.Request, teamId openapi_types.UUID, userId openapi_types.UUID) {
+func (h *Handlers) ConnectUserTeam(w http.ResponseWriter, r *http.Request, teamId openapi_types.UUID, userId openapi_types.UUID) {
 	// fixme move Role to openapi request
 	type request struct {
 		Role string `json:"role"`
@@ -109,7 +109,7 @@ func (h *Handlers) ConnectUserWithTeam(w http.ResponseWriter, r *http.Request, t
 	}
 	teamRepo := repository.NewTeamMemberRequestRepository(h.DB)
 
-	err := teamRepo.ConnectUserWithTeam(r.Context(), teamId, userId, req.Role)
+	err := teamRepo.ConnectUserTeam(r.Context(), teamId, userId, req.Role)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -118,9 +118,9 @@ func (h *Handlers) ConnectUserWithTeam(w http.ResponseWriter, r *http.Request, t
 }
 
 // Обновляет запись в таблице запросов и добавляет пользователя в команду
-func (h *Handlers) ApproveTeamUser(w http.ResponseWriter, r *http.Request, teamId openapi_types.UUID, userId openapi_types.UUID) {
+func (h *Handlers) ApproveUserTeam(w http.ResponseWriter, r *http.Request, teamId openapi_types.UUID, userId openapi_types.UUID) {
 	teamRepo := repository.NewTeamMemberRequestRepository(h.DB)
-	err := teamRepo.ApproveTeamUser(r.Context(), teamId, userId)
+	err := teamRepo.ApproveUserTeam(r.Context(), teamId, userId)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -129,9 +129,9 @@ func (h *Handlers) ApproveTeamUser(w http.ResponseWriter, r *http.Request, teamI
 }
 
 // Удаляет пользователя из команды
-func (h *Handlers) LeaveTeamUser(w http.ResponseWriter, r *http.Request, teamId openapi_types.UUID, userId openapi_types.UUID) {
+func (h *Handlers) LeaveUserFromTeam(w http.ResponseWriter, r *http.Request, teamId openapi_types.UUID, userId openapi_types.UUID) {
 	teamRepo := repository.NewTeamMemberRequestRepository(h.DB)
-	err := teamRepo.LeaveTeamUser(r.Context(), teamId, userId)
+	err := teamRepo.LeaveUserFromTeam(r.Context(), teamId, userId)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return

@@ -473,10 +473,10 @@ type ServerInterface interface {
 	LeaveUserFromTeam(w http.ResponseWriter, r *http.Request, teamId openapi_types.UUID, userId openapi_types.UUID)
 	// Connect user with team
 	// (POST /api/v1/teams/{teamId}/members/{userId})
-	ConnectUserWithTeam(w http.ResponseWriter, r *http.Request, teamId openapi_types.UUID, userId openapi_types.UUID)
+	ConnectUserTeam(w http.ResponseWriter, r *http.Request, teamId openapi_types.UUID, userId openapi_types.UUID)
 	// Approve connected user with team lead
 	// (PUT /api/v1/teams/{teamId}/members/{userId})
-	ApproveUserWithTeam(w http.ResponseWriter, r *http.Request, teamId openapi_types.UUID, userId openapi_types.UUID)
+	ApproveUserTeam(w http.ResponseWriter, r *http.Request, teamId openapi_types.UUID, userId openapi_types.UUID)
 	// Retrieves a list of universities
 	// (GET /api/v1/universities)
 	ListUniversities(w http.ResponseWriter, r *http.Request, params ListUniversitiesParams)
@@ -668,13 +668,13 @@ func (_ Unimplemented) LeaveUserFromTeam(w http.ResponseWriter, r *http.Request,
 
 // Connect user with team
 // (POST /api/v1/teams/{teamId}/members/{userId})
-func (_ Unimplemented) ConnectUserWithTeam(w http.ResponseWriter, r *http.Request, teamId openapi_types.UUID, userId openapi_types.UUID) {
+func (_ Unimplemented) ConnectUserTeam(w http.ResponseWriter, r *http.Request, teamId openapi_types.UUID, userId openapi_types.UUID) {
 	w.WriteHeader(http.StatusNotImplemented)
 }
 
 // Approve connected user with team lead
 // (PUT /api/v1/teams/{teamId}/members/{userId})
-func (_ Unimplemented) ApproveUserWithTeam(w http.ResponseWriter, r *http.Request, teamId openapi_types.UUID, userId openapi_types.UUID) {
+func (_ Unimplemented) ApproveUserTeam(w http.ResponseWriter, r *http.Request, teamId openapi_types.UUID, userId openapi_types.UUID) {
 	w.WriteHeader(http.StatusNotImplemented)
 }
 
@@ -1341,8 +1341,8 @@ func (siw *ServerInterfaceWrapper) LeaveUserFromTeam(w http.ResponseWriter, r *h
 	handler.ServeHTTP(w, r.WithContext(ctx))
 }
 
-// ConnectUserWithTeam operation middleware
-func (siw *ServerInterfaceWrapper) ConnectUserWithTeam(w http.ResponseWriter, r *http.Request) {
+// ConnectUserTeam operation middleware
+func (siw *ServerInterfaceWrapper) ConnectUserTeam(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 
 	var err error
@@ -1366,7 +1366,7 @@ func (siw *ServerInterfaceWrapper) ConnectUserWithTeam(w http.ResponseWriter, r 
 	}
 
 	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		siw.Handler.ConnectUserWithTeam(w, r, teamId, userId)
+		siw.Handler.ConnectUserTeam(w, r, teamId, userId)
 	}))
 
 	for _, middleware := range siw.HandlerMiddlewares {
@@ -1376,8 +1376,8 @@ func (siw *ServerInterfaceWrapper) ConnectUserWithTeam(w http.ResponseWriter, r 
 	handler.ServeHTTP(w, r.WithContext(ctx))
 }
 
-// ApproveUserWithTeam operation middleware
-func (siw *ServerInterfaceWrapper) ApproveUserWithTeam(w http.ResponseWriter, r *http.Request) {
+// ApproveUserTeam operation middleware
+func (siw *ServerInterfaceWrapper) ApproveUserTeam(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 
 	var err error
@@ -1401,7 +1401,7 @@ func (siw *ServerInterfaceWrapper) ApproveUserWithTeam(w http.ResponseWriter, r 
 	}
 
 	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		siw.Handler.ApproveUserWithTeam(w, r, teamId, userId)
+		siw.Handler.ApproveUserTeam(w, r, teamId, userId)
 	}))
 
 	for _, middleware := range siw.HandlerMiddlewares {
@@ -1768,10 +1768,10 @@ func HandlerWithOptions(si ServerInterface, options ChiServerOptions) http.Handl
 		r.Delete(options.BaseURL+"/api/v1/teams/{teamId}/members/{userId}", wrapper.LeaveUserFromTeam)
 	})
 	r.Group(func(r chi.Router) {
-		r.Post(options.BaseURL+"/api/v1/teams/{teamId}/members/{userId}", wrapper.ConnectUserWithTeam)
+		r.Post(options.BaseURL+"/api/v1/teams/{teamId}/members/{userId}", wrapper.ConnectUserTeam)
 	})
 	r.Group(func(r chi.Router) {
-		r.Put(options.BaseURL+"/api/v1/teams/{teamId}/members/{userId}", wrapper.ApproveUserWithTeam)
+		r.Put(options.BaseURL+"/api/v1/teams/{teamId}/members/{userId}", wrapper.ApproveUserTeam)
 	})
 	r.Group(func(r chi.Router) {
 		r.Get(options.BaseURL+"/api/v1/universities", wrapper.ListUniversities)

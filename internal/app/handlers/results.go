@@ -48,7 +48,7 @@ func (h *Handlers) GetResult(w http.ResponseWriter, r *http.Request, gameId open
 	api_helpers.RespondWithJSON(w, http.StatusOK, view.NewResultFromModel(result))
 }
 
-func (h *Handlers) UpdateResult(w http.ResponseWriter, r *http.Request, teamId openapi_types.UUID, userId openapi_types.UUID) {
+func (h *Handlers) UpdateResult(w http.ResponseWriter, r *http.Request, gameId openapi_types.UUID) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusNotImplemented)
 }

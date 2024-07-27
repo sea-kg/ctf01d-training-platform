@@ -9,9 +9,9 @@ import (
 )
 
 type TeamMemberRequestRepository interface {
-	ConnectUserWithTeam(ctx context.Context, teamID, userID openapi_types.UUID, role string) error
-	ApproveTeamUser(ctx context.Context, teamID, userID openapi_types.UUID) error
-	LeaveTeamUser(ctx context.Context, teamID, userID openapi_types.UUID) error
+	ConnectUserTeam(ctx context.Context, teamID, userID openapi_types.UUID, role string) error
+	ApproveUserTeam(ctx context.Context, teamID, userID openapi_types.UUID) error
+	LeaveUserFromTeam(ctx context.Context, teamID, userID openapi_types.UUID) error
 	TeamMembers(ctx context.Context, teamID openapi_types.UUID) ([]*models.User, error)
 }
 
@@ -19,14 +19,14 @@ func NewTeamMemberRequestRepository(db *sql.DB) TeamMemberRequestRepository {
 	return &teamRepo{db: db}
 }
 
-func (r *teamRepo) ConnectUserWithTeam(ctx context.Context, teamID, userID openapi_types.UUID, role string) error {
+func (r *teamRepo) ConnectUserTeam(ctx context.Context, teamID, userID openapi_types.UUID, role string) error {
 	query := `INSERT INTO team_member_requests (team_id, user_id, role, status)
 	          VALUES ($1, $2, $3, 'pending')`
 	_, err := r.db.ExecContext(ctx, query, teamID, userID, role)
 	return err
 }
 
-func (r *teamRepo) ApproveTeamUser(ctx context.Context, teamID, userID openapi_types.UUID) error {
+func (r *teamRepo) ApproveUserTeam(ctx context.Context, teamID, userID openapi_types.UUID) error {
 	tx, err := r.db.BeginTx(ctx, nil)
 	if err != nil {
 		return err
@@ -57,7 +57,7 @@ func (r *teamRepo) ApproveTeamUser(ctx context.Context, teamID, userID openapi_t
 	return tx.Commit()
 }
 
-func (r *teamRepo) LeaveTeamUser(ctx context.Context, teamID, userID openapi_types.UUID) error {
+func (r *teamRepo) LeaveUserFromTeam(ctx context.Context, teamID, userID openapi_types.UUID) error {
 	// fixme - обновить team_history
 	query := `DELETE FROM profiles WHERE current_team_id = $1 AND user_id = $2`
 	_, err := r.db.ExecContext(ctx, query, teamID, userID)

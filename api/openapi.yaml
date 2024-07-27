@@ -530,7 +530,7 @@ paths:
       tags:
         - Teams
       summary: Connect user with team
-      operationId: connectUserWithTeam
+      operationId: connectUserTeam
       parameters:
         - in: path
           name: teamId
@@ -560,7 +560,7 @@ paths:
       tags:
         - Teams
       summary: Approve connected user with team lead
-      operationId: approveUserWithTeam
+      operationId: approveUserTeam
       parameters:
         - in: path
           name: teamId
