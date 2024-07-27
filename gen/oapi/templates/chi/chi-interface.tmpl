@@ -1,0 +1,34 @@
+// ServerInterface представляет все обработчики сервера.
+
+type ServerInterface struct {
+	handlers *handlers.Handlers
+}
+
+{{range .}}{{.SummaryAsComment}}
+// ({{.Method}} {{.Path}})
+func (si *ServerInterface) {{.OperationId}}(w http.ResponseWriter, r *http.Request{{genParamArgs .PathParams}}{{if .RequiresParamObject}}, params {{.OperationId}}Params{{end}}) {
+	{{if .PathParams}}
+	var err error
+	{{range .PathParams}}
+	{{if .IsPassThrough}}
+	{{.GoVariableName}} = chi.URLParam(r, "{{.ParamName}}")
+	{{end}}
+	{{if .IsJson}}
+	err = json.Unmarshal([]byte(chi.URLParam(r, "{{.ParamName}}")), &{{.GoVariableName}})
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+	{{end}}
+	{{if .IsStyled}}
+	err = runtime.BindStyledParameter("{{.Style}}", {{.Explode}}, "{{.ParamName}}", chi.URLParam(r, "{{.ParamName}}"), &{{.GoVariableName}})
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+	{{end}}
+	{{end}}
+	{{end}}
+	si.handlers.{{.OperationId}}(w, r{{genParamNames .PathParams}}{{if .RequiresParamObject}}, params{{end}})
+}
+{{end}}

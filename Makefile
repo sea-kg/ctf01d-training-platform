@@ -93,4 +93,4 @@ attach-db:
 
 # Generate Go server boilerplate from OpenAPI 3
 codegen:
-	oapi-codegen -generate models,chi -o internal/app/server/server.gen.go --package server api/openapi.yaml
+	oapi-codegen -generate models,chi -o gen/oapi/handlers/handlers.gen.go -templates gen/oapi/templates --package handlers ./api/openapi.yaml
