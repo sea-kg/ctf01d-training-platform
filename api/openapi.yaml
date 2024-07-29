@@ -1181,7 +1181,6 @@ components:
           description: A brief description of the game
     ResultRequest:
       required:
-        - game_id
         - rank
         - score
         - team_id
@@ -1189,10 +1188,8 @@ components:
       properties:
         team_id:
           type: string
+          format: uuid
           description: Identifier of the team this result belongs to
-        game_id:
-          type: string
-          description: Identifier of the game this result is for
         score:
           type: number
           format: double
@@ -1215,9 +1212,11 @@ components:
           description: Unique identifier for the result entry
         team_id:
           type: string
+          format: uuid
           description: Identifier of the team this result belongs to
         game_id:
           type: string
+          format: uuid
           description: Identifier of the game this result is for
         score:
           type: number

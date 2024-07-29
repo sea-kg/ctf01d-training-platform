@@ -128,9 +128,6 @@ type ProfileResponseTeamRole string
 
 // ResultRequest defines model for ResultRequest.
 type ResultRequest struct {
-	// GameId Identifier of the game this result is for
-	GameId string `json:"game_id"`
-
 	// Rank The rank achieved by the team in this game
 	Rank int `json:"rank"`
 
@@ -138,13 +135,13 @@ type ResultRequest struct {
 	Score float64 `json:"score"`
 
 	// TeamId Identifier of the team this result belongs to
-	TeamId string `json:"team_id"`
+	TeamId openapi_types.UUID `json:"team_id"`
 }
 
 // ResultResponse defines model for ResultResponse.
 type ResultResponse struct {
 	// GameId Identifier of the game this result is for
-	GameId string `json:"game_id"`
+	GameId openapi_types.UUID `json:"game_id"`
 
 	// Id Unique identifier for the result entry
 	Id openapi_types.UUID `json:"id"`
@@ -156,7 +153,7 @@ type ResultResponse struct {
 	Score float64 `json:"score"`
 
 	// TeamId Identifier of the team this result belongs to
-	TeamId string `json:"team_id"`
+	TeamId openapi_types.UUID `json:"team_id"`
 }
 
 // ServiceRequest defines model for ServiceRequest.
