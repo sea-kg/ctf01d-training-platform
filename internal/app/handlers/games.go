@@ -97,8 +97,3 @@ func (h *Handlers) UpdateGame(w http.ResponseWriter, r *http.Request, id openapi
 	}
 	api_helpers.RespondWithJSON(w, http.StatusOK, map[string]string{"data": "Game updated successfully"})
 }
-
-func (h *Handlers) GetScoreboard(w http.ResponseWriter, r *http.Request, id openapi_types.UUID) {
-	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
-	w.WriteHeader(http.StatusNotImplemented)
-}

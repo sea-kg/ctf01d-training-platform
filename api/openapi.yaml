@@ -644,6 +644,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CreateResultResponse'
+  /api/v1/games/{gameId}/results/{resultId}:
     get:
       tags:
         - Results
@@ -651,6 +652,15 @@ paths:
       operationId: getResult
       parameters:
         - name: gameId
+          in: path
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+            example: 81e17cb6-5c46-4934-b6d5-5c8356712cb6
+        - name: resultId
           in: path
           required: true
           style: simple
@@ -678,6 +688,16 @@ paths:
           schema:
             type: string
             format: uuid
+            example: 81e17cb6-5c46-4934-b6d5-5c8356712cb6
+        - name: resultId
+          in: path
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+            example: 81e17cb6-5c46-4934-b6d5-5c8356712cb6
       requestBody:
         content:
           application/json:

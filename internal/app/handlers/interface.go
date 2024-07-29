@@ -49,16 +49,16 @@ func (siw *ServerInterfaceWrapper) ValidateSession(w http.ResponseWriter, r *htt
 	siw.handlers.ValidateSession(w, r)
 }
 
-func (siw *ServerInterfaceWrapper) GetResult(w http.ResponseWriter, r *http.Request, gameId openapi_types.UUID) {
-	siw.handlers.GetResult(w, r, gameId)
-}
-
 func (siw *ServerInterfaceWrapper) CreateResult(w http.ResponseWriter, r *http.Request, gameId openapi_types.UUID) {
 	siw.handlers.CreateResult(w, r, gameId)
 }
 
-func (siw *ServerInterfaceWrapper) UpdateResult(w http.ResponseWriter, r *http.Request, gameId openapi_types.UUID) {
-	siw.handlers.CreateResult(w, r, gameId)
+func (siw *ServerInterfaceWrapper) GetResult(w http.ResponseWriter, r *http.Request, gameId openapi_types.UUID, resultId openapi_types.UUID) {
+	siw.handlers.GetResult(w, r, gameId, resultId)
+}
+
+func (siw *ServerInterfaceWrapper) UpdateResult(w http.ResponseWriter, r *http.Request, gameId openapi_types.UUID, resultId openapi_types.UUID) {
+	siw.handlers.UpdateResult(w, r, gameId, resultId)
 }
 
 func (siw *ServerInterfaceWrapper) GetScoreboard(w http.ResponseWriter, r *http.Request, gameId openapi_types.UUID) {

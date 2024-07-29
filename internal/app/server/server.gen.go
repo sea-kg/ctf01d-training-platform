@@ -417,15 +417,15 @@ type ServerInterface interface {
 	// Update a game
 	// (PUT /api/v1/games/{gameId})
 	UpdateGame(w http.ResponseWriter, r *http.Request, gameId openapi_types.UUID)
-	// Get game result
-	// (GET /api/v1/games/{gameId}/results)
-	GetResult(w http.ResponseWriter, r *http.Request, gameId openapi_types.UUID)
 	// Create a new game result
 	// (POST /api/v1/games/{gameId}/results)
 	CreateResult(w http.ResponseWriter, r *http.Request, gameId openapi_types.UUID)
+	// Get game result
+	// (GET /api/v1/games/{gameId}/results/{resultId})
+	GetResult(w http.ResponseWriter, r *http.Request, gameId openapi_types.UUID, resultId openapi_types.UUID)
 	// Update a result
-	// (PUT /api/v1/games/{gameId}/results)
-	UpdateResult(w http.ResponseWriter, r *http.Request, gameId openapi_types.UUID)
+	// (PUT /api/v1/games/{gameId}/results/{resultId})
+	UpdateResult(w http.ResponseWriter, r *http.Request, gameId openapi_types.UUID, resultId openapi_types.UUID)
 	// Get game scoreboard
 	// (GET /api/v1/games/{gameId}/scoreboard)
 	GetScoreboard(w http.ResponseWriter, r *http.Request, gameId openapi_types.UUID)
@@ -558,21 +558,21 @@ func (_ Unimplemented) UpdateGame(w http.ResponseWriter, r *http.Request, gameId
 	w.WriteHeader(http.StatusNotImplemented)
 }
 
-// Get game result
-// (GET /api/v1/games/{gameId}/results)
-func (_ Unimplemented) GetResult(w http.ResponseWriter, r *http.Request, gameId openapi_types.UUID) {
-	w.WriteHeader(http.StatusNotImplemented)
-}
-
 // Create a new game result
 // (POST /api/v1/games/{gameId}/results)
 func (_ Unimplemented) CreateResult(w http.ResponseWriter, r *http.Request, gameId openapi_types.UUID) {
 	w.WriteHeader(http.StatusNotImplemented)
 }
 
+// Get game result
+// (GET /api/v1/games/{gameId}/results/{resultId})
+func (_ Unimplemented) GetResult(w http.ResponseWriter, r *http.Request, gameId openapi_types.UUID, resultId openapi_types.UUID) {
+	w.WriteHeader(http.StatusNotImplemented)
+}
+
 // Update a result
-// (PUT /api/v1/games/{gameId}/results)
-func (_ Unimplemented) UpdateResult(w http.ResponseWriter, r *http.Request, gameId openapi_types.UUID) {
+// (PUT /api/v1/games/{gameId}/results/{resultId})
+func (_ Unimplemented) UpdateResult(w http.ResponseWriter, r *http.Request, gameId openapi_types.UUID, resultId openapi_types.UUID) {
 	w.WriteHeader(http.StatusNotImplemented)
 }
 
@@ -908,32 +908,6 @@ func (siw *ServerInterfaceWrapper) UpdateGame(w http.ResponseWriter, r *http.Req
 	handler.ServeHTTP(w, r.WithContext(ctx))
 }
 
-// GetResult operation middleware
-func (siw *ServerInterfaceWrapper) GetResult(w http.ResponseWriter, r *http.Request) {
-	ctx := r.Context()
-
-	var err error
-
-	// ------------- Path parameter "gameId" -------------
-	var gameId openapi_types.UUID
-
-	err = runtime.BindStyledParameterWithOptions("simple", "gameId", chi.URLParam(r, "gameId"), &gameId, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationPath, Explode: false, Required: true})
-	if err != nil {
-		siw.ErrorHandlerFunc(w, r, &InvalidParamFormatError{ParamName: "gameId", Err: err})
-		return
-	}
-
-	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		siw.Handler.GetResult(w, r, gameId)
-	}))
-
-	for _, middleware := range siw.HandlerMiddlewares {
-		handler = middleware(handler)
-	}
-
-	handler.ServeHTTP(w, r.WithContext(ctx))
-}
-
 // CreateResult operation middleware
 func (siw *ServerInterfaceWrapper) CreateResult(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
@@ -960,6 +934,41 @@ func (siw *ServerInterfaceWrapper) CreateResult(w http.ResponseWriter, r *http.R
 	handler.ServeHTTP(w, r.WithContext(ctx))
 }
 
+// GetResult operation middleware
+func (siw *ServerInterfaceWrapper) GetResult(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+
+	var err error
+
+	// ------------- Path parameter "gameId" -------------
+	var gameId openapi_types.UUID
+
+	err = runtime.BindStyledParameterWithOptions("simple", "gameId", chi.URLParam(r, "gameId"), &gameId, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationPath, Explode: false, Required: true})
+	if err != nil {
+		siw.ErrorHandlerFunc(w, r, &InvalidParamFormatError{ParamName: "gameId", Err: err})
+		return
+	}
+
+	// ------------- Path parameter "resultId" -------------
+	var resultId openapi_types.UUID
+
+	err = runtime.BindStyledParameterWithOptions("simple", "resultId", chi.URLParam(r, "resultId"), &resultId, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationPath, Explode: false, Required: true})
+	if err != nil {
+		siw.ErrorHandlerFunc(w, r, &InvalidParamFormatError{ParamName: "resultId", Err: err})
+		return
+	}
+
+	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		siw.Handler.GetResult(w, r, gameId, resultId)
+	}))
+
+	for _, middleware := range siw.HandlerMiddlewares {
+		handler = middleware(handler)
+	}
+
+	handler.ServeHTTP(w, r.WithContext(ctx))
+}
+
 // UpdateResult operation middleware
 func (siw *ServerInterfaceWrapper) UpdateResult(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
@@ -975,8 +984,17 @@ func (siw *ServerInterfaceWrapper) UpdateResult(w http.ResponseWriter, r *http.R
 		return
 	}
 
+	// ------------- Path parameter "resultId" -------------
+	var resultId openapi_types.UUID
+
+	err = runtime.BindStyledParameterWithOptions("simple", "resultId", chi.URLParam(r, "resultId"), &resultId, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationPath, Explode: false, Required: true})
+	if err != nil {
+		siw.ErrorHandlerFunc(w, r, &InvalidParamFormatError{ParamName: "resultId", Err: err})
+		return
+	}
+
 	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		siw.Handler.UpdateResult(w, r, gameId)
+		siw.Handler.UpdateResult(w, r, gameId, resultId)
 	}))
 
 	for _, middleware := range siw.HandlerMiddlewares {
@@ -1714,13 +1732,13 @@ func HandlerWithOptions(si ServerInterface, options ChiServerOptions) http.Handl
 		r.Put(options.BaseURL+"/api/v1/games/{gameId}", wrapper.UpdateGame)
 	})
 	r.Group(func(r chi.Router) {
-		r.Get(options.BaseURL+"/api/v1/games/{gameId}/results", wrapper.GetResult)
-	})
-	r.Group(func(r chi.Router) {
 		r.Post(options.BaseURL+"/api/v1/games/{gameId}/results", wrapper.CreateResult)
 	})
 	r.Group(func(r chi.Router) {
-		r.Put(options.BaseURL+"/api/v1/games/{gameId}/results", wrapper.UpdateResult)
+		r.Get(options.BaseURL+"/api/v1/games/{gameId}/results/{resultId}", wrapper.GetResult)
+	})
+	r.Group(func(r chi.Router) {
+		r.Put(options.BaseURL+"/api/v1/games/{gameId}/results/{resultId}", wrapper.UpdateResult)
 	})
 	r.Group(func(r chi.Router) {
 		r.Get(options.BaseURL+"/api/v1/games/{gameId}/scoreboard", wrapper.GetScoreboard)
