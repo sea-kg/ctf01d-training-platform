@@ -940,7 +940,6 @@ func TestResultsCRUD(t *testing.T) {
 	t.Run("Create Result", func(t *testing.T) {
 		result := map[string]interface{}{
 			"game_id": gameID,
-			"rank":    fake.IntBetween(1, 10),
 			"score":   fake.Float64(0, 1, 100),
 			"team_id": teamID,
 		}
@@ -967,7 +966,7 @@ func TestResultsCRUD(t *testing.T) {
 
 	// 3. Получение результата игры по ID
 	t.Run("Get Result by ID", func(t *testing.T) {
-		req, _ := http.NewRequest("GET", "/api/v1/games/"+gameID+"/results", nil)
+		req, _ := http.NewRequest("GET", "/api/v1/games/"+gameID+"/results/"+resultID, nil)
 		rr := httptest.NewRecorder()
 		r.ServeHTTP(rr, req)
 
@@ -989,11 +988,10 @@ func TestResultsCRUD(t *testing.T) {
 	t.Run("Update Result by ID", func(t *testing.T) {
 		t.Skip()
 		updatedResult := map[string]interface{}{
-			"rank":  fake.IntBetween(1, 10),
 			"score": fake.Float64(0, 1, 100),
 		}
 		body, _ := json.Marshal(updatedResult)
-		req, _ := http.NewRequest("PUT", "/api/v1/games/"+gameID+"/results", bytes.NewBuffer(body))
+		req, _ := http.NewRequest("PUT", "/api/v1/games/"+gameID+"/results/"+resultID, bytes.NewBuffer(body))
 		req.Header.Set("Content-Type", "application/json")
 		rr := httptest.NewRecorder()
 		r.ServeHTTP(rr, req)

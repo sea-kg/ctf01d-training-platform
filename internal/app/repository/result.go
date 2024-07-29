@@ -27,7 +27,7 @@ func NewResultRepository(db *sql.DB) ResultRepository {
 
 func (r *resultRepo) Create(ctx context.Context, result *models.Result) error {
 	query := `INSERT INTO results (team_id, game_id, score)
-	          VALUES ($1, $2, $3, $4)
+	          VALUES ($1, $2, $3)
 	          RETURNING id, team_id, game_id, score`
 	row := r.db.QueryRowContext(ctx, query, result.TeamId, result.GameId, result.Score)
 	err := row.Scan(&result.Id, &result.TeamId, &result.GameId, &result.Score)
@@ -38,7 +38,7 @@ func (r *resultRepo) Create(ctx context.Context, result *models.Result) error {
 }
 
 func (r *resultRepo) GetById(ctx context.Context, gameId openapi_types.UUID) (*models.Result, error) {
-	query := `SELECT id, team_id, game_id, score, rank FROM results WHERE game_id = $1 order by score desc`
+	query := `SELECT id, team_id, game_id, score FROM results WHERE game_id = $1 order by score desc`
 	result := &models.Result{}
 	err := r.db.QueryRowContext(ctx, query, gameId).Scan(&result.Id, &result.TeamId, &result.GameId, &result.Score)
 	if err != nil {
@@ -60,7 +60,7 @@ func (r *resultRepo) Delete(ctx context.Context, id string) error {
 }
 
 func (r *resultRepo) List(ctx context.Context, gameId openapi_types.UUID) ([]*models.Result, error) {
-	query := `SELECT id, team_id, game_id, score, rank FROM results WHERE game_id = $1 ORDER BY score DESC`
+	query := `SELECT id, team_id, game_id, score FROM results WHERE game_id = $1 ORDER BY score DESC`
 	rows, err := r.db.QueryContext(ctx, query, gameId)
 	if err != nil {
 		return nil, err
