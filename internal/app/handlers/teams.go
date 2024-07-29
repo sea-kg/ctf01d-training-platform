@@ -26,7 +26,7 @@ func (h *Handlers) CreateTeam(w http.ResponseWriter, r *http.Request) {
 	teamRepo := repository.NewTeamRepository(h.DB)
 	newTeam := &dbmodels.Team{
 		Name:         team.Name,
-		SocialLinks:  *team.SocialLinks,
+		SocialLinks:  api_helpers.ToNullString(team.SocialLinks),
 		Description:  *team.Description,
 		UniversityId: team.UniversityId,
 		AvatarUrl:    api_helpers.ToNullString(team.AvatarUrl),
@@ -81,7 +81,7 @@ func (h *Handlers) UpdateTeam(w http.ResponseWriter, r *http.Request, id openapi
 	teamRepo := repository.NewTeamRepository(h.DB)
 	updateTeam := &dbmodels.Team{
 		Name:         team.Name,
-		SocialLinks:  *team.SocialLinks,
+		SocialLinks:  api_helpers.ToNullString(team.SocialLinks),
 		Description:  *team.Description,
 		UniversityId: team.UniversityId,
 		AvatarUrl:    api_helpers.ToNullString(team.AvatarUrl),

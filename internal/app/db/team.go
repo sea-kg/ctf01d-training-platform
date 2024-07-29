@@ -11,7 +11,7 @@ type Team struct {
 	Name         string             `db:"name"`
 	Description  string             `db:"description"`
 	UniversityId openapi_types.UUID `db:"university_id"`
-	SocialLinks  string             `db:"social_links"`
+	SocialLinks  sql.NullString     `db:"social_links"`
 	AvatarUrl    sql.NullString     `db:"avatar_url"`
 	University   *string
 }
