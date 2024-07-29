@@ -290,6 +290,7 @@ paths:
         required: true
       responses:
         '200':
+          description: Game created successfully
           content:
             application/json:
               schema:
@@ -422,6 +423,7 @@ paths:
         required: true
       responses:
         '200':
+          description: Team created successfully
           content:
             application/json:
               schema:
@@ -637,6 +639,7 @@ paths:
         required: true
       responses:
         '200':
+          description: Result created successfully
           content:
             application/json:
               schema:
@@ -738,6 +741,7 @@ paths:
         required: true
       responses:
         '200':
+          description: Service created successfully
           content:
             application/json:
               schema:
