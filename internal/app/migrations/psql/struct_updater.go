@@ -48,6 +48,7 @@ func RegisterAllUpdates() map[string][]DatabaseUpdateFunc {
 	allUpdates = RegisterDatabaseUpdate(allUpdates, DatabaseUpdate_update0018_update0019)
 	allUpdates = RegisterDatabaseUpdate(allUpdates, DatabaseUpdate_update0019_update0019testdata)
 	allUpdates = RegisterDatabaseUpdate(allUpdates, DatabaseUpdate_update0019_update0020)
+	allUpdates = RegisterDatabaseUpdate(allUpdates, DatabaseUpdate_update0020_update0020testdata)
 
 	return allUpdates
 }
