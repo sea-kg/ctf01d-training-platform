@@ -1,0 +1,61 @@
+@import url('styles/font/font.scss');
+
+body {
+  font-family: 'Petrov Sans-Trial';
+}
+
+.bold_60 {
+  font-style: normal;
+  font-size: 60px;
+  line-height: 68px;
+  letter-spacing: 1px;
+  font-weight: bold;
+}
+
+.semi_40 {
+  font-style: normal;
+  font-size: 40px;
+  line-height: 48px;
+  letter-spacing: 1px;
+  font-weight: 600;
+}
+
+.semi_24 {
+  font-style: normal;
+  font-size: 24px;
+  line-height: 32px;
+  letter-spacing: 0.3px;
+  font-weight: 600;
+}
+
+.semi_16 {
+  font-style: normal;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.3px;
+  font-weight: 600;
+}
+
+.semi_14 {
+  font-style: normal;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.3px;
+  font-weight: 600;
+}
+
+.reg_16 {
+  font-style: normal;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.3px;
+  font-weight: normal;
+}
+
+.reg_14 {
+  font-style: normal;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.3px;
+  font-weight: normal;
+}

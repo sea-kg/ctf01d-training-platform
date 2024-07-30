@@ -1,0 +1,16 @@
+@import url('styles/font/font.scss');
+@import "./styles/typography.scss";
+@import "./styles/vars.scss";
+@import "./styles/grid.scss";
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  transition: .3s all;
+  color: $primary;
+}
+
+body{
+  background-color: $surface_1;
+}
