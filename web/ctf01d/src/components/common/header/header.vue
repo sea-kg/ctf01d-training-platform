@@ -1,13 +1,16 @@
 <template>
   <header class="header_wrapper">
     <div class="header_logo">
-      <img class="logo" src="../../../assets/img/header_logo.svg" alt="">
+      <RouterLink to="/">
+        <img class="logo" src="../../../assets/img/header_logo.svg" alt="">
+      </RouterLink>
     </div>
     <Menu />
     <div class="header_profile_info">
       <Button 
         :title="'log in'"
         :isPrimary="true"
+        :imgPath=loginButtonIconPath
       />
     </div>
   </header>
@@ -16,6 +19,7 @@
 <script setup>
   import Menu from './header_menu.vue'
   import Button from '../button/button.vue'
+  const loginButtonIconPath = '/src/assets/icon/log-in.svg'
 </script>
 
 <style>

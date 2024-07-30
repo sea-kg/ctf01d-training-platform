@@ -2,8 +2,8 @@
   <button @click.prevent="action()"
     class="button button_M semi_16"
     :class="{ primary: isPrimary, secondary: isSecondary}"
-  >{{ title }}
-    <img class="button_icon" src="../../../assets/icon/log-in.svg" alt="">
+  ><span class="button_title" v-if="title">{{ title }}</span>
+    <img class="button_icon" :src=imgPath alt="">
   </button>
 </template>
 
@@ -22,6 +22,9 @@ export default {
       },
       action: {
         type: function(){}
+      },
+      imgPath: {
+        type: String
       }
     }
   }
@@ -33,6 +36,7 @@ export default {
     display: flex;
     align-items: center;
     width: fit-content;
+    font-family: 'Petrov Sans-Trial';
   }
   .button_M {
     padding: 12px 24px;
@@ -56,7 +60,8 @@ export default {
       background-color: #e2e2e2;
     }
   }
-  .button_icon {
-    margin-left: 6px;
+  .button_title {
+    margin-right: 6px;
+    color: $on-accent;
   }
 </style>

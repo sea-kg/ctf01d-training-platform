@@ -1,13 +1,18 @@
 <template>
-  <div class="header_menu_item reg_16">{{ title }}</div>
+  <div @click.prevent="goTo()" class="header_menu_item reg_16">{{ item.title }}</div>
 </template>
 
 <script>
   export default {
     props: {
-      title: {
-        type: String,
+      item: {
+        type: Object,
         required: true
+      }
+    },
+    methods: {
+      goTo(){
+        this.$router.push(`${this.item.path}`)
       },
     }
   }

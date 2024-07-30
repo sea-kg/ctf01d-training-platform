@@ -1,14 +1,31 @@
 <script setup>
   import Item from './header_menu_item.vue'
-  const list = ['games', 'services', 'teams', 'users']
+  let list = [
+    {
+      title: 'games',
+      path: '/games'
+    },
+    {
+      title: 'services',
+      path: '/services'
+    },
+    {
+      title: 'teams',
+      path: '/teams'
+    },
+    {
+      title: 'users',
+      path: '/users'
+    },
+  ]
 </script>
 
 <template>
   <div class="header_menu">
     <Item 
-      v-for="(item, index) in list"
-      :key="index"
-      :title="item"
+      v-for="item in list"
+      :key="item.name"
+      :item="item"
       />
   </div>
 </template>
