@@ -12,6 +12,7 @@ const routes = [
     { path: '/services', component: ServicesView },
     { path: '/teams', component: TeamsView },
     { path: '/users', component: UsersView },
+    { path: '/:pathMatch(.*)*', component: WelcomeView}
   ]
   
   const router = createRouter({
