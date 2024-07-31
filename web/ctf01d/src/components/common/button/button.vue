@@ -1,7 +1,7 @@
 <template>
   <button @click.prevent="action()"
     class="button button_M semi_16"
-    :class="{ primary: isPrimary, secondary: isSecondary}"
+    :class="{ primary: isPrimary, secondary: isSecondary , ghost: isGhost}"
   ><span class="button_title" v-if="title">{{ title }}</span>
     <img class="button_icon" :src=imgPath alt="">
   </button>
@@ -18,6 +18,9 @@ export default {
         type: Boolean
       },
       isSecondary: {
+        type: Boolean
+      },
+      isGhost: {
         type: Boolean
       },
       action: {
@@ -60,8 +63,13 @@ export default {
       background-color: #e2e2e2;
     }
   }
+  .ghost {
+    border: none;
+    background-color: transparent;
+    color: $primary;
+    padding: 0;
+  }
   .button_title {
     margin-right: 6px;
-    color: $on-accent;
   }
 </style>

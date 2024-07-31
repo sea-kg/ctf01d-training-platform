@@ -24,6 +24,7 @@
     margin-right: 64px;
     border-bottom: 2px solid $surface_1;
     padding-bottom: 4px;
+    color: $primary;
     &:hover {
       border-bottom: 2px solid $accent;
       cursor: pointer;

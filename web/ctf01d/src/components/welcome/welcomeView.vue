@@ -24,7 +24,6 @@
 <script setup>
   import Button from '../common/button/button.vue'
   const welcomeText = {
-    title: 'Welcome to <span class="accent">ctf01d</span> training platform!',
     description: 'This service can prepare training attack-defense game, based on ctf01d jury system'
   }
   const toGitHub = () => window.open('https://github.com/sea-kg/ctf01d-training-platform', '_blank').focus();
@@ -39,6 +38,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  color: $primary;
 }
 
 .welcome_title, .welcome_description {

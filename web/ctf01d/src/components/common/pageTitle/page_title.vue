@@ -22,8 +22,8 @@ export default {
 </script>
 
 <template>
-  <div class="wrapper_page_title">
-    <div class="row">
+  <div class="row">
+    <div class="wrapper_page_title">
         <div class="col12">
             <div class="page_title">
                 <div class="title semi_40">{{ title }}</div>
@@ -38,7 +38,9 @@ export default {
   </div>
 </template>
 
-<style>
+<style lang="scss">
+    @import '/src/styles/vars.scss';
+
     .wrapper_page_title{
         width: 100%;
         margin-top: 40px;
@@ -49,5 +51,6 @@ export default {
     }
     .title {
         margin-right: 16px;
+        color: $primary;
     }
 </style>
