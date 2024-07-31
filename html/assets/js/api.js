@@ -15,6 +15,13 @@ window.ctf01d_tp_api.game_info = function(game_id) {
     });
 }
 
+window.ctf01d_tp_api.game_scoreboard = function(game_id) {
+    return $.ajax({
+        url: 'api/v1/games/' + game_id + '/scoreboard',
+        method: 'GET',
+    });
+}
+
 window.ctf01d_tp_api.game_create = function(game_data) {
     return $.ajax({
         url: '/api/v1/games',
