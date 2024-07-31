@@ -11,6 +11,7 @@ import (
 	"ctf01d/internal/app/server"
 
 	"github.com/go-chi/chi/v5"
+	"github.com/go-chi/cors"
 	_ "github.com/lib/pq"
 )
 
@@ -40,6 +41,19 @@ func main() {
 	slog.Info("Database connection established successfully")
 	defer db.Close()
 	router := chi.NewRouter()
+
+	// Добавление CORS middleware
+	corsMiddleware := cors.New(cors.Options{
+		AllowedOrigins:   []string{"*"},
+		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+		AllowedHeaders:   []string{"Accept", "Authorization", "Content-Type", "X-CSRF-Token"},
+		ExposedHeaders:   []string{"Link"},
+		AllowCredentials: true,
+		MaxAge:           300,
+	})
+
+	router.Use(corsMiddleware.Handler)
+
 	hndlrs := &handlers.Handlers{
 		DB: db,
 	}
