@@ -170,6 +170,59 @@ function doSignOut() {
     })
 }
 
+$(document).ready(function () {
+    $(document).on('click', '.btn-info', function () {
+        var gameId = $(this).closest('.list-group-item').find('h5').text().substring(1);
+        fetchGameResults(gameId);
+    });
+});
+
+function fetchGameResults(gameId) {
+    // просто для проверки гипотезы, потом убрать в -> window.ctf01d_tp_api
+    $.ajax({
+        url: '/api/v1/games/' + gameId + '/scoreboard',
+        method: 'GET',
+        success: function (data) {
+            renderGameResults(data);
+            $('#modal_game_results').modal('show');
+        },
+        error: function (xhr, status, error) {
+            console.error('Failed to fetch game results:', error);
+        }
+    });
+}
+
+function escapeHtml(text) {
+    if (typeof text !== 'string') {
+        return text;
+    }
+
+    var map = {
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#039;'
+    };
+    return text.replace(/[&<>"']/g, function (m) { return map[m]; });
+}
+
+function renderGameResults(results) {
+    var resultsHtml = '<table class="table table-striped">';
+    resultsHtml += '<thead><tr><th>Rank</th><th>Score</th><th>Team Id</th></tr></thead><tbody>';
+
+    results.forEach(function (result) {
+        resultsHtml += '<tr>';
+        resultsHtml += '<td>' + escapeHtml(result.rank) + '</td>';
+        resultsHtml += '<td>' + result.score.toFixed(2) + '</td>';
+        resultsHtml += '<td>' + escapeHtml(result.team_id) + '</td>';
+        resultsHtml += '</tr>';
+    });
+
+    resultsHtml += '</tbody></table>';
+    $('#game_results_content').html(resultsHtml);
+}
+
 function renderGamesPage() {
     $('.spa-web-page').css({"display": ""})
     $('#games_page').css({"display": "block"})
@@ -190,6 +243,7 @@ function renderGamesPage() {
             gamesHtml += '<div href="#" class="list-group-item list-group-item-action flex-column align-items-start">';
             gamesHtml += '  <div class="d-flex w-100 justify-content-between">';
             gamesHtml += '    <h5 class="mb-1">#' + game_info.id + '</h5>';
+            gamesHtml += '    <button type="button" class="btn btn-info">Game result</button>';
             gamesHtml += '    <small>' + getHumanTimeHasPassed(new Date(game_info.end_time)) + '</small>';
             gamesHtml += '  </div>';
             gamesHtml += '  <p class="mb-1">' + escapeHtml(game_info.description) + '</p>';
