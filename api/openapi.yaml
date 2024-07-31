@@ -11,6 +11,21 @@ servers:
     description: Staging server
   - url: 'http://localhost:4102'
     description: Local server
+tags:
+  - name: Games
+    description: Endpoints for managing CTF games, including creation, retrieval, updating, and deletion.
+  - name: Results
+    description: Endpoints for handling results of CTF games, including creating, retrieving, updating, and deleting game results.
+  - name: Services
+    description: Endpoints for managing services used in CTF games, such as creating, updating, retrieving, and deleting service information.
+  - name: Sessions
+    description: Endpoints for authentication and authorization, including login, logout, and session validation.
+  - name: Teams
+    description: Endpoints for managing teams, including creating, updating, retrieving, and deleting team information, and handling team membership.
+  - name: University
+    description: Endpoints for managing university information related to teams and users.
+  - name: Users
+    description: Endpoints for managing user information, including creating, updating, retrieving, and deleting user profiles, and handling authentication.
 paths:
   /api/v1/auth/sign_in:
     post:
@@ -920,6 +935,8 @@ paths:
                 $ref: '#/components/schemas/UniversitiesResponse'
   /api/v1/avatar/{username}:
     get:
+      tags:
+        - Users
       summary: Get a unique avatar for the username
       operationId: uniqueAvatar
       parameters:
