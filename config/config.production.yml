@@ -3,7 +3,7 @@ http:
   host: '127.0.0.1'
 
 logger:
-  log_level: 'warn'
+  log_level: 'info'
 
 db:
   driver: postgres
