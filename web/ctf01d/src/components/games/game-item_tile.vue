@@ -18,7 +18,7 @@ export default {
     },
     methods: {
       getGame(){
-        axios.get(`http://ctf01d.ru:4102/api/v1/games/${this.game_data.id}`)
+        axios.get(`https://ctf01d.ru/api/v1/games/${this.game_data.id}`)
             .then(response => (
                 this.game = response.data,
                 this.team_length = this.game.team_details.length

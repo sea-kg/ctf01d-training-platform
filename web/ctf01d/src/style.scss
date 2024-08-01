@@ -13,3 +13,56 @@
 body{
   background-color: $surface_1;
 }
+
+label {
+  color: $primary;
+}
+
+input {
+  color: $primary;
+  border: 1px solid $outline-hard;
+  background-color: $surface-1;
+  padding: 12px;
+  font-style: normal;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.5px;
+  font-weight: normal;
+  width: 100%;
+  font-family: 'Petrov Sans-Trial';
+}
+
+textarea {
+  color: $primary;
+  border: 1px solid $outline-hard;
+  background-color: $surface-2;
+  padding: 12px;
+  font-style: normal;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.5px;
+  font-weight: normal;
+  width: 100%;
+  font-family: 'Petrov Sans-Trial';
+  resize: none;
+}
+
+input[type="submit"] {
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    font-family: 'Petrov Sans-Trial';
+    padding: 12px 24px;
+    font-style: normal;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+    border: none;
+    background-color: $accent;
+    color: $on-accent;
+    &:hover {
+      background-color: #E8FF99;
+      cursor: pointer;
+    }
+}

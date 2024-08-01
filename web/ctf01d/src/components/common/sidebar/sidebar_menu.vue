@@ -1,5 +1,5 @@
 <script setup>
-  import Item from './header_menu_item.vue'
+  import Item from './sidebar_menu_item.vue'
   let list = [
     {
       title: 'games',
@@ -21,7 +21,7 @@
 </script>
 
 <template>
-  <div class="header_menu">
+  <div class="sidebar_menu">
     <Item 
       v-for="item in list"
       :key="item.name"
@@ -31,7 +31,8 @@
 </template>
 
 <style>
-  .header_menu{
+  .sidebar_menu{
     display: flex;
+    flex-direction: column;
   }
 </style>

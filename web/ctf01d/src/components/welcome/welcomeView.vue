@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="row">
-      <div class="col7">
+      <div class="col6">
         <div class="welcome_wrapper">
           <div class="welcome_title bold_60">Welcome to <span class="accent">ctf01d</span> training platform!</div>
           <div class="welcome_description reg_16">{{ welcomeText.description }}</div>
@@ -13,7 +13,7 @@
           />
         </div>
       </div>
-      <div class="col5">
+      <div class="col6">
         <img src="/src/assets/img/welcome.svg" alt="" class="hero_img">
       </div>
     </div>
@@ -33,7 +33,6 @@
 <style lang="scss">
 @import '/src/styles/vars.scss';
 .welcome_wrapper {
-  margin-left: 117px;
   height: 100%;
   display: flex;
   flex-direction: column;

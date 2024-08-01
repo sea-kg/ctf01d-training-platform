@@ -1,6 +1,6 @@
 <template>
     <div class="game_teams_item">
-        <img :src="`http://ctf01d.ru:4102/api/v1/avatar/${this.team.name}`" alt="" class="team_avatar">
+        <img :src="`https://ctf01d.ru/api/v1/avatar/${this.team.name}`" alt="" class="team_avatar">
         <div class="game_team_info">
             <div class="team_title semi_14">{{ team.name }}</div>
             <div class="team_description reg_14">{{ team.description }}</div>

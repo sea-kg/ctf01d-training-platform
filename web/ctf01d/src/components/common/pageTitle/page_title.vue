@@ -5,7 +5,10 @@ export default {
         title: {
             type: String,
             required: true
-        }
+        },
+        action: {
+            type: function(){}
+        },
     },
     data(){
         return {
@@ -31,6 +34,7 @@ export default {
                     :title=button.title
                     :isSecondary="true"
                     :imgPath=button.addButtonIconPath
+                    :action="action"
                 />
             </div>
         </div>

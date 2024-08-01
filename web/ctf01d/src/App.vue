@@ -1,10 +1,10 @@
 <script setup>
-import Header from './components/common/header/header.vue'
+import sidebar from './components/common/sidebar/sidebar.vue'
 </script>
 
 <template>
   <div>
-    <Header />
+    <sidebar />
     <router-view></router-view>
   </div>
 </template>

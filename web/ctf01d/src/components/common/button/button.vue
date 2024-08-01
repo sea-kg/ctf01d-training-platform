@@ -1,6 +1,7 @@
 <template>
-  <button @click.prevent="action()"
+  <button @click.prevent="action"
     class="button button_M semi_16"
+    :type="type"
     :class="{ primary: isPrimary, secondary: isSecondary , ghost: isGhost}"
   ><span class="button_title" v-if="title">{{ title }}</span>
     <img class="button_icon" :src=imgPath alt="">
@@ -27,6 +28,9 @@ export default {
         type: function(){}
       },
       imgPath: {
+        type: String
+      },
+      type: {
         type: String
       }
     }

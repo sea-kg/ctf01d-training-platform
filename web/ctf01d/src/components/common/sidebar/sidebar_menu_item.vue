@@ -1,5 +1,5 @@
 <template>
-  <div @click.prevent="goTo()" class="header_menu_item reg_16">{{ item.title }}</div>
+  <div @click.prevent="goTo()" class="sidebar_menu_item reg_16">{{ item.title }}</div>
 </template>
 
 <script>
@@ -20,9 +20,9 @@
 
 <style lang="scss">
 @import '../../../styles/vars.scss';
-  .header_menu_item {
-    margin-right: 64px;
-    border-bottom: 2px solid $surface_1;
+  .sidebar_menu_item {
+    margin-bottom: 16px;
+    border-bottom: 2px solid $surface_2;
     padding-bottom: 4px;
     color: $primary;
     &:hover {
