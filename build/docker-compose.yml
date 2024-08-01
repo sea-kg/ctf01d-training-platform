@@ -1,0 +1,40 @@
+version: "2"
+
+services:
+  ctf01d_backend:
+    image: ghcr.io/sea-kg/ctf01d-training-platform:latest
+    environment:
+      CONFIG_PATH: "config/config.production.yml"
+    networks:
+      - ctf01d_net
+
+  ctf_training_platform_db:
+    image: postgres:16.3
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: ctf01d_training_platform
+      PGPORT: 4112
+    volumes:
+      - ./docker_tmp/pg_data:/var/lib/postgresql/data/
+    networks:
+      - ctf01d_net
+
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./nginx/certbot/conf:/etc/letsencrypt
+      - ./nginx/certbot/www:/var/www/certbot
+    depends_on:
+      - ctf01d_backend
+    networks:
+      - ctf01d_net
+
+networks:
+  ctf01d_net:
+    driver: bridge
