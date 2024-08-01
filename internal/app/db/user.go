@@ -1,8 +1,9 @@
 package db
 
 import (
-	"ctf01d/internal/app/server"
 	"database/sql"
+
+	"ctf01d/internal/app/server"
 
 	openapi_types "github.com/oapi-codegen/runtime/types"
 )

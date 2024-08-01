@@ -1,8 +1,9 @@
 package handlers
 
 import (
-	"ctf01d/pkg/avatar"
 	"net/http"
+
+	"ctf01d/pkg/avatar"
 )
 
 func (h *Handlers) UniqueAvatar(w http.ResponseWriter, r *http.Request, username string) {

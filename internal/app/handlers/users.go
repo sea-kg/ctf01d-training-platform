@@ -50,7 +50,6 @@ func (h *Handlers) CreateUser(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 	api_helpers.RespondWithJSON(w, http.StatusOK, view.NewUserFromModel(newUser))
-
 }
 
 func (h *Handlers) DeleteUser(w http.ResponseWriter, r *http.Request, id openapi_types.UUID) {

@@ -1,25 +1,18 @@
 package server
 
 import (
-	// "database/sql"
 	"errors"
-	"log/slog"
 	"net/http"
 	"os"
 	"path/filepath"
 	"strings"
-	// "github.com/gorilla/mux"
-	// "ctf01d/internal/app/logger"
 )
 
 var tmplPath = "./html/"
 
 func NewHtmlRouter(w http.ResponseWriter, req *http.Request) {
-	// router := mux.NewRouter().StrictSlash(true)
-	slog.Info("req.URL.Path: " + req.URL.Path)
-
 	if strings.HasPrefix(req.URL.Path, "/api/") {
-		err := errors.New("Not found api handler")
+		err := errors.New("not found api handler")
 		http.Error(w, err.Error(), http.StatusNotFound)
 		return
 	}
@@ -27,12 +20,10 @@ func NewHtmlRouter(w http.ResponseWriter, req *http.Request) {
 	// https://github.com/gorilla/mux?tab=readme-ov-file#serving-single-page-applications
 	// can it possible ../../etc/hosts ?
 	path := filepath.Join(tmplPath, req.URL.Path)
-	slog.Info("path " + path)
-
 	// check whether a file exists or is a directory at the given path
 	fi, err := os.Stat(path)
 	if (os.IsNotExist(err) || fi.IsDir()) && strings.HasPrefix(req.URL.Path, "/assets/") {
-		err := errors.New("File in assests not found")
+		err := errors.New("file in assests not found")
 		http.Error(w, err.Error(), http.StatusNotFound)
 		return
 	}
@@ -50,7 +41,7 @@ func NewHtmlRouter(w http.ResponseWriter, req *http.Request) {
 	}
 
 	if strings.HasSuffix(req.URL.Path, "/api") {
-		err := errors.New("Not found api handler")
+		err := errors.New("not found api handler")
 		http.Error(w, err.Error(), http.StatusNotFound)
 		return
 	}

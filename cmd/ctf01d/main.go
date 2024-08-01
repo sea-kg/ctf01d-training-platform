@@ -27,9 +27,7 @@ func main() {
 		os.Exit(1)
 	}
 	logger := slog.New(slog.NewTextHandler(os.Stdout, &slog.HandlerOptions{
-		Level: slog.Level(
-			cfg.ParseLogLevel(cfg.Log.Level),
-		),
+		Level: slog.Level(cfg.ParseLogLevel(cfg.Log.Level)),
 	}))
 	slog.SetDefault(logger)
 	slog.Info("Config path is - " + path)
