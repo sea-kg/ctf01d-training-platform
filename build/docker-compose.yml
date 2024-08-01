@@ -5,6 +5,11 @@ services:
     image: ghcr.io/sea-kg/ctf01d-training-platform:latest
     environment:
       CONFIG_PATH: "config/config.production.yml"
+    depends_on:
+      - ctf_training_platform_db
+    ports:
+      - "4102:4102"
+    restart: always
     networks:
       - ctf01d_net
 
