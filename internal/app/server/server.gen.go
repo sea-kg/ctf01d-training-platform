@@ -330,6 +330,13 @@ type SignInUserJSONBody struct {
 	UserName *string `json:"user_name,omitempty"`
 }
 
+// UniqueAvatarParams defines parameters for UniqueAvatar.
+type UniqueAvatarParams struct {
+	Max       *int `form:"max,omitempty" json:"max,omitempty"`
+	BlockSize *int `form:"blockSize,omitempty" json:"blockSize,omitempty"`
+	Steps     *int `form:"steps,omitempty" json:"steps,omitempty"`
+}
+
 // UploadCheckerMultipartBody defines parameters for UploadChecker.
 type UploadCheckerMultipartBody struct {
 	File *openapi_types.File `json:"file,omitempty"`
@@ -398,7 +405,7 @@ type ServerInterface interface {
 	SignOutUser(w http.ResponseWriter, r *http.Request)
 	// Get a unique avatar for the username
 	// (GET /api/v1/avatar/{username})
-	UniqueAvatar(w http.ResponseWriter, r *http.Request, username string)
+	UniqueAvatar(w http.ResponseWriter, r *http.Request, username string, params UniqueAvatarParams)
 	// List all games
 	// (GET /api/v1/games)
 	ListGames(w http.ResponseWriter, r *http.Request)
@@ -521,7 +528,7 @@ func (_ Unimplemented) SignOutUser(w http.ResponseWriter, r *http.Request) {
 
 // Get a unique avatar for the username
 // (GET /api/v1/avatar/{username})
-func (_ Unimplemented) UniqueAvatar(w http.ResponseWriter, r *http.Request, username string) {
+func (_ Unimplemented) UniqueAvatar(w http.ResponseWriter, r *http.Request, username string, params UniqueAvatarParams) {
 	w.WriteHeader(http.StatusNotImplemented)
 }
 
@@ -786,8 +793,35 @@ func (siw *ServerInterfaceWrapper) UniqueAvatar(w http.ResponseWriter, r *http.R
 		return
 	}
 
+	// Parameter object where we will unmarshal all parameters from the context
+	var params UniqueAvatarParams
+
+	// ------------- Optional query parameter "max" -------------
+
+	err = runtime.BindQueryParameter("form", true, false, "max", r.URL.Query(), &params.Max)
+	if err != nil {
+		siw.ErrorHandlerFunc(w, r, &InvalidParamFormatError{ParamName: "max", Err: err})
+		return
+	}
+
+	// ------------- Optional query parameter "blockSize" -------------
+
+	err = runtime.BindQueryParameter("form", true, false, "blockSize", r.URL.Query(), &params.BlockSize)
+	if err != nil {
+		siw.ErrorHandlerFunc(w, r, &InvalidParamFormatError{ParamName: "blockSize", Err: err})
+		return
+	}
+
+	// ------------- Optional query parameter "steps" -------------
+
+	err = runtime.BindQueryParameter("form", true, false, "steps", r.URL.Query(), &params.Steps)
+	if err != nil {
+		siw.ErrorHandlerFunc(w, r, &InvalidParamFormatError{ParamName: "steps", Err: err})
+		return
+	}
+
 	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		siw.Handler.UniqueAvatar(w, r, username)
+		siw.Handler.UniqueAvatar(w, r, username, params)
 	}))
 
 	for _, middleware := range siw.HandlerMiddlewares {

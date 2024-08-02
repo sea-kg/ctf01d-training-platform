@@ -3,29 +3,39 @@ info:
   title: CTF Management API
   description: 'API for managing CTF (Capture The Flag) games, teams, users, and services.'
   contact: {}
-  version: 1.0.0
+  version: 1.1.0
 servers:
-  - url: 'https://ctf01d.com'
+  - url: 'https://ctf01d.ru'
     description: Production server
-  - url: 'https://staging.ctf01d.com'
-    description: Staging server
   - url: 'http://localhost:4102'
     description: Local server
 tags:
   - name: Games
-    description: Endpoints for managing CTF games, including creation, retrieval, updating, and deletion.
+    description: >-
+      Endpoints for managing CTF games, including creation, retrieval, updating,
+      and deletion.
   - name: Results
-    description: Endpoints for handling results of CTF games, including creating, retrieving, updating, and deleting game results.
+    description: >-
+      Endpoints for handling results of CTF games, including creating,
+      retrieving, updating, and deleting game results.
   - name: Services
-    description: Endpoints for managing services used in CTF games, such as creating, updating, retrieving, and deleting service information.
+    description: >-
+      Endpoints for managing services used in CTF games, such as creating,
+      updating, retrieving, and deleting service information.
   - name: Sessions
-    description: Endpoints for authentication and authorization, including login, logout, and session validation.
+    description: >-
+      Endpoints for authentication and authorization, including login, logout,
+      and session validation.
   - name: Teams
-    description: Endpoints for managing teams, including creating, updating, retrieving, and deleting team information, and handling team membership.
+    description: >-
+      Endpoints for managing teams, including creating, updating, retrieving,
+      and deleting team information, and handling team membership.
   - name: University
     description: Endpoints for managing university information related to teams and users.
   - name: Users
-    description: Endpoints for managing user information, including creating, updating, retrieving, and deleting user profiles, and handling authentication.
+    description: >-
+      Endpoints for managing user information, including creating, updating,
+      retrieving, and deleting user profiles, and handling authentication.
 paths:
   /api/v1/auth/sign_in:
     post:
@@ -125,6 +135,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SessionResponse'
+      parameters: []
   /api/v1/users:
     get:
       tags:
@@ -518,7 +529,7 @@ paths:
       responses:
         '200':
           description: Team deleted successfully
-  /api/v1/teams/{teamId}/members:
+  '/api/v1/teams/{teamId}/members':
     get:
       tags:
         - Teams
@@ -542,7 +553,7 @@ paths:
                   $ref: '#/components/schemas/UserResponse'
         '404':
           description: Team not found
-  /api/v1/teams/{teamId}/members/{userId}:
+  '/api/v1/teams/{teamId}/members/{userId}':
     post:
       tags:
         - Teams
@@ -633,7 +644,7 @@ paths:
                 properties:
                   data:
                     type: string
-  /api/v1/games/{gameId}/results:
+  '/api/v1/games/{gameId}/results':
     post:
       tags:
         - Results
@@ -659,7 +670,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CreateResultResponse'
-  /api/v1/games/{gameId}/results/{resultId}:
+  '/api/v1/games/{gameId}/results/{resultId}':
     get:
       tags:
         - Results
@@ -722,7 +733,7 @@ paths:
       responses:
         '200':
           description: Result updated successfully
-  /api/v1/games/{gameId}/scoreboard:
+  '/api/v1/games/{gameId}/scoreboard':
     get:
       tags:
         - Results
@@ -846,13 +857,13 @@ paths:
       responses:
         '200':
           description: Service deleted successfully
-  /api/v1/services/{serviceId}/checker:
+  '/api/v1/services/{serviceId}/checker':
     post:
       tags:
         - Services
       summary: Upload zip-archive
       description: |
-          Handler for upload zip-archive with checker
+        Handler for upload zip-archive with checker
       operationId: uploadChecker
       parameters:
         - in: path
@@ -876,13 +887,12 @@ paths:
         '200':
           description: Success upload
           content:
-            application/json:
-              {}
-  /api/v1/services/{serviceId}/service:
+            application/json: {}
+  '/api/v1/services/{serviceId}/service':
     post:
       summary: Upload zip service
       description: |
-          Upload zip archive with service code images and etc...
+        Upload zip archive with service code images and etc...
       tags:
         - Services
       operationId: uploadService
@@ -908,8 +918,7 @@ paths:
         '200':
           description: Success upload
           content:
-            application/json:
-              {}
+            application/json: {}
   /api/v1/universities:
     get:
       summary: Retrieves a list of universities
@@ -933,7 +942,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UniversitiesResponse'
-  /api/v1/avatar/{username}:
+  '/api/v1/avatar/{username}':
     get:
       tags:
         - Users
@@ -945,6 +954,27 @@ paths:
           required: true
           schema:
             type: string
+        - name: max
+          in: query
+          required: false
+          schema:
+            type: integer
+          minLength: 10
+          maxLength: 1000
+        - name: blockSize
+          in: query
+          required: false
+          schema:
+            type: integer
+          minLength: 10
+          maxLength: 100
+        - name: steps
+          in: query
+          required: false
+          schema:
+            type: integer
+          minLength: 1
+          maxLength: 100
       responses:
         '200':
           description: Unique avatar image
@@ -1001,7 +1031,7 @@ components:
       properties:
         data:
           type: string
-          example: "User created successfully"
+          example: User created successfully
         id:
           type: string
           format: uuid
@@ -1014,7 +1044,7 @@ components:
       properties:
         data:
           type: string
-          example: "Team created successfully"
+          example: Team created successfully
         id:
           type: string
           format: uuid
@@ -1027,7 +1057,7 @@ components:
       properties:
         data:
           type: string
-          example: "Service created successfully"
+          example: Service created successfully
         id:
           type: string
           format: uuid
@@ -1040,7 +1070,7 @@ components:
       properties:
         data:
           type: string
-          example: "Game created successfully"
+          example: Game created successfully
         id:
           type: string
           format: uuid
@@ -1053,14 +1083,16 @@ components:
       properties:
         data:
           type: string
-          example: "Result created successfully"
+          example: Result created successfully
         id:
           type: string
           format: uuid
           example: 81e17cb6-5c46-4934-b6d5-5c8356712cb6
     ProfileResponse:
       type: object
-      description: The response schema for a user's profile, including id, timestamps, team name, and team history.
+      description: >-
+        The response schema for a user's profile, including id, timestamps, team
+        name, and team history.
       required:
         - id
         - created_at
@@ -1093,7 +1125,9 @@ components:
             - guest
         team_history:
           type: array
-          description: The list of teams the user has been part of, including the periods of membership.
+          description: >-
+            The list of teams the user has been part of, including the periods
+            of membership.
           items:
             $ref: '#/components/schemas/TeamHistory'
     TeamHistory:
@@ -1102,7 +1136,9 @@ components:
         - join
         - role
       type: object
-      description: The schema for recording the history of teams a user has joined and left.
+      description: >-
+        The schema for recording the history of teams a user has joined and
+        left.
       properties:
         name:
           type: string
@@ -1352,9 +1388,7 @@ components:
         name:
           type: string
           description: The name of the university
-          example: >-
-            Анапский филиал Кубанского государственного аграрного
-            университета
+          example: Анапский филиал Кубанского государственного аграрного университета
     UniversitiesResponse:
       type: array
       items:
@@ -1364,17 +1398,17 @@ components:
       properties:
         role:
           type: string
-          example: "admin"
+          example: admin
           description: The role of the current user
           nullable: true
         name:
           type: string
-          example: "r00t"
+          example: r00t
           description: The name of the current user
           nullable: true
         id:
           type: string
-          example: "a8a5d938-1bc7-4b69-942d-9c00fc166fb6"
+          example: a8a5d938-1bc7-4b69-942d-9c00fc166fb6
           format: uuid
   links: {}
   callbacks: {}
