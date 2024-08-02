@@ -959,22 +959,16 @@ paths:
           required: false
           schema:
             type: integer
-          minLength: 10
-          maxLength: 1000
         - name: blockSize
           in: query
           required: false
           schema:
             type: integer
-          minLength: 10
-          maxLength: 100
         - name: steps
           in: query
           required: false
           schema:
             type: integer
-          minLength: 1
-          maxLength: 100
       responses:
         '200':
           description: Unique avatar image
