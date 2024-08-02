@@ -1,5 +1,5 @@
 <script>
-import axios from 'axios'
+import axios from 'axios';
 import moment from 'moment';
 
 import TeamAvatarList from '../games/game-team-item_list.vue'
@@ -62,7 +62,7 @@ export default {
     <div class="game_list_item_teams">
       <div class="team_length reg_14">teams: [{{ team_length || 0 }}]</div>
       <div class="teams_avatar_list">
-        <TeamAvatarList 
+        <TeamAvatarList
           v-for="team in game.team_details"
           :key="team.id"
           :team="team"
@@ -70,7 +70,7 @@ export default {
       </div>
     </div>
   </div>
-  
+
 </template>
 
 <style lang="scss">
