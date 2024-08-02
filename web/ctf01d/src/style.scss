@@ -61,6 +61,7 @@ input[type="submit"] {
     border: none;
     background-color: $accent;
     color: $on-accent;
+    margin-right: 16px;
     &:hover {
       background-color: #E8FF99;
       cursor: pointer;

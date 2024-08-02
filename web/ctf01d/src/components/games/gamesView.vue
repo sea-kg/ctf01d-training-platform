@@ -149,6 +149,7 @@
             v-for="game in searchGames"
             :key="game.id"
             :game_data="game"
+            @updateGameList="getGames"
           />
         </div>
       </div>

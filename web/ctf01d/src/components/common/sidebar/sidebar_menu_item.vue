@@ -1,5 +1,5 @@
 <template>
-  <div @click.prevent="goTo()" class="sidebar_menu_item reg_16">{{ item.title }}</div>
+  <div @click.prevent="goTo()" :class="{ 'sidebar_menu_item_active': $route.path === this.item.path }" class="sidebar_menu_item reg_16">{{ item.title }}</div>
 </template>
 
 <script>
@@ -30,5 +30,8 @@
       cursor: pointer;
       transition: none;
     }
+  }
+  .sidebar_menu_item_active {
+    border-bottom: 2px solid $accent;
   }
 </style>
