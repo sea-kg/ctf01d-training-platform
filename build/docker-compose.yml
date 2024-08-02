@@ -11,6 +11,16 @@ services:
     networks:
       - ctf01d_net
 
+  ctf01d_frontend:
+    build:
+      context: ../web/ctf01d
+    ports:
+      - "1337:1337"
+    depends_on:
+      - ctf01d_backend
+    networks:
+      - ctf01d_net
+
   ctf_training_platform_db:
     image: postgres:16.3
     restart: always
