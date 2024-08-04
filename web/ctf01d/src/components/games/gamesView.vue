@@ -3,8 +3,9 @@
   import GameItemList from '../games/game-item_list.vue'
   import ModalHeader from '../common/modal/modal_header.vue'
   import Button from '../common/button/button.vue'
-  
-  import axios from 'axios'
+
+  // import axios from 'axios'
+  import axios from 'https://cdn.jsdelivr.net/npm/axios@1.3.5/+esm';
 
   export default {
     data(){
@@ -38,7 +39,7 @@
             ))
       },
       createGame(){
-        
+
         const game = {
           start_time: this.newGame.start_time+':00.000Z',
           end_time: this.newGame.end_time+':00.000Z',

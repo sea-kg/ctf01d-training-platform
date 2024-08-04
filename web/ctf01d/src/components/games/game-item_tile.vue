@@ -1,7 +1,9 @@
 <script>
 import Button from '../common/button/button.vue'
 import TeamListItem from './game-team-item.vue'
-import axios from 'axios'
+// import axios from 'axios'
+import axios from 'https://cdn.jsdelivr.net/npm/axios@1.3.5/+esm';
+
 import moment from 'moment';
 
 export default {
@@ -165,7 +167,7 @@ export default {
         margin-bottom: 4px;
     }
 
-    
+
 
     .list_more {
         padding-top: 16px;

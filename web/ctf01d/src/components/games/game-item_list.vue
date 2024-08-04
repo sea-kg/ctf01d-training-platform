@@ -1,5 +1,7 @@
 <script>
-import axios from 'axios';
+// import axios from 'axios';
+import axios from 'https://cdn.jsdelivr.net/npm/axios@1.3.5/+esm';
+
 import moment from 'moment';
 
 import TeamAvatarList from '../games/game-team-item_list.vue'
