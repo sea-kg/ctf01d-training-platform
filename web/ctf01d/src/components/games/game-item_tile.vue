@@ -3,7 +3,6 @@ import Button from '../common/button/button.vue'
 import TeamListItem from './game-team-item.vue'
 // import axios from 'axios'
 import axios from 'https://cdn.jsdelivr.net/npm/axios@1.3.5/+esm';
-import 'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js'; // Загружаем moment из CDN
 
 export default {
     props: ['game_data'],
@@ -34,19 +33,19 @@ export default {
     },
     computed: {
         dateStatus () {
-            return window.moment(this.game.end_time).fromNow();
+            return this.game.end_time;
         },
         startDate(){
-            return window.moment(this.game.start_time).format('LL');
+            return this.game.start_time;
         },
         startTime(){
-            return window.moment(this.game.start_time).format('LT');
+            return this.game.start_time;
         },
         finishDate(){
-            return window.moment(this.game.end_time).format('LL');
+            return this.game.end_time;
         },
         finishTime(){
-            return window.moment(this.game.end_time).format('LT');
+            return this.game.end_time;
         }
     }
 }
