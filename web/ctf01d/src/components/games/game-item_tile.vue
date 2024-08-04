@@ -3,8 +3,7 @@ import Button from '../common/button/button.vue'
 import TeamListItem from './game-team-item.vue'
 // import axios from 'axios'
 import axios from 'https://cdn.jsdelivr.net/npm/axios@1.3.5/+esm';
-// import moment from 'moment';
-import 'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js';
+import 'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js'; // Загружаем moment из CDN
 
 export default {
     props: ['game_data'],
@@ -21,30 +20,33 @@ export default {
     methods: {
       getGame(){
         axios.get(`https://ctf01d.ru/api/v1/games/${this.game_data.id}`)
-            .then(response => (
-                this.game = response.data,
-                this.team_length = this.game.team_details.length
-            ))
+            .then(response => {
+                this.game = response.data;
+                this.team_length = this.game.team_details.length;
+            })
+            .catch(error => {
+                console.error("Ошибка при получении данных игры:", error);
+            });
       }
     },
     mounted(){
-        this.getGame()
+        this.getGame();
     },
     computed: {
         dateStatus () {
-            return moment(this.game.end_time).fromNow();
+            return window.moment(this.game.end_time).fromNow();
         },
         startDate(){
-            return moment(this.game.start_time).format('LL');;
+            return window.moment(this.game.start_time).format('LL');
         },
         startTime(){
-            return moment(this.game.start_time).format('LT');;
+            return window.moment(this.game.start_time).format('LT');
         },
         finishDate(){
-            return moment(this.game.end_time).format('LL');;
+            return window.moment(this.game.end_time).format('LL');
         },
         finishTime(){
-            return moment(this.game.end_time).format('LT');;
+            return window.moment(this.game.end_time).format('LT');
         }
     }
 }
@@ -166,8 +168,6 @@ export default {
         margin: 0 8px;
         margin-bottom: 4px;
     }
-
-
 
     .list_more {
         padding-top: 16px;
