@@ -1,8 +1,7 @@
 <script>
 // import axios from 'axios';
 import axios from 'https://cdn.jsdelivr.net/npm/axios@1.3.5/+esm';
-
-import moment from 'moment';
+import moment from 'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js';
 
 import TeamAvatarList from '../games/game-team-item_list.vue'
 import ModalHeader from '../common/modal/modal_header.vue'

@@ -3,8 +3,8 @@ import Button from '../common/button/button.vue'
 import TeamListItem from './game-team-item.vue'
 // import axios from 'axios'
 import axios from 'https://cdn.jsdelivr.net/npm/axios@1.3.5/+esm';
-
-import moment from 'moment';
+// import moment from 'moment';
+import moment from 'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js';
 
 export default {
     props: ['game_data'],
