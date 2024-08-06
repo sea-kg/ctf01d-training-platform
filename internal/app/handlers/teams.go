@@ -15,6 +15,7 @@ import (
 )
 
 func (h *Handlers) CreateTeam(w http.ResponseWriter, r *http.Request) {
+	// fixme - создание команды через апрупы - нужен стейт
 	var team server.TeamRequest
 	var err error
 	if err := json.NewDecoder(r.Body).Decode(&team); err != nil {
@@ -140,6 +141,7 @@ func (h *Handlers) LeaveUserFromTeam(w http.ResponseWriter, r *http.Request, tea
 }
 
 func (h *Handlers) TeamMembers(w http.ResponseWriter, r *http.Request, teamId openapi_types.UUID) {
+	// нужно по парамтрам иметь возможноть получать pending user'ов для опрува
 	teamRepo := repository.NewTeamMemberRequestRepository(h.DB)
 	members, err := teamRepo.TeamMembers(r.Context(), teamId)
 	if err != nil {
