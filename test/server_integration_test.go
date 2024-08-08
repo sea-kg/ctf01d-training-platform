@@ -10,7 +10,7 @@ import (
 	"testing"
 	"time"
 
-	"ctf01d/config"
+	"ctf01d/internal/app/config"
 	"ctf01d/internal/app/handlers"
 	migration "ctf01d/internal/app/migrations/psql"
 	"ctf01d/internal/app/server"
@@ -25,7 +25,7 @@ var db *sql.DB
 var r *chi.Mux
 
 func TestMain(m *testing.M) {
-	cfg, err := config.NewConfig("../config/config.test.yml")
+	cfg, err := config.NewConfig("../configs/config.test.yml")
 	if err != nil {
 		panic(err)
 	}

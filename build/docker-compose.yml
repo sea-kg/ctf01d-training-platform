@@ -4,7 +4,7 @@ services:
   ctf01d_backend:
     image: ghcr.io/sea-kg/ctf01d-training-platform:latest
     environment:
-      CONFIG_PATH: "config/config.production.yml"
+      CONFIG_PATH: "configs/config.production.yml"
     depends_on:
       - ctf_training_platform_db
     restart: always

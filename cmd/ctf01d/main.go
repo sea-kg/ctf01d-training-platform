@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"os"
 
-	"ctf01d/config"
+	"ctf01d/internal/app/config"
 	"ctf01d/internal/app/handlers"
 	migration "ctf01d/internal/app/migrations/psql"
 	"ctf01d/internal/app/server"
@@ -16,7 +16,7 @@ import (
 )
 
 func main() {
-	path := "./config/config.development.yml"
+	path := "./configs/config.development.yml"
 	if envPath, exists := os.LookupEnv("CONFIG_PATH"); exists {
 		path = envPath
 	}

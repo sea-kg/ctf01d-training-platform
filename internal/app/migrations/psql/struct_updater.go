@@ -8,7 +8,7 @@ import (
 	"strings"
 	"time"
 
-	"ctf01d/config"
+	"ctf01d/internal/app/config"
 )
 
 type DatabaseUpdateFunc func(db *sql.DB, getInfo bool) (string, string, string, error)
