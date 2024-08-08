@@ -16,7 +16,7 @@ type (
 
 	HTTP struct {
 		Port string `env-required:"true" yaml:"port" env:"HTTP_PORT" env-default:"4102"`
-		Host string `env-required:"true" yaml:"host" env:"HTTP_PORT" env-default:"localhost"`
+		Host string `env-required:"true" yaml:"host" env:"HTTP_HOST" env-default:"localhost"`
 	}
 
 	Log struct {
