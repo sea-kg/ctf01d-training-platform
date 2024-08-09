@@ -15,8 +15,7 @@ Service used go && psql
 │       └── main.go
 ├── docs # project documentation
 │   └── *.md
-├── config
-│   ├── *.go
+├── configs
 │   └── *.yml
 ├── html
 ├── internal
@@ -105,7 +104,7 @@ oapi-codegen -generate models,chi -o internal/app/server/server.gen.go --package
 
 ### psql
 
-connect to db configure in `src/config/config.#{STAGE}.yaml`
+connect to db configure in `src/configs/config.#{STAGE}.yaml`
 
 ```yaml
 ...

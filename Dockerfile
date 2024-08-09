@@ -19,7 +19,7 @@ RUN apk --no-cache add ca-certificates
 WORKDIR /ctf01d.ru
 
 COPY --from=builder /ctf01d.ru/server .
-COPY --from=builder /ctf01d.ru/config/ ./config/
+COPY --from=builder /ctf01d.ru/configs/ ./configs/
 COPY --from=builder /ctf01d.ru/html/ ./html/
 
 EXPOSE 4102
