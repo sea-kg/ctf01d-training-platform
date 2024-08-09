@@ -57,6 +57,16 @@ jobs:
         with:
           go_version: 1.22
 
+  lint-oapi:
+    name: Run Spectral
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: stoplightio/spectral-action@latest
+        with:
+          file_glob: 'api/.yaml'
+          spectral_ruleset: "configs/spectral/spectral.yaml"
   test:
     name: Run Tests
     runs-on: ubuntu-latest
