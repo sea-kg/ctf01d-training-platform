@@ -82,13 +82,13 @@ $ go mod download && go mod tidy
 ### Build server
 
 ```shell
-$ go build cmd/ctf01d/main.go
+$ go build cmd/main.go
 ```
 
 ### Run server
 
 ```shell
-$ go run cmd/ctf01d/main.go
+$ go run cmd/main.go
 ```
 
 will be available on - [http://localhost:4102](http://localhost:4102)

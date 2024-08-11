@@ -16,11 +16,11 @@ install:
 
 # Build the server executable
 build:
-	go build cmd/ctf01d/main.go
+	go build cmd/main.go
 
 # Build the server executable in docker
 build-in-docker:
-	docker run --rm -v $(PWD):/app -w /app golang:1.22-bookworm go build cmd/ctf01d/main.go
+	docker run --rm -v $(PWD):/app -w /app golang:1.22-bookworm go build cmd/main.go
 
 # format go files
 fmt:
@@ -29,7 +29,7 @@ fmt:
 
 # Run the local development server
 run-server:
-	go run cmd/ctf01d/main.go
+	go run cmd/main.go
 
 # Run PostgreSQL container for local development
 run-db:

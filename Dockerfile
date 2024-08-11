@@ -9,7 +9,7 @@ RUN go mod tidy
 
 COPY ./ ./
 
-RUN CGO_ENABLED=0 GOOS=linux go build -o server ./cmd/ctf01d/main.go
+RUN CGO_ENABLED=0 GOOS=linux go build -o server ./cmd/main.go
 
 FROM alpine:latest as prod
 LABEL "maintainer"="Evgenii Sopov <mrseakg@gmail.com>"
