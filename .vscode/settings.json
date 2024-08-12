@@ -2,6 +2,7 @@
     "conventionalCommits.scopes": [
         "config",
         "api",
-        "test"
+        "test",
+        "deps"
     ]
 }

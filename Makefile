@@ -45,7 +45,7 @@ run-db:
 			-e POSTGRES_USER=postgres \
 			-e POSTGRES_PASSWORD=postgres \
 			-e PGPORT=4112 \
-			-p 4112:4112 postgres:16.3; \
+			-p 4112:4112 postgres:16.4; \
 	fi
 
 # Stop PostgreSQL container
