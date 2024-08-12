@@ -592,10 +592,15 @@ func TestGameCRUD(t *testing.T) {
 			t.Fatalf("expected at least one game")
 		}
 
-		lastGame := games[len(games)-1]
-		gameID = lastGame["id"].(string)
-		if gameID == "" {
-			t.Fatalf("expected game ID in response")
+		gameExists := false
+		for _, game := range games {
+			if game["id"].(string) == gameID {
+				gameExists = true
+				break
+			}
+		}
+		if !gameExists {
+			t.Fatalf("expected game ID %v in the list of games, but it was not found", gameID)
 		}
 	})
 
