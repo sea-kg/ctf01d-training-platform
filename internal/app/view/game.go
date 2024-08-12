@@ -1,64 +1,40 @@
 package view
 
 import (
-	"time"
-
 	"ctf01d/internal/app/db"
-
-	openapi_types "github.com/oapi-codegen/runtime/types"
+	"ctf01d/internal/app/server"
 )
 
-type Game struct {
-	Id          openapi_types.UUID `json:"id"`
-	StartTime   time.Time          `json:"start_time"`
-	EndTime     time.Time          `json:"end_time"`
-	Description string             `json:"description,omitempty"`
-}
-
-type GameDetails struct {
-	Id          openapi_types.UUID `json:"id"`
-	StartTime   time.Time          `json:"start_time"`
-	EndTime     time.Time          `json:"end_time"`
-	Description string             `json:"description,omitempty"`
-	Teams       []Teams            `json:"team_details,omitempty"`
-}
-
-type Teams struct {
-	Id          openapi_types.UUID `json:"id"`
-	Name        string             `json:"name"`
-	Description string             `json:"description"`
-}
-
-func NewGameFromModel(m *db.Game) *Game {
-	return &Game{
+func NewGameFromModel(m *db.Game) *server.GameResponse {
+	return &server.GameResponse{
 		Id:          m.Id,
 		StartTime:   m.StartTime,
 		EndTime:     m.EndTime,
-		Description: m.Description,
+		Description: &m.Description,
 	}
 }
 
-func NewGameDetailsFromModel(m *db.GameDetails) *GameDetails {
-	teams := make([]Teams, 0, len(m.Teams))
+func NewGameDetailsFromModel(m *db.GameDetails) *server.GameResponse {
+	teams := make([]server.TeamResponse, 0, len(m.Teams))
 	for _, t := range m.Teams {
-		teams = append(teams, Teams{
+		teams = append(teams, server.TeamResponse{
 			Id:          t.Id,
 			Name:        t.Name,
-			Description: t.Description,
+			Description: &t.Description,
 		})
 	}
 
-	return &GameDetails{
+	return &server.GameResponse{
 		Id:          m.Id,
 		StartTime:   m.StartTime,
 		EndTime:     m.EndTime,
-		Description: m.Description,
-		Teams:       teams,
+		Description: &m.Description,
+		Teams:       &teams,
 	}
 }
 
-func NewGamesFromModels(ms []*db.Game) []*Game {
-	var games []*Game
+func NewGamesFromModels(ms []*db.Game) []*server.GameResponse {
+	var games []*server.GameResponse
 	for _, m := range ms {
 		games = append(games, NewGameFromModel(m))
 	}

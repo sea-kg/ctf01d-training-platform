@@ -99,7 +99,8 @@ type GameResponse struct {
 	Id openapi_types.UUID `json:"id"`
 
 	// StartTime The start time of the game
-	StartTime time.Time `json:"start_time"`
+	StartTime time.Time       `json:"start_time"`
+	Teams     *[]TeamResponse `json:"teams,omitempty"`
 }
 
 // ProfileResponse The response schema for a user's profile, including id, timestamps, team name, and team history.
