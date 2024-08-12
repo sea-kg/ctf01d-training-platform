@@ -1226,6 +1226,10 @@ components:
         description:
           type: string
           description: A brief description of the game
+        teams:
+          type: array
+          items:
+            $ref: '#/components/schemas/TeamResponse'
     ResultRequest:
       required:
         - rank

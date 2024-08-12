@@ -65,13 +65,18 @@ func (h *Handlers) GetGameById(w http.ResponseWriter, r *http.Request, id openap
 
 func (h *Handlers) ListGames(w http.ResponseWriter, r *http.Request) {
 	repo := repository.NewGameRepository(h.DB)
-	games, err := repo.List(r.Context())
+	games, err := repo.ListGamesDetails(r.Context())
 	if err != nil {
 		slog.Warn(err.Error(), "handler", "ListGames")
 		api_helpers.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Failed to fetch games"})
 		return
 	}
-	api_helpers.RespondWithJSON(w, http.StatusOK, view.NewGamesFromModels(games))
+	gameResponses := make([]*server.GameResponse, 0, len(games))
+	for _, game := range games {
+		gameResponses = append(gameResponses, view.NewGameDetailsFromModel(game))
+	}
+
+	api_helpers.RespondWithJSON(w, http.StatusOK, gameResponses)
 }
 
 func (h *Handlers) UpdateGame(w http.ResponseWriter, r *http.Request, id openapi_types.UUID) {

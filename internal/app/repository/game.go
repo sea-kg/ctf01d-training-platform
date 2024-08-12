@@ -18,6 +18,7 @@ type GameRepository interface {
 	Update(ctx context.Context, game *models.Game) error
 	Delete(ctx context.Context, id openapi_types.UUID) error
 	List(ctx context.Context) ([]*models.Game, error)
+	ListGamesDetails(ctx context.Context) ([]*models.GameDetails, error)
 }
 
 type gameRepo struct {
@@ -38,6 +39,70 @@ func (r *gameRepo) Create(ctx context.Context, game *models.Game) error {
 		return err
 	}
 	return nil
+}
+
+func (r *gameRepo) ListGamesDetails(ctx context.Context) ([]*models.GameDetails, error) {
+	query := `
+        SELECT g.id, g.start_time, g.end_time, g.description,
+               t.id AS team_id, t.name AS team_name, t.description AS team_description
+        FROM games g
+        LEFT JOIN team_games tg ON g.id = tg.game_id
+        LEFT JOIN teams t ON tg.team_id = t.id;
+    `
+	rows, err := r.db.QueryContext(ctx, query)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	gameDetailsMap := make(map[uuid.UUID]*models.GameDetails)
+	for rows.Next() {
+		var gameId uuid.UUID
+		var startTime, endTime time.Time
+		var description string
+		var teamId sql.NullString
+		var teamName sql.NullString
+		var teamDescription sql.NullString
+
+		err := rows.Scan(&gameId, &startTime, &endTime, &description, &teamId, &teamName, &teamDescription)
+		if err != nil {
+			return nil, err
+		}
+
+		gameDetails, exists := gameDetailsMap[gameId]
+		if !exists {
+			gameDetails = &models.GameDetails{
+				Game: models.Game{
+					Id:          gameId,
+					StartTime:   startTime,
+					EndTime:     endTime,
+					Description: description,
+				},
+				Teams: []*models.Team{},
+			}
+			gameDetailsMap[gameId] = gameDetails
+		}
+
+		if teamId.Valid {
+			teamUUID, err := uuid.Parse(teamId.String)
+			if err != nil {
+				return nil, err
+			}
+			team := &models.Team{
+				Id:          teamUUID,
+				Name:        teamName.String,
+				Description: teamDescription.String,
+			}
+			gameDetails.Teams = append(gameDetails.Teams, team)
+		}
+	}
+
+	var gameDetailsList []*models.GameDetails
+	for _, gameDetails := range gameDetailsMap {
+		gameDetailsList = append(gameDetailsList, gameDetails)
+	}
+
+	return gameDetailsList, nil
 }
 
 func (r *gameRepo) GetGameDetails(ctx context.Context, id openapi_types.UUID) (*models.GameDetails, error) {
