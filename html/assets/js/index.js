@@ -243,7 +243,7 @@ function renderGamesPage() {
             gamesHtml += '<div href="#" class="list-group-item list-group-item-action flex-column align-items-start">';
             gamesHtml += '  <div class="d-flex w-100 justify-content-between">';
             gamesHtml += '    <h5 class="mb-1">#' + game_info.id + '</h5>';
-            gamesHtml += '    <button type="button" class="btn btn-info">Game result</button>';
+            gamesHtml += '    <button type="button" class="btn btn-info">' + tr('Результаты игры') + '</button>';
             gamesHtml += '    <small>' + getHumanTimeHasPassed(new Date(game_info.end_time)) + '</small>';
             gamesHtml += '  </div>';
             gamesHtml += '  <p class="mb-1">' + escapeHtml(game_info.description) + '</p>';
@@ -784,6 +784,8 @@ function showMyTeams(userId) {
 
 $(document).ready(function() {
     console.log("Ready");
+    translateHtml();
+
     renderPage(window.location.pathname);
 
     window.ctf01d_tp_api.auth_session().fail(function(res) {

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
   <head>
     <title>ctf01d training platform</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -17,6 +17,7 @@
     <script src="./assets/js/vendor/bootstrap-notify.min.js?v=1.0"></script>
     <script src="https://cdn.jsdelivr.net/gh/xcash/bootstrap-autocomplete@v2.3.7/dist/latest/bootstrap-autocomplete.min.js"></script>
     <script src="./assets/js/api.js?v=1.0"></script>
+    <script src="./assets/js/translates.js?v=1.0"></script>
     <script src="./assets/js/index.js?v=1.0"></script>
   </head>
   <body>
@@ -30,29 +31,29 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <div class="nav-link" onclick="renderGamesPage()">Games</div>
+            <div class="nav-link" onclick="renderGamesPage()" translate="Игры">Games</div>
           </li>
           <li class="nav-item active">
-            <div class="nav-link" onclick="renderServicesPage()">Services</div>
+            <div class="nav-link" onclick="renderServicesPage()" translate="Сервисы">Services</div>
           </li>
           <li class="nav-item active">
-            <a class="nav-link" href="./teams/">Teams</a>
+            <a class="nav-link" href="./teams/" translate="Команды">Teams</a>
           </li>
           <li class="nav-item active">
-            <a class="nav-link" href="./users/">Users</a>
+            <a class="nav-link" href="./users/" translate="Пользователи">Users</a>
           </li>
         </ul>
         <div class="form-inline my-2 my-lg-0">
-          <button id="btn_sign_in" class="btn-menu-top-left btn btn-outline-success my-2 my-sm-0" style="display: none" onclick="showLoginForm()">Sign-in</button>
+          <button id="btn_sign_in" class="btn-menu-top-left btn btn-outline-success my-2 my-sm-0" style="display: none" onclick="showLoginForm()" translate="Войти">Sign-in</button>
           <div class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="btn_profile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               User
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <div class="dropdown-item" id="btn_my_teams" onclick="showMyTeams('2d10ba59-4e45-4b05-86e4-9a135b444c50')">My Team(s)</div> <!-- fixme use id from session -->
-              <div class="dropdown-item" id="btn_my_services" onclick="showMyServices()">My Service(s)</div>
+              <div class="dropdown-item" id="btn_my_teams" onclick="showMyTeams('2d10ba59-4e45-4b05-86e4-9a135b444c50')" translate="Мои команды">My Team(s)</div> <!-- fixme use id from session -->
+              <div class="dropdown-item" id="btn_my_services" onclick="showMyServices()" translate="Мои сервисы">My Service(s)</div>
               <div class="dropdown-divider"></div>
-              <div class="dropdown-item" id="btn_sign_out" onclick="doSignOut()">Sign-out</div>
+              <div class="dropdown-item" id="btn_sign_out" onclick="doSignOut()" translate="Выйти">Sign-out</div>
             </div>
           </div>
         </div>
@@ -65,7 +66,7 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLongTitle">Sign-in</h5>
+            <h5 class="modal-title" id="exampleModalLongTitle" translate="Войти">Sign-in</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -81,13 +82,13 @@
                 <input type="password" class="form-control" id="sign_in_password" placeholder="Password" required>
               </div>
             </form>
-            <div class="alert alert-danger" role="alert" style="display: none;" id="sign_error_info">
+            <div class="alert alert-danger" role="alert" style="display: none;" id="sign_error_info" translate="Что-то пошло не так...">
               Something wrong
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-primary" onclick="doSignIn()">Sign-in</button>
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" onclick="doSignIn()" translate="Войти">Sign-in</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" translate="Закрыть">Close</button>
           </div>
         </div>
       </div>
@@ -99,7 +100,7 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLongTitle">My teams</h5>
+            <h5 class="modal-title" id="exampleModalLongTitle" translate="Мои команды">My teams</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -110,7 +111,7 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" translate="Закрыть">Close</button>
           </div>
         </div>
       </div>
@@ -122,7 +123,7 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLongTitle">Game results</h5>
+            <h5 class="modal-title" id="exampleModalLongTitle" translate="Результаты игры">Game results</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -133,7 +134,7 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" translate="Закрыть">Close</button>
           </div>
         </div>
       </div>
@@ -146,11 +147,11 @@
       <br>
       <div class="card">
         <div class="card-header">
-          <strong class="card-title">Welcome to ctf01d training platform!</strong>
+          <strong class="card-title" translate="Добро пожаловать на тренировочную площадку ctf01d!">Welcome to ctf01d training platform!</strong>
         </div>
         <div class="card-body">
           <div class="card-text">
-            <p>This service can prepare training attack-defense game, based on ctf01d jury system</p>
+            <p translate="Этот сервис может подготовить учебную игру 'атака-защита' на основе системы жюри ctf01d.">This service can prepare training attack-defense game, based on ctf01d jury system</p>
             <p>Github: <a href="https://github.com/sea-kg/ctf01d-training-platform">https://github.com/sea-kg/ctf01d-training-platform</a></p>
           </div>
         </div>
@@ -161,12 +162,12 @@
     <!-- GAMES PAGE -->
     <div class="container spa-web-page" id="games_page">
       <br>
-      <h2>Games</h2>
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_create_game">
+      <h2 translate="Игры">Games</h2>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_create_game" translate="Новая игра">
         New Game
       </button>
       <br><br>
-      <div class="alert alert-danger" role="alert" style="display: none;" id="games_page_error">
+      <div class="alert alert-danger" role="alert" style="display: none;" id="games_page_error" translate="Что-то пошло не так...">
         Something wrong
       </div>
       <div class="list-group" id="games_page_list">
@@ -178,7 +179,7 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLongTitle">New Game</h5>
+            <h5 class="modal-title" id="exampleModalLongTitle" translate="Новая игра">New Game</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -186,22 +187,22 @@
           <div class="modal-body">
             <form>
               <div class="form-group">
-                <label for="game_create_start_time" class="col-form-label">Start Time:</label>
+                <label for="game_create_start_time" class="col-form-label" translate="Начало">Start Time:</label>
                 <input type="datetime-local" class="form-control" id="game_create_start_time" name="start_time" required>
               </div>
               <div class="form-group">
-                <label for="game_create_end_time" class="col-form-label">End Time:</label>
+                <label for="game_create_end_time" class="col-form-label" translate="Конец">End Time:</label>
                 <input type="datetime-local" class="form-control" id="game_create_end_time" name="start_time" required>
               </div>
               <div class="form-group">
-                <label for="game_create_description" class="col-form-label">Description:</label>
+                <label for="game_create_description" class="col-form-label" translate="Описание">Description:</label>
                 <input type="text" class="form-control" id="game_create_description" name="description" required>
               </div>
             </form>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" onclick="gameCreate()">Create</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" translate="Закрыть">Close</button>
+            <button type="button" class="btn btn-primary" onclick="gameCreate()" translate="Создать">Create</button>
           </div>
         </div>
       </div>
@@ -210,12 +211,12 @@
     <!-- SERVICES PAGE -->
     <div class="container spa-web-page" id="services_page">
       <br>
-      <h2>Services</h2>
-      <button type="button" class="btn btn-primary" onclick="showCreateService()">
+      <h2 translate="Сервисы">Services</h2>
+      <button type="button" class="btn btn-primary" onclick="showCreateService()" translate="Новый сервис">
         New Service
       </button>
       <br><br>
-      <div class="alert alert-danger" role="alert" style="display: none;" id="services_page_error">
+      <div class="alert alert-danger" role="alert" style="display: none;" id="services_page_error" translate="Что-то пошло не так...">
         Something wrong
       </div>
       <div id="services_page_list">
@@ -227,7 +228,7 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="title_service_create_or_update">New Service</h5>
+            <h5 class="modal-title" id="title_service_create_or_update" translate="Новый сервис">New Service</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -236,23 +237,23 @@
             <form>
               <input type="hidden" id="service_update_service_id" value="0" name="service_id">
               <div class="form-group">
-                <label for="service_create_name" class="col-form-label">Name:</label>
+                <label for="service_create_name" class="col-form-label" translate="Название:">Name:</label>
                 <input type="text" class="form-control" id="service_create_name" placeholder="Name" required>
               </div>
               <div class="form-group">
-                <label for="service_create_author" class="col-form-label">Author:</label>
+                <label for="service_create_author" class="col-form-label" translate="Автор:">Author:</label>
                 <input type="text" class="form-control" id="service_create_author" placeholder="Author" required>
               </div>
               <div class="form-group">
-                <label for="service_create_logo_url" class="col-form-label">Logo URL:</label>
+                <label for="service_create_logo_url" class="col-form-label" translate="Логотип (URL):">Logo URL:</label>
                 <input type="text" class="form-control" id="service_create_logo_url" placeholder="Logo URL" required>
               </div>
               <div class="form-group">
-                <label for="service_create_description" class="col-form-label">Description:</label>
+                <label for="service_create_description" class="col-form-label" translate="Описание:">Description:</label>
                 <input type="text" class="form-control" id="service_create_description" placeholder="Description" name="description" required>
               </div>
               <div class="form-group">
-                <label for="service_create_is_public" class="col-form-label">Is public?</label>
+                <label for="service_create_is_public" class="col-form-label" translate="Публичный?">Is public?</label>
                 <input type="checkbox" class="form-control" id="service_create_is_public" name="is_public" required>
               </div>
 
@@ -264,7 +265,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-primary" id="btn_service_create_or_update" onclick="serviceCreateOrUpdate()">Create</button>
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" translate="Закрыть">Close</button>
           </div>
         </div>
       </div>
@@ -277,7 +278,7 @@
         New Team
       </button>
       <br><br>
-      <div class="alert alert-danger" role="alert" style="display: none;" id="teams_page_error">
+      <div class="alert alert-danger" role="alert" style="display: none;" id="teams_page_error" translate="Что-то пошло не так...">
         Something wrong
       </div>
       <div id="teams_page_list">
@@ -289,17 +290,17 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="title_team_create_or_update">New Team</h5>
+            <h5 class="modal-title" id="title_team_create_or_update" translate="Новая команда">New Team</h5>
           </div>
           <div class="modal-body">
             <form>
               <input type="hidden" id="team_update_team_id" value="" name="team_id">
               <div class="form-group">
-                <label for="team_create_name" class="col-form-label">Name:</label>
+                <label for="team_create_name" class="col-form-label" translate="Имя:">Name:</label>
                 <input type="text" class="form-control" id="team_create_name" placeholder="Name" required>
               </div>
               <div class="form-group">
-                <label for="team_create_description" class="col-form-label">Description:</label>
+                <label for="team_create_description" class="col-form-label" translate="Описание:">Description:</label>
                 <input type="text" class="form-control" id="team_create_description" placeholder="Description" name="description" required>
               </div>
               <div class="form-group">
@@ -311,7 +312,7 @@
                 <input type="text" class="form-control" id="team_create_avatar_url" placeholder="Avatar URL" required>
               </div>
               <div class="form-group">
-                <label for="team_create_university" class="col-form-label">Университет</label>
+                <label for="team_create_university" class="col-form-label" translate="Университет">Университет</label>
                 <input type="text" id="team_create_university" class="form-control basicAutoComplete" placeholder="Начните набирать..." required autocomplete="off"></input>
                 <div id="choose_list_university"></div>
               </div>
@@ -320,13 +321,13 @@
                 <input type="datetime-local" class="form-control" id="game_create_start_time" name="start_time" required>
               </div -->
             </form>
-            <div class="alert alert-danger" role="alert" style="display: none;" id="teams_edit_or_create_team_error">
+            <div class="alert alert-danger" role="alert" style="display: none;" id="teams_edit_or_create_team_error" translate="Что-то пошло не так...">
               Something wrong
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-primary" id="btn_team_create_or_update" onclick="teamCreateOrUpdate()">Create</button>
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" id="btn_team_create_or_update" onclick="teamCreateOrUpdate()" translate="Создать">Create</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" translate="Закрыть">Close</button>
           </div>
         </div>
       </div>
@@ -340,7 +341,7 @@
         New User
       </button>
       <br><br>
-      <div class="alert alert-danger" role="alert" style="display: none;" id="services_page_error">
+      <div class="alert alert-danger" role="alert" style="display: none;" id="services_page_error" translate="Что-то пошло не так...">
         Something wrong
       </div>
       <div id="users_page_list">
@@ -352,7 +353,7 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="title_user_create_or_update">New User</h5>
+            <h5 class="modal-title" id="title_user_create_or_update" translate="Новый пользователь">New User</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -361,12 +362,12 @@
             <form id="add-user-form">
               <input type="hidden" id="user_update_user_id" value="0" name="user_id">
               <div class="form-group">
-                <label for="user_create_name" class="col-form-label">Username:</label>
+                <label for="user_create_name" class="col-form-label" translate="Имя пользователя:">Username:</label>
                 <input type="text" class="form-control" id="user_create_name" name="user_name" placeholder="Username"
                   required>
               </div>
               <div class="form-group">
-                <label for="user_create_display_name" class="col-form-label">Display Name:</label>
+                <label for="user_create_display_name" class="col-form-label" translate="Отображаемое имя:">Display Name:</label>
                 <input type="text" class="form-control" id="user_create_display_name" name="display_name"
                   placeholder="Display Name">
               </div>
@@ -376,24 +377,24 @@
                   placeholder="Avatar URL">
               </div>
               <div class="form-group">
-                <label for="user_create_password" class="col-form-label">Password:</label>
+                <label for="user_create_password" class="col-form-label" translate="Пароль:">Password:</label>
                 <input type="password" class="form-control" id="user_create_password" name="password" placeholder="Password"
                   required>
               </div>
               <div class="form-group">
-                <label for="user_create_status" class="col-form-label">Status:</label>
+                <label for="user_create_status" class="col-form-label" translate="Статус:">Status:</label>
                 <input type="text" class="form-control" id="user_create_status" name="status" placeholder="Status">
               </div>
               <div class="form-group">
-                <label for="user_create_role" class="col-form-label">Role:</label>
+                <label for="user_create_role" class="col-form-label" translate="Роль:">Role:</label>
                 <select class="form-control" id="user_create_role" name="role">
-                  <option value="admin">Admin</option>
-                  <option value="player">Player</option>
-                  <option value="guest">Guest</option>
+                  <option value="admin" translate="Админ">Admin</option>
+                  <option value="player" translate="Игрок">Player</option>
+                  <option value="guest" translate="Гость">Guest</option>
                 </select>
               </div>
               <div class="form-group">
-                <label for="user_create_team" class="col-form-label">Team:</label>
+                <label for="user_create_team" class="col-form-label" translate="Команда">Team:</label>
                 <select class="form-control" id="user_create_team" name="team" multiple>
                   <!-- Teams will be loaded here -->
                 </select>
@@ -401,9 +402,9 @@
             </form>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" translate="Закрыть">Close</button>
             <button type="button" class="btn btn-primary" id="btn_user_create_or_update"
-              onclick="userCreateOrUpdate()">Create</button>
+              onclick="userCreateOrUpdate()" translate="Создать">Create</button>
           </div>
         </div>
       </div>
@@ -412,7 +413,7 @@
     <!-- UNKNOWN PAGE -->
     <div class="container spa-web-page" id="unknown_page">
       <br>
-      <h1>Unknown page</h1>
+      <h1 translate="Такая страница не нашлась!">Unknown page</h1>
       <br>
     </div>
 
