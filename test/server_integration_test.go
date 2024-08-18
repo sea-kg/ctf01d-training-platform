@@ -21,8 +21,10 @@ import (
 	"github.com/go-chi/chi/v5"
 )
 
-var db *sql.DB
-var r *chi.Mux
+var (
+	db *sql.DB
+	r  *chi.Mux
+)
 
 func TestMain(m *testing.M) {
 	cfg, err := config.NewConfig("../configs/config.test.yml")
@@ -689,6 +691,7 @@ func TestGameCRUD(t *testing.T) {
 		}
 	})
 }
+
 func TestTeamMembersCRUD(t *testing.T) {
 	var teamID string
 	var userID string
@@ -886,6 +889,7 @@ func TestTeamMembersCRUD(t *testing.T) {
 		}
 	})
 }
+
 func TestResultsCRUD(t *testing.T) {
 	var gameID, teamID string
 	fake := faker.New()

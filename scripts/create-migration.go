@@ -64,7 +64,7 @@ func DatabaseUpdate_update%04d_update%04d(db *sql.DB, getInfo bool) (string, str
 }
 `, maxUpdate, nextUpdate)
 
-	err = ioutil.WriteFile(newFilePath, []byte(template), 0644)
+	err = ioutil.WriteFile(newFilePath, []byte(template), 0o644)
 	if err != nil {
 		log.Fatal(err)
 	}

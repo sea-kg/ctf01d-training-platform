@@ -60,7 +60,6 @@ func hexToInt(hexStr string) int {
 }
 
 func generateGradient(username string, steps int) []color.RGBA {
-
 	runes := []rune(username)
 	for i, r := range runes {
 		runes[i] = unicode.ToUpper(r)
