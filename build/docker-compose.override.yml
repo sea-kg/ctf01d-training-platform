@@ -20,19 +20,6 @@ services:
     networks:
       - ctf01d_net
 
-  ctf_training_platform_db:
-    image: postgres:16.4
-    restart: always
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: ctf01d_training_platform
-      PGPORT: 4112
-    volumes:
-      - ./docker_tmp/pg_data:/var/lib/postgresql/data/
-    networks:
-      - ctf01d_net
-
   nginx:
     image: nginx:latest
     ports:
