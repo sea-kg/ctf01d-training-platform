@@ -1,5 +1,3 @@
-version: "2"
-
 services:
   ctf01d_backend:
     image: ghcr.io/sea-kg/ctf01d-training-platform:latest
