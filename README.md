@@ -1,8 +1,14 @@
-# ctf01d-training-platform
+# Backend for ctf01d-training-platform
 
-Service used go && psql
+This service uses Go and PostgreSQL.
 
 [Roadmap](docs/ROADMAP.md) & [Concept](docs/CONCEPT.md)
+
+### Related Projects
+- [Frontend for ctf01d-training-platform](https://github.com/AlexBazh/ctf01d-front/)
+
+### Contributing
+We welcome contributions! Please see our [Contributing Guidelines](docs/CONTRIBUTING.md) for more details.
 
 ## Project structure
 
@@ -16,6 +22,8 @@ Service used go && psql
 ├── docs # project documentation
 │   └── *.md
 ├── configs
+│   └── *.yml
+├── build # docker files
 │   └── *.yml
 ├── html
 ├── internal

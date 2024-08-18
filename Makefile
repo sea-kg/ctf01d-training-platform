@@ -1,4 +1,4 @@
-.PHONY: lint install build run-server run-db attach-db fuzz-api
+.PHONY: lint install build run-server run-db stop-db reset-db test-db remove-db attach-db codegen
 
 # Lint the code with golangci-lint
 lint:
@@ -18,11 +18,7 @@ install:
 build:
 	go build cmd/main.go
 
-# Build the server executable in docker
-build-in-docker:
-	docker run --rm -v $(PWD):/app -w /app golang:1.22-bookworm go build cmd/main.go
-
-# format go files
+# Format go files
 fmt:
 	go fmt ./internal/...; \
 	go fmt ./cmd/...;
@@ -57,7 +53,7 @@ stop-db:
 		echo "Container ctf01d-postgres is not running."; \
 	fi
 
-# cleanup db and restart db and rebuild main app
+# Cleanup db and restart db and rebuild main app
 reset-db:
 	make stop-db; \
 	sudo rm -rf docker_tmp/pg_data; \
@@ -78,7 +74,7 @@ test-db:
 	# Run the tests
 	@go test -v ./test/server_integration_test.go
 
-# Revome PostgreSQL container
+# Remove PostgreSQL container
 remove-db:
 	@if [ $$(docker ps -a -q -f name=ctf01d-postgres) ]; then \
 		echo "Removing container ctf01d-postgres..."; \
