@@ -15,17 +15,17 @@ type (
 	}
 
 	HTTP struct {
-		Port string `env-required:"true" yaml:"port" env:"HTTP_PORT" env-default:"4102"`
-		Host string `env-required:"true" yaml:"host" env:"HTTP_HOST" env-default:"localhost"`
+		Port string `env:"HTTP_PORT" env-default:"4102"      env-required:"true" yaml:"port"`
+		Host string `env:"HTTP_HOST" env-default:"localhost" env-required:"true" yaml:"host"`
 	}
 
 	Log struct {
-		Level string `env-required:"true" yaml:"log_level" env:"LOG_LEVEL"`
+		Level string `env:"LOG_LEVEL" env-required:"true" yaml:"log_level"`
 	}
 
 	DB struct {
 		Driver     string `yaml:"driver"`
-		DataSource string `env-required:"true" yaml:"data_source" env:"data_source"`
+		DataSource string `env:"data_source" env-required:"true" yaml:"data_source"`
 	}
 )
 
