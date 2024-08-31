@@ -5,10 +5,10 @@ import (
 	"net/http"
 	"os"
 
-	"ctf01d/internal/app/config"
-	"ctf01d/internal/app/handlers"
-	migration "ctf01d/internal/app/migrations/psql"
-	"ctf01d/internal/app/server"
+	"ctf01d/internal/config"
+	"ctf01d/internal/handler"
+	migration "ctf01d/internal/migrations/psql"
+	"ctf01d/internal/server"
 
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/cors"
@@ -52,10 +52,10 @@ func main() {
 
 	router.Use(corsMiddleware.Handler)
 
-	hndlrs := &handlers.Handlers{
+	hndlr := &handler.Handler{
 		DB: db,
 	}
-	svr := handlers.NewServerInterfaceWrapper(hndlrs)
+	svr := handler.NewServerInterfaceWrapper(hndlr)
 
 	router.Mount("/api/", server.HandlerFromMux(svr, router))
 	router.Mount("/", http.HandlerFunc(server.NewHtmlRouter))

@@ -105,7 +105,7 @@ will be available on - [http://localhost:4102](http://localhost:4102)
 ### Generate code from openapi schema
 
 ```shell
-oapi-codegen -generate models,chi -o internal/app/server/server.gen.go --package routers api/openapi.yaml
+oapi-codegen -generate models,chi -o internal/server/server.gen.go --package routers api/openapi.yaml
 ```
 
 ## DataBase
@@ -137,7 +137,7 @@ $ docker exec -it ctf01d-postgres psql -U postgres
 ### create new migrate file
 
 ```shell
-go run scripts/create-migration.go # Created new migration file: internal/app/migrations/psql/update0022_update0023.go
+go run scripts/create-migration.go # Created new migration file: internal/migrations/psql/update0022_update0023.go
 ```
 
 ## Experimental

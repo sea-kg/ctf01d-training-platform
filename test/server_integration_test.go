@@ -10,10 +10,10 @@ import (
 	"testing"
 	"time"
 
-	"ctf01d/internal/app/config"
-	"ctf01d/internal/app/handlers"
-	migration "ctf01d/internal/app/migrations/psql"
-	"ctf01d/internal/app/server"
+	"ctf01d/internal/config"
+	"ctf01d/internal/handler"
+	migration "ctf01d/internal/migrations/psql"
+	"ctf01d/internal/server"
 
 	"github.com/jaswdr/faker"
 	_ "github.com/lib/pq"
@@ -48,10 +48,10 @@ func TestMain(m *testing.M) {
 }
 
 func NewTestRouter() (http.Handler, error) {
-	h := &handlers.Handlers{
+	h := &handler.Handler{
 		DB: db,
 	}
-	svr := handlers.NewServerInterfaceWrapper(h)
+	svr := handler.NewServerInterfaceWrapper(h)
 
 	r = chi.NewRouter()
 	r.Mount("/api/", server.HandlerFromMux(svr, r))

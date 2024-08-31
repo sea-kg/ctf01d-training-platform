@@ -10,7 +10,7 @@ import (
 )
 
 func main() {
-	dir := "./internal/app/migrations/psql/"
+	dir := "./internal/migrations/psql/"
 	files, err := os.ReadDir(dir)
 	if err != nil {
 		log.Fatal(err)
