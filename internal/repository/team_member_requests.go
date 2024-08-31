@@ -4,7 +4,7 @@ import (
 	"context"
 	"database/sql"
 
-	models "ctf01d/internal/model"
+	"ctf01d/internal/model"
 
 	openapi_types "github.com/oapi-codegen/runtime/types"
 )
@@ -13,7 +13,7 @@ type TeamMemberRequestRepository interface {
 	ConnectUserTeam(ctx context.Context, teamID, userID openapi_types.UUID, role string) error
 	ApproveUserTeam(ctx context.Context, teamID, userID openapi_types.UUID) error
 	LeaveUserFromTeam(ctx context.Context, teamID, userID openapi_types.UUID) error
-	TeamMembers(ctx context.Context, teamID openapi_types.UUID) ([]*models.User, error)
+	TeamMembers(ctx context.Context, teamID openapi_types.UUID) ([]*model.User, error)
 }
 
 func NewTeamMemberRequestRepository(db *sql.DB) TeamMemberRequestRepository {
@@ -36,7 +36,10 @@ func (r *teamRepo) ApproveUserTeam(ctx context.Context, teamID, userID openapi_t
 	query := `UPDATE team_member_requests SET status = 'approved' WHERE team_id = $1 AND user_id = $2 AND status = 'pending'`
 	_, err = tx.ExecContext(ctx, query, teamID, userID)
 	if err != nil {
-		tx.Rollback()
+		err = tx.Rollback()
+		if err != nil {
+			return err
+		}
 		return err
 	}
 
@@ -44,14 +47,20 @@ func (r *teamRepo) ApproveUserTeam(ctx context.Context, teamID, userID openapi_t
 	query = `SELECT role FROM team_member_requests WHERE team_id = $1 AND user_id = $2 AND status = 'approved'`
 	err = tx.QueryRowContext(ctx, query, teamID, userID).Scan(&role)
 	if err != nil {
-		tx.Rollback()
+		err = tx.Rollback()
+		if err != nil {
+			return err
+		}
 		return err
 	}
 	// fixme - обновить team_history
 	query = `INSERT INTO profiles (current_team_id, user_id, role) VALUES ($1, $2, $3)`
 	_, err = tx.ExecContext(ctx, query, teamID, userID, role)
 	if err != nil {
-		tx.Rollback()
+		err = tx.Rollback()
+		if err != nil {
+			return err
+		}
 		return err
 	}
 
@@ -65,7 +74,7 @@ func (r *teamRepo) LeaveUserFromTeam(ctx context.Context, teamID, userID openapi
 	return err
 }
 
-func (r *teamRepo) TeamMembers(ctx context.Context, teamID openapi_types.UUID) ([]*models.User, error) {
+func (r *teamRepo) TeamMembers(ctx context.Context, teamID openapi_types.UUID) ([]*model.User, error) {
 	query := `SELECT u.id, u.display_name, u.user_name, tm.role, u.avatar_url, u.status
 	          FROM profiles tm
 	          JOIN users u ON tm.user_id = u.id
@@ -76,9 +85,9 @@ func (r *teamRepo) TeamMembers(ctx context.Context, teamID openapi_types.UUID) (
 	}
 	defer rows.Close()
 
-	var members []*models.User
+	var members []*model.User
 	for rows.Next() {
-		var member models.User
+		var member model.User
 		if err := rows.Scan(&member.Id, &member.DisplayName, &member.Username, &member.Role, &member.AvatarUrl, &member.Status); err != nil {
 			return nil, err
 		}

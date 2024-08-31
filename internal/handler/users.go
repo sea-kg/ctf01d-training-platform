@@ -48,7 +48,7 @@ func (h *Handler) CreateUser(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 	}
-	api_helpers.RespondWithJSON(w, http.StatusOK, model.NewUserFromModel(newUser))
+	api_helpers.RespondWithJSON(w, http.StatusOK, newUser.ToResponse())
 }
 
 func (h *Handler) DeleteUser(w http.ResponseWriter, r *http.Request, id openapi_types.UUID) {
@@ -69,7 +69,7 @@ func (h *Handler) GetUserById(w http.ResponseWriter, r *http.Request, id openapi
 		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to fetch user"})
 		return
 	}
-	api_helpers.RespondWithJSON(w, http.StatusOK, model.NewUserFromModel(user))
+	api_helpers.RespondWithJSON(w, http.StatusOK, user.ToResponse())
 }
 
 func (h *Handler) GetProfileById(w http.ResponseWriter, r *http.Request, id openapi_types.UUID) {
@@ -80,7 +80,7 @@ func (h *Handler) GetProfileById(w http.ResponseWriter, r *http.Request, id open
 		api_helpers.RespondWithJSON(w, http.StatusNotFound, map[string]string{"data": "User have not profile"})
 		return
 	}
-	api_helpers.RespondWithJSON(w, http.StatusOK, model.NewProfileFromModel(userProfile))
+	api_helpers.RespondWithJSON(w, http.StatusOK, userProfile.ToResponse())
 }
 
 func (h *Handler) ListUsers(w http.ResponseWriter, r *http.Request) {

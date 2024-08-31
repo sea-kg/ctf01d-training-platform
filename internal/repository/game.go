@@ -5,7 +5,7 @@ import (
 	"database/sql"
 	"time"
 
-	model "ctf01d/internal/model"
+	"ctf01d/internal/model"
 
 	"github.com/google/uuid"
 	openapi_types "github.com/oapi-codegen/runtime/types"

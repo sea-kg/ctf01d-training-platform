@@ -34,7 +34,7 @@ func (h *Handler) CreateService(w http.ResponseWriter, r *http.Request) {
 		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to create service"})
 		return
 	}
-	api_helpers.RespondWithJSON(w, http.StatusOK, model.NewServiceFromModel(newService))
+	api_helpers.RespondWithJSON(w, http.StatusOK, newService.ToResponse())
 }
 
 func (h *Handler) DeleteService(w http.ResponseWriter, r *http.Request, id openapi_types.UUID) {
@@ -55,7 +55,7 @@ func (h *Handler) GetServiceById(w http.ResponseWriter, r *http.Request, id open
 		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to fetch service"})
 		return
 	}
-	api_helpers.RespondWithJSON(w, http.StatusOK, model.NewServiceFromModel(service))
+	api_helpers.RespondWithJSON(w, http.StatusOK, service.ToResponse())
 }
 
 func (h *Handler) ListServices(w http.ResponseWriter, r *http.Request) {

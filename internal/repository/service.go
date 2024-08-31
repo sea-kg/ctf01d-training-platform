@@ -4,17 +4,17 @@ import (
 	"context"
 	"database/sql"
 
-	models "ctf01d/internal/model"
+	"ctf01d/internal/model"
 
 	openapi_types "github.com/oapi-codegen/runtime/types"
 )
 
 type ServiceRepository interface {
-	Create(ctx context.Context, service *models.Service) error
-	GetById(ctx context.Context, id openapi_types.UUID) (*models.Service, error)
-	Update(ctx context.Context, service *models.Service) error
+	Create(ctx context.Context, service *model.Service) error
+	GetById(ctx context.Context, id openapi_types.UUID) (*model.Service, error)
+	Update(ctx context.Context, service *model.Service) error
 	Delete(ctx context.Context, id openapi_types.UUID) error
-	List(ctx context.Context) ([]*models.Service, error)
+	List(ctx context.Context) ([]*model.Service, error)
 }
 
 type serviceRepo struct {
@@ -25,7 +25,7 @@ func NewServiceRepository(db *sql.DB) ServiceRepository {
 	return &serviceRepo{db: db}
 }
 
-func (r *serviceRepo) Create(ctx context.Context, service *models.Service) error {
+func (r *serviceRepo) Create(ctx context.Context, service *model.Service) error {
 	query := `INSERT INTO services (name, author, logo_url, description, is_public)
 	          VALUES ($1, $2, $3, $4, $5)
 	          RETURNING id, name, author, logo_url, description, is_public`
@@ -37,9 +37,9 @@ func (r *serviceRepo) Create(ctx context.Context, service *models.Service) error
 	return nil
 }
 
-func (r *serviceRepo) GetById(ctx context.Context, id openapi_types.UUID) (*models.Service, error) {
+func (r *serviceRepo) GetById(ctx context.Context, id openapi_types.UUID) (*model.Service, error) {
 	query := `SELECT id, name, author, logo_url, description, is_public FROM services WHERE id = $1`
-	service := &models.Service{}
+	service := &model.Service{}
 	err := r.db.QueryRowContext(ctx, query, id).Scan(&service.Id, &service.Name, &service.Author, &service.LogoUrl, &service.Description, &service.IsPublic)
 	if err != nil {
 		return nil, err
@@ -47,7 +47,7 @@ func (r *serviceRepo) GetById(ctx context.Context, id openapi_types.UUID) (*mode
 	return service, nil
 }
 
-func (r *serviceRepo) Update(ctx context.Context, service *models.Service) error {
+func (r *serviceRepo) Update(ctx context.Context, service *model.Service) error {
 	query := `UPDATE services SET name = $1, author = $2, logo_url = $3, description = $4, is_public = $5 WHERE id = $6`
 	_, err := r.db.ExecContext(ctx, query, service.Name, service.Author, service.LogoUrl, service.Description, service.IsPublic, service.Id)
 	return err
@@ -59,7 +59,7 @@ func (r *serviceRepo) Delete(ctx context.Context, id openapi_types.UUID) error {
 	return err
 }
 
-func (r *serviceRepo) List(ctx context.Context) ([]*models.Service, error) {
+func (r *serviceRepo) List(ctx context.Context) ([]*model.Service, error) {
 	query := `SELECT id, name, author, logo_url, description, is_public FROM services`
 	rows, err := r.db.QueryContext(ctx, query)
 	if err != nil {
@@ -67,9 +67,9 @@ func (r *serviceRepo) List(ctx context.Context) ([]*models.Service, error) {
 	}
 	defer rows.Close()
 
-	var services []*models.Service
+	var services []*model.Service
 	for rows.Next() {
-		var service models.Service
+		var service model.Service
 		if err := rows.Scan(&service.Id, &service.Name, &service.Author, &service.LogoUrl, &service.Description, &service.IsPublic); err != nil {
 			return nil, err
 		}

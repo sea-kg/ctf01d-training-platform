@@ -19,7 +19,7 @@ type Team struct {
 	University   *string
 }
 
-func NewTeamFromModel(t *Team) *server.TeamResponse {
+func (t *Team) ToResponse() *server.TeamResponse {
 	var avatarUrl string
 	if t.AvatarUrl.Valid {
 		avatarUrl = t.AvatarUrl.String
@@ -39,7 +39,7 @@ func NewTeamFromModel(t *Team) *server.TeamResponse {
 func NewTeamsFromModels(ts []*Team) []*server.TeamResponse {
 	var teams []*server.TeamResponse
 	for _, t := range ts {
-		teams = append(teams, NewTeamFromModel(t))
+		teams = append(teams, t.ToResponse())
 	}
 	return teams
 }

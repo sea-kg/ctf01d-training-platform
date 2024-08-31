@@ -20,7 +20,7 @@ type User struct {
 	PasswordHash string                 `db:"password_hash" json:"password_hash"`
 }
 
-func NewUserFromModel(u *User) *server.UserResponse {
+func (u *User) ToResponse() *server.UserResponse {
 	userRole := helpers.ConvertUserRequestRoleToUserResponseRole(u.Role)
 	var avatarUrl string
 	if u.AvatarUrl.Valid {
@@ -38,10 +38,10 @@ func NewUserFromModel(u *User) *server.UserResponse {
 	}
 }
 
-func NewUsersFromModels(ms []*User) []*server.UserResponse {
+func NewUsersFromModels(us []*User) []*server.UserResponse {
 	var users []*server.UserResponse
-	for _, m := range ms {
-		users = append(users, NewUserFromModel(m))
+	for _, u := range us {
+		users = append(users, u.ToResponse())
 	}
 	return users
 }

@@ -13,7 +13,7 @@ type Result struct {
 	Score  float64            `db:"score"   json:"score"`
 }
 
-func NewResultFromModel(s *Result, rank int) *server.ResultResponse {
+func (s *Result) ToResponse(rank int) *server.ResultResponse {
 	return &server.ResultResponse{
 		Id:     s.Id,
 		GameId: s.GameId,
@@ -26,7 +26,7 @@ func NewResultFromModel(s *Result, rank int) *server.ResultResponse {
 func NewScoreboardFromResults(ms []*Result) []*server.ResultResponse {
 	var results []*server.ResultResponse
 	for i, r := range ms {
-		results = append(results, NewResultFromModel(r, i+1))
+		results = append(results, r.ToResponse(i+1))
 	}
 	return results
 }

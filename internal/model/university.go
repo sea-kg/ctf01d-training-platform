@@ -11,17 +11,17 @@ type University struct {
 	Name string             `db:"name" json:"name"`
 }
 
-func NewUniversityFromModel(u *University) *server.UniversityResponse {
+func (u *University) ToResponse() *server.UniversityResponse {
 	return &server.UniversityResponse{
 		Id:   u.Id,
 		Name: u.Name,
 	}
 }
 
-func NewUniversitiesFromModels(ms []*University) []*server.UniversityResponse {
+func NewUniversitiesFromModels(us []*University) []*server.UniversityResponse {
 	var universities []*server.UniversityResponse = []*server.UniversityResponse{}
-	for _, m := range ms {
-		universities = append(universities, NewUniversityFromModel(m))
+	for _, u := range us {
+		universities = append(universities, u.ToResponse())
 	}
 	return universities
 }

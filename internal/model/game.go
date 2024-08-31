@@ -20,7 +20,7 @@ type GameDetails struct {
 	Teams []*Team
 }
 
-func NewGameFromModel(m *Game) *server.GameResponse {
+func (m *Game) ToResponse() *server.GameResponse {
 	return &server.GameResponse{
 		Id:          m.Id,
 		StartTime:   m.StartTime,
@@ -29,7 +29,7 @@ func NewGameFromModel(m *Game) *server.GameResponse {
 	}
 }
 
-func NewGameDetailsFromModel(m *GameDetails) *server.GameResponse {
+func (m *GameDetails) ToResponseGameDetails() *server.GameResponse {
 	teams := make([]server.TeamResponse, 0, len(m.Teams))
 	for _, t := range m.Teams {
 		teams = append(teams, server.TeamResponse{
@@ -51,7 +51,7 @@ func NewGameDetailsFromModel(m *GameDetails) *server.GameResponse {
 func NewGamesFromModels(ms []*Game) []*server.GameResponse {
 	var games []*server.GameResponse
 	for _, m := range ms {
-		games = append(games, NewGameFromModel(m))
+		games = append(games, m.ToResponse())
 	}
 	return games
 }

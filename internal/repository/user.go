@@ -4,7 +4,7 @@ import (
 	"context"
 	"database/sql"
 
-	model "ctf01d/internal/model"
+	"ctf01d/internal/model"
 
 	openapi_types "github.com/oapi-codegen/runtime/types"
 )

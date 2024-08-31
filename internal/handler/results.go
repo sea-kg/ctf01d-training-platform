@@ -32,7 +32,7 @@ func (h *Handler) CreateResult(w http.ResponseWriter, r *http.Request, gameId op
 		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to create result"})
 		return
 	}
-	api_helpers.RespondWithJSON(w, http.StatusOK, model.NewResultFromModel(newResult, 0))
+	api_helpers.RespondWithJSON(w, http.StatusOK, newResult.ToResponse(0))
 }
 
 func (h *Handler) GetResult(w http.ResponseWriter, r *http.Request, gameId openapi_types.UUID, resultId openapi_types.UUID) {
@@ -44,7 +44,7 @@ func (h *Handler) GetResult(w http.ResponseWriter, r *http.Request, gameId opena
 		api_helpers.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Failed to fetch result"})
 		return
 	}
-	api_helpers.RespondWithJSON(w, http.StatusOK, model.NewResultFromModel(result, 0))
+	api_helpers.RespondWithJSON(w, http.StatusOK, result.ToResponse(0))
 }
 
 func (h *Handler) UpdateResult(w http.ResponseWriter, r *http.Request, gameId openapi_types.UUID, resultId openapi_types.UUID) {
@@ -69,7 +69,7 @@ func (h *Handler) UpdateResult(w http.ResponseWriter, r *http.Request, gameId op
 		return
 	}
 
-	api_helpers.RespondWithJSON(w, http.StatusOK, model.NewResultFromModel(result, 0))
+	api_helpers.RespondWithJSON(w, http.StatusOK, result.ToResponse(0))
 }
 
 // GetScoreboard retrieves the scoreboard for a given game ID

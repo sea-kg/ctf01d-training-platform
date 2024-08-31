@@ -29,7 +29,11 @@ func DatabaseUpdate_update0020_update0020testdata(db *sql.DB, getInfo bool) (str
 	// Очистка таблицы team_games
 	_, err = tx.Exec(`DELETE FROM team_games`)
 	if err != nil {
-		tx.Rollback()
+		err = tx.Rollback()
+		if err != nil {
+			slog.Error("Failed to rollback: " + err.Error())
+			return fromUpdateId, toUpdateId, description, err
+		}
 		slog.Error("Failed to clear team_games table: " + err.Error())
 		return fromUpdateId, toUpdateId, description, err
 	}
@@ -48,7 +52,11 @@ func DatabaseUpdate_update0020_update0020testdata(db *sql.DB, getInfo bool) (str
 
 	_, err = tx.Exec(query)
 	if err != nil {
-		tx.Rollback()
+		err = tx.Rollback()
+		if err != nil {
+			slog.Error("Failed to rollback: " + err.Error())
+			return fromUpdateId, toUpdateId, description, err
+		}
 		slog.Error("Problem with query execution, query: " + query + "\n   error:" + err.Error())
 		return fromUpdateId, toUpdateId, description, err
 	}
@@ -56,7 +64,11 @@ func DatabaseUpdate_update0020_update0020testdata(db *sql.DB, getInfo bool) (str
 	// Получение существующих команд из базы данных
 	teamRows, err := tx.Query(`SELECT id, name FROM teams`)
 	if err != nil {
-		tx.Rollback()
+		err = tx.Rollback()
+		if err != nil {
+			slog.Error("Failed to rollback: " + err.Error())
+			return fromUpdateId, toUpdateId, description, err
+		}
 		slog.Error("Failed to fetch existing teams: " + err.Error())
 		return fromUpdateId, toUpdateId, description, err
 	}
@@ -70,7 +82,11 @@ func DatabaseUpdate_update0020_update0020testdata(db *sql.DB, getInfo bool) (str
 	for teamRows.Next() {
 		var id, name string
 		if err := teamRows.Scan(&id, &name); err != nil {
-			tx.Rollback()
+			err = tx.Rollback()
+			if err != nil {
+				slog.Error("Failed to rollback: " + err.Error())
+				return fromUpdateId, toUpdateId, description, err
+			}
 			slog.Error("Failed to scan team: " + err.Error())
 			return fromUpdateId, toUpdateId, description, err
 		}
@@ -83,7 +99,11 @@ func DatabaseUpdate_update0020_update0020testdata(db *sql.DB, getInfo bool) (str
 	// Получение существующих игр из базы данных
 	gameRows, err := tx.Query(`SELECT id, description FROM games`)
 	if err != nil {
-		tx.Rollback()
+		err = tx.Rollback()
+		if err != nil {
+			slog.Error("Failed to rollback: " + err.Error())
+			return fromUpdateId, toUpdateId, description, err
+		}
 		slog.Error("Failed to fetch existing games: " + err.Error())
 		return fromUpdateId, toUpdateId, description, err
 	}
@@ -97,7 +117,11 @@ func DatabaseUpdate_update0020_update0020testdata(db *sql.DB, getInfo bool) (str
 	for gameRows.Next() {
 		var id, description string
 		if err := gameRows.Scan(&id, &description); err != nil {
-			tx.Rollback()
+			err = tx.Rollback()
+			if err != nil {
+				slog.Error("Failed to rollback: " + err.Error())
+				return fromUpdateId, toUpdateId, description, err
+			}
 			slog.Error("Failed to scan game: " + err.Error())
 			return fromUpdateId, toUpdateId, description, err
 		}
@@ -113,7 +137,11 @@ func DatabaseUpdate_update0020_update0020testdata(db *sql.DB, getInfo bool) (str
 			_, err = tx.Exec(`INSERT INTO results (score, rank, id, team_id, game_id) VALUES ($1, $2, $3, $4, $5)`,
 				score, rank+1, uuid.New().String(), team.ID, game.ID)
 			if err != nil {
-				tx.Rollback()
+				err = tx.Rollback()
+				if err != nil {
+					slog.Error("Failed to rollback: " + err.Error())
+					return fromUpdateId, toUpdateId, description, err
+				}
 				slog.Error("Failed to insert result: " + err.Error())
 				return fromUpdateId, toUpdateId, description, err
 			}
@@ -122,7 +150,11 @@ func DatabaseUpdate_update0020_update0020testdata(db *sql.DB, getInfo bool) (str
 			_, err = tx.Exec(`INSERT INTO team_games (team_id, game_id) VALUES ($1, $2)`,
 				team.ID, game.ID)
 			if err != nil {
-				tx.Rollback()
+				err = tx.Rollback()
+				if err != nil {
+					slog.Error("Failed to rollback: " + err.Error())
+					return fromUpdateId, toUpdateId, description, err
+				}
 				slog.Error("Failed to insert team_game: " + err.Error())
 				return fromUpdateId, toUpdateId, description, err
 			}

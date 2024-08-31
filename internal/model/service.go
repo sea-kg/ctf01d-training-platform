@@ -18,7 +18,7 @@ type Service struct {
 	IsPublic    bool               `db:"is_public"   json:"is_public"`
 }
 
-func NewServiceFromModel(s *Service) *server.ServiceResponse {
+func (s *Service) ToResponse() *server.ServiceResponse {
 	var logo string
 	if s.LogoUrl.Valid {
 		logo = s.LogoUrl.String
@@ -38,7 +38,7 @@ func NewServiceFromModel(s *Service) *server.ServiceResponse {
 func NewServiceFromModels(ms []*Service) []*server.ServiceResponse {
 	var services []*server.ServiceResponse
 	for _, s := range ms {
-		services = append(services, NewServiceFromModel(s))
+		services = append(services, s.ToResponse())
 	}
 	return services
 }

@@ -28,7 +28,7 @@ type ProfileWithHistory struct {
 	History []ProfileTeams
 }
 
-func NewProfileFromModel(p *ProfileWithHistory) *server.ProfileResponse {
+func (p *ProfileWithHistory) ToResponse() *server.ProfileResponse {
 	return &server.ProfileResponse{
 		Id:          p.Profile.Id,
 		CreatedAt:   p.Profile.CreatedAt,

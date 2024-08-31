@@ -38,7 +38,7 @@ func (h *Handler) CreateGame(w http.ResponseWriter, r *http.Request) {
 		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to create game"})
 		return
 	}
-	api_helpers.RespondWithJSON(w, http.StatusOK, model.NewGameFromModel(newGame))
+	api_helpers.RespondWithJSON(w, http.StatusOK, newGame.ToResponse())
 }
 
 func (h *Handler) DeleteGame(w http.ResponseWriter, r *http.Request, id openapi_types.UUID) {
@@ -59,7 +59,7 @@ func (h *Handler) GetGameById(w http.ResponseWriter, r *http.Request, id openapi
 		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to fetch game"})
 		return
 	}
-	api_helpers.RespondWithJSON(w, http.StatusOK, model.NewGameDetailsFromModel(game))
+	api_helpers.RespondWithJSON(w, http.StatusOK, game.ToResponseGameDetails())
 }
 
 func (h *Handler) ListGames(w http.ResponseWriter, r *http.Request) {
@@ -72,7 +72,7 @@ func (h *Handler) ListGames(w http.ResponseWriter, r *http.Request) {
 	}
 	gameResponses := make([]*server.GameResponse, 0, len(games))
 	for _, game := range games {
-		gameResponses = append(gameResponses, model.NewGameDetailsFromModel(game))
+		gameResponses = append(gameResponses, game.ToResponseGameDetails())
 	}
 
 	api_helpers.RespondWithJSON(w, http.StatusOK, gameResponses)

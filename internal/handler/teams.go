@@ -36,7 +36,7 @@ func (h *Handler) CreateTeam(w http.ResponseWriter, r *http.Request) {
 		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to create team"})
 		return
 	}
-	api_helpers.RespondWithJSON(w, http.StatusOK, model.NewTeamFromModel(newTeam))
+	api_helpers.RespondWithJSON(w, http.StatusOK, newTeam.ToResponse())
 }
 
 func (h *Handler) DeleteTeam(w http.ResponseWriter, r *http.Request, id openapi_types.UUID) {
@@ -57,7 +57,7 @@ func (h *Handler) GetTeamById(w http.ResponseWriter, r *http.Request, id openapi
 		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to fetch team"})
 		return
 	}
-	api_helpers.RespondWithJSON(w, http.StatusOK, model.NewTeamFromModel(team))
+	api_helpers.RespondWithJSON(w, http.StatusOK, team.ToResponse())
 }
 
 func (h *Handler) ListTeams(w http.ResponseWriter, r *http.Request) {
