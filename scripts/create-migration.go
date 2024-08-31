@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
 	"log"
+	"os"
 	"path/filepath"
 	"regexp"
 	"strconv"
@@ -11,7 +11,7 @@ import (
 
 func main() {
 	dir := "./internal/app/migrations/psql/"
-	files, err := ioutil.ReadDir(dir)
+	files, err := os.ReadDir(dir)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -64,7 +64,7 @@ func DatabaseUpdate_update%04d_update%04d(db *sql.DB, getInfo bool) (string, str
 }
 `, maxUpdate, nextUpdate)
 
-	err = ioutil.WriteFile(newFilePath, []byte(template), 0o644)
+	err = os.WriteFile(newFilePath, []byte(template), 0o644)
 	if err != nil {
 		log.Fatal(err)
 	}

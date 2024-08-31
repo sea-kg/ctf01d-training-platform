@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"log/slog"
 	"net/http"
 
 	"ctf01d/internal/app/server"
@@ -26,5 +27,8 @@ func (h *Handlers) UniqueAvatar(w http.ResponseWriter, r *http.Request, username
 	imageBytes := avatar.GenerateAvatar(username, xMax, yMax, blockSize, steps)
 
 	w.Header().Set("Content-Type", "image/png")
-	w.Write(imageBytes)
+	_, err := w.Write(imageBytes)
+	if err != nil {
+		slog.Warn(err.Error(), "handler", "UniqueAvatar	")
+	}
 }

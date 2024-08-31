@@ -36,7 +36,12 @@ func TestMain(m *testing.M) {
 	if err != nil {
 		panic(err)
 	}
-	NewTestRouter()
+
+	_, err = NewTestRouter()
+	if err != nil {
+		panic(err)
+	}
+
 	code := m.Run()
 	db.Close()
 	os.Exit(code)
