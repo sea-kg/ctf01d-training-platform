@@ -6,7 +6,7 @@ lint:
 	if ! [ -x "$$(command -v golangci-lint)" ]; then \
 		docker run --rm -v $(PWD):/app -w /app golangci/golangci-lint:latest golangci-lint run -v; \
 	else \
-		golangci-lint run; \
+		golangci-lint run --config configs/golangci/golangci.yml; \
 	fi
 
 # Install requirements
