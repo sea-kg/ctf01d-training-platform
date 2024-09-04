@@ -4,11 +4,11 @@ import (
 	"log/slog"
 	"net/http"
 
-	"ctf01d/internal/server"
+	"ctf01d/internal/httpserver"
 	"ctf01d/pkg/avatar"
 )
 
-func (h *Handler) UniqueAvatar(w http.ResponseWriter, r *http.Request, username string, params server.UniqueAvatarParams) {
+func (h *Handler) UniqueAvatar(w http.ResponseWriter, r *http.Request, username string, params httpserver.UniqueAvatarParams) {
 	xMax := 100
 	yMax := 100
 	if params.Max != nil {

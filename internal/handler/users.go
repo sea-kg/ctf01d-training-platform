@@ -6,15 +6,15 @@ import (
 	"net/http"
 
 	"ctf01d/internal/helper"
+	"ctf01d/internal/httpserver"
 	"ctf01d/internal/model"
 	"ctf01d/internal/repository"
-	"ctf01d/internal/server"
 	openapi_types "github.com/oapi-codegen/runtime/types"
 )
 
 func (h *Handler) CreateUser(w http.ResponseWriter, r *http.Request) {
 	// fixme обернуть в транзакцию, т.к. две вставки подряд
-	var user server.UserRequest
+	var user httpserver.UserRequest
 	if err := json.NewDecoder(r.Body).Decode(&user); err != nil {
 		slog.Warn(err.Error(), "handler", "CreateUserHandler")
 		helper.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Invalid request payload"})
@@ -95,7 +95,7 @@ func (h *Handler) ListUsers(w http.ResponseWriter, r *http.Request) {
 
 func (h *Handler) UpdateUser(w http.ResponseWriter, r *http.Request, id openapi_types.UUID) {
 	// fixme update не проверяет есть ли запись в бд
-	var user server.UserRequest
+	var user httpserver.UserRequest
 	if err := json.NewDecoder(r.Body).Decode(&user); err != nil {
 		slog.Warn(err.Error(), "handler", "UpdateUserHandler")
 		helper.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Invalid request payload"})

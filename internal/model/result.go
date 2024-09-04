@@ -1,7 +1,7 @@
 package model
 
 import (
-	"ctf01d/internal/server"
+	"ctf01d/internal/httpserver"
 	openapi_types "github.com/oapi-codegen/runtime/types"
 )
 
@@ -12,8 +12,8 @@ type Result struct {
 	Score  float64            `db:"score"   json:"score"`
 }
 
-func (s *Result) ToResponse(rank int) *server.ResultResponse {
-	return &server.ResultResponse{
+func (s *Result) ToResponse(rank int) *httpserver.ResultResponse {
+	return &httpserver.ResultResponse{
 		Id:     s.Id,
 		GameId: s.GameId,
 		Rank:   rank,
@@ -22,8 +22,8 @@ func (s *Result) ToResponse(rank int) *server.ResultResponse {
 	}
 }
 
-func NewScoreboardFromResults(ms []*Result) []*server.ResultResponse {
-	var results []*server.ResultResponse
+func NewScoreboardFromResults(ms []*Result) []*httpserver.ResultResponse {
+	var results []*httpserver.ResultResponse
 	for i, r := range ms {
 		results = append(results, r.ToResponse(i+1))
 	}

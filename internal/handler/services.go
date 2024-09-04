@@ -6,14 +6,14 @@ import (
 	"net/http"
 
 	"ctf01d/internal/helper"
+	"ctf01d/internal/httpserver"
 	"ctf01d/internal/model"
 	"ctf01d/internal/repository"
-	"ctf01d/internal/server"
 	openapi_types "github.com/oapi-codegen/runtime/types"
 )
 
 func (h *Handler) CreateService(w http.ResponseWriter, r *http.Request) {
-	var service server.ServiceRequest
+	var service httpserver.ServiceRequest
 	var err error
 	if err := json.NewDecoder(r.Body).Decode(&service); err != nil {
 		slog.Warn(err.Error(), "handler", "CreateServiceHandler")
@@ -69,7 +69,7 @@ func (h *Handler) ListServices(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *Handler) UpdateService(w http.ResponseWriter, r *http.Request, id openapi_types.UUID) {
-	var sr server.ServiceRequest
+	var sr httpserver.ServiceRequest
 	if err := json.NewDecoder(r.Body).Decode(&sr); err != nil {
 		slog.Warn(err.Error(), "handler", "UpdateService")
 		helper.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Invalid request payload"})

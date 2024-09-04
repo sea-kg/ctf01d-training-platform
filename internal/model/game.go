@@ -3,7 +3,7 @@ package model
 import (
 	"time"
 
-	"ctf01d/internal/server"
+	"ctf01d/internal/httpserver"
 	openapi_types "github.com/oapi-codegen/runtime/types"
 )
 
@@ -19,8 +19,8 @@ type GameDetails struct {
 	Teams []*Team
 }
 
-func (m *Game) ToResponse() *server.GameResponse {
-	return &server.GameResponse{
+func (m *Game) ToResponse() *httpserver.GameResponse {
+	return &httpserver.GameResponse{
 		Id:          m.Id,
 		StartTime:   m.StartTime,
 		EndTime:     m.EndTime,
@@ -28,17 +28,17 @@ func (m *Game) ToResponse() *server.GameResponse {
 	}
 }
 
-func (m *GameDetails) ToResponseGameDetails() *server.GameResponse {
-	teams := make([]server.TeamResponse, 0, len(m.Teams))
+func (m *GameDetails) ToResponseGameDetails() *httpserver.GameResponse {
+	teams := make([]httpserver.TeamResponse, 0, len(m.Teams))
 	for _, t := range m.Teams {
-		teams = append(teams, server.TeamResponse{
+		teams = append(teams, httpserver.TeamResponse{
 			Id:          t.Id,
 			Name:        t.Name,
 			Description: &t.Description,
 		})
 	}
 
-	return &server.GameResponse{
+	return &httpserver.GameResponse{
 		Id:          m.Id,
 		StartTime:   m.StartTime,
 		EndTime:     m.EndTime,
@@ -47,8 +47,8 @@ func (m *GameDetails) ToResponseGameDetails() *server.GameResponse {
 	}
 }
 
-func NewGamesFromModels(ms []*Game) []*server.GameResponse {
-	var games []*server.GameResponse
+func NewGamesFromModels(ms []*Game) []*httpserver.GameResponse {
+	var games []*httpserver.GameResponse
 	for _, m := range ms {
 		games = append(games, m.ToResponse())
 	}

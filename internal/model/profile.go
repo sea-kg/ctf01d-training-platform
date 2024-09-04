@@ -3,7 +3,7 @@ package model
 import (
 	"time"
 
-	"ctf01d/internal/server"
+	"ctf01d/internal/httpserver"
 	openapi_types "github.com/oapi-codegen/runtime/types"
 )
 
@@ -27,25 +27,25 @@ type ProfileWithHistory struct {
 	History []ProfileTeams
 }
 
-func (p *ProfileWithHistory) ToResponse() *server.ProfileResponse {
-	return &server.ProfileResponse{
+func (p *ProfileWithHistory) ToResponse() *httpserver.ProfileResponse {
+	return &httpserver.ProfileResponse{
 		Id:          p.Profile.Id,
 		CreatedAt:   p.Profile.CreatedAt,
 		UpdatedAt:   &p.Profile.UpdatedAt,
 		TeamName:    p.Profile.CurrentTeam,
-		TeamRole:    server.ProfileResponseTeamRole(p.Profile.Role),
+		TeamRole:    httpserver.ProfileResponseTeamRole(p.Profile.Role),
 		TeamHistory: makeTeamHistory(p.History),
 	}
 }
 
-func makeTeamHistory(tms []ProfileTeams) *[]server.TeamHistory {
-	out := []server.TeamHistory{}
+func makeTeamHistory(tms []ProfileTeams) *[]httpserver.TeamHistory {
+	out := []httpserver.TeamHistory{}
 	for _, tm := range tms {
-		out = append(out, server.TeamHistory{
+		out = append(out, httpserver.TeamHistory{
 			Join: tm.JoinedAt,
 			Left: tm.LeftAt,
 			Name: tm.Name,
-			Role: server.TeamHistoryRole(tm.Role),
+			Role: httpserver.TeamHistoryRole(tm.Role),
 		})
 	}
 	return &out

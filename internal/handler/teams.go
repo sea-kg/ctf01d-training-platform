@@ -6,15 +6,15 @@ import (
 	"net/http"
 
 	"ctf01d/internal/helper"
+	"ctf01d/internal/httpserver"
 	"ctf01d/internal/model"
 	"ctf01d/internal/repository"
-	"ctf01d/internal/server"
 	openapi_types "github.com/oapi-codegen/runtime/types"
 )
 
 func (h *Handler) CreateTeam(w http.ResponseWriter, r *http.Request) {
 	// fixme - создание команды через апрупы - нужен стейт
-	var team server.TeamRequest
+	var team httpserver.TeamRequest
 	var err error
 	if err := json.NewDecoder(r.Body).Decode(&team); err != nil {
 		slog.Warn(err.Error(), "handler", "CreateTeamHandler")
@@ -71,7 +71,7 @@ func (h *Handler) ListTeams(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *Handler) UpdateTeam(w http.ResponseWriter, r *http.Request, id openapi_types.UUID) {
-	var team server.TeamRequest
+	var team httpserver.TeamRequest
 	if err := json.NewDecoder(r.Body).Decode(&team); err != nil {
 		slog.Warn(err.Error(), "handler", "UpdateTeamHandler")
 		helper.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Invalid request payload"})

@@ -4,7 +4,7 @@ import (
 	"database/sql"
 
 	"ctf01d/internal/helper"
-	"ctf01d/internal/server"
+	"ctf01d/internal/httpserver"
 	openapi_types "github.com/oapi-codegen/runtime/types"
 )
 
@@ -17,14 +17,14 @@ type Service struct {
 	IsPublic    bool               `db:"is_public"   json:"is_public"`
 }
 
-func (s *Service) ToResponse() *server.ServiceResponse {
+func (s *Service) ToResponse() *httpserver.ServiceResponse {
 	var logo string
 	if s.LogoUrl.Valid {
 		logo = s.LogoUrl.String
 	} else {
 		logo = helper.WithDefault(s.Name)
 	}
-	return &server.ServiceResponse{
+	return &httpserver.ServiceResponse{
 		Id:          s.Id,
 		Name:        s.Name,
 		Author:      s.Author,
@@ -34,8 +34,8 @@ func (s *Service) ToResponse() *server.ServiceResponse {
 	}
 }
 
-func NewServiceFromModels(ms []*Service) []*server.ServiceResponse {
-	var services []*server.ServiceResponse
+func NewServiceFromModels(ms []*Service) []*httpserver.ServiceResponse {
+	var services []*httpserver.ServiceResponse
 	for _, s := range ms {
 		services = append(services, s.ToResponse())
 	}

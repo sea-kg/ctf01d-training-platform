@@ -12,8 +12,8 @@ import (
 
 	"ctf01d/internal/config"
 	"ctf01d/internal/handler"
+	"ctf01d/internal/httpserver"
 	migration "ctf01d/internal/migrations/psql"
-	"ctf01d/internal/server"
 	"github.com/go-chi/chi/v5"
 	"github.com/jaswdr/faker"
 	_ "github.com/lib/pq"
@@ -52,8 +52,8 @@ func NewTestRouter() (http.Handler, error) {
 	svr := handler.NewServerInterfaceWrapper(h)
 
 	r = chi.NewRouter()
-	r.Mount("/api/", server.HandlerFromMux(svr, r))
-	r.Mount("/", http.HandlerFunc(server.NewHtmlRouter))
+	r.Mount("/api/", httpserver.HandlerFromMux(svr, r))
+	r.Mount("/", http.HandlerFunc(httpserver.NewHtmlRouter))
 
 	return r, nil
 }

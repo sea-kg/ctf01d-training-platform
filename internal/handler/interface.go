@@ -3,7 +3,7 @@ package handler
 import (
 	"net/http"
 
-	"ctf01d/internal/server"
+	"ctf01d/internal/httpserver"
 	openapi_types "github.com/oapi-codegen/runtime/types"
 )
 
@@ -120,7 +120,7 @@ func (siw *ServerInterfaceWrapper) TeamMembers(w http.ResponseWriter, r *http.Re
 	siw.handlers.TeamMembers(w, r, teamId)
 }
 
-func (siw *ServerInterfaceWrapper) ListUniversities(w http.ResponseWriter, r *http.Request, params server.ListUniversitiesParams) {
+func (siw *ServerInterfaceWrapper) ListUniversities(w http.ResponseWriter, r *http.Request, params httpserver.ListUniversitiesParams) {
 	siw.handlers.ListUniversities(w, r, params)
 }
 
@@ -156,6 +156,6 @@ func (siw *ServerInterfaceWrapper) UploadService(w http.ResponseWriter, r *http.
 	siw.handlers.UploadService(w, r, id)
 }
 
-func (siw *ServerInterfaceWrapper) UniqueAvatar(w http.ResponseWriter, r *http.Request, username string, params server.UniqueAvatarParams) {
+func (siw *ServerInterfaceWrapper) UniqueAvatar(w http.ResponseWriter, r *http.Request, username string, params httpserver.UniqueAvatarParams) {
 	siw.handlers.UniqueAvatar(w, r, username, params)
 }

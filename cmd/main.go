@@ -7,8 +7,8 @@ import (
 
 	"ctf01d/internal/config"
 	"ctf01d/internal/handler"
+	"ctf01d/internal/httpserver"
 	migration "ctf01d/internal/migrations/psql"
-	"ctf01d/internal/server"
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/cors"
 	_ "github.com/lib/pq"
@@ -57,8 +57,8 @@ func main() {
 	}
 	svr := handler.NewServerInterfaceWrapper(hndlr)
 
-	router.Mount("/api/", server.HandlerFromMux(svr, router))
-	router.Mount("/", http.HandlerFunc(server.NewHtmlRouter))
+	router.Mount("/api/", httpserver.HandlerFromMux(svr, router))
+	router.Mount("/", http.HandlerFunc(httpserver.NewHtmlRouter))
 
 	slog.Info("Server run on", slog.String("host", cfg.HTTP.Host), slog.String("port", cfg.HTTP.Port))
 	err = http.ListenAndServe(cfg.HTTP.Host+":"+cfg.HTTP.Port, router)

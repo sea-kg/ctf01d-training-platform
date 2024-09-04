@@ -7,7 +7,7 @@ import (
 	"net/http"
 	"net/url"
 
-	"ctf01d/internal/server"
+	"ctf01d/internal/httpserver"
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -57,40 +57,40 @@ func RespondWithJSON(w http.ResponseWriter, code int, payload interface{}) {
 	}
 }
 
-func ConvertUserRequestRoleToUserResponseRole(role server.UserRequestRole) server.UserResponseRole {
+func ConvertUserRequestRoleToUserResponseRole(role httpserver.UserRequestRole) httpserver.UserResponseRole {
 	switch role {
-	case server.UserRequestRoleAdmin:
-		return server.UserResponseRoleAdmin
-	case server.UserRequestRoleGuest:
-		return server.UserResponseRoleGuest
-	case server.UserRequestRolePlayer:
-		return server.UserResponseRolePlayer
+	case httpserver.UserRequestRoleAdmin:
+		return httpserver.UserResponseRoleAdmin
+	case httpserver.UserRequestRoleGuest:
+		return httpserver.UserResponseRoleGuest
+	case httpserver.UserRequestRolePlayer:
+		return httpserver.UserResponseRolePlayer
 	default:
 		return ""
 	}
 }
 
-func ConvertUserRequestRoleToString(role server.UserRequestRole) string {
+func ConvertUserRequestRoleToString(role httpserver.UserRequestRole) string {
 	switch role {
-	case server.UserRequestRoleAdmin:
+	case httpserver.UserRequestRoleAdmin:
 		return "admin"
-	case server.UserRequestRoleGuest:
+	case httpserver.UserRequestRoleGuest:
 		return "guest"
-	case server.UserRequestRolePlayer:
+	case httpserver.UserRequestRolePlayer:
 		return "player"
 	default:
 		return ""
 	}
 }
 
-func ConvertUserResponseRoleToUserRequestRole(role server.UserResponseRole) server.UserRequestRole {
+func ConvertUserResponseRoleToUserRequestRole(role httpserver.UserResponseRole) httpserver.UserRequestRole {
 	switch role {
-	case server.UserResponseRoleAdmin:
-		return server.UserRequestRoleAdmin
-	case server.UserResponseRoleGuest:
-		return server.UserRequestRoleGuest
-	case server.UserResponseRolePlayer:
-		return server.UserRequestRolePlayer
+	case httpserver.UserResponseRoleAdmin:
+		return httpserver.UserRequestRoleAdmin
+	case httpserver.UserResponseRoleGuest:
+		return httpserver.UserRequestRoleGuest
+	case httpserver.UserResponseRolePlayer:
+		return httpserver.UserRequestRolePlayer
 	default:
 		return ""
 	}

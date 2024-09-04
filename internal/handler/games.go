@@ -6,14 +6,14 @@ import (
 	"net/http"
 
 	"ctf01d/internal/helper"
+	"ctf01d/internal/httpserver"
 	"ctf01d/internal/model"
 	"ctf01d/internal/repository"
-	"ctf01d/internal/server"
 	openapi_types "github.com/oapi-codegen/runtime/types"
 )
 
 func (h *Handler) CreateGame(w http.ResponseWriter, r *http.Request) {
-	var game server.GameRequest
+	var game httpserver.GameRequest
 	var err error
 	if err := json.NewDecoder(r.Body).Decode(&game); err != nil {
 		slog.Warn(err.Error(), "handler", "CreateGame")
@@ -69,7 +69,7 @@ func (h *Handler) ListGames(w http.ResponseWriter, r *http.Request) {
 		helper.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Failed to fetch games"})
 		return
 	}
-	gameResponses := make([]*server.GameResponse, 0, len(games))
+	gameResponses := make([]*httpserver.GameResponse, 0, len(games))
 	for _, game := range games {
 		gameResponses = append(gameResponses, game.ToResponseGameDetails())
 	}
@@ -79,7 +79,7 @@ func (h *Handler) ListGames(w http.ResponseWriter, r *http.Request) {
 
 func (h *Handler) UpdateGame(w http.ResponseWriter, r *http.Request, id openapi_types.UUID) {
 	// fixme update не проверяет есть ли запись в бд
-	var game server.GameRequest
+	var game httpserver.GameRequest
 	if err := json.NewDecoder(r.Body).Decode(&game); err != nil {
 		slog.Warn(err.Error(), "handler", "UpdateGame")
 		helper.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Invalid request payload"})

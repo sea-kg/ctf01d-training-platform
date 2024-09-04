@@ -5,12 +5,12 @@ import (
 	"net/http"
 
 	"ctf01d/internal/helper"
+	"ctf01d/internal/httpserver"
 	"ctf01d/internal/model"
 	"ctf01d/internal/repository"
-	"ctf01d/internal/server"
 )
 
-func (h *Handler) ListUniversities(w http.ResponseWriter, r *http.Request, params server.ListUniversitiesParams) {
+func (h *Handler) ListUniversities(w http.ResponseWriter, r *http.Request, params httpserver.ListUniversitiesParams) {
 	queryParam := r.URL.Query().Get("term")
 
 	repo := repository.NewUniversityRepository(h.DB)

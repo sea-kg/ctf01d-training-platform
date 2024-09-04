@@ -6,14 +6,14 @@ import (
 	"net/http"
 
 	"ctf01d/internal/helper"
+	"ctf01d/internal/httpserver"
 	"ctf01d/internal/repository"
-	"ctf01d/internal/server"
 	"ctf01d/internal/view"
 	openapi_types "github.com/oapi-codegen/runtime/types"
 )
 
 func (h *Handler) SignInUser(w http.ResponseWriter, r *http.Request) {
-	var req server.SignInUserJSONBody
+	var req httpserver.SignInUserJSONBody
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
 		slog.Warn(err.Error(), "handler", "SignInUser")
 		http.Error(w, "Invalid request body", http.StatusBadRequest)

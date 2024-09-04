@@ -4,7 +4,7 @@ import (
 	"database/sql"
 
 	"ctf01d/internal/helper"
-	"ctf01d/internal/server"
+	"ctf01d/internal/httpserver"
 	openapi_types "github.com/oapi-codegen/runtime/types"
 )
 
@@ -18,14 +18,14 @@ type Team struct {
 	University   *string
 }
 
-func (t *Team) ToResponse() *server.TeamResponse {
+func (t *Team) ToResponse() *httpserver.TeamResponse {
 	var avatarUrl string
 	if t.AvatarUrl.Valid {
 		avatarUrl = t.AvatarUrl.String
 	} else {
 		avatarUrl = helper.WithDefault(t.Name)
 	}
-	return &server.TeamResponse{
+	return &httpserver.TeamResponse{
 		Id:          t.Id,
 		Name:        t.Name,
 		Description: &t.Description,
@@ -35,8 +35,8 @@ func (t *Team) ToResponse() *server.TeamResponse {
 	}
 }
 
-func NewTeamsFromModels(ts []*Team) []*server.TeamResponse {
-	var teams []*server.TeamResponse
+func NewTeamsFromModels(ts []*Team) []*httpserver.TeamResponse {
+	var teams []*httpserver.TeamResponse
 	for _, t := range ts {
 		teams = append(teams, t.ToResponse())
 	}
