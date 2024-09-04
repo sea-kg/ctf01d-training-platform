@@ -3,9 +3,9 @@ package model
 import (
 	"time"
 
-	"ctf01d/internal/server"
-
 	openapi_types "github.com/oapi-codegen/runtime/types"
+
+	"ctf01d/internal/server"
 )
 
 type Game struct {

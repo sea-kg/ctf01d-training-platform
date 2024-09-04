@@ -5,12 +5,12 @@ import (
 	"log/slog"
 	"net/http"
 
+	openapi_types "github.com/oapi-codegen/runtime/types"
+
+	"ctf01d/internal/helper"
 	"ctf01d/internal/model"
 	"ctf01d/internal/repository"
 	"ctf01d/internal/server"
-	api_helpers "ctf01d/internal/utils"
-
-	openapi_types "github.com/oapi-codegen/runtime/types"
 )
 
 func (h *Handler) CreateGame(w http.ResponseWriter, r *http.Request) {
@@ -18,11 +18,11 @@ func (h *Handler) CreateGame(w http.ResponseWriter, r *http.Request) {
 	var err error
 	if err := json.NewDecoder(r.Body).Decode(&game); err != nil {
 		slog.Warn(err.Error(), "handler", "CreateGame")
-		api_helpers.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Invalid request payload"})
+		helper.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Invalid request payload"})
 		return
 	}
 	if game.EndTime.Before(game.StartTime) {
-		api_helpers.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "EndTime must be after StartTime"})
+		helper.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "EndTime must be after StartTime"})
 		return
 	}
 	repo := repository.NewGameRepository(h.DB)
@@ -35,20 +35,20 @@ func (h *Handler) CreateGame(w http.ResponseWriter, r *http.Request) {
 	err = repo.Create(r.Context(), newGame)
 	if err != nil {
 		slog.Warn(err.Error(), "handler", "CreateGame")
-		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to create game"})
+		helper.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to create game"})
 		return
 	}
-	api_helpers.RespondWithJSON(w, http.StatusOK, newGame.ToResponse())
+	helper.RespondWithJSON(w, http.StatusOK, newGame.ToResponse())
 }
 
 func (h *Handler) DeleteGame(w http.ResponseWriter, r *http.Request, id openapi_types.UUID) {
 	repo := repository.NewGameRepository(h.DB)
 	if err := repo.Delete(r.Context(), id); err != nil {
 		slog.Warn(err.Error(), "handler", "DeleteGame")
-		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to delete game"})
+		helper.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to delete game"})
 		return
 	}
-	api_helpers.RespondWithJSON(w, http.StatusOK, map[string]string{"data": "Game deleted successfully"})
+	helper.RespondWithJSON(w, http.StatusOK, map[string]string{"data": "Game deleted successfully"})
 }
 
 func (h *Handler) GetGameById(w http.ResponseWriter, r *http.Request, id openapi_types.UUID) {
@@ -56,10 +56,10 @@ func (h *Handler) GetGameById(w http.ResponseWriter, r *http.Request, id openapi
 	game, err := repo.GetGameDetails(r.Context(), id) // короткий ответ, если нужен см. GetById
 	if err != nil {
 		slog.Warn(err.Error(), "handler", "GetGameById")
-		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to fetch game"})
+		helper.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Failed to fetch game"})
 		return
 	}
-	api_helpers.RespondWithJSON(w, http.StatusOK, game.ToResponseGameDetails())
+	helper.RespondWithJSON(w, http.StatusOK, game.ToResponseGameDetails())
 }
 
 func (h *Handler) ListGames(w http.ResponseWriter, r *http.Request) {
@@ -67,7 +67,7 @@ func (h *Handler) ListGames(w http.ResponseWriter, r *http.Request) {
 	games, err := repo.ListGamesDetails(r.Context())
 	if err != nil {
 		slog.Warn(err.Error(), "handler", "ListGames")
-		api_helpers.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Failed to fetch games"})
+		helper.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Failed to fetch games"})
 		return
 	}
 	gameResponses := make([]*server.GameResponse, 0, len(games))
@@ -75,7 +75,7 @@ func (h *Handler) ListGames(w http.ResponseWriter, r *http.Request) {
 		gameResponses = append(gameResponses, game.ToResponseGameDetails())
 	}
 
-	api_helpers.RespondWithJSON(w, http.StatusOK, gameResponses)
+	helper.RespondWithJSON(w, http.StatusOK, gameResponses)
 }
 
 func (h *Handler) UpdateGame(w http.ResponseWriter, r *http.Request, id openapi_types.UUID) {
@@ -83,7 +83,7 @@ func (h *Handler) UpdateGame(w http.ResponseWriter, r *http.Request, id openapi_
 	var game server.GameRequest
 	if err := json.NewDecoder(r.Body).Decode(&game); err != nil {
 		slog.Warn(err.Error(), "handler", "UpdateGame")
-		api_helpers.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Invalid request payload"})
+		helper.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Invalid request payload"})
 		return
 	}
 	repo := repository.NewGameRepository(h.DB)
@@ -96,8 +96,8 @@ func (h *Handler) UpdateGame(w http.ResponseWriter, r *http.Request, id openapi_
 	err := repo.Update(r.Context(), updateGame)
 	if err != nil {
 		slog.Warn(err.Error(), "handler", "UpdateGame")
-		api_helpers.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Invalid request payload"})
+		helper.RespondWithJSON(w, http.StatusInternalServerError, map[string]string{"error": "Invalid request payload"})
 		return
 	}
-	api_helpers.RespondWithJSON(w, http.StatusOK, map[string]string{"data": "Game updated successfully"})
+	helper.RespondWithJSON(w, http.StatusOK, map[string]string{"data": "Game updated successfully"})
 }

@@ -3,10 +3,10 @@ package model
 import (
 	"database/sql"
 
-	"ctf01d/internal/server"
-	helpers "ctf01d/internal/utils"
-
 	openapi_types "github.com/oapi-codegen/runtime/types"
+
+	"ctf01d/internal/helper"
+	"ctf01d/internal/server"
 )
 
 type Team struct {
@@ -24,7 +24,7 @@ func (t *Team) ToResponse() *server.TeamResponse {
 	if t.AvatarUrl.Valid {
 		avatarUrl = t.AvatarUrl.String
 	} else {
-		avatarUrl = helpers.WithDefault(t.Name)
+		avatarUrl = helper.WithDefault(t.Name)
 	}
 	return &server.TeamResponse{
 		Id:          t.Id,

@@ -5,10 +5,10 @@ import (
 	"database/sql"
 	"time"
 
-	"ctf01d/internal/model"
-
 	"github.com/google/uuid"
 	openapi_types "github.com/oapi-codegen/runtime/types"
+
+	"ctf01d/internal/model"
 )
 
 type GameRepository interface {

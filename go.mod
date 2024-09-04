@@ -11,6 +11,7 @@ require (
 	github.com/jaswdr/faker/v2 v2.3.0
 	github.com/lib/pq v1.2.0
 	github.com/oapi-codegen/runtime v1.1.1
+	go.uber.org/automaxprocs v1.5.3
 	golang.org/x/crypto v0.24.0
 )
 

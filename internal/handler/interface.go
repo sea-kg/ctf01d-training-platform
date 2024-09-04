@@ -3,9 +3,9 @@ package handler
 import (
 	"net/http"
 
-	"ctf01d/internal/server"
-
 	openapi_types "github.com/oapi-codegen/runtime/types"
+
+	"ctf01d/internal/server"
 )
 
 // ServerInterfaceWrapper wraps Handler to conform to the generated interface

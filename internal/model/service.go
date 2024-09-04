@@ -3,10 +3,10 @@ package model
 import (
 	"database/sql"
 
-	"ctf01d/internal/server"
-	helpers "ctf01d/internal/utils"
-
 	openapi_types "github.com/oapi-codegen/runtime/types"
+
+	"ctf01d/internal/helper"
+	"ctf01d/internal/server"
 )
 
 type Service struct {
@@ -23,7 +23,7 @@ func (s *Service) ToResponse() *server.ServiceResponse {
 	if s.LogoUrl.Valid {
 		logo = s.LogoUrl.String
 	} else {
-		logo = helpers.WithDefault(s.Name)
+		logo = helper.WithDefault(s.Name)
 	}
 	return &server.ServiceResponse{
 		Id:          s.Id,

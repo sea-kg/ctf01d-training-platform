@@ -3,11 +3,10 @@ package model
 import (
 	"database/sql"
 
-	"ctf01d/internal/server"
-
-	helpers "ctf01d/internal/utils"
-
 	openapi_types "github.com/oapi-codegen/runtime/types"
+
+	"ctf01d/internal/helper"
+	"ctf01d/internal/server"
 )
 
 type User struct {
@@ -21,12 +20,12 @@ type User struct {
 }
 
 func (u *User) ToResponse() *server.UserResponse {
-	userRole := helpers.ConvertUserRequestRoleToUserResponseRole(u.Role)
+	userRole := helper.ConvertUserRequestRoleToUserResponseRole(u.Role)
 	var avatarUrl string
 	if u.AvatarUrl.Valid {
 		avatarUrl = u.AvatarUrl.String
 	} else {
-		avatarUrl = helpers.WithDefault(u.Username)
+		avatarUrl = helper.WithDefault(u.Username)
 	}
 	return &server.UserResponse{
 		Id:          &u.Id,

@@ -4,9 +4,9 @@ import (
 	"context"
 	"database/sql"
 
-	"ctf01d/internal/model"
-
 	openapi_types "github.com/oapi-codegen/runtime/types"
+
+	"ctf01d/internal/model"
 )
 
 type UserRepository interface {
