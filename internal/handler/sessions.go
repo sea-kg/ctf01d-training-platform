@@ -5,12 +5,11 @@ import (
 	"log/slog"
 	"net/http"
 
-	openapi_types "github.com/oapi-codegen/runtime/types"
-
 	"ctf01d/internal/helper"
 	"ctf01d/internal/repository"
 	"ctf01d/internal/server"
 	"ctf01d/internal/view"
+	openapi_types "github.com/oapi-codegen/runtime/types"
 )
 
 func (h *Handler) SignInUser(w http.ResponseWriter, r *http.Request) {

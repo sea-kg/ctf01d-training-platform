@@ -5,12 +5,11 @@ import (
 	"log/slog"
 	"net/http"
 
-	openapi_types "github.com/oapi-codegen/runtime/types"
-
 	"ctf01d/internal/helper"
 	"ctf01d/internal/model"
 	"ctf01d/internal/repository"
 	"ctf01d/internal/server"
+	openapi_types "github.com/oapi-codegen/runtime/types"
 )
 
 func (h *Handler) CreateResult(w http.ResponseWriter, r *http.Request, gameId openapi_types.UUID) {

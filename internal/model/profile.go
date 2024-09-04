@@ -3,9 +3,8 @@ package model
 import (
 	"time"
 
-	openapi_types "github.com/oapi-codegen/runtime/types"
-
 	"ctf01d/internal/server"
+	openapi_types "github.com/oapi-codegen/runtime/types"
 )
 
 type Profile struct {

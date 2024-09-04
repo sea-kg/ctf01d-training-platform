@@ -8,7 +8,6 @@ import (
 	"net/url"
 
 	"ctf01d/internal/server"
-
 	"golang.org/x/crypto/bcrypt"
 )
 

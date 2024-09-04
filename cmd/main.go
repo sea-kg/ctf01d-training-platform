@@ -5,15 +5,14 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/go-chi/chi/v5"
-	"github.com/go-chi/cors"
-	_ "github.com/lib/pq"
-	_ "go.uber.org/automaxprocs"
-
 	"ctf01d/internal/config"
 	"ctf01d/internal/handler"
 	migration "ctf01d/internal/migrations/psql"
 	"ctf01d/internal/server"
+	"github.com/go-chi/chi/v5"
+	"github.com/go-chi/cors"
+	_ "github.com/lib/pq"
+	_ "go.uber.org/automaxprocs"
 )
 
 func main() {

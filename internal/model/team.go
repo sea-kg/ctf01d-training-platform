@@ -3,10 +3,9 @@ package model
 import (
 	"database/sql"
 
-	openapi_types "github.com/oapi-codegen/runtime/types"
-
 	"ctf01d/internal/helper"
 	"ctf01d/internal/server"
+	openapi_types "github.com/oapi-codegen/runtime/types"
 )
 
 type Team struct {
