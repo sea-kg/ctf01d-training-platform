@@ -29,7 +29,7 @@ type (
 	}
 )
 
-func NewConfig(path string) (*Config, error) {
+func New(path string) (*Config, error) {
 	cfg := &Config{}
 
 	err := cleanenv.ReadConfig(path, cfg)

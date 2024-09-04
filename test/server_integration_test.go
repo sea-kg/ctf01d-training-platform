@@ -26,7 +26,7 @@ var (
 )
 
 func TestMain(m *testing.M) {
-	cfg, err := config.NewConfig("../configs/config.test.yml")
+	cfg, err := config.New("../configs/config.test.yml")
 	if err != nil {
 		panic(err)
 	}

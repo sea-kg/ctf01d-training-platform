@@ -22,7 +22,7 @@ func main() {
 		path = envPath
 	}
 
-	cfg, err := config.NewConfig(path)
+	cfg, err := config.New(path)
 	if err != nil {
 		slog.Error("Config error: " + err.Error())
 		os.Exit(1)
