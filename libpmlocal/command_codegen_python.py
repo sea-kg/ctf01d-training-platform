@@ -3,6 +3,8 @@
 
 """ CommandCodegenPython """
 
+import yaml
+
 
 class CommandCodegenPython:
     """ CommandCodegenPython """
@@ -22,5 +24,10 @@ class CommandCodegenPython:
         codegen_python.set_defaults(subparser=self.__command)
 
     def execute(self, args):
-        """ TODO """
-        pass
+        with open("./api/openapi.yaml", "rt", encoding="utf-8") as _file:
+            _openapi = yaml.safe_load(_file)
+            print(_openapi)
+            _paths = _openapi["paths"]
+            for _path in _paths:
+                print(_path)
+                # print(_paths[_path])
