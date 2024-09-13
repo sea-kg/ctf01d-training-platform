@@ -4,6 +4,7 @@
 package httpserver
 
 import (
+	"context"
 	"fmt"
 	"net/http"
 	"time"
@@ -11,6 +12,10 @@ import (
 	"github.com/go-chi/chi/v5"
 	"github.com/oapi-codegen/runtime"
 	openapi_types "github.com/oapi-codegen/runtime/types"
+)
+
+const (
+	SessionCookieScopes = "SessionCookie.Scopes"
 )
 
 // Defines values for ProfileResponseTeamRole.
@@ -851,6 +856,8 @@ func (siw *ServerInterfaceWrapper) ListGames(w http.ResponseWriter, r *http.Requ
 func (siw *ServerInterfaceWrapper) CreateGame(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 
+	ctx = context.WithValue(ctx, SessionCookieScopes, []string{})
+
 	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		siw.Handler.CreateGame(w, r)
 	}))
@@ -876,6 +883,8 @@ func (siw *ServerInterfaceWrapper) DeleteGame(w http.ResponseWriter, r *http.Req
 		siw.ErrorHandlerFunc(w, r, &InvalidParamFormatError{ParamName: "gameId", Err: err})
 		return
 	}
+
+	ctx = context.WithValue(ctx, SessionCookieScopes, []string{})
 
 	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		siw.Handler.DeleteGame(w, r, gameId)
@@ -929,6 +938,8 @@ func (siw *ServerInterfaceWrapper) UpdateGame(w http.ResponseWriter, r *http.Req
 		return
 	}
 
+	ctx = context.WithValue(ctx, SessionCookieScopes, []string{})
+
 	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		siw.Handler.UpdateGame(w, r, gameId)
 	}))
@@ -954,6 +965,8 @@ func (siw *ServerInterfaceWrapper) CreateResult(w http.ResponseWriter, r *http.R
 		siw.ErrorHandlerFunc(w, r, &InvalidParamFormatError{ParamName: "gameId", Err: err})
 		return
 	}
+
+	ctx = context.WithValue(ctx, SessionCookieScopes, []string{})
 
 	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		siw.Handler.CreateResult(w, r, gameId)
@@ -1025,6 +1038,8 @@ func (siw *ServerInterfaceWrapper) UpdateResult(w http.ResponseWriter, r *http.R
 		return
 	}
 
+	ctx = context.WithValue(ctx, SessionCookieScopes, []string{})
+
 	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		siw.Handler.UpdateResult(w, r, gameId, resultId)
 	}))
@@ -1081,6 +1096,8 @@ func (siw *ServerInterfaceWrapper) ListServices(w http.ResponseWriter, r *http.R
 func (siw *ServerInterfaceWrapper) CreateService(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 
+	ctx = context.WithValue(ctx, SessionCookieScopes, []string{})
+
 	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		siw.Handler.CreateService(w, r)
 	}))
@@ -1106,6 +1123,8 @@ func (siw *ServerInterfaceWrapper) DeleteService(w http.ResponseWriter, r *http.
 		siw.ErrorHandlerFunc(w, r, &InvalidParamFormatError{ParamName: "serviceId", Err: err})
 		return
 	}
+
+	ctx = context.WithValue(ctx, SessionCookieScopes, []string{})
 
 	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		siw.Handler.DeleteService(w, r, serviceId)
@@ -1159,6 +1178,8 @@ func (siw *ServerInterfaceWrapper) UpdateService(w http.ResponseWriter, r *http.
 		return
 	}
 
+	ctx = context.WithValue(ctx, SessionCookieScopes, []string{})
+
 	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		siw.Handler.UpdateService(w, r, serviceId)
 	}))
@@ -1185,6 +1206,8 @@ func (siw *ServerInterfaceWrapper) UploadChecker(w http.ResponseWriter, r *http.
 		return
 	}
 
+	ctx = context.WithValue(ctx, SessionCookieScopes, []string{})
+
 	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		siw.Handler.UploadChecker(w, r, serviceId)
 	}))
@@ -1210,6 +1233,8 @@ func (siw *ServerInterfaceWrapper) UploadService(w http.ResponseWriter, r *http.
 		siw.ErrorHandlerFunc(w, r, &InvalidParamFormatError{ParamName: "serviceId", Err: err})
 		return
 	}
+
+	ctx = context.WithValue(ctx, SessionCookieScopes, []string{})
 
 	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		siw.Handler.UploadService(w, r, serviceId)
@@ -1241,6 +1266,8 @@ func (siw *ServerInterfaceWrapper) ListTeams(w http.ResponseWriter, r *http.Requ
 func (siw *ServerInterfaceWrapper) CreateTeam(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 
+	ctx = context.WithValue(ctx, SessionCookieScopes, []string{})
+
 	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		siw.Handler.CreateTeam(w, r)
 	}))
@@ -1266,6 +1293,8 @@ func (siw *ServerInterfaceWrapper) DeleteTeam(w http.ResponseWriter, r *http.Req
 		siw.ErrorHandlerFunc(w, r, &InvalidParamFormatError{ParamName: "teamId", Err: err})
 		return
 	}
+
+	ctx = context.WithValue(ctx, SessionCookieScopes, []string{})
 
 	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		siw.Handler.DeleteTeam(w, r, teamId)
@@ -1318,6 +1347,8 @@ func (siw *ServerInterfaceWrapper) UpdateTeam(w http.ResponseWriter, r *http.Req
 		siw.ErrorHandlerFunc(w, r, &InvalidParamFormatError{ParamName: "teamId", Err: err})
 		return
 	}
+
+	ctx = context.WithValue(ctx, SessionCookieScopes, []string{})
 
 	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		siw.Handler.UpdateTeam(w, r, teamId)
@@ -1380,6 +1411,8 @@ func (siw *ServerInterfaceWrapper) LeaveUserFromTeam(w http.ResponseWriter, r *h
 		return
 	}
 
+	ctx = context.WithValue(ctx, SessionCookieScopes, []string{})
+
 	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		siw.Handler.LeaveUserFromTeam(w, r, teamId, userId)
 	}))
@@ -1415,6 +1448,8 @@ func (siw *ServerInterfaceWrapper) ConnectUserTeam(w http.ResponseWriter, r *htt
 		return
 	}
 
+	ctx = context.WithValue(ctx, SessionCookieScopes, []string{})
+
 	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		siw.Handler.ConnectUserTeam(w, r, teamId, userId)
 	}))
@@ -1449,6 +1484,8 @@ func (siw *ServerInterfaceWrapper) ApproveUserTeam(w http.ResponseWriter, r *htt
 		siw.ErrorHandlerFunc(w, r, &InvalidParamFormatError{ParamName: "userId", Err: err})
 		return
 	}
+
+	ctx = context.WithValue(ctx, SessionCookieScopes, []string{})
 
 	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		siw.Handler.ApproveUserTeam(w, r, teamId, userId)
@@ -1508,6 +1545,8 @@ func (siw *ServerInterfaceWrapper) ListUsers(w http.ResponseWriter, r *http.Requ
 func (siw *ServerInterfaceWrapper) CreateUser(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 
+	ctx = context.WithValue(ctx, SessionCookieScopes, []string{})
+
 	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		siw.Handler.CreateUser(w, r)
 	}))
@@ -1533,6 +1572,8 @@ func (siw *ServerInterfaceWrapper) DeleteUser(w http.ResponseWriter, r *http.Req
 		siw.ErrorHandlerFunc(w, r, &InvalidParamFormatError{ParamName: "userId", Err: err})
 		return
 	}
+
+	ctx = context.WithValue(ctx, SessionCookieScopes, []string{})
 
 	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		siw.Handler.DeleteUser(w, r, userId)
@@ -1585,6 +1626,8 @@ func (siw *ServerInterfaceWrapper) UpdateUser(w http.ResponseWriter, r *http.Req
 		siw.ErrorHandlerFunc(w, r, &InvalidParamFormatError{ParamName: "userId", Err: err})
 		return
 	}
+
+	ctx = context.WithValue(ctx, SessionCookieScopes, []string{})
 
 	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		siw.Handler.UpdateUser(w, r, userId)

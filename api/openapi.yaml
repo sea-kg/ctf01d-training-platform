@@ -178,6 +178,8 @@ paths:
           description: Bad request
         '500':
           description: Failed response
+      security:
+        - SessionCookie: []
   '/api/v1/users/{userId}':
     get:
       tags:
@@ -233,6 +235,8 @@ paths:
           description: Bad request
         '500':
           description: Failed response
+      security:
+        - SessionCookie: []
     delete:
       tags:
         - Users
@@ -256,6 +260,8 @@ paths:
           content:
             application/json:
               schema: {}
+      security:
+        - SessionCookie: []
   '/api/v1/users/{userId}/profile':
     get:
       tags:
@@ -325,6 +331,8 @@ paths:
           description: Bad request
         '500':
           description: Failed response
+      security:
+        - SessionCookie: []
   '/api/v1/games/{gameId}':
     get:
       tags:
@@ -386,6 +394,8 @@ paths:
           content:
             application/json:
               schema: {}
+      security:
+        - SessionCookie: []
     delete:
       tags:
         - Games
@@ -408,6 +418,8 @@ paths:
           description: Bad request
         '500':
           description: Failed response
+      security:
+        - SessionCookie: []
   /api/v1/teams:
     get:
       tags:
@@ -464,6 +476,8 @@ paths:
           content:
             application/json:
               schema: {}
+      security:
+        - SessionCookie: []
   '/api/v1/teams/{teamId}':
     get:
       tags:
@@ -511,6 +525,8 @@ paths:
       responses:
         '200':
           description: Team updated successfully
+      security:
+        - SessionCookie: []
     delete:
       tags:
         - Teams
@@ -529,6 +545,8 @@ paths:
       responses:
         '200':
           description: Team deleted successfully
+      security:
+        - SessionCookie: []
   '/api/v1/teams/{teamId}/members':
     get:
       tags:
@@ -584,6 +602,8 @@ paths:
                 properties:
                   data:
                     type: string
+      security:
+        - SessionCookie: []
     put:
       tags:
         - Teams
@@ -614,6 +634,8 @@ paths:
                 properties:
                   data:
                     type: string
+      security:
+        - SessionCookie: []
     delete:
       tags:
         - Teams
@@ -644,6 +666,8 @@ paths:
                 properties:
                   data:
                     type: string
+      security:
+        - SessionCookie: []
   '/api/v1/games/{gameId}/results':
     post:
       tags:
@@ -670,6 +694,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CreateResultResponse'
+      security:
+        - SessionCookie: []
   '/api/v1/games/{gameId}/results/{resultId}':
     get:
       tags:
@@ -733,6 +759,8 @@ paths:
       responses:
         '200':
           description: Result updated successfully
+      security:
+        - SessionCookie: []
   '/api/v1/games/{gameId}/scoreboard':
     get:
       tags:
@@ -792,6 +820,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CreateServiceResponse'
+      security:
+        - SessionCookie: []
   '/api/v1/services/{serviceId}':
     get:
       tags:
@@ -839,6 +869,8 @@ paths:
       responses:
         '200':
           description: Service updated successfully
+      security:
+        - SessionCookie: []
     delete:
       tags:
         - Services
@@ -857,6 +889,8 @@ paths:
       responses:
         '200':
           description: Service deleted successfully
+      security:
+        - SessionCookie: []
   '/api/v1/services/{serviceId}/checker':
     post:
       tags:
@@ -888,6 +922,8 @@ paths:
           description: Success upload
           content:
             application/json: {}
+      security:
+        - SessionCookie: []
   '/api/v1/services/{serviceId}/service':
     post:
       summary: Upload zip service
@@ -919,6 +955,8 @@ paths:
           description: Success upload
           content:
             application/json: {}
+      security:
+        - SessionCookie: []
   /api/v1/universities:
     get:
       summary: Retrieves a list of universities
@@ -1408,6 +1446,11 @@ components:
           type: string
           example: a8a5d938-1bc7-4b69-942d-9c00fc166fb6
           format: uuid
+  securitySchemes:
+    SessionCookie:
+      type: apiKey
+      in: cookie
+      name: session_id
   links: {}
   callbacks: {}
 security: []
