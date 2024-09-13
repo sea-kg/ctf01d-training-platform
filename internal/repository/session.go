@@ -30,18 +30,11 @@ func (r *sessionRepo) GetSessionFromDB(ctx context.Context, sessionId string) (o
 
 func (r *sessionRepo) StoreSessionInDB(ctx context.Context, userId openapi_types.UUID) (string, error) {
 	var session string
-	// query := `
-	// 	INSERT INTO sessions (user_id, expires_at)
-	// 	VALUES ($1, $2)
-	// 	ON CONFLICT (user_id) DO
-	// 	UPDATE SET expires_at = EXCLUDED.expires_at
-	// 	RETURNING id
-	// 	`
 	query := `
 		INSERT INTO sessions (user_id, expires_at)
 		VALUES ($1, $2)
 		RETURNING id
-		`
+	`
 	err := r.db.QueryRowContext(ctx, query, userId, time.Now().Add(96*time.Hour)).Scan(&session)
 	if err != nil {
 		return "", err
@@ -50,10 +43,7 @@ func (r *sessionRepo) StoreSessionInDB(ctx context.Context, userId openapi_types
 }
 
 func (r *sessionRepo) DeleteSessionInDB(ctx context.Context, sessionId string) error {
-	query := "DELETE FROM sessions where id = $1"
+	query := "DELETE FROM sessions WHERE id = $1"
 	_, err := r.db.ExecContext(ctx, query, sessionId)
-	if err != nil {
-		return err
-	}
-	return nil
+	return err
 }

@@ -4,3 +4,5 @@ src/server
 vendor
 /docker_tmp
 main
+cmd/__debug*
+__debug*
