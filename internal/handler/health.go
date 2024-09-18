@@ -10,14 +10,14 @@ import (
 
 var (
 	version   = "dev"
-	buildTime = time.Now()
+	buildTime = time.Now().Format(time.RFC822Z)
 )
 
 func (h *Handler) GetVersion(w http.ResponseWriter, r *http.Request) {
 	res := map[string]string{
 		"version":    version,
 		"golang":     runtime.Version(),
-		"build_time": buildTime.Format(time.RFC822Z),
+		"build_time": buildTime,
 	}
 	helper.RespondWithJSON(w, http.StatusOK, res)
 }

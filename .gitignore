@@ -6,3 +6,4 @@ vendor
 main
 cmd/__debug*
 __debug*
+server

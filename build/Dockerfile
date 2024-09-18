@@ -9,7 +9,9 @@ RUN go mod tidy
 
 COPY ./ ./
 
-RUN CGO_ENABLED=0 GOOS=linux go build -o server ./cmd/main.go
+ARG VERSION
+ARG BUILDTIME
+RUN CGO_ENABLED=0 GOOS=linux go build -ldflags "-X 'ctf01d/internal/handler.version=${VERSION}' -X ctf01d/internal/handler.buildTime=${BUILDTIME}" -o server cmd/main.go
 
 FROM alpine:latest as prod
 LABEL "maintainer"="Evgenii Sopov <mrseakg@gmail.com>"

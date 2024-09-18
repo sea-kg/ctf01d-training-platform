@@ -15,20 +15,24 @@ install:
 	go mod tidy
 
 # Build the server executable
-build:
-	go build cmd/main.go
+VERSION=$(shell git describe --tags --always)
+LDVERSION=-X 'ctf01d/internal/handler.version=$(VERSION)'
+BUILDTIME=$(shell date -R)
+LDBUILDTIME=-X 'ctf01d/internal/handler.buildTime=$(BUILDTIME)'
+server-build:
+	go build -ldflags "$(LDVERSION) $(LDBUILDTIME)" -o server ./cmd/main.go
+
+# Run the local development server
+server-run:
+	go run cmd/main.go
 
 # Format go files
 fmt:
 	go fmt ./internal/...; \
 	go fmt ./cmd/...;
 
-# Run the local development server
-run-server:
-	go run cmd/main.go
-
 # Run PostgreSQL container for local development
-run-db:
+database-run:
 	@if [ $$(docker ps -a -q -f name=ctf01d-postgres) ]; then \
 		echo "Container ctf01d-postgres already exists. Restarting..."; \
 		docker start ctf01d-postgres; \
@@ -44,8 +48,12 @@ run-db:
 			-p 4112:4112 postgres:16.4; \
 	fi
 
+# Attach to the running PostgreSQL container
+database-attach:
+	docker exec -it ctf01d-postgres psql -U postgres -d ctf01d_training_platform
+
 # Stop PostgreSQL container
-stop-db:
+database-stop:
 	@if [ $$(docker ps -q -f name=ctf01d-postgres) ]; then \
 		echo "Stopping container ctf01d-postgres..."; \
 		docker stop ctf01d-postgres; \
@@ -54,14 +62,23 @@ stop-db:
 	fi
 
 # Cleanup db and restart db and rebuild main app
-reset-db:
+database-reset:
 	make stop-db; \
 	sudo rm -rf docker_tmp/pg_data; \
 	make run-db; \
 	make build;
 
+# Remove PostgreSQL container
+database-remove:
+	@if [ $$(docker ps -a -q -f name=ctf01d-postgres) ]; then \
+		echo "Removing container ctf01d-postgres..."; \
+		docker rm -f ctf01d-postgres; \
+	else \
+		echo "Container ctf01d-postgres does not exist."; \
+	fi
+
 # Setup test database and run tests
-test-db:
+test:
 	# Ensure the PostgreSQL container is running
 	@if ! [ $$(docker ps -q -f name=ctf01d-postgres) ]; then \
 		echo "Starting PostgreSQL container..."; \
@@ -73,19 +90,6 @@ test-db:
 	@docker exec -it ctf01d-postgres psql -U postgres -c "CREATE DATABASE ctf01d_training_platform_test;"
 	# Run the tests
 	@go test -v ./test/server_integration_test.go
-
-# Remove PostgreSQL container
-remove-db:
-	@if [ $$(docker ps -a -q -f name=ctf01d-postgres) ]; then \
-		echo "Removing container ctf01d-postgres..."; \
-		docker rm -f ctf01d-postgres; \
-	else \
-		echo "Container ctf01d-postgres does not exist."; \
-	fi
-
-# Attach to the running PostgreSQL container
-attach-db:
-	docker exec -it ctf01d-postgres psql -U postgres -d ctf01d_training_platform
 
 # Generate Go server boilerplate from OpenAPI 3
 codegen:
