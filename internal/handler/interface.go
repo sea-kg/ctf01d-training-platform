@@ -159,3 +159,7 @@ func (siw *ServerInterfaceWrapper) UploadService(w http.ResponseWriter, r *http.
 func (siw *ServerInterfaceWrapper) UniqueAvatar(w http.ResponseWriter, r *http.Request, username string, params httpserver.UniqueAvatarParams) {
 	siw.handlers.UniqueAvatar(w, r, username, params)
 }
+
+func (siw *ServerInterfaceWrapper) GetVersion(w http.ResponseWriter, r *http.Request) {
+	siw.handlers.GetVersion(w, r)
+}

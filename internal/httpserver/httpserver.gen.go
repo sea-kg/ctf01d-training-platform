@@ -503,6 +503,9 @@ type ServerInterface interface {
 	// Get a profile by user ID
 	// (GET /api/v1/users/{userId}/profile)
 	GetProfileById(w http.ResponseWriter, r *http.Request, userId openapi_types.UUID)
+	// Getting service version
+	// (GET /version)
+	GetVersion(w http.ResponseWriter, r *http.Request)
 }
 
 // Unimplemented server implementation that returns http.StatusNotImplemented for each endpoint.
@@ -722,6 +725,12 @@ func (_ Unimplemented) UpdateUser(w http.ResponseWriter, r *http.Request, userId
 // Get a profile by user ID
 // (GET /api/v1/users/{userId}/profile)
 func (_ Unimplemented) GetProfileById(w http.ResponseWriter, r *http.Request, userId openapi_types.UUID) {
+	w.WriteHeader(http.StatusNotImplemented)
+}
+
+// Getting service version
+// (GET /version)
+func (_ Unimplemented) GetVersion(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusNotImplemented)
 }
 
@@ -1623,6 +1632,21 @@ func (siw *ServerInterfaceWrapper) GetProfileById(w http.ResponseWriter, r *http
 	handler.ServeHTTP(w, r.WithContext(ctx))
 }
 
+// GetVersion operation middleware
+func (siw *ServerInterfaceWrapper) GetVersion(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+
+	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		siw.Handler.GetVersion(w, r)
+	}))
+
+	for _, middleware := range siw.HandlerMiddlewares {
+		handler = middleware(handler)
+	}
+
+	handler.ServeHTTP(w, r.WithContext(ctx))
+}
+
 type UnescapedCookieParamError struct {
 	ParamName string
 	Err       error
@@ -1843,6 +1867,9 @@ func HandlerWithOptions(si ServerInterface, options ChiServerOptions) http.Handl
 	})
 	r.Group(func(r chi.Router) {
 		r.Get(options.BaseURL+"/api/v1/users/{userId}/profile", wrapper.GetProfileById)
+	})
+	r.Group(func(r chi.Router) {
+		r.Get(options.BaseURL+"/version", wrapper.GetVersion)
 	})
 
 	return r

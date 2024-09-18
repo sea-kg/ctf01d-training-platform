@@ -36,6 +36,8 @@ tags:
     description: >-
       Endpoints for managing user information, including creating, updating,
       retrieving, and deleting user profiles, and handling authentication.
+  - name: Health
+    description: Checking the availability and operability of the service
 paths:
   /api/v1/auth/sign_in:
     post:
@@ -977,6 +979,21 @@ paths:
               schema:
                 type: string
                 format: binary
+  /version:
+    get:
+      summary: Getting service version
+      description: This endpoint returns the current version of the service.
+      operationId: getVersion
+      tags:
+        - Health
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+      parameters: []
 components:
   schemas:
     UserRequest:
