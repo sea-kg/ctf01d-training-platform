@@ -504,7 +504,7 @@ type ServerInterface interface {
 	// (GET /api/v1/users/{userId}/profile)
 	GetProfileById(w http.ResponseWriter, r *http.Request, userId openapi_types.UUID)
 	// Getting service version
-	// (GET /version)
+	// (GET /api/version)
 	GetVersion(w http.ResponseWriter, r *http.Request)
 }
 
@@ -729,7 +729,7 @@ func (_ Unimplemented) GetProfileById(w http.ResponseWriter, r *http.Request, us
 }
 
 // Getting service version
-// (GET /version)
+// (GET /api/version)
 func (_ Unimplemented) GetVersion(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusNotImplemented)
 }
@@ -1869,7 +1869,7 @@ func HandlerWithOptions(si ServerInterface, options ChiServerOptions) http.Handl
 		r.Get(options.BaseURL+"/api/v1/users/{userId}/profile", wrapper.GetProfileById)
 	})
 	r.Group(func(r chi.Router) {
-		r.Get(options.BaseURL+"/version", wrapper.GetVersion)
+		r.Get(options.BaseURL+"/api/version", wrapper.GetVersion)
 	})
 
 	return r
