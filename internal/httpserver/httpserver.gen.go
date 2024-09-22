@@ -8,7 +8,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/go-chi/chi/v5"
+	"github.com/gin-gonic/gin"
 	"github.com/oapi-codegen/runtime"
 	openapi_types "github.com/oapi-codegen/runtime/types"
 )
@@ -397,409 +397,176 @@ type UpdateUserJSONRequestBody = UserRequest
 type ServerInterface interface {
 	// Validate current session and return user role
 	// (GET /api/v1/auth/session)
-	ValidateSession(w http.ResponseWriter, r *http.Request)
+	ValidateSession(c *gin.Context)
 	// Sign in user
 	// (POST /api/v1/auth/sign_in)
-	SignInUser(w http.ResponseWriter, r *http.Request)
+	SignInUser(c *gin.Context)
 	// Sign out user
 	// (POST /api/v1/auth/sign_out)
-	SignOutUser(w http.ResponseWriter, r *http.Request)
+	SignOutUser(c *gin.Context)
 	// Get a unique avatar for the username
 	// (GET /api/v1/avatar/{username})
-	UniqueAvatar(w http.ResponseWriter, r *http.Request, username string, params UniqueAvatarParams)
+	UniqueAvatar(c *gin.Context, username string, params UniqueAvatarParams)
 	// List all games
 	// (GET /api/v1/games)
-	ListGames(w http.ResponseWriter, r *http.Request)
+	ListGames(c *gin.Context)
 	// Create a new game
 	// (POST /api/v1/games)
-	CreateGame(w http.ResponseWriter, r *http.Request)
+	CreateGame(c *gin.Context)
 	// Delete a game
 	// (DELETE /api/v1/games/{gameId})
-	DeleteGame(w http.ResponseWriter, r *http.Request, gameId openapi_types.UUID)
+	DeleteGame(c *gin.Context, gameId openapi_types.UUID)
 	// Get a game by ID
 	// (GET /api/v1/games/{gameId})
-	GetGameById(w http.ResponseWriter, r *http.Request, gameId openapi_types.UUID)
+	GetGameById(c *gin.Context, gameId openapi_types.UUID)
 	// Update a game
 	// (PUT /api/v1/games/{gameId})
-	UpdateGame(w http.ResponseWriter, r *http.Request, gameId openapi_types.UUID)
+	UpdateGame(c *gin.Context, gameId openapi_types.UUID)
 	// Create a new game result
 	// (POST /api/v1/games/{gameId}/results)
-	CreateResult(w http.ResponseWriter, r *http.Request, gameId openapi_types.UUID)
+	CreateResult(c *gin.Context, gameId openapi_types.UUID)
 	// Get game result
 	// (GET /api/v1/games/{gameId}/results/{resultId})
-	GetResult(w http.ResponseWriter, r *http.Request, gameId openapi_types.UUID, resultId openapi_types.UUID)
+	GetResult(c *gin.Context, gameId openapi_types.UUID, resultId openapi_types.UUID)
 	// Update a result
 	// (PUT /api/v1/games/{gameId}/results/{resultId})
-	UpdateResult(w http.ResponseWriter, r *http.Request, gameId openapi_types.UUID, resultId openapi_types.UUID)
+	UpdateResult(c *gin.Context, gameId openapi_types.UUID, resultId openapi_types.UUID)
 	// Get game scoreboard
 	// (GET /api/v1/games/{gameId}/scoreboard)
-	GetScoreboard(w http.ResponseWriter, r *http.Request, gameId openapi_types.UUID)
+	GetScoreboard(c *gin.Context, gameId openapi_types.UUID)
 	// List all services
 	// (GET /api/v1/services)
-	ListServices(w http.ResponseWriter, r *http.Request)
+	ListServices(c *gin.Context)
 	// Create a new service
 	// (POST /api/v1/services)
-	CreateService(w http.ResponseWriter, r *http.Request)
+	CreateService(c *gin.Context)
 	// Delete a service
 	// (DELETE /api/v1/services/{serviceId})
-	DeleteService(w http.ResponseWriter, r *http.Request, serviceId openapi_types.UUID)
+	DeleteService(c *gin.Context, serviceId openapi_types.UUID)
 	// Get a service by ID
 	// (GET /api/v1/services/{serviceId})
-	GetServiceById(w http.ResponseWriter, r *http.Request, serviceId openapi_types.UUID)
+	GetServiceById(c *gin.Context, serviceId openapi_types.UUID)
 	// Update a service
 	// (PUT /api/v1/services/{serviceId})
-	UpdateService(w http.ResponseWriter, r *http.Request, serviceId openapi_types.UUID)
+	UpdateService(c *gin.Context, serviceId openapi_types.UUID)
 	// Upload zip-archive
 	// (POST /api/v1/services/{serviceId}/checker)
-	UploadChecker(w http.ResponseWriter, r *http.Request, serviceId openapi_types.UUID)
+	UploadChecker(c *gin.Context, serviceId openapi_types.UUID)
 	// Upload zip service
 	// (POST /api/v1/services/{serviceId}/service)
-	UploadService(w http.ResponseWriter, r *http.Request, serviceId openapi_types.UUID)
+	UploadService(c *gin.Context, serviceId openapi_types.UUID)
 	// List all teams
 	// (GET /api/v1/teams)
-	ListTeams(w http.ResponseWriter, r *http.Request)
+	ListTeams(c *gin.Context)
 	// Create a new team
 	// (POST /api/v1/teams)
-	CreateTeam(w http.ResponseWriter, r *http.Request)
+	CreateTeam(c *gin.Context)
 	// Delete a team
 	// (DELETE /api/v1/teams/{teamId})
-	DeleteTeam(w http.ResponseWriter, r *http.Request, teamId openapi_types.UUID)
+	DeleteTeam(c *gin.Context, teamId openapi_types.UUID)
 	// Get a team by ID
 	// (GET /api/v1/teams/{teamId})
-	GetTeamById(w http.ResponseWriter, r *http.Request, teamId openapi_types.UUID)
+	GetTeamById(c *gin.Context, teamId openapi_types.UUID)
 	// Update a team
 	// (PUT /api/v1/teams/{teamId})
-	UpdateTeam(w http.ResponseWriter, r *http.Request, teamId openapi_types.UUID)
+	UpdateTeam(c *gin.Context, teamId openapi_types.UUID)
 	// Get all members of a team
 	// (GET /api/v1/teams/{teamId}/members)
-	TeamMembers(w http.ResponseWriter, r *http.Request, teamId openapi_types.UUID)
+	TeamMembers(c *gin.Context, teamId openapi_types.UUID)
 	// Leave user from team
 	// (DELETE /api/v1/teams/{teamId}/members/{userId})
-	LeaveUserFromTeam(w http.ResponseWriter, r *http.Request, teamId openapi_types.UUID, userId openapi_types.UUID)
+	LeaveUserFromTeam(c *gin.Context, teamId openapi_types.UUID, userId openapi_types.UUID)
 	// Connect user with team
 	// (POST /api/v1/teams/{teamId}/members/{userId})
-	ConnectUserTeam(w http.ResponseWriter, r *http.Request, teamId openapi_types.UUID, userId openapi_types.UUID)
+	ConnectUserTeam(c *gin.Context, teamId openapi_types.UUID, userId openapi_types.UUID)
 	// Approve connected user with team lead
 	// (PUT /api/v1/teams/{teamId}/members/{userId})
-	ApproveUserTeam(w http.ResponseWriter, r *http.Request, teamId openapi_types.UUID, userId openapi_types.UUID)
+	ApproveUserTeam(c *gin.Context, teamId openapi_types.UUID, userId openapi_types.UUID)
 	// Retrieves a list of universities
 	// (GET /api/v1/universities)
-	ListUniversities(w http.ResponseWriter, r *http.Request, params ListUniversitiesParams)
+	ListUniversities(c *gin.Context, params ListUniversitiesParams)
 	// List all users
 	// (GET /api/v1/users)
-	ListUsers(w http.ResponseWriter, r *http.Request)
+	ListUsers(c *gin.Context)
 	// Create a new user
 	// (POST /api/v1/users)
-	CreateUser(w http.ResponseWriter, r *http.Request)
+	CreateUser(c *gin.Context)
 	// Delete a user
 	// (DELETE /api/v1/users/{userId})
-	DeleteUser(w http.ResponseWriter, r *http.Request, userId openapi_types.UUID)
+	DeleteUser(c *gin.Context, userId openapi_types.UUID)
 	// Get a user by ID
 	// (GET /api/v1/users/{userId})
-	GetUserById(w http.ResponseWriter, r *http.Request, userId openapi_types.UUID)
+	GetUserById(c *gin.Context, userId openapi_types.UUID)
 	// Update a user
 	// (PUT /api/v1/users/{userId})
-	UpdateUser(w http.ResponseWriter, r *http.Request, userId openapi_types.UUID)
+	UpdateUser(c *gin.Context, userId openapi_types.UUID)
 	// Get a profile by user ID
 	// (GET /api/v1/users/{userId}/profile)
-	GetProfileById(w http.ResponseWriter, r *http.Request, userId openapi_types.UUID)
+	GetProfileById(c *gin.Context, userId openapi_types.UUID)
 	// Getting service version
 	// (GET /api/version)
-	GetVersion(w http.ResponseWriter, r *http.Request)
-}
-
-// Unimplemented server implementation that returns http.StatusNotImplemented for each endpoint.
-
-type Unimplemented struct{}
-
-// Validate current session and return user role
-// (GET /api/v1/auth/session)
-func (_ Unimplemented) ValidateSession(w http.ResponseWriter, r *http.Request) {
-	w.WriteHeader(http.StatusNotImplemented)
-}
-
-// Sign in user
-// (POST /api/v1/auth/sign_in)
-func (_ Unimplemented) SignInUser(w http.ResponseWriter, r *http.Request) {
-	w.WriteHeader(http.StatusNotImplemented)
-}
-
-// Sign out user
-// (POST /api/v1/auth/sign_out)
-func (_ Unimplemented) SignOutUser(w http.ResponseWriter, r *http.Request) {
-	w.WriteHeader(http.StatusNotImplemented)
-}
-
-// Get a unique avatar for the username
-// (GET /api/v1/avatar/{username})
-func (_ Unimplemented) UniqueAvatar(w http.ResponseWriter, r *http.Request, username string, params UniqueAvatarParams) {
-	w.WriteHeader(http.StatusNotImplemented)
-}
-
-// List all games
-// (GET /api/v1/games)
-func (_ Unimplemented) ListGames(w http.ResponseWriter, r *http.Request) {
-	w.WriteHeader(http.StatusNotImplemented)
-}
-
-// Create a new game
-// (POST /api/v1/games)
-func (_ Unimplemented) CreateGame(w http.ResponseWriter, r *http.Request) {
-	w.WriteHeader(http.StatusNotImplemented)
-}
-
-// Delete a game
-// (DELETE /api/v1/games/{gameId})
-func (_ Unimplemented) DeleteGame(w http.ResponseWriter, r *http.Request, gameId openapi_types.UUID) {
-	w.WriteHeader(http.StatusNotImplemented)
-}
-
-// Get a game by ID
-// (GET /api/v1/games/{gameId})
-func (_ Unimplemented) GetGameById(w http.ResponseWriter, r *http.Request, gameId openapi_types.UUID) {
-	w.WriteHeader(http.StatusNotImplemented)
-}
-
-// Update a game
-// (PUT /api/v1/games/{gameId})
-func (_ Unimplemented) UpdateGame(w http.ResponseWriter, r *http.Request, gameId openapi_types.UUID) {
-	w.WriteHeader(http.StatusNotImplemented)
-}
-
-// Create a new game result
-// (POST /api/v1/games/{gameId}/results)
-func (_ Unimplemented) CreateResult(w http.ResponseWriter, r *http.Request, gameId openapi_types.UUID) {
-	w.WriteHeader(http.StatusNotImplemented)
-}
-
-// Get game result
-// (GET /api/v1/games/{gameId}/results/{resultId})
-func (_ Unimplemented) GetResult(w http.ResponseWriter, r *http.Request, gameId openapi_types.UUID, resultId openapi_types.UUID) {
-	w.WriteHeader(http.StatusNotImplemented)
-}
-
-// Update a result
-// (PUT /api/v1/games/{gameId}/results/{resultId})
-func (_ Unimplemented) UpdateResult(w http.ResponseWriter, r *http.Request, gameId openapi_types.UUID, resultId openapi_types.UUID) {
-	w.WriteHeader(http.StatusNotImplemented)
-}
-
-// Get game scoreboard
-// (GET /api/v1/games/{gameId}/scoreboard)
-func (_ Unimplemented) GetScoreboard(w http.ResponseWriter, r *http.Request, gameId openapi_types.UUID) {
-	w.WriteHeader(http.StatusNotImplemented)
-}
-
-// List all services
-// (GET /api/v1/services)
-func (_ Unimplemented) ListServices(w http.ResponseWriter, r *http.Request) {
-	w.WriteHeader(http.StatusNotImplemented)
-}
-
-// Create a new service
-// (POST /api/v1/services)
-func (_ Unimplemented) CreateService(w http.ResponseWriter, r *http.Request) {
-	w.WriteHeader(http.StatusNotImplemented)
-}
-
-// Delete a service
-// (DELETE /api/v1/services/{serviceId})
-func (_ Unimplemented) DeleteService(w http.ResponseWriter, r *http.Request, serviceId openapi_types.UUID) {
-	w.WriteHeader(http.StatusNotImplemented)
-}
-
-// Get a service by ID
-// (GET /api/v1/services/{serviceId})
-func (_ Unimplemented) GetServiceById(w http.ResponseWriter, r *http.Request, serviceId openapi_types.UUID) {
-	w.WriteHeader(http.StatusNotImplemented)
-}
-
-// Update a service
-// (PUT /api/v1/services/{serviceId})
-func (_ Unimplemented) UpdateService(w http.ResponseWriter, r *http.Request, serviceId openapi_types.UUID) {
-	w.WriteHeader(http.StatusNotImplemented)
-}
-
-// Upload zip-archive
-// (POST /api/v1/services/{serviceId}/checker)
-func (_ Unimplemented) UploadChecker(w http.ResponseWriter, r *http.Request, serviceId openapi_types.UUID) {
-	w.WriteHeader(http.StatusNotImplemented)
-}
-
-// Upload zip service
-// (POST /api/v1/services/{serviceId}/service)
-func (_ Unimplemented) UploadService(w http.ResponseWriter, r *http.Request, serviceId openapi_types.UUID) {
-	w.WriteHeader(http.StatusNotImplemented)
-}
-
-// List all teams
-// (GET /api/v1/teams)
-func (_ Unimplemented) ListTeams(w http.ResponseWriter, r *http.Request) {
-	w.WriteHeader(http.StatusNotImplemented)
-}
-
-// Create a new team
-// (POST /api/v1/teams)
-func (_ Unimplemented) CreateTeam(w http.ResponseWriter, r *http.Request) {
-	w.WriteHeader(http.StatusNotImplemented)
-}
-
-// Delete a team
-// (DELETE /api/v1/teams/{teamId})
-func (_ Unimplemented) DeleteTeam(w http.ResponseWriter, r *http.Request, teamId openapi_types.UUID) {
-	w.WriteHeader(http.StatusNotImplemented)
-}
-
-// Get a team by ID
-// (GET /api/v1/teams/{teamId})
-func (_ Unimplemented) GetTeamById(w http.ResponseWriter, r *http.Request, teamId openapi_types.UUID) {
-	w.WriteHeader(http.StatusNotImplemented)
-}
-
-// Update a team
-// (PUT /api/v1/teams/{teamId})
-func (_ Unimplemented) UpdateTeam(w http.ResponseWriter, r *http.Request, teamId openapi_types.UUID) {
-	w.WriteHeader(http.StatusNotImplemented)
-}
-
-// Get all members of a team
-// (GET /api/v1/teams/{teamId}/members)
-func (_ Unimplemented) TeamMembers(w http.ResponseWriter, r *http.Request, teamId openapi_types.UUID) {
-	w.WriteHeader(http.StatusNotImplemented)
-}
-
-// Leave user from team
-// (DELETE /api/v1/teams/{teamId}/members/{userId})
-func (_ Unimplemented) LeaveUserFromTeam(w http.ResponseWriter, r *http.Request, teamId openapi_types.UUID, userId openapi_types.UUID) {
-	w.WriteHeader(http.StatusNotImplemented)
-}
-
-// Connect user with team
-// (POST /api/v1/teams/{teamId}/members/{userId})
-func (_ Unimplemented) ConnectUserTeam(w http.ResponseWriter, r *http.Request, teamId openapi_types.UUID, userId openapi_types.UUID) {
-	w.WriteHeader(http.StatusNotImplemented)
-}
-
-// Approve connected user with team lead
-// (PUT /api/v1/teams/{teamId}/members/{userId})
-func (_ Unimplemented) ApproveUserTeam(w http.ResponseWriter, r *http.Request, teamId openapi_types.UUID, userId openapi_types.UUID) {
-	w.WriteHeader(http.StatusNotImplemented)
-}
-
-// Retrieves a list of universities
-// (GET /api/v1/universities)
-func (_ Unimplemented) ListUniversities(w http.ResponseWriter, r *http.Request, params ListUniversitiesParams) {
-	w.WriteHeader(http.StatusNotImplemented)
-}
-
-// List all users
-// (GET /api/v1/users)
-func (_ Unimplemented) ListUsers(w http.ResponseWriter, r *http.Request) {
-	w.WriteHeader(http.StatusNotImplemented)
-}
-
-// Create a new user
-// (POST /api/v1/users)
-func (_ Unimplemented) CreateUser(w http.ResponseWriter, r *http.Request) {
-	w.WriteHeader(http.StatusNotImplemented)
-}
-
-// Delete a user
-// (DELETE /api/v1/users/{userId})
-func (_ Unimplemented) DeleteUser(w http.ResponseWriter, r *http.Request, userId openapi_types.UUID) {
-	w.WriteHeader(http.StatusNotImplemented)
-}
-
-// Get a user by ID
-// (GET /api/v1/users/{userId})
-func (_ Unimplemented) GetUserById(w http.ResponseWriter, r *http.Request, userId openapi_types.UUID) {
-	w.WriteHeader(http.StatusNotImplemented)
-}
-
-// Update a user
-// (PUT /api/v1/users/{userId})
-func (_ Unimplemented) UpdateUser(w http.ResponseWriter, r *http.Request, userId openapi_types.UUID) {
-	w.WriteHeader(http.StatusNotImplemented)
-}
-
-// Get a profile by user ID
-// (GET /api/v1/users/{userId}/profile)
-func (_ Unimplemented) GetProfileById(w http.ResponseWriter, r *http.Request, userId openapi_types.UUID) {
-	w.WriteHeader(http.StatusNotImplemented)
-}
-
-// Getting service version
-// (GET /api/version)
-func (_ Unimplemented) GetVersion(w http.ResponseWriter, r *http.Request) {
-	w.WriteHeader(http.StatusNotImplemented)
+	GetVersion(c *gin.Context)
 }
 
 // ServerInterfaceWrapper converts contexts to parameters.
 type ServerInterfaceWrapper struct {
 	Handler            ServerInterface
 	HandlerMiddlewares []MiddlewareFunc
-	ErrorHandlerFunc   func(w http.ResponseWriter, r *http.Request, err error)
+	ErrorHandler       func(*gin.Context, error, int)
 }
 
-type MiddlewareFunc func(http.Handler) http.Handler
+type MiddlewareFunc func(c *gin.Context)
 
 // ValidateSession operation middleware
-func (siw *ServerInterfaceWrapper) ValidateSession(w http.ResponseWriter, r *http.Request) {
-	ctx := r.Context()
-
-	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		siw.Handler.ValidateSession(w, r)
-	}))
+func (siw *ServerInterfaceWrapper) ValidateSession(c *gin.Context) {
 
 	for _, middleware := range siw.HandlerMiddlewares {
-		handler = middleware(handler)
+		middleware(c)
+		if c.IsAborted() {
+			return
+		}
 	}
 
-	handler.ServeHTTP(w, r.WithContext(ctx))
+	siw.Handler.ValidateSession(c)
 }
 
 // SignInUser operation middleware
-func (siw *ServerInterfaceWrapper) SignInUser(w http.ResponseWriter, r *http.Request) {
-	ctx := r.Context()
-
-	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		siw.Handler.SignInUser(w, r)
-	}))
+func (siw *ServerInterfaceWrapper) SignInUser(c *gin.Context) {
 
 	for _, middleware := range siw.HandlerMiddlewares {
-		handler = middleware(handler)
+		middleware(c)
+		if c.IsAborted() {
+			return
+		}
 	}
 
-	handler.ServeHTTP(w, r.WithContext(ctx))
+	siw.Handler.SignInUser(c)
 }
 
 // SignOutUser operation middleware
-func (siw *ServerInterfaceWrapper) SignOutUser(w http.ResponseWriter, r *http.Request) {
-	ctx := r.Context()
-
-	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		siw.Handler.SignOutUser(w, r)
-	}))
+func (siw *ServerInterfaceWrapper) SignOutUser(c *gin.Context) {
 
 	for _, middleware := range siw.HandlerMiddlewares {
-		handler = middleware(handler)
+		middleware(c)
+		if c.IsAborted() {
+			return
+		}
 	}
 
-	handler.ServeHTTP(w, r.WithContext(ctx))
+	siw.Handler.SignOutUser(c)
 }
 
 // UniqueAvatar operation middleware
-func (siw *ServerInterfaceWrapper) UniqueAvatar(w http.ResponseWriter, r *http.Request) {
-	ctx := r.Context()
+func (siw *ServerInterfaceWrapper) UniqueAvatar(c *gin.Context) {
 
 	var err error
 
 	// ------------- Path parameter "username" -------------
 	var username string
 
-	err = runtime.BindStyledParameterWithOptions("simple", "username", chi.URLParam(r, "username"), &username, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationPath, Explode: false, Required: true})
+	err = runtime.BindStyledParameterWithOptions("simple", "username", c.Param("username"), &username, runtime.BindStyledParameterOptions{Explode: false, Required: true})
 	if err != nil {
-		siw.ErrorHandlerFunc(w, r, &InvalidParamFormatError{ParamName: "username", Err: err})
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter username: %w", err), http.StatusBadRequest)
 		return
 	}
 
@@ -808,671 +575,619 @@ func (siw *ServerInterfaceWrapper) UniqueAvatar(w http.ResponseWriter, r *http.R
 
 	// ------------- Optional query parameter "max" -------------
 
-	err = runtime.BindQueryParameter("form", true, false, "max", r.URL.Query(), &params.Max)
+	err = runtime.BindQueryParameter("form", true, false, "max", c.Request.URL.Query(), &params.Max)
 	if err != nil {
-		siw.ErrorHandlerFunc(w, r, &InvalidParamFormatError{ParamName: "max", Err: err})
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter max: %w", err), http.StatusBadRequest)
 		return
 	}
 
 	// ------------- Optional query parameter "blockSize" -------------
 
-	err = runtime.BindQueryParameter("form", true, false, "blockSize", r.URL.Query(), &params.BlockSize)
+	err = runtime.BindQueryParameter("form", true, false, "blockSize", c.Request.URL.Query(), &params.BlockSize)
 	if err != nil {
-		siw.ErrorHandlerFunc(w, r, &InvalidParamFormatError{ParamName: "blockSize", Err: err})
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter blockSize: %w", err), http.StatusBadRequest)
 		return
 	}
 
 	// ------------- Optional query parameter "steps" -------------
 
-	err = runtime.BindQueryParameter("form", true, false, "steps", r.URL.Query(), &params.Steps)
+	err = runtime.BindQueryParameter("form", true, false, "steps", c.Request.URL.Query(), &params.Steps)
 	if err != nil {
-		siw.ErrorHandlerFunc(w, r, &InvalidParamFormatError{ParamName: "steps", Err: err})
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter steps: %w", err), http.StatusBadRequest)
 		return
 	}
 
-	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		siw.Handler.UniqueAvatar(w, r, username, params)
-	}))
-
 	for _, middleware := range siw.HandlerMiddlewares {
-		handler = middleware(handler)
+		middleware(c)
+		if c.IsAborted() {
+			return
+		}
 	}
 
-	handler.ServeHTTP(w, r.WithContext(ctx))
+	siw.Handler.UniqueAvatar(c, username, params)
 }
 
 // ListGames operation middleware
-func (siw *ServerInterfaceWrapper) ListGames(w http.ResponseWriter, r *http.Request) {
-	ctx := r.Context()
-
-	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		siw.Handler.ListGames(w, r)
-	}))
+func (siw *ServerInterfaceWrapper) ListGames(c *gin.Context) {
 
 	for _, middleware := range siw.HandlerMiddlewares {
-		handler = middleware(handler)
+		middleware(c)
+		if c.IsAborted() {
+			return
+		}
 	}
 
-	handler.ServeHTTP(w, r.WithContext(ctx))
+	siw.Handler.ListGames(c)
 }
 
 // CreateGame operation middleware
-func (siw *ServerInterfaceWrapper) CreateGame(w http.ResponseWriter, r *http.Request) {
-	ctx := r.Context()
-
-	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		siw.Handler.CreateGame(w, r)
-	}))
+func (siw *ServerInterfaceWrapper) CreateGame(c *gin.Context) {
 
 	for _, middleware := range siw.HandlerMiddlewares {
-		handler = middleware(handler)
+		middleware(c)
+		if c.IsAborted() {
+			return
+		}
 	}
 
-	handler.ServeHTTP(w, r.WithContext(ctx))
+	siw.Handler.CreateGame(c)
 }
 
 // DeleteGame operation middleware
-func (siw *ServerInterfaceWrapper) DeleteGame(w http.ResponseWriter, r *http.Request) {
-	ctx := r.Context()
+func (siw *ServerInterfaceWrapper) DeleteGame(c *gin.Context) {
 
 	var err error
 
 	// ------------- Path parameter "gameId" -------------
 	var gameId openapi_types.UUID
 
-	err = runtime.BindStyledParameterWithOptions("simple", "gameId", chi.URLParam(r, "gameId"), &gameId, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationPath, Explode: false, Required: true})
+	err = runtime.BindStyledParameterWithOptions("simple", "gameId", c.Param("gameId"), &gameId, runtime.BindStyledParameterOptions{Explode: false, Required: true})
 	if err != nil {
-		siw.ErrorHandlerFunc(w, r, &InvalidParamFormatError{ParamName: "gameId", Err: err})
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter gameId: %w", err), http.StatusBadRequest)
 		return
 	}
 
-	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		siw.Handler.DeleteGame(w, r, gameId)
-	}))
-
 	for _, middleware := range siw.HandlerMiddlewares {
-		handler = middleware(handler)
+		middleware(c)
+		if c.IsAborted() {
+			return
+		}
 	}
 
-	handler.ServeHTTP(w, r.WithContext(ctx))
+	siw.Handler.DeleteGame(c, gameId)
 }
 
 // GetGameById operation middleware
-func (siw *ServerInterfaceWrapper) GetGameById(w http.ResponseWriter, r *http.Request) {
-	ctx := r.Context()
+func (siw *ServerInterfaceWrapper) GetGameById(c *gin.Context) {
 
 	var err error
 
 	// ------------- Path parameter "gameId" -------------
 	var gameId openapi_types.UUID
 
-	err = runtime.BindStyledParameterWithOptions("simple", "gameId", chi.URLParam(r, "gameId"), &gameId, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationPath, Explode: false, Required: true})
+	err = runtime.BindStyledParameterWithOptions("simple", "gameId", c.Param("gameId"), &gameId, runtime.BindStyledParameterOptions{Explode: false, Required: true})
 	if err != nil {
-		siw.ErrorHandlerFunc(w, r, &InvalidParamFormatError{ParamName: "gameId", Err: err})
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter gameId: %w", err), http.StatusBadRequest)
 		return
 	}
 
-	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		siw.Handler.GetGameById(w, r, gameId)
-	}))
-
 	for _, middleware := range siw.HandlerMiddlewares {
-		handler = middleware(handler)
+		middleware(c)
+		if c.IsAborted() {
+			return
+		}
 	}
 
-	handler.ServeHTTP(w, r.WithContext(ctx))
+	siw.Handler.GetGameById(c, gameId)
 }
 
 // UpdateGame operation middleware
-func (siw *ServerInterfaceWrapper) UpdateGame(w http.ResponseWriter, r *http.Request) {
-	ctx := r.Context()
+func (siw *ServerInterfaceWrapper) UpdateGame(c *gin.Context) {
 
 	var err error
 
 	// ------------- Path parameter "gameId" -------------
 	var gameId openapi_types.UUID
 
-	err = runtime.BindStyledParameterWithOptions("simple", "gameId", chi.URLParam(r, "gameId"), &gameId, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationPath, Explode: false, Required: true})
+	err = runtime.BindStyledParameterWithOptions("simple", "gameId", c.Param("gameId"), &gameId, runtime.BindStyledParameterOptions{Explode: false, Required: true})
 	if err != nil {
-		siw.ErrorHandlerFunc(w, r, &InvalidParamFormatError{ParamName: "gameId", Err: err})
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter gameId: %w", err), http.StatusBadRequest)
 		return
 	}
 
-	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		siw.Handler.UpdateGame(w, r, gameId)
-	}))
-
 	for _, middleware := range siw.HandlerMiddlewares {
-		handler = middleware(handler)
+		middleware(c)
+		if c.IsAborted() {
+			return
+		}
 	}
 
-	handler.ServeHTTP(w, r.WithContext(ctx))
+	siw.Handler.UpdateGame(c, gameId)
 }
 
 // CreateResult operation middleware
-func (siw *ServerInterfaceWrapper) CreateResult(w http.ResponseWriter, r *http.Request) {
-	ctx := r.Context()
+func (siw *ServerInterfaceWrapper) CreateResult(c *gin.Context) {
 
 	var err error
 
 	// ------------- Path parameter "gameId" -------------
 	var gameId openapi_types.UUID
 
-	err = runtime.BindStyledParameterWithOptions("simple", "gameId", chi.URLParam(r, "gameId"), &gameId, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationPath, Explode: false, Required: true})
+	err = runtime.BindStyledParameterWithOptions("simple", "gameId", c.Param("gameId"), &gameId, runtime.BindStyledParameterOptions{Explode: false, Required: true})
 	if err != nil {
-		siw.ErrorHandlerFunc(w, r, &InvalidParamFormatError{ParamName: "gameId", Err: err})
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter gameId: %w", err), http.StatusBadRequest)
 		return
 	}
 
-	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		siw.Handler.CreateResult(w, r, gameId)
-	}))
-
 	for _, middleware := range siw.HandlerMiddlewares {
-		handler = middleware(handler)
+		middleware(c)
+		if c.IsAborted() {
+			return
+		}
 	}
 
-	handler.ServeHTTP(w, r.WithContext(ctx))
+	siw.Handler.CreateResult(c, gameId)
 }
 
 // GetResult operation middleware
-func (siw *ServerInterfaceWrapper) GetResult(w http.ResponseWriter, r *http.Request) {
-	ctx := r.Context()
+func (siw *ServerInterfaceWrapper) GetResult(c *gin.Context) {
 
 	var err error
 
 	// ------------- Path parameter "gameId" -------------
 	var gameId openapi_types.UUID
 
-	err = runtime.BindStyledParameterWithOptions("simple", "gameId", chi.URLParam(r, "gameId"), &gameId, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationPath, Explode: false, Required: true})
+	err = runtime.BindStyledParameterWithOptions("simple", "gameId", c.Param("gameId"), &gameId, runtime.BindStyledParameterOptions{Explode: false, Required: true})
 	if err != nil {
-		siw.ErrorHandlerFunc(w, r, &InvalidParamFormatError{ParamName: "gameId", Err: err})
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter gameId: %w", err), http.StatusBadRequest)
 		return
 	}
 
 	// ------------- Path parameter "resultId" -------------
 	var resultId openapi_types.UUID
 
-	err = runtime.BindStyledParameterWithOptions("simple", "resultId", chi.URLParam(r, "resultId"), &resultId, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationPath, Explode: false, Required: true})
+	err = runtime.BindStyledParameterWithOptions("simple", "resultId", c.Param("resultId"), &resultId, runtime.BindStyledParameterOptions{Explode: false, Required: true})
 	if err != nil {
-		siw.ErrorHandlerFunc(w, r, &InvalidParamFormatError{ParamName: "resultId", Err: err})
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter resultId: %w", err), http.StatusBadRequest)
 		return
 	}
 
-	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		siw.Handler.GetResult(w, r, gameId, resultId)
-	}))
-
 	for _, middleware := range siw.HandlerMiddlewares {
-		handler = middleware(handler)
+		middleware(c)
+		if c.IsAborted() {
+			return
+		}
 	}
 
-	handler.ServeHTTP(w, r.WithContext(ctx))
+	siw.Handler.GetResult(c, gameId, resultId)
 }
 
 // UpdateResult operation middleware
-func (siw *ServerInterfaceWrapper) UpdateResult(w http.ResponseWriter, r *http.Request) {
-	ctx := r.Context()
+func (siw *ServerInterfaceWrapper) UpdateResult(c *gin.Context) {
 
 	var err error
 
 	// ------------- Path parameter "gameId" -------------
 	var gameId openapi_types.UUID
 
-	err = runtime.BindStyledParameterWithOptions("simple", "gameId", chi.URLParam(r, "gameId"), &gameId, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationPath, Explode: false, Required: true})
+	err = runtime.BindStyledParameterWithOptions("simple", "gameId", c.Param("gameId"), &gameId, runtime.BindStyledParameterOptions{Explode: false, Required: true})
 	if err != nil {
-		siw.ErrorHandlerFunc(w, r, &InvalidParamFormatError{ParamName: "gameId", Err: err})
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter gameId: %w", err), http.StatusBadRequest)
 		return
 	}
 
 	// ------------- Path parameter "resultId" -------------
 	var resultId openapi_types.UUID
 
-	err = runtime.BindStyledParameterWithOptions("simple", "resultId", chi.URLParam(r, "resultId"), &resultId, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationPath, Explode: false, Required: true})
+	err = runtime.BindStyledParameterWithOptions("simple", "resultId", c.Param("resultId"), &resultId, runtime.BindStyledParameterOptions{Explode: false, Required: true})
 	if err != nil {
-		siw.ErrorHandlerFunc(w, r, &InvalidParamFormatError{ParamName: "resultId", Err: err})
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter resultId: %w", err), http.StatusBadRequest)
 		return
 	}
 
-	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		siw.Handler.UpdateResult(w, r, gameId, resultId)
-	}))
-
 	for _, middleware := range siw.HandlerMiddlewares {
-		handler = middleware(handler)
+		middleware(c)
+		if c.IsAborted() {
+			return
+		}
 	}
 
-	handler.ServeHTTP(w, r.WithContext(ctx))
+	siw.Handler.UpdateResult(c, gameId, resultId)
 }
 
 // GetScoreboard operation middleware
-func (siw *ServerInterfaceWrapper) GetScoreboard(w http.ResponseWriter, r *http.Request) {
-	ctx := r.Context()
+func (siw *ServerInterfaceWrapper) GetScoreboard(c *gin.Context) {
 
 	var err error
 
 	// ------------- Path parameter "gameId" -------------
 	var gameId openapi_types.UUID
 
-	err = runtime.BindStyledParameterWithOptions("simple", "gameId", chi.URLParam(r, "gameId"), &gameId, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationPath, Explode: false, Required: true})
+	err = runtime.BindStyledParameterWithOptions("simple", "gameId", c.Param("gameId"), &gameId, runtime.BindStyledParameterOptions{Explode: false, Required: true})
 	if err != nil {
-		siw.ErrorHandlerFunc(w, r, &InvalidParamFormatError{ParamName: "gameId", Err: err})
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter gameId: %w", err), http.StatusBadRequest)
 		return
 	}
 
-	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		siw.Handler.GetScoreboard(w, r, gameId)
-	}))
-
 	for _, middleware := range siw.HandlerMiddlewares {
-		handler = middleware(handler)
+		middleware(c)
+		if c.IsAborted() {
+			return
+		}
 	}
 
-	handler.ServeHTTP(w, r.WithContext(ctx))
+	siw.Handler.GetScoreboard(c, gameId)
 }
 
 // ListServices operation middleware
-func (siw *ServerInterfaceWrapper) ListServices(w http.ResponseWriter, r *http.Request) {
-	ctx := r.Context()
-
-	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		siw.Handler.ListServices(w, r)
-	}))
+func (siw *ServerInterfaceWrapper) ListServices(c *gin.Context) {
 
 	for _, middleware := range siw.HandlerMiddlewares {
-		handler = middleware(handler)
+		middleware(c)
+		if c.IsAborted() {
+			return
+		}
 	}
 
-	handler.ServeHTTP(w, r.WithContext(ctx))
+	siw.Handler.ListServices(c)
 }
 
 // CreateService operation middleware
-func (siw *ServerInterfaceWrapper) CreateService(w http.ResponseWriter, r *http.Request) {
-	ctx := r.Context()
-
-	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		siw.Handler.CreateService(w, r)
-	}))
+func (siw *ServerInterfaceWrapper) CreateService(c *gin.Context) {
 
 	for _, middleware := range siw.HandlerMiddlewares {
-		handler = middleware(handler)
+		middleware(c)
+		if c.IsAborted() {
+			return
+		}
 	}
 
-	handler.ServeHTTP(w, r.WithContext(ctx))
+	siw.Handler.CreateService(c)
 }
 
 // DeleteService operation middleware
-func (siw *ServerInterfaceWrapper) DeleteService(w http.ResponseWriter, r *http.Request) {
-	ctx := r.Context()
+func (siw *ServerInterfaceWrapper) DeleteService(c *gin.Context) {
 
 	var err error
 
 	// ------------- Path parameter "serviceId" -------------
 	var serviceId openapi_types.UUID
 
-	err = runtime.BindStyledParameterWithOptions("simple", "serviceId", chi.URLParam(r, "serviceId"), &serviceId, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationPath, Explode: false, Required: true})
+	err = runtime.BindStyledParameterWithOptions("simple", "serviceId", c.Param("serviceId"), &serviceId, runtime.BindStyledParameterOptions{Explode: false, Required: true})
 	if err != nil {
-		siw.ErrorHandlerFunc(w, r, &InvalidParamFormatError{ParamName: "serviceId", Err: err})
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter serviceId: %w", err), http.StatusBadRequest)
 		return
 	}
 
-	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		siw.Handler.DeleteService(w, r, serviceId)
-	}))
-
 	for _, middleware := range siw.HandlerMiddlewares {
-		handler = middleware(handler)
+		middleware(c)
+		if c.IsAborted() {
+			return
+		}
 	}
 
-	handler.ServeHTTP(w, r.WithContext(ctx))
+	siw.Handler.DeleteService(c, serviceId)
 }
 
 // GetServiceById operation middleware
-func (siw *ServerInterfaceWrapper) GetServiceById(w http.ResponseWriter, r *http.Request) {
-	ctx := r.Context()
+func (siw *ServerInterfaceWrapper) GetServiceById(c *gin.Context) {
 
 	var err error
 
 	// ------------- Path parameter "serviceId" -------------
 	var serviceId openapi_types.UUID
 
-	err = runtime.BindStyledParameterWithOptions("simple", "serviceId", chi.URLParam(r, "serviceId"), &serviceId, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationPath, Explode: false, Required: true})
+	err = runtime.BindStyledParameterWithOptions("simple", "serviceId", c.Param("serviceId"), &serviceId, runtime.BindStyledParameterOptions{Explode: false, Required: true})
 	if err != nil {
-		siw.ErrorHandlerFunc(w, r, &InvalidParamFormatError{ParamName: "serviceId", Err: err})
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter serviceId: %w", err), http.StatusBadRequest)
 		return
 	}
 
-	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		siw.Handler.GetServiceById(w, r, serviceId)
-	}))
-
 	for _, middleware := range siw.HandlerMiddlewares {
-		handler = middleware(handler)
+		middleware(c)
+		if c.IsAborted() {
+			return
+		}
 	}
 
-	handler.ServeHTTP(w, r.WithContext(ctx))
+	siw.Handler.GetServiceById(c, serviceId)
 }
 
 // UpdateService operation middleware
-func (siw *ServerInterfaceWrapper) UpdateService(w http.ResponseWriter, r *http.Request) {
-	ctx := r.Context()
+func (siw *ServerInterfaceWrapper) UpdateService(c *gin.Context) {
 
 	var err error
 
 	// ------------- Path parameter "serviceId" -------------
 	var serviceId openapi_types.UUID
 
-	err = runtime.BindStyledParameterWithOptions("simple", "serviceId", chi.URLParam(r, "serviceId"), &serviceId, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationPath, Explode: false, Required: true})
+	err = runtime.BindStyledParameterWithOptions("simple", "serviceId", c.Param("serviceId"), &serviceId, runtime.BindStyledParameterOptions{Explode: false, Required: true})
 	if err != nil {
-		siw.ErrorHandlerFunc(w, r, &InvalidParamFormatError{ParamName: "serviceId", Err: err})
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter serviceId: %w", err), http.StatusBadRequest)
 		return
 	}
 
-	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		siw.Handler.UpdateService(w, r, serviceId)
-	}))
-
 	for _, middleware := range siw.HandlerMiddlewares {
-		handler = middleware(handler)
+		middleware(c)
+		if c.IsAborted() {
+			return
+		}
 	}
 
-	handler.ServeHTTP(w, r.WithContext(ctx))
+	siw.Handler.UpdateService(c, serviceId)
 }
 
 // UploadChecker operation middleware
-func (siw *ServerInterfaceWrapper) UploadChecker(w http.ResponseWriter, r *http.Request) {
-	ctx := r.Context()
+func (siw *ServerInterfaceWrapper) UploadChecker(c *gin.Context) {
 
 	var err error
 
 	// ------------- Path parameter "serviceId" -------------
 	var serviceId openapi_types.UUID
 
-	err = runtime.BindStyledParameterWithOptions("simple", "serviceId", chi.URLParam(r, "serviceId"), &serviceId, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationPath, Explode: false, Required: true})
+	err = runtime.BindStyledParameterWithOptions("simple", "serviceId", c.Param("serviceId"), &serviceId, runtime.BindStyledParameterOptions{Explode: false, Required: true})
 	if err != nil {
-		siw.ErrorHandlerFunc(w, r, &InvalidParamFormatError{ParamName: "serviceId", Err: err})
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter serviceId: %w", err), http.StatusBadRequest)
 		return
 	}
 
-	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		siw.Handler.UploadChecker(w, r, serviceId)
-	}))
-
 	for _, middleware := range siw.HandlerMiddlewares {
-		handler = middleware(handler)
+		middleware(c)
+		if c.IsAborted() {
+			return
+		}
 	}
 
-	handler.ServeHTTP(w, r.WithContext(ctx))
+	siw.Handler.UploadChecker(c, serviceId)
 }
 
 // UploadService operation middleware
-func (siw *ServerInterfaceWrapper) UploadService(w http.ResponseWriter, r *http.Request) {
-	ctx := r.Context()
+func (siw *ServerInterfaceWrapper) UploadService(c *gin.Context) {
 
 	var err error
 
 	// ------------- Path parameter "serviceId" -------------
 	var serviceId openapi_types.UUID
 
-	err = runtime.BindStyledParameterWithOptions("simple", "serviceId", chi.URLParam(r, "serviceId"), &serviceId, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationPath, Explode: false, Required: true})
+	err = runtime.BindStyledParameterWithOptions("simple", "serviceId", c.Param("serviceId"), &serviceId, runtime.BindStyledParameterOptions{Explode: false, Required: true})
 	if err != nil {
-		siw.ErrorHandlerFunc(w, r, &InvalidParamFormatError{ParamName: "serviceId", Err: err})
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter serviceId: %w", err), http.StatusBadRequest)
 		return
 	}
 
-	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		siw.Handler.UploadService(w, r, serviceId)
-	}))
-
 	for _, middleware := range siw.HandlerMiddlewares {
-		handler = middleware(handler)
+		middleware(c)
+		if c.IsAborted() {
+			return
+		}
 	}
 
-	handler.ServeHTTP(w, r.WithContext(ctx))
+	siw.Handler.UploadService(c, serviceId)
 }
 
 // ListTeams operation middleware
-func (siw *ServerInterfaceWrapper) ListTeams(w http.ResponseWriter, r *http.Request) {
-	ctx := r.Context()
-
-	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		siw.Handler.ListTeams(w, r)
-	}))
+func (siw *ServerInterfaceWrapper) ListTeams(c *gin.Context) {
 
 	for _, middleware := range siw.HandlerMiddlewares {
-		handler = middleware(handler)
+		middleware(c)
+		if c.IsAborted() {
+			return
+		}
 	}
 
-	handler.ServeHTTP(w, r.WithContext(ctx))
+	siw.Handler.ListTeams(c)
 }
 
 // CreateTeam operation middleware
-func (siw *ServerInterfaceWrapper) CreateTeam(w http.ResponseWriter, r *http.Request) {
-	ctx := r.Context()
-
-	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		siw.Handler.CreateTeam(w, r)
-	}))
+func (siw *ServerInterfaceWrapper) CreateTeam(c *gin.Context) {
 
 	for _, middleware := range siw.HandlerMiddlewares {
-		handler = middleware(handler)
+		middleware(c)
+		if c.IsAborted() {
+			return
+		}
 	}
 
-	handler.ServeHTTP(w, r.WithContext(ctx))
+	siw.Handler.CreateTeam(c)
 }
 
 // DeleteTeam operation middleware
-func (siw *ServerInterfaceWrapper) DeleteTeam(w http.ResponseWriter, r *http.Request) {
-	ctx := r.Context()
+func (siw *ServerInterfaceWrapper) DeleteTeam(c *gin.Context) {
 
 	var err error
 
 	// ------------- Path parameter "teamId" -------------
 	var teamId openapi_types.UUID
 
-	err = runtime.BindStyledParameterWithOptions("simple", "teamId", chi.URLParam(r, "teamId"), &teamId, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationPath, Explode: false, Required: true})
+	err = runtime.BindStyledParameterWithOptions("simple", "teamId", c.Param("teamId"), &teamId, runtime.BindStyledParameterOptions{Explode: false, Required: true})
 	if err != nil {
-		siw.ErrorHandlerFunc(w, r, &InvalidParamFormatError{ParamName: "teamId", Err: err})
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter teamId: %w", err), http.StatusBadRequest)
 		return
 	}
 
-	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		siw.Handler.DeleteTeam(w, r, teamId)
-	}))
-
 	for _, middleware := range siw.HandlerMiddlewares {
-		handler = middleware(handler)
+		middleware(c)
+		if c.IsAborted() {
+			return
+		}
 	}
 
-	handler.ServeHTTP(w, r.WithContext(ctx))
+	siw.Handler.DeleteTeam(c, teamId)
 }
 
 // GetTeamById operation middleware
-func (siw *ServerInterfaceWrapper) GetTeamById(w http.ResponseWriter, r *http.Request) {
-	ctx := r.Context()
+func (siw *ServerInterfaceWrapper) GetTeamById(c *gin.Context) {
 
 	var err error
 
 	// ------------- Path parameter "teamId" -------------
 	var teamId openapi_types.UUID
 
-	err = runtime.BindStyledParameterWithOptions("simple", "teamId", chi.URLParam(r, "teamId"), &teamId, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationPath, Explode: false, Required: true})
+	err = runtime.BindStyledParameterWithOptions("simple", "teamId", c.Param("teamId"), &teamId, runtime.BindStyledParameterOptions{Explode: false, Required: true})
 	if err != nil {
-		siw.ErrorHandlerFunc(w, r, &InvalidParamFormatError{ParamName: "teamId", Err: err})
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter teamId: %w", err), http.StatusBadRequest)
 		return
 	}
 
-	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		siw.Handler.GetTeamById(w, r, teamId)
-	}))
-
 	for _, middleware := range siw.HandlerMiddlewares {
-		handler = middleware(handler)
+		middleware(c)
+		if c.IsAborted() {
+			return
+		}
 	}
 
-	handler.ServeHTTP(w, r.WithContext(ctx))
+	siw.Handler.GetTeamById(c, teamId)
 }
 
 // UpdateTeam operation middleware
-func (siw *ServerInterfaceWrapper) UpdateTeam(w http.ResponseWriter, r *http.Request) {
-	ctx := r.Context()
+func (siw *ServerInterfaceWrapper) UpdateTeam(c *gin.Context) {
 
 	var err error
 
 	// ------------- Path parameter "teamId" -------------
 	var teamId openapi_types.UUID
 
-	err = runtime.BindStyledParameterWithOptions("simple", "teamId", chi.URLParam(r, "teamId"), &teamId, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationPath, Explode: false, Required: true})
+	err = runtime.BindStyledParameterWithOptions("simple", "teamId", c.Param("teamId"), &teamId, runtime.BindStyledParameterOptions{Explode: false, Required: true})
 	if err != nil {
-		siw.ErrorHandlerFunc(w, r, &InvalidParamFormatError{ParamName: "teamId", Err: err})
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter teamId: %w", err), http.StatusBadRequest)
 		return
 	}
 
-	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		siw.Handler.UpdateTeam(w, r, teamId)
-	}))
-
 	for _, middleware := range siw.HandlerMiddlewares {
-		handler = middleware(handler)
+		middleware(c)
+		if c.IsAborted() {
+			return
+		}
 	}
 
-	handler.ServeHTTP(w, r.WithContext(ctx))
+	siw.Handler.UpdateTeam(c, teamId)
 }
 
 // TeamMembers operation middleware
-func (siw *ServerInterfaceWrapper) TeamMembers(w http.ResponseWriter, r *http.Request) {
-	ctx := r.Context()
+func (siw *ServerInterfaceWrapper) TeamMembers(c *gin.Context) {
 
 	var err error
 
 	// ------------- Path parameter "teamId" -------------
 	var teamId openapi_types.UUID
 
-	err = runtime.BindStyledParameterWithOptions("simple", "teamId", chi.URLParam(r, "teamId"), &teamId, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationPath, Explode: false, Required: true})
+	err = runtime.BindStyledParameterWithOptions("simple", "teamId", c.Param("teamId"), &teamId, runtime.BindStyledParameterOptions{Explode: false, Required: true})
 	if err != nil {
-		siw.ErrorHandlerFunc(w, r, &InvalidParamFormatError{ParamName: "teamId", Err: err})
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter teamId: %w", err), http.StatusBadRequest)
 		return
 	}
 
-	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		siw.Handler.TeamMembers(w, r, teamId)
-	}))
-
 	for _, middleware := range siw.HandlerMiddlewares {
-		handler = middleware(handler)
+		middleware(c)
+		if c.IsAborted() {
+			return
+		}
 	}
 
-	handler.ServeHTTP(w, r.WithContext(ctx))
+	siw.Handler.TeamMembers(c, teamId)
 }
 
 // LeaveUserFromTeam operation middleware
-func (siw *ServerInterfaceWrapper) LeaveUserFromTeam(w http.ResponseWriter, r *http.Request) {
-	ctx := r.Context()
+func (siw *ServerInterfaceWrapper) LeaveUserFromTeam(c *gin.Context) {
 
 	var err error
 
 	// ------------- Path parameter "teamId" -------------
 	var teamId openapi_types.UUID
 
-	err = runtime.BindStyledParameterWithOptions("simple", "teamId", chi.URLParam(r, "teamId"), &teamId, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationPath, Explode: false, Required: true})
+	err = runtime.BindStyledParameterWithOptions("simple", "teamId", c.Param("teamId"), &teamId, runtime.BindStyledParameterOptions{Explode: false, Required: true})
 	if err != nil {
-		siw.ErrorHandlerFunc(w, r, &InvalidParamFormatError{ParamName: "teamId", Err: err})
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter teamId: %w", err), http.StatusBadRequest)
 		return
 	}
 
 	// ------------- Path parameter "userId" -------------
 	var userId openapi_types.UUID
 
-	err = runtime.BindStyledParameterWithOptions("simple", "userId", chi.URLParam(r, "userId"), &userId, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationPath, Explode: false, Required: true})
+	err = runtime.BindStyledParameterWithOptions("simple", "userId", c.Param("userId"), &userId, runtime.BindStyledParameterOptions{Explode: false, Required: true})
 	if err != nil {
-		siw.ErrorHandlerFunc(w, r, &InvalidParamFormatError{ParamName: "userId", Err: err})
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter userId: %w", err), http.StatusBadRequest)
 		return
 	}
 
-	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		siw.Handler.LeaveUserFromTeam(w, r, teamId, userId)
-	}))
-
 	for _, middleware := range siw.HandlerMiddlewares {
-		handler = middleware(handler)
+		middleware(c)
+		if c.IsAborted() {
+			return
+		}
 	}
 
-	handler.ServeHTTP(w, r.WithContext(ctx))
+	siw.Handler.LeaveUserFromTeam(c, teamId, userId)
 }
 
 // ConnectUserTeam operation middleware
-func (siw *ServerInterfaceWrapper) ConnectUserTeam(w http.ResponseWriter, r *http.Request) {
-	ctx := r.Context()
+func (siw *ServerInterfaceWrapper) ConnectUserTeam(c *gin.Context) {
 
 	var err error
 
 	// ------------- Path parameter "teamId" -------------
 	var teamId openapi_types.UUID
 
-	err = runtime.BindStyledParameterWithOptions("simple", "teamId", chi.URLParam(r, "teamId"), &teamId, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationPath, Explode: false, Required: true})
+	err = runtime.BindStyledParameterWithOptions("simple", "teamId", c.Param("teamId"), &teamId, runtime.BindStyledParameterOptions{Explode: false, Required: true})
 	if err != nil {
-		siw.ErrorHandlerFunc(w, r, &InvalidParamFormatError{ParamName: "teamId", Err: err})
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter teamId: %w", err), http.StatusBadRequest)
 		return
 	}
 
 	// ------------- Path parameter "userId" -------------
 	var userId openapi_types.UUID
 
-	err = runtime.BindStyledParameterWithOptions("simple", "userId", chi.URLParam(r, "userId"), &userId, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationPath, Explode: false, Required: true})
+	err = runtime.BindStyledParameterWithOptions("simple", "userId", c.Param("userId"), &userId, runtime.BindStyledParameterOptions{Explode: false, Required: true})
 	if err != nil {
-		siw.ErrorHandlerFunc(w, r, &InvalidParamFormatError{ParamName: "userId", Err: err})
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter userId: %w", err), http.StatusBadRequest)
 		return
 	}
 
-	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		siw.Handler.ConnectUserTeam(w, r, teamId, userId)
-	}))
-
 	for _, middleware := range siw.HandlerMiddlewares {
-		handler = middleware(handler)
+		middleware(c)
+		if c.IsAborted() {
+			return
+		}
 	}
 
-	handler.ServeHTTP(w, r.WithContext(ctx))
+	siw.Handler.ConnectUserTeam(c, teamId, userId)
 }
 
 // ApproveUserTeam operation middleware
-func (siw *ServerInterfaceWrapper) ApproveUserTeam(w http.ResponseWriter, r *http.Request) {
-	ctx := r.Context()
+func (siw *ServerInterfaceWrapper) ApproveUserTeam(c *gin.Context) {
 
 	var err error
 
 	// ------------- Path parameter "teamId" -------------
 	var teamId openapi_types.UUID
 
-	err = runtime.BindStyledParameterWithOptions("simple", "teamId", chi.URLParam(r, "teamId"), &teamId, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationPath, Explode: false, Required: true})
+	err = runtime.BindStyledParameterWithOptions("simple", "teamId", c.Param("teamId"), &teamId, runtime.BindStyledParameterOptions{Explode: false, Required: true})
 	if err != nil {
-		siw.ErrorHandlerFunc(w, r, &InvalidParamFormatError{ParamName: "teamId", Err: err})
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter teamId: %w", err), http.StatusBadRequest)
 		return
 	}
 
 	// ------------- Path parameter "userId" -------------
 	var userId openapi_types.UUID
 
-	err = runtime.BindStyledParameterWithOptions("simple", "userId", chi.URLParam(r, "userId"), &userId, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationPath, Explode: false, Required: true})
+	err = runtime.BindStyledParameterWithOptions("simple", "userId", c.Param("userId"), &userId, runtime.BindStyledParameterOptions{Explode: false, Required: true})
 	if err != nil {
-		siw.ErrorHandlerFunc(w, r, &InvalidParamFormatError{ParamName: "userId", Err: err})
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter userId: %w", err), http.StatusBadRequest)
 		return
 	}
 
-	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		siw.Handler.ApproveUserTeam(w, r, teamId, userId)
-	}))
-
 	for _, middleware := range siw.HandlerMiddlewares {
-		handler = middleware(handler)
+		middleware(c)
+		if c.IsAborted() {
+			return
+		}
 	}
 
-	handler.ServeHTTP(w, r.WithContext(ctx))
+	siw.Handler.ApproveUserTeam(c, teamId, userId)
 }
 
 // ListUniversities operation middleware
-func (siw *ServerInterfaceWrapper) ListUniversities(w http.ResponseWriter, r *http.Request) {
-	ctx := r.Context()
+func (siw *ServerInterfaceWrapper) ListUniversities(c *gin.Context) {
 
 	var err error
 
@@ -1481,396 +1196,219 @@ func (siw *ServerInterfaceWrapper) ListUniversities(w http.ResponseWriter, r *ht
 
 	// ------------- Optional query parameter "term" -------------
 
-	err = runtime.BindQueryParameter("form", true, false, "term", r.URL.Query(), &params.Term)
+	err = runtime.BindQueryParameter("form", true, false, "term", c.Request.URL.Query(), &params.Term)
 	if err != nil {
-		siw.ErrorHandlerFunc(w, r, &InvalidParamFormatError{ParamName: "term", Err: err})
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter term: %w", err), http.StatusBadRequest)
 		return
 	}
 
-	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		siw.Handler.ListUniversities(w, r, params)
-	}))
-
 	for _, middleware := range siw.HandlerMiddlewares {
-		handler = middleware(handler)
+		middleware(c)
+		if c.IsAborted() {
+			return
+		}
 	}
 
-	handler.ServeHTTP(w, r.WithContext(ctx))
+	siw.Handler.ListUniversities(c, params)
 }
 
 // ListUsers operation middleware
-func (siw *ServerInterfaceWrapper) ListUsers(w http.ResponseWriter, r *http.Request) {
-	ctx := r.Context()
-
-	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		siw.Handler.ListUsers(w, r)
-	}))
+func (siw *ServerInterfaceWrapper) ListUsers(c *gin.Context) {
 
 	for _, middleware := range siw.HandlerMiddlewares {
-		handler = middleware(handler)
+		middleware(c)
+		if c.IsAborted() {
+			return
+		}
 	}
 
-	handler.ServeHTTP(w, r.WithContext(ctx))
+	siw.Handler.ListUsers(c)
 }
 
 // CreateUser operation middleware
-func (siw *ServerInterfaceWrapper) CreateUser(w http.ResponseWriter, r *http.Request) {
-	ctx := r.Context()
-
-	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		siw.Handler.CreateUser(w, r)
-	}))
+func (siw *ServerInterfaceWrapper) CreateUser(c *gin.Context) {
 
 	for _, middleware := range siw.HandlerMiddlewares {
-		handler = middleware(handler)
+		middleware(c)
+		if c.IsAborted() {
+			return
+		}
 	}
 
-	handler.ServeHTTP(w, r.WithContext(ctx))
+	siw.Handler.CreateUser(c)
 }
 
 // DeleteUser operation middleware
-func (siw *ServerInterfaceWrapper) DeleteUser(w http.ResponseWriter, r *http.Request) {
-	ctx := r.Context()
+func (siw *ServerInterfaceWrapper) DeleteUser(c *gin.Context) {
 
 	var err error
 
 	// ------------- Path parameter "userId" -------------
 	var userId openapi_types.UUID
 
-	err = runtime.BindStyledParameterWithOptions("simple", "userId", chi.URLParam(r, "userId"), &userId, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationPath, Explode: false, Required: true})
+	err = runtime.BindStyledParameterWithOptions("simple", "userId", c.Param("userId"), &userId, runtime.BindStyledParameterOptions{Explode: false, Required: true})
 	if err != nil {
-		siw.ErrorHandlerFunc(w, r, &InvalidParamFormatError{ParamName: "userId", Err: err})
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter userId: %w", err), http.StatusBadRequest)
 		return
 	}
 
-	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		siw.Handler.DeleteUser(w, r, userId)
-	}))
-
 	for _, middleware := range siw.HandlerMiddlewares {
-		handler = middleware(handler)
+		middleware(c)
+		if c.IsAborted() {
+			return
+		}
 	}
 
-	handler.ServeHTTP(w, r.WithContext(ctx))
+	siw.Handler.DeleteUser(c, userId)
 }
 
 // GetUserById operation middleware
-func (siw *ServerInterfaceWrapper) GetUserById(w http.ResponseWriter, r *http.Request) {
-	ctx := r.Context()
+func (siw *ServerInterfaceWrapper) GetUserById(c *gin.Context) {
 
 	var err error
 
 	// ------------- Path parameter "userId" -------------
 	var userId openapi_types.UUID
 
-	err = runtime.BindStyledParameterWithOptions("simple", "userId", chi.URLParam(r, "userId"), &userId, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationPath, Explode: false, Required: true})
+	err = runtime.BindStyledParameterWithOptions("simple", "userId", c.Param("userId"), &userId, runtime.BindStyledParameterOptions{Explode: false, Required: true})
 	if err != nil {
-		siw.ErrorHandlerFunc(w, r, &InvalidParamFormatError{ParamName: "userId", Err: err})
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter userId: %w", err), http.StatusBadRequest)
 		return
 	}
 
-	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		siw.Handler.GetUserById(w, r, userId)
-	}))
-
 	for _, middleware := range siw.HandlerMiddlewares {
-		handler = middleware(handler)
+		middleware(c)
+		if c.IsAborted() {
+			return
+		}
 	}
 
-	handler.ServeHTTP(w, r.WithContext(ctx))
+	siw.Handler.GetUserById(c, userId)
 }
 
 // UpdateUser operation middleware
-func (siw *ServerInterfaceWrapper) UpdateUser(w http.ResponseWriter, r *http.Request) {
-	ctx := r.Context()
+func (siw *ServerInterfaceWrapper) UpdateUser(c *gin.Context) {
 
 	var err error
 
 	// ------------- Path parameter "userId" -------------
 	var userId openapi_types.UUID
 
-	err = runtime.BindStyledParameterWithOptions("simple", "userId", chi.URLParam(r, "userId"), &userId, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationPath, Explode: false, Required: true})
+	err = runtime.BindStyledParameterWithOptions("simple", "userId", c.Param("userId"), &userId, runtime.BindStyledParameterOptions{Explode: false, Required: true})
 	if err != nil {
-		siw.ErrorHandlerFunc(w, r, &InvalidParamFormatError{ParamName: "userId", Err: err})
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter userId: %w", err), http.StatusBadRequest)
 		return
 	}
 
-	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		siw.Handler.UpdateUser(w, r, userId)
-	}))
-
 	for _, middleware := range siw.HandlerMiddlewares {
-		handler = middleware(handler)
+		middleware(c)
+		if c.IsAborted() {
+			return
+		}
 	}
 
-	handler.ServeHTTP(w, r.WithContext(ctx))
+	siw.Handler.UpdateUser(c, userId)
 }
 
 // GetProfileById operation middleware
-func (siw *ServerInterfaceWrapper) GetProfileById(w http.ResponseWriter, r *http.Request) {
-	ctx := r.Context()
+func (siw *ServerInterfaceWrapper) GetProfileById(c *gin.Context) {
 
 	var err error
 
 	// ------------- Path parameter "userId" -------------
 	var userId openapi_types.UUID
 
-	err = runtime.BindStyledParameterWithOptions("simple", "userId", chi.URLParam(r, "userId"), &userId, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationPath, Explode: false, Required: true})
+	err = runtime.BindStyledParameterWithOptions("simple", "userId", c.Param("userId"), &userId, runtime.BindStyledParameterOptions{Explode: false, Required: true})
 	if err != nil {
-		siw.ErrorHandlerFunc(w, r, &InvalidParamFormatError{ParamName: "userId", Err: err})
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter userId: %w", err), http.StatusBadRequest)
 		return
 	}
 
-	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		siw.Handler.GetProfileById(w, r, userId)
-	}))
-
 	for _, middleware := range siw.HandlerMiddlewares {
-		handler = middleware(handler)
+		middleware(c)
+		if c.IsAborted() {
+			return
+		}
 	}
 
-	handler.ServeHTTP(w, r.WithContext(ctx))
+	siw.Handler.GetProfileById(c, userId)
 }
 
 // GetVersion operation middleware
-func (siw *ServerInterfaceWrapper) GetVersion(w http.ResponseWriter, r *http.Request) {
-	ctx := r.Context()
-
-	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		siw.Handler.GetVersion(w, r)
-	}))
+func (siw *ServerInterfaceWrapper) GetVersion(c *gin.Context) {
 
 	for _, middleware := range siw.HandlerMiddlewares {
-		handler = middleware(handler)
-	}
-
-	handler.ServeHTTP(w, r.WithContext(ctx))
-}
-
-type UnescapedCookieParamError struct {
-	ParamName string
-	Err       error
-}
-
-func (e *UnescapedCookieParamError) Error() string {
-	return fmt.Sprintf("error unescaping cookie parameter '%s'", e.ParamName)
-}
-
-func (e *UnescapedCookieParamError) Unwrap() error {
-	return e.Err
-}
-
-type UnmarshalingParamError struct {
-	ParamName string
-	Err       error
-}
-
-func (e *UnmarshalingParamError) Error() string {
-	return fmt.Sprintf("Error unmarshaling parameter %s as JSON: %s", e.ParamName, e.Err.Error())
-}
-
-func (e *UnmarshalingParamError) Unwrap() error {
-	return e.Err
-}
-
-type RequiredParamError struct {
-	ParamName string
-}
-
-func (e *RequiredParamError) Error() string {
-	return fmt.Sprintf("Query argument %s is required, but not found", e.ParamName)
-}
-
-type RequiredHeaderError struct {
-	ParamName string
-	Err       error
-}
-
-func (e *RequiredHeaderError) Error() string {
-	return fmt.Sprintf("Header parameter %s is required, but not found", e.ParamName)
-}
-
-func (e *RequiredHeaderError) Unwrap() error {
-	return e.Err
-}
-
-type InvalidParamFormatError struct {
-	ParamName string
-	Err       error
-}
-
-func (e *InvalidParamFormatError) Error() string {
-	return fmt.Sprintf("Invalid format for parameter %s: %s", e.ParamName, e.Err.Error())
-}
-
-func (e *InvalidParamFormatError) Unwrap() error {
-	return e.Err
-}
-
-type TooManyValuesForParamError struct {
-	ParamName string
-	Count     int
-}
-
-func (e *TooManyValuesForParamError) Error() string {
-	return fmt.Sprintf("Expected one value for %s, got %d", e.ParamName, e.Count)
-}
-
-// Handler creates http.Handler with routing matching OpenAPI spec.
-func Handler(si ServerInterface) http.Handler {
-	return HandlerWithOptions(si, ChiServerOptions{})
-}
-
-type ChiServerOptions struct {
-	BaseURL          string
-	BaseRouter       chi.Router
-	Middlewares      []MiddlewareFunc
-	ErrorHandlerFunc func(w http.ResponseWriter, r *http.Request, err error)
-}
-
-// HandlerFromMux creates http.Handler with routing matching OpenAPI spec based on the provided mux.
-func HandlerFromMux(si ServerInterface, r chi.Router) http.Handler {
-	return HandlerWithOptions(si, ChiServerOptions{
-		BaseRouter: r,
-	})
-}
-
-func HandlerFromMuxWithBaseURL(si ServerInterface, r chi.Router, baseURL string) http.Handler {
-	return HandlerWithOptions(si, ChiServerOptions{
-		BaseURL:    baseURL,
-		BaseRouter: r,
-	})
-}
-
-// HandlerWithOptions creates http.Handler with additional options
-func HandlerWithOptions(si ServerInterface, options ChiServerOptions) http.Handler {
-	r := options.BaseRouter
-
-	if r == nil {
-		r = chi.NewRouter()
-	}
-	if options.ErrorHandlerFunc == nil {
-		options.ErrorHandlerFunc = func(w http.ResponseWriter, r *http.Request, err error) {
-			http.Error(w, err.Error(), http.StatusBadRequest)
+		middleware(c)
+		if c.IsAborted() {
+			return
 		}
 	}
+
+	siw.Handler.GetVersion(c)
+}
+
+// GinServerOptions provides options for the Gin server.
+type GinServerOptions struct {
+	BaseURL      string
+	Middlewares  []MiddlewareFunc
+	ErrorHandler func(*gin.Context, error, int)
+}
+
+// RegisterHandlers creates http.Handler with routing matching OpenAPI spec.
+func RegisterHandlers(router gin.IRouter, si ServerInterface) {
+	RegisterHandlersWithOptions(router, si, GinServerOptions{})
+}
+
+// RegisterHandlersWithOptions creates http.Handler with additional options
+func RegisterHandlersWithOptions(router gin.IRouter, si ServerInterface, options GinServerOptions) {
+	errorHandler := options.ErrorHandler
+	if errorHandler == nil {
+		errorHandler = func(c *gin.Context, err error, statusCode int) {
+			c.JSON(statusCode, gin.H{"msg": err.Error()})
+		}
+	}
+
 	wrapper := ServerInterfaceWrapper{
 		Handler:            si,
 		HandlerMiddlewares: options.Middlewares,
-		ErrorHandlerFunc:   options.ErrorHandlerFunc,
+		ErrorHandler:       errorHandler,
 	}
 
-	r.Group(func(r chi.Router) {
-		r.Get(options.BaseURL+"/api/v1/auth/session", wrapper.ValidateSession)
-	})
-	r.Group(func(r chi.Router) {
-		r.Post(options.BaseURL+"/api/v1/auth/sign_in", wrapper.SignInUser)
-	})
-	r.Group(func(r chi.Router) {
-		r.Post(options.BaseURL+"/api/v1/auth/sign_out", wrapper.SignOutUser)
-	})
-	r.Group(func(r chi.Router) {
-		r.Get(options.BaseURL+"/api/v1/avatar/{username}", wrapper.UniqueAvatar)
-	})
-	r.Group(func(r chi.Router) {
-		r.Get(options.BaseURL+"/api/v1/games", wrapper.ListGames)
-	})
-	r.Group(func(r chi.Router) {
-		r.Post(options.BaseURL+"/api/v1/games", wrapper.CreateGame)
-	})
-	r.Group(func(r chi.Router) {
-		r.Delete(options.BaseURL+"/api/v1/games/{gameId}", wrapper.DeleteGame)
-	})
-	r.Group(func(r chi.Router) {
-		r.Get(options.BaseURL+"/api/v1/games/{gameId}", wrapper.GetGameById)
-	})
-	r.Group(func(r chi.Router) {
-		r.Put(options.BaseURL+"/api/v1/games/{gameId}", wrapper.UpdateGame)
-	})
-	r.Group(func(r chi.Router) {
-		r.Post(options.BaseURL+"/api/v1/games/{gameId}/results", wrapper.CreateResult)
-	})
-	r.Group(func(r chi.Router) {
-		r.Get(options.BaseURL+"/api/v1/games/{gameId}/results/{resultId}", wrapper.GetResult)
-	})
-	r.Group(func(r chi.Router) {
-		r.Put(options.BaseURL+"/api/v1/games/{gameId}/results/{resultId}", wrapper.UpdateResult)
-	})
-	r.Group(func(r chi.Router) {
-		r.Get(options.BaseURL+"/api/v1/games/{gameId}/scoreboard", wrapper.GetScoreboard)
-	})
-	r.Group(func(r chi.Router) {
-		r.Get(options.BaseURL+"/api/v1/services", wrapper.ListServices)
-	})
-	r.Group(func(r chi.Router) {
-		r.Post(options.BaseURL+"/api/v1/services", wrapper.CreateService)
-	})
-	r.Group(func(r chi.Router) {
-		r.Delete(options.BaseURL+"/api/v1/services/{serviceId}", wrapper.DeleteService)
-	})
-	r.Group(func(r chi.Router) {
-		r.Get(options.BaseURL+"/api/v1/services/{serviceId}", wrapper.GetServiceById)
-	})
-	r.Group(func(r chi.Router) {
-		r.Put(options.BaseURL+"/api/v1/services/{serviceId}", wrapper.UpdateService)
-	})
-	r.Group(func(r chi.Router) {
-		r.Post(options.BaseURL+"/api/v1/services/{serviceId}/checker", wrapper.UploadChecker)
-	})
-	r.Group(func(r chi.Router) {
-		r.Post(options.BaseURL+"/api/v1/services/{serviceId}/service", wrapper.UploadService)
-	})
-	r.Group(func(r chi.Router) {
-		r.Get(options.BaseURL+"/api/v1/teams", wrapper.ListTeams)
-	})
-	r.Group(func(r chi.Router) {
-		r.Post(options.BaseURL+"/api/v1/teams", wrapper.CreateTeam)
-	})
-	r.Group(func(r chi.Router) {
-		r.Delete(options.BaseURL+"/api/v1/teams/{teamId}", wrapper.DeleteTeam)
-	})
-	r.Group(func(r chi.Router) {
-		r.Get(options.BaseURL+"/api/v1/teams/{teamId}", wrapper.GetTeamById)
-	})
-	r.Group(func(r chi.Router) {
-		r.Put(options.BaseURL+"/api/v1/teams/{teamId}", wrapper.UpdateTeam)
-	})
-	r.Group(func(r chi.Router) {
-		r.Get(options.BaseURL+"/api/v1/teams/{teamId}/members", wrapper.TeamMembers)
-	})
-	r.Group(func(r chi.Router) {
-		r.Delete(options.BaseURL+"/api/v1/teams/{teamId}/members/{userId}", wrapper.LeaveUserFromTeam)
-	})
-	r.Group(func(r chi.Router) {
-		r.Post(options.BaseURL+"/api/v1/teams/{teamId}/members/{userId}", wrapper.ConnectUserTeam)
-	})
-	r.Group(func(r chi.Router) {
-		r.Put(options.BaseURL+"/api/v1/teams/{teamId}/members/{userId}", wrapper.ApproveUserTeam)
-	})
-	r.Group(func(r chi.Router) {
-		r.Get(options.BaseURL+"/api/v1/universities", wrapper.ListUniversities)
-	})
-	r.Group(func(r chi.Router) {
-		r.Get(options.BaseURL+"/api/v1/users", wrapper.ListUsers)
-	})
-	r.Group(func(r chi.Router) {
-		r.Post(options.BaseURL+"/api/v1/users", wrapper.CreateUser)
-	})
-	r.Group(func(r chi.Router) {
-		r.Delete(options.BaseURL+"/api/v1/users/{userId}", wrapper.DeleteUser)
-	})
-	r.Group(func(r chi.Router) {
-		r.Get(options.BaseURL+"/api/v1/users/{userId}", wrapper.GetUserById)
-	})
-	r.Group(func(r chi.Router) {
-		r.Put(options.BaseURL+"/api/v1/users/{userId}", wrapper.UpdateUser)
-	})
-	r.Group(func(r chi.Router) {
-		r.Get(options.BaseURL+"/api/v1/users/{userId}/profile", wrapper.GetProfileById)
-	})
-	r.Group(func(r chi.Router) {
-		r.Get(options.BaseURL+"/api/version", wrapper.GetVersion)
-	})
-
-	return r
+	router.GET(options.BaseURL+"/api/v1/auth/session", wrapper.ValidateSession)
+	router.POST(options.BaseURL+"/api/v1/auth/sign_in", wrapper.SignInUser)
+	router.POST(options.BaseURL+"/api/v1/auth/sign_out", wrapper.SignOutUser)
+	router.GET(options.BaseURL+"/api/v1/avatar/:username", wrapper.UniqueAvatar)
+	router.GET(options.BaseURL+"/api/v1/games", wrapper.ListGames)
+	router.POST(options.BaseURL+"/api/v1/games", wrapper.CreateGame)
+	router.DELETE(options.BaseURL+"/api/v1/games/:gameId", wrapper.DeleteGame)
+	router.GET(options.BaseURL+"/api/v1/games/:gameId", wrapper.GetGameById)
+	router.PUT(options.BaseURL+"/api/v1/games/:gameId", wrapper.UpdateGame)
+	router.POST(options.BaseURL+"/api/v1/games/:gameId/results", wrapper.CreateResult)
+	router.GET(options.BaseURL+"/api/v1/games/:gameId/results/:resultId", wrapper.GetResult)
+	router.PUT(options.BaseURL+"/api/v1/games/:gameId/results/:resultId", wrapper.UpdateResult)
+	router.GET(options.BaseURL+"/api/v1/games/:gameId/scoreboard", wrapper.GetScoreboard)
+	router.GET(options.BaseURL+"/api/v1/services", wrapper.ListServices)
+	router.POST(options.BaseURL+"/api/v1/services", wrapper.CreateService)
+	router.DELETE(options.BaseURL+"/api/v1/services/:serviceId", wrapper.DeleteService)
+	router.GET(options.BaseURL+"/api/v1/services/:serviceId", wrapper.GetServiceById)
+	router.PUT(options.BaseURL+"/api/v1/services/:serviceId", wrapper.UpdateService)
+	router.POST(options.BaseURL+"/api/v1/services/:serviceId/checker", wrapper.UploadChecker)
+	router.POST(options.BaseURL+"/api/v1/services/:serviceId/service", wrapper.UploadService)
+	router.GET(options.BaseURL+"/api/v1/teams", wrapper.ListTeams)
+	router.POST(options.BaseURL+"/api/v1/teams", wrapper.CreateTeam)
+	router.DELETE(options.BaseURL+"/api/v1/teams/:teamId", wrapper.DeleteTeam)
+	router.GET(options.BaseURL+"/api/v1/teams/:teamId", wrapper.GetTeamById)
+	router.PUT(options.BaseURL+"/api/v1/teams/:teamId", wrapper.UpdateTeam)
+	router.GET(options.BaseURL+"/api/v1/teams/:teamId/members", wrapper.TeamMembers)
+	router.DELETE(options.BaseURL+"/api/v1/teams/:teamId/members/:userId", wrapper.LeaveUserFromTeam)
+	router.POST(options.BaseURL+"/api/v1/teams/:teamId/members/:userId", wrapper.ConnectUserTeam)
+	router.PUT(options.BaseURL+"/api/v1/teams/:teamId/members/:userId", wrapper.ApproveUserTeam)
+	router.GET(options.BaseURL+"/api/v1/universities", wrapper.ListUniversities)
+	router.GET(options.BaseURL+"/api/v1/users", wrapper.ListUsers)
+	router.POST(options.BaseURL+"/api/v1/users", wrapper.CreateUser)
+	router.DELETE(options.BaseURL+"/api/v1/users/:userId", wrapper.DeleteUser)
+	router.GET(options.BaseURL+"/api/v1/users/:userId", wrapper.GetUserById)
+	router.PUT(options.BaseURL+"/api/v1/users/:userId", wrapper.UpdateUser)
+	router.GET(options.BaseURL+"/api/v1/users/:userId/profile", wrapper.GetProfileById)
+	router.GET(options.BaseURL+"/api/version", wrapper.GetVersion)
 }

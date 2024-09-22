@@ -93,4 +93,4 @@ test:
 
 # Generate Go server boilerplate from OpenAPI 3
 codegen:
-	oapi-codegen -generate models,chi -o internal/httpserver/httpserver.gen.go --package httpserver api/openapi.yaml
+	oapi-codegen -generate models,gin -o internal/httpserver/httpserver.gen.go --package httpserver api/openapi.yaml
