@@ -1,6 +1,7 @@
 package helper
 
 import (
+	"bytes"
 	"database/sql"
 	"encoding/json"
 	"log/slog"
@@ -8,6 +9,7 @@ import (
 	"net/url"
 
 	"ctf01d/internal/httpserver"
+
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -94,4 +96,18 @@ func ConvertUserResponseRoleToUserRequestRole(role httpserver.UserResponseRole) 
 	default:
 		return ""
 	}
+}
+
+var zipSignature = []byte{0x50, 0x4b, 0x03, 0x04}
+
+func IsZip(data []byte) bool {
+	if len(data) < 4 {
+		return false
+	}
+
+	if !bytes.Equal(zipSignature, data[:4]) {
+		return false
+	}
+
+	return true
 }

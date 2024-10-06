@@ -916,11 +916,18 @@ paths:
                 file:
                   type: string
                   format: binary
+            encoding:
+              file:
+                contentType: application/octet-stream
       responses:
         '200':
           description: Success upload
           content:
             application/json: {}
+        '400':
+          description: Bad request
+        '500':
+          description: Failed response
   /api/v1/universities:
     get:
       summary: Retrieves a list of universities

@@ -1,7 +1,11 @@
 package handler
 
 import (
+	"bytes"
 	"encoding/json"
+	"errors"
+	"fmt"
+	"io"
 	"log/slog"
 	"net/http"
 
@@ -9,6 +13,7 @@ import (
 	"ctf01d/internal/httpserver"
 	"ctf01d/internal/model"
 	"ctf01d/internal/repository"
+
 	openapi_types "github.com/oapi-codegen/runtime/types"
 )
 
@@ -99,8 +104,52 @@ func (h *Handler) UploadChecker(w http.ResponseWriter, r *http.Request, id opena
 	w.WriteHeader(http.StatusNotImplemented)
 }
 
-// fixme implement
 func (h *Handler) UploadService(w http.ResponseWriter, r *http.Request, id openapi_types.UUID) {
-	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
-	w.WriteHeader(http.StatusNotImplemented)
+	repo := repository.NewServiceRepository(h.DB)
+	_, err := repo.GetById(r.Context(), id)
+	if err != nil {
+		slog.Warn(err.Error(), "handler", "UploadService")
+		helper.RespondWithJSON(w, http.StatusNotFound, map[string]string{"error": "Unable to fetch service"})
+		return
+	}
+
+	var req httpserver.UploadServiceMultipartRequestBody
+	boundedReader := http.MaxBytesReader(w, r.Body, 100<<20) // 100Mb todo externalize to props
+	if err := json.NewDecoder(boundedReader).Decode(&req); err != nil {
+		slog.Warn(err.Error(), "handler", "UploadService")
+		helper.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Invalid request payload"})
+		return
+	}
+
+	f := req.File
+	reader, err := f.Reader()
+	if err != nil {
+		slog.Warn(err.Error(), "handler", "UploadService")
+		helper.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Unable to read bytes"})
+		return
+	}
+
+	reader, err = validateUploadService(reader)
+	if err != nil {
+		slog.Warn(err.Error(), "handler", "UploadService")
+		helper.RespondWithJSON(w, http.StatusBadRequest, map[string]string{"error": "Invalid request"})
+		return
+	}
+}
+
+func validateUploadService(reader io.Reader) (io.ReadCloser, error) {
+	footprint := make([]byte, 4)
+	if _, err := io.ReadFull(reader, footprint); err != nil {
+		slog.Warn("Unable to read file", "handler", "UploadService")
+		return nil, errors.New(fmt.Sprintf("Unable to read file: %s", err.Error()))
+	}
+
+	if !helper.IsZip(footprint) {
+		slog.Warn("Uploaded file is not a zip", "handler", "UploadService")
+		return nil, errors.New("Uploaded file is not a zip")
+	}
+
+	restored := io.MultiReader(bytes.NewReader(footprint), reader)
+
+	return io.NopCloser(restored), nil
 }
