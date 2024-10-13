@@ -7,9 +7,12 @@ import (
 	"log/slog"
 	"net/http"
 	"net/url"
+	"path/filepath"
+	"strings"
 
 	"ctf01d/internal/httpserver"
 
+	openapi_types "github.com/oapi-codegen/runtime/types"
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -101,13 +104,30 @@ func ConvertUserResponseRoleToUserRequestRole(role httpserver.UserResponseRole) 
 var zipSignature = []byte{0x50, 0x4b, 0x03, 0x04}
 
 func IsZip(data []byte) bool {
-	if len(data) < 4 {
-		return false
+	return len(data) >= 4 && bytes.Equal(zipSignature, data[:4])
+}
+
+func Unhyphensify(id openapi_types.UUID) string {
+	var sb strings.Builder
+	str := id.String()
+	sb.WriteString(str[0:8])
+	sb.WriteString(str[8:12])
+	sb.WriteString(str[12:16])
+	sb.WriteString(str[16:20])
+	sb.WriteString(str[20:32])
+
+	return sb.String()
+}
+
+func IdToPath(id openapi_types.UUID) string {
+	raw := Unhyphensify(id)
+	const rank = 8
+	size := len(raw) / rank
+	var path string
+	for i := 0; i < rank; i++ {
+		base := i * size
+		path = filepath.Join(path, raw[base:base+size])
 	}
 
-	if !bytes.Equal(zipSignature, data[:4]) {
-		return false
-	}
-
-	return true
+	return path
 }

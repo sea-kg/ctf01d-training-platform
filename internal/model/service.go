@@ -5,16 +5,18 @@ import (
 
 	"ctf01d/internal/helper"
 	"ctf01d/internal/httpserver"
+
 	openapi_types "github.com/oapi-codegen/runtime/types"
 )
 
 type Service struct {
-	Id          openapi_types.UUID `db:"id"          json:"id"`
-	Name        string             `db:"name"        json:"name"`
-	Author      string             `db:"author"      json:"author"`
-	LogoUrl     sql.NullString     `db:"logo_url"    json:"logo_url"`
-	Description string             `db:"description" json:"description"`
-	IsPublic    bool               `db:"is_public"   json:"is_public"`
+	Id             openapi_types.UUID `db:"id"               json:"id"`
+	Name           string             `db:"name"             json:"name"`
+	Author         string             `db:"author"           json:"author"`
+	LogoUrl        sql.NullString     `db:"logo_url"         json:"logo_url"`
+	Description    string             `db:"description"      json:"description"`
+	IsPublic       bool               `db:"is_public"        json:"is_public"`
+	IsServiceValid bool               `db:"is_service_valid" json:"is_service_valid"`
 }
 
 func (s *Service) ToResponse() *httpserver.ServiceResponse {
