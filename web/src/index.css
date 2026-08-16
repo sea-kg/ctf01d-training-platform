@@ -1808,6 +1808,7 @@ a:focus-visible {
 
 .game-info-access {
   grid-column: 1 / -1;
+  scroll-margin-top: 140px;
 }
 
 .game-info-groups .game-info-access {
@@ -1815,7 +1816,30 @@ a:focus-visible {
 }
 
 .game-info-access .info-row {
-  grid-template-columns: 116px minmax(0, 1fr);
+  grid-template-columns: minmax(116px, max-content) minmax(0, 1fr);
+}
+
+.info-group-note {
+  margin: -4px 0 10px;
+  color: var(--muted);
+  font-size: .78rem;
+  line-height: 1.4;
+}
+
+.access-instructions {
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+.copy-value {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.copy-value code {
+  word-break: break-all;
 }
 
 .team-info-groups {
@@ -2074,6 +2098,44 @@ a:focus-visible {
   padding: 14px 0 0;
   font-size: .9rem;
   color: var(--muted);
+}
+
+.form-section {
+  margin: 0 0 18px;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--surface-muted);
+}
+
+.form-section legend {
+  padding: 0 6px;
+  color: var(--muted);
+  font-size: .74rem;
+  font-weight: 900;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+}
+
+.form-section-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 14px;
+}
+
+.form-section .form-group:last-child {
+  margin-bottom: 0;
+}
+
+.form-hint {
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: .78rem;
+  line-height: 1.4;
+}
+
+.form-section > .form-hint {
+  margin: 0 0 12px;
 }
 
 .form-group {
@@ -2345,7 +2407,8 @@ a:focus-visible {
 .create-form .form-actions,
 .edit-form .form-actions,
 .create-form > .btn,
-.edit-form > .btn {
+.edit-form > .btn,
+.edit-form > .form-section {
   grid-column: 1 / -1;
 }
 
@@ -2719,7 +2782,8 @@ a:focus-visible {
 
   .card-grid,
   .create-form,
-  .edit-form {
+  .edit-form,
+  .form-section-grid {
     grid-template-columns: 1fr;
   }
 

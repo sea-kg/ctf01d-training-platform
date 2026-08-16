@@ -409,7 +409,20 @@ const ruCatalog: Record<string, TranslationValue> = {
   Vulnerabilities: "Уязвимости",
   "Service {index}": "Сервис {index}",
   "Service {index}: {name}": "Сервис {index}: {name}",
-  "Access (admin)": "Доступ (админ)",
+  "VPN and access": "VPN и доступ",
+  "Visible only to admins and approved participants of this game.":
+    "Видно только администраторам и подтверждённым участникам этой игры.",
+  "Page or panel where participants get their VPN account.":
+    "Страница или панель, где участники получают учётную запись VPN.",
+  "Direct link to the config file (.ovpn, .conf).":
+    "Прямая ссылка на файл конфигурации (.ovpn, .conf).",
+  "Shared password or token for the VPN, if there is one.":
+    "Общий пароль или токен для VPN, если он есть.",
+  "Download config": "Скачать конфиг",
+  Copy: "Копировать",
+  Copied: "Скопировано",
+  "Copy failed": "Не удалось скопировать",
+  Basics: "Основное",
   Secret: "Секрет",
   Instructions: "Инструкции",
   "Starts At": "Время начала",

@@ -89,14 +89,22 @@ export function InfoGroup({
   title,
   children,
   className,
+  id,
+  note,
 }: {
   title: string;
   children: ReactNode;
   className?: string;
+  id?: string;
+  note?: ReactNode;
 }) {
   return (
-    <div className={className ? `info-group ${className}` : "info-group"}>
+    <div
+      className={className ? `info-group ${className}` : "info-group"}
+      id={id}
+    >
       <h4>{title}</h4>
+      {note && <p className="info-group-note">{note}</p>}
       <dl className="info-dl">{children}</dl>
     </div>
   );

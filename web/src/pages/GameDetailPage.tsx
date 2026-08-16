@@ -54,6 +54,65 @@ function isValidIpOrHost(value: string): boolean {
   return hostname.test(value);
 }
 
+type EditField = {
+  field: keyof GameUpdate;
+  label: string;
+  hint?: string;
+  kind?: "text" | "datetime" | "textarea";
+};
+
+type EditSection = {
+  title: string;
+  hint?: string;
+  fields: EditField[];
+};
+
+function CopyValue({ value }: { value: string }) {
+  const { t } = useI18n();
+  const [copyState, setCopyState] = useState<"idle" | "copied" | "failed">(
+    "idle",
+  );
+  useEffect(() => {
+    if (copyState === "idle") return;
+    const timer = setTimeout(() => setCopyState("idle"), 1500);
+    return () => clearTimeout(timer);
+  }, [copyState]);
+
+  const handleCopy = async () => {
+    if (!navigator.clipboard) {
+      setCopyState("failed");
+      return;
+    }
+    try {
+      await navigator.clipboard.writeText(value);
+      setCopyState("copied");
+    } catch {
+      setCopyState("failed");
+    }
+  };
+
+  const buttonLabel =
+    copyState === "copied"
+      ? t("Copied")
+      : copyState === "failed"
+        ? t("Copy failed")
+        : t("Copy");
+
+  return (
+    <span className="copy-value">
+      <code>{value}</code>
+      <button
+        type="button"
+        className="btn btn-sm"
+        onClick={() => void handleCopy()}
+        aria-live="polite"
+      >
+        {buttonLabel}
+      </button>
+    </span>
+  );
+}
+
 export default function GameDetailPage() {
   const { t } = useI18n();
   const { id } = useParams<{ id: string }>();
@@ -480,11 +539,14 @@ export default function GameDetailPage() {
   const writeupTeamOptions = isAdmin
     ? gameTeams.map((gt) => ({ id: gt.team_id, name: nameOf(gt.team_id) }))
     : manageableTeamIds.map((tid) => ({ id: tid, name: nameOf(tid) }));
-  const hasGameLinks = Boolean(
-    game.site_url || game.ctftime_url || game.vpn_url || game.vpn_config_url,
-  );
-  const hasAdminAccess = Boolean(
-    isAdmin && (game.access_secret || game.access_instructions),
+  const hasGameLinks = Boolean(game.site_url || game.ctftime_url);
+  // The API only sends vpn_* and access_* to admins and approved participants,
+  // so presence of any of them is the permission check.
+  const hasGameAccess = Boolean(
+    game.vpn_url ||
+      game.vpn_config_url ||
+      game.access_secret ||
+      game.access_instructions,
   );
   const gameTabs: Array<{ href: string; label: string; count?: number }> = [
     { href: "#overview", label: t("Overview") },
@@ -497,30 +559,75 @@ export default function GameDetailPage() {
       ? [{ href: "#writeups", label: t("Writeups"), count: writeups.length }]
       : []),
   ];
-  const textFields: Array<{ field: keyof GameUpdate; label: string }> = [
-    { field: "name", label: t("Name") },
-    { field: "organizer", label: t("Organizer") },
-    { field: "avatar_url", label: t("Avatar URL") },
-    { field: "site_url", label: t("Site URL") },
-    { field: "ctftime_url", label: t("CTFtime URL") },
-    { field: "vpn_url", label: t("VPN URL") },
-    { field: "vpn_config_url", label: t("VPN config URL") },
-    { field: "access_instructions", label: t("Access instructions") },
-    { field: "access_secret", label: t("Access secret") },
-  ];
-  const datetimeFields: Array<{ field: keyof GameUpdate; label: string }> = [
-    { field: "starts_at", label: t("Starts At") },
-    { field: "ends_at", label: t("Ends At") },
+  const editSections: EditSection[] = [
     {
-      field: "registration_opens_at",
-      label: t("Registration Opens At"),
+      title: t("Basics"),
+      fields: [
+        { field: "name", label: t("Name") },
+        { field: "organizer", label: t("Organizer") },
+        { field: "avatar_url", label: t("Avatar URL") },
+      ],
     },
     {
-      field: "registration_closes_at",
-      label: t("Registration Closes At"),
+      title: t("Links"),
+      fields: [
+        { field: "site_url", label: t("Site URL") },
+        { field: "ctftime_url", label: t("CTFtime URL") },
+      ],
     },
-    { field: "scoreboard_opens_at", label: t("Scoreboard Opens At") },
-    { field: "scoreboard_closes_at", label: t("Scoreboard Closes At") },
+    {
+      title: t("Schedule"),
+      fields: [
+        { field: "starts_at", label: t("Starts At"), kind: "datetime" },
+        { field: "ends_at", label: t("Ends At"), kind: "datetime" },
+        {
+          field: "registration_opens_at",
+          label: t("Registration Opens At"),
+          kind: "datetime",
+        },
+        {
+          field: "registration_closes_at",
+          label: t("Registration Closes At"),
+          kind: "datetime",
+        },
+        {
+          field: "scoreboard_opens_at",
+          label: t("Scoreboard Opens At"),
+          kind: "datetime",
+        },
+        {
+          field: "scoreboard_closes_at",
+          label: t("Scoreboard Closes At"),
+          kind: "datetime",
+        },
+      ],
+    },
+    {
+      title: t("VPN and access"),
+      hint: t("Visible only to admins and approved participants of this game."),
+      fields: [
+        {
+          field: "vpn_url",
+          label: t("VPN URL"),
+          hint: t("Page or panel where participants get their VPN account."),
+        },
+        {
+          field: "vpn_config_url",
+          label: t("VPN config URL"),
+          hint: t("Direct link to the config file (.ovpn, .conf)."),
+        },
+        {
+          field: "access_secret",
+          label: t("Access secret"),
+          hint: t("Shared password or token for the VPN, if there is one."),
+        },
+        {
+          field: "access_instructions",
+          label: t("Access instructions"),
+          kind: "textarea",
+        },
+      ],
+    },
   ];
 
   return (
@@ -594,13 +701,8 @@ export default function GameDetailPage() {
                     CTFtime
                   </a>
                 )}
-                {game.vpn_url && (
-                  <a
-                    className="btn btn-sm"
-                    href={safeHref(game.vpn_url)}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
+                {hasGameAccess && (
+                  <a className="btn btn-sm" href="#access">
                     VPN
                   </a>
                 )}
@@ -707,32 +809,45 @@ export default function GameDetailPage() {
                       {renderLink(game.ctftime_url)}
                     </InfoRow>
                   )}
+                </InfoGroup>
+              )}
+
+              {hasGameAccess && (
+                <InfoGroup
+                  title={t("VPN and access")}
+                  className="game-info-access"
+                  id="access"
+                  note={t(
+                    "Visible only to admins and approved participants of this game.",
+                  )}
+                >
                   {game.vpn_url && (
-                    <InfoRow label={t("VPN")}>
+                    <InfoRow label={t("VPN URL")}>
                       {renderLink(game.vpn_url)}
                     </InfoRow>
                   )}
                   {game.vpn_config_url && (
                     <InfoRow label={t("VPN config")}>
-                      {renderLink(game.vpn_config_url)}
+                      <a
+                        className="btn btn-sm"
+                        href={safeHref(game.vpn_config_url)}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        {t("Download config")}
+                      </a>
                     </InfoRow>
                   )}
-                </InfoGroup>
-              )}
-
-              {hasAdminAccess && (
-                <InfoGroup
-                  title={t("Access (admin)")}
-                  className="game-info-access"
-                >
                   {game.access_secret && (
                     <InfoRow label={t("Secret")}>
-                      <code>{game.access_secret}</code>
+                      <CopyValue value={game.access_secret} />
                     </InfoRow>
                   )}
                   {game.access_instructions && (
                     <InfoRow label={t("Instructions")}>
-                      {game.access_instructions}
+                      <p className="access-instructions">
+                        {game.access_instructions}
+                      </p>
                     </InfoRow>
                   )}
                 </InfoGroup>
@@ -748,28 +863,38 @@ export default function GameDetailPage() {
           }}
           className="edit-form"
         >
-          {textFields.map(({ field, label }) => (
-            <div className="form-group" key={field}>
-              <label>{label}</label>
-              <input
-                value={(editForm[field] as string) ?? ""}
-                onChange={(e) =>
-                  setEditForm((f) => ({ ...f, [field]: e.target.value }))
-                }
-              />
-            </div>
-          ))}
-          {datetimeFields.map(({ field, label }) => (
-            <div className="form-group" key={field}>
-              <label>{label}</label>
-              <input
-                type="datetime-local"
-                value={(editForm[field] as string) ?? ""}
-                onChange={(e) =>
-                  setEditForm((f) => ({ ...f, [field]: e.target.value }))
-                }
-              />
-            </div>
+          {editSections.map((section) => (
+            <fieldset className="form-section" key={section.title}>
+              <legend>{section.title}</legend>
+              {section.hint && <p className="form-hint">{section.hint}</p>}
+              <div className="form-section-grid">
+                {section.fields.map(({ field, label, hint, kind }) => (
+                  <div className="form-group" key={field}>
+                    <label htmlFor={`game-${field}`}>{label}</label>
+                    {kind === "textarea" ? (
+                      <textarea
+                        id={`game-${field}`}
+                        rows={4}
+                        value={(editForm[field] as string) ?? ""}
+                        onChange={(e) =>
+                          setEditForm((f) => ({ ...f, [field]: e.target.value }))
+                        }
+                      />
+                    ) : (
+                      <input
+                        id={`game-${field}`}
+                        type={kind === "datetime" ? "datetime-local" : "text"}
+                        value={(editForm[field] as string) ?? ""}
+                        onChange={(e) =>
+                          setEditForm((f) => ({ ...f, [field]: e.target.value }))
+                        }
+                      />
+                    )}
+                    {hint && <p className="form-hint">{hint}</p>}
+                  </div>
+                ))}
+              </div>
+            </fieldset>
           ))}
           <div className="form-actions">
             <button type="submit" className="btn btn-primary" disabled={saving}>
