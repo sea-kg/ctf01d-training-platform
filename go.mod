@@ -1,6 +1,6 @@
 module github.com/ctf01d/ctf01d-training-platform
 
-go 1.26.2
+go 1.27.0
 
 require (
 	github.com/gin-contrib/cors v1.7.8
